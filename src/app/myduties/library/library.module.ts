@@ -6,6 +6,7 @@ import { ThesisComponent } from './thesis/thesis.component';
 import { LibraryRoutingModule } from './library-routing.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ResearchComponent } from './research/research.component';
 
 
 @NgModule({
@@ -14,7 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
     LibraryRoutingModule,FormsModule,HttpClientModule
     
   ],
-  declarations: [LibraryComponent, BooksComponent, ThesisComponent],
+  declarations: [LibraryComponent, BooksComponent, ThesisComponent, ResearchComponent],
   exports : [LibraryComponent]
 })
 export class LibraryModule { }
