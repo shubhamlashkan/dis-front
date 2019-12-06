@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="row">
+
+<!--Start Left Panel-->
+    <div class="col-lg-3 profile-info">
+
+      <div class="downloads">
+        <div class="row">
+        <div class="col-lg-2">
+            <img style="padding-right:10px; height: 40px; width: 40px;" src="assets/images/download.png" alt=""/>
+        </div>
+        <div class="col-lg-10">
+            <h5><a href="#" style="color: #0085cc;">Academic Calender</a> <h6>2018-2019</h6></h5>
+        </div>
+      </div>
+      </div>
+  <div class="downloads">
+    <div>
+      <h5 class="heading">Download Syllabus</h5>
+      <hr/>
+      <div *ngFor="let subject of mySubjects">
+        <h6><a href= {{subject?.subSyllabus}} style="text-decoration:none;">{{subject?.subCode}} :  {{subject?.subName}}</a></h6>
+      </div>
+  </div>
+
+      </div>
+
+    </div>
+
+  <!--End Left Panel-->
+
+
+    <!--Start Right Panel-->
+    <div class="col-lg-9 kyc-colm user-management">
+      <div class="kyc-section rewards-section reports-sectn">
+      <!--Time Table comes in below div-->
+   <div>
+     <h3  class="heading" >Time Table</h3>
+     <hr/>
+    <div class="table-responsive">
+      <table class="table table-bordered " id="tt">
+        <thead>
+          <tr >
+            <ng-container *ngFor="let val of columnHeaders">
+              <th [attr.colspan] = "2*val.colspanValue">{{val?.day}} </th>
+            </ng-container>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor = "let timeslot of schedule">
+            <ng-container *ngFor= "let lectures of timeslot" style="position: relative;">
+              <td style="position: relative ;" *ngIf="lectures.length===0" [attr.colspan] = "2*(columnHeaders[timeslot.indexOf(lectures)].colspanValue)"></td>
+              <ng-container *ngIf="lectures.length !==0">
+              <ng-container *ngFor= "let lecture of lectures">
+                <ng-container *ngIf = "lecture!==null">
+                  <td *ngIf = "isString(lecture)" colspan="2">
+                    {{lecture}}
+                  </td>
+
+                  <td style="position: relative;" *ngIf = "isObject(lecture)" [attr.colspan] = "2*(columnHeaders[timeslot.indexOf(lectures)].colspanValue)/lectures.length" [attr.rowspan] = "(convertedTime(lecture.to) - convertedTime(lecture.from))/duration">
+                    {{lecture?.subjectCode}}<br/>
+                    {{lecture?.batch}}<br/>
+                    {{lecture?.location}}
+                  </td>
+
+                </ng-container>
+              </ng-container>
+            </ng-container>
+            </ng-container>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+    <a href="#" class="float-right" style="color: #0085cc;">Download timetable</a>
+    <!--End Right Panel-->
+    </div>
+
+    <div class=" downloads ">
+
+      <h5>Other Time tables (downloadable format)</h5>
+      <hr/>
+      <button type="button" class="btn btn-light " style="margin-right:30px"><img style="padding-right:10px; height: 35px; width: 35px;" src="assets/images/download.png" alt=""/>Mid term 1</button>
+      <button type="button" class="btn btn-light " style="margin-right:30px"><img style="padding-right:10px; height: 35px; width: 35px;" src="assets/images/download.png" alt=""/>Mid tern 2</button>
+      <button type="button" class="btn btn-light " style="margin-right:30px"><img style="padding-right:10px; height: 35px; width: 35px;" src="assets/images/download.png" alt=""/>Quiz</button>
+
+
+      </div>
+
+
+    </div>
+
+  <!--End Right Panel-->
+
+  </div>
+</div>

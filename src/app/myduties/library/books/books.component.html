@@ -1,0 +1,229 @@
+<div class="d-flex justify-content-between">
+    <button class="btn btn-success" data-toggle="modal" data-target="#booksAddModal"  ><i class="fa fa-plus-circle fa-fw fa-lg" aria-hidden="true"></i>Add Book</button>
+    <button class="btn btn-success" data-toggle="modal" data-target="#booksIssueModal" (click)="initForm()" ><i class="fa fa-minus-circle fa-fw fa-lg" aria-hidden="true"></i>Issue Book</button>
+    <button class="btn btn-success" data-toggle="modal" data-target="#booksReturnModal" (click)="initForm()" ><i class="fa fa-plus-circle fa-fw fa-lg" aria-hidden="true"></i>Return Book</button>
+  </div>
+<br/>
+  <table class="table table-striped">
+
+      <tr>
+        
+          <th class="col-lg-1" >S. No.</th>
+          <th class="col-lg-2">Book no</th>
+      
+          <th class="col-lg-4">Title</th>
+      
+          <th class="col-lg-2">Author </th>
+      
+          <th class="col-lg-1"> </th>
+          <th class="col-lg-2"></th>
+      </tr>     
+      <tr>
+        <td >1</td>
+        <td>121</td>
+        <td>Principles of Operating System </td>
+        <td>Galvin</td>
+        <td><button class="btn btn-primary">Edit</button></td>
+        <td><button class="btn btn-danger">Remove</button></td>
+      </tr>                       
+      <tr>
+        <td >1</td>
+        <td>121</td>
+        <td>Principles of Operating System </td>
+        <td>Galvin</td>
+        <td><button class="btn btn-primary">Edit</button> </td>
+        <td><button class="btn btn-danger">Remove</button></td>
+
+      </tr>                       
+     </table>
+
+
+  <div class="modal fade" id="booksAddModal" tabindex="-1" role="dialog" aria-labelledby="booksAddModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="booksAddModalLabel">Add Book</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+              <div id="add-book-records" ngModelGroup="addBookData">
+                <div class="form-row">
+                  <div class="col-4">
+                    <label for="isbnNo">ISBN no.</label>
+                    <input type="text" id="isbnNo" class="form-control" name="isbnNo" ngModel>
+                  </div> 
+                  <div class="col-4">
+                    <label for="authorName">Author Name</label>
+                    <input type="text" id="authorName" class="form-control" name="authorName" ngModel>
+                  </div>
+                  <div class="col-4">
+                    <label for="title">Title<span class="mandatory">*</span></label>
+                    <input type="text" id="title" required class="form-control" name="title" ngModel>
+                  </div>
+                </div><br/>
+                <div class="form-row">
+                  <div class="col-4">
+                    <label for="publisher">Publisher</label>
+                    <input type="text" id="publisher" class="form-control" name="publisher" ngModel>
+                  </div>
+                  <div class="col-4">
+                    <label for="edition">Edition</label>
+                    <input type="text" id="edition" class="form-control" name="edition" ngModel>
+                  </div>
+                  <div class="col-4">
+                    <label for="publicationYear">Publication Year</label>
+                    <input type="text" id="publicationYear" class="form-control" name="publicationYear" ngModel>
+                  </div>
+                </div><br/>
+                <div class="form-row">
+                    <div class="col-4">
+                        <label for="price">Price</label>
+                        <input type="text" id="price" class="form-control" name="price" ngModel>
+                      </div>
+                  
+                  <div class="col-4">
+                    <label for="noOfPages">no. of Pages</label>
+                    <input type="text" id="noOfPages" class="form-control" name="noOfPages" ngModel>
+                  </div>
+                  <div class="col-4">
+                    <br>
+                      <select class="dropdown-primary" name="subjectCategory" required ngModel >
+                        <option  value="" disabled selected>Subject Category</option>
+                        <option  value="1">OS</option>
+                        <option  value="2">TOC</option>
+                        <option  value="3">URF</option>
+                      </select>
+                    </div>
+                    
+                </div><br/>
+                <div class="form-row">
+                    <div class="col-4">
+                        <label for="purchasedOn">Date of Purchase</label>
+                        <input type="date" id="purchasedOn" class="form-control" name="purchasedOn" ngModel>
+                      </div>
+                      <div class="col-8">
+                          <label for="remarks">Remarks</label>
+                          <textarea class="form-control" id="remarks" name="remarks" ngModel></textarea>
+                      </div>
+                </div>
+             
+                <div  class="d-flex justify-content-center mt-3">
+    
+                  <button type="submit" class="btn btn-primary btnWidth" [disabled]="!f.valid" >Add</button>
+                  
+                </div>
+     
+              </div>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+
+  <div class="modal fade" id="booksIssueModal" tabindex="-1" role="dialog" aria-labelledby="booksIssueModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="booksIssueModalLabel">Issue Book</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form  >
+            <div class="form-row">
+              <div class="col-4">
+                
+                <input type="text" required placeholder="Enter Enrollment No. or Faculty Name" class="form-control" name="enrollmentno" ngModel>
+              </div> 
+              
+              <div class="col-">
+                  <button type="submit" class="btn btn-success btnWidth" >Check Limit</button>
+
+              </div>
+              
+              
+  
+            </div><br/>
+            <div class="form-row">
+              <div class="col-4">
+                <label>Title</label>
+                <input type="text" class="form-control" name="title" ngModel>
+              </div>
+              <div class="col-4">
+                <label>Edition</label>
+                <input type="text" class="form-control" name="edition" ngModel>
+              </div>
+              <div class="col-4">
+                <label>Author Name</label>
+                <input type="text" class="form-control" name="authorName" ngModel>
+              </div>
+            </div><br/>
+            <div class="d-flex justify-content-center mt-3">
+             
+              <button type="submit" class="btn btn-success btnWidth" >Issue</button>
+            </div>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="booksReturnModal" tabindex="-1" role="dialog" aria-labelledby="booksReturnModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="booksReturnModalLabel">Return Book</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+             <form  >
+                <div class="form-row"> <br/>
+                    <div class="col-4">
+                      <input type="text" class="form-control" placeholder="Enter Book Number" name="bookNo" ngModel>
+                    </div> 
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-success btnWidth" >Show Details</button>
+                    </div>
+                </div>
+              <div class="container">
+                  <table class="table table-striped">
+
+                      <tr>
+                        
+                          <th >S. No.</th>
+                      
+                          <th >Title</th>
+                      
+                          <th >Author </th>
+                      
+                          <th >Penalty</th>
+                      
+                          <th ></th>
+                      </tr>     
+                      <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>                       
+                     </table>
+              </div>
+    
+                                      
+            </form>
+          </div>
+          
+        </div>
+      </div>
+    </div>

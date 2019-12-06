@@ -1,0 +1,95 @@
+<div class="bg"></div>
+<div class="login-pg">
+  <div class="signup-wrap">
+
+    <form [formGroup]="registerForm" class="login-html" (ngSubmit)="onSubmit()">
+      <div class="company-logo">
+        <img src="assets/images/logo.png" alt="" />
+        <div style="color:#1d98c5; padding-top:15px;">
+          <h4>Department of Computer Engineering</h4>
+        </div>
+      </div>
+      <div class="panel-headng">
+        <h4>Sign Up</h4>
+      </div>
+      <div class="login-form">
+        <div class="sign-up-htm">
+          <div class="group">
+            <label for="user" class="label">Username
+              <span class="mandatory">*</span>
+            </label>
+            <input id="user" type="text" [(ngModel)]="form.username" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls.username.errors }" />
+            <div *ngIf="submitted && formCtl.username.errors" class="invalid-feedback">
+              <div *ngIf="formCtl.username.errors.required">Username is required</div>
+            </div>
+        </div>
+        <div class="group">
+            <label for="pass" class="label">Password
+              <span class="mandatory">*</span>
+            </label>
+             <input id="pass" type="password" [(ngModel)]="form.password" formControlName="password"  class="form-control" data-type="password" [ngClass]="{ 'is-invalid': submitted && formCtl.password.errors }" />
+             <div *ngIf=" submitted && formCtl.password.errors" class="invalid-feedback">
+                <div *ngIf="formCtl.password.errors.required">Password is required</div>
+                <div *ngIf="formCtl.password.errors.pattern">Password must have at least one uppercase letter, one lowercase letter and one number</div>
+                <div *ngIf="formCtl.password.errors.minlength">Password must be at least 6 characters</div>
+            </div>
+          </div>
+
+        <div class="group">
+          <label for="cpass" class="label">Re-enter Password
+            <span class="mandatory">*</span>
+          </label>
+          <input id="cpass" type="password" formControlName="confirm_password" class="form-control" data-type="password" [ngClass]="{ 'is-invalid': submitted && formCtl.confirm_password.errors }" />
+          <div *ngIf=" submitted && formCtl.confirm_password.errors" class="invalid-feedback">
+              <div *ngIf="formCtl.confirm_password.errors.required">Password is required</div>
+              <div *ngIf="formCtl.confirm_password.errors.MatchPassword">Password does not match</div>
+          </div>
+        </div>
+        
+        <div class="group">
+          <label for="email" class="label">Email Address
+            <span class="mandatory">*</span>
+          </label>
+          <input id="email" type="email" [(ngModel)]="form.email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && formCtl.email.errors }" />
+          <div *ngIf="submitted && formCtl.email.errors" class="invalid-feedback">
+            <div *ngIf="formCtl.email.errors.required">Email is required</div>
+            <div *ngIf="formCtl.email.errors.email">Email must be a valid email address</div>
+          </div>
+        </div>
+
+
+
+        <div class="group">
+          <label for="mobile" class="label">Mobile No.
+            <span class="mandatory">*</span>
+          </label>
+          <input id="mobile" type="text" [(ngModel)]="form.mobileNo" formControlName="phoneNo" class="form-control" [ngClass]="{ 'is-invalid': submitted && formCtl.phoneNo.errors }" />
+          <div *ngIf=" submitted && formCtl.phoneNo.errors" class="invalid-feedback">
+            <div *ngIf="formCtl.phoneNo.errors.required">Phone Number is required</div>
+            <div *ngIf="formCtl.phoneNo.errors.minlength || formCtl.phoneNo.errors.maxlength">Phone Number must be at 10 digit long</div>
+          </div>
+        </div>
+
+      <div class="group">
+          <label for="date" class="label">Date of Birth
+            <span class="mandatory">*</span>
+          </label>
+          <input id ="date" type="date" [(ngModel)]="form.dob" formControlName="date" class="form-control" [ngClass]="{ 'is-invalid': submitted && formCtl.date.errors }" />
+          <div *ngIf=" submitted && formCtl.date.errors" class="invalid-feedback">
+            <div *ngIf="formCtl.date.errors.required">Date of Birth is required</div>
+          </div>
+      </div>
+
+      <div class="group">
+        <input type="submit" class="button login-button" value="Sign Up">
+      </div>
+      
+      <div class="foot-lnk">
+        <a href=".">Already Member? Sign In</a>
+      </div>
+      
+    </div>
+    </div>
+    </form>
+  </div>
+</div>

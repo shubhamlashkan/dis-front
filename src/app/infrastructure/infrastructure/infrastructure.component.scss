@@ -1,0 +1,75 @@
+.span-text {
+    font-size: 16px;
+    margin-left: 10px;
+  }
+  .plusIcon:hover {
+    opacity: .5;
+  }
+  .more {
+    text-decoration: none;
+    float: right;
+    color: #0085cc;
+  }
+
+  .more:hover {
+    text-decoration: none;
+    color: #f46404;
+  }
+
+  .contact-icon {
+    margin-left: 20px;
+  }
+
+  .add-engagement {
+    color: #1483CC;
+  }
+
+  .add-engagement:hover {
+    color: #f46404;
+  }
+
+  .box {
+    padding: 1%;
+    padding-left: 5%;
+    background-color: #fff;
+    border: 1px solid #bfbfbf;
+    -webkit-box-shadow: -1px 3px 3px -3px rgba(0, 0, 0, 0.35);
+    -moz-box-shadow: -1px 3px 3px -3px rgba(0, 0, 0, 0.35);
+    box-shadow: -1px 3px 3px -3px rgba(0, 0, 0, 0.35);
+  }
+
+  .center {
+    display: block;
+    margin-left: 25%;
+
+  }
+
+  .center-text {
+    margin-left: 20%;
+  }
+
+  .navbar-left {
+    margin-right: 12%;
+  }
+
+  .heading {
+    background: grey;
+    padding: 2%;
+  }
+
+  .modal-heading {
+    background: #1483cc;
+    color: white;
+  }
+
+  .modal-lg {
+    max-width: 70% !important;
+  }
+  .navbar-left{
+    margin-left:9%;
+
+}
+.navbar-padding > li{
+padding-left:35px;
+padding-right:35px;
+}

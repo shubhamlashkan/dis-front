@@ -1,0 +1,268 @@
+<!-- Tooltip -->
+<link href="../../../assets/css/tooltip.css" rel="stylesheet" type="text/css" />
+<script src="js/tooltip.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+<script type="text/javascript" src="../../../assets/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script type="text/javascript" src="../../../assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../../assets/js/bootstrap-datepicker.js"></script>  
+
+<!--grid script-->
+<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+
+<script>
+  $(document).ready(function(){
+    $('#myTable').dataTable();
+  });
+</script> 
+<!--END grid script-->
+
+
+<div class="container">
+  <div class="row">
+
+<!--Start Left Panel-->
+    <div class="col-lg-3 profile-info">
+      <app-sidenavigation></app-sidenavigation>
+     
+    </div>
+
+  <!--End Left Panel-->
+
+
+    <!--Start Right Panel-->
+    <div class="col-lg-9 kyc-colm user-management">
+      <div class="kyc-section rewards-section reports-sectn">
+      <!--Calendar comes in below div-->
+      <ul class="nav nav-pills mb-3 nav-fill" id="pills-tab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Calender</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Time Table</a>
+        </li>
+</ul>
+        <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+          <br>	
+          <div id='calendar'>
+            <app-calendar></app-calendar>
+          </div>
+        </div>
+        <div class="tab-pane show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+          <br>	
+          <div class="table-responsive">
+              <table class="table table-bordered table-striped">
+                <thead class="">
+                  <tr>
+                    <th scope="col">Timing</th>
+                    <th scope="col">Monday</th>
+                    <th scope="col">Tuesday</th>
+                    <th scope="col">Wednesday</th>
+                    <th scope="col">Thursday</th>
+                    <th scope="col">Friday</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">10:00-11:00</th>
+                    <td>CO34007</td>
+                    <td>CO34002</td>
+                    <td>CO34008</td>
+                    <td>CO34005</td>
+                    <td>CO34007</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">11:00-12:00</th>
+                    <td>CO34002</td>
+                    <td>CO34005</td>
+                    <td>CO34007</td>
+                    <td>CO34008</td>
+                    <td>CO34007</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">12:00-1:00</th>
+                    <td></td>
+                    <td>EC34007</td>
+                    <td>EC34007</td>
+                    <td>EC34007</td>
+                    <td>EC34007</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">1:00-2:00</th>
+
+                  </tr>
+                  <tr>
+                    <th scope="row">2:00-3:00</th>
+                    <td>CO34007</td>
+                    <td></td>
+                    <td>CO34008</td>
+                    <td>CO34005</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3:00-4:00</th>
+                    <td>CO34007</td>
+                    <td>CO34002</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">4:00-5:00</th>
+                    <td>CO34007</td>
+                    <td>CO34002</td>
+                    <td>CO34008</td>
+                    <td>CO34005</td>
+                    <td>CO34007</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">5:00-6:00</th>
+                    <td>CO34007</td>
+                    <td>CO34002</td>
+                    <td>CO34008</td>
+                    <td>CO34005</td>
+                    <td>CO34007</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div style="color:#1488CC;"><a href="#" style="float:right;"><i class="fa fa-download fa-fw"></i>Week time table</a></div>
+        </div>
+        
+        </div>
+ 
+    <!--End Right Panel-->
+
+  <!--Notification Panel starts-->
+  <div class="notification heading">
+  <br/>
+  <br/>
+  <h2>Notifications</h2>   
+    <hr/>
+  </div>
+  <div class="col-12">
+    <div class = "row">
+      <div class="alert alert-success row col-lg-4" style="height:100px; margin-left: 4px">
+        <h6 class="col-12">CO34002 Assignment #04</h6>
+        <hr/>
+        <p class="col-6" style="font-size: 70%"> Date of submission: 29/08/2017</p>
+        <div class="col">
+          <img class="download" src="assets/images/download.png" style= "height : 12px; width: 15px" alt=""/>
+          <a href="#" style="font-size: 80%">  Assignment</a>
+        </div>
+      </div>
+      <hr>
+      <div class="alert alert-success row col-lg-4" style="height:100px; margin-left: 4px">
+        <h6 class="col-12">CO34002 Assignment #04</h6>
+        <hr>
+        <p class="col-6" style="font-size: 70%"> Date of submission: 29/08/2017</p>
+        <hr>
+        <div class="col">
+          <img class="download" src="assets/images/download.png" style= "height : 12px; width: 15px" alt=""/>
+          <a href="#" style="font-size: 80%">  Assignment</a>
+        </div>
+      </div>
+      <hr>
+      <div class="alert alert-success row col-lg-4" style="height:100px; margin-left: 4px">
+        <h6 class="col-12">Mid Term-1 Time table</h6>
+        <p class="col-6" style="font-size: 70%"> Start Date: 22/03/2019
+          
+        </p>
+        <div class="col">
+          <span><img class="download" src="assets/images/download.png" style= "height : 12px; width: 15px" alt=""/>
+        <a href="#" style="font-size: 80%">  TimeTable</a></span>
+        <br>
+        <img class="download" src="assets/images/download.png"style= "height : 12px; width: 15px" alt=""/>
+        <a href="#" style="font-size: 80%"> Seating Plan</a>
+        </div>
+      </div>
+    </div>
+    <div class = "row">
+    <div class="alert alert-success row col-lg-4" style="height:100px; margin-left: 4px">
+      <h6 class="col-12">CO34002 Assignment #04</h6>
+      <hr>
+      <p class="col-6" style="font-size: 70%"> Date of submission: 29/08/2017</p>
+      <hr>
+      <div class="col">
+        <img class="download" src="assets/images/download.png" style= "height : 12px; width: 15px" alt=""/>
+        <a href="#" style="font-size: 80%">  Assignment</a>
+      </div>
+    </div>
+    <hr>
+    <div class="alert alert-success row col-lg-4" style="height:100px; margin-left: 4px">
+      <h6 class="col-12">CO34002 Assignment #04</h6>
+      <hr>
+      <p class="col-6" style="font-size: 70%"> Date of submission: 29/08/2017</p>
+      <hr>
+      <div class="col">
+        <img class="download" src="assets/images/download.png" style= "height : 12px; width: 15px" alt=""/>
+        <a href="#" style="font-size: 80%">  Assignment</a>
+      </div>
+    </div>
+    <hr>
+    <div class="alert alert-success row col-lg-4" style="height:100px; margin-left: 4px">
+      <h6 class="col-12">Mid Term-1 Time table</h6>
+      <p class="col-6" style="font-size: 70%"> Start Date: 22/03/2019
+        
+      </p>
+      <div class="col">
+        <span><img class="download" src="assets/images/download.png" style= "height : 12px; width: 15px" alt=""/>
+      <a href="#" style="font-size: 80%">  TimeTable</a></span>
+      <br>
+      <img class="download" src="assets/images/download.png"style= "height : 12px; width: 15px" alt=""/>
+      <a href="#" style="font-size: 80%"> Seating Plan</a>
+      </div>
+    </div>
+  </div>
+  <div class = "row">
+    <div class="alert alert-success row col-lg-4" style="height:100px; margin-left: 4px">
+      <h6 class="col-12">CO34002 Assignment #04</h6>
+      <hr>
+      <p class="col-6" style="font-size: 70%"> Date of submission: 29/08/2017</p>
+      <hr>
+      <div class="col">
+        <img class="download" src="assets/images/download.png" style= "height : 12px; width: 15px" alt=""/>
+        <a href="#" style="font-size: 80%">  Assignment</a>
+      </div>
+    </div>
+    <hr>
+    <div class="alert alert-success row col-lg-4" style="height:100px; margin-left: 4px">
+      <h6 class="col-12">CO34002 Assignment #04</h6>
+      <hr>
+      <p class="col-6" style="font-size: 70%"> Date of submission: 29/08/2017</p>
+      <hr>
+      <div class="col">
+        <img class="download" src="assets/images/download.png" style= "height : 12px; width: 15px" alt=""/>
+        <a href="#" style="font-size: 80%">  Assignment</a>
+      </div>
+    </div>
+    <hr>
+    <div class="alert alert-success row col-lg-4" style="height:100px; margin-left: 4px">
+      <h6 class="col-12">Mid Term-1 Time table</h6>
+      <p class="col-6" style="font-size: 70%"> Start Date: 22/03/2019
+        
+      </p>
+      <div class="col">
+        <span><img class="download" src="assets/images/download.png" style= "height : 12px; width: 15px" alt=""/>
+      <a href="#" style="font-size: 80%">  TimeTable</a></span>
+      <br>
+      <img class="download" src="assets/images/download.png"style= "height : 12px; width: 15px" alt=""/>
+      <a href="#" style="font-size: 80%"> Seating Plan</a>
+      </div>
+    </div>
+  </div>
+  </div>
+  <a href="#" class="float-right">View All</a>
+  <!--Notification Panel Ends-->
+      </div>
+
+    </div>
+
+  <!--End Right Panel-->
+
+  </div>
+</div>

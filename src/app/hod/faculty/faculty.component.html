@@ -1,0 +1,329 @@
+<div class="modal fade my-modal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="col-lg-12 kyc-colm user-management">
+
+
+        <div class="row page-headng">
+
+          <div class="col-lg-12">
+            <h3>Time Table <button type="button" class="close" data-dismiss="modal">&times;</button></h3>
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Timing</th>
+                  <th scope="col">Monday</th>
+                  <th scope="col">Tuesday</th>
+                  <th scope="col">Wednesday</th>
+                  <th scope="col">Thursday</th>
+                  <th scope="col">Friday</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">10:00-11:00</th>
+                  <td>CO34007</td>
+                  <td>CO34002</td>
+                  <td>CO34008</td>
+                  <td>CO34005</td>
+                  <td>CO34007</td>
+                </tr>
+                <tr>
+                  <th scope="row">11:00-12:00</th>
+                  <td>CO34002</td>
+                  <td>CO34005</td>
+                  <td>CO34007</td>
+                  <td>CO34008</td>
+                  <td>CO34007</td>
+                </tr>
+                <tr>
+                  <th scope="row">12:00-1:00</th>
+                  <td></td>
+                  <td>EC34007</td>
+                  <td>EC34007</td>
+                  <td>EC34007</td>
+                  <td>EC34007</td>
+                </tr>
+                <tr>
+                  <th scope="row">1:00-2:00</th>
+
+                </tr>
+                <tr>
+                  <th scope="row">2:00-3:00</th>
+                  <td>CO34007</td>
+                  <td></td>
+                  <td>CO34008</td>
+                  <td>CO34005</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th scope="row">3:00-4:00</th>
+                  <td>CO34007</td>
+                  <td>CO34002</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th scope="row">4:00-5:00</th>
+                  <td>CO34007</td>
+                  <td>CO34002</td>
+                  <td>CO34008</td>
+                  <td>CO34005</td>
+                  <td>CO34007</td>
+                </tr>
+                <tr>
+                  <th scope="row">5:00-6:00</th>
+                  <td>CO34007</td>
+                  <td>CO34002</td>
+                  <td>CO34008</td>
+                  <td>CO34005</td>
+                  <td>CO34007</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade my-modal2" id="myModal2" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <!--En-->
+
+        <!--En-->
+        <h3 class="modal-title">Assign New Task</h3>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <h6 class="heading">Select Faculty</h6>
+            <select class="form-control" id="sel1">
+              <option>Somil Neema</option>
+              <option>Ritambara Patidar</option>
+              <option>Surendra Gupta</option>
+              <option>Jyoti Tiwari</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <h6 class="heading">Category</h6>
+            <select class="form-control input-lg" id="sel2">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <h6 class="heading">Choose Task </h6>
+            <select class="form-control input-lg" id="sel3">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+            </select>
+          </div>
+
+          <div class="form-group form-group-lg">
+            <h6 class="heading">If Other Please Specify </h6>
+            <input class="form-control" id="inputdefault" type="text">
+          </div>
+          <div class="form-group">
+            <h6 class="heading">Description(If any) </h6>
+            <input class="form-control form-control-lg" id="inputlg" type="text">
+          </div>
+        </form>
+        <button type="button" class="btn btn-primary">Submit</button>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="container">
+
+  <ul class="nav nav-pills nav-fill">
+    <input type="text" placeholder="Search.." name="search" style="width:700px;">
+    <li class="nav-item">
+      <a class="nav-link active" id="sectionA-tab" data-toggle="pill" href="#sectionA" role="tab" aria-controls="sectionA"
+        aria-selected="true">Faculty</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " id="sectionB-tab" data-toggle="pill" href="#sectionB" role="tab" aria-controls="sectionB"
+        aria-selected="true">Staff</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link pl-2" id="sectionB-tab" data-toggle="pill" href="#sectionC" role="tab" aria-controls="sectionB"
+        aria-selected="true">Add Member</a>
+    </li>
+
+  </ul>
+  <hr />
+  <div class="tab-content ">
+    <div class="tab-pane fade show active" id="sectionA" role="tabpane1" aria-labelledby="sectionA-tab">
+      <div class="row">
+        <div class="col-lg-3 col-sm-6" *ngFor='let f of fData'>
+
+          <div class="card hovercard">
+            <div class="cardheader">
+              <div class="dropleft">
+                <a href="#" id="dropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="true" style="text-decoration:none;margin-left: 85%;">
+                  <i class="fa fa-ellipsis-v"></i>
+                </a>
+                <div class="dropdown-menu rounded-0 " aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" role="button" data-toggle="modal" data-target=".my-modal" aria-controls="cleanliness"
+                    style="text-decoration:none;">
+                    Time Table</a>
+                  <a class="dropdown-item collapsed" href="hod/hod_tasks" role="button" data-toggle="collapse" style="text-decoration:none;">
+                    Assigned Tasks</a>
+                  <a class="dropdown-item collapsed" href="#" role="button" data-toggle="modal" data-target=".my-modal2"
+                    aria-controls="equipments" style="text-decoration:none;">
+                    Assign New Tasks</a>
+                  <a class="dropdown-item collapsed" href="#" role="button" data-toggle="modal" data-target=".my-modal2"
+                    aria-controls="equipments" style="text-decoration:none;">
+                    Profile</a>
+                </div>
+              </div>
+
+            </div>
+            <div class="avatar">
+              <img alt="" src="../../../assets/images/img_avatar3.png">
+            </div>
+            <div class="info">
+              <div class="title">
+                <a target="_blank" href="https://scripteden.com/">{{f.name}}</a>
+              </div>
+
+              <div class="desc"> {{f.currentDesignation}}</div>
+              <div class="desc"><i class="fa fa-mobile"></i> {{f.mobileNo}}</div>
+              <div class="desc"><i class="fa fa-mobile"></i> {{f.alternateMobileNo}}</div>
+              <div class="desc"><i class="fa fa-envelope"></i>{{f.email}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade show active" id="sectionB" role="tabpane1" aria-labelledby="sectionA-tab">
+      <div class="row">
+        <div class="col-lg-3 col-sm-6" *ngFor='let f of sData'>
+
+          <div class="card hovercard">
+            <div class="cardheader">
+              <div class="dropleft">
+                <a href="#" id="dropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="true" style="text-decoration:none;margin-left: 85%;">
+                  <i class="fa fa-ellipsis-v"></i>
+                </a>
+                <div class="dropdown-menu rounded-0 " aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" role="button" data-toggle="modal" data-target=".my-modal" aria-controls="cleanliness"
+                    style="text-decoration:none;">
+                    Time Table</a>
+                  <a class="dropdown-item collapsed" href="hod/hod_tasks" role="button" data-toggle="collapse" style="text-decoration:none;">
+                    Assigned Tasks</a>
+                  <a class="dropdown-item collapsed" href="#" role="button" data-toggle="modal" data-target=".my-modal2"
+                    aria-controls="equipments" style="text-decoration:none;">
+                    Assign New Tasks</a>
+                  <a class="dropdown-item collapsed" href="#" role="button" data-toggle="modal" data-target=".my-modal2"
+                    aria-controls="equipments" style="text-decoration:none;">
+                    Profile</a>
+                </div>
+              </div>
+
+            </div>
+            <div class="avatar">
+              <img alt="" src="../../../assets/images/img_avatar3.png">
+            </div>
+            <div class="info">
+              <div class="title">
+                <a target="_blank" href="https://scripteden.com/">{{f.name}}</a>
+              </div>
+
+              <div class="desc"> {{f.currentDesignation}}</div>
+              <div class="desc"><i class="fa fa-mobile"></i> {{f.mobileNo}}</div>
+              <div class="desc"><i class="fa fa-mobile"></i> {{f.alternateMobileNo}}</div>
+              <div class="desc"><i class="fa fa-envelope"></i>{{f.email}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="sectionC" role="tabpane1" aria-labelledby="sectionB-tab">
+      <div class="col-lg-12 kyc-colm user-management kyc-section rewards-section reports-sectn">
+        <form>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-4">
+                <label class="control-label col-sm-2" for="name">Name:</label>
+              </div>
+              <div class="col-lg-8">
+                <input type="name" class="form-control" id="name1" placeholder="Enter Name:" name="name1">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-4">
+                <label class="control-label col-sm-2" for="date">Joining_date:</label>
+              </div>
+              <div class="col-lg-8">
+                <input type="date" class="form-control" id="date_j" placeholder="Enter Joining date:" name="date">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-4">
+                <label class="control-label col-sm-2" for="email">Email:</label>
+              </div>
+              <div class="col-lg-8">
+                <input type="email" class="form-control" id="email" placeholder="abc..@gmail.com" name="email">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-4">
+                <label class="control-label col-sm-2" for="date">Date_of_Birth:</label>
+              </div>
+              <div class="col-lg-8">
+                <input type="date" class="form-control" id="dob" placeholder="Enter Date of Birth:" name="date">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-4">
+                <label class="control-label col-sm-2" for="number">Mobile_Number:</label>
+              </div>
+              <div class="col-lg-8">
+                <input type="number" class="form-control" id="number" placeholder="Enter Mobile_Number:" name="number">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-4">
+                <label class="control-label col-sm-2" for="address">Address:</label>
+              </div>
+              <div class="col-lg-8">
+                <input type="address" class="form-control" id="address" placeholder="Enter Address:" name="address">
+              </div>
+            </div>
+          </div>
+
+        </form>
+        <button type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <!--END grid script-->

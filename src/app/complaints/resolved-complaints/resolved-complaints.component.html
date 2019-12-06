@@ -1,0 +1,274 @@
+<div class="row">
+  <div class="col-lg-7 heading">
+    <h3>Resolved Complaints</h3>
+  </div>
+  <div class="col-lg-5">
+    <div class="row">
+      <div class="col-lg-7">
+        <ul class="searchbox">
+          <li class="">
+            <input class="form-control mr-sm-2 searchbox-width" type="search" placeholder="Search" aria-label="Search">
+            <i class="fa fa-search" style="position: absolute;top:11px;" aria-hidden="true"></i>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-5" style="padding-bottom:3%;">
+        <a href="#" class="nav-link add-complaint nav-item profile dropdown" id="filter" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-filter fa-fw fa-lg" aria-hidden="true"></i>Filter
+          <div class="dropdown-menu rounded-0" aria-labelledby="filter">
+
+            <ng-container *ngIf="student">
+              <a class="dropdown-item" class="filter-links" (click)="showAll()">
+                <i class="fa fa-file-text fa-fw" aria-hidden="true"></i>All
+              </a><br />
+              <a class="dropdown-item" class="filter-links" href='#' (click)="showOther()">
+                <i class="fa fa-plus fa-fw" aria-hidden="true"></i> Other
+              </a><br />
+              <a class="dropdown-item" class="filter-links" href='#' (click)="showFaculty()">
+                <i class="fa fa-users fa-fw" aria-hidden="true"></i> Faculty
+              </a><br />
+              <a class="dropdown-item" class="filter-links" href='#' (click)="showCleanliness()">
+                <i class="fa fa-paint-brush fa-fw" aria-hidden="true"></i> Cleanliness
+              </a><br />
+              <a class="dropdown-item" class="filter-links" href='#' (click)="showLe()">
+                <i class="fa fa-desktop fa-fw" aria-hidden="true"></i> Lab Equipments
+              </a><br />
+            </ng-container>
+
+            <ng-container *ngIf="staff">
+              <a class="dropdown-item" class="filter-links" (click)="showAll()">
+                <i class="fa fa-file-text fa-fw" aria-hidden="true"></i>All
+              </a><br />
+              <a class="dropdown-item" class="filter-links" href='#' (click)="showStudent()">
+                <i class="fa fa-user fa-fw" aria-hidden="true"></i> Student
+              </a><br />
+              <a class="dropdown-item" class="filter-links" href='#' (click)="showOther()">
+                <i class="fa fa-plus fa-fw" aria-hidden="true"></i> Other
+              </a><br />
+              <a class="dropdown-item" class="filter-links" href='#' (click)="showFaculty()">
+                <i class="fa fa-users fa-fw" aria-hidden="true"></i> Faculty
+              </a><br />
+              <a class="dropdown-item" class="filter-links" href='#' (click)="showCleanliness()">
+                <i class="fa fa-paint-brush fa-fw" aria-hidden="true"></i> Cleanliness
+              </a><br />
+              <a class="dropdown-item" class="filter-links" href='#' (click)="showLe()">
+                <i class="fa fa-desktop fa-fw" aria-hidden="true"></i> Lab Equipments
+              </a><br />
+              <a class="dropdown-item" class="filter-links" (click)="showCwn()">
+                <i class="fa fa-book fa-fw" aria-hidden="true"></i>CWN
+              </a><br />
+              <a class="dropdown-item" class="filter-links" href="#" (click)="showEmrs()">
+                <i class="fa fa-book fa-fw" aria-hidden="true"></i> EMRS
+              </a><br />
+              <a class="dropdown-item" class="filter-links" href='#' (click)="showTelephone()">
+                <i class="fa fa-phone fa-fw" aria-hidden="true"></i> Telephone
+              </a><br />
+              <a class="dropdown-item" class="filter-links" href='#' (click)="showEcc()">
+                <i class="fa fa-file-o fa-fw" aria-hidden="true"></i> ECCW
+              </a>
+            </ng-container>
+            <ng-container *ngIf="isFaculty">
+              <a class="dropdown-item" class="filter-links" (click)="showAll()">
+                <i class="fa fa-file-text fa-fw" aria-hidden="true"></i>All
+              </a><br />
+              <a class="dropdown-item" class="filter-links" href='#' (click)="showStudent()">
+                <i class="fa fa-user fa-fw" aria-hidden="true"></i> Student
+              </a><br />
+              <a class="dropdown-item" class="filter-links" href='#' (click)="showOther()">
+                <i class="fa fa-plus fa-fw" aria-hidden="true"></i> Other
+              </a><br />
+              <a class="dropdown-item" class="filter-links" href='#' (click)="showFaculty()">
+                <i class="fa fa-users fa-fw" aria-hidden="true"></i> Faculty
+              </a><br />
+              <a class="dropdown-item" class="filter-links" href='#' (click)="showCleanliness()">
+                <i class="fa fa-paint-brush fa-fw" aria-hidden="true"></i> Cleanliness
+              </a><br />
+              <a class="dropdown-item" class="filter-links" href='#' (click)="showLe()">
+                <i class="fa fa-desktop fa-fw" aria-hidden="true"></i> Lab Equipments
+              </a><br />
+              <a class="dropdown-item" class="filter-links" (click)="showCwn()">
+                <i class="fa fa-book fa-fw" aria-hidden="true"></i>CWN
+              </a><br />
+              <a class="dropdown-item" class="filter-links" href="#" (click)="showEmrs()">
+                <i class="fa fa-book fa-fw" aria-hidden="true"></i> EMRS
+              </a><br />
+              <a class="dropdown-item" class="filter-links" href='#' (click)="showTelephone()">
+                <i class="fa fa-phone fa-fw" aria-hidden="true"></i> Telephone
+              </a><br />
+              <a class="dropdown-item" class="filter-links" href='#' (click)="showEcc()">
+                <i class="fa fa-file-o fa-fw" aria-hidden="true"></i> ECCW
+              </a>
+            </ng-container>
+            <ng-container *ngIf="hod">
+              <a class="dropdown-item" class="filter-links" (click)="showAll()">
+                <i class="fa fa-file-text fa-fw" aria-hidden="true"></i>All
+              </a><br />
+              <a class="dropdown-item" class="filter-links" href='#' (click)="showStudent()">
+                <i class="fa fa-user fa-fw" aria-hidden="true"></i> Student
+              </a><br />
+              <a class="dropdown-item" class="filter-links" href='#' (click)="showOther()">
+                <i class="fa fa-plus fa-fw" aria-hidden="true"></i> Other
+              </a><br />
+              <a class="dropdown-item" class="filter-links" href='#' (click)="showFaculty()">
+                <i class="fa fa-users fa-fw" aria-hidden="true"></i> Faculty
+              </a><br />
+             
+            </ng-container>
+
+
+          </div>
+        </a>
+      </div>
+
+      <!-- <i class="col-1 fa fa-file icon fa-fw" style=" padding-top:1%" aria-hidden="true"></i><Download list of all complaints-->
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+    <div  class="col-lg-12" >
+    <app-addacomplaint></app-addacomplaint>
+    </div>
+    </div>
+  <br>
+<!--Notification Panel starts-->
+
+<div  style="padding-left:12px;padding-right:12px">
+  <div *ngIf="cleanliness">
+  <div *ngFor="let val of cleanlinessResolvedComplaintsInfo">
+    <div class="alert alert-success row">
+     <h4 class="col-9">Complaint : {{val.type}}{{val.id}}</h4>
+     <h6 class="col-3"  style="text-align: right;" >Status : {{val.status}}</h6> 
+    <p class="col-8"> Date and Time : {{val.createdDate}}<br/>Location : {{val.location}}<br/>
+        Description : {{val.details}}<br/>
+      Level of Dust : {{val.levelOfDust}}</p>
+      <!--  Assigned to : Mr XYZ <br/>Work in progress<br/>	-->
+    </div>
+</div>
+</div>
+<div *ngIf="le">
+
+<div *ngFor="let val of leResolvedComplaintsInfo">
+  <div class="alert alert-success row">
+   <h4 class="col-9">Complaint : {{val.type}}{{val.id}}</h4>
+   <h6 class="col-3"  style="text-align: right;" >Status : {{val.status}}</h6> 
+  <p class="col-8"> Date and Time : {{val.createdDate}}<br/>
+    System No. : {{val.systemNo}}<br/>
+    Lab : {{val.lab}}<br/>
+      Description : {{val.details}}<br/>
+    </p>
+    <!--  Assigned to : Mr XYZ <br/>Work in progress<br/>	-->
+  </div>
+</div>
+</div>
+
+<div *ngIf="cwn">
+<div *ngFor="let val of cwnResolvedComplaintsInfo">
+<div class="alert alert-success row">
+ <h4 class="col-9">Complaint : {{val.type}}{{val.id}}</h4>
+ <h6 class="col-3"  style="text-align: right;" >Status : {{val.status}}</h6> 
+<p class="col-8"> Date and Time : {{val.createdDate}}<br/>
+  Location : {{val.location}}<br/>
+    Description : {{val.details}}<br/>
+    Form Id : {{val.formId}}<br/>
+  </p>
+  <!--  Assigned to : Mr XYZ <br/>Work in progress<br/>	-->
+</div>
+</div>
+</div>
+<div *ngIf="ecc">
+
+<div *ngFor="let val of eccwResolvedComplaintsInfo">
+<div class="alert alert-success row">
+<h4 class="col-9">Complaint : {{val.type}}{{val.id}}</h4>
+<h6 class="col-3"  style="text-align: right;" >Status : {{val.status}}</h6> 
+<p class="col-8"> Date and Time : {{val.createdDate}}<br/>
+Location : {{val.location}}<br/>
+  Description : {{val.details}}<br/>
+  Form Id : {{val.formId}}<br/>
+</p>
+<!--  Assigned to : Mr XYZ <br/>Work in progress<br/>	-->
+</div>
+</div>
+</div>
+<div *ngIf="other">
+<div *ngFor="let val of otherResolvedComplaintsInfo">
+<div class="alert alert-success row">
+<h4 class="col-9">Complaint : {{val.type}}{{val.id}}</h4>
+<h6 class="col-3"  style="text-align: right;" >Status : {{val.status}}</h6> 
+<p class="col-8"> Date and Time : {{val.createdDate}}<br/>
+  Description : {{val.details}}<br/>
+  Assigned To : {{val.assignedTo}}<br/>
+</p>
+<!--  Assigned to : Mr XYZ <br/>Work in progress<br/>	-->
+</div>
+</div>
+</div>
+<div *ngIf="faculty">
+<div *ngFor="let val of facultyResolvedComplaintsInfo">
+<div class="alert alert-success row">
+<h4 class="col-9">Complaint : {{val.type}}{{val.id}}</h4>
+<h6 class="col-3"  style="text-align: right;" >Status : {{val.status}}</h6> 
+<p class="col-8"> Date and Time : {{val.createdDate}}<br/>
+  Description : {{val.details}}<br/>
+  Faculty Name : {{val.facultyName}}<br/>
+  Date of Resolution : {{val.dateOfResolution}}
+</p>
+<!--  Assigned to : Mr XYZ <br/>Work in progress<br/>	-->
+</div>
+</div>
+</div>
+<div *ngIf="stu">
+
+<div *ngFor="let val of stuResolvedComplaintsInfo">
+<div class="alert alert-success row">
+<h4 class="col-9">Complaint : {{val.type}}{{val.id}}</h4>
+<h6 class="col-3"  style="text-align: right;" >Status : {{val.status}}</h6> 
+<p class="col-8"> Date and Time : {{val.createdDate}}<br/>
+  Description : {{val.details}}<br/>
+  Student Name : {{val.studentName}}<br/>
+  Student Roll No. : {{val.studentRollNo}}<br/>
+  Student Year : {{val.year}}<br/>
+  Date of Resolution : {{val.dateOfResolution}}<br/>
+  <b>Remark : {{val.remarks}}</b>
+</p>
+<!--  Assigned to : Mr XYZ <br/>Work in progress<br/>	-->
+</div>
+</div>
+</div>
+<div *ngIf="telephone">
+
+<div *ngFor="let val of telephoneResolvedComplaintsInfo">
+<div class="alert alert-success row">
+<h4 class="col-9">Complaint : {{val.type}}{{val.id}}</h4>
+<h6 class="col-3"  style="text-align: right;" >Status : {{val.status}}</h6> 
+<p class="col-8"> Date and Time : {{val.createdDate}}<br/>
+  Description : {{val.details}}<br/>
+ Location : {{val.location}}<br/>
+ Extension No. : {{val.extension_no}}<br/>
+  Date of Resolution : {{val.dateOfResolution}}<br/>
+  <b>Remark : {{val.remarks}}</b>
+</p>
+<!--  Assigned to : Mr XYZ <br/>Work in progress<br/>	-->
+</div>
+</div>
+</div>
+<div *ngIf="emrs">
+<div *ngFor="let val of emrsResolvedComplaintsInfo">
+<div class="alert alert-success row">
+<h4 class="col-9">Complaint : {{val.type}}{{val.id}}</h4>
+<h6 class="col-3"  style="text-align: right;" >Status : {{val.status}}</h6> 
+<p class="col-8"> Date and Time : {{val.createdDate}}<br/>
+  Description : {{val.details}}<br/>
+  Location : {{val.location}}<br/>
+  Date of Resolution : {{val.dateOfResolution}}<br/>
+  Form Id : {{val.formId}}<br/>
+  <b>Remark : {{val.remarks}}</b>
+  </p>
+<!--  Assigned to : Mr XYZ <br/>Work in progress<br/>	-->
+</div>
+</div>
+</div>
+  </div>
+<!--Notification Panel Ends-->

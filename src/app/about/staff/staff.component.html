@@ -1,0 +1,17 @@
+<div class="kyc-section rewards-section reports-sectn">
+    <div class="row ">
+            <div class="card col-sm-3" *ngFor="let emp of staffMembers">
+              <div class=" card-body text-center">
+              <div class="profile-info">
+                  <div class="profile-icon">
+                    <img class="center" src="./../../../assets/images/img_avatar2.png" alt="" />
+                  </div>
+                </div>
+                <div class="center-text">  <!--text alignent issue-->
+                  <p>{{emp?.name}}<br>{{emp?.currentDesignation}}</p>
+                  <i class="fa fa-envelope"></i> {{emp?.email}}
+                </div>
+                </div>
+              </div>
+      </div>
+</div>

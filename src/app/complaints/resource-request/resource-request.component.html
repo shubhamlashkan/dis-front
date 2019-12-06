@@ -1,0 +1,139 @@
+<div class="container">
+<div class="row">
+
+  <div class="col-lg-6 heading">
+    <div class="customDiv">
+        <h3>Resource Request</h3>
+    </div>
+  </div>
+  <div class="col-lg-6">
+      <div class="customDiv">
+          <button type="button" class="btn btn-default" style="float:right;"
+        (click)="onButtonClick()"> Request Resource</button>
+      </div>
+  </div>
+</div>
+    <div *ngIf="displayForm">
+      <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <div ngModelGroup="resourceData">
+        <div class="group">
+          <div class="row">
+            <div class="col-lg-3">
+            </div>
+                 <div class="col-lg-3">
+                      <label for="category">Category
+                          <span class="mandatory">*</span>
+                      </label>
+                 </div>
+                 <div class="col-lg-6">
+                   <div class="customDiv">
+                      <select name="category" class="form-control"
+                      id="category"
+                      [ngModel]="defaultCategory"
+                      required >
+                          <option value="stat">Stationary Items</option>
+                          <option value="lab">Lab Equipments</option>
+                          <option value="electric">Electrical Appliances</option>
+                      </select>
+                   </div>
+              </div>
+          </div>
+      </div>
+        <div class="group" >
+       <div class="row">
+          <div class="col-lg-3">
+            </div>
+        <div class="col-lg-3">
+          <label for="details">Details
+              <span class="mandatory">*</span>
+          </label>
+        </div>
+        <div class="col-lg-6">
+          <div class="customDiv">
+              <textarea class="form-control" rows="3" 
+                placeholder="Enter Specific Details of Required Resource Category"
+               name="details" 
+               id="details"
+               required
+               ngModel></textarea>
+          </div>
+          </div>
+       </div>
+        </div>
+        <div class="group">
+            <div class="row">
+                <div class="col-lg-3">
+                  </div>
+              <div class="col-lg-3">
+                <label for="priority">Priority
+                  <span class="mandatory">*</span>
+                </label>
+              </div>
+              <div class="col-lg-6">
+                <div class="customDiv">
+                    <select name="priority" class="form-control"
+                     id="priority"
+                     [ngModel]="defaultPriority"
+                     required>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+                      </div>
+                </div>
+            </div>
+        </div>
+        <div class="group">
+            <div class="row">
+                <div class="col-lg-3">
+                  </div>
+                <div class="col-lg-3">
+                    <label for="deadlineDate">Required Before
+                        <span class="mandatory">*</span>
+                    </label>
+                </div>
+                <div class="col-lg-6">
+                  <div class="customDiv">
+                      <input type="date" name="deadlineDate" class="form-control"
+                      id="deadlineDate"
+                      required
+                      ngModel>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div class="group">
+            <div class="row">
+                <div class="col-lg-6">
+
+                  </div>
+                  <div class="col-lg-3">
+                      <button type="reset" class="btn btn-primary">Reset</button>
+                  </div>
+                  <div class="col-lg-3">
+                      <button type="submit" 
+                      class="btn btn-submit"
+                      [disabled]="!f.valid">Submit</button>
+                  </div>
+            </div>
+          </div>
+        </div>
+          </form>
+        </div>
+        <br>
+      <!--  <div class="row" *ngIf="submitted">
+          <p>Category: {{requestData.category}}</p>
+          <p>Details: {{requestData.details}}</p>
+          <p>Priority: {{requestData.priority}}</p>
+          <p>Date: {{requestData.date}}</p>
+        </div>
+        -->
+      <div class="row">
+        <table class="customTable" >
+          <th class="customTd">Resource Category</th>
+          <th class="customTd">Details</th>
+          <th class="customTd">Status</th>
+          <th class="customTd">Take Action</th>
+        </table>
+      </div>
+</div>

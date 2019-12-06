@@ -1,0 +1,608 @@
+<ng-container *ngIf="userType != 'head' ">
+<div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <h5>Add a Complaint
+          <div class="nav-item profile dropdown float-right" >
+              <a class="nav-link" href="" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="false"
+              aria-expanded="true" style="text-decoration:none;" >
+              <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i>
+            </a>
+          
+            <div class="dropdown-menu rounded-0 " aria-labelledby="navbarDropdownMenuLink2">
+              <ng-container *ngIf="student">
+                  <a class="dropdown-item collapsed" href="#" role="button" data-toggle="collapse"
+                  data-target="#cleanliness" aria-expanded="false" aria-controls="cleanliness"
+                  style="text-decoration:none;"  (click)="resetForm()">
+                  <i class="fa fa-paint-brush fa-fw" aria-hidden="true"> Cleanliness</i>
+                </a>
+                <a class="dropdown-item collapsed" href="#" role="button" data-toggle="collapse" data-target="#equipments"
+                  aria-expanded="false" aria-controls="equipments" style="text-decoration:none;" (click)="resetForm()">
+                  <i class="fa fa-desktop fa-fw" aria-hidden="true"> Lab Equipments</i>
+                </a>
+                <a class="dropdown-item collapsed" href="#" role="button" data-toggle="collapse"
+                data-target="#otherComplaints" aria-expanded="false" aria-controls="otherComplaints"
+                style="text-decoration:none;" (click)="resetForm()">
+                <i class="fa fa-plus fa-fw" aria-hidden="true"></i> Other
+              </a>
+              <a class="dropdown-item collapsed" href="#" role="button" data-toggle="collapse"
+                data-target="#facultyComplaint" aria-expanded="false" aria-controls="facultyComplaints"
+                style="text-decoration:none;" (click)="resetForm()"><i class="fa fa-users fa-fw" aria-hidden="true"></i> Faculty
+              </a>
+              </ng-container>
+
+              <ng-container *ngIf="staff">
+                  <a class="dropdown-item collapsed" href="#" role="button" data-toggle="collapse"
+                  data-target="#cleanliness" aria-expanded="false" aria-controls="cleanliness"
+                  style="text-decoration:none;"  (click)="resetForm()">
+                  <i class="fa fa-paint-brush fa-fw" aria-hidden="true"> Cleanliness</i>
+                </a>
+                <a class="dropdown-item collapsed" href="#" role="button" data-toggle="collapse" data-target="#equipments"
+                aria-expanded="false" aria-controls="equipments" style="text-decoration:none;" (click)="resetForm()">
+                <i class="fa fa-desktop fa-fw" aria-hidden="true"> Lab Equipments</i>
+              </a>
+                  <a class="dropdown-item collapsed" href="#" role="button" data-toggle="collapse"
+                  data-target="#cwnComplaint" aria-expanded="false" aria-controls="cwnComplaints"
+                  style="text-decoration:none;"  (click)="resetForm()">
+                  <i class="fa fa-book fa-fw" aria-hidden="true"></i>CWN
+                </a>
+                <a class="dropdown-item collapsed" href="#" role="button" data-toggle="collapse"
+                  data-target="#eccwComplaint" aria-expanded="false" aria-controls="eccwComplaints"
+                  style="text-decoration:none;" (click)="resetForm()">
+                  <i class="fa fa-file-o fa-fw" aria-hidden="true"></i>ECCW
+                </a>
+                <a class="dropdown-item collapsed" href="#" role="button" data-toggle="collapse"
+                  data-target="#emrsComplaint" aria-expanded="false" aria-controls="emrsComplaints"
+                  style="text-decoration:none;" (click)="resetForm()">
+                  <i class="fa fa-book fa-fw" aria-hidden="true"></i>EMRS
+                </a>
+                <a class="dropdown-item collapsed" href="#" role="button" data-toggle="collapse"
+                  data-target="#telephoneComplaint" aria-expanded="false" aria-controls="telephoneComplaints"
+                  style="text-decoration:none;"  (click)="resetForm()">
+                  <i class="fa fa-phone fa-fw" aria-hidden="true"></i>Telephone
+                </a>
+                <a class="dropdown-item collapsed" href="#" role="button" data-toggle="collapse"
+                data-target="#otherComplaints" aria-expanded="false" aria-controls="otherComplaints"
+                style="text-decoration:none;" (click)="resetForm()">
+                <i class="fa fa-plus fa-fw" aria-hidden="true"></i> Other
+              </a>
+              </ng-container>
+             <ng-container *ngIf="faculty">
+              <a class="dropdown-item collapsed" href="#" role="button" data-toggle="collapse"
+                data-target="#studentComplaint" aria-expanded="false" aria-controls="otherComplaints"
+                style="text-decoration:none;" (click)="resetForm()">
+                <i class="fa fa-user fa-fw" aria-hidden="true"></i> Student
+              </a>
+              <a class="dropdown-item collapsed" href="#" role="button" data-toggle="collapse"
+              data-target="#cleanliness" aria-expanded="false" aria-controls="cleanliness"
+              style="text-decoration:none;"  (click)="resetForm()">
+              <i class="fa fa-paint-brush fa-fw" aria-hidden="true"> Cleanliness</i>
+            </a>
+            <a class="dropdown-item collapsed" href="#" role="button" data-toggle="collapse" data-target="#equipments"
+              aria-expanded="false" aria-controls="equipments" style="text-decoration:none;" (click)="resetForm()">
+              <i class="fa fa-desktop fa-fw" aria-hidden="true"> Lab Equipments</i>
+            </a>
+            <a class="dropdown-item collapsed" href="#" role="button" data-toggle="collapse"
+            data-target="#otherComplaints" aria-expanded="false" aria-controls="otherComplaints"
+            style="text-decoration:none;" (click)="resetForm()">
+            <i class="fa fa-plus fa-fw" aria-hidden="true"></i> Other
+          </a>
+            </ng-container>
+             <ng-container *ngIf="hod">
+             <div (click)="addComplaintDisable()"></div>
+             </ng-container>
+            </div>
+          </div>
+        </h5>
+      </h5>
+    </div>
+    <div id="cleanliness" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        <form [formGroup]="cleanlinessForm" (ngSubmit)="onCleanlinessSubmit(cleanlinessForm.value)">
+
+          <div>
+            <div formArrayName="cleanlinessFields"
+              *ngFor="let val of cleanlinessForm.get('cleanlinessFields').controls; let i = index">
+              <div [formGroupName]="i">
+                <div class="form-group">
+                  <h6>Cleanliness Complaint</h6>
+                </div>
+                <div class="form-row">
+                  <div class="col"
+                  [ngClass]=" { 'has-error ' : val.controls.location.invalid && val.controls.location.touched }">
+                   <select class="form-control" id="{{'location'+i}}" formControlName="location">
+                    <option value="" disabled selected>Select location *</option>
+                    <option *ngFor="let location of locations" [value]="location">{{location}}</option>
+                  </select>  
+                  <span class="help-block required-text"
+                    *ngIf="val.controls.location.errors?.required && val.controls.location.touched">Location is required</span>
+                </div>
+                  <div class="col"
+                    [ngClass]="{ 'has-error' : val.controls.levelOfDust.invalid && val.controls.levelOfDust.touched }">
+                    <input type="number" id="{{'levelOfDust'+i}}" formControlName="levelOfDust" class="form-control"
+                      placeholder="Level of Dust *">
+                    <span class="help-block required-text"
+                      *ngIf="val.controls.levelOfDust.errors?.required && val.controls.levelOfDust.touched">Level of
+                      dust is required</span>
+                    <span class="help-block required-text"
+                      *ngIf="val.controls.levelOfDust.errors?.max || val.controls.levelOfDust.errors?.min">Level of dust
+                      must be between 1 to 5</span>
+                  </div>
+                </div>
+                <br />
+                <div class="form-group"
+                  [ngClass]="{ 'has-error' : val.controls.details.invalid && val.controls.details.touched }">
+                  <textarea class="form-control" rows="2" placeholder="Details *" id="{{'details'+i}}"
+                    formControlName="details"></textarea>
+                  <span class="help-block required-text"
+                    *ngIf="val.controls.details.errors?.required && val.controls.details.touched">Detail is
+                    required</span>
+                </div>
+              </div>
+            </div>
+            <!--Button to add more cleanliness complaint-->
+            <!-- <div class="form-group">
+              <button type="button" class="btn btn-primary btnDesign" (click)="addMoreCleanlinessComplaint()">Add
+                More</button>
+            </div> -->
+            <ng-container *ngIf="showConfirmation">
+              <div class="form-group">
+                <div class="d-flex justify-content-center">
+                  <span class="confirmationMessage">{{completionMessage}}</span>
+                </div>
+              </div>
+              </ng-container>
+          </div>
+          <div class="form-group float-right">
+            <button type="reset" class="btn btn-secondary btnDesign" (click)="resetForm()">Reset</button>
+            <button type="submit" class="btn btn-primary ml-2 btnDesign"
+              [disabled]="cleanlinessForm.invalid">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="equipments" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        <form [formGroup]="leForm" (ngSubmit)="onLeSubmit(leForm.value)">
+          <div>
+            <div formArrayName="leFields" *ngFor="let val of leForm.get('leFields').controls; let i = index">
+              <div formGroupName="{{i}}">
+                <div class="form-group">
+                  <h6>Lab Equipment Complaint </h6>
+                </div>
+                <div class="form-row">
+                  <div class="col"
+                  [ngClass]=" { 'has-error ' : val.controls.lab.invalid && val.controls.lab.touched }">
+                   <select class="form-control" id="{{'lab'+i}}" formControlName="lab">
+                    <option value="" disabled selected>Select lab *</option>
+                    <option *ngFor="let lab of locations" [value]="lab">{{lab}}</option>
+                  </select>  
+                  <span class="help-block required-text"
+                    *ngIf="val.controls.lab.errors?.required && val.controls.lab.touched">lab is required</span>
+                </div>
+                  <div class="col"
+                    [ngClass]="{ 'has-error' : val.controls.systemNo.invalid && val.controls.systemNo.touched}">
+                    <input class="form-control" type="text" placeholder="System no. *" id="{{'systemNo'+i}}"
+                      formControlName="systemNo">
+                    <span class="help-block required-text"
+                      *ngIf="val.controls.systemNo.errors?.required && val.controls.systemNo.touched">System no. is
+                      required</span>
+                  </div>
+                </div>
+                <br />
+                <div class="form-group">
+                  <textarea class="form-control" rows="2" placeholder="Details *" id="{{'details'+i}}"
+                    formControlName="details"></textarea>
+                  <span class="help-block required-text"
+                    *ngIf="val.controls.details.errors?.required && val.controls.details.touched">Detail is
+                    required</span>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="form-group">
+              <button type="button" class="btn btn-primary btnDesign" (click)="addMoreLeComplaint()">Add More</button>
+            </div> -->
+            <ng-container *ngIf="showConfirmation">
+              <div class="form-group">
+                <div class="d-flex justify-content-center">
+                  <span class="confirmationMessage">{{completionMessage}}</span>
+                </div>
+              </div>
+              </ng-container>
+          </div>
+          <div class="form-group float-right">
+            <button type="reset" class="btn btn-secondary btnDesign" (click)="resetForm()">Reset</button>
+            <button type="submit" class="btn btn-primary ml-2 btnDesign" [disabled]="leForm.invalid">Submit</button>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+    <!-- Student Complaint-->
+    <div id="studentComplaint" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        <form [formGroup]="studentForm" (ngSubmit)="onStudentSubmit(studentForm.value)">
+          <div>
+            <div formArrayName="studentFields"
+              *ngFor="let val of studentForm.get('studentFields').controls; let i = index">
+              <div formGroupName="{{i}}">
+                <div class="form-group">
+                  <h6>Student Complaint</h6>
+                </div>
+                <div class="form-row">
+                  <div class="col"
+                    [ngClass]=" { 'has-error ' : val.controls.studentRollNo.invalid && val.controls.studentRollNo.touched }">
+                    <input class="form-control" type="text" placeholder="Enrollment no." id="{{'studentRollNo'+i}}"
+                      formControlName="studentRollNo">
+                    <span class="help-block required-text"
+                      *ngIf="val.controls.studentRollNo.errors?.required && val.controls.studentRollNo.touched">Student
+                      roll no. is required</span>
+                  </div>
+                  <div class="col"
+                    [ngClass]=" { 'has-error ' : val.controls.studentName.invalid && val.controls.studentName.touched }">
+                    <input class="form-control" type="text" placeholder="Student name" id="{{'studentName'+i}}"
+                      formControlName="studentName">
+                    <span class="help-block required-text"
+                      *ngIf="val.controls.studentName.errors?.required && val.controls.studentName.touched">Student name
+                      is required</span>
+                  </div>
+
+                  <div class="col"
+                    [ngClass]=" { 'has-error ' : val.controls.course.invalid && val.controls.course.touched }">
+                    <input class="form-control" type="text" placeholder="Course" id="{{'course'+i}}"
+                      formControlName="course">
+                    <span class="help-block required-text"
+                      *ngIf="val.controls.course.errors?.required && val.controls.course.touched">Course is
+                      required</span>
+                  </div>
+                  <div class="col"
+                    [ngClass]=" { 'has-error ' : val.controls.year.invalid && val.controls.year.touched }">
+                    <input class="form-control" type="text" placeholder="Year" id="{{'year'+i}}" formControlName="year">
+                    <span class="help-block required-text"
+                      *ngIf="val.controls.year.errors?.required && val.controls.year.touched">Year is required</span>
+                  </div>
+                </div>
+                <br />
+                <div class="form-group"
+                  [ngClass]=" { 'has-error ' : val.controls.details.invalid && val.controls.details.touched }">
+                  <textarea rows="2" class="form-control" placeholder="Details" id="{{'details'+i}}"
+                    formControlName="details"></textarea>
+                  <span class="help-block required-text"
+                    *ngIf="val.controls.details.errors?.required && val.controls.details.touched">Detail is
+                    required</span>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="form-group">
+              <button type="button" class="btn btn-primary btnDesign" (click)="addMoreStudentComplaints()">Add
+                More</button>
+            </div> -->
+            <ng-container *ngIf="showConfirmation">
+              <div class="form-group">
+                <div class="d-flex justify-content-center">
+                  <span class="confirmationMessage">{{completionMessage}}</span>
+                </div>
+              </div>
+              </ng-container>
+          </div>
+          <div class="form-group float-right">
+            <button type="reset" class="btn btn-secondary btnDesign" (click)="resetForm()">Reset</button>
+            <button type="submit" class="btn btn-primary ml-2 btnDesign"
+              [disabled]="studentForm.invalid">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <!--Other Complaint ends--->
+    <div id="otherComplaints" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+
+        <form [formGroup]="otherForm" (ngSubmit)="onOtherSubmit(otherForm.value)">
+          <div>
+            <div formArrayName="otherFields" *ngFor="let val of otherForm.get('otherFields').controls; let i = index">
+              <div class="form-group">
+                <h6>Other Complaint</h6>
+              </div>
+              <div formGroupName="{{i}}">
+                <div class="form-group"
+                  [ngClass]="{'has-error' : val.controls.details.invalid && val.controls.details.touched}">
+                  <textarea class="form-control" id="{{'details'+i}}" placeholder="Details *"
+                    formControlName="details"></textarea>
+                  <span class="help-block required-text"
+                    *ngIf="val.controls.details.errors?.required && val.controls.details.touched">
+                    Detail is required</span>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="form-group">
+              <button type="button" class="btn btn-primary btnDesign" (click)="addMoreOtherComplaints()">Add
+                More</button>
+            </div> -->
+            <ng-container *ngIf="showConfirmation">
+              <div class="form-group">
+                <div class="d-flex justify-content-center">
+                  <span class="confirmationMessage">{{completionMessage}}</span>
+                </div>
+              </div>
+              </ng-container>
+          </div>
+          <div class="form-group float-right">
+            <button type="reset" class="btn btn-secondary btnDesign" (click)="resetForm()">Reset</button>
+            <button type="submit" class="btn btn-primary ml-2 btnDesign" [disabled]="otherForm.invalid">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!--Faculty complaint starts-->
+    <div id="facultyComplaint" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        <form [formGroup]="facultyForm" (ngSubmit)="onFacultySubmit(facultyForm.value)">
+          <div>
+            <div formArrayName="facultyFields"
+              *ngFor="let val of facultyForm.get('facultyFields').controls; let i = index">
+              <div class="form-group">
+                <h6>Faculty Complaint</h6>
+              </div>
+              <div formGroupName="{{i}}">
+                  <div class="form-group"
+                  [ngClass]=" { 'has-error ' : val.controls.facultyName.invalid && val.controls.facultyName.touched }">
+                  <input class="form-control" type="text" placeholder="Faculty name *" id="{{'facultyName'+i}}"
+                    formControlName="facultyName">
+                  <span class="help-block required-text"
+                    *ngIf="val.controls.facultyName.errors?.required && val.controls.facultyName.touched">Faculty name is required</span>
+                </div>
+                <div class="form-group"
+                  [ngClass]="{'has-error' : val.controls.details.invalid && val.controls.details.touched}">
+                  <textarea class="form-control" id="{{'details'+i}}" placeholder="Details *"
+                    formControlName="details"></textarea>
+                  <span class="help-block required-text"
+                    *ngIf="val.controls.details.errors?.required && val.controls.details.touched">
+                    Detail is required</span>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="form-group">
+              <button type="button" class="btn btn-primary btnDesign" (click)="addMoreFacultyComplaint()">Add
+                More</button>
+            </div> -->
+            <ng-container *ngIf="showConfirmation">
+              <div class="form-group">
+                <div class="d-flex justify-content-center">
+                  <span class="confirmationMessage">{{completionMessage}}</span>
+                </div>
+              </div>
+              </ng-container>
+          </div>
+          <div class="form-group float-right">
+            <button type="reset" class="btn btn-secondary btnDesign" (click)="resetForm()">Reset</button>
+            <button type="submit" class="btn btn-primary ml-2 btnDesign" [disabled]="facultyForm.invalid">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!--Faculty complaint ends -->
+
+     <!--cwn complaint starts-->
+     <div id="cwnComplaint" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+          <form [formGroup]="cwnForm" (ngSubmit)="onCwnSubmit(cwnForm.value)">
+            <div>
+              <div formArrayName="cwnFields"
+                *ngFor="let val of cwnForm.get('cwnFields').controls; let i = index">
+                <div class="form-group">
+                  <h6>CWN Complaint {{i+1}}</h6>
+                </div>
+                <div formGroupName="{{i}}">
+                  <div class="form-row">
+                    <div class="col-3"
+                    [ngClass]=" { 'has-error ' : val.controls.location.invalid && val.controls.location.touched }">
+                     <select class="form-control" id="{{'location'+i}}" formControlName="location">
+                      <option value="" disabled selected>Select location *</option>
+                      <option *ngFor="let location of locations" [value]="location">{{location}}</option>
+                    </select>  
+                    <span class="help-block required-text"
+                      *ngIf="val.controls.location.errors?.required && val.controls.location.touched">Location is required</span>
+                  </div>
+                  <div class="col-9"
+                    [ngClass]="{'has-error' : val.controls.details.invalid && val.controls.details.touched}">
+                    <input class="form-control" id="{{'details'+i}}" placeholder="Details *"
+                      formControlName="details" >
+                    <span class="help-block required-text"
+                      *ngIf="val.controls.details.errors?.required && val.controls.details.touched">
+                      Detail is required</span>
+                  </div>
+                </div>
+                </div>
+              </div>
+              <br/>
+              <div class="form-group">
+                <button type="button" class="btn btn-primary btnDesign" (click)="addMoreCwnComplaint()">Add
+                  More</button>
+              </div>
+              <ng-container *ngIf="showConfirmation">
+              <div class="form-group">
+                <div class="d-flex justify-content-center">
+                  <span class="confirmationMessage">{{completionMessage}}</span>
+                </div>
+              </div>
+              </ng-container>
+            </div>
+            <div class="form-group float-right">
+              <button type="reset" class="btn btn-secondary btnDesign" (click)="resetForm()">Reset</button>
+              <button type="submit" class="btn btn-primary ml-2 btnDesign" [disabled]="cwnForm.invalid">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!--cwn complaint ends -->
+
+       <!--eccw complaint starts-->
+     <div id="eccwComplaint" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+          <form [formGroup]="eccwForm" (ngSubmit)="onEccwSubmit(eccwForm.value)">
+            <div>
+              <div formArrayName="eccwFields"
+                *ngFor="let val of eccwForm.get('eccwFields').controls; let i = index">
+                <div class="form-group">
+                  <h6>ECCW Complaint {{i+1}}</h6>
+                </div>
+                <div formGroupName="{{i}}">
+                  <div class="form-row">
+                    <div class="col-3"
+                    [ngClass]=" { 'has-error ' : val.controls.location.invalid && val.controls.location.touched }">
+                     <select class="form-control" id="{{'location'+i}}" formControlName="location">
+                      <option value="" disabled selected>Select location *</option>
+                      <option *ngFor="let location of locations" [value]="location">{{location}}</option>
+                    </select>  
+                    <span class="help-block required-text"
+                      *ngIf="val.controls.location.errors?.required && val.controls.location.touched">Location is required</span>
+                  </div>
+                  <div class="col-9"
+                    [ngClass]="{'has-error' : val.controls.details.invalid && val.controls.details.touched}">
+                    <input class="form-control" id="{{'details'+i}}" placeholder="Details *"
+                      formControlName="details" >
+                    <span class="help-block required-text"
+                      *ngIf="val.controls.details.errors?.required && val.controls.details.touched">
+                      Detail is required</span>
+                  </div>
+                </div>
+                </div>
+              </div>
+              <br/>
+              <div class="form-group">
+                <button type="button" class="btn btn-primary btnDesign" (click)="addMoreEccwComplaint()">Add
+                  More</button>
+              </div>
+              <ng-container *ngIf="showConfirmation">
+                <div class="form-group">
+                  <div class="d-flex justify-content-center">
+                    <span class="confirmationMessage">{{completionMessage}}</span>
+                  </div>
+                </div>
+                </ng-container>
+            </div>
+            <div class="form-group float-right">
+              <button type="reset" class="btn btn-secondary btnDesign" (click)="resetForm()">Reset</button>
+              <button type="submit" class="btn btn-primary ml-2 btnDesign" [disabled]="eccwForm.invalid">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!--eccw complaint ends -->
+
+        <!--emrs complaint starts-->
+     <div id="emrsComplaint" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+          <form [formGroup]="emrsForm" (ngSubmit)="onEmrsSubmit(emrsForm.value)">
+            <div>
+              <div formArrayName="emrsFields"
+                *ngFor="let val of emrsForm.get('emrsFields').controls; let i = index">
+                <div class="form-group">
+                  <h6>EMRS Complaint {{i+1}}</h6>
+                </div>
+                <div formGroupName="{{i}}">
+                  <div class="form-row">
+                    <div class="col-3"
+                    [ngClass]=" { 'has-error ' : val.controls.location.invalid && val.controls.location.touched }">
+                     <select class="form-control" id="{{'location'+i}}" formControlName="location">
+                      <option value="" disabled selected>Select location *</option>
+                      <option *ngFor="let location of locations" [value]="location">{{location}}</option>
+                    </select>  
+                    <span class="help-block required-text"
+                      *ngIf="val.controls.location.errors?.required && val.controls.location.touched">Location is required</span>
+                  </div>
+                  <div class="col-9"
+                    [ngClass]="{'has-error' : val.controls.details.invalid && val.controls.details.touched}">
+                    <input class="form-control" id="{{'details'+i}}" placeholder="Details *"
+                      formControlName="details" >
+                    <span class="help-block required-text"
+                      *ngIf="val.controls.details.errors?.required && val.controls.details.touched">
+                      Detail is required</span>
+                  </div>
+                </div>
+                </div>
+              </div>
+              <br/>
+              <div class="form-group">
+                <button type="button" class="btn btn-primary btnDesign" (click)="addMoreEmrsComplaint()">Add
+                  More</button>
+              </div>
+              <ng-container *ngIf="showConfirmation">
+                <div class="form-group">
+                  <div class="d-flex justify-content-center">
+                    <span class="confirmationMessage">{{completionMessage}}</span>
+                  </div>
+                </div>
+                </ng-container>
+            </div>
+            <div class="form-group float-right">
+              <button type="reset" class="btn btn-secondary btnDesign" (click)="resetForm()">Reset</button>
+              <button type="submit" class="btn btn-primary ml-2 btnDesign" [disabled]="emrsForm.invalid">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!--emrs complaint ends -->
+
+      <!--telephone complaint starts-->
+     <div id="telephoneComplaint" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+          <form [formGroup]="telephoneForm" (ngSubmit)="onTelephoneSubmit(telephoneForm.value)">
+            <div>
+              <div formArrayName="telephoneFields"
+                *ngFor="let val of telephoneForm.get('telephoneFields').controls; let i = index">
+                <div class="form-group">
+                  <h6>Telephone Complaint {{i+1}}</h6>
+                </div>
+                <div formGroupName="{{i}}">
+                  <div class="form-row">
+                    <div class="col-3"
+                    [ngClass]=" { 'has-error ' : val.controls.location.invalid && val.controls.location.touched }">
+                     <select class="form-control" id="{{'location'+i}}" formControlName="location">
+                      <option value="" disabled selected>Select location *</option>
+                      <option *ngFor="let location of locations" [value]="location">{{location}}</option>
+                    </select>  
+                    <span class="help-block required-text"
+                      *ngIf="val.controls.location.errors?.required && val.controls.location.touched">Location is required</span>
+                  </div>
+                  <div class="col-9"
+                    [ngClass]="{'has-error' : val.controls.details.invalid && val.controls.details.touched}">
+                    <input class="form-control" id="{{'details'+i}}" placeholder="Details *"
+                      formControlName="details" >
+                    <span class="help-block required-text"
+                      *ngIf="val.controls.details.errors?.required && val.controls.details.touched">
+                      Detail is required</span>
+                  </div>
+                </div>
+                </div>
+              </div>
+              <br/>
+              <div class="form-group">
+                <button type="button" class="btn btn-primary btnDesign" (click)="addMoreTelephoneComplaint()">Add
+                  More</button>
+              </div>
+              <ng-container *ngIf="showConfirmation">
+                <div class="form-group">
+                  <div class="d-flex justify-content-center">
+                    <span class="confirmationMessage">{{completionMessage}}</span>
+                  </div>
+                </div>
+                </ng-container>
+            </div>
+            <div class="form-group float-right">
+              <button type="reset" class="btn btn-secondary btnDesign" (click)="resetForm()">Reset</button>
+              <button type="submit" class="btn btn-primary ml-2 btnDesign" [disabled]="telephoneForm.invalid">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!--telephone complaint ends -->
+  </div>
+</div>
+</ng-container>

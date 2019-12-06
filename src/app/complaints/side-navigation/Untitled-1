@@ -1,0 +1,49 @@
+<div class="modal fade" id="requestResource" tabindex="-1" role="dialog" aria-labelledby="requestResourceLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header modal-head">
+        <h5 class="modal-title " id="requestResourceLabel " style="color:white;">Request Resources</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="resourceFormGroup" (ngSubmit)="getResource(resourceFormGroup.value)">
+          <div class="form-group"
+            [ngClass]="{ 'has-error ' : resourceFormGroup.controls.resource.invalid && resourceFormGroup.controls.resource.touched }">
+            <label>Resource *</label>
+            <input class="form-control" placeholder="Resource" [(ngModel)]="resource" formControlName="resource">
+            <span class="help-block required-text"
+              *ngIf="resourceFormGroup.controls.resource.errors?.required && resourceFormGroup.controls.resource.touched">This
+              field is
+              required</span>
+          </div>
+          <div class="form-group"
+            [ngClass]="{ 'has-error ' : resourceFormGroup.controls.details.invalid && resourceFormGroup.controls.details.touched }">
+            <label>Details *</label>
+            <textarea class="form-control" placeholder="Details" [(ngModel)]="details"
+              formControlName="details"></textarea>
+            <span class="help-block required-text"
+              *ngIf="resourceFormGroup.controls.details.errors?.required && resourceFormGroup.controls.details.touched">This
+              field is
+              required</span>
+          </div>
+          <ng-container *ngIf="showConfirmation">
+          <div class="form-group">
+            <div class="d-flex justify-content-center">
+              <span class="confirmationMessage">{{completionMessage}}</span>
+            </div>
+          </div>
+        </ng-container>
+          <div class="form-group" align="right">
+            <button type="reset" class="btn btn-secondary mr-2" (click)="requestResourceForm()">Reset</button>
+            <button type="submit" [disabled]="resourceFormGroup.invalid" class="btn btn-primary">Submit</button>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+  </div>

@@ -1,0 +1,150 @@
+<ul class="nav nav-pills mb-3 nav-fill" id="pills-tab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Calender</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Time Table</a>
+          </li>
+  </ul>
+          <div class="tab-content" id="pills-tabContent">
+          <div class="tab-pane show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+            <br>
+            <div id='calendar'>
+              <app-calendar></app-calendar>
+            </div>
+          </div>
+          <div class="tab-pane" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+            <br>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                  <thead class="">
+                    <tr>
+                      <th scope="col">Timing</th>
+                      <th scope="col">Monday</th>
+                      <th scope="col">Tuesday</th>
+                      <th scope="col">Wednesday</th>
+                      <th scope="col">Thursday</th>
+                      <th scope="col">Friday</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">10:00-11:00</th>
+                      <td>CO34007</td>
+                      <td>CO34002</td>
+                      <td>CO34008</td>
+                      <td>CO34005</td>
+                      <td>CO34007</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">11:00-12:00</th>
+                      <td>CO34002</td>
+                      <td>CO34005</td>
+                      <td>CO34007</td>
+                      <td>CO34008</td>
+                      <td>CO34007</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">12:00-1:00</th>
+                      <td></td>
+                      <td>EC34007</td>
+                      <td>EC34007</td>
+                      <td>EC34007</td>
+                      <td>EC34007</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">1:00-2:00</th>
+
+                    </tr>
+                    <tr>
+                      <th scope="row">2:00-3:00</th>
+                      <td>CO34007</td>
+                      <td></td>
+                      <td>CO34008</td>
+                      <td>CO34005</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3:00-4:00</th>
+                      <td>CO34007</td>
+                      <td>CO34002</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">4:00-5:00</th>
+                      <td>CO34007</td>
+                      <td>CO34002</td>
+                      <td>CO34008</td>
+                      <td>CO34005</td>
+                      <td>CO34007</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">5:00-6:00</th>
+                      <td>CO34007</td>
+                      <td>CO34002</td>
+                      <td>CO34008</td>
+                      <td>CO34005</td>
+                      <td>CO34007</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div style="color:#1488CC;"><a href="#" style="float:right;"><i class="fa fa-download fa-fw"></i>Week time table</a></div>
+          </div>
+
+          </div>
+
+
+
+      <!--Notification Panel starts-->
+      <div class="container">
+          <div class="notifiactiion heading">
+
+              <div>
+                <h3>Notifications</h3>
+              </div>
+            </div>
+          <hr>
+
+        <div class="alert alert-success row">
+          <h5 class="col-7">Mid Term-1 Time table</h5>
+          <p class="col-3">By: Somil Neema</p>
+          <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> 2 days ago</p>
+          <p class="col-6"> Start date: 24/08/2018</p>
+          <div class="col-6 ">
+            <a href="#" style="margin-left:5%;"  class="float-right"><i class="fa fa-download" aria-hidden="true"></i> Time Table</a>
+
+
+            <a href="#" class="float-right"><i class="fa fa-download" aria-hidden="true"></i> Sitting Arrangement</a>
+          </div>
+        </div>
+        <div class="alert alert-danger row">
+            <h5 class="col-7">Quiz Schedule</h5>
+            <p class="col-3">By: Somil Neema</p>
+            <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Today</p>
+            <p class="col-4"> Start date: 26/08/2018</p>
+            <div class="col-4">
+
+            </div>
+            <div class="col-4">
+              <a href="#"  class="float-right"><i class="fa fa-download" aria-hidden="true"></i> Quiz Schedule</a>
+            </div>
+          </div>
+          <div class="alert alert-success row">
+              <h5 class="col-7">Mid Term-2 Time table</h5>
+              <p class="col-3">By: Somil Neema</p>
+              <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> 5 days ago</p>
+              <p class="col-6"> Start date: 12/09/2018</p>
+              <div class="col-6 ">
+                <a href="#" style="margin-left:5%;"  class="float-right"><i class="fa fa-download" aria-hidden="true"></i> Time Table</a>
+
+
+                <a href="#" class="float-right"><i class="fa fa-download" aria-hidden="true"></i> Sitting Arrangement</a>
+              </div>
+            </div>
+        <div style="color:#1488CC;"><a routerLink='notification' style="float:right;">See all Notification</a></div>
+      </div>
+      <!--Notification Panel Ends-->
+

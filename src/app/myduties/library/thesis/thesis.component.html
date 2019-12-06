@@ -1,0 +1,198 @@
+<div class="d-flex justify-content-between">
+   
+  <button class="btn btn-reset" data-toggle="modal" data-target="#thesisAddModal" (click)="initForm()" ><i class="fa fa-plus-circle fa-fw fa-lg" aria-hidden="true"></i>Add Thesis</button>
+  <button class="btn btn-reset" data-toggle="modal" data-target="#thesisIssueModal" (click)="initForm()" ><i class="fa fa-minus-circle fa-fw fa-lg" aria-hidden="true"></i>Issue Thesis</button>
+  <button class="btn btn-reset" data-toggle="modal" data-target="#thesisReturnModal" (click)="initForm()" ><i class="fa fa-plus-circle fa-fw fa-lg" aria-hidden="true"></i>Return Thesis</button>
+ 
+ 
+  
+
+</div>
+<br>
+<table class="table table-striped">
+
+  <tr>
+    
+      <th >S. No.</th>
+    
+  
+      <th >Title</th>
+      <th >Submitted by </th>
+  
+      <th >Guide </th>
+  
+      
+  
+      <th ></th>
+  </tr>     
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>                       
+ </table>
+
+
+<div class="modal fade" id="thesisAddModal" tabindex="-1" role="dialog" aria-labelledby="thesisEditModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="thesisEditModalLabel">Add Thesis</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  <form>
+                      <div class="form-row">
+                          <div class="col">
+                            <label>Title<span class="mandatory">*</span></label>
+                            <input type="text" class="form-control" name="title" ngModel>
+                          </div>
+                          <div class="col">
+                            <label>Year_For_Sort<span class="mandatory">*</span></label>
+                            <input type="text" class="form-control" name="Year_For_Sort" ngModel>
+                          </div>
+                      </div>
+                      <br/>
+                      <div class="form-row">
+                          <div class="col-4">
+                            <label>Year</label>
+                            <input type="text" class="form-control" name="year" ngModel>
+                          </div>
+                          <div class="col-4">
+                            <label>Submitted By<span class="mandatory">*</span></label>
+                            <input type="textarea" class="form-control" name="submittedBy" ngModel>
+                          </div>
+                          <div class="col-4">
+                            <label>Guided By<span class="mandatory">*</span></label>
+                            <input type="textarea" class="form-control" name="guidedBy" ngModel>
+                          </div>
+                        </div><br/>
+                        <div class="form-row">
+                            <div class="col">
+                              <label>cd status</label>
+                              <input type="text" class="form-control" name="cdStatus" ngModel>
+                            </div>
+                            <div class="col">
+                              <label>course<span class="mandatory">*</span></label>
+                              <input type="text" class="form-control" name="course" ngModel>
+                            </div>
+                            <div class="col">
+                              <label>Remarks</label>
+                              <input type="text" class="form-control" name="remarks" ngModel>
+                            </div>
+                          </div><br/>
+                          <div *ngIf="edit" class="d-flex justify-content-center mt-3">
+                              <button type="reset" class="btn btn-danger mr-3 btnWidth">Reset</button>
+                              <button type="submit" class="btn btn-success btnWidth" (click)="editBook(bookForm)">Update</button>
+                            </div>
+                            <div *ngIf="!edit" class="d-flex justify-content-center mt-3">
+                                <button type="reset" class="btn btn-primary mr-3 btnWidth">Reset</button>
+                                <button type="submit" class="btn btn-success btnWidth" (click)="addBook(bookForm)">Add</button>
+                              </div>
+                    </form>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="modal fade" id="thesisIssueModal" tabindex="-1" role="dialog" aria-labelledby="thesisIssueModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="thesisIssueModalLabel">Issue Book</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form  >
+              <div class="form-row">
+                <div class="col-4">
+                  
+                  <input type="text" class="form-control"  required placeholder="Enter Enrollment No. or Faculty Name" name="enrollmentno" ngModel>
+                </div> 
+                
+                <div class="col-">
+                    <button type="submit" class="btn btn-success btnWidth" >Check Limit</button>
+  
+                </div>
+                
+                
+    
+              </div><br/>
+              <div class="form-row">
+                <div class="col-4">
+                  <label>Title</label>
+                  <input type="text" class="form-control" name="title" ngModel>
+                </div>
+                <div class="col-4">
+                  <label>Submitted By</label>
+                  <input type="text" class="form-control" name="authorName" ngModel>
+                </div>
+              </div><br/>
+              <div *ngIf="edit" class="d-flex justify-content-center mt-3">
+                <button type="reset" class="btn btn-primary mr-3 btnWidth">Reset</button>
+                <button type="submit" class="btn btn-success btnWidth" >Update</button>
+              </div>
+              <div *ngIf="!edit" class="d-flex justify-content-center mt-3">
+                <button type="reset" class="btn btn-primary mr-3 btnWidth">Reset</button>
+                <button type="submit" class="btn btn-success btnWidth" >Issue</button>
+              </div>
+            </form>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="thesisReturnModal" tabindex="-1" role="dialog" aria-labelledby="thesisReturnModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="thesisReturnModalLabel">Return Book</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+               <form  >
+                  <div class="form-row"> 
+                      <div class="col-4">
+                        <input type="text" class="form-control" placeholder="Enter Enrollment No. or faculty name" name="enrollmentno" ngModel>
+                      </div> 
+                      <div class="col-4">
+                          <button type="submit" class="btn btn-success btnWidth" >Show Details</button>
+                      </div>
+                  </div>
+                <div class="container">
+                    <table class="table table-striped">
+  
+                        <tr>
+                          
+                            <th >S. No.</th>
+                        
+                            <th >Title</th>
+                        
+                        
+                            <th >Penalty</th>
+                        
+                            <th ></th>
+                        </tr>     
+                        <tr>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>                       
+                       </table>
+                </div>
+      
+                                        
+              </form>
+            </div>
+            
+          </div>
+        </div>
+      </div>

@@ -1,0 +1,188 @@
+<script>
+  $(document).ready(function () {
+    $('#myTable').dataTable();
+  });
+</script>
+
+<div class="modal fade" id="addInfra" tabindex="-1" role="dialog" aria-labelledby="addInfraLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addInfraLabel">Add an Infrastructure</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="InfraTypes">Infrastructure Type</label>
+            <select class="form-control" id="InfraTypes">
+              <option>Laboratory</option>
+              <option>Classroom</option>
+              <option>Facultyroom</option>
+              <option>Others</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="infraName">Name</label>
+            <input type="text" class="form-control" id="infraName">
+          </div>
+          <div class="form-group">
+            <label for="location">Location</label>
+            <div class="row pl-3">
+              <select class="form-control col-6" id="location">
+                <option>First Floor</option>
+                <option>Second Floor</option>
+                <option>Enter New Location</option>
+              </select>
+              <input type="text" class="form-control" id="location" style="width:220px; margin-left: 4px" disabled="true"
+                placeholder="Enter new Location">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="incharge">Incharge</label>
+            <input type="text" class="form-control" list="suggestions" id="Incharge">
+            <datalist id="suggestions"   style="overflow-y:absolute;height:100px;">
+              <option *ngFor="let f of fData">{{f.name}}</option>
+            </datalist>
+          </div>
+          <div class="form-group">
+            <label for="associateIncharge">Associate Incharge</label>
+            <input type="text" class="form-control" list="suggestions2" id="associateIncharge">
+            <datalist id="suggestions2">
+              <option *ngFor="let f of fData">{{f.name}}</option>
+            </datalist>
+          </div>
+          <div class="form-group">
+            <label for="staff">Staff</label>
+            <input type="text" class="form-control" list="suggestions1" id="staff">
+            <datalist id="suggestions1" style="height:180px">
+              <option *ngFor="let s of sData">{{s.name}}</option>
+            </datalist>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="input-group mb-1">
+  <ul class="nav nav-pills nav-fill col-lg-12" id="pills-tab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home"
+        aria-selected="true">Labs</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile"
+        aria-selected="false">Classrooms</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="pills-frooms-tab" data-toggle="pill" href="#pills-frooms" role="tab" aria-controls="pills-frooms"
+        aria-selected="false">Faculty Rooms</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact"
+        aria-selected="false">Others</a>
+    </li>
+    <li>
+      <button class="btn" style="width:200px;margin-left:5px" routerLink="Cinventory">Inventory</button>
+    </li>
+    <li>
+      <input type="text" style="width:460px; height: 38px;margin-left:5px" placeholder="search.." name="search">
+    </li>
+    <i class="fa fa-plus-circle fa-2x pl-2" data-toggle="modal" data-target="#addInfra" title="Add an Infrastructure"
+      aria-hidden="true"></i>
+  </ul>
+</div>
+
+<div class="col-lg-12 kyc-colm user-management kyc-section rewards-section reports-sectn">
+  <div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+      <div class="pt-2">
+
+        <h4 id="lab">Labs</h4>
+        <hr>
+        <div class="row">
+          <div class="col-lg-4 kyc-section rewards-section reports-sectn pb-4" *ngFor='let inf of labs' style="background-color: rgb(208, 225, 245);">
+            <div class="inline-block">
+              <div class="row">
+                <h5 class="col-9">{{inf.name}}</h5>
+                <div class="col-2" style="text-decoration: none;">
+                  <a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true" style="text-decoration:none; position: relative; bottom:10px; left: 20px;">
+                    <i class="fa fa-arrow-right" routerLink="timetable" role="button" (click)="infraName(inf)"
+                      aria-hidden="true"> </i>
+                  </a>
+
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div>
+              <p>Location: {{ inf.location}}<br />
+                Incharge: {{ inf.incharge}}<br />
+                Associate Incharge: {{ inf.associateIncharge}}<br />
+                Subjects: Operating Systems, DBMS, Computer Architecture<br />
+                Staff: {{inf.staff}}</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+
+      <h4 id="Classroom ">Classrooms</h4>
+      <hr>
+
+    </div>
+
+    <div class="tab-pane fade" id="pills-frooms" role="tabpanel" aria-labelledby="pills-frooms-tab">
+      <h4 id="Classroom">Faculty Rooms</h4>
+      <hr>
+      <div class="col-12">
+        <div class="row">
+          <div class="col-lg-4 kyc-section rewards-section reports-sectn" *ngFor='let f of facultyRooms' style="margin-bottom: 4px; background-color: rgb(208, 225, 245)">
+            <h5 class="col-10">{{f.name}}</h5>
+            <hr />
+            <p class="col-12" style="font-size: 90%"> {{f.associatedTo }}<br>
+              Location : {{f.location}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+      <h4>Others</h4>
+      <hr>
+      <div class="row">
+        <div class="col-lg-4 kyc-section rewards-section reports-sectn pt-4" *ngFor='let inf of others' style="background-color: rgb(208, 225, 245);">
+          <div class="inline-block">
+            <div class="row">
+              <h5 class="col-9">{{inf.name}}</h5>
+              <div class="col-2" style="text-decoration: none;">
+                <a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true" style="text-decoration:none; position: relative; bottom:10px; left: 20px;">
+                  <i class="fa fa-arrow-right" routerLink="timetable" role="button" aria-hidden="true"> </i>
+                </a>
+
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div>
+            <p>Location: {{ inf.location}}<br />
+              Incharge: {{ inf.incharge}}<br />
+              Associate Incharge: {{ inf.associateIncharge}}<br />
+              Staff: {{inf.staff}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

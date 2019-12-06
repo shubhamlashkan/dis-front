@@ -1,0 +1,25 @@
+.customDiv1{
+    float:right;
+}
+
+.customElements{
+    padding-right:10px;
+}
+
+.customDiv2{
+    padding-bottom:10px;
+}
+
+.customDiv3{
+    padding-left:10px;
+}
+
+input.ng-invalid.ng-touched{
+    border: 1px solid red;
+}
+textarea.ng-invalid.ng-touched{
+    border:1px solid red;
+}
+select.ng-invalid.ng-touched{
+    border: 1px solid red;
+}

@@ -1,0 +1,117 @@
+<!-- Tooltip -->
+<link href="../../../assets/css/tooltip.css" rel="stylesheet" type="text/css" />
+<script src="js/tooltip.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+<script type="text/javascript" src="../../../assets/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script type="text/javascript" src="../../../assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../../assets/js/bootstrap-datepicker.js"></script>
+
+<!--grid script-->
+<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+
+<script>
+  $(document).ready(function(){
+    $('#myTable').dataTable();
+  });
+</script>
+<!--END grid script-->
+
+
+<div class="container">
+  <div class="row">
+
+<!--Start Left Panel-->
+    <div class="col-lg-3 profile-info">
+      <app-sidenavigation></app-sidenavigation>
+        <div class="scheme downloadables">
+          <div>
+            <i class="fa fa-file-text" style="font-size: 48px; color: #0085cc;" aria-hidden="true"></i>
+            <h5><a href="#">Download Scheme</a></h5>
+            <h6>2016-2020</h6>
+          </div>
+          <hr/>
+          <div>
+            <i class="fa fa-file-text" style="font-size: 48px; color: #0085cc;" aria-hidden="true"></i>
+            <h5><a href="#">Download Syllabus</a></h5>
+            <h6>2016-2020</h6>
+          </div>
+        </div>
+    </div>
+
+  <!--End Left Panel-->
+
+
+    <!--Start Right Panel-->
+    <div class="col-lg-9 kyc-colm user-management">
+      <div class="kyc-section rewards-section reports-sectn">
+      <!--Calendar comes in below div-->
+        <div class="row">
+          <div class="col">
+            <h3 class="heading">Calendar</h3>
+            <hr/>
+           <app-calendar></app-calendar>
+          </div>
+          <div class="col">
+            <h3  class="heading" >Attendance</h3>
+            <hr/>
+            <div class="chart-container">
+              <canvas id="barChart"></canvas>
+            </div>
+          </div>
+          </div>
+    <!--End Right Panel-->
+
+  <!--Notification Panel starts-->
+  <div class="notifiactiion heading">
+  <br/>
+  <br/>
+    <h2>Notifications</h2>
+    <hr/>
+  </div>
+  <div>
+    <div class="alert alert-success row">
+      <h4 class="col-12">Mid Term-2 Time table</h4>
+      <p class="col"> Start date: 24/08/2017</p>
+      <div class="col">
+      <img class="download float-left" src="assets/images/download.png" alt=""/>
+      <a href="#"> download Time Table</a>
+      </div>
+      <div class="col">
+      <img class="download float-left" src="assets/images/download.png" alt=""/>
+      <a href="#"> download Sitting Arrangement</a>
+      </div>
+    </div>
+    <div class="alert alert-success row">
+      <h4 class="col-12">CO34002 Assignment #04</h4>
+      <p class="col-4"> Date of submission: 29/08/2017</p>
+      <div class="col-7">
+      <img class="download float-left" src="assets/images/download.png" alt=""/>
+      <a href="#"> download Assignment</a>
+      </div>
+    </div>
+    <div class="alert alert-success row">
+      <h4 class="col-12">Mid Term-1 Time table</h4>
+      <p class="col"> Start date: 24/08/2017</p>
+      <div class="col">
+      <img class="download float-left" src="assets/images/download.png" alt=""/>
+      <a href="#"> download Time Table</a>
+      </div>
+      <div class="col">
+      <img class="download float-left" src="assets/images/download.png" alt=""/>
+      <a href="#"> download Sitting Arrangement</a>
+      </div>
+    </div>
+  </div>
+  <!--Notification Panel Ends-->
+      </div>
+
+    </div>
+
+  <!--End Right Panel-->
+
+  </div>
+</div>

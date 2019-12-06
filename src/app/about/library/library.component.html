@@ -1,0 +1,528 @@
+<br>
+<div class="row">
+  <div class="col-lg-12 kyc-colm user-management">
+          <div class="row">
+              <div class="col-8">
+                  <h6 style="color:#f46404;font-size: 20px;">Department Library</h6>
+              </div>
+              <div class="col-4">
+                  <ul class="searchbox">
+                      <li class="">
+                          <input class="form-control mr-sm-2 searchbox-width"
+                              type="search" placeholder="Search" aria-label="Search">
+                          <i class="fa fa-search" style="position:absolute;top:11px;"
+                              aria-hidden="true"></i>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+
+
+
+          <hr>
+          <div class="row">
+              <div class="col-lg-2" style="border-right:2px solid black;">
+                  <ul class="list-unstyled" style="text-align: center;">
+                      <li style="margin-top: 30px;"><i class="fa fa-book fa-fw"
+                              aria-hidden="true" style="font-size: 60px;" onclick="getBooks()"></i>
+                          
+                         <p> Books</p>
+                      </li>
+
+                      <li style="margin-top: 30px;"><a><img src="assets/images/thesis.png"
+                                  style="width: 60px; height: 60px; " onclick="getThesis()"></a>
+                         
+                         <p> Thesis</p>
+                      </li>
+                      <li style="margin-top: 30px;"><a><img src="assets/images/researchpaper.png"
+                                  style="width: 60px; height: 60px; " onclick="getResearchpaper()"></a>
+                          <p>Research Papers</p>
+                      </li>
+                  </ul>
+              </div>
+              <!-- modal add book -->
+              <div class="modal fade" id="addbooks" tabindex="-1" role="dialog"
+                  aria-labelledby="addbooks" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="addbooks">Add Books</h5>
+                              <button type="button" class="close" data-dismiss="modal"
+                                  aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                          <div class="modal-body">
+                              <form>
+                                  <div class="form-group">
+                                      <label for="bookid" class="col-form-label">Book
+                                          Id:</label>
+                                      <input class="form-control" id="bookid">
+
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="bookname" class="col-form-label">Book
+                                          Name:</label>
+                                      <input type="text" class="form-control" id="bookname">
+
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="bookauther" class="col-form-label">Book
+                                          Auther:</label>
+                                      <input type="text" class="form-control" id="bookauther">
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="bookpublisher" class="col-form-label">Book
+                                          Publisher:</label>
+                                      <input type="text" class="form-control" id="bookpublisher">
+                                  </div>
+                              </form>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary"
+                                  data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary"
+                                  data-dismiss="modal">Save changes</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <!--modal rem0ve book-->
+              <div class="modal fade" id="removebooks" tabindex="-1" role="dialog"
+                  aria-labelledby="removebooks" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="addbooks">Remove Books</h5>
+                              <button type="button" class="close" data-dismiss="modal"
+                                  aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                          <div class="modal-body">
+                              <div class="col-lg-12 table-responsive" id="books"
+                                  style="display: block;">
+                                  <table class="table table-striped table-bordered">
+                                      <thead>
+                                          <tr>
+                                              <th scope="col">Book Id</th>
+                                              <th scope="col">Book Name</th>
+                                              <th scope="col">Author</th>
+                                              <th scope="col">Publisher</th>
+                                              <th scope="col">Select</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          <tr>
+                                              <th scope="row">B101</th>
+                                              <td>Theory of Computation</td>
+                                              <td>Ullman</td>
+                                              <td>Addison-Wesley</td>
+                                              <td> <input type="checkbox">&nbsp;</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row">B101</th>
+                                              <td>Theory of Computation</td>
+                                              <td>Ullman</td>
+                                              <td>Addison-Wesley</td>
+                                              <td> <input type="checkbox">&nbsp;</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row">B101</th>
+                                              <td>Theory of Computation</td>
+                                              <td>Ullman</td>
+                                              <td>Addison-Wesley</td>
+                                              <td> <input type="checkbox">&nbsp;</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row">B101</th>
+                                              <td>Theory of Computation</td>
+                                              <td>Ullman</td>
+                                              <td>Addison-Wesley</td>
+                                              <td> <input type="checkbox">&nbsp;</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row">B101</th>
+                                              <td>Theory of Computation</td>
+                                              <td>Ullman</td>
+                                              <td>Addison-Wesley</td>
+                                              <td> <input type="checkbox">&nbsp;</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row">B101</th>
+                                              <td>Theory of Computation</td>
+                                              <td>Ullman</td>
+                                              <td>Addison-Wesley</td>
+                                              <td> <input type="checkbox">&nbsp;</td>
+                                          </tr>
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary"
+                                  data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary"
+                                  data-dismiss="modal">Remove</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <!--modal end-->
+
+              <!-- modal add thesis -->
+              <div class="modal fade" id="addth" tabindex="-1" role="dialog"
+                  aria-labelledby="addth" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="addbooks">Add Thesis</h5>
+                              <button type="button" class="close" data-dismiss="modal"
+                                  aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                          <div class="modal-body">
+                              <form>
+                                  <div class="form-group">
+                                      <label for="ThesisId" class="col-form-label">Thesis
+                                          Id:</label>
+                                      <input class="form-control" id="ThesisId">
+
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="Title" class="col-form-label">Title:</label>
+                                      <input type="text" class="form-control" id="Titleof">
+
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="Year" class="col-form-label">Year:</label>
+                                      <input type="text" class="form-control" id="Year">
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="SubmittedBy" class="col-form-label">Submitted
+                                          By:</label>
+                                      <input type="text" class="form-control" id="SubmittedBy">
+                                  </div>
+
+                                  <div class="form-group">
+                                      <label for="GuidedBy" class="col-form-label">Guided
+                                          By:</label>
+                                      <input type="text" class="form-control" id="GuidedBy">
+                                  </div>
+
+                                  <div class="form-group">
+                                      <label for="CD" class="col-form-label">CD(Y/N):</label>
+                                      <input type="checkbox" class="form-control"
+                                          id="CD">
+                                  </div>
+                              </form>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary"
+                                  data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary"
+                                  data-dismiss="modal">Save changes</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <!--modal rem0ve thesis-->
+              <div class="modal fade" id="removeth" tabindex="-1" role="dialog"
+                  aria-labelledby="removeth" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="removeth">Remove Thesis</h5>
+                              <button type="button" class="close" data-dismiss="modal"
+                                  aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                          <div class="modal-body">
+                              <div class="col-lg-12 table-responsive" id="thesis"
+                                  style="display: block;">
+
+                                  <table class="table table-striped table-bordered">
+                                      <thead>
+                                          <tr>
+                                              <th scope="col">Thesis Id</th>
+                                              <th scope="col">Title of Thesis</th>
+                                              <th scope="col">Year</th>
+                                              <th scope="col">Submitted By</th>
+                                              <th scope="col">Guided By</th>
+                                              <th scope="col">CD(Y/N)</th>
+                                              <th scope="col">Remove</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          <tr>
+                                              <th scope="row">1</th>
+                                              <td>Time Table Helper</td>
+                                              <td>2000</td>
+                                              <td>Nikita Tiwari</td>
+                                              <td>Mrs. U. Thakur</td>
+                                              <td>Y</td>
+                                              <td> <input type="checkbox">&nbsp;</td>
+
+                                          </tr>
+                                          <tr>
+                                              <th scope="row">2</th>
+                                              <td>Time Table Helper</td>
+                                              <td>2000</td>
+                                              <td>Nikita Tiwari</td>
+                                              <td>Mrs. U. Thakur</td>
+                                              <td>Y</td>
+                                              <td> <input type="checkbox">&nbsp;</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row">3</th>
+                                              <td>Time Table Helper</td>
+                                              <td>2000</td>
+                                              <td>Nikita Tiwari</td>
+                                              <td>Mrs. U. Thakur</td>
+                                              <td>Y</td>
+                                              <td> <input type="checkbox">&nbsp;</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row">4</th>
+                                              <td>Time Table Helper</td>
+                                              <td>2000</td>
+                                              <td>Nikita Tiwari</td>
+                                              <td>Mrs. U. Thakur</td>
+                                              <td>Y</td>
+                                              <td> <input type="checkbox">&nbsp;</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row">5</th>
+                                              <td>Time Table Helper</td>
+                                              <td>2000</td>
+                                              <td>Nikita Tiwari</td>
+                                              <td>Mrs. U. Thakur</td>
+                                              <td>Y</td>
+                                              <td> <input type="checkbox">&nbsp;</td>
+                                          </tr>
+                                          <tr>
+                                              <th scope="row">6</th>
+                                              <td>Time Table Helper</td>
+                                              <td>2000</td>
+                                              <td>Nikita Tiwari</td>
+                                              <td>Mrs. U. Thakur</td>
+                                              <td>Y</td>
+                                              <td> <input type="checkbox">&nbsp;</td>
+                                          </tr>
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary"
+                                  data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary"
+                                  data-dismiss="modal">Remove</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <!--modal end-->
+              <div class="col-lg-10 table-responsive" id="thesis" style="display: none;">
+
+                  <table class="table table-striped">
+                      <thead>
+                          <tr>
+                              <th scope="col">Thesis Id</th>
+                              <th scope="col">Title of Thesis</th>
+                              <th scope="col">Year</th>
+                              <th scope="col">Submitted By</th>
+                              <th scope="col">Guided By</th>
+                              <th scope="col">CD(Y/N)</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <th scope="row">1</th>
+                              <td>Time Table Helper</td>
+                              <td>2000</td>
+                              <td>Nikita Tiwari</td>
+                              <td>Mrs. U. Thakur</td>
+                              <td>Y</td>
+                          </tr>
+                          <tr>
+                              <th scope="row">2</th>
+                              <td>Time Table Helper</td>
+                              <td>2000</td>
+                              <td>Nikita Tiwari</td>
+                              <td>Mrs. U. Thakur</td>
+                              <td>Y</td>
+                          </tr>
+                          <tr>
+                              <th scope="row">3</th>
+                              <td>Time Table Helper</td>
+                              <td>2000</td>
+                              <td>Nikita Tiwari</td>
+                              <td>Mrs. U. Thakur</td>
+                              <td>Y</td>
+                          </tr>
+                          <tr>
+                              <th scope="row">4</th>
+                              <td>Time Table Helper</td>
+                              <td>2000</td>
+                              <td>Nikita Tiwari</td>
+                              <td>Mrs. U. Thakur</td>
+                              <td>Y</td>
+                          </tr>
+                          <tr>
+                              <th scope="row">5</th>
+                              <td>Time Table Helper</td>
+                              <td>2000</td>
+                              <td>Nikita Tiwari</td>
+                              <td>Mrs. U. Thakur</td>
+                              <td>Y</td>
+                          </tr>
+                          <tr>
+                              <th scope="row">6</th>
+                              <td>Time Table Helper</td>
+                              <td>2000</td>
+                              <td>Nikita Tiwari</td>
+                              <td>Mrs. U. Thakur</td>
+                              <td>Y</td>
+                          </tr>
+
+                      </tbody>
+                  </table>
+              </div>
+
+              <div class="col-lg-10 table-responsive" id="books" style="display: block;">
+                  <table class="table table-striped">
+                      <thead>
+                          <tr>
+                              <th scope="col">Book Id</th>
+                              <th scope="col">Book Name</th>
+                              <th scope="col">Author</th>
+                              <th scope="col">Publisher</th>
+                              <th scope="col">Status</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <th scope="row">B101</th>
+                              <td>Theory of Computation</td>
+                              <td>Ullman</td>
+                              <td>Addison-Wesley</td>
+                              <td>Available</td>
+                          </tr>
+                          <tr>
+                              <th scope="row">B101</th>
+                              <td>Theory of Computation</td>
+                              <td>Ullman</td>
+                              <td>Addison-Wesley</td>
+                              <td>Available</td>
+                          </tr>
+                          <tr>
+                              <th scope="row">B101</th>
+                              <td>Theory of Computation</td>
+                              <td>Ullman</td>
+                              <td>Addison-Wesley</td>
+                              <td>Available</td>
+                          </tr>
+                          <tr>
+                              <th scope="row">B101</th>
+                              <td>Theory of Computation</td>
+                              <td>Ullman</td>
+                              <td>Addison-Wesley</td>
+                              <td>Available</td>
+                          </tr>
+                          <tr>
+                              <th scope="row">B101</th>
+                              <td>Theory of Computation</td>
+                              <td>Ullman</td>
+                              <td>Addison-Wesley</td>
+                              <td>Available</td>
+                          </tr>
+                          <tr>
+                              <th scope="row">B101</th>
+                              <td>Theory of Computation</td>
+                              <td>Ullman</td>
+                              <td>Addison-Wesley</td>
+                              <td>Available</td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+
+              <div class="col-lg-10 table-responsive" id="researchpaper" style="display: none;">
+                  <table class="table table-striped">
+                      <thead>
+                          <tr>
+                              <th scope="col">Title</th>
+                              <th scope="col">Publication</th>
+                              <th scope="col">Date</th>
+                              <th scope="col">Author</th>
+                              <th scope="col">Co-authors</th>
+                              <th scope="col">Guided By</th>
+                              <th scope="col">pdf</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <th scope="row">LEACH ENL</th>
+                              <td>IEEE</td>
+                              <td>10/11/2018</td>
+                              <td>Nikita Tiwari</td>
+                              <td>Anonymous</td>
+                              <td>Dr. XYZ</td>
+                              <td><a href="#">click to download</a></td>
+                          </tr>
+                          <tr>
+                              <th scope="row">LEACH ENL</th>
+                              <td>IEEE</td>
+                              <td>10/11/2018</td>
+                              <td>Nikita Tiwari</td>
+                              <td>Anonymous</td>
+                              <td>Dr. XYZ</td>
+                              <td><a href="#">click to download</a></td>
+                          </tr>
+                          <tr>
+                              <th scope="row">LEACH ENL</th>
+                              <td>IEEE</td>
+                              <td>10/11/2018</td>
+                              <td>Nikita Tiwari</td>
+                              <td>Anonymous</td>
+                              <td>Dr. XYZ</td>
+                              <td><a href="#">click to download</a></td>
+                          </tr>
+                          <tr>
+                              <th scope="row">LEACH ENL</th>
+                              <td>IEEE</td>
+                              <td>10/11/2018</td>
+                              <td>Nikita Tiwari</td>
+                              <td>Anonymous</td>
+                              <td>Dr. XYZ</td>
+                              <td><a href="#">click to download</a></td>
+                          </tr>
+                          <tr>
+                              <th scope="row">LEACH ENL</th>
+                              <td>IEEE</td>
+                              <td>10/11/2018</td>
+                              <td>Nikita Tiwari</td>
+                              <td>Anonymous</td>
+                              <td>Dr. XYZ</td>
+                              <td><a href="#">click to download</a></td>
+                          </tr>
+                          <tr>
+                              <th scope="row">LEACH ENL</th>
+                              <td>IEEE</td>
+                              <td>10/11/2018</td>
+                              <td>Nikita Tiwari</td>
+                              <td>Anonymous</td>
+                              <td>Dr. XYZ</td>
+                              <td><a href="#">click to download</a></td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+
+          </div>
+</div>
+

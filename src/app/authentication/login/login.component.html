@@ -1,0 +1,47 @@
+<div class="bg"></div>
+<div class="login-pg">
+<div class="login-wrap">
+
+  <form class="login-html" (ngSubmit)="onSubmit()">
+    <div class="company-logo">
+      <img src="assets/images/logo.png" alt="" />
+      <div style="color:#1d98c5; padding-top:15px;">
+        <h4>Department of Computer Engineering</h4>
+      </div>
+    </div>
+
+    <div class="panel-headng">
+      <h4>Log In</h4>
+    </div>
+    <div class="loading-indicator">
+      <mat-spinner style="margin:0 auto;" mode="indeterminate" *ngIf="loading"></mat-spinner>
+    </div>
+    <div class="login-form">
+      <div class="sign-in-htm">
+        <div class="group">
+          <label for="user" class="label">Username</label>
+          <input id="user" type="text" class="input" [(ngModel)]="form.username" name="username">
+        </div>
+        <div class="group">
+          <label for="pass" class="label">Password</label>
+          <input id="pass" type="password" class="input" data-type="password" [(ngModel)]="form.password" name="password">
+        </div>
+        <div class="group chkbox">
+          <input id="check" type="checkbox" class="check" checked>
+          <label for="check">
+            <span class="icon"></span> Remember me</label>
+        </div>
+        <div class="group">
+          <input type="submit" class="button login-button"  [disabled]="loading" value="Sign In">
+        </div>
+        <div class="foot-lnk">
+          
+          <a href="/forgot-password">Forgot Password?</a> |
+          <a href="/signup">Sign Up</a> |
+          <a href="/activate-account">Activate Account</a>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div>

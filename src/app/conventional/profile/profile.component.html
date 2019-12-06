@@ -1,0 +1,1434 @@
+<div class="container">
+  <div class="row">
+    <div class="loading-indicator">
+      <mat-spinner style="margin:0 auto;" mode="indeterminate" *ngIf="loading"></mat-spinner>
+    </div>
+    <!--Start Left Panel-->
+    <div class="col-lg-9 kyc-colm user-management">
+      <!--Staff Profile begin-->
+      <ng-container *ngIf="staff">
+        <div class="kyc-section rewards-section reports-sectn">
+          <!--Calendar comes in below div-->
+          <div class="row">
+            <div class="col-6">
+              <h3 class="heading">{{staffBasicProfile?.name}} [{{staffBasicProfile?.nameAcronym}}]</h3>
+            </div>
+            <div class="col-6">
+              <h3 class="text-right">Employee Id : {{staffBasicProfile?.employeeId}}<a data-toggle="modal"
+                  data-target="#staffBasicProfile" (click)="resetConfirmationMessge()">
+                  <i class="fa fa-pencil float-right" style="font-size: 30px; margin-left: 20px;"></i></a>
+              </h3>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-3">
+              <div><img class="profilepic" src="../../../assets/images/profile-pic_02.jpg" alt="" /></div>
+            </div>
+            <div class="col-9">
+              <div class=row>
+                <div class="col-3">
+                  <p><b>{{staffBasicProfile?.currentDesignation}}<br />
+                      DOB : {{staffBasicProfile?.dob}}<br />
+                      Gender : {{staffBasicProfile?.gender}}<br />
+                      Blood Group : {{staffBasicProfile?.bloodGroup}}
+                    </b></p>
+                </div>
+                <div class="col-9">
+                  <p><b>
+                      Email : {{staffBasicProfile?.email}}<br />
+                      Mobile Number : +91 {{staffBasicProfile?.mobileNo}}<br />
+                      Alternate Mobile Number : +91 {{staffBasicProfile?.alternateMobileNo}}<br />
+                      Specialization : {{staffBasicProfile?.areaOfSpecialization}}<br />
+                    </b></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12" style="font-size:13px;">
+                  <p>Father : {{staffBasicProfile?.fatherName}}<br />
+                    Mother : {{staffBasicProfile?.motherName}}<br />
+                  </p>
+                </div>
+              </div>
+
+              <div class="row" style="font-size: 13px;">
+                <div class="col-lg-11">
+                  <ng-container *ngFor="let val of userAddressInfo">
+                    <p><b>{{val.type}} address</b> : {{val.addressLine1}}, {{val.addressLine2}}, {{val.city}},
+                      {{val.pincode}},
+                      {{val.state}}, {{val.country}}
+                    </p>
+                  </ng-container>
+                </div>
+                <div class="col-lg-1 d-flex justify-content-end">
+                  <a data-toggle="modal" data-target="#address" (click)="resetConfirmationMessge()">
+                    <i class="fa fa-pencil" style="font-size: 20px;"></i></a>
+                </div>
+              </div>
+
+
+              <!--Address Modal starts-->
+              <div class="modal fade" id="address" role="dialog">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Edit addresses</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                      <form [formGroup]="addressFormGroup" (ngSubmit)="updateAddresses(addressFormGroup.value)">
+                        <div formArrayName="addresses">
+                          <div *ngFor="let addressCtrl of getControls(); let i = index" [formGroupName]="i">
+                            <div class="form-row">
+                              <div class="col">
+                                <label>Address line 1</label>
+                                <input class="form-control" type="text" formControlName="addressLine1">
+                              </div>
+                              <div class="col">
+                                <label>Address line 2</label>
+                                <input class="form-control" type="text" formControlName="addressLine2">
+                              </div>
+                              <div class="col">
+                                <label>City</label>
+                                <input type="text" class="form-control" formControlName="city">
+                              </div>
+                            </div>
+                            <div class="form-row">
+                              <div class="col">
+                                <label>State</label>
+                                <input type="text" class="form-control" formControlName="state">
+                              </div>
+                              <div class="col">
+                                <label>Country</label>
+                                <input class="form-control" type="text" formControlName="country">
+                              </div>
+                              <div class="col">
+                                <label>Type</label>
+                                <input class="form-control" type="text" formControlName="type">
+                              </div>
+                              <div class="col">
+                                <label>Pincode</label>
+                                <input class="form-control" type="text" formControlName="pincode">
+                              </div>
+                            </div>
+                            <hr>
+                          </div>
+                        </div>
+                        <ng-container *ngIf="showConfirmation">
+                            <div class="form-group">
+                              <div class="d-flex justify-content-center">
+                                <span class="confirmationMessage">{{completionMessage}}</span>
+                              </div>
+                            </div>
+                            </ng-container>
+                        <div class="d-flex justify-content-center mt-3">
+                          <button type="reset" class="btn btn-danger mr-3 btnWidth">Reset</button>
+                          <button type="submit" class="btn btn-success btnWidth"  data-dismiss="modal">Update</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--Address Modal Ends-->
+              <div class="float-right">
+                <div class="dropdown">
+                  <button type="button" class="btn btn-primary nav-link" href="" id="dropdownMenu2"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add Profile Section</button>
+
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenu2" style="width: 300px;">
+                    <p class="dropdown-item" data-toggle="modal" data-target="#experience">Work Experience
+                      <span class="float-right">
+                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                      </span></p>
+                    <hr>
+
+                    <p class="dropdown-item" data-toggle="modal" data-target="#education">Education
+                      <span class="float-right">
+                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                      </span></p>
+                    <hr>
+
+                    <p class="dropdown-item" data-toggle="modal" data-target="#research">Publications
+                      <span class="float-right">
+                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                      </span></p>
+                    <hr>
+
+                    <p class="dropdown-item" data-toggle="modal" data-target="#internship">Internships
+                      <span class="float-right">
+                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                      </span></p>
+                    <hr>
+
+                    <p class="dropdown-item" data-toggle="modal" data-target="#project">Projects
+                      <span class="float-right">
+                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                      </span></p>
+                    <hr>
+
+                    <p class="dropdown-item" data-toggle="modal" data-target="#competetive">Competetive Exams
+                      <span class="float-right">
+                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                      </span></p>
+                    <hr>
+
+                    <p class="dropdown-item" data-toggle="modal" data-target="#placement">Placements
+                      <span class="float-right">
+                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                      </span></p>
+                    <hr>
+
+                    <p class="dropdown-item" data-toggle="modal" data-target="#culturalactivity">Cultural
+                      Activities/Achievement
+                      <span class="float-right">
+                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                      </span></p>
+                    <hr>
+                    <p class="dropdown-item" data-toggle="modal" data-target="#technicalactivity">Technical
+                      Activities/Achievements
+                      <span class="float-right">
+                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                      </span></p>
+                    <hr>
+                    <p class="dropdown-item" data-toggle="modal" data-target="#workshop">Workshops/Seminars
+                      <span class="float-right">
+                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                      </span></p>
+                    <hr>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Basic profile modal -->
+          <div class="modal fade" id="staffBasicProfile" role="dialog">
+            <div class="modal-dialog modal-lg">
+
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Edit profile</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <form [formGroup]="editStaffBasicProfileFormGroup"
+                    (ngSubmit)="updateStaffBasicProfileData(editStaffBasicProfileFormGroup.value)">
+                    <div class="form-row mb-1">
+                      <div class="col">
+                        <label>Mobile number</label>
+                        <input class="form-control" placeholder="Mobile no." type="number" [(ngModel)]="mobileNo"
+                          formControlName="mobileNo">
+                      </div>
+                      <div class="col">
+                        <label>Alternate Mobile number</label>
+                        <input class="form-control" placeholder="Alternate mobile no." type="number"
+                          formControlName="alternateMobileNo" [(ngModel)]="alternateMobileNo">
+                      </div>
+                      <div class="col">
+                        <label>Mother name</label>
+                        <input class="form-control" placeholder="Mother name" formControlName="motherName"
+                          [(ngModel)]="motherName">
+                      </div>
+                    </div>
+                    <div class="form-row mb-1">
+                      <div class="col">
+                        <label>DOB</label>
+                        <input class="form-control" type="date" placeholder="DOB" formControlName="dob"
+                          [(ngModel)]="dob">
+                      </div>
+                      <div class="col">
+                        <label>Blood group</label>
+                        <input class="form-control" placeholder="Blood group" formControlName="bloodGroup"
+                          [(ngModel)]="bloodGroup">
+                      </div>
+                      <div class="col">
+                        <label>Father name</label>
+                        <input class="form-control" placeholder="Father name" formControlName="fatherName"
+                          [(ngModel)]="fatherName">
+                      </div>
+                    </div>
+                    <div class="form-group mb-2">
+                      <div>
+                        <label>Area of specialization</label>
+                        <input class="form-control" placeholder="Area of specialization"
+                          formControlName="areaOfSpecialization" [(ngModel)]="areaOfSpecialization">
+                      </div>
+
+                    </div>
+                    <ng-container *ngIf="showConfirmation">
+                        <div class="form-group">
+                          <div class="d-flex justify-content-center">
+                            <span class="confirmationMessage">{{completionMessage}}</span>
+                          </div>
+                        </div>
+                        </ng-container>
+                    <div class="form-group d-flex justify-content-center mt-3">
+                      <button type='reset' class="btn btn-secondary mr-4 btnWidth">Reset</button>
+                      <button type="submit" class="btn btn-primary"  data-dismiss="modal">Update Data</button>
+
+                    </div>
+                  </form>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <br />
+      </ng-container>
+      <!--Staff Profile ends-->
+      <!--Student Profile begin-->
+      <ng-container *ngIf="student">
+        <div class="kyc-section rewards-section reports-sectn">
+          <!--Calendar comes in below div-->
+          <div class="row">
+            <div class="col-6">
+              <h3 class="heading">{{studentProfile?.name}}</h3>
+            </div>
+            <div class="col-6">
+              <h3 class="text-right">Enrollment Id : {{studentProfile?.enrollmentId}}<a data-toggle="modal"
+                  data-target="#studentBasicProfile">
+                  <i class="fa fa-pencil float-right" style="font-size: 30px; margin-left: 20px;"></i></a></h3>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-3">
+              <div><img class="profilepic" src="../../../assets/images/profile-pic_02.jpg" alt="" /></div>
+            </div>
+            <div class="col-9">
+              <div class=row>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                  <p><b>{{studentProfile?.courseYearSession}}<br />
+                      DOB : {{studentProfile?.dob}}<br />
+                      Gender : {{studentProfile?.gender}}<br />
+
+                    </b></p>
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6">
+                  <p><b>
+                      Email : {{studentProfile?.email}}<br />
+                      Mobile Number : +91 {{studentProfile?.mobileNo}}<br />
+
+                    </b></p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"><b>
+                    Blood Group : {{studentProfile?.bloodGroup}}<br />
+                    Category : {{studentProfile?.category}}</b>
+                </div>
+              </div>
+              <div class="row" style="font-size:13px;">
+                <div class="col-lg-4">
+                  <p>Father : {{studentProfile?.fatherName}}<br />
+                    Mother : {{studentProfile?.motherName}}</p>
+                </div>
+                <div class="col-lg-3">
+                  <p>Mobile : {{studentProfile?.fatherContact}}<br />
+                    Mobile : {{studentProfile?.motherContact}} </p>
+                </div>
+                <div class="col-lg-5">
+                  <p>Email :
+                    {{studentProfile?.fatherEmail}}<br />
+                    Email :
+                    {{studentProfile?.motherEmail}}
+                  </p>
+                </div>
+              </div>
+              <div class="row d-flex justify-content-start" style="font-size:13px;">
+                <ng-container *ngFor="let val of userAddressInfo">
+                  <p> Address : {{val.addressLine1}}, {{val.addressLine2}}, {{val.city}}, {{val.pincode}},
+                    {{val.state}}, {{val.country}}
+                  </p>
+                </ng-container>
+              </div>
+              <div class="float-right">
+                <div class="dropdown">
+                  <button type="button" class="btn btn-primary nav-link" href="" id="dropdownMenu2"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add Profile Section</button>
+
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenu2" style="width: 300px;">
+                    <p class="dropdown-item" data-toggle="modal" data-target="#experience_modal">Work Experience
+                      <span class="float-right">
+                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                      </span></p>
+                    <hr>
+
+                    <p class="dropdown-item" data-toggle="modal" data-target="#education_modal">Education
+                      <span class="float-right">
+                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                      </span></p>
+                    <hr>
+
+                    <p class="dropdown-item" data-toggle="modal" data-target="#publication_modal">Publications
+                      <span class="float-right">
+                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                      </span></p>
+                    <hr>
+
+                    <p class="dropdown-item" data-toggle="modal" data-target="#internship_modal">Internships
+                      <span class="float-right">
+                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                      </span></p>
+                    <hr>
+
+                    <p class="dropdown-item" data-toggle="modal" data-target="#project_modal">Projects
+                      <span class="float-right">
+                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                      </span></p>
+                    <hr>
+
+                    <p class="dropdown-item" data-toggle="modal" data-target="#competetive_modal">Competetive Exams
+                      <span class="float-right">
+                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                      </span></p>
+                    <hr>
+
+                    <p class="dropdown-item" data-toggle="modal" data-target="#placement_modal">Placements
+                      <span class="float-right">
+                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                      </span></p>
+                    <hr>
+
+                    <p class="dropdown-item" data-toggle="modal" data-target="#culturalactivity_modal">Cultural
+                      Activities/Achievement
+                      <span class="float-right">
+                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                      </span></p>
+                    <hr>
+                    <p class="dropdown-item" data-toggle="modal" data-target="#technicalactivity_modal">Technical
+                      Activities/Achievements
+                      <span class="float-right">
+                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                      </span></p>
+                    <hr>
+                    <p class="dropdown-item" data-toggle="modal" data-target="#workshop_modal">Workshops/Seminars
+                      <span class="float-right">
+                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                      </span></p>
+                    <hr>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Basic profile modal -->
+          <div class="modal fade" id="studentBasicProfile" role="dialog">
+            <div class="modal-dialog modal-lg">
+
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Edit profile</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <form [formGroup]="editStudentProfileFormGroup"
+                    (ngSubmit)="updateStudentBasicProfileData(editStudentProfileFormGroup.value)">
+                    <div class="form-row mb-1">
+                      <div class="col">
+                        <label>Mobile number</label>
+                        <input class="form-control" placeholder="Mobile no." hover type="number" [(ngModel)]="mobileNo"
+                          formControlName="mobileNo">
+                      </div>
+                      <div class="col">
+                        <label>Father Mobile number</label>
+                        <input class="form-control" placeholder="Father mobile no." type="number"
+                          formControlName="fatherContact" [(ngModel)]="fatherContact">
+                      </div>
+                      <div class="col">
+                        <label>Mother Mobile number</label>
+                        <input class="form-control" placeholder="Mother mobile number" formControlName="motherContact"
+                          [(ngModel)]="motherContact">
+                      </div>
+                    </div>
+                    <div class="form-row mb-1">
+                      <div class="col">
+                        <label>Father email</label>
+                        <input class="form-control" type="text" placeholder="Father's email"
+                          formControlName="fatherEmail" [(ngModel)]="fatherEmail">
+                      </div>
+                      <div class="col">
+                        <label>Blood group</label>
+                        <input class="form-control" placeholder="Blood group" formControlName="bloodGroup"
+                          [(ngModel)]="bloodGroup">
+                      </div>
+                      <div class="col">
+                        <label>Mother email</label>
+                        <input class="form-control" placeholder="Mother email" formControlName="motherEmail"
+                          [(ngModel)]="motherEmail">
+                      </div>
+                    </div>
+
+                    <div class="form-group d-flex justify-content-center mt-3">
+                      <button type='reset' class="btn btn-secondary mr-4 btnWidth">Reset</button>
+                      <button type="submit" class="btn btn-primary"  data-dismiss="modal">Update Data</button>
+
+                    </div>
+                  </form>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <br />
+      </ng-container>
+      <!--student Profile ends-->
+
+      <!--Work Experience-->
+
+      <div class="kyc-section rewards-section reports-sectn">
+        <h3>Experience <a data-toggle="modal" data-target="#experience" (click)="resetWorkExperienceForm()"><i
+              class="fa fa-plus-square float-right" style="font-size: 30px;"></i></a></h3>
+        <div *ngFor="let val of workExperienceInfo; let i = index">
+          <div class="row">
+            <div class="col-1">
+              <i class="fa fa-suitcase text-center" style="font-size: 60px;"></i>
+            </div>
+            <div class="col-11">
+              <h5> <a data-toggle="modal" [attr.data-target]="'#experience'" (click)="fillWorkExperienceData(i)"> <i
+                    class="fa fa-pencil float-right" style="font-size: 30px;"></i></a></h5>
+              <p>{{val.designation}}, {{val.organizationName}}<br />
+                Payscale : {{val.Payscale}}<br />
+                {{val.dateOfJoining}} - {{val.dateOfLeaving}}<br />
+                {{val.city}}, {{val?.state}}, {{val.country}}
+              </p>
+            </div>
+          </div>
+          <hr>
+        </div>
+      </div>
+      <!--Work Experience Modal starts-->
+      <div class="modal fade" id="experience" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Experience</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <form (ngSubmit)="updateExperienceData(workExperience)" #workExperience="ngForm">
+                <div class="form-row">
+                  <div class="col">
+                    <label>Organization name</label>
+                    <input class="form-control" type="text" id="organizationName" name="organizationName" ngModel>
+                  </div>
+                  <div class="col">
+                    <label>Designation</label>
+                    <input class="form-control" type="text" id="designation" name="designation" ngModel>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col">
+                    <label>Date of Joining</label>
+                    <input type="date" class="form-control" id="dateOfJoining" name="dateOfJoining" ngModel>
+                  </div>
+                  <div class="col">
+                    <label>Date of leaving</label>
+                    <input type="date" id="dateOfLeaving" class="form-control" name="dateOfLeaving" ngModel>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col">
+                    <label>City</label>
+                    <input class="form-control" id="city" type="text" name="city" ngModel>
+                  </div>
+                  <div class="col">
+                    <label>State</label>
+                    <input class="form-control" id="state" name="state" ngModel>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col">
+                    <label>Country</label>
+                    <input class="form-control" id="country" type="text" name="country" ngModel>
+                  </div>
+                  <div class="col">
+                    <label>Payscale</label>
+                    <input class="form-control" id="payscale" type="text" name="payscale" ngModel>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-center mt-3">
+                  <button type="reset" class="btn btn-danger mr-3 btnWidth">Reset</button>
+                  <button type="submit" class="btn btn-success btnWidth"  data-dismiss="modal">Update</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Work Experience Modal ends-->
+
+      <!--Work Experience ends-->
+      <br />
+
+      <!--Education starts-->
+      <div class="kyc-section rewards-section reports-sectn">
+        <h3>Education <a data-toggle="modal" data-target="#education" (click)="resetEducationForm()"><i
+              class="fa fa-plus-square float-right" style="font-size: 30px;"></i></a>
+        </h3>
+        <ng-container *ngFor="let val of userQualificationInfo; let i = index">
+
+          <div class="row">
+            <div class="col-1">
+              <i class="fa fa-graduation-cap text-center" style="font-size: 60px;"></i>
+            </div>
+            <div class="col-11">
+              <h5>
+                <span *ngIf="val.collegeSchool; else notAvailable">
+                  {{val.collegeSchool}}
+                </span>
+                <a data-toggle="modal" [attr.data-target]="'#education'" (click)="fillEducationData(i)"><i
+                    class="fa fa-pencil float-right" style="font-size: 30px;"></i></a></h5>
+              <p>{{val.universityBoard}}<br />{{val.degreeCertificate}}, {{val.specialization}}<br />Year of Passing :
+                {{val.yearOfPassing}}<br />CGPA : {{val.percentageCgpa}}</p>
+            </div>
+          </div>
+          <hr>
+        </ng-container>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="education" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Education</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <form (ngSubmit)="updateEducationData(educationForm)" #educationForm="ngForm">
+                <div class="form-group">
+                  <label>Degree/Certificate</label>
+                  <input class="form-control" id="degreeCertificate" type="text" name="degreeCertificate" ngModel>
+                </div>
+                <div class="form-group">
+                  <label>College/School</label>
+                  <input class="form-control" id="collegeSchool" type="text" name="collegeSchool" ngModel>
+                </div>
+                <div class="form-group">
+                  <label>University/Board</label>
+                  <input class="form-control" id="universityBoard" type="text" name="universityBoard" ngModel>
+                </div>
+                <div class="form-group">
+                  <label>Specialization</label>
+                  <input class="form-control" id="specialization" type="text" name="specialization" ngModel>
+                </div>
+                <div class="form-row">
+                  <div class="col">
+                    <label>Year of Passing</label>
+                    <input type="text" class="form-control" id="yearOfPassing" name="yearOfPassing" ngModel>
+                  </div>
+                  <div class="col">
+                    <label>Percentag/CGPA</label>
+                    <input class="form-control" id="percentageCgpa" type="text" name="percentageCgpa" ngModel>
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-center mt-3">
+                  <button type="reset" class="btn btn-danger mr-3 btnWidth">Reset</button>
+                  <button type="submit" class="btn btn-success btnWidth"  data-dismiss="modal">Update</button>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!--Education ends-->
+      <br />
+      <!--research work-->
+      <div class="kyc-section rewards-section reports-sectn">
+        <h3>Research Work <a data-toggle="modal" data-target="#research" (click)="resetResearchForm()"><i
+              class="fa fa-plus-square float-right" style="font-size: 30px;"></i></a></h3>
+        <div *ngFor="let val of userResearchWorkInfo; let i = index">
+          <div class="row">
+            <div class="col-1">
+              <i class="fa fa-book text-center" style="font-size: 60px;"></i>
+            </div>
+            <div class="col-11">
+              <h5>{{val.title}}
+                <a data-toggle="modal" [attr.data-target]="'#research'" (click)="fillResearchData(i)"><i
+                    class="fa fa-pencil float-right" style="font-size: 30px;"></i></a>
+              </h5>
+              <p>{{val.yearOfPublication}}, {{val.publisher}}<br />
+                Guide : {{val.guideName}} <br />
+                Co-Authors : {{val.coAuthors}}<br />
+                Category : {{val.category}}, {{val.subcategory}}<br />
+                Journal Conference Name : {{val.journalConferenceName}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="research" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Research Work</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <form #researchForm="ngForm" (ngSubmit)="updateResearchWork(researchForm)">
+                <div class="form-row">
+                  <div class="col-1">
+                    <label for="publicationTitle">Title : </label>
+                  </div>
+                  <div class="col-11">
+                    <textarea class="form-control" id="publicationTitle" name="title" type="text" ngModel></textarea>
+                  </div>
+                </div>
+                <br />
+                <div class="form-row">
+                  <div class="col">
+                    <div class="form-row">
+                      <div class="col">
+                        <label for="yearOfPublication">Year of Publication : </label>
+                      </div>
+                      <div class="col-7">
+                        <input class="form-control" id="yearOfPublication" type="text" name="yearOfPublication" ngModel>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-row">
+                      <div class="col">
+                        <label>Publisher : </label>
+                      </div>
+                      <div class="col-7">
+                        <input class="form-control" id="publisher" type="text" name="publisher" ngModel>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br />
+                <div class="form-row">
+                  <div class="col">
+                    <div class="form-row">
+                      <div class="col">
+                        <label>Category : </label>
+                      </div>
+                      <div class="col-7">
+                        <input class="form-control" id="category" type="text" name="category" ngModel>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-row">
+                      <div class="col">
+                        <label>Sub Category : </label>
+                      </div>
+                      <div class="col-7">
+                        <input class="form-control" id="subcategory" type="text" name="subcategory" ngModel>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br />
+                <div class="form-row">
+                  <div class="col">
+                    <div class="form-row">
+                      <div class="col">
+                        <label>Co-Authors : </label>
+                      </div>
+                      <div class="col-7">
+                        <input class="form-control" id="coAuthors" type="text" name="coAuthors" ngModel>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-row">
+                      <div class="col">
+                        <label>Guide : </label>
+                      </div>
+                      <div class="col-7">
+                        <input class="form-control" id="guideName" type="text" name="guideName" ngModel>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br />
+                <div class="form-row">
+                  <div class="col-3">
+                    <label for="conferenceJournalName">Conference/Journal : </label>
+                  </div>
+                  <div class="col-9">
+                    <textarea type="text" class="form-control" id="conferenceJournalName" name="journalConferenceName"
+                      ngModel></textarea>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-center mt-3">
+                  <button type="reset" class="btn btn-danger mr-3 btnWidth">Reset</button>
+                  <button type="submit" class="btn btn-success btnWidth"  data-dismiss="modal">Update</button>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!--research work ends-->
+      <br />
+      <!--Internship starts-->
+      <ng-container *ngIf="student">
+        <div class="kyc-section rewards-section reports-sectn">
+          <h3>Internship <a data-toggle="modal" data-target="#internship" (click)="resetInternshipForm()"><i
+                class="fa fa-plus-square float-right" style="font-size: 30px;"></i></a></h3>
+          <div *ngFor="let val of userInternshipInfo; let i = index">
+            <div class="row">
+              <div class="col-1">
+                <i class="fa fa-building text-center" style="font-size: 60px;"></i>
+              </div>
+              <div class="col-11">
+                <h5>{{val.subject}} <a data-toggle="modal" [attr.data-target]="'#internship'"
+                    (click)="fillInternshipData(i)"><i class="fa fa-pencil float-right"
+                      style="font-size: 30px;"></i></a></h5>
+                <p>{{val.companyName}}<br />{{val.city}}, {{val.state}}, {{val.country}}<br />{{val.startDate}} -
+                  {{val.endDate}}<br /></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="internship" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Internship</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                <form (ngSubmit)="updateInternshipData(internshipForm)" #internshipForm="ngForm">
+                  <div class="form-group">
+                    <label>Field of Internship</label>
+                    <input class="form-control" type="text" name="subject" ngModel>
+                  </div>
+                  <div class="form-group">
+                    <label>Company Name</label>
+                    <input class="form-control" type="text" name="companyName" ngModel>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-lg-4">
+                      <label>City</label>
+                      <input class="form-control" type="text" name="city" ngModel>
+                    </div>
+                    <div class="col-lg-4">
+                      <label>State</label>
+                      <input class="form-control" type="text" name="state" ngModel>
+                    </div>
+                    <div class="col-lg-4">
+                      <label>Country</label>
+                      <input class="form-control" type="text" name="country" ngModel>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <label>From</label>
+                      <input type="date" name="startDate" class="form-control" ngModel>
+                    </div>
+
+                    <div class="col-lg-6">
+                      <label>To</label>
+                      <input type="date" name="endDate" class="form-control" ngModel>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-center mt-3">
+                    <button type="reset" class="btn btn-danger mr-3 btnWidth">Reset</button>
+                    <button type="submit" class="btn btn-success btnWidth"  data-dismiss="modal">Update</button>
+                  </div>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <br />
+      </ng-container>
+      <!--Internship ends-->
+
+      <!--project starts-->
+      <ng-container *ngIf="student">
+        <div class="kyc-section rewards-section reports-sectn">
+          <h3>Projects <a data-toggle="modal" data-target="#project" (click)="resetProjectForm()"><i
+                class="fa fa-plus-square float-right" style="font-size: 30px;"></i></a></h3>
+          <div *ngFor="let val of userProjectInfo; let i = index">
+            <div class="row">
+              <div class="col-1">
+                <i class="fa fa-code text-center" style="font-size: 60px;"></i>
+              </div>
+              <div class="col-11">
+                <h5>{{val.title}} <a data-toggle="modal" [attr.data-target]="'#project'" (click)="fillProjectData(i)"><i
+                      class="fa fa-pencil float-right" style="font-size: 30px;"></i></a></h5>
+                <p>{{val.from}} - {{val.to}}<br />Guide : {{val.guide}}<br />{{val.description}} <br />Other Creators :
+                  {{val.otherCreators}} <br />My Role : {{val.role}}</p>
+              </div>
+            </div>
+            <hr>
+          </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="project" role="dialog">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Projects</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                <form (ngSubmit)="updateProjectData(projectForm)" #projectForm="ngForm">
+                  <div class="form-group">
+                    <label>Title</label>
+                    <input class="form-control" type="text" name="title" ngModel>
+                  </div>
+                  <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control" row="5" name="description" ngModel></textarea>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-lg-4">
+                      <label>Guide</label>
+                      <input class="form-control" type="text" name="guide" ngModel>
+                    </div>
+                    <div class="form-group col-lg-4">
+                      <label>Other Creators</label>
+                      <input class="form-control" type="text" name="otherCreators" ngModel>
+                    </div>
+                    <div class="form-group col-lg-4">
+                      <label>Role</label>
+                      <input class="form-control" type="text" name="role" ngModel>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <label>From</label>
+                      <input type="date" name="from" class="form-control" ngModel>
+                    </div>
+
+                    <div class="col-lg-6">
+                      <label>To</label>
+                      <input type="date" name="to" class="form-control" ngModel>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-center mt-3">
+                    <button type="reset" class="btn btn-danger mr-3 btnWidth">Reset</button>
+                    <button type="submit" class="btn btn-success btnWidth"  data-dismiss="modal">Update</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+      </ng-container>
+      <!--Project ends-->
+
+      <ng-container>
+        <div class="kyc-section rewards-section reports-sectn">
+          <h3>Competetive Exams <a data-toggle="modal" data-target="#competitiveexam"
+              (click)="resetCompetetiveExam()"><i class="fa fa-plus-square float-right"
+                style="font-size: 30px;"></i></a></h3>
+          <div *ngFor="let val of userCompetitiveExamInfo;let i = index">
+            <div class="row">
+              <div class="col-1">
+                <i class="fa fa-clipboard text-center" style="font-size: 60px;"></i>
+              </div>
+              <div class="col-11">
+                <h5>{{val.nameOfExam}} <a data-toggle="modal" [attr.data-target]="'#competitiveexam'"
+                    (click)="fillCompetetiveExamData(i)"><i class="fa fa-pencil float-right"
+                      style="font-size: 30px;"></i></a></h5>
+                <p>Registration No. : {{val.registrationNo}}<br />
+                  Year : {{val.year}}<br />
+                  Score : {{val.score}}<br />
+                  Rank : {{val.rank}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="competitiveexam" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Competitive Exam</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                <form (ngSubmit)="updateCompetitiveExamData(competitiveExamForm)" #competitiveExamForm="ngForm">
+                  <div class="form-group">
+                    <label>Name of Exam</label>
+                    <input type="text" class="form-control" name="nameOfExam" ngModel>
+                  </div>
+                  <div class="form-row">
+                    <div class="col">
+                      <label>All India Rank</label>
+                      <input class="form-control" type="text" name="rank" ngModel>
+                    </div>
+                    <div class="col">
+                      <label>Registration number</label>
+                      <input class="form-control" type="text" name="registrationNo" ngModel>
+                    </div>
+                  </div>
+                  <br />
+                  <div class="form-row">
+                    <div class="col">
+                      <label>Year of Exam</label>
+                      <input class="form-control" name="year" type="text" ngModel>
+                    </div>
+                    <div class="col">
+                      <label>Score</label>
+                      <input class="form-control" name="score" type="text" ngModel>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-center mt-3">
+                    <button type="reset" class="btn btn-danger mr-3 btnWidth">Reset</button>
+                    <button type="submit" class="btn btn-success btnWidth" data-dismiss="modal">Update</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+
+      </ng-container>
+
+      <ng-container *ngIf="student">
+        <div class="kyc-section rewards-section reports-sectn">
+          <h3>Placements <i class="fa fa-plus-square float-right" style="font-size: 30px;"></i></h3>
+          <div *ngFor="let val of userPlacementInfo">
+            <div class="row">
+              <div class="col-1">
+                <i class="fa fa-suitcase text-center" style="font-size: 60px;"></i>
+              </div>
+              <div class="col-11">
+                <h5>Deloitte, Hyderabad (On Campus) <a data-toggle="modal" [attr.data-target]="'#placement' + val.id">
+                    <i class="fa fa-pencil float-right" style="font-size: 30px;"></i></a></h5>
+                <p>6.2 CTC<br />status</p>
+              </div>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="placement{{val.id}}" role="dialog">
+              <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Internship</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+
+                      <div class="col-lg">
+                        <label for="reason">Company Name<span class="necessary"> *</span></label>
+                        <select id="leavetype" class="form-control">
+                          <option>Delloite</option>
+                          <option>GATE</option>
+                          <option>CAT</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-lg">
+                        <label for="reason">Company Address<span class="necessary"> *</span></label>
+                        <input class="form-control" id="reason">
+                      </div>
+                      <br />
+
+                      <label class="control-label col-lg" for="Type of leave">Location<span class="necessary">
+                          *</span></label>
+                      <div class="row">
+                        <div class="col-lg-4">
+                          <select id="leavetype" class="form-control">
+                            <option>Country</option>
+                            <option>India</option>
+                            <option>USA</option>
+                          </select>
+                        </div>
+
+                        <div class="col-lg-4">
+                          <select id="leavetype" class="form-control">
+                            <option>State</option>
+                            <option>M.P.</option>
+                            <option>New Delhi</option>
+                          </select>
+                        </div>
+
+                        <div class="col-lg-4">
+                          <select id="leavetype" class="form-control">
+                            <option>City</option>
+                            <option>Indore</option>
+                            <option>New Delhi</option>
+                          </select>
+                        </div>
+
+                      </div>
+                      <br />
+
+                      <div class="form-group col-lg">
+                        <label for="reason">Area/ Subject/ Topic<span class="necessary"> *</span></label>
+                        <input class="form-control" id="reason">
+                      </div>
+
+                      <br />
+                      <div class='row'>
+                        <div class="col-lg-6">
+                          <label for="From">From<span class="necessary"> *</span></label>
+                          <input type="date" name="Joining">
+                        </div>
+
+                        <div class="col-lg-6">
+                          <label for="To">To<span class="necessary"> *</span></label>
+                          <input type="date" name="Passing">
+                        </div>
+                      </div>
+                      <br />
+
+
+                      <div class="form-group col-lg">
+                        <i class="fa fa-file"></i>
+                      </div>
+                      <br />
+
+
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <!-- Modal -->
+          <div class="modal fade" id="placement_modal" role="dialog">
+            <div class="modal-dialog">
+
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Internship</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <form>
+
+                    <div class="col-lg">
+                      <label for="reason">Company Name<span class="necessary"> *</span></label>
+                      <select id="leavetype" class="form-control">
+                        <option>Delloite</option>
+                        <option>GATE</option>
+                        <option>CAT</option>
+                      </select>
+                    </div>
+                    <div class="form-group col-lg">
+                      <label for="reason">Company Address<span class="necessary"> *</span></label>
+                      <input class="form-control" id="reason">
+                    </div>
+                    <br />
+
+                    <label class="control-label col-lg" for="Type of leave">Location<span class="necessary">
+                        *</span></label>
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <select id="leavetype" class="form-control">
+                          <option>Country</option>
+                          <option>India</option>
+                          <option>USA</option>
+                        </select>
+                      </div>
+
+                      <div class="col-lg-4">
+                        <select id="leavetype" class="form-control">
+                          <option>State</option>
+                          <option>M.P.</option>
+                          <option>New Delhi</option>
+                        </select>
+                      </div>
+
+                      <div class="col-lg-4">
+                        <select id="leavetype" class="form-control">
+                          <option>City</option>
+                          <option>Indore</option>
+                          <option>New Delhi</option>
+                        </select>
+                      </div>
+
+                    </div>
+                    <br />
+
+                    <div class="form-group col-lg">
+                      <label for="reason">Area/ Subject/ Topic<span class="necessary"> *</span></label>
+                      <input class="form-control" id="reason">
+                    </div>
+
+                    <br />
+                    <div class='row'>
+                      <div class="col-lg-6">
+                        <label for="From">From<span class="necessary"> *</span></label>
+                        <input type="date" name="Joining">
+                      </div>
+
+                      <div class="col-lg-6">
+                        <label for="To">To<span class="necessary"> *</span></label>
+                        <input type="date" name="Passing">
+                      </div>
+                    </div>
+                    <br />
+
+
+                    <div class="form-group col-lg">
+                      <i class="fa fa-file"></i>
+                    </div>
+                    <br />
+
+
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+        <br />
+      </ng-container>
+      <!--Cultural activity starts-->
+      <ng-container>
+        <div class="kyc-section rewards-section reports-sectn">
+          <h3>Cultural Activities<a data-toggle="modal" data-target="#culturalactivity"
+              (click)="resetCulturalActivity()"> <i class="fa fa-plus-square float-right"
+                style="font-size: 30px;"></i></a></h3>
+          <div *ngFor="let val of userCulturalActivityInfo; let i = index">
+            <div class="row">
+              <div class="col-1">
+                <i class="fa fa-trophy text-center" style="font-size: 60px;"></i>
+              </div>
+              <div class="col-11">
+                <h5>{{val.achievement}}<a data-toggle="modal" [attr.data-target]="'#culturalactivity'"
+                    (click)="fillCulturalActivityData(i)"> <i class="fa fa-pencil float-right"
+                      style="font-size: 30px;"></i></a></h5>
+                <h5>{{val.nameOfActivity}} - {{val.type}}</h5>
+                <p>{{val.date}}, {{val.place}}</p>
+              </div>
+            </div>
+            <hr>
+
+          </div>
+
+        </div>
+        <!--Cultural activity modal-->
+        <div class="modal fade" id="culturalactivity" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Cultural Activities</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                <form (ngSubmit)="updateCulturalActivity(culturalActivityForm)" #culturalActivityForm="ngForm">
+                  <div class="form-group">
+                    <label>Name of Activity</label>
+                    <input class="form-control" type="text" name="nameOfActivity" ngModel>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-lg-6">
+                      <label>Activity type</label>
+                      <input type="text" class="form-control" name="type" ngModel>
+                    </div>
+                    <div class="form-group col-lg-6">
+                      <label>Achivement</label>
+                      <input class="form-control" type="text" name="achievement" ngModel>
+                    </div>
+
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-lg-6">
+                      <label>Date</label>
+                      <input class="form-control" type="date" name="date" ngModel>
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                      <label>Place</label>
+                      <input class="form-control" type="text" name="place" ngModel>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-center mt-3">
+                    <button type="reset" class="btn btn-danger mr-3 btnWidth">Reset</button>
+                    <button type="submit" class="btn btn-success btnWidth"  data-dismiss="modal">Update</button>
+                  </div>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <!--Cultural activity modal ends-->
+        <!--Cultural activity ends-->
+        <br />
+      </ng-container>
+
+
+      <!--User Technical Activity starts-->
+      <ng-container>
+        <div class="kyc-section rewards-section reports-sectn">
+          <h3>Technical Activities<a data-toggle="modal" data-target="#technicalactivity"
+              (click)="resetTechnicalActivity()"> <i class="fa fa-plus-square float-right"
+                style="font-size: 30px;"></i></a></h3>
+          <div *ngFor="let val of userTechnicalActivityInfo; let i = index">
+            <div class="row">
+              <div class="col-1">
+                <i class="fa fa-trophy text-center" style="font-size: 60px;"></i>
+              </div>
+              <div class="col-11">
+                <h5>{{val.subject}}<a data-toggle="modal" [attr.data-target]="'#technicalactivity'"
+                    (click)="fillTechnicalActivityData(i)"> <i class="fa fa-pencil float-right"
+                      style="font-size: 30px;"></i></a></h5>
+                <p>{{val.type}}<br />
+                  Place - {{val.place}}<br />
+                  Attended / Organised - {{val.attendedOrganized}}<br />
+                  From : {{val.from}} To : {{val.to}}<br />
+                  Name of Coordinator - {{val.nameOfCoordinator}}
+                </p>
+              </div>
+            </div>
+            <hr>
+
+          </div>
+        </div>
+
+        <!--Technical activity modal-->
+        <div class="modal fade" id="technicalactivity" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Technical Activities</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                <form (ngSubmit)="updateTechnicalActivity(technicalActivityForm)" #technicalActivityForm="ngForm">
+                  <div class="form-group">
+                    <label>Subject</label>
+                    <input class="form-control" type="text" name="subject" ngModel>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-lg-6">
+                      <label>Type</label>
+                      <input type="text" class="form-control" name="type" ngModel>
+                    </div>
+                    <div class="form-group col-lg-6">
+                      <label>Place</label>
+                      <input class="form-control" type="text" name="place" ngModel>
+                    </div>
+
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-lg-6">
+                      <label>Name of Coordinator</label>
+                      <input class="form-control" type="text" name="nameOfCoordinator" ngModel>
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                      <label>Organised / Attended</label>
+                      <input class="form-control" type="text" name="attendedOrganized" ngModel>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-lg-6">
+                      <label>From</label>
+                      <input class="form-control" type="date" name="from" ngModel>
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                      <label>To</label>
+                      <input class="form-control" type="date" name="to" ngModel>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-center mt-3">
+                    <button type="reset" class="btn btn-danger mr-3 btnWidth">Reset</button>
+                    <button type="submit" class="btn btn-success btnWidth" data-dismiss="modal">Update</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <!--Col-lg-9 ended-->
+    </div>
+
+
+
+    <!--End Left Panel-->
+
+
+    <!--Start Right Panel-->
+    <div class="col-lg-3 kyc-section rewards-section reports-sectn scroll-area" style="max-height: 1000px">
+      <div class="position-static">
+          <div class="d-flex justify-content-between">
+          <i class="fa fa-arrow-left facultyName" (click)="loadProfile('','')"  style="font-size: 20px" aria-hidden="true"></i>
+          <h4>Employees </h4>
+          <i class="fa fa-download" aria-hidden="true" style="font-size: 20px"></i>
+        </div>
+        <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+        <hr>
+      </div>
+      <div>
+        <div *ngFor="let val of facultyStaffListInfo; let i = index">
+          <div class="row">
+            <div class="col-3">
+              <div><img class="othersprofile" src="../../../assets/images/img_avatar3.png" alt="" /></div>
+            </div>
+            <div class="col-9">
+              <a class="facultyName" style="cursor: pointer;" (click)="loadProfile(val.userId,val.userType)" >{{val.name}} [{{val.nameAcronym}}]</a>
+              <p style="font-size:13px;">{{val.currentDesignation}}<br />
+                <i class="fa fa-envelope mr-1" aria-hidden="true"></i>{{val.email}}<br />
+                <i class="fa fa-mobile mr-1" aria-hidden="true"></i>{{val.mobileNo}}
+              </p>
+            </div>
+
+          </div>
+          <hr>
+        </div>
+        <div *ngFor="let val of staffListInfo; let i = index">
+          <div class="row">
+            <div class="col-3">
+              <div><img class="othersprofile" src="../../../assets/images/img_avatar2.png" alt="" /></div>
+            </div>
+            <div class="col-9">
+              <h6><a  (click)="loadProfile(val.userId,val.userType)">{{val.name}} [{{val.nameAcronym}}]</a></h6>
+              <p style="font-size:13px;">{{val.currentDesignation}}<br />
+                <i class="fa fa-envelope mr-1" aria-hidden="true"></i>{{val.email}}<br />
+                <i class="fa fa-mobile mr-1" aria-hidden="true"></i>{{val.mobileNo}}
+              </p>
+            </div>
+
+          </div>
+          <hr>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--End Right Panel-->

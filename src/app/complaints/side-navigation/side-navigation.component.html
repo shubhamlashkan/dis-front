@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3 kyc-colm user-management">
+    
+    <!-- <div class="complaint-meter">
+        <h5 class="text-center">Complaint Meter</h5>
+      </div> -->
+      <div class=" profile-info">
+        <div class="profile-content">
+          <div class="text-center">
+            <img src="../../../assets/images/meter.png" style="width: 50%;height:50%;">
+          </div>
+          <ng-container *ngIf="userType != 'student'">
+              <div class="txt-info three">
+                    <h5><a routerLink='resource_request' >Request Resources</a></h5>
+              </div>
+              <div class="txt-info three">
+                  <h3 style="padding-right: 25%; padding-left: 25%">{{remaining}}</h3>
+                  <h5><a routerLink='remaining_complaints'>Complaint Remaining</a></h5>
+              </div>
+              <div class="txt-info">
+                <h3 style="color: #58c365;">{{resolved}}</h3>
+                <h5><a routerLink='resolved_complaints'>Resolved Complaints</a></h5>
+              </div>
+          <div class="txt-info one">
+            <h3>{{total}}</h3>
+            <h5 ><a routerLink='total_complaints'>Total Complaints</a></h5>
+          </div>
+        </ng-container>
+          <ng-container *ngIf="userType == 'student' || userType != 'head'">
+          <div class="txt-info">
+            <h3 style="color: #f55831;">{{my}}</h3>
+            <h5><a routerLink='mycomplaints'>My Complaints</a></h5>
+          </div>
+        </ng-container>
+        <!--- <ng-container *ngIf=" userType == 'faculty' || userType == 'staff'">
+            <div class="kyc-section rewards-section reports-sectn top-buffer">
+             <div style="text-align-last: center;">
+                <a class="request-resources" style="font-size:40px;"><i class="fa fa-cart-plus icon" aria-hidden="true"></i></a>
+              </div>
+              
+            </div>
+          </ng-container>-->
+        </div>
+      </div>
+     
+    </div>
+    <div class="col-lg-9 kyc-colm user-management">
+      <div class="kyc-section rewards-section reports-sectn">
+
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+  
+</div>
+

@@ -1,0 +1,471 @@
+<!-- Tooltip -->
+<link href="../../../assets/css/tooltip.css" rel="stylesheet" type="text/css" />
+<script src="js/tooltip.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="../../../assets/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script type="text/javascript" src="../../../assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../../assets/js/bootstrap-datepicker.js"></script>  
+
+<!--grid script-->
+<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+
+<script>
+  $(document).ready(function(){
+    $('#myTable').dataTable();
+  });
+</script> 
+<!--END grid script-->
+<div class="container">
+  <div class="row">
+
+<!--Start Left Panel-->
+    <div class="col-lg-3 profile-info">
+      <app-sidenavigation></app-sidenavigation>
+     
+    </div>
+
+  <!--End Left Panel-->
+
+
+    <!--Start Right Panel-->
+    <div class="col-lg-9 kyc-colm user-management">
+      <div class="kyc-section rewards-section reports-sectn">
+          <div class="row">   
+              <div class="input-group mb-1">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Task assigned to</label>
+                  </div>
+                  <select class="custom-select" id="inputGroupSelect01">
+                    <option selected>Choose...</option>
+                    <option value="1">Somil Neema</option>
+                    <option value="2">Jyoti Tiwari</option>
+                    <option value="3">Ritambara Patidar</option>
+                  </select>
+                  <!-- Example single danger button -->
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Category
+                    </button>
+                    <div class="dropdown-menu">
+                     <a class="dropdown-item" style="text-decoration:None" href="#">Student</a>
+                    <a class="dropdown-item" style="text-decoration:None"href="#">Time Table</a>
+                    <a class="dropdown-item" style="text-decoration:None" href="#">Exam Work</a>
+                    <a class="dropdown-item" style="text-decoration:None" href="#">Administration</a>
+                    <a class="dropdown-item" style="text-decoration:None" href="#">Resources</a>
+                    <a class="dropdown-item" style="text-decoration:None" href="#">Other Tasks</a>
+
+                   
+                   </div>
+                  </div>
+                  
+                    <button type="button" class="btn btn-light" data-toggle="modal" data-target=".my-modal">Assign Task</button>
+                        
+                    <div class="modal fade my-modal" id="myModal" role="dialog">
+                      <div class="modal-dialog">
+                      
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <!--En-->
+                              
+                              <!--En-->
+                            <h3 class="modal-title heading">Assign New Task</h3>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            
+                          </div>
+                          <div class="modal-body">
+                              <form>
+                                  <div class="form-group">
+                                    <h6 class="heading">Select Faculty</h6>  
+                                      <select multiple class="form-control" id="sel2">
+                                      <option>Somil Neema</option>
+                                      <option>Rithambara Patidar</option>
+                                      <option>Jyoti Tiwari</option>
+                                      <option>Surendra Gupta</option>
+                                      <option>Vandan Tiwari</option>
+                                    </select>
+                                    </div>
+                                    <div class="form-group">
+                                      <h6 class="heading">Category</h6>
+                                      <select class="form-control input-lg" id="sel2">
+                                        <option>Student</option>
+                                        <option>Time Table</option>
+                                        <option>Exam Work</option>
+                                        <option>Administration</option>
+                                        <option>Resources</option>
+                                        <option>Other Tasks</option>
+                                      </select>
+                                    </div>
+                                    <div class="form-group">
+                                      <h6 class="heading">Choose Task </h6>
+                                      <select class="form-control input-lg" id="sel3">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                      </select>
+                                    </div>
+            
+                                <div class="form-group form-group-lg">
+                                  <h6 class="heading">If Other Please Specify </h6>
+                                  <input class="form-control" id="inputdefault" type="text">
+                                </div>
+                                <div class="form-group">
+                                  <h6 class="heading">Description(If any) </h6>
+                                  <input class="form-control form-control-lg" id="inputlg" type="text">
+                                </div>
+                                <button type="button" class="btn btn-primary btn-lg btn-block">Submit</button>
+                              </form>
+                           
+                            
+                          </div>
+                          
+                        </div>
+                       </div> 
+                      </div>
+                    
+                          
+                      
+                  
+                </div>
+                   </div>
+          
+        
+      <!--Calendar comes in below div-->
+      <h3 class="heading">In Progress</h3>
+            <hr/>
+        <div class="row">
+          <div class="col-lg-3">
+            
+            
+            <div class="alert alert-success row">
+              <h4 class="col-12">Placement Incharge</h4>
+              <p class="col"> Start date: 24/08/2017</p>
+              <p class="col-6 heading"> Assigned to</p>
+              <p class="col-6 float-left"> Somil Neema</p>
+              
+                          
+            </div>
+            <div class="alert alert-success row">
+                <h4 class="col-12">Placement Incharge</h4>
+                <p class="col"> Start date: 24/08/2017</p>
+                <p class="col-6 heading"> Assigned to</p>
+                <p class="col-6 float-left"> Somil Neema</p>
+                
+                            
+              </div>
+             
+        </div>
+          
+          <div class="col-lg-3 pl-4">
+              <div class="alert alert-success row">
+                  <h4 class="col-12">Placement Incharge</h4>
+                  <p class="col"> Start date: 24/08/2017</p>
+                  <p class="col-7 heading"> Assigned to</p>
+                  <p class="col-5 float-left"> Somil Neema</p>
+                  
+                              
+                </div>
+                <div class="alert alert-success row">
+                    <h4 class="col-12">Placement Incharge</h4>
+                    <p class="col"> Start date: 24/08/2017</p>
+                    <p class="col-7 heading"> Assigned to</p>
+                    <p class="col-5 float-left"> Somil Neema</p>
+                    
+                                
+                  </div>
+                  
+            
+          </div>
+          <div class="col-lg-3 pl-4">
+              <div class="alert alert-success row">
+                  <h4 class="col-12">Placement Incharge</h4>
+                  <p class="col"> Start date: 24/08/2017</p>
+                  <p class="col-7 heading"> Assigned to</p>
+                  <p class="col-5 float-left"> Somil Neema</p>
+                  
+                              
+                </div>
+                <div class="alert alert-success row">
+                    <h4 class="col-12">Placement Incharge</h4>
+                    <p class="col"> Start date: 24/08/2017</p>
+                    <p class="col-7 heading"> Assigned to</p>
+                    <p class="col-5 float-left"> Somil Neema</p>
+                    
+                                
+                  </div>
+                  
+            
+          </div>
+          <div class="col-lg-3 pl-4">
+              <div class="alert alert-success row">
+                  <h4 class="col-12">Placement Incharge</h4>
+                  <p class="col"> Start date: 24/08/2017</p>
+                  <p class="col-7 heading"> Assigned to</p>
+                  <p class="col-5 float-left"> Somil Neema</p>
+                  
+                              
+                </div>
+                <div class="alert alert-success row">
+                    <h4 class="col-12">Placement Incharge</h4>
+                    <p class="col"> Start date: 24/08/2017</p>
+                    <p class="col-7 heading"> Assigned to</p>
+                    <p class="col-5 float-left"> Somil Neema</p>
+                    
+                                
+                  </div>
+                  
+            
+          </div>
+          </div>
+    <!--End Right Panel-->
+         <h3 class="heading">Completed</h3>
+            <hr/>
+        <div class="row">
+          <div class="col-lg-3">
+            
+            
+              <div class="alert alert-success row">
+                  <h4 class="col-12">Placement Incharge</h4>
+                  <p class="col"> Start date: 24/08/2017</p>
+                  <p class="col-7 heading"> Assigned to</p>
+                  <p class="col-5 float-left"> Somil Neema</p>
+                  
+                              
+                </div>
+                <div class="alert alert-success row">
+                    <h4 class="col-12">Placement Incharge</h4>
+                    <p class="col"> Start date: 24/08/2017</p>
+                    <p class="col-7 heading"> Assigned to</p>
+                    <p class="col-5 float-left"> Somil Neema</p>
+                    
+                                
+                  </div>
+                 
+        </div>
+          
+          <div class="col-lg-3 pl-4">
+              <div class="alert alert-success row">
+                  <h4 class="col-12">Placement Incharge</h4>
+                  <p class="col"> Start date: 24/08/2017</p>
+                  <p class="col-7 heading"> Assigned to</p>
+                  <p class="col-5 float-left"> Somil Neema</p>
+                  
+                              
+                </div>
+                <div class="alert alert-success row">
+                    <h4 class="col-12">Placement Incharge</h4>
+                    <p class="col"> Start date: 24/08/2017</p>
+                    <p class="col-7 heading"> Assigned to</p>
+                    <p class="col-5 float-left"> Somil Neema</p>
+                    
+                                
+                  </div>
+                  
+            
+          </div>
+          <div class="col-lg-3 pl-4">
+              <div class="alert alert-success row">
+                  <h4 class="col-12">Placement Incharge</h4>
+                  <p class="col"> Start date: 24/08/2017</p>
+                  <p class="col-7 heading"> Assigned to</p>
+                  <p class="col-5 float-left"> Somil Neema</p>
+                  
+                              
+                </div>
+                <div class="alert alert-success row">
+                    <h4 class="col-12">Placement Incharge</h4>
+                    <p class="col"> Start date: 24/08/2017</p>
+                    <p class="col-7 heading"> Assigned to</p>
+                    <p class="col-5 float-left"> Somil Neema</p>
+                    
+                                
+                  </div>
+                  
+            
+          </div>
+          <div class="col-lg-3 pl-4">
+              <div class="alert alert-success row">
+                  <h4 class="col-12">Placement Incharge</h4>
+                  <p class="col"> Start date: 24/08/2017</p>
+                  <p class="col-7 heading"> Assigned to</p>
+                  <p class="col-5 float-left"> Somil Neema</p>
+                  
+                              
+                </div>
+                <div class="alert alert-success row">
+                    <h4 class="col-12">Placement Incharge</h4>
+                    <p class="col"> Start date: 24/08/2017</p>
+                    <p class="col-7 heading"> Assigned to</p>
+                    <p class="col-5 float-left"> Somil Neema</p>
+                    
+                                
+                  </div>
+                  
+            
+          </div>
+          </div> 
+  <!--Notification Panel starts-->
+  
+  <!--Notification Panel Ends-->
+      </div>
+
+    </div>
+
+  <!--End Right Panel-->
+
+  </div>
+</div>
+ <!-- <app-calendar>
+<div class="container">
+  <div class="row">
+
+
+    <div class="col-lg-3 profile-info">
+      <app-sidenavigation></app-sidenavigation>
+    </div>
+
+<div class="col-lg-9 kyc-colm user-management">
+  <div class="kyc-section rewards-section reports-sectn">
+
+    <div class="row">   
+    <div class="input-group mb-1">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupSelect01">Task assigned to</label>
+        </div>
+        <select class="custom-select" id="inputGroupSelect01">
+          <option selected>Choose...</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Category
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li><a href="#">A</a></li>
+              <li><a href="#">B</a></li>
+              <li><a href="#">C</a></li>
+              
+            </ul>
+          </div>
+        
+      </div>
+         </div>
+
+  
+      
+        <div class="row">
+         
+
+          <div class="col">
+            
+            
+            <h3 class="heading">In Progress</h3>
+          <hr/>
+          <div class="alert alert-success row">
+            <h4 class="col-12">Placement Incharge</h4>
+            <p class="col"> Somil Neema</p>
+            <div class="col">
+              <p class="col"> From: 28/06/2018</p>
+            
+            </div>
+          </div>
+          <div class="alert alert-success row">
+            <h4 class="col-12">Placement Incharge</h4>
+            <p class="col"> Somil Neema</p>
+            <div class="col">
+              <p class="col"> From: 28/06/2018</p>
+            
+            </div>
+          </div>
+          <div class="alert alert-success row">
+            <h4 class="col-12">Placement Incharge</h4>
+            <p class="col"> Somil Neema</p>
+            <div class="col">
+              <p class="col"> From: 28/06/2018</p>
+            
+            </div>
+          </div>
+          <h3 class="heading">Completed</h3>
+          <hr/>
+          <div class="alert alert-success row">
+            <h4 class="col-12">Industrial Visit(NIC BHOPAL)</h4>
+            <p class="col"> Somil Neema</p>
+            <div class="col">
+              <p class="col"> on: 28/06/2018</p>
+            
+            </div>
+          </div>
+          <div class="alert alert-success row">
+            <h4 class="col-12">Industrial Visit(RRCAT)</h4>
+            <p class="col"> Somil Neema</p>
+            <div class="col">
+              <p class="col"> on: 28/06/2018</p>
+            
+            </div>
+          </div>
+          
+            
+          
+          </div>
+          <div class="col">
+            
+            
+            <h3 class="heading">Assign New Task </h3>
+            <hr/>
+            
+              
+                <div class="task-Assign">    
+                 
+                      <form>
+                          <div class="form-group">
+                            <h6 class="heading">Select Faculty</h6>  
+                              <select class="form-control" id="sel1">
+                                <option>Somil Neema</option>
+                                <option>Ritambara Patidar</option>
+                                <option>Surendra Gupta</option>
+                                <option>Jyoti Tiwari</option>
+                              </select>
+                            </div>
+                            <div class="form-group">
+                              <h6 class="heading">Category</h6>
+                              <select class="form-control input-lg" id="sel2">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                              </select>
+                            </div>
+                            <div class="form-group">
+                              <h6 class="heading">Choose Task </h6>
+                              <select class="form-control input-lg" id="sel3">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                              </select>
+                            </div>
+    
+                        <div class="form-group form-group-lg">
+                          <h6 class="heading">If Other Please Specify </h6>
+                          <input class="form-control" id="inputdefault" type="text">
+                        </div>
+                        <div class="form-group">
+                          <h6 class="heading">Description(If any) </h6>
+                          <input class="form-control form-control-lg" id="inputlg" type="text">
+                        </div>
+                        <button type="button" class="btn btn-primary btn-lg btn-block">Submit</button>
+                      </form>
+                   
+                    
+             
+            </div>
+          </div>
+    
+        </div>
+        </div>
+  
+  </div>
+</div>
+</app-calendar>-->
