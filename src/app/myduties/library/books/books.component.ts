@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { LibraryService } from 'src/app/API_Service/library.service';
-import { addBookData, addBookResponse } from '../bookDataObj';
+import { addBookData, addBookResponse, subjectCategory } from '../bookDataObj';
 
 @Component({
   selector: 'app-books',
@@ -14,11 +14,17 @@ export class BooksComponent implements OnInit {
   Book:addBookData;
   responseAdd:addBookResponse;
   data:string;  
-
+  private subject:subjectCategory[]=[];
 
   constructor(private service:LibraryService) { }
 
   ngOnInit() {
+
+   this.service.getSubjectCatergoryAcronymList().subscribe((res:subjectCategory[])=>{
+     this.subject = res;
+   });
+
+
   }
 
   // onSubmit(form:NgForm){

@@ -90,11 +90,10 @@
                   </div>
                   <div class="col-4">
                     <br>
-                      <select class="dropdown-primary" name="subjectCategory" required ngModel >
-                        <option  value="" disabled selected>Subject Category</option>
-                        <option  value="1">OS</option>
-                        <option  value="2">TOC</option>
-                        <option  value="3">URF</option>
+                      <select class="dropdown-primary form-control" name="subjectCategory" required ngModel >
+                       <option *ngFor="let sub of subject" [value]="sub.acr" >
+                            {{sub.acr}}
+                       </option>
                       </select>
                     </div>
                     

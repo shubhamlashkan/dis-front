@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { addBookData } from '../myduties/library/bookDataObj';
+import { addBookData, subjectCategory } from '../myduties/library/bookDataObj';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +20,9 @@ export class LibraryService {
 
   addBookDetails(Book:addBookData){
   return this.http.post('http://localhost:8083/library/addBook',Book,this.httpOptions);
+  }
+
+  getSubjectCatergoryAcronymList():Observable<subjectCategory[]>{
+    return this.http.get<subjectCategory[]>('http://localhost:8083/library/getSubjectCatergoryAcronymList');
   }
 }

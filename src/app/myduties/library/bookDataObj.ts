@@ -1,3 +1,4 @@
+
 export class addBookData{
         authorName: string;
         edition: string;
@@ -16,4 +17,8 @@ export class addBookData{
 export interface addBookResponse{
     bookId: string;
   message: string;
+}
+
+export interface subjectCategory{
+  acr : string;
 }
