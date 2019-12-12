@@ -7,7 +7,7 @@ import { NgModule } from "@angular/core";
 import { LibraryModule } from './library.module';
 
 const routes : Routes = [
-
+  
     {
         path: "library",
         component:LibraryComponent

@@ -61,8 +61,71 @@
             </ul>
         </div>
         <div class="col-lg-9">
+            <div class="row">
+              <div class="col-lg-6">
+                  <h5 >Library Settings</h5>
+                <br>
+                <ol type="1" *ngFor="let setting of setting">
+                    <li>
+                        Max no. of Books to be issued: {{setting.noOfBooksAllowed}}
+                    </li>
+                    <li>
+                        Penalty per day: {{setting.penaltyPerDay}}
+                    </li>
+                    <li>
+                        Return after: {{setting.returnDeadlineDays}}
+                    </li>
+                  </ol>
+              </div>
+
+              <div class="col-lg-3">
+                  <button class="btn btn-success " data-toggle="modal" data-target="#changeSettingsModal"  ><i class="fa fa-gear fa-fw fa-lg" aria-hidden="true"></i>Update Settings</button>
+              </div>
+                
+              </div>
 <router-outlet></router-outlet>
             </div>
                 
     </div>
 </div>
+
+
+<div class="modal fade" id="changeSettingsModal" tabindex="-1" role="dialog" aria-labelledby="booksIssueModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="booksIssueModalLabel">Issue Book</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <form  >
+            <div class="form-row" *ngFor="let setting of setting">
+              <div class="col-4">
+                  <label for="noOfBooksAllowed">Max. Books Allowed</label>
+                  <input type="text" id="noOfBooksAllowed" class="form-control" name="noOfBooksAllowed" [(ngModel)]="setting.noOfBooksAllowed">
+              </div> 
+              <div class="col-4">
+                  <label for="penaltyPerDay">Penalty Per Day</label>
+                  <input type="text" id="penaltyPerDay" class="form-control" name="penaltyPerDay" [(ngModel)]="setting.penaltyPerDay">
+              </div> 
+              <div class="col-4">
+                  <label for="returnDeadlineDays">Return Days</label>
+                  <input type="text" id="returnDeadlineDays" class="form-control" name="returnDeadlineDays" [(ngModel)]="setting.returnDeadlineDays">
+              </div>  
+            </div>
+            <br>
+            <div class="form-row">
+                <div class="col-">
+                    <button type="submit"  class="btn btn-success btnWidth" >Change Settings</button>
+                </div>  
+            </div>
+            <br/>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>

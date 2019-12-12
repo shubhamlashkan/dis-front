@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { LibraryService } from 'src/app/API_Service/library.service';
-import { addBookData, addBookResponse, subjectCategory } from '../bookDataObj';
+import { addBookData, addBookResponse, subjectCategory, allBooks, librarySettings } from '../bookDataObj';
 
 @Component({
   selector: 'app-books',
@@ -11,18 +11,27 @@ import { addBookData, addBookResponse, subjectCategory } from '../bookDataObj';
 export class BooksComponent implements OnInit {
  @ViewChild('f') addBookForm:NgForm;
 
+
+  showId:boolean=false;
   Book:addBookData;
   responseAdd:addBookResponse;
   data:string;  
+  books:allBooks[]=[];
   private subject:subjectCategory[]=[];
-
+  private setting:librarySettings[]=[];
   constructor(private service:LibraryService) { }
 
   ngOnInit() {
 
+    this.showId=false;
+
    this.service.getSubjectCatergoryAcronymList().subscribe((res:subjectCategory[])=>{
      this.subject = res;
    });
+
+   this.service.getAllBooks().subscribe((bookData:allBooks[])=>{
+     this.books = bookData;
+   })
 
 
   }
@@ -50,11 +59,24 @@ export class BooksComponent implements OnInit {
     this.service.addBookDetails(this.Book).subscribe((res:addBookResponse)=>{
       this.responseAdd = res;
       console.log(this.responseAdd.bookId);
-      this.data =  this.responseAdd.bookId + '-' + this.responseAdd.message;
+      this.data =  this.responseAdd.message+ ' '+ this.responseAdd.bookId;
     });
+    this.addBookForm.resetForm();
     
   }
 
+  retrieveLibrarySettings()
+  {
+    this.service.getLibrarySettings().subscribe((libSettings:librarySettings[])=>{
+      this.setting = libSettings;
+      console.log(this.setting);
+    });
+  }
+
+  onButtonClicked()
+  {
+    this.showId=true;
+  }
 
 }
 

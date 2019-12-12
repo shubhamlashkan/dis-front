@@ -20,5 +20,21 @@ export interface addBookResponse{
 }
 
 export interface subjectCategory{
-  acr : string;
+  
+}
+
+export interface allBooks{
+  authorName: string;
+  edition: string
+  status: string
+  subjectCategory: string;
+  title: string;
+}
+
+export interface librarySettings{
+  id: string;
+  noOfBooksAllowed: number;
+  penaltyPerDay: number;
+  returnDeadlineDays: number;
+  
 }
