@@ -79,7 +79,7 @@
               </div>
 
               <div class="col-lg-3">
-                  <button class="btn btn-success " data-toggle="modal" data-target="#changeSettingsModal"  ><i class="fa fa-gear fa-fw fa-lg" aria-hidden="true"></i>Update Settings</button>
+                  <button class="btn btn-reset " data-toggle="modal" data-target="#changeSettingsModal"  ><i class="fa fa-gear fa-fw fa-lg" aria-hidden="true"></i>Update Settings</button>
               </div>
                 
               </div>
@@ -90,37 +90,43 @@
 </div>
 
 
-<div class="modal fade" id="changeSettingsModal" tabindex="-1" role="dialog" aria-labelledby="booksIssueModalLabel" aria-hidden="true">
+<div class="modal fade" id="changeSettingsModal" tabindex="-1" role="dialog" aria-labelledby="changeSettiingsModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="booksIssueModalLabel">Issue Book</h5>
+          <h5 class="modal-title" id="changeSettiingsModalLabel">Issue Book</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
 
-          <form  >
-            <div class="form-row" *ngFor="let setting of setting">
-              <div class="col-4">
-                  <label for="noOfBooksAllowed">Max. Books Allowed</label>
-                  <input type="text" id="noOfBooksAllowed" class="form-control" name="noOfBooksAllowed" [(ngModel)]="setting.noOfBooksAllowed">
-              </div> 
-              <div class="col-4">
-                  <label for="penaltyPerDay">Penalty Per Day</label>
-                  <input type="text" id="penaltyPerDay" class="form-control" name="penaltyPerDay" [(ngModel)]="setting.penaltyPerDay">
-              </div> 
-              <div class="col-4">
-                  <label for="returnDeadlineDays">Return Days</label>
-                  <input type="text" id="returnDeadlineDays" class="form-control" name="returnDeadlineDays" [(ngModel)]="setting.returnDeadlineDays">
-              </div>  
-            </div>
-            <br>
-            <div class="form-row">
-                <div class="col-">
-                    <button type="submit"  class="btn btn-success btnWidth" >Change Settings</button>
-                </div>  
+          <form (ngSubmit)="change(f)" #f="ngForm" >
+
+            <div id="update-settings" ngModelGroup="librarySettings">
+                <div class="form-row" *ngFor="let setting of setting">
+                    <div class="col-3">
+                        <label for="noOfBooksAllowed">Max. Books Allowed</label>
+                        <input type="text" required id="noOfBooksAllowed" class="form-control" name="noOfBooksAllowed"  [(ngModel)]="setting.noOfBooksAllowed" (ngModelChange)="change()">
+                    </div> 
+                    <div class="col-3">
+                        <label for="penaltyPerDay">Penalty Per Day</label>
+                        <input type="text" required id="penaltyPerDay" class="form-control" name="penaltyPerDay" [(ngModel)]="setting.penaltyPerDay" (ngModelChange)="change()">
+                    </div> 
+                    <div class="col-3">
+                        <label for="returnDeadlineDays">Return Days</label>
+                        <input type="text" required id="returnDeadlineDays" class="form-control" name="returnDeadlineDays" [(ngModel)]="setting.returnDeadlineDays" (ngModelChange)="change()">
+                    </div>  
+                    <div class="col-3">
+                        <input type="hidden" class="form-control" id="id" name="id" [(ngModel)]="setting.id" (ngModelChange)="change()">
+                      </div>
+                  </div>
+                  <br>
+                  <div class="form-row">
+                      <div class="col-">
+                          <button type="submit"  class="btn btn-primary btnWidth" [disabled]="!f.valid" >Change Settings</button>
+                      </div>  
+                  </div>
             </div>
             <br/>
           </form>

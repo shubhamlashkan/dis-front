@@ -18,13 +18,13 @@
           <th class="col-lg-1"></th>
           <th class="col-lg-1"></th>
       </tr>     
-      <tr *ngFor="let book of books">
-        <td >1</td>
+      <tr *ngFor="let book of books; let i = index">
+        <td >{{i+1}}</td>
         <td>{{book.title}}</td>
         <td>{{book.authorName}} </td>
         <td>{{book.edition}}</td>
-        <td><button class="btn btn-primary">Edit</button></td>
-        <td><button class="btn btn-danger">Remove</button></td>
+        <td><button class="btn btn-primary" (click)="getBookByBookId(book.bookId)" data-toggle="modal" data-target="#booksEditModal">Edit</button></td>
+        <td><button class="btn btn-danger" data-toggle="modal" data-target="#booksRemoveModal">Remove</button></td>
         <td><button class="btn btn-success" (click)="retrieveLibrarySettings()" data-toggle="modal" data-target="#booksIssueModal" ><i class="fa fa-minus-circle fa-fw fa-lg" aria-hidden="true"></i>Issue Book</button></td>
       </tr>                       
                          
@@ -84,7 +84,8 @@
                   <div class="col-4">
                     <br>
                       <select class="dropdown-primary form-control" name="subjectCategory" required ngModel >
-                       <option *ngFor="let sub of subject" [value]="sub" >
+                        <option value="Study Material" selected disabled>Study Material</option>
+                        <option *ngFor="let sub of subject" [value]="sub" >
                             {{sub}}
                        </option>
                       </select>
@@ -235,3 +236,33 @@
         </div>
       </div>
     </div>
+
+
+
+
+
+
+
+    <div class="modal fade" id="booksEditModal" tabindex="-1" role="dialog" aria-labelledby="booksEditModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="booksEditModalLabel">Update Book Info</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+             <form  >
+                <div class="form-row" *ngFor="let book of bookById"> <br/>
+                    <div class="col-4">
+                      <input type="text" class="form-control" id="title"  placeholder="Enter Book Number" name="title" [(ngModel)]="book.title">
+                    </div> 
+                </div>                        
+            </form>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
