@@ -1,8 +1,8 @@
 <div class="d-flex justify-content-between">
    
-  <button class="btn btn-success" data-toggle="modal" data-target="#thesisAddModal" (click)="initForm()" ><i class="fa fa-plus-circle fa-fw fa-lg" aria-hidden="true"></i>Add Thesis</button>
-  <button class="btn btn-success" data-toggle="modal" data-target="#thesisIssueModal" (click)="initForm()" ><i class="fa fa-minus-circle fa-fw fa-lg" aria-hidden="true"></i>Issue Thesis</button>
-  <button class="btn btn-success" data-toggle="modal" data-target="#thesisReturnModal" (click)="initForm()" ><i class="fa fa-plus-circle fa-fw fa-lg" aria-hidden="true"></i>Return Thesis</button>
+  <button class="btn btn-success" data-toggle="modal" data-target="#thesisAddModal" ><i class="fa fa-plus-circle fa-fw fa-lg" aria-hidden="true"></i>Add Thesis</button>
+ 
+  <button class="btn btn-success" data-toggle="modal" data-target="#thesisReturnModal"  ><i class="fa fa-plus-circle fa-fw fa-lg" aria-hidden="true"></i>Return Thesis</button>
  
  
   
@@ -19,18 +19,25 @@
       <th >Title</th>
       <th >Submitted by </th>
   
-      <th >Guide </th>
+      <th >Guided by </th>
+      <th> course</th>
   
-      
+      <th></th>
   
       <th ></th>
   </tr>     
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+  <tr *ngFor= 'let thesises of thesis'>
+    <td>1</td>
+    <td>{{thesises.title}}</td>
+    <td>{{thesises.submittedBy}}</td>
+    <td>{{thesises.guidedBy}}</td>
+    <td>{{thesises.course}}</td>
+    <td><button class="btn btn-primary">Edit</button></td>
+        <td><button class="btn btn-danger">Remove</button></td>
+    <td><button class="btn btn-success" data-toggle="modal" data-target="#thesisIssueModal"  ><i class="fa fa-minus-circle fa-fw fa-lg" aria-hidden="true"></i>Issue Thesis</button></td>
+    
+    
+
   </tr>                       
  </table>
 
@@ -41,58 +48,55 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="thesisEditModalLabel">Add Thesis</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
+                  <span aria-hidden="true">&times</span>
                 </button>
               </div>
               <div class="modal-body">
-                  <form>
+                  <form (ngSubmit) ="onSubmit(f)" #f="ngForm">
+                    <div ngModelGroup="addThesisData">
                       <div class="form-row">
                           <div class="col">
                             <label>Title<span class="mandatory">*</span></label>
-                            <input type="text" class="form-control" name="title" ngModel>
+                            <input type="text" required class="form-control" id="name" name="title" ngModel>
                           </div>
                           <div class="col">
-                            <label>Year_For_Sort<span class="mandatory">*</span></label>
-                            <input type="text" class="form-control" name="Year_For_Sort" ngModel>
+                            <label>Year<span class="mandatory">*</span></label>
+                            <input type="text" required class="form-control" name="Year_For_Sort" ngModel>
                           </div>
                       </div>
                       <br/>
                       <div class="form-row">
-                          <div class="col-4">
-                            <label>Year</label>
-                            <input type="text" class="form-control" name="year" ngModel>
-                          </div>
+                         
                           <div class="col-4">
                             <label>Submitted By<span class="mandatory">*</span></label>
-                            <input type="textarea" class="form-control" name="submittedBy" ngModel>
+                            <input type="textarea" required class="form-control" name="submittedBy" ngModel>
                           </div>
                           <div class="col-4">
                             <label>Guided By<span class="mandatory">*</span></label>
-                            <input type="textarea" class="form-control" name="guidedBy" ngModel>
+                            <input type="textarea" required class="form-control" name="guidedBy" ngModel>
+                          </div>
+                          <div class="col-4">
+                            <label>course<span class="mandatory">*</span></label>
+                            <input type="text" required class="form-control" name="course" ngModel>
                           </div>
                         </div><br/>
                         <div class="form-row">
-                            <div class="col">
+                            <div class="col-4">
                               <label>cd status</label>
                               <input type="text" class="form-control" name="cdStatus" ngModel>
                             </div>
-                            <div class="col">
-                              <label>course<span class="mandatory">*</span></label>
-                              <input type="text" class="form-control" name="course" ngModel>
-                            </div>
-                            <div class="col">
+                           
+                            <div class="col-8">
                               <label>Remarks</label>
                               <input type="text" class="form-control" name="remarks" ngModel>
                             </div>
                           </div><br/>
-                          <div *ngIf="edit" class="d-flex justify-content-center mt-3">
-                              <button type="reset" class="btn btn-danger mr-3 btnWidth">Reset</button>
-                              <button type="submit" class="btn btn-success btnWidth" (click)="editBook(bookForm)">Update</button>
-                            </div>
-                            <div *ngIf="!edit" class="d-flex justify-content-center mt-3">
-                                <button type="reset" class="btn btn-primary mr-3 btnWidth">Reset</button>
-                                <button type="submit" class="btn btn-success btnWidth" (click)="addBook(bookForm)">Add</button>
+                         
+                            <div  class="d-flex justify-content-center mt-3">
+                                
+                                <button type="submit" class="btn btn-success btnWidth" [disabled] = '!f.valid'>Add</button>
                               </div>
+                            </div>
                     </form>
               </div>
           </div>
@@ -133,14 +137,11 @@
                   <input type="text" class="form-control" name="authorName" ngModel>
                 </div>
               </div><br/>
-              <div *ngIf="edit" class="d-flex justify-content-center mt-3">
-                <button type="reset" class="btn btn-primary mr-3 btnWidth">Reset</button>
+              <div  class="d-flex justify-content-center mt-3">
+                
                 <button type="submit" class="btn btn-success btnWidth" >Update</button>
               </div>
-              <div *ngIf="!edit" class="d-flex justify-content-center mt-3">
-                <button type="reset" class="btn btn-primary mr-3 btnWidth">Reset</button>
-                <button type="submit" class="btn btn-success btnWidth" >Issue</button>
-              </div>
+              
             </form>
           </div>
           
@@ -157,6 +158,8 @@
               </button>
             </div>
             <div class="modal-body">
+                <div class="modal-content">
+                  <div class="modal-header">
                <form  >
                   <div class="form-row"> 
                       <div class="col-4">

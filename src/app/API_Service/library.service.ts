@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { addBookData, subjectCategory, allBooks, librarySettings } from '../myduties/library/bookDataObj';
+import { allThesis, addThesisData } from '../myduties/library/thesisDataObj'; 
+
+
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -33,4 +36,13 @@ export class LibraryService {
   getLibrarySettings():Observable<librarySettings[]>{
     return this.http.get<librarySettings[]>('http://localhost:8083/library/getLibrarySettings');
   }
-}
+  getAllThesis():Observable<allThesis[]>{ 
+    return this.http.get<allThesis[]> ('http://localhost:8083/library/getAllThesis');
+
+  }
+  addThesisDetails(Thesis:addThesisData){
+    return this.http.post('http://localhost:8083/library/addThesis',Thesis,this.httpOptions);
+  }
+
+  }
+
