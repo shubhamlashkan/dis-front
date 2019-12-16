@@ -2,23 +2,7 @@
   <div class = "row">
 
       <h4 class="col-6 text-primary" >Department Library</h4>
-      <div class="col-lg-3">
-          <select class="mdb-select md-form colorful-select dropdown-primary" style="float: right">
-            <option  value="" disabled selected>Search By</option>
-            <option  value="1">Title</option>
-            <option  value="2">Author</option>
-            <option  value="3">Book no</option>
-          </select>
-        </div>
-
-      <div class="col-lg-3">
-          <ul class="searchbox float-right">
-            <li class="">
-              <input class="form-control mr-sm-2 searchbox-width" type="search" placeholder="Search" aria-label="Search">
-              <i class="fa fa-search" style="position:absolute;top:11px;" aria-hidden="true"></i>
-            </li>
-          </ul>
-        </div>
+      
   </div>
   <hr>
   <div class="row">
@@ -94,8 +78,8 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="changeSettiingsModalLabel">Issue Book</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <h5 class="modal-title" id="changeSettiingsModalLabel">Update Settings</h5>
+          <button type="button" (click)="ngOnInit()" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -105,27 +89,36 @@
 
             <div id="update-settings" ngModelGroup="librarySettings">
                 <div class="form-row" *ngFor="let setting of setting">
-                    <div class="col-3">
+                    <div class="col-4">
                         <label for="noOfBooksAllowed">Max. Books Allowed</label>
-                        <input type="text" required id="noOfBooksAllowed" class="form-control" name="noOfBooksAllowed"  [(ngModel)]="setting.noOfBooksAllowed" (ngModelChange)="change()">
+                        <input type="text" required id="noOfBooksAllowed" class="form-control" name="noOfBooksAllowed"  [(ngModel)]="setting.noOfBooksAllowed" >
                     </div> 
-                    <div class="col-3">
+                    <div class="col-4">
                         <label for="penaltyPerDay">Penalty Per Day</label>
-                        <input type="text" required id="penaltyPerDay" class="form-control" name="penaltyPerDay" [(ngModel)]="setting.penaltyPerDay" (ngModelChange)="change()">
+                        <input type="text" required id="penaltyPerDay" class="form-control" name="penaltyPerDay" [(ngModel)]="setting.penaltyPerDay" >
                     </div> 
                     <div class="col-3">
                         <label for="returnDeadlineDays">Return Days</label>
-                        <input type="text" required id="returnDeadlineDays" class="form-control" name="returnDeadlineDays" [(ngModel)]="setting.returnDeadlineDays" (ngModelChange)="change()">
+                        <input type="text" required id="returnDeadlineDays" class="form-control" name="returnDeadlineDays" [(ngModel)]="setting.returnDeadlineDays" >
                     </div>  
-                    <div class="col-3">
-                        <input type="hidden" class="form-control" id="id" name="id" [(ngModel)]="setting.id" (ngModelChange)="change()">
+                    <div class="col-1">
+                        <input type="hidden" class="form-control" id="id" name="id" [(ngModel)]="setting.id" >
                       </div>
                   </div>
                   <br>
                   <div class="form-row">
-                      <div class="col-">
-                          <button type="submit"  class="btn btn-primary btnWidth" [disabled]="!f.valid" >Change Settings</button>
+                    <div class="col-3">
+
+                    </div>
+                    <div class="col-3">
+                        <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth" data-dismiss="modal">Cancel</button>
+                    </div>
+                      <div class="col-3">
+                          <button type="submit" (click)="isButtonClicked()"  class="btn btn-primary btnWidth" [disabled]="!f.valid" >Change Settings</button>
                       </div>  
+                      <div class="col-3">
+
+                        </div>
                   </div>
             </div>
             <br/>
