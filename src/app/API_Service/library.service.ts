@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { addBookData, subjectCategory, allBooks, librarySettings, getBookByBookId} from '../myduties/library/bookDataObj';
+import { addBookData, subjectCategory, allBooks, librarySettings, getBookByBookId, updateBookData} from '../myduties/library/bookDataObj';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -42,5 +42,12 @@ export class LibraryService {
 
   getBookByBookId(bookId:string):Observable<getBookByBookId[]>{
     return this.http.get<getBookByBookId[]>(`${this.apiUrl}/getBookByBookId/${bookId}`);
+  }
+  updateBookByBookId(bookId:string,updatebook:updateBookData){
+    return this.http.put(`${this.apiUrl}/updateBook/${bookId}`,updatebook,this.httpOptions);
+  }
+
+  removeBookByBookId(bookId:string){
+    return this.http.delete(`${this.apiUrl}/deleteBook/${bookId}`,{responseType: 'text'});
   }
 }

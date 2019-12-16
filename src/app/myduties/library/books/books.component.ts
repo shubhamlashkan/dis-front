@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { LibraryService } from 'src/app/API_Service/library.service';
-import { addBookData, addBookResponse, subjectCategory, allBooks, librarySettings, getBookByBookId } from '../bookDataObj';
+import { addBookData, addBookResponse, subjectCategory, allBooks, librarySettings, getBookByBookId, updateBookData, updateBookResponse, removeBookData } from '../bookDataObj';
 
 @Component({
   selector: 'app-books',
@@ -9,24 +9,41 @@ import { addBookData, addBookResponse, subjectCategory, allBooks, librarySetting
   styleUrls: ['./books.component.scss']
 })
 export class BooksComponent implements OnInit {
- @ViewChild('f') addBookForm:NgForm;
+  @ViewChild('f') addBookForm:NgForm;
+  @ViewChild('g') updateBookForm:NgForm;
+  @ViewChild('h') removeBookForm:NgForm;
+  @ViewChild('i') checkLimitForm:NgForm;
 
-
+  removeButton:boolean=false;
+  updateButton:boolean=false;
   showId:boolean=false;
   Book:addBookData;
   responseAdd:addBookResponse;
   data:string;  
+  msg:string;
   books:allBooks[]=[];
   bookById:getBookByBookId[]=[];
   private subject:subjectCategory[]=[];
   private setting:librarySettings[]=[];
-  
+  updatedata:updateBookData;
+  responseUpdate:updateBookResponse;
+  removeData:removeBookData;
+  removeRes:string;
+
+  // selectedAttribute:attributeSearch = new attributeSearch(2,'author');
+  // attributes=[
+  //   new attributeSearch(1,'Title'),
+  //   new attributeSearch(2,'Author'),
+  //   new attributeSearch(3,'BookId')
+  // ];
+
   constructor(private service:LibraryService) { }
 
   ngOnInit() {
 
     this.showId=false;
-
+    this.updateButton=false;
+    this.removeButton=false;
    this.service.getSubjectCatergoryAcronymList().subscribe((res:subjectCategory[])=>{
      this.subject = res;
    });
@@ -66,6 +83,7 @@ export class BooksComponent implements OnInit {
       this.responseAdd = res;
      // console.log(this.responseAdd.bookId);
       this.data =  this.responseAdd.message+ ' '+ this.responseAdd.bookId;
+      this.showId=true;
     });
     this.addBookForm.resetForm();
     
@@ -79,10 +97,16 @@ export class BooksComponent implements OnInit {
     });
   }
 
-  onButtonClicked()
+  onBookAdded()
   {
-    this.showId=true;
+    this.showId=true;    
   }
+
+  onUpdateButtonClick()
+  {
+    this.updateButton=true;
+  }
+
 
   getBookByBookId(bookId:string)
   {
@@ -92,5 +116,65 @@ export class BooksComponent implements OnInit {
     });
   }
 
+  update()
+  {
+    if(this.updateButton)
+    {
+      this.updatedata = new updateBookData(this.updateBookForm.value.updateBookData.authorName,
+                                          this.updateBookForm.value.updateBookData.edition,
+                                          this.updateBookForm.value.updateBookData.isbnNo,
+                                          this.updateBookForm.value.updateBookData.noOfPages,
+                                          this.updateBookForm.value.updateBookData.price,
+                                          this.updateBookForm.value.updateBookData.publisher,
+                                          this.updateBookForm.value.updateBookData.purchasedOn,
+                                          this.updateBookForm.value.updateBookData.remarks,
+                                          this.updateBookForm.value.updateBookData.subjectCategory,
+                                          this.updateBookForm.value.updateBookData.title,
+                                          this.updateBookForm.value.updateBookData.publicationYear);
+        console.log(this.updatedata);
+        this.service.updateBookByBookId(this.updateBookForm.value.updateBookData.bookId,this.updatedata).subscribe((res:updateBookResponse)=>{
+          this.responseUpdate = res;
+          this.msg = this.responseUpdate.message + this.responseUpdate.bookId;
+          console.log(this.responseUpdate);
+        });
+        this.updateButton=false;
+    }
+  }
+
+  remove(){
+    console.log(this.removeBookForm.value.removeBookData.bookId);
+    this.service.removeBookByBookId(this.removeBookForm.value.removeBookData.bookId).subscribe((res:string)=>{
+      this.removeRes = res;
+      console.log(res);
+      this.removeButton=true;
+    });
+  }
+
+
+  checkLimit()
+  {
+    console.log(this.checkLimitForm.value.checkLimitData.enrollmentno);
+  }
+
+  // onSelect(selectedAttributeId)
+  // {
+  //   this.selectedAttribute = null;
+  //   for(var i=0;i<this.attributes.length;i++)
+  //   {
+  //     if(this.attributes[i].id == selectedAttributeId){
+  //       this.selectedAttribute = this.attributes[i];
+  //       console.log(this.selectedAttribute);
+  //     }
+  //   }
+  // }
+
 }
 
+
+// export class attributeSearch{
+
+// 	constructor(public id: number, public attrib:string) {
+  
+//   }
+  
+//}
