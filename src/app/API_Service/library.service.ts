@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { addBookData, subjectCategory, allBooks, librarySettings, getBookByBookId, updateBookData} from '../myduties/library/bookDataObj';
 import { Observable } from 'rxjs';
-import { allThesis, addThesisData } from '../myduties/library/thesisDataObj';
+import { allThesis, addThesisData, getThesisByThesisId, updateThesisData } from '../myduties/library/thesisDataObj';
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +52,7 @@ export class LibraryService {
     return this.http.post('http://localhost:8083/library/addThesis',Thesis,this.httpOptions);
   }
 
-  
+
 
   updateBookByBookId(bookId:string,updatebook:updateBookData){
     return this.http.put(`${this.apiUrl}/updateBook/${bookId}`,updatebook,this.httpOptions);
@@ -60,5 +60,16 @@ export class LibraryService {
 
   removeBookByBookId(bookId:string){
     return this.http.delete(`${this.apiUrl}/deleteBook/${bookId}`,{responseType: 'text'});
+  }
+  getThesisByThesisId(thesisId:number): Observable<getThesisByThesisId[]>{
+    return this.http.get<getThesisByThesisId[]>(`${this.apiUrl}/getThesisByThesisId/${thesisId}`);
+  }
+
+  updateThesisByThesisId(thesisId:number,updatethesis:updateThesisData){
+    return this.http.put(`${this.apiUrl}/updateThesis/${thesisId}`,updatethesis,this.httpOptions);
+
+  }
+  removeThesisByThesisId(thesisId:number){
+    return this.http.delete(`${this.apiUrl}/deleteThesis/${thesisId}`,{responseType: 'text'});
   }
 }

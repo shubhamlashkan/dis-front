@@ -6,12 +6,11 @@
  
  
   
-
 </div>
 <br>
 <table class="table table-striped">
 
-  <tr>
+<tr>
     
       <th >S. No.</th>
     
@@ -25,16 +24,20 @@
       <th></th>
   
       <th ></th>
+      <th></th>
   </tr>     
-  <tr *ngFor= 'let thesises of thesis'>
-    <td>1</td>
+  <tr *ngFor= 'let thesises of thesis;let i = index'>
+    <td>{{i+1}}</td>
     <td>{{thesises.title}}</td>
     <td>{{thesises.submittedBy}}</td>
     <td>{{thesises.guidedBy}}</td>
     <td>{{thesises.course}}</td>
-    <td><button class="btn btn-primary">Edit</button></td>
-        <td><button class="btn btn-danger">Remove</button></td>
-    <td><button class="btn btn-success" data-toggle="modal" data-target="#thesisIssueModal"  ><i class="fa fa-minus-circle fa-fw fa-lg" aria-hidden="true"></i>Issue Thesis</button></td>
+
+        <td><button class="btn btn-primary" (click)="getThesisByThesisId(thesises.thesisId)" data-toggle="modal" data-target="#thesisEditModal">Edit</button></td>
+        <td><button class="btn btn-danger" (click)="getThesisByThesisId(thesises.thesisId)" data-toggle="modal" data-target="#thesisRemoveModal">Remove</button></td>
+    
+     
+    <td><button class="btn btn-success" data-toggle="modal" data-target="#"><i class="fa fa-minus-circle fa-fw fa-lg" aria-hidden="true"></i>Issue Thesis</button></td>
     
     
 
@@ -42,18 +45,21 @@
  </table>
 
 
-<div class="modal fade" id="thesisAddModal" tabindex="-1" role="dialog" aria-labelledby="thesisEditModalLabel" aria-hidden="true">
+<div class="modal fade" id="thesisAddModal" tabindex="-1" role="dialog" aria-labelledby="thesisAddModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="thesisEditModalLabel">Add Thesis</h5>
+                <h5 class="modal-title" id="thesisAddModalLabel">Add Thesis</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times</span>
                 </button>
               </div>
               <div class="modal-body">
+                <div *ngIf="ShowId" class="alert alert-primary" role="alert">
+                  {{data}}
+                </div>
                   <form (ngSubmit) ="onSubmit(f)" #f="ngForm">
-                    <div ngModelGroup="addThesisData">
+                    <div *ngIf= "!ShowId" ngModelGroup="addThesisData" id = "add-thesis-records">
                       <div class="form-row">
                           <div class="col">
                             <label>Title<span class="mandatory">*</span></label>
@@ -102,52 +108,10 @@
           </div>
       </div>
   </div>
-  <div class="modal fade" id="thesisIssueModal" tabindex="-1" role="dialog" aria-labelledby="thesisIssueModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="thesisIssueModalLabel">Issue Book</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form  >
-              <div class="form-row">
-                <div class="col-4">
-                  
-                  <input type="text" class="form-control"  required placeholder="Enter Enrollment No. or Faculty Name" name="enrollmentno" ngModel>
-                </div> 
-                
-                <div class="col-">
-                    <button type="submit" class="btn btn-success btnWidth" >Check Limit</button>
+
+
+                                                    
   
-                </div>
-                
-                
-    
-              </div><br/>
-              <div class="form-row">
-                <div class="col-4">
-                  <label>Title</label>
-                  <input type="text" class="form-control" name="title" ngModel>
-                </div>
-                <div class="col-4">
-                  <label>Submitted By</label>
-                  <input type="text" class="form-control" name="authorName" ngModel>
-                </div>
-              </div><br/>
-              <div  class="d-flex justify-content-center mt-3">
-                
-                <button type="submit" class="btn btn-success btnWidth" >Update</button>
-              </div>
-              
-            </form>
-          </div>
-          
-        </div>
-      </div>
-    </div>
     <div class="modal fade" id="thesisReturnModal" tabindex="-1" role="dialog" aria-labelledby="thesisReturnModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
@@ -158,9 +122,7 @@
               </button>
             </div>
             <div class="modal-body">
-                <div class="modal-content">
-                  <div class="modal-header">
-               <form  >
+               <form>
                   <div class="form-row"> 
                       <div class="col-4">
                         <input type="text" class="form-control" placeholder="Enter Enrollment No. or faculty name" name="enrollmentno" ngModel>
@@ -198,4 +160,161 @@
             
           </div>
         </div>
+      </div>
+    
+      
+      <div class="modal fade" id="thesisEditModal" tabindex="-1" role="dialog" aria-labelledby="thesisEditModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="thesisEditModalLabel">Update Thesis info</h5>
+                    <button type="button" (click)="ngOnInit()" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    
+                      <form (ngSubmit)="update(g)" #g="ngForm">
+                        <div id = 'update-thesis' ngModelGroup = "updateThesisData">
+                          <div *ngFor="let thesis of thesisById">
+                          <div class="form-row">
+                              <div class="col">
+                                <label>Title<span class="mandatory">*</span></label>
+                                <input type="text" required class="form-control" id="title" name="title" [(ngModel)]="thesis.title">
+                              </div>
+                              <div class="col">
+                                <label>Year<span class="mandatory">*</span></label>
+                                <input type="text" required class="form-control" name="Year" [(ngModel)]="thesis.year">
+                              </div>
+                          </div>
+                          <br/>
+                          <div class="form-row">
+                             
+                              <div class="col-4">
+                                <label>Submitted By<span class="mandatory">*</span></label>
+                                <input type="textarea" required class="form-control" name="submittedBy" [(ngModel)]="thesis.submittedBy">
+                              </div>
+                              <div class="col-4">
+                                <label>Guided By<span class="mandatory">*</span></label>
+                                ￼
+                                   <input type="textarea" required class="form-control" name="guidedBy" [(ngModel)]="thesis.guidedBy">
+                              </div>
+                              <div class="col-4">
+                                <label>course<span class="mandatory">*</span></label>
+                                <input type="text" required class="form-control" name="course" [(ngModel)]="thesis.course">
+                              </div>
+                            </div><br/>
+                            <div class="form-row">
+                                <div class="col-4">
+                                  <label>cd status</label>
+                                  <input type="text" class="form-control" name="cdStatus" [(ngModel)]="thesis.cdStatus">
+                                </div>
+                               
+                                <div class="col-8">
+                                  <label>Remarks</label>
+                                  <input type="text" class="form-control" name="remarks" [(ngModel)]="thesis.remarks">
+                                </div>
+                              </div><br/>
+                             <div class = "form-row">
+
+                              <div class col-4>
+                                <input type="text" name="thesisId" id="thesisId" [(ngModel)]="thesis.thesisId">
+                              </div>
+                              
+                                <div class col-4>
+                                    
+                                    <button type="submit" (click)="onUpdateButtonClick()" class="btn btn-success btnWidth" >Update</button>
+                                  </div>
+                                  </div>
+                                  </div>
+                               </div>
+                        </form>
+                  
+              </div>
+          </div>
+      </div>
+      </div>
+
+
+      <div class="modal fade" id="thesisRemoveModal" tabindex="-1" role="dialog" aria-labelledby="thesisRemoveModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="thesisRemoveModalLabel">Remove Thesis</h5>
+                    <button type="button" (click)="ngOnInit()" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div *ngIf="removeButton" class="alert alert-primary" role="alert">
+                      {{removeRes}}
+                    </div>
+                    
+                      <form (ngSubmit)="remove(h)" #h="ngForm">
+                        <div *ngIf="!removeButton" id = 'remove-thesis' ngModelGroup = "removeThesisData">
+                          <div *ngFor="let thesis of thesisById">
+                          <div class="form-row">
+                              <div class="col">
+                                <label>Title<span class="mandatory">*</span></label>
+                                <input type="text" required class="form-control" id="title" disabled name="title"  [(ngModel)]="thesis.title">
+                              </div>
+                              <div class="col">
+                                <label>Year<span class="mandatory">*</span></label>
+                                <input type="text" required class="form-control" disabled name="Year" [(ngModel)]="thesis.year">
+                              </div>
+                          </div>
+                          <br/>
+                          <div class="form-row">
+                             
+                              <div class="col-4">
+                                <label>Submitted By<span class="mandatory">*</span></label>
+                                <input type="textarea" required class="form-control"disabled name="submittedBy" [(ngModel)]="thesis.submittedBy">
+                              </div>
+                              <div class="col-4">
+                                <label>Guided By<span class="mandatory">*</span></label>
+                                   <input type="textarea" required class="form-control" disabled name="guidedBy" [(ngModel)]="thesis.guidedBy">
+                              </div>
+                              <div class="col-4">
+                                <label>course<span class="mandatory">*</span></label>
+                                <input type="text" required class="form-control" disabled name="course" [(ngModel)]="thesis.course">
+                              </div>
+                            </div><br/>
+                            <div class="form-row">
+                                <div class="col-4">
+                                  <label>cd status</label>
+                                  <input type="text" class="form-control" disabled name="cdStatus" [(ngModel)]="thesis.cdStatus">
+                                </div>
+                               
+                                <div class="col-8">
+                                  <label>Remarks</label>
+                                  <input type="text" class="form-control" disabled name="remarks" [(ngModel)]="thesis.remarks">
+                                </div>
+                              </div><br/>
+                              <div class="form-row">
+                                <div class="col-7">
+                                    <h4>Are you sure you want to remove book ?</h4>
+                                </div>
+                                
+                             <div class="col-2">
+                                  <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth" data-dismiss="modal">Cancel</button>
+                              </div>
+                              <div class="col-2">
+                                  <button type="submit"  class="btn btn-primary btnWidth">Remove </button>
+                              </div>  
+                              <div class="col-1">
+                                  <input type="hidden" name="thesisId"  id="thesisId" [(ngModel)]="thesis.thesisId">
+                              
+                    
+                                </div>
+                            </div> 
+                              
+                              
+                              
+                                  </div>
+                               </div>
+                        </form>
+                  
+              </div>
+          </div>
+      </div>
       </div>
