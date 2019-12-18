@@ -1,53 +1,68 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { addBookData, subjectCategory, allBooks, librarySettings, getBookByBookId, updateBookData} from '../myduties/library/bookDataObj';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { addBookData, subjectCategory, allBooks, librarySettings, getBookByBookId, updateBookData, issueBookData, checkPenaltyResponse } from '../myduties/library/bookDataObj';
+import { Observable , throwError} from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LibraryService {
 
-  constructor(private http:HttpClient) { 
-    
+  constructor(private http: HttpClient) {
+
   }
 
-  apiUrl:string = 'http://localhost:8083/library';
+  apiUrl: string = 'http://localhost:8083/library';
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type':'application/json',
-      'Authorization':'my-auth-token',
+      'Content-Type': 'application/json',
+      'Authorization': 'my-auth-token',
       'Accept': 'application/json'
     })
   };
 
-  addBookDetails(Book:addBookData){
-  return this.http.post(this.apiUrl+'/addBook',Book,this.httpOptions);
+  addBookDetails(Book: addBookData) {
+    return this.http.post(this.apiUrl + '/addBook', Book, this.httpOptions);
   }
 
-  getSubjectCatergoryAcronymList():Observable<subjectCategory[]>{
-    return this.http.get<subjectCategory[]>(this.apiUrl+'/getSubjectCatergoryAcronymList');
+  getSubjectCatergoryAcronymList(): Observable<subjectCategory[]> {
+    return this.http.get<subjectCategory[]>(this.apiUrl + '/getSubjectCatergoryAcronymList');
   }
 
-  getAllBooks():Observable<allBooks[]>{
-    return this.http.get<allBooks[]>(this.apiUrl+'/getAllBooks');
+  getAllBooks(): Observable<allBooks[]> {
+    return this.http.get<allBooks[]>(this.apiUrl + '/getAllBooks');
   }
 
-  getLibrarySettings():Observable<librarySettings[]>{
-    return this.http.get<librarySettings[]>(this.apiUrl+'/getLibrarySettings');
+  getLibrarySettings(): Observable<librarySettings[]> {
+    return this.http.get<librarySettings[]>(this.apiUrl + '/getLibrarySettings');
   }
-  updateLibrarySettings(settings:librarySettings){
-    return this.http.put(this.apiUrl+'/updateLibrarySettings',settings,{responseType: 'text'});
+  updateLibrarySettings(settings: librarySettings) {
+    return this.http.put(this.apiUrl + '/updateLibrarySettings', settings, { responseType: 'text' });
   }
 
-  getBookByBookId(bookId:string):Observable<getBookByBookId[]>{
+  getBookByBookId(bookId: string): Observable<getBookByBookId[]> {
     return this.http.get<getBookByBookId[]>(`${this.apiUrl}/getBookByBookId/${bookId}`);
   }
-  updateBookByBookId(bookId:string,updatebook:updateBookData){
-    return this.http.put(`${this.apiUrl}/updateBook/${bookId}`,updatebook,this.httpOptions);
+  updateBookByBookId(bookId: string, updatebook: updateBookData) {
+    return this.http.put(`${this.apiUrl}/updateBook/${bookId}`, updatebook, this.httpOptions);
   }
 
-  removeBookByBookId(bookId:string){
-    return this.http.delete(`${this.apiUrl}/deleteBook/${bookId}`,{responseType: 'text'});
+  removeBookByBookId(bookId: string) {
+    return this.http.delete(`${this.apiUrl}/deleteBook/${bookId}`, { responseType: 'text' });
   }
+  getNoOfIssues(enrollment: string): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/getNoOfIssues/${enrollment}`);
+  }
+
+  issueBook(issueBook: issueBookData) {
+    return this.http.put(`${this.apiUrl}/issue`, issueBook, { responseType: 'text' })
+  }
+
+  getIssuedBookInfo(bookId: string): Observable<checkPenaltyResponse[]> {
+    return this.http.get<checkPenaltyResponse[]>(`${this.apiUrl}/getIssuedBookInfo/${bookId}`);
+  }
+
+  
+
 }
