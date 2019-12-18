@@ -1,4 +1,4 @@
-export class addBookData{
+export class addBookData {
 
   private authorName: string;
   private edition: string;
@@ -10,56 +10,56 @@ export class addBookData{
   private remarks: string;
   private subjectCategory: string;
   private title: string;
-  private yearOfPublication: string; 
+  private yearOfPublication: string;
 
 
-    constructor($authorName: string, $edition: string, $isbn: string, $noOfPages: number, $price: number, $publisherAndPlace: string, $purchaseDate: string, $remarks: string, $subjectCategory: string, $title: string, $yearOfPublication: string) {
-        this.authorName = $authorName;
-        this.edition = $edition;
-        this.isbn = $isbn;
-        this.noOfPages = $noOfPages;
-        this.price = $price;
-        this.publisherAndPlace = $publisherAndPlace;
-        this.purchaseDate = $purchaseDate;
-        this.remarks = $remarks;
-        this.subjectCategory = $subjectCategory;
-        this.title = $title;
-        this.yearOfPublication = $yearOfPublication;
-    }
-    
+  constructor($authorName: string, $edition: string, $isbn: string, $noOfPages: number, $price: number, $publisherAndPlace: string, $purchaseDate: string, $remarks: string, $subjectCategory: string, $title: string, $yearOfPublication: string) {
+    this.authorName = $authorName;
+    this.edition = $edition;
+    this.isbn = $isbn;
+    this.noOfPages = $noOfPages;
+    this.price = $price;
+    this.publisherAndPlace = $publisherAndPlace;
+    this.purchaseDate = $purchaseDate;
+    this.remarks = $remarks;
+    this.subjectCategory = $subjectCategory;
+    this.title = $title;
+    this.yearOfPublication = $yearOfPublication;
+  }
 
-       
+
+
 }
 
-export class librarySettings{
-  
+export class librarySettings {
+
   private id: string;
   private noOfBooksAllowed: number;
   private penaltyPerDay: number;
   private returnDeadlineDays: number;
 
-	constructor($id: string, $noOfBooksAllowed: number, $penaltyPerDay: number, $returnDeadlineDays: number) {
-		this.id = $id;
-		this.noOfBooksAllowed = $noOfBooksAllowed;
-		this.penaltyPerDay = $penaltyPerDay;
-		this.returnDeadlineDays = $returnDeadlineDays;
-	}
+  constructor($id: string, $noOfBooksAllowed: number, $penaltyPerDay: number, $returnDeadlineDays: number) {
+    this.id = $id;
+    this.noOfBooksAllowed = $noOfBooksAllowed;
+    this.penaltyPerDay = $penaltyPerDay;
+    this.returnDeadlineDays = $returnDeadlineDays;
+  }
 
 }
 
 
-export interface addBookResponse{
-    bookId: string;
+export interface addBookResponse {
+  bookId: string;
   message: string;
 }
 
-export interface subjectCategory{
-  
+export interface subjectCategory {
+
 }
 
 
-export interface allBooks{
-  bookId:string
+export interface allBooks {
+  bookId: string
   authorName: string;
   edition: string
   status: string
@@ -75,8 +75,8 @@ export interface allBooks{
   yearOfPublication: string;
 }
 
-export interface getBookByBookId{ 
-  bookId:string
+export interface getBookByBookId {
+  bookId: string
   authorName: string;
   edition: string
   status: string
@@ -107,34 +107,58 @@ export class updateBookData {
   private title: string;
   private yearOfPublication: string;
 
-	constructor($authorName: string, $edition: string, $isbn: string, $noOfPages: number, $price: number, $publisherAndPlace: string, $purchaseDate: string, $remarks: string, $subjectCategory: string, $title: string, $yearOfPublication: string) {
-		this.authorName = $authorName;
-		this.edition = $edition;
-		this.isbn = $isbn;
-		this.noOfPages = $noOfPages;
-		this.price = $price;
-		this.publisherAndPlace = $publisherAndPlace;
-		this.purchaseDate = $purchaseDate;
-		this.remarks = $remarks;
-		this.subjectCategory = $subjectCategory;
-		this.title = $title;
-		this.yearOfPublication = $yearOfPublication;
-	}
+  constructor($authorName: string, $edition: string, $isbn: string, $noOfPages: number, $price: number, $publisherAndPlace: string, $purchaseDate: string, $remarks: string, $subjectCategory: string, $title: string, $yearOfPublication: string) {
+    this.authorName = $authorName;
+    this.edition = $edition;
+    this.isbn = $isbn;
+    this.noOfPages = $noOfPages;
+    this.price = $price;
+    this.publisherAndPlace = $publisherAndPlace;
+    this.purchaseDate = $purchaseDate;
+    this.remarks = $remarks;
+    this.subjectCategory = $subjectCategory;
+    this.title = $title;
+    this.yearOfPublication = $yearOfPublication;
+  }
 
 }
 
-export interface updateBookResponse{
-        bookId: string;
-        message: string;
+export interface updateBookResponse {
+  bookId: string;
+  message: string;
 }
 
-export class removeBookData{
-   private bookId:string;
+export class removeBookData {
+  private bookId: string;
 
-	constructor($bookid: string) {
+  constructor($bookid: string) {
     this.bookId = $bookid;
   }
 
 }
 
+export class checkLimitData {
+  enrollment: string;
+}
 
+export class issueBookData {
+  private bookId: string;
+  private thesisId: string;
+  private username: string;
+
+  constructor($bookId: string, $thesisId: string, $username: string) {
+    this.bookId = $bookId;
+    this.thesisId = $thesisId;
+    this.username = $username;
+  }
+
+}
+
+export class checkPenaltyData {
+  bookId: string;
+}
+
+export interface checkPenaltyResponse {
+  penalty: string;
+  username: string;
+}

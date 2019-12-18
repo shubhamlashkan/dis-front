@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { LibraryService } from 'src/app/API_Service/library.service';
-import { librarySettings} from '../bookDataObj';
+import { librarySettings, allBooks} from '../bookDataObj';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -15,6 +15,8 @@ export class LibraryComponent implements OnInit {
   setting:librarySettings[]=[];
   settingsRes:string;
   updateSetting:librarySettings;
+  bookCount:number=0;
+  books: allBooks[] = [];
   constructor(private service:LibraryService) { }
 
   ngOnInit() {
@@ -22,6 +24,10 @@ export class LibraryComponent implements OnInit {
     this.service.getLibrarySettings().subscribe((libSettings:librarySettings[])=>{
       this.setting = libSettings;
       console.log(this.setting);
+    });
+    this.service.getAllBooks().subscribe((bookData: allBooks[]) => {
+      this.books = bookData;
+      this.bookCount = this.books.length;
     });
   }
 
