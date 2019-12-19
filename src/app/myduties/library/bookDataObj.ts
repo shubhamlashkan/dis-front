@@ -143,10 +143,10 @@ export class checkLimitData {
 
 export class issueBookData {
   private bookId: string;
-  private thesisId: string;
+  private thesisId: number;
   private username: string;
 
-  constructor($bookId: string, $thesisId: string, $username: string) {
+  constructor($bookId: string, $thesisId: number, $username: string) {
     this.bookId = $bookId;
     this.thesisId = $thesisId;
     this.username = $username;

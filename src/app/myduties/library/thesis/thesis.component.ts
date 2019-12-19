@@ -1,8 +1,8 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { allThesis, addThesisData, addThesisResponse, getThesisByThesisId, updateThesisData, updateThesisResponse, removeThesisData } from '../thesisDataObj';
+import { allThesis, addThesisData, addThesisResponse, getThesisByThesisId, updateThesisData, updateThesisResponse, removeThesisData, course, librarySettingsthesis, checkLimitDataThesis, checkPenaltyDataThesis, checkPenaltyResponseThesis } from '../thesisDataObj';
 import { LibraryService } from 'src/app/API_Service/library.service';
-import { updateBookData } from '../bookDataObj';
+import { updateBookData, librarySettings, issueBookData } from '../bookDataObj';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
@@ -14,6 +14,9 @@ export class ThesisComponent implements OnInit {
   @ViewChild('f') addThesisForm : NgForm;
   @ViewChild('g') updateThesisForm:NgForm;
   @ViewChild('h') removeThesisForm:NgForm;
+  @ViewChild('i') checkLimitForm:NgForm;
+  @ViewChild('j') issueThesisForm:NgForm;
+  @ViewChild('k') checkPenaltyForm: NgForm;
 
 
   removeButton:boolean=false;
@@ -29,7 +32,19 @@ export class ThesisComponent implements OnInit {
   msg:string;
   removeData:removeThesisData;
   removeRes:string;
- 
+  private course : course[] = [];
+  private setting: librarySettingsthesis[] = [];
+  checkIssue: checkLimitDataThesis;
+  currentIssue: number;
+thesisAllowed : string;
+  allowIssueRequest: boolean = false;
+  issueto: string;
+  issueData : issueBookData;
+  issueRes: string;
+  checkPenalty: checkPenaltyDataThesis;
+  error: string=null;
+  showPenalty: boolean = true;
+  penaltyRes: checkPenaltyResponseThesis[];
 
   constructor(private service : LibraryService) { }
 
@@ -39,6 +54,9 @@ export class ThesisComponent implements OnInit {
     this.removeButton=false;
     this.service.getAllThesis().subscribe((thesisData:allThesis[])=>{
       this.thesis = thesisData;
+    });
+    this.service.getCourse().subscribe((courseList:course[])=>{
+      this.course = courseList;
     })
     
   }
@@ -63,6 +81,14 @@ export class ThesisComponent implements OnInit {
 
   
   }
+  retrieveLibrarySettings() {
+    this.service.getLibrarySettingsthesis().subscribe((libSettings: librarySettingsthesis[]) => {
+      this.setting = libSettings;
+    
+    });
+  }
+
+
   onThesisAdded()
   {
     this.ShowId=true;    
@@ -107,5 +133,48 @@ export class ThesisComponent implements OnInit {
 
       });
  }
+
+
+ checkLimit() {
+  this.checkIssue = new checkLimitDataThesis();
+  this.checkIssue.enrollments = this.checkLimitForm.value.checkLimitData.enrollment;
+  console.log(this.checkIssue.enrollments);
+  this.service.getNoOfIssuesthesis(this.checkIssue.enrollments).subscribe((res: number) => {
+    this.currentIssue = res;
+    console.log(this.currentIssue);
+  //  console.log(this.checkLimitForm.value.checkLimitDataThesis.thesisAllowed);
+    if (this.currentIssue < 3) {
+      this.allowIssueRequest = true;
+      this.issueto = this.checkIssue.enrollments;
+    }
+    else {
+      this.allowIssueRequest = false;
+    }
+  });
+}
+issueThesis() {
+  this.issueData = new issueBookData(null,this.issueThesisForm.value.issueBookData.thesisId,
+    this.issueto);
+  console.log(this.issueData);
+  this.service.issueBook(this.issueData).subscribe((res: string) => {
+    this.issueRes = res;
+    if(this.issueRes.includes("http://localhost:8083/library/")){
+        console.log("Username not found");
+    }
+    else
+    {
+      console.log(this.issueRes);
+    }
+  });
+
+}
+getPenalty() {
+  this.checkPenalty = new checkPenaltyDataThesis();
+  this.checkPenalty.thesisId = this.checkPenaltyForm.value.checkPenaltyDataThesis.thesisId;
+  this.service.getIssueThesisInfo(this.checkPenalty.thesisId).subscribe((res: checkPenaltyResponseThesis[]) => {
+    this.penaltyRes = res;
+    console.log()
+  });
+}
 
 }

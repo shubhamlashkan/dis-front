@@ -71,12 +71,12 @@
     </td>
     <td>
       <div *ngIf="book.status=='Available'; then issue else notissue"></div>
-      <ng-template #issue>
+      <ng-template #notissue>
         <button class="btn btn-success" (click)="retrieveLibrarySettings(); getBookByBookId(book.bookId) "
           data-toggle="modal" data-target="#booksIssueModal"><i class="fa fa-minus-circle fa-fw fa-lg"
             aria-hidden="true"></i>Issue Book</button>
       </ng-template>
-      <ng-template #notissue>
+      <ng-template #issue>
         <button class="btn btn-success" (click)="retrieveLibrarySettings()" disabled data-toggle="modal"
           data-target="#booksIssueModal"><i class="fa fa-minus-circle fa-fw fa-lg" aria-hidden="true"></i>Issue
           Book</button>
@@ -86,8 +86,7 @@
 </table>
 
 
-<div class="modal fade" id="booksAddModal" tabindex="-1" role="dialog" aria-labelledby="booksAddModalLabel"
-  aria-hidden="true">
+<div class="modal fade" id="booksAddModal" tabindex="-1" role="dialog" aria-labelledby="booksAddModalLabel"aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -150,9 +149,10 @@
                 </select>
               </div>
 
-            </div><br /> updateBookByBookId(bookId: string, updatebook: updateBookData) {
-              return this.http.put(`${this.apiUrl}/updateBook/${bookId}`, updatebook, this.httpOptions);
-            }ate of Purchase</label>
+            </div><br /> 
+            <div class="form-row">
+              <div class="col-4">
+           <label for ="purchasedOn"> Date of Purchase</label>
                 <input type="date" id="purchasedOn" class="form-control" name="purchasedOn" ngModel>
               </div>
               <div class="col-4">
@@ -179,16 +179,13 @@
 </div>
 
 
-<div class="modal fade" id="booksIssueModal" tabindex="-1" role="dialog" aria-labelledby="booksIssueModalLabel"
-  aria-hidden="true">
+<div class="modal fade" id="booksIssueModal" tabindex="-1" role="dialog" aria-labelledby="booksIssueModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="booksIssueModalLabel">Issue Book</h5>
         <button type="button" (click)="ngOnInit()" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times; updateBookByBookId(bookId: string, updatebook: updateBookData) {
-            return this.http.put(`${this.apiUrl}/updateBook/${bookId}`, updatebook, this.httpOptions);
-          }</span>
+          <span aria-hidden="true">&times; </span>
         </button>
       </div>
       <div class="modal-body">
@@ -220,9 +217,6 @@
               <div class="col-">
                 <button type="submit" data-target="show" class="btn btn-primary btnWidth">Check Limit</button>
               </div>
-
-
-
             </div><br />
           </div>
         </form>
@@ -232,13 +226,10 @@
             <div id="issue-book" ngModelGroup="issueBookData">
               <div *ngFor="let book of bookById">
                 <div class="form-row">
-                  <input type="hidden" name="bookId" id="bookId" [(ngModel)]="book.bookId">
+
                   <div class="col-4">
                     <label for="title">Title<span class="mandatory">*</span></label>
-                    <input type="text" disabled id="title" required class="form-control" name="title"
-                      [(ngModel)]="book.ti updateBookByBookId(bookId: string, updatebook: updateBookData) {
-                        return this.http.put(`${this.apiUrl}/updateBook/${bookId}`, updatebook, this.httpOptions);
-                      }tle">
+                    <input type="text" disabled id="title" required class="form-control" name="title" [(ngModel)]="book.title">
                   </div>
                   <div class="col-4">
                     <label for="authorName">Author Name</label>
@@ -253,9 +244,7 @@
                 </div>
                 <br>
                 <div class="form-row">
-                  <div class="col-4"> updateBookByBookId(bookId: string, updatebook: updateBookData) {
-                    return this.http.put(`${this.apiUrl}/updateBook/${bookId}`, updatebook, this.httpOptions);
-                  }
+                  <div class="col-4"> 
                     <label for="enrollment"> Issue To: </label>
                   </div>
                   <div class="col-4">
@@ -266,24 +255,25 @@
                   </div>
                 </div>
                 <br>
-                <div class="form-row"> updateBookByBookId(bookId: string, updatebook: updateBookData) {
-                  return this.http.put(`${this.apiUrl}/updateBook/${bookId}`, updatebook, this.httpOptions);
-                }class="btn btn-success btnWidth">Issue</button>
+                <div class="form-row">
+                  
+                  <div class="col-3"> 
+                <button  class="btn btn-success btnWidth">Issue</button>
                   </div>
                   <div class="col-3">
                       <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth"
                         data-dismiss="modal">Cancel</button>
                     </div>
+                    <div>
+                    <input type="hidden" name="bookId" id="bookId" [(ngModel)]="book.bookId"></div>
                     <div class="col-3"></div>
-                </div>
-                 
               
+                 </div>
+          
               </div>
             </div>
           </form>
-        </ng-template> updateBookByBookId(bookId: string, updatebook: updateBookData) {
-          return this.http.put(`${this.apiUrl}/updateBook/${bookId}`, updatebook, this.httpOptions);
-        }
+        </ng-template> 
       </div>
 
     </div>
@@ -302,9 +292,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form (ngSubmit)="getPenalty(k)" # updateBookByBookId(bookId: string, updatebook: updateBookData) {
-          return this.http.put(`${this.apiUrl}/updateBook/${bookId}`, updatebook, this.httpOptions);
-        }k="ngForm">
+        <form (ngSubmit)="getPenalty(k)" #k="ngForm">
           <div id="check-penalty" ngModelGroup="checkPenaltyData">
             <div class="form-row"> <br />
               <div class="col-4">
@@ -348,9 +336,7 @@
                   <label for="isbnNo">ISBN no.</label>
                   <input type="text" id="isbnNo" class="form-control" name="isbnNo" [(ngModel)]="book.isbn">
                 </div>
-                <div class="col-4"> updateBookByBookId(bookId: string, updatebook: updateBookData) {
-                  return this.http.put(`${this.apiUrl}/updateBook/${bookId}`, updatebook, this.httpOptions);
-                }
+                <div class="col-4"> 
                   <label for="authorName">Author Name</label>
                   <input type="text" id="authorName" class="form-control" name="authorName"
                     [(ngModel)]="book.authorName">
@@ -364,9 +350,7 @@
               <div class="form-row">
                 <div class="col-4">
                   <label for="publisher">Publisher</label>
-                  <input type="text" id="p updateBookByBookId(bookId: string, updatebook: updateBookData) {
-                    return this.http.put(`${this.apiUrl}/updateBook/${bookId}`, updatebook, this.httpOptions);
-                  }
+                  <input type="text" id="publisher" class ="form-control" name = "publisher" [(ngModel)] = "book.publisher"></div>
                 <div class="col-4">
                   <label for="edition">Edition</label>
                   <input type="text" id="edition" class="form-control" name="edition" [(ngModel)]="book.edition">
@@ -382,9 +366,7 @@
                   <label for="price">Price</label>
                   <input type="text" id="price" class="form-control" name="price" [(ngModel)]="book.price">
                 </div>
-                updateBookByBookId(bookId: string, updatebook: updateBookData) {
-                  return this.http.put(`${this.apiUrl}/updateBook/${bookId}`, updatebook, this.httpOptions);
-                }
+               
                 <div class="col-4">
                   <label for="noOfPages">no. of Pages</label>
                   <input type="text" id="noOfPages" class="form-control" name="noOfPages" [(ngModel)]="book.noOfPages">
@@ -402,9 +384,7 @@
                   <textarea class="form-control" id="remarks" name="remarks" [(ngModel)]="book.remarks"></textarea>
                 </div>
               </div>
-              <br> updateBookByBookId(bookId: string, updatebook: updateBookData) {
-                return this.http.put(`${this.apiUrl}/updateBook/${bookId}`, updatebook, this.httpOptions);
-              }
+              <br> 
               <div class="form-row">
                 <div class="col-3">
                   <input type="hidden" name="bookId" id="bookId" [(ngModel)]="book.bookId">
@@ -424,8 +404,6 @@
               </div>
             </div>
           </div>
-
-
         </form>
       </div>
 
@@ -440,8 +418,7 @@
 
 
 
-<div class="modal fade" id="booksRemoveModal" tabindex="-1" role="dialog" aria-labelledby="booksRemoveModalLabel"
-  aria-hidden="true">
+<div class="modal fade" id="booksRemoveModal" tabindex="-1" role="dialog" aria-labelledby="booksRemoveModalLabel"aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -456,7 +433,7 @@
         </div>
         <form (ngSubmit)="remove(h)" #h="ngForm">
           <div *ngIf="!removeButton" id="remove-books" ngModelGroup="removeBookData">
-            <div *ngFor="let book of bookById">
+            <div *ngFor="let book of bookById"> 
               <div class="form-row">
                 <div class="col-4">
                   <label for="isbnNo">ISBN no.</label>
@@ -464,21 +441,19 @@
                 </div>
                 <div class="col-4">
                   <label for="authorName">Author Name</label>
-                  <input type="text" id="authorName" class="form-control" disabled name="authorName"
-                    [(ngModel)]="book.authorName">
+                  <input type="text" id="authorName" class="form-control" disabled name="authorName" [(ngModel)]="book.authorName">
                 </div>
-                <div class="col-4">
+
+                  <div class="col-4">
                   <label for="title">Title<span class="mandatory">*</span></label>
-                  <input type="text" id="title" required disabled class="form-control" name="title"
-                    [(ngModel)]="book.title">
+                  <input type="text" id="title" required disabled class="form-control" name="title" [(ngModel)]="book.title">
                 </div>
               </div>
               <br>
               <div class="form-row">
                 <div class="col-4">
                   <label for="publisher">Publisher</label>
-                  <input type="text" id="publisher" disabled class="form-control" name="publisher"
-                    [(ngModel)]="book.publisherAndPlace">
+                  <input type="text" id="publisher" disabled class="form-control" name="publisher"  [(ngModel)]="book.publisherAndPlace">
                 </div>
                 <div class="col-4">
                   <label for="edition">Edition</label>

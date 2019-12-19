@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { allThesis, addThesisData, getThesisByThesisId, updateThesisData } from '../myduties/library/thesisDataObj';
+import { allThesis, addThesisData, getThesisByThesisId, updateThesisData, course , librarySettingsthesis,checkPenaltyResponseThesis } from '../myduties/library/thesisDataObj';
 
 import { addBookData, subjectCategory, allBooks, librarySettings, getBookByBookId, updateBookData, issueBookData, checkPenaltyResponse } from '../myduties/library/bookDataObj';
 
@@ -39,6 +39,10 @@ export class LibraryService {
 
   getLibrarySettings(): Observable<librarySettings[]> {
     return this.http.get<librarySettings[]>(this.apiUrl + '/getLibrarySettings');
+  }
+
+  getLibrarySettingsthesis(): Observable<librarySettingsthesis[]> {
+    return this.http.get<librarySettingsthesis[]>(this.apiUrl + '/getLibrarySettings');
   }
   updateLibrarySettings(settings: librarySettings) {
     return this.http.put(this.apiUrl + '/updateLibrarySettings', settings, { responseType: 'text' });
@@ -87,7 +91,15 @@ export class LibraryService {
   getIssuedBookInfo(bookId: string): Observable<checkPenaltyResponse[]> {
     return this.http.get<checkPenaltyResponse[]>(`${this.apiUrl}/getIssuedBookInfo/${bookId}`);
   }
+ getCourse() : Observable<course[]>{
+   return this.http.get<course[]>(`${this.apiUrl}/getCourseList`);
 
-  
+ }
+ getNoOfIssuesthesis(enrollments:string): Observable<number> {
+  return this.http.get<number>(`${this.apiUrl}/getNoOfIssues/${enrollments}`);
+}
+getIssueThesisInfo(thesisId:number): Observable<checkPenaltyResponseThesis[]>{
+  return this.http.get<checkPenaltyResponseThesis[]>(`${this.apiUrl}/getIssuedThesisInfo/${thesisId}`);
+}
 
 }

@@ -1,4 +1,18 @@
+export class librarySettingsthesis {
 
+  private id: string;
+  private noOfBooksAllowed: number;
+  private penaltyPerDay: number;
+  private returnDeadlineDays: number;
+
+  constructor($id: string, $noOfBooksAllowed: number, $penaltyPerDay: number, $returnDeadlineDays: number) {
+    this.id = $id;
+    this.noOfBooksAllowed = $noOfBooksAllowed;
+    this.penaltyPerDay = $penaltyPerDay;
+    this.returnDeadlineDays = $returnDeadlineDays;
+  }
+
+}
 export interface allThesis{
   title : string;
   submittedBy : string;
@@ -6,6 +20,11 @@ export interface allThesis{
   course : string;
   
 }
+export interface course{
+
+}
+
+
 export class addThesisData{
 
 course : string;
@@ -68,4 +87,15 @@ export class removeThesisData{
     constructor($thesisId : number){
       this.thesisId=$thesisId;
     }
+}
+export class checkLimitDataThesis {
+  enrollments: string;
+}
+export class checkPenaltyDataThesis {
+  thesisId: number;
+}
+
+export interface checkPenaltyResponseThesis {
+  penalty: string;
+  username: string;
 }
