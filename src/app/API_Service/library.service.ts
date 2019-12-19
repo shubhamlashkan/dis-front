@@ -63,6 +63,10 @@ export class LibraryService {
     return this.http.get<checkPenaltyResponse[]>(`${this.apiUrl}/getIssuedBookInfo/${bookId}`);
   }
 
-  
-
+  getBookByTitle(title:string):Observable<getBookByBookId[]>{
+    return this.http.get<getBookByBookId[]>(`${this.apiUrl}/getBookByTitle/${title}`);
+  }
+  getBookByAuthor(author:string):Observable<getBookByBookId[]>{
+    return this.http.get<getBookByBookId[]>(`${this.apiUrl}/getBookByAuthorName/${author}`);
+  }
 }

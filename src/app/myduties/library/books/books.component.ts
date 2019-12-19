@@ -41,11 +41,11 @@ export class BooksComponent implements OnInit {
   checkPenalty: checkPenaltyData;
   error: string=null;
   showPenalty: boolean = true;
-  searchBy:number = 1;
+  searchBy:number;
   searchTerm:string=null;
   showSearchedRecord:boolean=false;
   searchedBooks:getBookByBookId[]=[];
-  selected:optionSearch = new optionSearch(1, 'Id');
+  selected:optionSearch = new optionSearch(3 ,'Author');
   options = [
      new optionSearch(1, 'Id' ),
      new optionSearch(2, 'Title' ),
@@ -204,8 +204,8 @@ export class BooksComponent implements OnInit {
   }
 
   onSelect(optionId) { 
+    console.log(optionId);
     this.selected = null;
-    console.log(this.options.length);
     for (var i = 0; i < this.options.length; i++)
     {
       if (this.options[i].id == optionId) {
@@ -231,9 +231,19 @@ export class BooksComponent implements OnInit {
     else if(this.searchBy==2)
     {
       console.log(this.searchTerm);
+        this.service.getBookByTitle(this.searchTerm).subscribe((bookByIdData: getBookByBookId[])=>{
+          this.searchedBooks= bookByIdData;
+          console.log(this.searchedBooks);
+        });
+        this.showSearchedRecord = true;
     }
-    else{
+    else {
       console.log(this.searchTerm);
+        this.service.getBookByAuthor(this.searchTerm).subscribe((bookByIdData: getBookByBookId[])=>{
+          this.searchedBooks= bookByIdData;
+          console.log(this.searchedBooks);
+        });
+        this.showSearchedRecord = true;
     }
   }
 
