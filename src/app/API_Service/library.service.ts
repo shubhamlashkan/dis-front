@@ -102,4 +102,10 @@ getIssueThesisInfo(thesisId:number): Observable<checkPenaltyResponseThesis[]>{
   return this.http.get<checkPenaltyResponseThesis[]>(`${this.apiUrl}/getIssuedThesisInfo/${thesisId}`);
 }
 
+  getBookByTitle(title:string):Observable<getBookByBookId[]>{
+    return this.http.get<getBookByBookId[]>(`${this.apiUrl}/getBookByTitle/${title}`);
+  }
+  getBookByAuthor(author:string):Observable<getBookByBookId[]>{
+    return this.http.get<getBookByBookId[]>(`${this.apiUrl}/getBookByAuthorName/${author}`);
+  }
 }
