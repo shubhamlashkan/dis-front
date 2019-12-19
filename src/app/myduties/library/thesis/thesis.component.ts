@@ -4,6 +4,7 @@ import { allThesis, addThesisData, addThesisResponse, getThesisByThesisId, updat
 import { LibraryService } from 'src/app/API_Service/library.service';
 import { updateBookData, librarySettings, issueBookData } from '../bookDataObj';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { optionSearch } from '../books/books.component';
 
 @Component({
   selector: 'app-thesis',
@@ -45,10 +46,24 @@ thesisAllowed : string;
   error: string=null;
   showPenalty: boolean = true;
   penaltyRes: checkPenaltyResponseThesis[];
+  searchBy:number=1;
+  searchTerm:number=null;
+  showSearchedRecord:boolean=false;
+  searchedThesis:getThesisByThesisId[]=[];
+  selected:optionSearch = new optionSearch(1,'Id');
+  options = [
+    new optionSearch(1,'Id'),
+    new optionSearch(2,'Title'),
+    new optionSearch(3,'course'),
+    new optionSearch(4,'submitted by'),
+    new optionSearch(5,'guided by')
+  ];
 
   constructor(private service : LibraryService) { }
 
   ngOnInit() {
+
+    this.searchTerm=null;
     this.ShowId = false;
     this.updateButton=false;
     this.removeButton=false;
@@ -176,5 +191,36 @@ getPenalty() {
     console.log()
   });
 }
-
+onSelect(optionId) { 
+  this.selected = null;
+  console.log(this.options.length);
+  for (var i = 0; i < this.options.length; i++)
+  {
+    if (this.options[i].id == optionId) {
+      this.selected = this.options[i];     
+      this.searchBy = this.options[i].id;
+    }
+  }
+}
+findBy(typedValue)
+{
+ 
+  this.searchTerm = typedValue;
+  if(this.searchBy==1)
+  {
+      console.log(this.searchTerm);
+      this.service.getThesisByThesisId(this.searchTerm).subscribe((thesisByIdData: getThesisByThesisId[])=>{
+        this.searchedThesis= thesisByIdData;
+        console.log(this.searchedThesis);
+      });
+      this.showSearchedRecord = true;
+  }
+  else if(this.searchBy==2)
+  {
+    console.log(this.searchTerm);
+  }
+  else{
+    console.log(this.searchTerm);
+  }
+}
 }

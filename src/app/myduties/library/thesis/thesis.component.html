@@ -1,18 +1,17 @@
 <div class="row">
   <div class="col-lg-3"></div>
   <div class="col-lg-3">
-    <select class="mdb-select md-form colorful-select dropdown-primary" style="float: right">
-      <option value="" disabled selected>Search By</option>
-      <option value="1">Title</option>
-      <option value="2">Author</option>
-      <option value="3">Book no</option>
-    </select>
+    <select (change)="onSelect($event.target.value)" [(ngModel)]="selected.id" class="mdb-select md-form colorful-select dropdown-primary" style="float: right">
+      <option *ngFor="let option of options" value= {{option.id}}>
+         {{option.name}}
+      </option>
+    </select>   
   </div>
   <div class="col-lg-6">
     <ul class="searchbox float-right">
       <li class="">
-        <input class="form-control mr-sm-2 searchbox-width" type="search" placeholder="Search" aria-label="Search">
-        <i class="fa fa-search" style="position:absolute;top:11px;" aria-hidden="true"></i>
+        <input class="form-control mr-sm-2 searchbox-width" type="search" placeholder="Search" aria-label="Search" name="searchValue" (keyup)="findBy($event.target.value)">
+        <i class="fa fa-search" style="position:absolute;top:11px;"  aria-hidden="true"></i>
       </li>
     </ul>
   </div>

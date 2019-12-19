@@ -99,3 +99,7 @@ export interface checkPenaltyResponseThesis {
   penalty: string;
   username: string;
 }
+
+export class optionSearch {
+  constructor(public id: number, public name: string) { }
+}
