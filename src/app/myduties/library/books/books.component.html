@@ -1,21 +1,22 @@
 <div class="row">
   <div class="col-lg-3"></div>
   <div class="col-lg-3">
-    <select class="mdb-select md-form colorful-select dropdown-primary" style="float: right">
-      <option value="" disabled selected>Search By</option>
-      <option value="1">Title</option>
-      <option value="2">Author</option>
-      <option value="3">Book no</option>
+    <select (change)="onSelect($event.target.value)" [(ngModel)]="selected.id" class="mdb-select md-form colorful-select dropdown-primary" style="float: right">
+      <option *ngFor="let option of options" value= {{option.id}}>
+         {{option.name}}
+      </option>
     </select>
+    <br/>
   </div>
-  <div class="col-lg-6">
-    <ul class="searchbox float-right">
-      <li class="">
-        <input class="form-control mr-sm-2 searchbox-width" type="search" placeholder="Search" aria-label="Search">
-        <i class="fa fa-search" style="position:absolute;top:11px;" aria-hidden="true"></i>
-      </li>
-    </ul>
-  </div>
+  
+    <div class="col-lg-6">
+      <ul class="searchbox float-right">
+        <li class="">
+          <input class="form-control mr-sm-2 searchbox-width" type="search" placeholder="Search" aria-label="Search" name="searchValue" (keyup)="findBy($event.target.value)">
+          <i class="fa fa-search" style="position:absolute;top:11px;"  aria-hidden="true"></i>
+        </li>
+      </ul>
+    </div>
 </div>
 <br>
 <div class="d-flex justify-content-between">
@@ -27,64 +28,128 @@
 <br />
 
 <br>
-<table class="table table-striped">
 
-  <tr>
+<div *ngIf="!showSearchedRecord">
+  <table  class="table table-striped">
 
-    <th class="col-lg-1">S. No.</th>
-    <th class="col-lg-3">Title</th>
+    <tr>
+  
+      <th class="col-lg-1">S. No.</th>
+      <th class="col-lg-3">Title</th>
+  
+      <th class="col-lg-3">Author</th>
+  
+      <th class="col-lg-2">Edition </th>
+  
+      <th class="col-lg-1"> </th>
+      <th class="col-lg-1"></th>
+      <th class="col-lg-1"></th>
+    </tr>
+    <tr *ngFor="let book of books; let i = index">
+      <td>{{i+1}}</td>
+      <td>{{book.title}}</td>
+      <td>{{book.authorName}} </td>
+      <td>{{book.edition}}</td>
+      <td>
+        <div *ngIf="book.status=='Available'; then update else notupdate"></div>
+        <ng-template #update>
+          <button class="btn btn-primary" (click)="getBookByBookId(book.bookId)" data-toggle="modal"
+            data-target="#booksEditModal">Edit</button>
+        </ng-template>
+        <ng-template #notupdate>
+          <button class="btn btn-primary" (click)="getBookByBookId(book.bookId)" disabled data-toggle="modal"
+            data-target="#booksEditModal">Edit</button>
+        </ng-template>
+      </td>
+      <td>
+        <div *ngIf="book.status=='Available'; then remove else notremove"></div>
+        <ng-template #remove>
+          <button class="btn btn-danger" (click)="getBookByBookId(book.bookId)" data-toggle="modal"
+            data-target="#booksRemoveModal">Remove</button>
+        </ng-template>
+        <ng-template #notremove>
+          <button class="btn btn-danger" (click)="getBookByBookId(book.bookId)" disabled data-toggle="modal"
+            data-target="#booksRemoveModal">Remove</button>
+        </ng-template>
+      </td>
+      <td>
+        <div *ngIf="book.status=='Available'; then issue else notissue"></div>
+        <ng-template #issue>
+          <button class="btn btn-success" (click)="retrieveLibrarySettings(); getBookByBookId(book.bookId) "
+            data-toggle="modal" data-target="#booksIssueModal"><i class="fa fa-minus-circle fa-fw fa-lg"
+              aria-hidden="true"></i>Issue Book</button>
+        </ng-template>
+        <ng-template #notissue>
+          <button class="btn btn-success" (click)="retrieveLibrarySettings()" disabled data-toggle="modal"
+            data-target="#booksIssueModal"><i class="fa fa-minus-circle fa-fw fa-lg" aria-hidden="true"></i>Issue
+            Book</button>
+        </ng-template>
+      </td>
+    </tr>
+  </table>
 
-    <th class="col-lg-3">Author</th>
+</div>
+  
+  <div *ngIf="showSearchedRecord">
+    <table  class="table table-striped">
 
-    <th class="col-lg-2">Edition </th>
-
-    <th class="col-lg-1"> </th>
-    <th class="col-lg-1"></th>
-    <th class="col-lg-1"></th>
-  </tr>
-  <tr *ngFor="let book of books; let i = index">
-    <td>{{i+1}}</td>
-    <td>{{book.title}}</td>
-    <td>{{book.authorName}} </td>
-    <td>{{book.edition}}</td>
-    <td>
-      <div *ngIf="book.status=='Available'; then update else notupdate"></div>
-      <ng-template #update>
-        <button class="btn btn-primary" (click)="getBookByBookId(book.bookId)" data-toggle="modal"
-          data-target="#booksEditModal">Edit</button>
-      </ng-template>
-      <ng-template #notupdate>
-        <button class="btn btn-primary" (click)="getBookByBookId(book.bookId)" disabled data-toggle="modal"
-          data-target="#booksEditModal">Edit</button>
-      </ng-template>
-    </td>
-    <td>
-      <div *ngIf="book.status=='Available'; then remove else notremove"></div>
-      <ng-template #remove>
-        <button class="btn btn-danger" (click)="getBookByBookId(book.bookId)" data-toggle="modal"
-          data-target="#booksRemoveModal">Remove</button>
-      </ng-template>
-      <ng-template #notremove>
-        <button class="btn btn-danger" (click)="getBookByBookId(book.bookId)" disabled data-toggle="modal"
-          data-target="#booksRemoveModal">Remove</button>
-      </ng-template>
-    </td>
-    <td>
-      <div *ngIf="book.status=='Available'; then issue else notissue"></div>
-      <ng-template #notissue>
-        <button class="btn btn-success" (click)="retrieveLibrarySettings(); getBookByBookId(book.bookId) "
-          data-toggle="modal" data-target="#booksIssueModal"><i class="fa fa-minus-circle fa-fw fa-lg"
-            aria-hidden="true"></i>Issue Book</button>
-      </ng-template>
-      <ng-template #issue>
-        <button class="btn btn-success" (click)="retrieveLibrarySettings()" disabled data-toggle="modal"
-          data-target="#booksIssueModal"><i class="fa fa-minus-circle fa-fw fa-lg" aria-hidden="true"></i>Issue
-          Book</button>
-      </ng-template>
-    </td>
-  </tr>
-</table>
-
+      <tr >
+        <th class="col-lg-1">S. No.</th>
+        <th class="col-lg-3">Title</th>
+    
+        <th class="col-lg-3">Author</th>
+    
+        <th class="col-lg-2">Edition </th>
+    
+        <th class="col-lg-1"> </th>
+        <th class="col-lg-1"></th>
+        <th class="col-lg-1"></th>
+      </tr>
+      <tr *ngFor="let searchedBook of searchedBooks; let i = index" >
+          <td>{{i+1}}</td>
+        <td>{{searchedBook.title}}</td>
+        <td>{{searchedBook.authorName}} </td>
+        <td>{{searchedBook.edition}}</td>
+        <td>
+          <div *ngIf="searchedBook.status=='Available'; then update else notupdate"></div>
+          <ng-template #update>
+            <button class="btn btn-primary" (click)="getBookByBookId(searchedBook.bookId)" data-toggle="modal"
+              data-target="#booksEditModal">Edit</button>
+          </ng-template>
+          <ng-template #notupdate>
+            <button class="btn btn-primary" (click)="getBookByBookId(searchedBook.bookId)" disabled data-toggle="modal"
+              data-target="#booksEditModal">Edit</button>
+          </ng-template>
+        </td>
+        <td>
+          <div *ngIf="searchedBook.status=='Available'; then remove else notremove"></div>
+          <ng-template #remove>
+            <button class="btn btn-danger" (click)="getBookByBookId(searchedBook.bookId)" data-toggle="modal"
+              data-target="#booksRemoveModal">Remove</button>
+          </ng-template>
+          <ng-template #notremove>
+            <button class="btn btn-danger" (click)="getBookByBookId(searchedBook.bookId)" disabled data-toggle="modal"
+              data-target="#booksRemoveModal">Remove</button>
+          </ng-template>
+        </td>
+        <td>
+          <div *ngIf="searchedBook.status=='Available'; then issue else notissue"></div>
+          <ng-template #issue>
+            <button class="btn btn-success" (click)="retrieveLibrarySettings(); getBookByBookId(searchedBook.bookId) "
+              data-toggle="modal" data-target="#booksIssueModal"><i class="fa fa-minus-circle fa-fw fa-lg"
+                aria-hidden="true"></i>Issue Book</button>
+          </ng-template>
+          <ng-template #notissue>
+            <button class="btn btn-success" (click)="retrieveLibrarySettings()" disabled data-toggle="modal"
+              data-target="#booksIssueModal"><i class="fa fa-minus-circle fa-fw fa-lg" aria-hidden="true"></i>Issue
+              Book</button>
+          </ng-template>
+        </td>
+      </tr>
+    </table>
+  
+  </div>
+  
 
 <div class="modal fade" id="booksAddModal" tabindex="-1" role="dialog" aria-labelledby="booksAddModalLabel"aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">

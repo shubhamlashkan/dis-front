@@ -42,17 +42,21 @@ export class BooksComponent implements OnInit {
   checkPenalty: checkPenaltyData;
   error: string=null;
   showPenalty: boolean = true;
-  // selectedAttribute:attributeSearch = new attributeSearch(2,'author');
-  // attributes=[
-  //   new attributeSearch(1,'Title'),
-  //   new attributeSearch(2,'Author'),
-  //   new attributeSearch(3,'BookId')
-  // ];
+  searchBy:number = 1;
+  searchTerm:string=null;
+  showSearchedRecord:boolean=false;
+  searchedBooks:getBookByBookId[]=[];
+  selected:optionSearch = new optionSearch(1, 'Id');
+  options = [
+     new optionSearch(1, 'Id' ),
+     new optionSearch(2, 'Title' ),
+     new optionSearch(3, 'Author' )
+  ];
 
   constructor(private service: LibraryService) { }
 
   ngOnInit() {
-
+    this.searchTerm = null;
     this.showId = false;
     this.updateButton = false;
     this.removeButton = false;
@@ -65,7 +69,8 @@ export class BooksComponent implements OnInit {
       console.log(this.books);
     });
 
-
+    
+    
   }
 
   // onSubmit(form:NgForm){
@@ -199,25 +204,43 @@ export class BooksComponent implements OnInit {
     });
   }
 
-  // onSelect(selectedAttributeId)
-  // {
-  //   this.selectedAttribute = null;
-  //   for(var i=0;i<this.attributes.length;i++)
-  //   {
-  //     if(this.attributes[i].id == selectedAttributeId){
-  //       this.selectedAttribute = this.attributes[i];
-  //       console.log(this.selectedAttribute);
-  //     }
-  //   }
-  // }
+  onSelect(optionId) { 
+    this.selected = null;
+    console.log(this.options.length);
+    for (var i = 0; i < this.options.length; i++)
+    {
+      if (this.options[i].id == optionId) {
+        this.selected = this.options[i];     
+        this.searchBy = this.options[i].id;
+      }
+    }
+}
+
+  findBy(typedValue)
+  {
+   
+    this.searchTerm = typedValue;
+    if(this.searchBy==1)
+    {
+        console.log(this.searchTerm);
+        this.service.getBookByBookId(this.searchTerm).subscribe((bookByIdData: getBookByBookId[])=>{
+          this.searchedBooks= bookByIdData;
+          console.log(this.searchedBooks);
+        });
+        this.showSearchedRecord = true;
+    }
+    else if(this.searchBy==2)
+    {
+      console.log(this.searchTerm);
+    }
+    else{
+      console.log(this.searchTerm);
+    }
+  }
 
 }
 
 
-// export class attributeSearch{
-
-// 	constructor(public id: number, public attrib:string) {
-
-//   }
-
-//}
+export class optionSearch {
+  constructor(public id: number, public name: string) { }
+}
