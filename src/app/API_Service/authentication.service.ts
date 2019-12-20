@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { apiSetting } from './apisetting';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { Observable } from 'rxjs';
 
 export class AuthenticationService {
 
-  private baseUrl = 'http://localhost:8082/dis';
+  private baseUrl = apiSetting.apiGateway+'/dis';
 
   constructor(private http: HttpClient) { }
 

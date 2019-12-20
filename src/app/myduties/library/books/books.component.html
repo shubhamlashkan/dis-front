@@ -8,7 +8,7 @@
     </select>
     <br/>
   </div>
-  
+
     <div class="col-lg-6">
       <ul class="searchbox float-right">
         <li class="">
@@ -33,14 +33,14 @@
   <table  class="table table-striped">
 
     <tr>
-  
+
       <th class="col-lg-1">S. No.</th>
       <th class="col-lg-3">Title</th>
-  
+
       <th class="col-lg-3">Author</th>
-  
+
       <th class="col-lg-2">Edition </th>
-  
+
       <th class="col-lg-1"> </th>
       <th class="col-lg-1"></th>
       <th class="col-lg-1"></th>
@@ -80,27 +80,25 @@
               aria-hidden="true"></i>Issue Book</button>
         </ng-template>
         <ng-template #notissue>
-          <button class="btn btn-success" (click)="retrieveLibrarySettings()" disabled data-toggle="modal"
-            data-target="#booksIssueModal"><i class="fa fa-minus-circle fa-fw fa-lg" aria-hidden="true"></i>Issue
-            Book</button>
+          <button class = "btn btn-reset" (click)="getThesisByThesisId(thesises.thesisId)" disabled data-toggle="modal" data-target="#thesisEditModal">Not Available</button>
         </ng-template>
       </td>
     </tr>
   </table>
 
 </div>
-  
+
   <div *ngIf="showSearchedRecord">
     <table  class="table table-striped">
 
       <tr >
         <th class="col-lg-1">S. No.</th>
         <th class="col-lg-3">Title</th>
-    
+
         <th class="col-lg-3">Author</th>
-    
+
         <th class="col-lg-2">Edition </th>
-    
+
         <th class="col-lg-1"> </th>
         <th class="col-lg-1"></th>
         <th class="col-lg-1"></th>
@@ -140,16 +138,14 @@
                 aria-hidden="true"></i>Issue Book</button>
           </ng-template>
           <ng-template #notissue>
-            <button class="btn btn-success" (click)="retrieveLibrarySettings()" disabled data-toggle="modal"
-              data-target="#booksIssueModal"><i class="fa fa-minus-circle fa-fw fa-lg" aria-hidden="true"></i>Issue
-              Book</button>
-          </ng-template>
+            <button class = "btn btn-reset" (click)="getThesisByThesisId(thesises.thesisId)" disabled data-toggle="modal" data-target="#thesisEditModal">Not Available</button>
+            </ng-template>
         </td>
       </tr>
     </table>
-  
+
   </div>
-  
+
 
 <div class="modal fade" id="booksAddModal" tabindex="-1" role="dialog" aria-labelledby="booksAddModalLabel"aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
@@ -214,7 +210,7 @@
                 </select>
               </div>
 
-            </div><br /> 
+            </div><br />
             <div class="form-row">
               <div class="col-4">
            <label for ="purchasedOn"> Date of Purchase</label>
@@ -319,7 +315,7 @@
                 </div>
                 <br>
                 <div class="form-row">
-                  <div class="col-4"> 
+                  <div class="col-4">
                     <label for="enrollment"> Issue To: </label>
                   </div>
                   <div class="col-4">
@@ -331,8 +327,8 @@
                 </div>
                 <br>
                 <div class="form-row">
-                  
-                  <div class="col-3"> 
+
+                  <div class="col-3">
                 <button  class="btn btn-success btnWidth">Issue</button>
                   </div>
                   <div class="col-3">
@@ -342,13 +338,13 @@
                     <div>
                     <input type="hidden" name="bookId" id="bookId" [(ngModel)]="book.bookId"></div>
                     <div class="col-3"></div>
-              
+
                  </div>
-          
+
               </div>
             </div>
           </form>
-        </ng-template> 
+        </ng-template>
       </div>
 
     </div>
@@ -379,7 +375,7 @@
             </div>
           </div>
         </form>
-       
+
       </div>
 
     </div>
@@ -414,7 +410,7 @@
                   <label for="isbnNo">ISBN no.</label>
                   <input type="text" id="isbnNo" class="form-control" name="isbnNo" [(ngModel)]="book.isbn">
                 </div>
-                <div class="col-4"> 
+                <div class="col-4">
                   <label for="authorName">Author Name</label>
                   <input type="text" id="authorName" class="form-control" name="authorName"
                     [(ngModel)]="book.authorName">
@@ -444,7 +440,7 @@
                   <label for="price">Price</label>
                   <input type="text" id="price" class="form-control" name="price" [(ngModel)]="book.price">
                 </div>
-               
+
                 <div class="col-4">
                   <label for="noOfPages">no. of Pages</label>
                   <input type="text" id="noOfPages" class="form-control" name="noOfPages" [(ngModel)]="book.noOfPages">
@@ -462,7 +458,7 @@
                   <textarea class="form-control" id="remarks" name="remarks" [(ngModel)]="book.remarks"></textarea>
                 </div>
               </div>
-              <br> 
+              <br>
               <div class="form-row">
                 <div class="col-3">
                   <input type="hidden" name="bookId" id="bookId" [(ngModel)]="book.bookId">
@@ -511,7 +507,7 @@
         </div>
         <form (ngSubmit)="remove(h)" #h="ngForm">
           <div *ngIf="!removeButton" id="remove-books" ngModelGroup="removeBookData">
-            <div *ngFor="let book of bookById"> 
+            <div *ngFor="let book of bookById">
               <div class="form-row">
                 <div class="col-4">
                   <label for="isbnNo">ISBN no.</label>

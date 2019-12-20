@@ -5,6 +5,7 @@ import { LibraryService } from 'src/app/API_Service/library.service';
 import { updateBookData, librarySettings, issueBookData } from '../bookDataObj';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { optionSearch } from '../books/books.component';
+import { apiSetting } from 'src/app/API_Service/apisetting';
 
 @Component({
   selector: 'app-thesis',
@@ -173,16 +174,15 @@ issueThesis() {
   console.log(this.issueData);
   this.service.issueBook(this.issueData).subscribe((res: string) => {
     this.issueRes = res;
-    if(this.issueRes.includes("http://localhost:8083/library/")){
-        console.log("Username not found");
-    }
-    else
-    {
-      console.log(this.issueRes);
-    }
+    console.log(this.issueRes);
+  },error=>{
+    console.log(error.message);
   });
+    this.allowIssueRequest=false;
+   
+  }
 
-}
+
 getPenalty() {
   this.checkPenalty = new checkPenaltyDataThesis();
   this.checkPenalty.thesisId = this.checkPenaltyForm.value.checkPenaltyDataThesis.thesisId;
@@ -193,7 +193,7 @@ getPenalty() {
 }
 onSelect(optionId) { 
   this.selected = null;
-  console.log(this.options.length);
+  console.log(optionId);
   for (var i = 0; i < this.options.length; i++)
   {
     if (this.options[i].id == optionId) {
@@ -239,8 +239,8 @@ findBy(typedValue)
     });
     this.showSearchedRecord=true;
   }
-  if(this.searchBy==5)
-  {
+   if(this.searchBy==5)
+   {
     console.log(this.searchTerm);
     this.service.getThesisByGuidedBy(this.searchTerm).subscribe((thesisByIdData: getThesisByThesisId[])=>{
       this.searchedThesis=thesisByIdData;

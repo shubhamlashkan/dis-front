@@ -48,21 +48,44 @@
       <th ></th>
       <th></th>
   </tr>     
-  <tr *ngFor= 'let thesises of thesis;let i = index'>
+   <tr *ngFor= 'let thesises of thesis;let i = index'>
     <td>{{i+1}}</td>
     <td>{{thesises.title}}</td>
     <td>{{thesises.submittedBy}}</td>
     <td>{{thesises.guidedBy}}</td>
     <td>{{thesises.course}}</td>
 
-        
-        <td><button class="btn btn-danger" (click)="getThesisByThesisId(thesises.thesisId)" data-toggle="modal" data-target="#thesisRemoveModal">Remove</button></td>
-    
+        <td>
+          <div *ngIf= "thesises.status=='Available'; then update else notupdate"></div>
+          <ng-template #update>
+            <button class="btn btn-primary" (click)="getThesisByThesisId(thesises.thesisId)" data-toggle="modal" data-target="#thesisEditModal">Edit</button>
+          </ng-template>
+          <ng-template #notupdate>
+            <button class = "btn btn-primary" (click)="getThesisByThesisId(thesises.thesisId)" disabled data-toggle="modal" data-target="#thesisEditModal">Edit</button>
+          </ng-template>  
+        </td>
+        <td>
+          <div *ngIf= "thesises.status=='Available'; then remove else notremove"></div>
+          <ng-template #remove>
+          
+          <button class="btn btn-danger" (click)="getThesisByThesisId(thesises.thesisId)" data-toggle="modal" data-target="#thesisRemoveModal">Remove</button>
+          </ng-template>
+          <ng-template #notremove>
+          
+            <button class="btn btn-danger" (click)="getThesisByThesisId(thesises.thesisId)" disabled data-toggle="modal" data-target="#thesisRemoveModal">Remove</button>
+            </ng-template>
+        </td>
      
-    <td><button class="btn btn-success" (click)="retrieveLibrarySettings();getThesisByThesisId(thesises.thesisId) " data-toggle="modal" data-target="#thesisIssueModal"><i class="fa fa-minus-circle fa-fw fa-lg" aria-hidden="true"></i>Issue Thesis</button></td>
-    
-    
+    <td>
+      <div *ngIf= "thesises.status=='Available'; then issue else notissue"></div>
+          <ng-template #issue> 
+            <button class="btn btn-success" (click)="retrieveLibrarySettings();getThesisByThesisId(thesises.thesisId) " data-toggle="modal" data-target="#thesisIssueModal"><i class="fa fa-minus-circle fa-fw fa-lg" aria-hidden="true"></i>Issue Thesis</button>
+          </ng-template>
+          <ng-template #notissue> 
+            <button class = "btn btn-reset" (click)="getThesisByThesisId(thesises.thesisId)" disabled data-toggle="modal" data-target="#thesisEditModal">Not Available</button>
+          </ng-template>
 
+</td>
   </tr>                       
  </table>
 </div>
@@ -84,21 +107,47 @@
     
         <th ></th>
         <th></th>
-    </tr>     
-    <!-- <tr *ngFor= 'let thesises of searchedThesis;let i = index'>
+    </tr>    
+    <tr *ngFor= 'let search of searchedThesis;let i = index'>
       <td>{{i+1}}</td>
-      <td>{{thesises.title}}</td>
-      <td>{{thesises.submittedBy}}</td>
-      <td>{{thesises.guidedBy}}</td>
-      <td>{{thesises.course}}</td>
-          <td><button class="btn btn-danger" (click)="getThesisByThesisId(thesises.thesisId)" data-toggle="modal" data-target="#thesisRemoveModal">Remove</button></td>
-      
-       
-      <td><button class="btn btn-success" (click)="retrieveLibrarySettings();getThesisByThesisId(thesises.thesisId) " data-toggle="modal" data-target="#thesisIssueModal"><i class="fa fa-minus-circle fa-fw fa-lg" aria-hidden="true"></i>Issue Thesis</button></td>
-      
-      
+      <td>{{search.title}}</td>
+      <td>{{search.submittedBy}}</td>
+      <td>{{search.guidedBy}}</td>
+      <td>{{search.course}}</td>
   
-    </tr>                        -->
+          <td>
+            <div *ngIf= "search.status=='Available'; then update else notupdate"></div>
+            <ng-template #update>
+              <button class="btn btn-primary" (click)="getThesisByThesisId(thesises.thesisId)" data-toggle="modal" data-target="#thesisEditModal">Edit</button>
+            </ng-template>
+            <ng-template #notupdate>
+              <button class = "btn btn-primary" (click)="getThesisByThesisId(thesises.thesisId)" disabled data-toggle="modal" data-target="#thesisEditModal">Edit</button>
+            </ng-template>  
+          </td>
+          <td>
+            <div *ngIf= "search.status=='Available'; then remove else notremove"></div>
+            <ng-template #remove>
+            
+            <button class="btn btn-danger" (click)="getThesisByThesisId(thesises.thesisId)" data-toggle="modal" data-target="#thesisRemoveModal">Remove</button>
+            </ng-template>
+            <ng-template #notremove>
+            
+              <button class="btn btn-danger" (click)="getThesisByThesisId(thesises.thesisId)" disabled data-toggle="modal" data-target="#thesisRemoveModal">Remove</button>
+              </ng-template>
+          </td>
+       
+      <td>
+        <div *ngIf= "search.status=='Available'; then issue else notissue"></div>
+            <ng-template #issue> 
+              <button class="btn btn-success" (click)="retrieveLibrarySettings();getThesisByThesisId(thesises.thesisId) " data-toggle="modal" data-target="#thesisIssueModal"><i class="fa fa-minus-circle fa-fw fa-lg" aria-hidden="true"></i>Issue Thesis</button>
+            </ng-template>
+            <ng-template #notissue> 
+              <button class = "btn btn-reset" (click)="getThesisByThesisId(thesises.thesisId)" disabled data-toggle="modal" data-target="#thesisEditModal">Not Available</button>
+            </ng-template>
+  
+  </td>
+    </tr> 
+
    </table>
   </div>
 
