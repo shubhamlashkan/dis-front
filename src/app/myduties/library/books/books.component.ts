@@ -200,7 +200,7 @@ export class BooksComponent implements OnInit {
     this.checkPenalty.bookId = this.checkPenaltyForm.value.checkPenaltyData.bookId;
     this.service.getIssuedBookInfo(this.checkPenalty.bookId).subscribe((res: checkPenaltyResponse[]) => {
       this.penaltyRes = res;
-      console.log()
+      console.log(this.penaltyRes);
     });
   }
 

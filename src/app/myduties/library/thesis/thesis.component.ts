@@ -47,7 +47,7 @@ thesisAllowed : string;
   showPenalty: boolean = true;
   penaltyRes: checkPenaltyResponseThesis[];
   searchBy:number=1;
-  searchTerm:number=null;
+  searchTerm:any=null;
   showSearchedRecord:boolean=false;
   searchedThesis:getThesisByThesisId[]=[];
   selected:optionSearch = new optionSearch(1,'Id');
@@ -168,7 +168,7 @@ thesisAllowed : string;
   });
 }
 issueThesis() {
-  this.issueData = new issueBookData(null,this.issueThesisForm.value.issueBookData.thesisId,
+  this.issueData = new issueBookData(null,this.issueThesisForm.value.issueThesisData.thesisId,
     this.issueto);
   console.log(this.issueData);
   this.service.issueBook(this.issueData).subscribe((res: string) => {
@@ -188,7 +188,7 @@ getPenalty() {
   this.checkPenalty.thesisId = this.checkPenaltyForm.value.checkPenaltyDataThesis.thesisId;
   this.service.getIssueThesisInfo(this.checkPenalty.thesisId).subscribe((res: checkPenaltyResponseThesis[]) => {
     this.penaltyRes = res;
-    console.log()
+    console.log(this.penaltyRes);
   });
 }
 onSelect(optionId) { 
@@ -215,12 +215,38 @@ findBy(typedValue)
       });
       this.showSearchedRecord = true;
   }
-  else if(this.searchBy==2)
+   if(this.searchBy==2)
   {
     console.log(this.searchTerm);
+    this.service.getThesisByTitle(this.searchTerm).subscribe((thesisByIdData: getThesisByThesisId[])=>{
+      this.searchedThesis=thesisByIdData;
+    });
+    this.showSearchedRecord=true;
   }
-  else{
+  if(this.searchBy==3)
+  {
     console.log(this.searchTerm);
+    this.service.getThesisByCourse(this.searchTerm).subscribe((thesisByIdData: getThesisByThesisId[])=>{
+      this.searchedThesis=thesisByIdData;
+    });
+    this.showSearchedRecord=true;
   }
+  if(this.searchBy==4)
+  {
+    console.log(this.searchTerm);
+    this.service.getThesisBySubmittedBy(this.searchTerm).subscribe((thesisByIdData: getThesisByThesisId[])=>{
+      this.searchedThesis=thesisByIdData;
+    });
+    this.showSearchedRecord=true;
+  }
+  if(this.searchBy==5)
+  {
+    console.log(this.searchTerm);
+    this.service.getThesisByGuidedBy(this.searchTerm).subscribe((thesisByIdData: getThesisByThesisId[])=>{
+      this.searchedThesis=thesisByIdData;
+    });
+    this.showSearchedRecord=true;
+  }
+  
 }
 }

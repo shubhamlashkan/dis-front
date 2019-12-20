@@ -29,6 +29,7 @@
   
 </div>
 <br>
+<div *ngIf="!showSearchedRecord">
 <table class="table table-striped">
 
 <tr>
@@ -64,7 +65,44 @@
 
   </tr>                       
  </table>
-
+</div>
+<div *ngIf="showSearchedRecord">
+  <table class="table table-striped">
+  
+  <tr>
+      
+        <th >S. No.</th>
+      
+    
+        <th >Title</th>
+        <th >Submitted by </th>
+    
+        <th >Guided by </th>
+        <th> course</th>
+    
+        <th></th>
+    
+        <th ></th>
+        <th></th>
+    </tr>     
+    <tr *ngFor= 'let thesises of searchedThesis;let i = index'>
+      <td>{{i+1}}</td>
+      <td>{{thesises.title}}</td>
+      <td>{{thesises.submittedBy}}</td>
+      <td>{{thesises.guidedBy}}</td>
+      <td>{{thesises.course}}</td>
+  
+          <td><button class="btn btn-primary" (click)="getThesisByThesisId(thesises.thesisId)" data-toggle="modal" data-target="#thesisEditModal">Edit</button></td>
+          <td><button class="btn btn-danger" (click)="getThesisByThesisId(thesises.thesisId)" data-toggle="modal" data-target="#thesisRemoveModal">Remove</button></td>
+      
+       
+      <td><button class="btn btn-success" (click)="retrieveLibrarySettings();getThesisByThesisId(thesises.thesisId) " data-toggle="modal" data-target="#thesisIssueModal"><i class="fa fa-minus-circle fa-fw fa-lg" aria-hidden="true"></i>Issue Thesis</button></td>
+      
+      
+  
+    </tr>                       
+   </table>
+  </div>
 
 <div class="modal fade" id="thesisAddModal" tabindex="-1" role="dialog" aria-labelledby="thesisAddModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">

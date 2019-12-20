@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {apiSetting} from '../API_Service/apisetting';
 import { allThesis, addThesisData, getThesisByThesisId, updateThesisData, course , librarySettingsthesis,checkPenaltyResponseThesis } from '../myduties/library/thesisDataObj';
 
 import { addBookData, subjectCategory, allBooks, librarySettings, getBookByBookId, updateBookData, issueBookData, checkPenaltyResponse } from '../myduties/library/bookDataObj';
@@ -17,6 +18,7 @@ export class LibraryService {
   }
 
   apiUrl: string = 'http://localhost:8083/library';
+  
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -30,7 +32,7 @@ export class LibraryService {
   }
 
   getSubjectCatergoryAcronymList(): Observable<subjectCategory[]> {
-    return this.http.get<subjectCategory[]>(this.apiUrl + '/getSubjectCatergoryAcronymList');
+    return this.http.get<subjectCategory[]>(apiSetting.apiAdministration + '/library/getSubjectCatergoryAcronymList');
   }
 
   getAllBooks(): Observable<allBooks[]> {
@@ -107,5 +109,17 @@ getIssueThesisInfo(thesisId:number): Observable<checkPenaltyResponseThesis[]>{
   }
   getBookByAuthor(author:string):Observable<getBookByBookId[]>{
     return this.http.get<getBookByBookId[]>(`${this.apiUrl}/getBookByAuthorName/${author}`);
+  }
+  getThesisByTitle(title:string):Observable<getThesisByThesisId[]>{
+    return this.http.get<getThesisByThesisId[]>(`${this.apiUrl}/getThesisByTitle/${title}`);
+  }
+  getThesisByCourse(course:string):Observable<getThesisByThesisId[]>{
+    return this.http.get<getThesisByThesisId[]>(`${this.apiUrl}/getThesisByCourse/${course}`);
+  }
+  getThesisBySubmittedBy(submittedBy:string):Observable<getThesisByThesisId[]>{
+    return this.http.get<getThesisByThesisId[]>(`${this.apiUrl}/getThesisBySubmittedBy/${submittedBy}`);
+  }
+  getThesisByGuidedBy(guidedBy:string):Observable<getThesisByThesisId[]>{
+    return this.http.get<getThesisByThesisId[]>(`${this.apiUrl}/getThesisByGuidedBy/${guidedBy}`);
   }
 }
