@@ -56,11 +56,15 @@ export class LibraryService {
   }
 
   issueBook(issueBook: issueBookData) {
-    return this.http.put(`${this.apiUrl}/issue`, issueBook, { responseType: 'text' })
+    return this.http.put(`${this.apiUrl}/issue`, issueBook, { responseType: 'text' }) .pipe(
+      catchError(this.handleError)
+    );
   }
 
   getIssuedBookInfo(bookId: string): Observable<checkPenaltyResponse[]> {
-    return this.http.get<checkPenaltyResponse[]>(`${this.apiUrl}/getIssuedBookInfo/${bookId}`);
+    return this.http.get<checkPenaltyResponse[]>(`${this.apiUrl}/getIssuedBookInfo/${bookId}`) .pipe(
+      catchError(this.handleError)
+    );
   }
 
   getBookByTitle(title:string):Observable<getBookByBookId[]>{
@@ -69,4 +73,21 @@ export class LibraryService {
   getBookByAuthor(author:string):Observable<getBookByBookId[]>{
     return this.http.get<getBookByBookId[]>(`${this.apiUrl}/getBookByAuthorName/${author}`);
   }
+
+  handleError(error) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // client-side error
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      if(error.status==404){
+        errorMessage = `${error.error.message}`;
+      }
+      // server-side error
+     // errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    window.alert(errorMessage);
+    return throwError(errorMessage);
+  }
+
 }
