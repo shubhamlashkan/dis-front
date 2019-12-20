@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import {apiSetting} from '../API_Service/apisetting';
 import { allThesis, addThesisData, getThesisByThesisId, updateThesisData, course , librarySettingsthesis,checkPenaltyResponseThesis } from '../myduties/library/thesisDataObj';
 
@@ -75,8 +75,10 @@ export class LibraryService {
     return this.http.get<number>(`${this.apiUrl}/getNoOfIssues/${enrollment}`);
   }
 
-  issueBook(issueBook:issueBookData) {
-    return this.http.put(`${this.apiUrl}/issue`, issueBook, { responseType: 'text' })
+  issueBook(issueBook: issueBookData) {
+    return this.http.put(`${this.apiUrl}/issue`, issueBook, { responseType: 'text' }) .pipe(
+      catchError(this.handleError)
+    );
   }
   getThesisByThesisId(thesisId:number): Observable<getThesisByThesisId[]>{
     return this.http.get<getThesisByThesisId[]>(`${this.apiUrl}/getThesisByThesisId/${thesisId}`);
@@ -91,7 +93,9 @@ export class LibraryService {
   }
 
   getIssuedBookInfo(bookId: string): Observable<checkPenaltyResponse[]> {
-    return this.http.get<checkPenaltyResponse[]>(`${this.apiUrl}/getIssuedBookInfo/${bookId}`);
+    return this.http.get<checkPenaltyResponse[]>(`${this.apiUrl}/getIssuedBookInfo/${bookId}`) .pipe(
+      catchError(this.handleError)
+    );
   }
  getCourse() : Observable<course[]>{
    return this.http.get<course[]>(`${this.apiUrl}/getCourseList`);
@@ -122,4 +126,21 @@ getIssueThesisInfo(thesisId:number): Observable<checkPenaltyResponseThesis[]>{
   getThesisByGuidedBy(guidedBy:string):Observable<getThesisByThesisId[]>{
     return this.http.get<getThesisByThesisId[]>(`${this.apiUrl}/getThesisByGuidedBy/${guidedBy}`);
   }
+
+  handleError(error) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // client-side error
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      if(error.status==404){
+        errorMessage = `${error.error.message}`;
+      }
+      // server-side error
+     // errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    window.alert(errorMessage);
+    return throwError(errorMessage);
+  }
+
 }

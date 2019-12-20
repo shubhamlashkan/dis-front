@@ -18,6 +18,7 @@ export class BooksComponent implements OnInit {
   @ViewChild('k') checkPenaltyForm: NgForm;
   removeButton: boolean = false;
   updateButton: boolean = false;
+  onSuccessfulUpdate:boolean = false;
   showId: boolean = false;
   Book: addBookData;
   responseAdd: addBookResponse;
@@ -52,7 +53,6 @@ export class BooksComponent implements OnInit {
      new optionSearch(2, 'Title' ),
      new optionSearch(3, 'Author' )
   ];
-
   constructor(private service: LibraryService) { }
 
   ngOnInit() {
@@ -68,8 +68,11 @@ export class BooksComponent implements OnInit {
       this.books = bookData;
       console.log(this.books);
     });
-
-    
+    this.allowIssueRequest=false;
+    this.onSuccessfulUpdate=false;
+    this.checkLimitForm.resetForm();
+    this.checkPenaltyForm.resetForm();
+    this.addBookForm.resetForm();
     
   }
 
@@ -148,6 +151,7 @@ export class BooksComponent implements OnInit {
         console.log(this.responseUpdate);
       });
       this.updateButton = false;
+      this.onSuccessfulUpdate = true;
     }
   }
 
@@ -184,15 +188,11 @@ export class BooksComponent implements OnInit {
     console.log(this.issueData);
     this.service.issueBook(this.issueData).subscribe((res: string) => {
       this.issueRes = res;
-      if(this.issueRes.includes("http://localhost:8083/library/")){
-          console.log("Username not found");
-      }
-      else
-      {
         console.log(this.issueRes);
-      }
+    },error=>{
+      console.log(error.message);
     });
-
+    this.allowIssueRequest=false;
   }
 
   getPenalty() {
@@ -201,6 +201,11 @@ export class BooksComponent implements OnInit {
     this.service.getIssuedBookInfo(this.checkPenalty.bookId).subscribe((res: checkPenaltyResponse[]) => {
       this.penaltyRes = res;
       console.log(this.penaltyRes);
+<<<<<<< HEAD
+=======
+    },error=>{
+      console.log(error.message);
+>>>>>>> b7bd06812d52d5edf6eaade6f8f3e0b820c069e1
     });
   }
 
