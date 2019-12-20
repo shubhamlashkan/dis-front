@@ -17,7 +17,7 @@ export class LibraryService {
 
   }
 
-  apiUrl: string = 'http://localhost:8083/library';
+  apiUrl: string = apiSetting.apiAdministration +'/library';
   
   httpOptions = {
     headers: new HttpHeaders({
@@ -32,7 +32,7 @@ export class LibraryService {
   }
 
   getSubjectCatergoryAcronymList(): Observable<subjectCategory[]> {
-    return this.http.get<subjectCategory[]>(apiSetting.apiAdministration + '/library/getSubjectCatergoryAcronymList');
+    return this.http.get<subjectCategory[]>(this.apiUrl+'/getSubjectCatergoryAcronymList');
   }
 
   getAllBooks(): Observable<allBooks[]> {
@@ -54,11 +54,11 @@ export class LibraryService {
     return this.http.get<getBookByBookId[]>(`${this.apiUrl}/getBookByBookId/${bookId}`);
   }
   getAllThesis():Observable<allThesis[]>{ 
-    return this.http.get<allThesis[]> ('http://localhost:8083/library/getAllThesis');
+    return this.http.get<allThesis[]> (this.apiUrl+'/getAllThesis');
 
   }
   addThesisDetails(Thesis:addThesisData){
-    return this.http.post('http://localhost:8083/library/addThesis',Thesis,this.httpOptions);
+    return this.http.post(this.apiUrl+'/addThesis',Thesis,this.httpOptions);
   }
 
 

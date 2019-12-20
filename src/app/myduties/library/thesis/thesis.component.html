@@ -55,7 +55,7 @@
     <td>{{thesises.guidedBy}}</td>
     <td>{{thesises.course}}</td>
 
-        <td><button class="btn btn-primary" (click)="getThesisByThesisId(thesises.thesisId)" data-toggle="modal" data-target="#thesisEditModal">Edit</button></td>
+        
         <td><button class="btn btn-danger" (click)="getThesisByThesisId(thesises.thesisId)" data-toggle="modal" data-target="#thesisRemoveModal">Remove</button></td>
     
      
@@ -85,14 +85,12 @@
         <th ></th>
         <th></th>
     </tr>     
-    <tr *ngFor= 'let thesises of searchedThesis;let i = index'>
+    <!-- <tr *ngFor= 'let thesises of searchedThesis;let i = index'>
       <td>{{i+1}}</td>
       <td>{{thesises.title}}</td>
       <td>{{thesises.submittedBy}}</td>
       <td>{{thesises.guidedBy}}</td>
       <td>{{thesises.course}}</td>
-  
-          <td><button class="btn btn-primary" (click)="getThesisByThesisId(thesises.thesisId)" data-toggle="modal" data-target="#thesisEditModal">Edit</button></td>
           <td><button class="btn btn-danger" (click)="getThesisByThesisId(thesises.thesisId)" data-toggle="modal" data-target="#thesisRemoveModal">Remove</button></td>
       
        
@@ -100,7 +98,7 @@
       
       
   
-    </tr>                       
+    </tr>                        -->
    </table>
   </div>
 
