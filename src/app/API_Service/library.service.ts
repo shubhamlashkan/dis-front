@@ -74,6 +74,10 @@ export class LibraryService {
     return this.http.get<getBookByBookId[]>(`${this.apiUrl}/getBookByAuthorName/${author}`);
   }
 
+  returnBook(bookId:string):Observable<string>{
+    return this.http.put<string>(`${this.apiUrl}/returnBook/${bookId}`,{responseType:'text'});
+  }
+
   handleError(error) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

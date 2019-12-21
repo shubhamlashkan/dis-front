@@ -385,7 +385,30 @@
             </div>
           </div>
         </form>
-       
+        <br>
+       <div *ngIf="showPenalty">
+       <form>
+         <div class="form-row">
+           <div class="col-3">
+              Issued To: {{penaltyRes.username}}
+           </div>
+           <div class="col-3">
+              Penalty: {{penaltyRes.penalty}} Rs.
+           </div>
+           <div class="col-3">
+              <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth"
+                        data-dismiss="modal">Cancel</button>
+           </div>
+          <div class="col-3">
+              <button type="submit" (click)="returnBook()"  class="btn btn-primary btnWidth"
+              >Return Book</button>
+          </div>
+          </div>
+        </form>
+        <div *ngIf="returnSuccess" class="alert alert-success" role="alert">
+      {{returnBookResponse}}
+        </div>
+       </div>
       </div>
 
     </div>
