@@ -20,7 +20,7 @@ export class ThesisComponent implements OnInit {
   @ViewChild('j') issueThesisForm:NgForm;
   @ViewChild('k') checkPenaltyForm: NgForm;
 
-
+  onSuccessfulUpdate:boolean = false;
   removeButton:boolean=false;
   updateButton:boolean=false;
    ShowId : boolean=false;
@@ -74,6 +74,7 @@ thesisAllowed : string;
     this.service.getCourse().subscribe((courseList:course[])=>{
       this.course = courseList;
     })
+    this.onSuccessfulUpdate=false;
     
   }
   onSubmit (){
@@ -137,7 +138,8 @@ thesisAllowed : string;
                 this.msg = this.responseUpdate.message + this.responseUpdate.thesisId;
                 console.log(this.msg);
               });
-              this.updateButton=false;                             
+              this.updateButton=false;
+              this.onSuccessfulUpdate=true;
    }
  }
 

@@ -173,7 +173,7 @@
                           </div>
                           <div class="col">
                             <label>Year<span class="mandatory">*</span></label>
-                            <input type="text" required class="form-control" name="Year_For_Sort" ngModel>
+                            <input type="text" required class="form-control" name="year" ngModel>
                           </div>
                       </div>
                       <br/>
@@ -279,13 +279,16 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="thesisEditModalLabel">Update Thesis info</h5>
                     <button type="button" (click)="ngOnInit()" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times</span>
+                      <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
                   <div class="modal-body">
+                    <div *ngIf="onSuccessfulUpdate" class="alert alert-success" role="alert">
+                      {{msg}}
+                    </div>
                     
                       <form (ngSubmit)="update(g)" #g="ngForm">
-                        <div id = 'update-thesis' ngModelGroup = "updateThesisData">
+                        <div *ngIf="!onSuccessfulUpdate" id = 'update-thesis' ngModelGroup = "updateThesisData">
                           <div *ngFor="let thesis of thesisById">
                           <div class="form-row">
                               <div class="col">
@@ -306,8 +309,7 @@
                               </div>
                               <div class="col-4">
                                 <label>Guided By<span class="mandatory">*</span></label>
-                                ￼
-                                   <input type="textarea" required class="form-control" name="guidedBy" [(ngModel)]="thesis.guidedBy">
+                                 <input type="textarea" required class="form-control" name="guidedBy" [(ngModel)]="thesis.guidedBy">
                               </div>
                               <div class="col-4">
                                 <label>course<span class="mandatory">*</span></label>
@@ -328,12 +330,13 @@
                              <div class = "form-row">
 
                               <div class col-4>
-                                <input type="text" name="thesisId" id="thesisId" [(ngModel)]="thesis.thesisId">
-                              </div>
-                              
-                                <div class col-4>
-                                    
+                                <input type="hidden" name="thesisId" id="thesisId" [(ngModel)]="thesis.thesisId">
+                              </div>                            
+                                <div class col-4>    
                                     <button type="submit" (click)="onUpdateButtonClick()" class="btn btn-success btnWidth" >Update</button>
+                                  </div>
+                                  <div class col-4>    
+                                    <button type="submit"  (click)="ngOnInit()" data-dismiss="modal" class="btn btn-danger btnWidth" >Cancel</button>
                                   </div>
                                   </div>
                                   </div>
