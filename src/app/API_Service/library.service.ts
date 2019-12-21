@@ -127,6 +127,10 @@ getIssueThesisInfo(thesisId:number): Observable<checkPenaltyResponseThesis[]>{
     return this.http.get<getThesisByThesisId[]>(`${this.apiUrl}/getThesisByGuidedBy/${guidedBy}`);
   }
 
+  returnBook(bookId:string):Observable<string>{
+    return this.http.put<string>(`${this.apiUrl}/returnBook/${bookId}`,{responseType:'text'});
+  }
+
   handleError(error) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

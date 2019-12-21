@@ -42,11 +42,14 @@ export class BooksComponent implements OnInit {
   penaltyRes: checkPenaltyResponse[];
   checkPenalty: checkPenaltyData;
   error: string=null;
-  showPenalty: boolean = true;
+  showPenalty: boolean = false;
   searchBy:number;
   searchTerm:string=null;
   showSearchedRecord:boolean=false;
   searchedBooks:getBookByBookId[]=[];
+  returnBookId:string;
+  returnBookResponse:string;
+  returnSuccess:boolean = false;
   selected:optionSearch = new optionSearch(3 ,'Author');
   options = [
      new optionSearch(1, 'Id' ),
@@ -70,10 +73,11 @@ export class BooksComponent implements OnInit {
     });
     this.allowIssueRequest=false;
     this.onSuccessfulUpdate=false;
+    this.showPenalty=false;
+    this.returnSuccess = false;
     this.checkLimitForm.resetForm();
     this.checkPenaltyForm.resetForm();
     this.addBookForm.resetForm();
-    
   }
 
   // onSubmit(form:NgForm){
@@ -200,9 +204,20 @@ export class BooksComponent implements OnInit {
     this.checkPenalty.bookId = this.checkPenaltyForm.value.checkPenaltyData.bookId;
     this.service.getIssuedBookInfo(this.checkPenalty.bookId).subscribe((res: checkPenaltyResponse[]) => {
       this.penaltyRes = res;
+      this.showPenalty = true;
+      this.returnBookId = this.checkPenalty.bookId;
       console.log(this.penaltyRes);
     },error=>{
       console.log(error.message);
+    });
+  }
+
+
+  returnBook(){
+    this.service.returnBook(this.returnBookId).subscribe((res:string)=>{
+      this.returnBookResponse = res;
+      this.returnSuccess = true;
+      console.log(this.returnBookResponse);
     });
   }
 
