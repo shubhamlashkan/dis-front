@@ -18,7 +18,6 @@
 </div>
 <br>
 
-
 <div class="d-flex justify-content-between">
    
   <button class="btn btn-success" data-toggle="modal" data-target="#thesisAddModal" ><i class="fa fa-plus-circle fa-fw fa-lg" aria-hidden="true"></i>Add Thesis</button>
@@ -30,7 +29,7 @@
 </div>
 <br>
 <div *ngIf="!showSearchedRecord">
-<table class="table table-striped">
+<table class="table table-striped" style >
 
 <tr>
     
@@ -222,55 +221,7 @@
 
                                                     
   
-    <div class="modal fade" id="thesisReturnModal" tabindex="-1" role="dialog" aria-labelledby="thesisReturnModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="thesisReturnModalLabel">Return Book</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-               <form>
-                  <div class="form-row"> 
-                      <div class="col-4">
-                        <input type="text" class="form-control" placeholder="Enter Enrollment No. or faculty name" name="enrollmentno" ngModel>
-                      </div> 
-                      <div class="col-4">
-                          <button type="submit" class="btn btn-success btnWidth" >Show Details</button>
-                      </div>
-                  </div>
-                <div class="container">
-                    <table class="table table-striped">
-  
-                        <tr>
-                          
-                            <th >S. No.</th>
-                        
-                            <th >Title</th>
-                        
-                        
-                            <th >Penalty</th>
-                        
-                            <th ></th>
-                        </tr>     
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                        </tr>                       
-                       </table>
-                </div>
-      
-                                        
-              </form>
-            </div>
-            
-          </div>
-        </div>
-      </div>
+ 
     
       
       <div class="modal fade" id="thesisEditModal" tabindex="-1" role="dialog" aria-labelledby="thesisEditModalLabel" aria-hidden="true">
@@ -313,7 +264,9 @@
                               </div>
                               <div class="col-4">
                                 <label>course<span class="mandatory">*</span></label>
-                                <input type="text" required class="form-control" name="course" [(ngModel)]="thesis.course">
+                                <input type="text" class="form-control" name="course" [(ngModel)]="thesis.course">
+                                
+                                
                               </div>
                             </div><br/>
                             <div class="form-row">
@@ -443,7 +396,13 @@
               </button>
             </div>
             <div class="modal-body">
+              <div *ngIf="showIssue" class="alert alert-primary" role="alert">
+                {{issueRes}}
+              </div>
+              
               <div>
+               
+
                 <h3>Library Instruction</h3>
                 <ol type="1" *ngFor="let setting of setting">
                   <li>
@@ -474,10 +433,10 @@
                   </div><br/>
                 </div>
               </form>
-              <div id="#show" *ngIf="allowIssueRequest ; then process "></div>
+              <div id="#show" *ngIf="allowIssueRequest ; then  process"></div>
               <ng-template #process>
                 <form (ngSubmit)="issueThesis(j)" #j="ngForm">
-                  <div id="issue-thesis" ngModelGroup="issueThesisData">
+                  <div  *ngIf="!ShowIssue" id="issue-thesis" ngModelGroup="issueThesisData">
                     <div *ngFor = "let thesis of thesisById">
                       <div class="form-row">
       
@@ -526,6 +485,7 @@
                   </div>
                 </form>
               </ng-template> 
+
             </div>
       
           </div>
@@ -557,10 +517,32 @@
           </div>
         </div>
       </form>
-      <div #showPenalty >
-
-      </div>
-     
+      <br>
+      <div *ngIf="showPenalty">
+        <form>
+          <div class="form-row">
+            <div class="col-3">
+               Issued To: {{penaltyRes.username}}
+            </div>
+            <div class="col-3">
+               Penalty: {{penaltyRes.penalty}} Rs.
+            </div>
+            <div class="col-3">
+               <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth"
+                         data-dismiss="modal">Cancel</button>
+            </div>
+           <div class="col-3">
+               <button type="submit" (click)="returnThesis()"  class="btn btn-primary btnWidth"
+               >Return Thesis</button>
+           </div>
+           </div>
+         </form>
+         </div>
+        <div *ngIf="returnSuccess" class="alert alert-success" role="alert">
+          {{returnThesisResponse}}
+            </div>
+           
+       
     </div>
 
   </div>

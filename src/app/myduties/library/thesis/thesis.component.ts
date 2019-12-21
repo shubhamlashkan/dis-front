@@ -19,7 +19,7 @@ export class ThesisComponent implements OnInit {
   @ViewChild('i') checkLimitForm:NgForm;
   @ViewChild('j') issueThesisForm:NgForm;
   @ViewChild('k') checkPenaltyForm: NgForm;
-
+showIssue : boolean=false;
   onSuccessfulUpdate:boolean = false;
   removeButton:boolean=false;
   updateButton:boolean=false;
@@ -51,6 +51,9 @@ thesisAllowed : string;
   searchTerm:any=null;
   showSearchedRecord:boolean=false;
   searchedThesis:getThesisByThesisId[]=[];
+  returnThesisId:number;
+  returnThesisResponse:string;
+  returnSuccess:boolean = false;
   selected:optionSearch = new optionSearch(1,'Id');
   options = [
     new optionSearch(1,'Id'),
@@ -74,8 +77,14 @@ thesisAllowed : string;
     this.service.getCourse().subscribe((courseList:course[])=>{
       this.course = courseList;
     })
+    this.allowIssueRequest=false;
     this.onSuccessfulUpdate=false;
-    
+    this.showPenalty=false;
+    this.returnSuccess = false;
+    this.checkLimitForm.resetForm();
+    this.checkPenaltyForm.resetForm();
+    this.addThesisForm.resetForm();
+    this.showIssue= false;
   }
   onSubmit (){
     console.log(this.addThesisForm);
@@ -160,8 +169,8 @@ thesisAllowed : string;
   this.service.getNoOfIssuesthesis(this.checkIssue.enrollments).subscribe((res: number) => {
     this.currentIssue = res;
     console.log(this.currentIssue);
-  //  console.log(this.checkLimitForm.value.checkLimitDataThesis.thesisAllowed);
-    if (this.currentIssue < 3) {
+  
+    if (this.currentIssue < this.checkLimitForm.value.checkLimitData.thesisAllowed) {
       this.allowIssueRequest = true;
       this.issueto = this.checkIssue.enrollments;
     }
@@ -181,6 +190,9 @@ issueThesis() {
     console.log(error.message);
   });
     this.allowIssueRequest=false;
+    this.showIssue=true;
+   
+  
    
   }
 
@@ -190,9 +202,24 @@ getPenalty() {
   this.checkPenalty.thesisId = this.checkPenaltyForm.value.checkPenaltyDataThesis.thesisId;
   this.service.getIssueThesisInfo(this.checkPenalty.thesisId).subscribe((res: checkPenaltyResponseThesis[]) => {
     this.penaltyRes = res;
+    this.showPenalty = true;
+    this.returnThesisId = this.checkPenalty.thesisId;
     console.log(this.penaltyRes);
+  },
+  error=>{
+    console.log(error.message);
   });
 }
+returnThesis(){
+  this.service.returnThesis(this.returnThesisId).subscribe((res:string)=>{
+    this.returnThesisResponse = res;
+    this.returnSuccess = true;
+    console.log(this.returnThesisResponse);
+  });
+}
+
+
+
 onSelect(optionId) { 
   this.selected = null;
   console.log(optionId);

@@ -130,6 +130,10 @@ getIssueThesisInfo(thesisId:number): Observable<checkPenaltyResponseThesis[]>{
   returnBook(bookId:string):Observable<string>{
     return this.http.put<string>(`${this.apiUrl}/returnBook/${bookId}`,{responseType:'text'});
   }
+  returnThesis(thesisId:number):Observable<any>{
+    return this.http.put<any>(`${this.apiUrl}/returnThesis/${thesisId}`,{responseType:'text'});
+  }
+
 
   handleError(error) {
     let errorMessage = '';
