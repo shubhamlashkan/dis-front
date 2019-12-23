@@ -14,11 +14,18 @@ export class librarySettingsthesis {
 
 }
 export interface allThesis{
-  title : string;
-  submittedBy : string;
-  guidedBy : string;
-  course : string;
   
+
+  cdStatus: string;
+  course: string;
+  entryDate: string;
+  guidedBy: string
+  remarks: string;
+  status: string;
+  submittedBy: string;
+  thesisId: number;
+  title: string;
+  year: string;
 }
 export interface course{
 
@@ -102,4 +109,16 @@ export interface checkPenaltyResponseThesis {
 
 export class optionSearch {
   constructor(public id: number, public name: string) { }
+}
+
+export interface previousIssueHistoryThesis{
+  actualReturnDate: string;
+  bookId: string;
+  expectedReturnDate: string;
+  issueDate: string;
+  issueId: string;
+  penalty: number;
+  thesisId: number;
+  title:string;
+  userName: string;
 }

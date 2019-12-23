@@ -162,3 +162,16 @@ export interface checkPenaltyResponse {
   penalty: string;
   username: string;
 }
+
+
+export interface previousIssueHistoryBook{
+  actualReturnDate: string;
+  bookId: string;
+  expectedReturnDate: string;
+  issueDate: string;
+  issueId: string;
+  penalty: number;
+  thesisId: number;
+  title:string;
+  userName: string;
+}

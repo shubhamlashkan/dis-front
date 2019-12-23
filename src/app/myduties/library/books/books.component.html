@@ -19,16 +19,24 @@
     </div>
 </div>
 <br>
-<div class="d-flex justify-content-between">
-  <button class="btn btn-success " (click)="ngOnInit()" data-toggle="modal" data-target="#booksAddModal"><i
-      class="fa fa-plus-circle fa-fw fa-lg" aria-hidden="true"></i>Add Book</button>
-  <button class="btn btn-success " data-toggle="modal" data-target="#booksReturnModal"><i
-      class="fa fa-plus-circle fa-fw fa-lg" aria-hidden="true"></i>Return Book</button>
-</div>
-<br />
+<div class="form-row">
+  <div class="col-3">
+      <button class="btn btn-success " (click)="ngOnInit()" data-toggle="modal" data-target="#booksAddModal"><i
+        class="fa fa-plus-circle fa-fw fa-lg" aria-hidden="true"></i>Add Book</button>
+  </div>
+  <div class="col-3">
+      <button class="btn btn-success " data-toggle="modal" data-target="#booksReturnModal"><i
+        class="fa fa-plus-circle fa-fw fa-lg" aria-hidden="true"></i>Return Book</button>  
+  </div>
+  <div class="col-3">
 
+  </div>
+ <div class="col-3">
+
+ </div>
+  
+  </div>
 <br>
-
 <div *ngIf="!showSearchedRecord">
   <table  class="table table-striped">
 
@@ -85,7 +93,7 @@
       </td>
     </tr>
   </table>
-
+  
 </div>
 
   <div *ngIf="showSearchedRecord">
@@ -201,13 +209,14 @@
                 <input type="text" id="noOfPages" class="form-control" name="noOfPages" ngModel>
               </div>
               <div class="col-4">
-                <br>
-                <select class="dropdown-primary form-control" name="subjectCategory" required ngModel>
+                <label >Subject Category</label>
+                <input type="text" name="subjectCategory" list="category" required ngModel class="form-control">
+                <datalist id="category">
                   <option value="" selected disabled>Study Material</option>
                   <option *ngFor="let sub of subject" [value]="sub">
                     {{sub}}
                   </option>
-                </select>
+                </datalist>
               </div>
 
             </div><br />
@@ -220,9 +229,7 @@
                 <label for="remarks">Remarks</label>
                 <textarea class="form-control" id="remarks" name="remarks" ngModel></textarea>
               </div>
-              <div *ngIf="!showId" class="col-4">
-                {{data}}
-              </div>
+    
             </div>
 
             <div class="form-row">
@@ -256,97 +263,103 @@
       <div class="modal-header">
         <h5 class="modal-title" id="booksIssueModalLabel">Issue Book</h5>
         <button type="button" (click)="ngOnInit()" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times; </span>
+          <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <div>
-          <h3>Library Instruction</h3>
-          <ol type="1" *ngFor="let setting of setting">
-            <li>
-              Max no. of Books to be issued: {{setting.noOfBooksAllowed}}
-            </li>
-            <li>
-              Penalty per day: {{setting.penaltyPerDay}}
-            </li>
-            <li>
-              Return after: {{setting.returnDeadlineDays}}
-            </li>
-          </ol>
-        </div>
-        <form (ngSubmit)="checkLimit(i)" #i="ngForm">
-          <div id="check-limit" ngModelGroup="checkLimitData">
-            <div class="form-row">
-              <div class="col-4">
-                <div *ngFor="let setting of setting">
-                  <input type="hidden" name="booksAllowed" [(ngModel)]="setting.noOfBooksAllowed">
-                </div>
-                <input type="text" required placeholder="Enter Enrollment No. or Faculty Name" class="form-control"
-                  name="enrollment" ngModel>
-              </div>
-
-              <div class="col-">
-                <button type="submit" data-target="show" [disabled]="!i.valid" class="btn btn-primary btnWidth">Check Limit</button>
-              </div>
-            </div><br />
-          </div>
-        </form>
-        <div id="#show" *ngIf="allowIssueRequest ; then process "></div>
-        <ng-template #process>
-          <form (ngSubmit)="issueBook(j)" #j="ngForm">
-            <div id="issue-book" ngModelGroup="issueBookData">
-              <div *ngFor="let book of bookById">
-                <div class="form-row">
-
-                  <div class="col-4">
-                    <label for="title">Title<span class="mandatory">*</span></label>
-                    <input type="text" disabled id="title" required class="form-control" name="title" [(ngModel)]="book.title">
-                  </div>
-                  <div class="col-4">
-                    <label for="authorName">Author Name</label>
-                    <input type="text" disabled id="authorName" class="form-control" name="authorName"
-                      [(ngModel)]="book.authorName">
-                  </div>
-                  <div class="col-4">
-                    <label for="edition">Edition</label>
-                    <input type="text" disabled id="edition" class="form-control" name="edition"
-                      [(ngModel)]="book.edition">
-                  </div>
-                </div>
-                <br>
-                <div class="form-row">
-                  <div class="col-4">
-                    <label for="enrollment"> Issue To: </label>
-                  </div>
-                  <div class="col-4">
-                    <input type="text" disabled id="enrollment" name="enrollment" [(ngModel)]="issueto">
-                  </div>
-                  <div class="col-4">
-
-                  </div>
-                </div>
-                <br>
-                <div class="form-row">
-
-                  <div class="col-3">
-                <button  class="btn btn-success btnWidth">Issue</button>
-                  </div>
-                  <div class="col-3">
-                      <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth"
-                        data-dismiss="modal">Cancel</button>
-                    </div>
-                    <div>
-                    <input type="hidden" name="bookId" id="bookId" [(ngModel)]="book.bookId"></div>
-                    <div class="col-3"></div>
-
-                 </div>
-
-              </div>
+          <div *ngIf="bookIssued" class="alert alert-success" role="alert">
+              {{issueRes}}
             </div>
-          </form>
-        </ng-template>
+            <div *ngIf=!bookIssued>
+                <div >
+                    <h3>Library Instruction</h3>
+                    <ol type="1" *ngFor="let setting of setting">
+                      <li>
+                        Max no. of Books to be issued: {{setting.noOfBooksAllowed}}
+                      </li>
+                      <li>
+                        Penalty per day: {{setting.penaltyPerDay}}
+                      </li>
+                      <li>
+                        Return after: {{setting.returnDeadlineDays}}
+                      </li>
+                    </ol>
+                  </div>
+                  <form (ngSubmit)="checkLimit(i)" #i="ngForm">
+                    <div  id="check-limit" ngModelGroup="checkLimitData">
+                      <div class="form-row">
+                        <div class="col-4">
+                          <div *ngFor="let setting of setting">
+                            <input type="hidden" name="booksAllowed" [(ngModel)]="setting.noOfBooksAllowed">
+                          </div>
+                          <input type="text" required placeholder="Enter Enrollment No. or Faculty Name" class="form-control"
+                            name="enrollment" ngModel>
+                        </div>
+          
+                        <div class="col-">
+                          <button type="submit" data-target="show" [disabled]="!i.valid" class="btn btn-primary btnWidth">Check Limit</button>
+                        </div>
+                      </div><br />
+                    </div>
+                  </form>
+                  <div id="#show" *ngIf="allowIssueRequest ; then process "></div>
+                  <ng-template #process>
+                    <form (ngSubmit)="issueBook(j)" #j="ngForm">
+                      <div id="issue-book" ngModelGroup="issueBookData">
+                        <div *ngFor="let book of bookById">
+                          <div class="form-row">
+          
+                            <div class="col-4">
+                              <label for="title">Title<span class="mandatory">*</span></label>
+                              <input type="text" disabled id="title" required class="form-control" name="title" [(ngModel)]="book.title">
+                            </div>
+                            <div class="col-4">
+                              <label for="authorName">Author Name</label>
+                              <input type="text" disabled id="authorName" class="form-control" name="authorName"
+                                [(ngModel)]="book.authorName">
+                            </div>
+                            <div class="col-4">
+                              <label for="edition">Edition</label>
+                              <input type="text" disabled id="edition" class="form-control" name="edition"
+                                [(ngModel)]="book.edition">
+                            </div>
+                          </div>
+                          <br>
+                          <div class="form-row">
+                            <div class="col-4">
+                              <label for="enrollment"> Issue To: </label>
+                            </div>
+                            <div class="col-4">
+                              <input type="text" disabled id="enrollment" name="enrollment" [(ngModel)]="issueto">
+                            </div>
+                            <div class="col-4">
+          
+                            </div>
+                          </div>
+                          <br>
+                          <div class="form-row">
+          
+                            <div class="col-3">
+                          <button  class="btn btn-success btnWidth">Issue</button>
+                            </div>
+                            <div class="col-3">
+                                <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth"
+                                  data-dismiss="modal">Cancel</button>
+                              </div>
+                              <div>
+                              <input type="hidden" name="bookId" id="bookId" [(ngModel)]="book.bookId"></div>
+                              <div class="col-3"></div>
+          
+                           </div>
+          
+                        </div>
+                      </div>
+                    </form>
+                  </ng-template>
+            </div>
+        
       </div>
-
+      
     </div>
   </div>
 </div>
@@ -358,7 +371,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="booksReturnModalLabel">Return Book</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" (click)="ngOnInit()" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -395,9 +408,9 @@
           </div>
           </div>
         </form>
-        <div *ngIf="returnSuccess" class="alert alert-success" role="alert">
-      {{returnBookResponse}}
-        </div>
+          <div *ngIf="returnSuccess" class="alert alert-success" role="alert">
+        {{returnBookResponse}}
+          </div>
        </div>
       </div>
 

@@ -31,12 +31,24 @@
                       </div>
                     </div>
                   </li>
-          </ul>
+                  <li style="cursor:pointer;">
+                    <div class="kyc-section rewards-section reports-sectn row" style="max-height: 100px; max-width: 250px; margin-bottom: 10px;" >
+                      <div class="col-lg-6">
+                        <a routerLink="history"><img src="../../../assets//images/thesis.png" style="width: 35px; height: 35px; " ></a>
+                        <p style="font-size: small" routerLink="history">Issue History</p>
+                      </div>
+                      <div class="col-lg-6" style="margin: auto 0px;">
+                         
+                        
+                      </div>
+                    </div>
+                  </li>
+            </ul>
         </div>
         <div class="col-lg-9">
             <div class="row">
               <div class="col-lg-6">
-                  <h5 >Library Settings</h5>
+                  <h5 >Library Instruction</h5>
                 <br>
                 <ol type="1" *ngFor="let setting of setting">
                     <li>
@@ -50,12 +62,14 @@
                     </li>
                   </ol>
               </div>
-
               <div class="col-lg-3">
-                  <button class="btn btn-reset " data-toggle="modal" data-target="#changeSettingsModal"  ><i class="fa fa-gear fa-fw fa-lg" aria-hidden="true"></i>Update Settings</button>
+
+              </div>
+              <div class="col-lg-3">
+                  <button class="btn btn-reset " data-toggle="modal" data-target="#changeSettingsModal"  ><i class="fa fa-gear fa-fw fa-lg" aria-hidden="true"></i></button>
               </div>
                 
-              </div>
+            </div>
 <router-outlet></router-outlet>
             </div>
                 

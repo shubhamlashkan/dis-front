@@ -9,7 +9,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { ResearchComponent } from './research/research.component';
 
 
-
 @NgModule({
   imports: [
     CommonModule,
