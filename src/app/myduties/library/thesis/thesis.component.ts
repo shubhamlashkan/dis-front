@@ -5,7 +5,7 @@ import { LibraryService } from 'src/app/API_Service/library.service';
 import { updateBookData, librarySettings, issueBookData } from '../bookDataObj';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { optionSearch } from '../books/books.component';
-import { apiSetting } from 'src/app/API_Service/apisetting';
+import { apiSetting } from 'src/app/urls/apisetting';
 
 @Component({
   selector: 'app-thesis',

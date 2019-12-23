@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import {apiSetting} from '../API_Service/apisetting';
+import {apiSetting} from '../urls/apisetting';
 import { allThesis, addThesisData, getThesisByThesisId, updateThesisData, course , librarySettingsthesis,checkPenaltyResponseThesis, previousIssueHistoryThesis } from '../myduties/library/thesisDataObj';
 
 import { addBookData, subjectCategory, allBooks, librarySettings, getBookByBookId, updateBookData, issueBookData, checkPenaltyResponse,  previousIssueHistoryBook } from '../myduties/library/bookDataObj';
