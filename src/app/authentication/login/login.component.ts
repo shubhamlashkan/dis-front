@@ -65,7 +65,11 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/' + tempData);
         console.log(tempData);
         localStorage.setItem('userType',tempData);
+        
       }
     );
   }
+
+ 
+
 }

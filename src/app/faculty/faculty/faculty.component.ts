@@ -10,6 +10,9 @@ export class FacultyComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  
   }
+
+  
 
 }

@@ -18,11 +18,12 @@ import { HodModule } from '../hod/hod.module';
 import { TimetableComponent } from '../conventional/timetable/timetable.component';
 import { LibraryComponent } from '../myduties/library/library/library.component';
 import { MydutiesNavigationComponent } from '../myduties/myduties-navigation/myduties-navigation.component';
+import { RouteGuardService } from '../route-guard.service';
 
 const routes: Routes = [
   {
     path : 'faculty',
-    component : FacultyComponent,
+    component : FacultyComponent,canActivate:[RouteGuardService],
     children : [
       {
         path: 'about',
