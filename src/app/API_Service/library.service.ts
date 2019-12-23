@@ -195,7 +195,7 @@ getIssueThesisInfo(thesisId:number): Observable<checkPenaltyResponseThesis[]>{
         errorMessage = `${error.error.message}`;
       }
       else if(error.status==500){
-        errorMessage = `${error.error.message}`;
+        errorMessage = "Cannot Connect to server";
       }
       else 
       {
