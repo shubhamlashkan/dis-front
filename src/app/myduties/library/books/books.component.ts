@@ -72,7 +72,7 @@ export class BooksComponent implements OnInit {
     /* Get Subject Acronym List */
     this.service.getSubjectCatergoryAcronymList().subscribe((res: subjectCategory[]) => {
       this.subject = res;
-      //console.log(this.subject);
+      console.log(this.subject);
     });
 
     /* Get All Books */
@@ -215,8 +215,6 @@ export class BooksComponent implements OnInit {
       this.issueRes = res;
       this.bookIssued = true;
       //  console.log(this.issueRes);
-    },error=>{
-      //console.log(error.message);
     });
     this.allowIssueRequest=false;
   }
@@ -229,14 +227,13 @@ export class BooksComponent implements OnInit {
       this.penaltyRes = res;
       this.showPenalty = true;
       this.returnBookId = this.checkPenalty.bookId;
-      //console.log(this.penaltyRes);
-    },error=>{
-      //console.log(error.message);
+      console.log(this.penaltyRes);
     });
   }
 
   /* Return Book */
   returnBook(){
+    console.log(this.returnBookId)
     this.service.returnBook(this.returnBookId).subscribe((res:string)=>{
       this.returnBookResponse = res;
       this.returnSuccess = true;

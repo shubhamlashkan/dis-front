@@ -160,7 +160,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="booksAddModalLabel">Add Book</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" (click)="ngOnInit()" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -376,6 +376,7 @@
         </button>
       </div>
       <div class="modal-body">
+
         <form (ngSubmit)="getPenalty(k)" #k="ngForm">
           <div id="check-penalty" ngModelGroup="checkPenaltyData">
             <div class="form-row"> <br />
@@ -409,7 +410,7 @@
           </div>
         </form>
           <div *ngIf="returnSuccess" class="alert alert-success" role="alert">
-        {{returnBookResponse}}
+             {{returnBookResponse}}
           </div>
        </div>
       </div>

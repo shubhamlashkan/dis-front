@@ -40,7 +40,7 @@ export class ResearchComponent implements OnInit {
 
 findBy(typedValue)
   {
-   
+    console.log(this.searchBy);
     this.searchTerm = typedValue;
     if(this.searchBy==1)
     {

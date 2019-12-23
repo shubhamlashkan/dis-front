@@ -440,7 +440,7 @@
                   </div><br/>
                 </div>
               </form>
-              <div id="#show" *ngIf="allowIssueRequest ; then  process"></div>
+              <div id="#show" *ngIf="allowIssueRequest ; then  process else noprocess"></div>
               <ng-template #process>
                 <form (ngSubmit)="issueThesis(j)" #j="ngForm">
                   <div  *ngIf="!ShowIssue" id="issue-thesis" ngModelGroup="issueThesisData">
@@ -492,7 +492,7 @@
                   </div>
                 </form>
               </ng-template> 
-
+              
             </div>
       
           </div>
