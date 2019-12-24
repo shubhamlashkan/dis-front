@@ -36,11 +36,12 @@ export class LoginComponent implements OnInit {
     this.loginInfo = new AuthLoginInfo(
       this.form.username,
       this.form.password);
-
+      console.log('Before '+this.isUserLoggedIn());
     this.authService.attemptAuth(this.loginInfo).subscribe(
       data => {
         this.loading = false;
         console.log(data);
+        sessionStorage.setItem('authenticaterUser',this.form.username);
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveAuthorities(data.authorities);
 
@@ -48,6 +49,7 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getAuthorities();
         this.getValidated();
+        console.log('After '+this.isUserLoggedIn());
       },
       error => {
         if(error.status === 400) {
@@ -64,12 +66,15 @@ export class LoginComponent implements OnInit {
       tempData => {
         this.router.navigateByUrl('/' + tempData);
         console.log(tempData);
-        localStorage.setItem('userType',tempData);
-        
+        sessionStorage.setItem('userType',tempData);
       }
     );
   }
 
- 
+  isUserLoggedIn()
+  {
+    let user = sessionStorage.getItem('authenticaterUser');
+    return !(user===null);
+  }
 
 }

@@ -14,10 +14,14 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit() {
     
+    
   }
   logout():void{
     window.sessionStorage.clear();
     window.localStorage.clear();
+    sessionStorage.removeItem('authenticaterUser');
+    sessionStorage.removeItem('userType');
     this.router.navigate(['/login']);
   }
+  
 }

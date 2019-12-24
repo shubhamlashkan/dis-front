@@ -19,6 +19,8 @@ import { TimetableComponent } from '../conventional/timetable/timetable.componen
 import { LibraryComponent } from '../myduties/library/library/library.component';
 import { MydutiesNavigationComponent } from '../myduties/myduties-navigation/myduties-navigation.component';
 import { RouteGuardService } from '../route-guard.service';
+import { FacultyModule } from './faculty.module';
+
 
 const routes: Routes = [
   {

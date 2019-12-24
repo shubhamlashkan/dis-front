@@ -19,8 +19,7 @@ export class RouteGuardService implements CanActivate {
   
   isUserLoggedIn()
   {
-    let user = localStorage.getItem('userType');
-    console.log("Message ke saath: "+user);
+    let user = sessionStorage.getItem('authenticaterUser');
     return !(user===null);
   }
 }

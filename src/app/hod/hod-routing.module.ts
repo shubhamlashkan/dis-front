@@ -18,10 +18,11 @@ import { InfrastructureModule } from '../infrastructure/infrastructure.module';
 import { Component } from 'fullcalendar';
 import { ProfileComponent } from '../conventional/profile/profile.component';
 import { ConventionalModule } from '../conventional/conventional.module';
+import { RouteGuardService } from '../route-guard.service';
 
 const routes: Routes = [
   { path: 'head',
-    component: HodComponent,
+    component: HodComponent,canActivate:[RouteGuardService],
     children: [
       {
         path: '',
