@@ -10,11 +10,9 @@ import { previousIssueHistoryThesis } from '../thesisDataObj';
 })
 export class ResearchComponent implements OnInit {
   searchBy:number;
-  selected:optionSearch = new optionSearch(3 ,'Author');
+  selected:optionSearch = new optionSearch(1 ,'bookId');
   options = [
-     new optionSearch(1, 'bookId' ),
-     new optionSearch(2, 'thesisId' ),
-     new optionSearch(3, 'username' )
+     new optionSearch(1, 'bookId' )
   ];
   searchTerm:any=null;
   booksRes:previousIssueHistoryBook[];
