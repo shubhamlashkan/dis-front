@@ -54,6 +54,8 @@ export class BooksComponent implements OnInit {
   returnBookResponse:string;
   returnSuccess:boolean = false;
   bookIssued:boolean = false;
+  errorMsg:string=null;
+  showError:boolean = false;
   /* Search By Feature  */
   selected:optionSearch = new optionSearch(3 ,'Author');
   options = [
@@ -69,10 +71,12 @@ export class BooksComponent implements OnInit {
     this.updateButton = false;
     this.removeButton = false;
     this.bookIssued = false;
+    this.returnSuccess = false;
+    this.showError = false;
     /* Get Subject Acronym List */
     this.service.getSubjectCatergoryAcronymList().subscribe((res: subjectCategory[]) => {
       this.subject = res;
-      console.log(this.subject);
+      //console.log(this.subject);
     });
 
     /* Get All Books */
@@ -112,12 +116,13 @@ export class BooksComponent implements OnInit {
     // this.Book.subjectCategory = this.addBookForm.value.addBookData.subjectCategory;
     // this.Book.title = this.addBookForm.value.addBookData.title;
     // this.Book. yearOfPublication = this.addBookForm.value.addBookData.publicationYear;
-    console.log(this.service.addBookDetails(this.Book));
+    //console.log(this.service.addBookDetails(this.Book));
     this.service.addBookDetails(this.Book).subscribe((res: addBookResponse) => {
       this.responseAdd = res;
       // console.log(this.responseAdd.bookId);
       this.data = this.responseAdd.message + ' ' + this.responseAdd.bookId;
       this.showId = true;
+      this.showError = false;
     });
     this.addBookForm.resetForm();
 
@@ -182,7 +187,7 @@ export class BooksComponent implements OnInit {
     //console.log(this.removeBookForm.value.removeBookData.bookId);
     this.service.removeBookByBookId(this.removeBookForm.value.removeBookData.bookId).subscribe((res: string) => {
       this.removeRes = res;
-      console.log(res);
+      //console.log(res);
       this.removeButton = true;
     });
   }
@@ -190,6 +195,7 @@ export class BooksComponent implements OnInit {
 
   /* Check If book issue limit is not exceeded */
   checkLimit() {
+    this.showError = false;
     this.checkIssue = new checkLimitData();
     this.checkIssue.enrollment = this.checkLimitForm.value.checkLimitData.enrollment;
     //console.log(this.checkIssue.enrollment);
@@ -214,30 +220,39 @@ export class BooksComponent implements OnInit {
     this.service.issueBook(this.issueData).subscribe((res: string) => {
       this.issueRes = res;
       this.bookIssued = true;
+      this.showError = false;
       //  console.log(this.issueRes);
-    });
+    },((error)=>{
+      this.showError = true;
+      this.errorMsg = "Username Not found";
+    }));
     this.allowIssueRequest=false;
   }
 
   /* Get Penalty if any */
   getPenalty() {
+    this.showError = false;
     this.checkPenalty = new checkPenaltyData();
     this.checkPenalty.bookId = this.checkPenaltyForm.value.checkPenaltyData.bookId;
     this.service.getIssuedBookInfo(this.checkPenalty.bookId).subscribe((res: checkPenaltyResponse[]) => {
       this.penaltyRes = res;
       this.showPenalty = true;
       this.returnBookId = this.checkPenalty.bookId;
-      console.log(this.penaltyRes);
-    });
+      //console.log(this.penaltyRes);
+    },((error)=>{
+      this.showError = true;
+      this.errorMsg = error;
+    }));
   }
 
   /* Return Book */
   returnBook(){
-    console.log(this.returnBookId)
+    //console.log(this.returnBookId)
+    this.returnSuccess = true;
     this.service.returnBook(this.returnBookId).subscribe((res:string)=>{
       this.returnBookResponse = res;
       this.returnSuccess = true;
-      console.log(this.returnBookResponse);
+      //console.log(this.returnBookResponse);
     });
   }
 
@@ -264,26 +279,37 @@ export class BooksComponent implements OnInit {
       //  console.log(this.searchTerm);
         this.service.getBookByBookId(this.searchTerm).subscribe((bookByIdData: getBookByBookId[])=>{
           this.searchedBooks= bookByIdData;
+          this.showError = false;
+          this.showSearchedRecord = true;
         //  console.log(this.searchedBooks);
-        });
-        this.showSearchedRecord = true;
+        },((error)=> {this.errorMsg = error;
+        this.showError=true;
+      this.showSearchedRecord= false;}));
     }
     else if(this.searchBy==2)
     {
       //console.log(this.searchTerm);
         this.service.getBookByTitle(this.searchTerm).subscribe((bookByIdData: getBookByBookId[])=>{
           this.searchedBooks= bookByIdData;
-        //  console.log(this.searchedBooks);
-        });
-        this.showSearchedRecord = true;
+          this.showError = false;
+          this.showSearchedRecord = true;
+          //  console.log(this.searchedBooks);
+        },((error)=> {this.errorMsg = error;
+          this.showError=true;
+        this.showSearchedRecord= false;}));
+        
     }
     else {
       //console.log(this.searchTerm);
         this.service.getBookByAuthor(this.searchTerm).subscribe((bookByIdData: getBookByBookId[])=>{
           this.searchedBooks= bookByIdData;
-        //  console.log(this.searchedBooks);
-        });
-        this.showSearchedRecord = true;
+          this.showError = false;
+          this.showSearchedRecord = true;
+          //  console.log(this.searchedBooks);
+        },((error)=> {this.errorMsg = error;
+          this.showError=true;
+        this.showSearchedRecord= false;}));
+        
     }
   }
 

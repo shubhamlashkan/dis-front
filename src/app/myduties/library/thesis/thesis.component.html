@@ -17,7 +17,11 @@
   </div>
 </div>
 <br>
-
+<div *ngIf = "showError"  class="alert alert-danger" role="alert">
+    {{errorMsg}}
+  </div>
+<br>
+<br>
 <div class="form-row">
    <div class="col-3">
       <button class="btn btn-success" data-toggle="modal" data-target="#thesisAddModal" ><i class="fa fa-plus-circle fa-fw fa-lg" aria-hidden="true"></i>Add Thesis</button>
@@ -162,7 +166,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="thesisAddModalLabel">Add Thesis</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" (click)="ngOnInit()" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
@@ -179,12 +183,11 @@
                           </div>
                           <div class="col">
                             <label>Year<span class="mandatory">*</span></label>
-                            <input type="text" required class="form-control" name="year" ngModel>
+                            <input type="number"  min="1" required class="form-control" name="year" ngModel>
                           </div>
                       </div>
                       <br/>
                       <div class="form-row">
-                         
                           <div class="col-4">
                             <label>Submitted By<span class="mandatory">*</span></label>
                             <input type="textarea" required class="form-control" name="submittedBy" ngModel>
@@ -213,12 +216,22 @@
                               <input type="text" class="form-control" name="remarks" ngModel>
                             </div>
                           </div><br/>
-                         
-                            <div  class="d-flex justify-content-center mt-3">
-                                
-                                <button type="submit" class="btn btn-success btnWidth" [disabled] = '!f.valid'>Add</button>
-                              </div>
-                            </div>
+                         <div class="form-row">
+                           <div class="col-3">
+
+                           </div>
+                           <div class="col-3">
+                            <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth"
+                            data-dismiss="modal">Cancel</button>
+                           </div>
+                           <div class="col-3">
+                            <button type="submit" class="btn btn-success btnWidth" [disabled] = '!f.valid'>Add</button>
+                           </div>
+                           <div class="col-3">
+
+                           </div>
+                         </div>
+                      </div>
                     </form>
               </div>
           </div>
@@ -255,7 +268,7 @@
                               </div>
                               <div class="col">
                                 <label>Year<span class="mandatory">*</span></label>
-                                <input type="text" required class="form-control" name="Year" [(ngModel)]="thesis.year">
+                                <input type="number"  min="1" required class="form-control" name="Year" [(ngModel)]="thesis.year">
                               </div>
                           </div>
                           <br/>
@@ -406,92 +419,97 @@
               <div *ngIf="showIssue" class="alert alert-primary" role="alert">
                 {{issueRes}}
               </div>
-              
-              <div>
+              <div *ngIf="!showIssue"> 
+                  <div>
                
 
-                <h3>Library Instruction</h3>
-                <ol type="1" *ngFor="let setting of setting">
-                  <li>
-                    Max no. of Books to be issued: {{setting.noOfBooksAllowed}}
-                  </li>
-                  <li>
-                    Penalty per day: {{setting.penaltyPerDay}}
-                  </li>
-                  <li>
-                    Return after: {{setting.returnDeadlineDays}}
-                  </li>
-                </ol>
-              </div>
-              <form (ngSubmit)="checkLimit(i)" #i="ngForm">
-                <div id="check-limit" ngModelGroup="checkLimitData">
-                  <div class="form-row">
-                    <div class="col-4">
-                      <div *ngFor="let setting of setting">
-                        <input type="hidden" name="thesisAllowed" [(ngModel)]="setting.noOfBooksAllowed">
-                      </div>
-                      <input type="text" required placeholder="Enter Enrollment No. or Faculty Name" class="form-control"
-                        name="enrollment" ngModel>
+                      <h3>Library Instruction</h3>
+                      <ol type="1" *ngFor="let setting of setting">
+                        <li>
+                          Max no. of Books to be issued: {{setting.noOfBooksAllowed}}
+                        </li>
+                        <li>
+                          Penalty per day: {{setting.penaltyPerDay}}
+                        </li>
+                        <li>
+                          Return after: {{setting.returnDeadlineDays}}
+                        </li>
+                      </ol>
                     </div>
-      
-                    <div class="col-">
-                      <button type="submit" data-target="show" class="btn btn-primary btnWidth">Check Limit</button>
-                    </div>
-                  </div><br/>
-                </div>
-              </form>
-              <div id="#show" *ngIf="allowIssueRequest ; then  process else noprocess"></div>
-              <ng-template #process>
-                <form (ngSubmit)="issueThesis(j)" #j="ngForm">
-                  <div  *ngIf="!ShowIssue" id="issue-thesis" ngModelGroup="issueThesisData">
-                    <div *ngFor = "let thesis of thesisById">
-                      <div class="form-row">
-      
-                        <div class="col-4">
-                          <label for="title">Title</label>
-                          <input type="text" disabled id="title" required class="form-control" name="title" [(ngModel)]="thesis.title">
-                        </div>
-                        <div class="col-4">
-                          <label for="course">Course</label>
-                          <input type="text" disabled id="course" class="form-control" name="course" [(ngModel)]="thesis.course">
-                        </div>
-                        <div class="col-4">
-                          <label for="year">Year</label>
-                          <input type="text" disabled id="year" class="form-control" name="year" [(ngModel)]="thesis.year">
-                        </div>
-                      </div>
-                      <br>
-                      <div class="form-row">
-                        <div class="col-4"> 
-                          <label for="enrollment"> Issue To: </label>
-                        </div>
-                        <div class="col-4">
-                          <input type="text" disabled id="enrollment" name="enrollment" [(ngModel)]="issueto">
-                        </div>
-                        <div class="col-4">
-      
-                        </div>
-                      </div>
-                      <br>
-                      <div class="form-row">
-                        
-                        <div class="col-3"> 
-                      <button  class="btn btn-success btnWidth">Issue</button>
-                        </div>
-                        <div class="col-3">
-                            <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth"
-                              data-dismiss="modal">Cancel</button>
+                    <form (ngSubmit)="checkLimit(i)" #i="ngForm">
+                      <div id="check-limit" ngModelGroup="checkLimitData">
+                        <div class="form-row">
+                          <div class="col-4">
+                            <div *ngFor="let setting of setting">
+                              <input type="hidden" name="thesisAllowed" [(ngModel)]="setting.noOfBooksAllowed">
+                            </div>
+                            <input type="text" required placeholder="Enter Enrollment No. or Faculty Name" class="form-control"
+                              name="enrollment" ngModel>
                           </div>
-                          <div class = "col-3">
-                          <input type="hidden" name="thesisId" id="thesisId" [(ngModel)]="thesis.thesisId"></div>
-                          <div class="col-3"></div>
+            
+                          <div class="col-">
+                            <button type="submit" [disabled]="!i.valid" data-target="show" class="btn btn-primary btnWidth">Check Limit</button>
+                          </div>
+                        </div><br/>
+                      </div>
+                    </form>
+                    <div *ngIf = "showError"  class="alert alert-danger" role="alert">
+                        {{errorMsg}}
+                      </div>
+                    <div id="#show" *ngIf="allowIssueRequest ; then  process else noprocess"></div>
+                    <ng-template #process>
+                      <form (ngSubmit)="issueThesis(j)" #j="ngForm">
+                        <div  *ngIf="!ShowIssue" id="issue-thesis" ngModelGroup="issueThesisData">
+                          <div *ngFor = "let thesis of thesisById">
+                            <div class="form-row">
+            
+                              <div class="col-4">
+                                <label for="title">Title</label>
+                                <input type="text" disabled id="title" required class="form-control" name="title" [(ngModel)]="thesis.title">
+                              </div>
+                              <div class="col-4">
+                                <label for="course">Course</label>
+                                <input type="text" disabled id="course" class="form-control" name="course" [(ngModel)]="thesis.course">
+                              </div>
+                              <div class="col-4">
+                                <label for="year">Year</label>
+                                <input type="text" disabled id="year" class="form-control" name="year" [(ngModel)]="thesis.year">
+                              </div>
+                            </div>
+                            <br>
+                            <div class="form-row">
+                              <div class="col-4"> 
+                                <label for="enrollment"> Issue To: </label>
+                              </div>
+                              <div class="col-4">
+                                <input type="text" disabled id="enrollment" name="enrollment" [(ngModel)]="issueto">
+                              </div>
+                              <div class="col-4">
+            
+                              </div>
+                            </div>
+                            <br>
+                            <div class="form-row">
+                              
+                              <div class="col-3"> 
+                            <button  class="btn btn-success btnWidth">Issue</button>
+                              </div>
+                              <div class="col-3">
+                                  <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth"
+                                    data-dismiss="modal">Cancel</button>
+                                </div>
+                                <div class = "col-3">
+                                <input type="hidden" name="thesisId" id="thesisId" [(ngModel)]="thesis.thesisId"></div>
+                                <div class="col-3"></div>
+                          
+                             </div>
+                      
+                          </div>
+                        </div>
+                      </form>
+                    </ng-template> 
                     
-                       </div>
-                
-                    </div>
-                  </div>
-                </form>
-              </ng-template> 
+              </div>
               
             </div>
       
@@ -516,14 +534,18 @@
         <div id="check-penalty-thesis" ngModelGroup="checkPenaltyDataThesis">
           <div class="form-row"> <br />
             <div class="col-4">
-              <input type="text" class="form-control" placeholder="Enter Thesis Number" name="thesisId" ngModel>
+              <input type="text" required class="form-control" placeholder="Enter Thesis Number" name="thesisId" ngModel>
             </div>
             <div class="col-4">
-              <button type="submit" data-target="#showPenalty" class="btn btn-success btnWidth">Show Details</button>
+              <button type="submit" [disabled]="!k.valid" data-target="#showPenalty" class="btn btn-success btnWidth">Show Details</button>
             </div>
           </div>
         </div>
       </form>
+      <br>
+      <div *ngIf = "showError"  class="alert alert-danger" role="alert">
+          {{errorMsg}}
+        </div>
       <br>
       <div *ngIf="showPenalty">
         <form>
@@ -534,19 +556,24 @@
             <div class="col-3">
                Penalty: {{penaltyRes.penalty}} Rs.
             </div>
-            <div class="col-3">
-               <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth"
-                         data-dismiss="modal">Cancel</button>
+            <div *ngIf="!returnSuccess">
+                <div class="col-3">
+                    <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth"
+                              data-dismiss="modal">Cancel</button>
+                 </div>
+                 <br>
+                <div class="col-3">
+                    <button type="submit" (click)="returnThesis()"  class="btn btn-primary btnWidth"
+                    >Return Thesis</button>
+                </div>   
             </div>
-           <div class="col-3">
-               <button type="submit" (click)="returnThesis()"  class="btn btn-primary btnWidth"
-               >Return Thesis</button>
-           </div>
+            
            </div>
          </form>
          </div>
+         <br>
         <div *ngIf="returnSuccess" class="alert alert-success" role="alert">
-          {{returnThesisResponse}}
+            "Thesis Returned Successfully Please collect above mentioned penalty."
             </div>
            
        

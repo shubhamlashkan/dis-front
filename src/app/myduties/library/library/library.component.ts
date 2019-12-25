@@ -20,10 +20,12 @@ export class LibraryComponent implements OnInit {
   books: allBooks[] = [];
   thesis: allThesis[] =[];
   thesisCount:number=0;
+  settingsChanged:boolean=false;
   constructor(private service:LibraryService) { }
 
   ngOnInit() {
     this.buttonClick = false;
+    this.settingsChanged=false;
     this.service.getLibrarySettings().subscribe((libSettings:librarySettings[])=>{
       this.setting = libSettings;
       console.log(this.setting);
@@ -55,6 +57,8 @@ export class LibraryComponent implements OnInit {
       this.service.updateLibrarySettings(this.updateSetting).subscribe((res:string)=>
       {
         this.settingsRes = res;
+        this.settingsChanged = true;
+
       });
       this.buttonClick=false;
     }

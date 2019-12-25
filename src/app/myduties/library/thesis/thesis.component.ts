@@ -55,6 +55,8 @@ thesisAllowed : string;
   returnThesisResponse:string;
   returnSuccess:boolean = false;
   selected:optionSearch = new optionSearch(1,'Id');
+  errorMsg:string=null;
+  showError:boolean = false;
   options = [
     new optionSearch(1,'Id'),
     new optionSearch(2,'Title'),
@@ -66,7 +68,8 @@ thesisAllowed : string;
   constructor(private service : LibraryService) { }
 
   ngOnInit() {
-
+    this.returnSuccess = false;
+    this.showError = false;
     this.searchTerm=null;
     this.ShowId = false;
     this.updateButton=false;
@@ -87,7 +90,7 @@ thesisAllowed : string;
     this.showIssue= false;
   }
   onSubmit (){
-    console.log(this.addThesisForm);
+   // console.log(this.addThesisForm);
     this.Thesis = new addThesisData();
     this.Thesis.title=this.addThesisForm.value.addThesisData.title;
     this.Thesis.year=this.addThesisForm.value.addThesisData.year;
@@ -163,6 +166,7 @@ thesisAllowed : string;
 
 
  checkLimit() {
+  this.showError = false;
   this.checkIssue = new checkLimitDataThesis();
   this.checkIssue.enrollments = this.checkLimitForm.value.checkLimitData.enrollment;
   //console.log(this.checkIssue.enrollments);
@@ -180,22 +184,26 @@ thesisAllowed : string;
   });
 } 
 issueThesis() {
+  
   this.issueData = new issueBookData(null,this.issueThesisForm.value.issueThesisData.thesisId,
     this.issueto);
   //console.log(this.issueData);
   this.service.issueBook(this.issueData).subscribe((res: string) => {
     this.issueRes = res;
-    //console.log(this.issueRes);
-  });
-    this.allowIssueRequest=false;
     this.showIssue=true;
-   
-  
+    this.showError = false;
+    //console.log(this.issueRes);
+  },((error)=>{
+    this.showError = true;
+    this.errorMsg = "Username Not found";
+  }));
+    this.allowIssueRequest=false;
     
   }
 
 
 getPenalty() {
+  this.showError = false;
   this.checkPenalty = new checkPenaltyDataThesis();
   this.checkPenalty.thesisId = this.checkPenaltyForm.value.checkPenaltyDataThesis.thesisId;
   this.service.getIssueThesisInfo(this.checkPenalty.thesisId).subscribe((res: checkPenaltyResponseThesis[]) => {
@@ -203,12 +211,16 @@ getPenalty() {
     this.showPenalty = true;
     this.returnThesisId = this.checkPenalty.thesisId;
     //console.log(this.penaltyRes);
-  });
+  },((error)=>{
+    this.showError = true;
+    this.errorMsg = error;
+  }));
 }
 returnThesis(){
+  this.returnSuccess = true;
   this.service.returnThesis(this.returnThesisId).subscribe((res:string)=>{
     this.returnThesisResponse = res;
-    this.returnSuccess = true;
+ 
     //console.log(this.returnThesisResponse);
   });
 }
@@ -235,41 +247,64 @@ findBy(typedValue)
       //console.log(this.searchTerm);
       this.service.getThesisByThesisId(this.searchTerm).subscribe((thesisByIdData: getThesisByThesisId[])=>{
         this.searchedThesis= thesisByIdData;
+        this.showError = false;
+        this.showSearchedRecord = true;
         //console.log(this.searchedThesis);
-      });
-      this.showSearchedRecord = true;
+      },((error)=> {this.errorMsg = error;
+      this.showError=true;
+        this.showSearchedRecord = false;
+    }));
+      
   }
    if(this.searchBy==2)
   {
     //console.log(this.searchTerm);
     this.service.getThesisByTitle(this.searchTerm).subscribe((thesisByIdData: getThesisByThesisId[])=>{
       this.searchedThesis=thesisByIdData;
-    });
-    this.showSearchedRecord=true;
+      this.showError = false;
+      this.showSearchedRecord=true;
+    },((error)=> {this.errorMsg = error;
+      this.showError=true;
+        this.showSearchedRecord = false;
+    }));
+    
   }
   if(this.searchBy==3)
   {
     //console.log(this.searchTerm);
     this.service.getThesisByCourse(this.searchTerm).subscribe((thesisByIdData: getThesisByThesisId[])=>{
       this.searchedThesis=thesisByIdData;
-    });
-    this.showSearchedRecord=true;
+      this.showError = false;
+      this.showSearchedRecord=true;
+    },((error)=> {this.errorMsg = error;
+      this.showError=true;
+        this.showSearchedRecord = false;
+    }));
+    
   }
   if(this.searchBy==4)
   {
     //console.log(this.searchTerm);
     this.service.getThesisBySubmittedBy(this.searchTerm).subscribe((thesisByIdData: getThesisByThesisId[])=>{
       this.searchedThesis=thesisByIdData;
-    });
-    this.showSearchedRecord=true;
+      this.showError = false;
+      this.showSearchedRecord=true;
+    },((error)=> {this.errorMsg = error;
+      this.showError=true;
+        this.showSearchedRecord = false;
+    }));
   }
    if(this.searchBy==5)
    {
     //console.log(this.searchTerm);
     this.service.getThesisByGuidedBy(this.searchTerm).subscribe((thesisByIdData: getThesisByThesisId[])=>{
       this.searchedThesis=thesisByIdData;
-    });
-    this.showSearchedRecord=true;
+      this.showError = false;
+      this.showSearchedRecord=true;
+    },((error)=> {this.errorMsg = error;
+      this.showError=true;
+        this.showSearchedRecord = false;
+    }));
   }
   
 }

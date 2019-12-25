@@ -19,6 +19,11 @@
     </div>
 </div>
 <br>
+<div *ngIf = "showError"  class="alert alert-danger" role="alert">
+    {{errorMsg}}
+  </div>
+<br>
+<br>
 <div class="form-row">
   <div class="col-3">
       <button class="btn btn-success " (click)="ngOnInit()" data-toggle="modal" data-target="#booksAddModal"><i
@@ -168,6 +173,7 @@
         <div *ngIf="showId" class="alert alert-success" role="alert">
           {{data}}
         </div>
+      
         <form (ngSubmit)="onSubmit(f)" #f="ngForm">
           <div *ngIf="!showId" id="add-book-records" ngModelGroup="addBookData">
             <div class="form-row">
@@ -195,18 +201,18 @@
               </div>
               <div class="col-4">
                 <label for="publicationYear">Publication Year</label>
-                <input type="text" id="publicationYear" class="form-control" name="publicationYear" ngModel>
+                <input type="number" id="publicationYear" class="form-control" name="publicationYear" ngModel>
               </div>
             </div><br />
             <div class="form-row">
               <div class="col-4">
                 <label for="price">Price</label>
-                <input type="text" id="price" class="form-control" name="price" ngModel>
+                <input type="number"  min="1" id="price" class="form-control" name="price" ngModel>
               </div>
 
               <div class="col-4">
                 <label for="noOfPages">no. of Pages</label>
-                <input type="text" id="noOfPages" class="form-control" name="noOfPages" ngModel>
+                <input type="number"  min="1" id="noOfPages" class="form-control" name="noOfPages" ngModel>
               </div>
               <div class="col-4">
                 <label >Subject Category</label>
@@ -302,6 +308,9 @@
                       </div><br />
                     </div>
                   </form>
+                  <div *ngIf = "showError"  class="alert alert-danger" role="alert">
+                      {{errorMsg}}
+                    </div>
                   <div id="#show" *ngIf="allowIssueRequest ; then process "></div>
                   <ng-template #process>
                     <form (ngSubmit)="issueBook(j)" #j="ngForm">
@@ -376,44 +385,54 @@
         </button>
       </div>
       <div class="modal-body">
-
-        <form (ngSubmit)="getPenalty(k)" #k="ngForm">
-          <div id="check-penalty" ngModelGroup="checkPenaltyData">
-            <div class="form-row"> <br />
-              <div class="col-4">
-                <input type="text" required class="form-control" placeholder="Enter Book Number" name="bookId" ngModel>
-              </div>
-              <div class="col-4">
-                <button type="submit" data-target="#showPenalty" [disabled]="!k.valid" class="btn btn-success btnWidth">Show Details</button>
+         
+    
+          <form (ngSubmit)="getPenalty(k)" #k="ngForm">
+            <div id="check-penalty" ngModelGroup="checkPenaltyData">
+              <div class="form-row"> <br />
+                <div class="col-4">
+                  <input type="text" required class="form-control" placeholder="Enter Book Number" name="bookId" ngModel>
+                </div>
+                <div class="col-4">
+                  <button type="submit" data-target="#showPenalty" [disabled]="!k.valid" class="btn btn-success btnWidth">Show Details</button>
+                </div>
               </div>
             </div>
-          </div>
-        </form>
-        <br>
-       <div *ngIf="showPenalty">
-       <form>
-         <div class="form-row">
-           <div class="col-3">
-              Issued To: {{penaltyRes.username}}
-           </div>
-           <div class="col-3">
-              Penalty: {{penaltyRes.penalty}} Rs.
-           </div>
-           <div class="col-3">
-              <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth"
-                        data-dismiss="modal">Cancel</button>
-           </div>
-          <div class="col-3">
-              <button type="submit" (click)="returnBook()"  class="btn btn-primary btnWidth"
-              >Return Book</button>
-          </div>
-          </div>
-        </form>
+          </form>
+          <br>
+          <div *ngIf = "showError"  class="alert alert-danger" role="alert">
+              {{errorMsg}}
+            </div>
+          <br>
+         <div *ngIf="showPenalty">
+         <form>
+           <div class="form-row">
+             <div class="col-3">
+                Issued To: {{penaltyRes.username}}
+             </div>
+             <div class="col-3">
+                Penalty: {{penaltyRes.penalty}} Rs.
+             </div>
+             <div class="col-6" *ngIf="!returnSuccess">
+                <div class="col-6">
+                    <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth"
+                              data-dismiss="modal">Cancel</button>
+                 </div>
+                 <br>
+                <div class="col-6">
+                    <button type="submit" (click)="returnBook()"  class="btn btn-primary btnWidth"
+                    >Return Book</button>
+                </div>
+     
+             </div>
+            </div>
+          </form>
+          <br>
           <div *ngIf="returnSuccess" class="alert alert-success" role="alert">
-             {{returnBookResponse}}
-          </div>
-       </div>
-      </div>
+              "Book Returned Successfully Please Collect above mentioned penalty"
+            </div>
+        </div>
+    </div>
 
     </div>
   </div>
@@ -468,19 +487,19 @@
                 </div>
                 <div class="col-4">
                   <label for="publicationYear">Publication Year</label>
-                  <input type="text" id="publicationYear" class="form-control" name="publicationYear"
+                  <input type="number"  min="1" id="publicationYear" class="form-control" name="publicationYear"
                     [(ngModel)]="book.yearOfPublication">
                 </div>
               </div><br />
               <div class="form-row">
                 <div class="col-4">
                   <label for="price">Price</label>
-                  <input type="text" id="price" class="form-control" name="price" [(ngModel)]="book.price">
+                  <input type="number"  min="1" id="price" class="form-control" name="price" [(ngModel)]="book.price">
                 </div>
 
                 <div class="col-4">
                   <label for="noOfPages">no. of Pages</label>
-                  <input type="text" id="noOfPages" class="form-control" name="noOfPages" [(ngModel)]="book.noOfPages">
+                  <input type="number"  min="1" id="noOfPages" class="form-control" name="noOfPages" [(ngModel)]="book.noOfPages">
                 </div>
                 <div class="col-4">
                   <label for="purchasedOn">Date of Purchase</label>

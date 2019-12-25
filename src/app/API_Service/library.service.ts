@@ -33,9 +33,7 @@ export class LibraryService {
 
 
   addBookDetails(Book: addBookData) {
-    return this.http.post(this.apiUrl + '/addBook', Book, this.httpOptions).pipe(
-      catchError(this.handleError)
-    );
+    return this.http.post(this.apiUrl + '/addBook', Book, this.httpOptions);
   }
 
   getSubjectCatergoryAcronymList(): Observable<subjectCategory[]> {
@@ -56,7 +54,9 @@ export class LibraryService {
   }
 
   getBookByBookId(bookId: string): Observable<getBookByBookId[]> {
-    return this.http.get<getBookByBookId[]>(`${this.apiUrl}/getBookByBookId/${bookId}`);
+    return this.http.get<getBookByBookId[]>(`${this.apiUrl}/getBookByBookId/${bookId}`).pipe(
+      catchError(this.handleError)
+    );; 
   }
  
   updateBookByBookId(bookId:string,updatebook:updateBookData){
@@ -88,10 +88,14 @@ export class LibraryService {
   }
 
   getBookByTitle(title:string):Observable<getBookByBookId[]>{
-    return this.http.get<getBookByBookId[]>(`${this.apiUrl}/getBookByTitle/${title}`);
+    return this.http.get<getBookByBookId[]>(`${this.apiUrl}/getBookByTitle/${title}`).pipe(
+      catchError(this.handleError)
+    );
   }
   getBookByAuthor(author:string):Observable<getBookByBookId[]>{
-    return this.http.get<getBookByBookId[]>(`${this.apiUrl}/getBookByAuthorName/${author}`);
+    return this.http.get<getBookByBookId[]>(`${this.apiUrl}/getBookByAuthorName/${author}`).pipe(
+      catchError(this.handleError)
+    );
   }
 
   returnBook(bookId:string):Observable<string>{
@@ -163,23 +167,29 @@ getIssueThesisInfo(thesisId:number): Observable<checkPenaltyResponseThesis[]>{
 
  
   getThesisByTitle(title:string):Observable<getThesisByThesisId[]>{
-    return this.http.get<getThesisByThesisId[]>(`${this.apiUrl}/getThesisByTitle/${title}`);
+    return this.http.get<getThesisByThesisId[]>(`${this.apiUrl}/getThesisByTitle/${title}`).pipe(
+      catchError(this.handleError)
+    );
   }
   getThesisByCourse(course:string):Observable<getThesisByThesisId[]>{
-    return this.http.get<getThesisByThesisId[]>(`${this.apiUrl}/getThesisByCourse/${course}`);
+    return this.http.get<getThesisByThesisId[]>(`${this.apiUrl}/getThesisByCourse/${course}`).pipe(
+      catchError(this.handleError)
+    );
   }
   getThesisBySubmittedBy(submittedBy:string):Observable<getThesisByThesisId[]>{
-    return this.http.get<getThesisByThesisId[]>(`${this.apiUrl}/getThesisBySubmittedBy/${submittedBy}`);
+    return this.http.get<getThesisByThesisId[]>(`${this.apiUrl}/getThesisBySubmittedBy/${submittedBy}`).pipe(
+      catchError(this.handleError)
+    );
   }
   getThesisByGuidedBy(guidedBy:string):Observable<getThesisByThesisId[]>{
-    return this.http.get<getThesisByThesisId[]>(`${this.apiUrl}/getThesisByGuidedBy/${guidedBy}`);
+    return this.http.get<getThesisByThesisId[]>(`${this.apiUrl}/getThesisByGuidedBy/${guidedBy}`).pipe(
+      catchError(this.handleError)
+    );
   }
 
   
   returnThesis(thesisId:number):Observable<any>{
-    return this.http.put<any>(`${this.apiUrl}/returnThesis/${thesisId}`,{responseType:'text'}).pipe(
-      catchError(this.handleError)
-    );
+    return this.http.put<any>(`${this.apiUrl}/returnThesis/${thesisId}`,{responseType:'text'});
   }
 
 
@@ -197,14 +207,22 @@ getIssueThesisInfo(thesisId:number): Observable<checkPenaltyResponseThesis[]>{
       else if(error.status==500){
         errorMessage = "Cannot Connect to server";
       }
+      else if(error.status==0)
+      {
+        errorMessage = "Input Can't be Empty";
+      }
+      else if(error.status==400)
+      {
+        errorMessage = "Invalid input";
+      }
       else 
       {
-        errorMessage = `${error.error.message}`;
+        errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
       }
       // server-side error
      // errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    window.alert(errorMessage);
+    //window.alert(errorMessage);
     return throwError(errorMessage);
   }
 
