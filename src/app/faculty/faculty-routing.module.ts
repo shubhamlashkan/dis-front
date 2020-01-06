@@ -21,11 +21,11 @@ import { MydutiesNavigationComponent } from '../myduties/myduties-navigation/myd
 import { RouteGuardService } from '../route-guard.service';
 import { FacultyModule } from './faculty.module';
 
-
+//canActivate:[RouteGuardService],
 const routes: Routes = [
   {
     path : 'faculty',
-    component : FacultyComponent,canActivate:[RouteGuardService],
+    component : FacultyComponent,
     children : [
       {
         path: 'about',

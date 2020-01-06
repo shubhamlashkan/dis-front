@@ -12,10 +12,10 @@ export class FacultyComponent implements OnInit {
 
   ngOnInit() {
 
-    if(!this.isUserLoggedIn())
+   /* if(!this.isUserLoggedIn())
     {
       this.router.navigate(['login']);
-    }
+    }*/
   }
 
   isUserLoggedIn()
