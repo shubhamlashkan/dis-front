@@ -172,6 +172,7 @@ export interface previousIssueHistoryBook{
   issueId: string;
   penalty: number;
   thesisId: number;
-  title:string;
+  title: string;
   userName: string;
 }
+
