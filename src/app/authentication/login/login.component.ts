@@ -52,8 +52,9 @@ export class LoginComponent implements OnInit {
        // console.log('After '+this.isUserLoggedIn());
       },
       error => {
-        if(error.status === 400) {
+        if(error.status === 404) {
         //this.router.navigate(['/forgot-password']);
+        this.loading=false;
         this.toastr.errorToastr(error.error['message'], 'Alert!');
         console.log(error);
         this.isLoginFailed = true;
