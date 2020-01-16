@@ -28,7 +28,7 @@ export class LibraryComponent implements OnInit {
     this.settingsChanged=false;
     this.service.getLibrarySettings().subscribe((libSettings:librarySettings[])=>{
       this.setting = libSettings;
-      console.log(this.setting);
+      //console.log(this.setting);
     });
     this.service.getAllBooks().subscribe((bookData: allBooks[]) => {
       this.books = bookData;

@@ -47,16 +47,16 @@ export class ResearchComponent implements OnInit {
 
 findBy(typedValue)
   {
-    console.log(this.searchBy);
+  //  console.log(this.searchBy);
     this.searchTerm = typedValue;
-    console.log(this.searchTerm);
+   // console.log(this.searchTerm);
     if(this.searchBy==1)
     {
       this.service.getPreviousIssuesByBookId(this.searchTerm).subscribe((res:previousIssueHistoryBook[])=>{
         this.booksRes = res;
         this.showError = false;
         this.showSearchedRecord=true;
-        console.log(this.booksRes);
+       // console.log(this.booksRes);
       },((error)=> {this.errorMsg = error;
         this.showError=true;
       this.showSearchedRecord= false;}));
@@ -78,7 +78,7 @@ findBy(typedValue)
           this.showError = false;
           this.showSearchedRecord=true;
         },((error) => {this.errorMsg = error;
-          console.log(this.errorMsg);
+        //  console.log(this.errorMsg);
           this.showError=true;
         this.showSearchedRecord= false;}));
     }

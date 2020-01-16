@@ -31,12 +31,12 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form);
+    //console.log(this.form);
     this.loading = true;
     this.loginInfo = new AuthLoginInfo(
       this.form.username,
       this.form.password);
-      console.log('Before '+this.isUserLoggedIn());
+     // console.log('Before '+this.isUserLoggedIn());
     this.authService.attemptAuth(this.loginInfo).subscribe(
       data => {
         this.loading = false;
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
         if(error.status === 400) {
         //this.router.navigate(['/forgot-password']);
         this.toastr.errorToastr(error.error['message'], 'Alert!');
-        console.log(error);
+        //console.log(error);
         this.isLoginFailed = true;
       }
       });
@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
     this.authService.validateUser().subscribe(
       tempData => {
         this.router.navigateByUrl('/' + tempData);
-        console.log(tempData);
+       // console.log(tempData);
         sessionStorage.setItem('userType',tempData);
       }
     );
