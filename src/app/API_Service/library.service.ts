@@ -103,15 +103,21 @@ export class LibraryService {
   }
 
   getPreviousIssuesByBookId(bookId:string):Observable<previousIssueHistoryBook[]>{
-    return this.http.get<previousIssueHistoryBook[]>(`${this.apiUrl}/getPreviousIssuesByBookId/${bookId}`);
+    return this.http.get<previousIssueHistoryBook[]>(`${this.apiUrl}/getPreviousIssuesByBookId/${bookId}`).pipe(
+      catchError(this.handleError)
+    );
   }
 
   getPreviousIssuesByThesisId(thesisId:number):Observable<previousIssueHistoryThesis[]>{
-    return this.http.get<previousIssueHistoryThesis[]>(`${this.apiUrl}/getPreviousIssuesByThesisId/${thesisId}`);
+    return this.http.get<previousIssueHistoryThesis[]>(`${this.apiUrl}/getPreviousIssuesByThesisId/${thesisId}`).pipe(
+      catchError(this.handleError)
+    );
   }
 
   getPreviousIssuesByUsername(username:string):Observable<previousIssueHistoryBook[]>{
-    return this.http.get<previousIssueHistoryBook[]>(`${this.apiUrl}/getPreviousIssuesByUsername/${username}`);
+    return this.http.get<previousIssueHistoryBook[]>(`${this.apiUrl}/getPreviousIssuesByUsername/${username}`).pipe(
+      catchError(this.handleError)
+    );
   }
 
 
@@ -205,7 +211,7 @@ getIssueThesisInfo(thesisId:number): Observable<checkPenaltyResponseThesis[]>{
         errorMessage = `${error.error.message}`;
       }
       else if(error.status==500){
-        errorMessage = "Cannot Connect to server";
+        errorMessage = "Records not found";
       }
       else if(error.status==0)
       {

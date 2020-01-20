@@ -53,7 +53,7 @@ export class SignUpComponent implements OnInit {
       this.authService.signUp(this.signupInfo).subscribe(
         data => {
           if(data.ok) {
-          console.log(data);
+         // console.log(data);
           this.isSignedUp = true;
           this.isSignUpFailed = false;
           this.toastr.successToastr(data.body['message'], 'Success!');
@@ -62,7 +62,7 @@ export class SignUpComponent implements OnInit {
         error => {
           if(error.status === 400) {
           this.toastr.errorToastr(error.error['message'], 'Alert!');
-          console.log(error);
+         // console.log(error);
           this.isSignUpFailed = true;
         }
       }

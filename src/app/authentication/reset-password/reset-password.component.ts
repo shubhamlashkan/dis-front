@@ -13,6 +13,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class ResetPasswordComponent implements OnInit {
   newPasswd: string;
   resetForm: FormGroup;
+  submitted = false;
 
   constructor(private authService: AuthService, private router: Router, public toastr: ToastrManager, private formBuider: FormBuilder) { }
 
@@ -36,7 +37,7 @@ get formCtl() {
         if(response.ok) {
           this.router.navigate(['/']);
           this.toastr.successToastr(response.body['message'], 'Success!');
-          console.log(response);
+         // console.log(response);
         }
       },
       // httpErrorResponse handling
@@ -44,10 +45,11 @@ get formCtl() {
         if(error.status === 400) {
           this.router.navigate(['/forgot-password']);
           this.toastr.errorToastr(error.error['message'], 'Oops!');
-          console.log(error);
+          //console.log(error);
         }
       }
     );
+    this.submitted = true;
     // stop here if form is invalid
     if (this.resetForm.invalid) {
       return;

@@ -51,9 +51,9 @@ export class AuthService {
   // returns full http response
   resetPassword(newPassword): Observable<HttpResponse<string>> {
     const reset_token = this.route.snapshot.queryParams['resetToken'];
-    console.log(reset_token);
+   // console.log(reset_token);
     const info = {resetToken: reset_token, password: newPassword};
-    console.log(info);
+    //console.log(info);
     // setting observe value as response to send full http response
     return this.http.post<string>(this.resetUrl, info, { observe: 'response' });
   }

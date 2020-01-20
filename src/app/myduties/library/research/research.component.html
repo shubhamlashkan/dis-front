@@ -21,6 +21,9 @@
 </div>
 <br>
 <br>
+<div *ngIf = "showError"  class="alert alert-danger" role="alert">
+  {{errorMsg}}
+</div>
 <div *ngIf="selected.id==1"> 
   <table  class="table table-striped">
     <tr>
@@ -51,7 +54,7 @@
       <th>Penalty</th>
       <th>Issued To</th>
     </tr>
-    <tr *ngFor="let searchedBook of booksRes">
+    <tr *ngFor="let searchedBook of thesisRes">
       <td>{{searchedBook.ThesisId}}</td>
       <td>{{searchedBook.title}}</td>
       <td>{{searchedBook.expectedReturnDate}}</td>
@@ -65,14 +68,17 @@
   <table  class="table table-striped">
     <tr>
       <th>Book Id</th>
+      <th>Thesis Id</th>
       <th>Title</th>
       <th>Expected return Date</th>
       <th>Actual Return Date</th>
       <th>Penalty</th>
       <th>Issued To</th>
     </tr>
-    <tr *ngFor="let searchedBook of booksRes">
+    <tr *ngFor="let searchedBook of usernameRes">
       <td>{{searchedBook.bookId}}</td>
+      <td>{{searchedBook.thesisId}}</td>
+
       <td>{{searchedBook.title}}</td>
       <td>{{searchedBook.expectedReturnDate}}</td>
       <td>{{searchedBook.actualReturnDate}}</td>

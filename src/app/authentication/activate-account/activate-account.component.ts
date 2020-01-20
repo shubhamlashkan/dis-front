@@ -37,7 +37,7 @@ export class ActivateAccountComponent implements OnInit {
         if(response.ok) {
           //this.router.navigate(['/']);
           this.toastr.successToastr(response.body['message'], 'Success!');
-          console.log(response);
+          //console.log(response);
         }
       },
       // httpErrorResponse handling
@@ -45,7 +45,7 @@ export class ActivateAccountComponent implements OnInit {
         if(error.status === 400) {
           //this.router.navigate(['/forgot-password']);
           this.toastr.errorToastr(error.error['message'], 'Oops!');
-          console.log(error);
+          //console.log(error);
         }
       });
   }
@@ -61,7 +61,7 @@ export class ActivateAccountComponent implements OnInit {
     if (this.activationForm.invalid) {
       return;
   }
-  console.log(this.student.email);
+  //console.log(this.student.email);
     this.activateAcc(this.student.email);
   }
 }
