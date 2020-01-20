@@ -25,7 +25,7 @@ import { FacultyModule } from './faculty.module';
 const routes: Routes = [
   {
     path : 'faculty',
-    component : FacultyComponent,
+    component : FacultyComponent,canActivate:[RouteGuardService],
     children : [
       {
         path: 'about',
