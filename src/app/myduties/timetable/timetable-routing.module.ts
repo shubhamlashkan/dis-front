@@ -8,7 +8,7 @@ import { SemTimeTableComponent } from './sem-time-table/sem-time-table.component
 
 const routes: Routes = [
     {
-      path: '',
+      path: 'timetable',
       component: TimetableComponent
     },
     {

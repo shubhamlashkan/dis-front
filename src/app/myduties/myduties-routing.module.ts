@@ -15,6 +15,14 @@ const routes : Routes = [
         path : 'myduties',
         component : MydutiesNavigationComponent,
     },
+    {
+        path : '',
+        component:MydutiesNavigationComponent
+    },
+    {
+        path : 'library',
+        component : LibraryComponent
+    }
     
     
  
@@ -22,7 +30,7 @@ const routes : Routes = [
 ];
 @NgModule(
     {
-        imports: [RouterModule.forChild(routes),TimetableRoutingModule],
+        imports: [RouterModule.forChild(routes),TimetableRoutingModule,LibraryRoutingModule],
         exports:[RouterModule]
     }
 )
