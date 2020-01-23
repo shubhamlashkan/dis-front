@@ -4,21 +4,25 @@ import { NgModule } from "@angular/core";
 import {LibraryRoutingModule} from "./library/library-routing.module";
 import { from } from "rxjs";
 import { LibraryModule } from "./library/library.module";
+import { LibraryComponent } from "./library/library/library.component";
+import { TimetableRoutingModule } from "./timetable/timetable-routing.module";
 
 
 
 
 const routes : Routes = [
     { 
-        path : 'mydutiesnavigation',
-        component : MydutiesNavigationComponent
+        path : 'myduties',
+        component : MydutiesNavigationComponent,
     },
+    
+    
  
   
 ];
 @NgModule(
     {
-        imports: [RouterModule.forChild(routes),LibraryModule],
+        imports: [RouterModule.forChild(routes),TimetableRoutingModule],
         exports:[RouterModule]
     }
 )
