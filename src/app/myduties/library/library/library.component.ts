@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { LibraryService } from 'src/app/API_Service/library.service';
-import { librarySettings, allBooks} from '../bookDataObj';
+import { librarySettings, allBooks, addBookCategory, subjectCategory} from '../bookDataObj';
 import { NgForm } from '@angular/forms';
 import { allThesis } from '../thesisDataObj';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-library',
@@ -12,6 +13,8 @@ import { allThesis } from '../thesisDataObj';
 export class LibraryComponent implements OnInit {
 
   @ViewChild('f') changeSettingsForm:NgForm;
+  @ViewChild('g') addNewCategoryForm:NgForm;
+  @ViewChild('h') deleteCategoryForm:NgForm;
   buttonClick:boolean = false;
   setting:librarySettings[]=[];
   settingsRes:string;
@@ -19,13 +22,21 @@ export class LibraryComponent implements OnInit {
   bookCount:number=0;
   books: allBooks[] = [];
   thesis: allThesis[] =[];
-  thesisCount:number=0;
+  thesisCount:number=0; 
   settingsChanged:boolean=false;
+  categoryAdded:boolean=false;
+  addCategory:addBookCategory;
+  message:string;
+  messageRem:string;
+  categoryRemoved:boolean = false;
+  private subject: subjectCategory[] = [];
   constructor(private service:LibraryService) { }
 
   ngOnInit() {
     this.buttonClick = false;
-    this.settingsChanged=false;
+    this.settingsChanged=false; 
+    this.categoryAdded=false;
+    this.categoryRemoved = false;
     this.service.getLibrarySettings().subscribe((libSettings:librarySettings[])=>{
       this.setting = libSettings;
       //console.log(this.setting);
@@ -37,6 +48,11 @@ export class LibraryComponent implements OnInit {
     this.service.getAllThesis().subscribe((thesisData: allThesis[]) => {
       this.thesis = thesisData;
       this.thesisCount = this.thesis.length;
+    });
+
+    this.service.getSubjectCatergoryAcronymList().subscribe((res: subjectCategory[]) => {
+      this.subject = res;
+      //console.log(this.subject);
     });
   }
 
@@ -62,7 +78,27 @@ export class LibraryComponent implements OnInit {
       });
       this.buttonClick=false;
     }
+
+
     
   }
 
+
+  onSubmit()
+  {
+    this.addCategory = new addBookCategory(null,null,this.addNewCategoryForm.value.addBookCategory.subjectCategory,this.addNewCategoryForm.value.addBookCategory.subjectName,);
+    this.service.addNewCategory(this.addCategory).subscribe((res:string)=>{
+      this.message = res;
+      this.categoryAdded = true;
+    })
+  }
+
+  removeCategory()
+  {
+    console.log(this.deleteCategoryForm.value.removeBookCategory.subjectCategory);
+    this.service.deleteCategory(this.deleteCategoryForm.value.removeBookCategory.subjectCategory).subscribe((res:string)=>{
+      this.messageRem = res;
+      this.categoryRemoved = true;
+    })
+  }
 }

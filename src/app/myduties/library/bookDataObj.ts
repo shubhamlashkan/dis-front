@@ -47,6 +47,21 @@ export class librarySettings {
 
 }
 
+export class addBookCategory
+{
+  private count:number;
+  private id:string;
+  private subjectCategory:string;
+  private subjectName:string;
+
+  constructor($count:number,$id:string,$subjectCategory:string,$subjectName:string)
+  {
+    this.count=$count;
+    this.id=$id;
+    this.subjectCategory=$subjectCategory;
+    this.subjectName =$subjectName;
+  }
+}
 
 export interface addBookResponse {
   bookId: string;

@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import {apiSetting} from '../urls/apisetting';
 import { allThesis, addThesisData, getThesisByThesisId, updateThesisData, course , librarySettingsthesis,checkPenaltyResponseThesis, previousIssueHistoryThesis } from '../myduties/library/thesisDataObj';
 
-import { addBookData, subjectCategory, allBooks, librarySettings, getBookByBookId, updateBookData, issueBookData, checkPenaltyResponse,  previousIssueHistoryBook } from '../myduties/library/bookDataObj';
+import { addBookData, subjectCategory, allBooks, librarySettings, getBookByBookId, updateBookData, issueBookData, checkPenaltyResponse,  previousIssueHistoryBook, addBookCategory } from '../myduties/library/bookDataObj';
 
 import { catchError } from 'rxjs/operators';
 
@@ -16,7 +16,7 @@ export class LibraryService {
   constructor(private http: HttpClient) {
 
   }
-
+   
   apiUrl: string = apiSetting.apiAdministration +'/library';
   
   
@@ -30,7 +30,7 @@ export class LibraryService {
 
 
   /* Books API Calls*/
-
+  
 
   addBookDetails(Book: addBookData) {
     return this.http.post(this.apiUrl + '/addBook', Book, this.httpOptions);
@@ -196,6 +196,13 @@ getIssueThesisInfo(thesisId:number): Observable<checkPenaltyResponseThesis[]>{
   
   returnThesis(thesisId:number):Observable<any>{
     return this.http.put<any>(`${this.apiUrl}/returnThesis/${thesisId}`,{responseType:'text'});
+  }
+
+  addNewCategory(addCategory:addBookCategory){
+    return this.http.post(this.apiUrl + '/addNewBookCategory', addCategory, {responseType:'text'});
+  }
+  deleteCategory(subjectCategory:string){
+    return this.http.delete(`${this.apiUrl}/deleteBookCategory/${subjectCategory}`,{responseType: 'text'})
   }
 
 

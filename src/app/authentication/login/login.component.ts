@@ -75,6 +75,7 @@ export class LoginComponent implements OnInit {
   isUserLoggedIn()
   {
     let user = sessionStorage.getItem('authenticaterUser');
+    console.log(user);
     return !(user===null);
   }
 

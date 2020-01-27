@@ -88,7 +88,7 @@ export class BooksComponent implements OnInit {
     this.onSuccessfulUpdate=false;
     this.showPenalty=false;
     this.returnSuccess = false;
-    this.checkLimitForm.resetForm();
+    this.checkLimitForm.resetForm(); 
     this.checkPenaltyForm.resetForm();
     this.addBookForm.resetForm();
   }
