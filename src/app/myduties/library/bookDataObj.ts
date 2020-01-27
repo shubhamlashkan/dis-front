@@ -69,7 +69,10 @@ export interface addBookResponse {
 }
 
 export interface subjectCategory {
-
+   count:number;
+   id:string;
+   subjectCategory:string;
+   subjectName:string;
 }
 
 

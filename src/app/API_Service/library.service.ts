@@ -199,7 +199,8 @@ getIssueThesisInfo(thesisId:number): Observable<checkPenaltyResponseThesis[]>{
   }
 
   addNewCategory(addCategory:addBookCategory){
-    return this.http.post(this.apiUrl + '/addNewBookCategory', addCategory, {responseType:'text'});
+    return this.http.post(this.apiUrl + '/addNewBookCategory', addCategory, {responseType:'text'}).pipe(
+      catchError(this.handleError));
   }
   deleteCategory(subjectCategory:string){
     return this.http.delete(`${this.apiUrl}/deleteBookCategory/${subjectCategory}`,{responseType: 'text'})

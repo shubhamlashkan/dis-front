@@ -29,6 +29,8 @@ export class LibraryComponent implements OnInit {
   message:string;
   messageRem:string;
   categoryRemoved:boolean = false;
+  showError:boolean = false;
+  errorMsg:string;
   private subject: subjectCategory[] = [];
   constructor(private service:LibraryService) { }
 
@@ -37,6 +39,9 @@ export class LibraryComponent implements OnInit {
     this.settingsChanged=false; 
     this.categoryAdded=false;
     this.categoryRemoved = false;
+    this.showError = false;
+    this.addNewCategoryForm.resetForm();
+    this.deleteCategoryForm.resetForm();
     this.service.getLibrarySettings().subscribe((libSettings:librarySettings[])=>{
       this.setting = libSettings;
       //console.log(this.setting);
@@ -89,13 +94,20 @@ export class LibraryComponent implements OnInit {
     this.addCategory = new addBookCategory(null,null,this.addNewCategoryForm.value.addBookCategory.subjectCategory,this.addNewCategoryForm.value.addBookCategory.subjectName,);
     this.service.addNewCategory(this.addCategory).subscribe((res:string)=>{
       this.message = res;
+      this.showError = false;
       this.categoryAdded = true;
-    })
+
+    },((error)=>{
+      this.categoryAdded = false;
+      this.showError = true;
+      this.errorMsg = "Subject Category Already Exists";
+    }))
+    this.addNewCategoryForm.resetForm();
   }
 
   removeCategory()
   {
-    console.log(this.deleteCategoryForm.value.removeBookCategory.subjectCategory);
+    //console.log(this.deleteCategoryForm.value.removeBookCategory.subjectCategory);
     this.service.deleteCategory(this.deleteCategoryForm.value.removeBookCategory.subjectCategory).subscribe((res:string)=>{
       this.messageRem = res;
       this.categoryRemoved = true;

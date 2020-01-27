@@ -90,6 +90,7 @@
           <li class="active"><a class="btn btn-link" data-toggle="tab" href="#updateSettings">Update Settings</a></li>
           <li><a  class="btn btn-link" data-toggle="tab" href="#addCategory">Add New Category</a></li>
           <li><a class="btn btn-link" data-toggle="tab" href="#removeCategory">Remove Category</a></li>
+          <li><a class="btn btn-link" data-toggle="tab" href="#viewCategory">View Category</a></li>
         </ul>
 
         <div class="tab-content">
@@ -142,6 +143,9 @@
 
           <div id="addCategory" class="tab-pane fade">
             <div class="modal-body">
+              <div *ngIf = "showError"  class="alert alert-danger" role="alert">
+                {{errorMsg}}
+              </div>
               <div *ngIf="categoryAdded" class="alert alert-success" role="alert">
                   {{message}}
               </div>
@@ -220,6 +224,9 @@
                 </form>
               </div>
             </div> 
+          </div>
+          <div id="viewCategory" class="tab-pane fade">
+            
           </div>
         </div>
 
