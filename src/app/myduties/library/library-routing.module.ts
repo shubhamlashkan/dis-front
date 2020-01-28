@@ -6,13 +6,16 @@ import { ThesisComponent } from './thesis/thesis.component';
 import { NgModule } from "@angular/core";
 import { LibraryModule } from './library.module';
 import { ResearchComponent } from './research/research.component';
+import { MydutiesNavigationComponent } from '../myduties-navigation/myduties-navigation.component';
 
 const routes : Routes = [
   
-    {
-        path: "library",
-        component:LibraryComponent
-    },
+    
+      
+            {
+                path: "library",
+                component:LibraryComponent
+            },
     {
         path: "books",
         component:BooksComponent
@@ -25,6 +28,8 @@ const routes : Routes = [
         path:"history",
         component:ResearchComponent
     }
+
+    
 ];
 @NgModule(
     {

@@ -29,7 +29,7 @@ export class BooksComponent implements OnInit {
   msg: string;
   books: allBooks[] = [];
   bookById: getBookByBookId[] = [];
-  private subject: subjectCategory[] = [];
+  subject: subjectCategory[] = [];
   private setting: librarySettings[] = [];
   updatedata: updateBookData;
   responseUpdate: updateBookResponse;
@@ -76,7 +76,7 @@ export class BooksComponent implements OnInit {
     /* Get Subject Acronym List */
     this.service.getSubjectCatergoryAcronymList().subscribe((res: subjectCategory[]) => {
       this.subject = res;
-      //console.log(this.subject);
+     // console.log(this.subject);
     });
 
     /* Get All Books */
@@ -88,7 +88,7 @@ export class BooksComponent implements OnInit {
     this.onSuccessfulUpdate=false;
     this.showPenalty=false;
     this.returnSuccess = false;
-    this.checkLimitForm.resetForm();
+    this.checkLimitForm.resetForm(); 
     this.checkPenaltyForm.resetForm();
     this.addBookForm.resetForm();
   }

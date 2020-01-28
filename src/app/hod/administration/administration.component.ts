@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AdministrationService } from 'src/app/API_Service/administration.service';
+import { categoryList } from './administrationModel';
 
 @Component({
   selector: 'app-administration',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdministrationComponent implements OnInit {
 
-  constructor() { }
+
+ private categories : categoryList[]=[];
+
+  constructor(private service: AdministrationService) { }
 
   ngOnInit() {
+ this.service.getCategoryList().subscribe((res:categoryList[])=>{
+   this.categories = res;
+   console.log(this.categories);
+ })
+
   }
 
 }
