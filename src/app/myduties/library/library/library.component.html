@@ -31,7 +31,7 @@
                       </div>
                     </div>
                   </li>
-                 <li style="cursor:pointer;">
+                 <!-- <li style="cursor:pointer;">
                     <div class="kyc-section rewards-section reports-sectn row" style="max-height: 100px; max-width: 250px; margin-bottom: 10px;" >
                       <div class="col-lg-6">
                         <a routerLink="history"><img src="../../../assets//images/thesis.png" style="width: 35px; height: 35px; " ></a>
@@ -42,7 +42,7 @@
                         
                       </div>
                     </div>
-                  </li>
+                  </li> -->
             </ul>
         </div>
         <div class="col-lg-9">
@@ -87,19 +87,18 @@
           </button>
         </div>
         <ul class="nav nav-tabs">
-          <li class="active"><a class="btn btn-link" data-toggle="tab" href="#updateSettings">Update Settings</a></li>
-          <li><a  class="btn btn-link" data-toggle="tab" href="#addCategory">Add New Category</a></li>
-          <li><a class="btn btn-link" data-toggle="tab" href="#removeCategory">Remove Category</a></li>
-          <li><a class="btn btn-link" data-toggle="tab" href="#viewCategory">View Category</a></li>
+          <li class="active"><a class="btn btn-link" data-toggle="tab" href="#updateSettings">Update Instruction</a></li>
+          <li><a  class="btn btn-link" data-toggle="tab" href="#addCategory">Add New Acronym</a></li>
+          <li><a class="btn btn-link" data-toggle="tab" href="#removeCategory">Remove Acronym</a></li>
+          <li><a class="btn btn-link" data-toggle="tab" href="#viewCategory">Search Acronym</a></li>
         </ul>
 
         <div class="tab-content">
           <div id="updateSettings" class="tab-pane fade show active">
             <div class="modal-body">
-              <div *ngIf="settingsChanged" class="alert alert-success" role="alert">
-                  Library Instruction Updated Successfully..!!
-              </div>
-              <div *ngIf="!settingsChanged">
+              <h4>Update Instruction</h4>
+              <hr>
+              <div >
                 <form (ngSubmit)="change(f)" #f="ngForm" >
     
                   <div id="update-settings" ngModelGroup="librarySettings">
@@ -138,18 +137,18 @@
                   <br/>
                 </form>
               </div>
+              <div *ngIf="settingsChanged" class="alert alert-success " role="alert">
+                Library Instruction Updated Successfully..!!
+                
+            </div>
             </div>            
           </div>
 
           <div id="addCategory" class="tab-pane fade">
             <div class="modal-body">
-              <div *ngIf = "showError"  class="alert alert-danger" role="alert">
-                {{errorMsg}}
-              </div>
-              <div *ngIf="categoryAdded" class="alert alert-success" role="alert">
-                  {{message}}
-              </div>
-              <div *ngIf="!categoryAdded">
+              <h4>Add New Acronym</h4>
+              <hr>
+              <div >
                 <form (ngSubmit)="onSubmit(g)" #g="ngForm" >
     
                   <div id="addNewCategory" ngModelGroup="addBookCategory">
@@ -181,15 +180,22 @@
                   <br/>
                 </form>
               </div>
+              <div *ngIf = "showError"  class="alert alert-danger " role="alert">
+                {{errorMsg}}
+               
+              </div>
+              <div *ngIf="categoryAdded" class="alert alert-success " role="alert">
+                  {{message}}
+               
+              </div>
             </div>       
           </div>
 
           <div id="removeCategory" class="tab-pane fade">
             <div class="modal-body">
-              <div *ngIf="categoryRemoved" class="alert alert-success" role="alert">
-                  {{messageRem}}
-              </div>
-              <div *ngIf="!categoryRemoved">
+              <h4>Remove Acronym</h4>
+              <hr>
+              <div >
                 <form (ngSubmit)="removeCategory(h)" #h="ngForm" >
     
                   <div id="remCategory" ngModelGroup="removeBookCategory">
@@ -223,10 +229,80 @@
                   <br/>
                 </form>
               </div>
+              <div *ngIf="categoryRemoved" class="alert alert-success " role="alert">
+                {{messageRem}}
+            </div>
             </div> 
           </div>
           <div id="viewCategory" class="tab-pane fade">
+            <div class="modal-body">
+              <h4>View Acronym</h4>
+              <hr>
+              <div >
+                <form (ngSubmit)="getAcronym(i)" #i="ngForm" >
+    
+                  <div id="viewCategory" ngModelGroup="viewBookCategory">
+                      <div class="form-row">
+                        <div class="col-6">
+                          
+                            <input type="radio" value="1" name="group1" [(ngModel)]="group1">Search Acronym By Subject Name
+                        
+                      
+                        </div>
+                          <!-- <div class="col-3">
+                            <label >Subject Category</label>
+                            <select class="dropdown-primary form-control" name="subjectCategory" required ngModel >
+                              <option value="" selected disabled>Subject Category</option>
+                              <option *ngFor="let sub of subject" [value]="sub">
+                                {{sub}}
+                              </option>
+                            </select>  
+                          </div>  -->
+                          <div class="col-6">
+                            <input type="radio"  value="2" name="group1" [(ngModel)]="group1">Search Subject By Acronym    
+                          </div>
+                        </div>
+                        <br>
+                        <div class="form-row">  
+                          <div class="col-3">
+                            <input type="text"  required id="subjectName" class="form-control" name="subjectName"  ngModel >
+                          </div>
+                          <div class="col-3">
+                              <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth" data-dismiss="modal">Cancel</button>
+                          </div>
+                            <div class="col-3">
+                                <button type="submit" [disabled]="!i.valid"  class="btn btn-primary btnWidth"  >Search</button>
+                            </div>  
+                            <div class="col-3">
+                              </div>
+                        </div>
+
+
+                  </div>
+                  <br/>
+                </form>
+              </div>
+              <div *ngIf="categoryExists" class="alert alert-danger" role="alert">
+                {{errorMsg}}
+                
+            </div>
+           
+              <div *ngIf="categoryFound" >
+                <table  class="table table-striped">
+                  <tr >
+                    
+                    <th>Subject Name</th>
             
+                    <th>Subject Acronym</th>
+                   
+                  </tr>  
+                  <tr *ngFor="let acronym of acronymList">
+                    <td>{{acronym.subjectName}}</td>
+                    <td>{{acronym.subjectCategory}}</td>
+                  </tr>
+                </table>
+              </div>
+            </div> 
           </div>
         </div>
 

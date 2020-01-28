@@ -59,13 +59,6 @@ export class LoginComponent implements OnInit {
         //console.log(error);
         this.isLoginFailed = true;
       }
-      if(error.status ===500) {
-        //this.router.navigate(['/forgot-password']);
-        this.loading=false;
-        this.toastr.errorToastr("Invalid username", 'Alert!');
-        //console.log(error);
-        this.isLoginFailed = true;
-      }
       });
   }
 

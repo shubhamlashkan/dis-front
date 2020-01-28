@@ -218,8 +218,8 @@
                 <label >Subject Category</label>
                 <select class="dropdown-primary form-control" name="subjectCategory" required ngModel >
                   <option value="" selected disabled>Subject Category</option>
-                  <option *ngFor="let sub of subject" [value]="sub.subjectCategory">
-                    {{sub.subjectCategory}}
+                  <option *ngFor="let sub of subject" [value]="sub">
+                    {{sub}}
                   </option>
                 </select>
               </div>

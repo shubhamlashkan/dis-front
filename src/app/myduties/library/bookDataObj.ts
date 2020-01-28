@@ -63,16 +63,20 @@ export class addBookCategory
   }
 }
 
+export interface acronym{
+   count:number;
+   id:string;
+   subjectCategory:string;
+   subjectName:string;
+}
+
 export interface addBookResponse {
   bookId: string;
   message: string;
 }
 
 export interface subjectCategory {
-   count:number;
-   id:string;
-   subjectCategory:string;
-   subjectName:string;
+  
 }
 
 

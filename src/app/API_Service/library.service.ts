@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import {apiSetting} from '../urls/apisetting';
 import { allThesis, addThesisData, getThesisByThesisId, updateThesisData, course , librarySettingsthesis,checkPenaltyResponseThesis, previousIssueHistoryThesis } from '../myduties/library/thesisDataObj';
 
-import { addBookData, subjectCategory, allBooks, librarySettings, getBookByBookId, updateBookData, issueBookData, checkPenaltyResponse,  previousIssueHistoryBook, addBookCategory } from '../myduties/library/bookDataObj';
+import { addBookData, subjectCategory, allBooks, librarySettings, getBookByBookId, updateBookData, issueBookData, checkPenaltyResponse,  previousIssueHistoryBook, addBookCategory, acronym } from '../myduties/library/bookDataObj';
 
 import { catchError } from 'rxjs/operators';
 
@@ -204,6 +204,20 @@ getIssueThesisInfo(thesisId:number): Observable<checkPenaltyResponseThesis[]>{
   }
   deleteCategory(subjectCategory:string){
     return this.http.delete(`${this.apiUrl}/deleteBookCategory/${subjectCategory}`,{responseType: 'text'})
+  }
+
+  getCategoryBySubjectName(subjectName:string):Observable<acronym[]>
+  {
+    return this.http.get<acronym[]>(`${this.apiUrl}/getAcronymBySubjectName/${subjectName}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getSubjectNameByCategory(subjectCategory:string):Observable<acronym[]>
+  {
+    return this.http.get<acronym[]>(`${this.apiUrl}/getSubjectNameByAcronym/${subjectCategory}`).pipe(
+      catchError(this.handleError)
+    );
   }
 
 
