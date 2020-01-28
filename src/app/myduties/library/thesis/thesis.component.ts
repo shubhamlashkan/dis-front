@@ -4,7 +4,6 @@ import { allThesis, addThesisData, addThesisResponse, getThesisByThesisId, updat
 import { LibraryService } from 'src/app/API_Service/library.service';
 import { updateBookData, librarySettings, issueBookData } from '../bookDataObj';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { optionSearch } from '../books/books.component';
 import { apiSetting } from 'src/app/urls/apisetting';
 
 @Component({
@@ -54,16 +53,9 @@ thesisAllowed : string;
   returnThesisId:number;
   returnThesisResponse:string;
   returnSuccess:boolean = false;
-  selected:optionSearch = new optionSearch(1,'Id');
   errorMsg:string=null;
   showError:boolean = false;
-  options = [
-    new optionSearch(1,'Id'),
-    new optionSearch(2,'Title'),
-    new optionSearch(3,'course'),
-    new optionSearch(4,'submitted by'),
-    new optionSearch(5,'guided by')
-  ];
+
 
   constructor(private service : LibraryService) { }
 
@@ -74,6 +66,7 @@ thesisAllowed : string;
     this.ShowId = false;
     this.updateButton=false;
     this.removeButton=false;
+    this.searchBy=1;
     this.service.getAllThesis().subscribe((thesisData:allThesis[])=>{
       this.thesis = thesisData;
     });
@@ -227,16 +220,19 @@ returnThesis(){
 
 
 
-onSelect(optionId) { 
-  this.selected = null;
-  //console.log(optionId);
-  for (var i = 0; i < this.options.length; i++)
-  {
-    if (this.options[i].id == optionId) {
-      this.selected = this.options[i];     
-      this.searchBy = this.options[i].id;
-    }
-  }
+onSelect(event:any) { 
+  // this.selected = null;
+  // //console.log(optionId);
+  // for (var i = 0; i < this.options.length; i++)
+  // {
+  //   if (this.options[i].id == optionId) {
+  //     this.selected = this.options[i];     
+  //     this.searchBy = this.options[i].id;
+  //   }
+  // }
+  this.searchBy = event.target.value;
+console.log(this.searchBy);
+
 }
 findBy(typedValue)
 {
