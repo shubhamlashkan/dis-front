@@ -8,10 +8,33 @@ import { NgForm } from '@angular/forms';
 })
 export class SemTimeTableComponent implements OnInit {
   @ViewChild('f') facultyNameForm : NgForm;
+  @ViewChild('g') dayForm : NgForm;
+  @ViewChild('h') addTimetableForm : NgForm;
+  @ViewChild('i') facultyNameUpForm : NgForm;
+
+  showDay : boolean = false;
+  
 
   constructor() { }
 
   ngOnInit() {
+    this.showDay = false;
+  }
+  onAddDay(){
+    this.showDay = true;
   }
 
+  containers = [];
+
+  add() {
+    this.containers.push(this.containers.length);
+  }
+  remove()
+  {
+    this.containers.pop();
+  }
+  onAddTimetable(){
+
+  }
+ 
 }
