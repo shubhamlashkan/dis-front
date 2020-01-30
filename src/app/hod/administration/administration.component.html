@@ -90,13 +90,11 @@
                                     </div>
                                     <div class="form-group">
                                       <h6 class="heading">Category</h6>
-                                      <select class="form-control input-lg" id="sel2">
-                                        <option>Student</option>
-                                        <option>Time Table</option>
-                                        <option>Exam Work</option>
-                                        <option>Administration</option>
-                                        <option>Resources</option>
-                                        <option>Other Tasks</option>
+                                      <select class="dropdown-primary form-control" name="category" required ngModel>
+                                        <option value="" selected disabled>Category</option>
+                                        <option *ngFor="let category of categories" [value]="category.id">
+                                          {{category.name}}
+                                        </option>
                                       </select>
                                     </div>
                                     <div class="form-group">

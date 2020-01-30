@@ -1,10 +1,10 @@
 <div class="row">
   <div class="col-lg-3"></div>
   <div class="col-lg-3">
-    <select (change)="onSelect($event.target.value)" [(ngModel)]="selected.id" class="mdb-select md-form colorful-select dropdown-primary" style="float: right">
-      <option *ngFor="let option of options" value= {{option.id}}>
-         {{option.name}}
-      </option>
+    <select (change)="onSelect($event)"  class="mdb-select md-form colorful-select dropdown-primary" style="float: right">
+      <option selected value="1">Id</option>
+      <option value="2">Title</option>
+      <option value="3">Author</option>
     </select>
     <br/>
   </div>
@@ -182,7 +182,7 @@
                 <input type="text" id="isbnNo" class="form-control" name="isbnNo" ngModel>
               </div>
               <div class="col-4">
-                <label for="authorName">Author Name</label>
+                 <label for="authorName">Author Name</label>
                 <input type="text" id="authorName" class="form-control" name="authorName" ngModel>
               </div>
               <div class="col-4">
@@ -216,13 +216,12 @@
               </div>
               <div class="col-4">
                 <label >Subject Category</label>
-                <input type="text" name="subjectCategory" list="category" required ngModel class="form-control">
-                <datalist id="category">
-                  <option value="" selected disabled>Study Material</option>
+                <select class="dropdown-primary form-control" name="subjectCategory" required ngModel >
+                  <option value="" selected disabled>Subject Category</option>
                   <option *ngFor="let sub of subject" [value]="sub">
                     {{sub}}
                   </option>
-                </datalist>
+                </select>
               </div>
 
             </div><br />

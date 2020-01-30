@@ -29,7 +29,7 @@ export class BooksComponent implements OnInit {
   msg: string;
   books: allBooks[] = [];
   bookById: getBookByBookId[] = [];
-  private subject: subjectCategory[] = [];
+  subject: subjectCategory[] = [];
   private setting: librarySettings[] = [];
   updatedata: updateBookData;
   responseUpdate: updateBookResponse;
@@ -56,13 +56,7 @@ export class BooksComponent implements OnInit {
   bookIssued:boolean = false;
   errorMsg:string=null;
   showError:boolean = false;
-  /* Search By Feature  */
-  selected:optionSearch = new optionSearch(3 ,'Author');
-  options = [
-     new optionSearch(1, 'Id' ),
-     new optionSearch(2, 'Title' ),
-     new optionSearch(3, 'Author' )
-  ];
+ 
   constructor(private service: LibraryService) { }
 
   ngOnInit() {
@@ -73,10 +67,11 @@ export class BooksComponent implements OnInit {
     this.bookIssued = false;
     this.returnSuccess = false;
     this.showError = false;
+    this.searchBy=1;
     /* Get Subject Acronym List */
     this.service.getSubjectCatergoryAcronymList().subscribe((res: subjectCategory[]) => {
       this.subject = res;
-      //console.log(this.subject);
+     // console.log(this.subject);
     });
 
     /* Get All Books */
@@ -88,7 +83,7 @@ export class BooksComponent implements OnInit {
     this.onSuccessfulUpdate=false;
     this.showPenalty=false;
     this.returnSuccess = false;
-    this.checkLimitForm.resetForm();
+    this.checkLimitForm.resetForm(); 
     this.checkPenaltyForm.resetForm();
     this.addBookForm.resetForm();
   }
@@ -257,16 +252,33 @@ export class BooksComponent implements OnInit {
   }
 
   /* Search By Id, Title, Author Selector */
-  onSelect(optionId) { 
-    //console.log(optionId);
-    this.selected = null;
-    for (var i = 0; i < this.options.length; i++)
-    {
-      if (this.options[i].id == optionId) {
-        this.selected = this.options[i];     
-        this.searchBy = this.options[i].id;
-      }
-    }
+  onSelect(event:any) { 
+  //   console.log("Selected Option:  "+optionId);
+  //  // this.selected = null;
+  //  for ( this.i = 0; this.i < this.options.length; this.i++){
+  //   console.log("At i= "+this.i);
+  //   console.log("option id:"+this.options[this.i].id);
+  //   console.log("option Value: "+this.options[this.i].name);
+  //  }
+  //  console.log("All options printed ");
+  //   for ( this.i = 0; this.i < this.options.length; this.i++)
+  //   {
+  //     console.log("i: "+this.i);
+  //     console.log("Current option id:"+this.options[this.i].id);
+  //     console.log("Current option Value: "+this.options[this.i].name);
+  //     if (this.options[this.i].id == optionId) 
+  //     {
+  //       this.selected = this.options[this.i];     
+  //       this.searchBy = this.options[this.i].id;
+  //       console.log("Search By:  "+this.options[this.i].name);
+  //       console.log("found at  = "+this.i);
+  //       break;
+  //     }
+  //   }
+
+this.searchBy = event.target.value;
+//console.log(this.searchBy);
+
 }
 
   /* Search By ID,Title,Author  */
@@ -286,7 +298,7 @@ export class BooksComponent implements OnInit {
         this.showError=true;
       this.showSearchedRecord= false;}));
     }
-    else if(this.searchBy==2)
+    if(this.searchBy==2)
     {
       //console.log(this.searchTerm);
         this.service.getBookByTitle(this.searchTerm).subscribe((bookByIdData: getBookByBookId[])=>{
@@ -299,23 +311,21 @@ export class BooksComponent implements OnInit {
         this.showSearchedRecord= false;}));
         
     }
-    else {
+    if(this.searchBy==3)
+    {
       //console.log(this.searchTerm);
-        this.service.getBookByAuthor(this.searchTerm).subscribe((bookByIdData: getBookByBookId[])=>{
-          this.searchedBooks= bookByIdData;
-          this.showError = false;
-          this.showSearchedRecord = true;
-          //  console.log(this.searchedBooks);
-        },((error)=> {this.errorMsg = error;
-          this.showError=true;
-        this.showSearchedRecord= false;}));
-        
+      this.service.getBookByAuthor(this.searchTerm).subscribe((bookByIdData: getBookByBookId[])=>{
+        this.searchedBooks= bookByIdData;
+        this.showError = false;
+        this.showSearchedRecord = true;
+        //  console.log(this.searchedBooks);
+      },((error)=> {this.errorMsg = error;
+        this.showError=true;
+      this.showSearchedRecord= false;}));
+      
     }
   }
 
 }
 
 
-export class optionSearch {
-  constructor(public id: number, public name: string) { }
-}

@@ -1,7 +1,7 @@
 <div class="bg"></div>
 <div class="login-pg">
   <div class="signup-wrap">
-
+    
     <form [formGroup]="registerForm" class="login-html" (ngSubmit)="onSubmit()">
       <div class="company-logo">
         <img src="assets/images/logo.png" alt="" />
@@ -67,6 +67,7 @@
           <div *ngIf=" submitted && formCtl.phoneNo.errors" class="invalid-feedback">
             <div *ngIf="formCtl.phoneNo.errors.required">Phone Number is required</div>
             <div *ngIf="formCtl.phoneNo.errors.minlength || formCtl.phoneNo.errors.maxlength">Phone Number must be at 10 digit long</div>
+            <div *ngIf="formCtl.phoneNo.errors.pattern">Mobile Number is not valid</div>
           </div>
         </div>
 
