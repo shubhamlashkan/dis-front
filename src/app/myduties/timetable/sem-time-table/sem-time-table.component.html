@@ -9,21 +9,7 @@
 
 </div>
 
-  
-    <!-- <div class = "row">
-  <div class = "col-4"> 
-    <select class="dropdown-primary form-control" required name="facultyName" required ngModel>
-    <option value="" selected disabled>Faculty Name</option>
-    <option value=" " > nandini </option>
-  </select>
-  </div>
-  <div class = "col-3">
-    <button type="submit" [disabled]="!f.valid" class="btn btn-default btnWidth" data-toggle="modal" data-target="#timetableAddModal" >Add Time Table</button>
-  </div>
-  <div class = "col-3">
-    <button type="submit" [disabled]="!f.valid" class="btn btn-default btnWidth" data-toggle="modal" data-target="#timetableAddModal" >Add Time Table</button>
-  </div>
-    </div> -->
+
     <div class="input-group mb-1">
       <ul class="nav nav-pills nav-fill col-lg-12" id="pills-tab" role="tablist">
        
@@ -80,7 +66,7 @@
           </select>
           </div>
           <div class = "col-3">
-            <button type="submit" [disabled]="!i.valid" class="btn btn-default btnWidth" data-toggle="modal" data-target="#timetableAddModal" >update Time Table</button>
+            <button type="submit" [disabled]="!i.valid" class="btn btn-default btnWidth" data-toggle="modal" data-target="#timetableEditModal" >update Time Table</button>
           </div>
          
             </div>
@@ -196,3 +182,24 @@
            </div>
         </div>
     </div>  
+
+    <div class="modal fade" id="timetableEditModal" tabindex="-1" role="dialog" aria-labelledby="timetableEditModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="timetableEditModalLabel">Update Time Table</h5>
+                  <button type="button"  class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  
+                
+                         
+                          
+                          
+                          </div>
+  
+             </div>
+          </div>
+      </div>  

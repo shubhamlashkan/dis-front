@@ -114,6 +114,7 @@ export class BooksComponent implements OnInit {
     //console.log(this.service.addBookDetails(this.Book));
     this.service.addBookDetails(this.Book).subscribe((res: addBookResponse) => {
       this.responseAdd = res;
+     // console.log(this.Book);
       // console.log(this.responseAdd.bookId);
       this.data = this.responseAdd.message + ' ' + this.responseAdd.bookId;
       this.showId = true;
