@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import {apiSetting} from '../urls/apisetting';
-import {categoryList} from '../hod/administration/administrationModel'
+import {categoryList, taskList, staffList, assignTaskData} from '../hod/administration/administrationModel'
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AdministrationService {
+export class AdministrationService { 
 
   constructor(private http: HttpClient) {
 
@@ -29,11 +29,19 @@ export class AdministrationService {
   {
       return this.http.get<categoryList[]>(this.apiUrl+'/getTaskCategoryList');
   }
-  getTaskByCategoryId(categoryId:string)
+  getTaskByCategoryId(categoryId:string):Observable<taskList[]>
   {
-      return this.http.get(`${this.apiUrl}/getgetTasksFromCategoryId/${categoryId}`)
+      return this.http.get<taskList[]>(`${this.apiUrl}/getTasksFromCategoryId/${categoryId}`);
+  }
+  getStaffList():Observable<staffList[]>{
+    return this.http.get<staffList[]>(this.apiUrl+'/getActiveStaffList');
   }
 
+assignTask(task:assignTaskData){
+  return this.http.post(this.apiUrl + '/assignTask', task, { responseType: 'text' }).pipe(
+    catchError(this.handleError)
+  );
+}
 
 
   /* Function to handle Error  */
@@ -55,7 +63,7 @@ export class AdministrationService {
       }
       else if(error.status==400)
       {
-        errorMessage = "Invalid input";
+        errorMessage =`${error.error.message}` ;
       }
       else 
       {
@@ -64,6 +72,8 @@ export class AdministrationService {
       // server-side error
      // errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
+
+    console.log(errorMessage);
     //window.alert(errorMessage);
     return throwError(errorMessage);
   }

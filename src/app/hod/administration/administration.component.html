@@ -73,24 +73,24 @@
                               
                               <!--En-->
                             <h3 class="modal-title heading">Assign New Task</h3>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <button type="button" class="close" (click)="ngOnInit()" data-dismiss="modal">&times;</button>
                             
                           </div>
                           <div class="modal-body">
-                              <form>
+                              <form (ngSubmit)="assignTask(f)" #f="ngForm">
+                                <div id="assign-task-records" ngModelGroup="assignTaskData">
                                   <div class="form-group">
                                     <h6 class="heading">Select Faculty</h6>  
-                                      <select multiple class="form-control" id="sel2">
-                                      <option>Somil Neema</option>
-                                      <option>Rithambara Patidar</option>
-                                      <option>Jyoti Tiwari</option>
-                                      <option>Surendra Gupta</option>
-                                      <option>Vandan Tiwari</option>
-                                    </select>
+                                    <select class="dropdown-primary form-control" name="staff" required ngModel>
+                                      <option value="" selected disabled>Staff</option>
+                                      <option *ngFor="let staff of staffs" [value]="staff.id">
+                                        {{staff.name}}
+                                      </option>
+                                    </select> 
                                     </div>
                                     <div class="form-group">
                                       <h6 class="heading">Category</h6>
-                                      <select class="dropdown-primary form-control" name="category" required ngModel>
+                                      <select (change)="onSelect($event)" class="dropdown-primary form-control" name="category" required ngModel>
                                         <option value="" selected disabled>Category</option>
                                         <option *ngFor="let category of categories" [value]="category.id">
                                           {{category.name}}
@@ -99,25 +99,37 @@
                                     </div>
                                     <div class="form-group">
                                       <h6 class="heading">Choose Task </h6>
-                                      <select class="form-control input-lg" id="sel3">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
+                                      <select class="dropdown-primary form-control" name="task" required ngModel>
+                                        <option value="" selected disabled>Task</option>
+                                        <option  *ngFor="let task of tasks" [value]="task.id">
+                                          {{task.name}}
+                                        </option>
                                       </select>
                                     </div>
             
-                                <div class="form-group form-group-lg">
+                                <!-- <div class="form-group form-group-lg">
                                   <h6 class="heading">If Other Please Specify </h6>
                                   <input class="form-control" id="inputdefault" type="text">
+                                </div> -->
+                                <div class="form-group">
+                                  <h6 class="heading">Deadline(If any)</h6>
+                                  <input type="date" id="deadline" class="form-control" name="deadline" ngModel>
                                 </div>
+
                                 <div class="form-group">
                                   <h6 class="heading">Description(If any) </h6>
-                                  <input class="form-control form-control-lg" id="inputlg" type="text">
+                                  <input class="form-control form-control-lg" id="description" name="description" type="text" ngModel>
                                 </div>
-                                <button type="button" class="btn btn-primary btn-lg btn-block">Submit</button>
+                                <button type="button" (click) = "assignTask()" class="btn btn-primary btn-lg btn-block" [disabled]="!f.valid">Submit</button>
+                                </div>
+                                  
                               </form>
-                           
-                            
+                              <div *ngIf="success" class="alert alert-success" role="alert">
+                                {{successMessage}}
+                              </div>
+                              <div *ngIf="showError" class="alert alert-success" role="alert">
+                                {{errorMsg}}
+                              </div>
                           </div>
                           
                         </div>

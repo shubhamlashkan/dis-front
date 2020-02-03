@@ -119,7 +119,7 @@ export class LibraryComponent implements OnInit {
     }))
    
     this.addNewCategoryForm.resetForm();
-
+ 
   }
 
   removeCategory()
