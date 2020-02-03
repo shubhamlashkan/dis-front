@@ -27,4 +27,15 @@ export interface staffList{
 		this.taskId = $taskId;
 		this.userId = $userId;
 	}   
-    }
+}
+
+export interface searchTask{
+    createdDate:string;
+    deadline:string;
+    description:string;
+    status:string;
+    taskId:string;
+    taskName:string;
+    userId:string;
+    userName:string;
+}

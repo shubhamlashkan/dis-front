@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AdministrationService } from 'src/app/API_Service/administration.service';
-import { categoryList, taskList, staffList, assignTaskData } from './administrationModel';
+import { categoryList, taskList, staffList, assignTaskData, searchTask } from './administrationModel';
 import { NgForm } from '@angular/forms';
+import { ToastrManager } from 'ng6-toastr-notifications';
+
 
 @Component({
   selector: 'app-administration',
@@ -15,33 +17,49 @@ export class AdministrationComponent implements OnInit {
  private categories : categoryList[]=[];
  private tasks : taskList[]=[];
  private staffs :staffList[]=[]; 
- successMessage:string;
- success:boolean = false;
- showError:boolean = false;
- errorMsg:string;
+selectedStaffId:string;
+selectedTaskId:string;
  task:assignTaskData;
-  constructor(private service: AdministrationService) { }
+ showByStaffId:searchTask[]=[];
+ showByTaskId:searchTask[]=[];
+ assignedTask:searchTask[]=[];
+ searchByStaff:boolean = false;
+ searchByTask:boolean = false; 
+ searchedRecords:boolean = false;
+ constructor(private service: AdministrationService, public toastr: ToastrManager) { }
  
   ngOnInit() {
-    this.successMessage = null;
-    this.success = false;
-    this.errorMsg = null;
-    this.showError = false;
- this.service.getCategoryList().subscribe((res:categoryList[])=>{
-   this.categories = res;
-   console.log(this.categories);
- })
- this.service.getStaffList().subscribe((res:staffList[])=>{
-   this.staffs = res;
- })
+    this.searchByStaff= false;
+    this.searchByTask = false;
+    this.searchedRecords = false;
+ this.service.getCategoryList().subscribe((response=>this.categories=response.body));
+ this.service.getStaffList().subscribe((response=>this.staffs=response.body));
+ this.service.assignTaskInfo().subscribe((response=>this.assignedTask=response.body));
   }
   
   onSelect(event:any){
     this.selectedCategoryId = event.target.value;
     console.log(this.selectedCategoryId);
-    this.service.getTaskByCategoryId(this.selectedCategoryId).subscribe((res:taskList[])=>{
-      this.tasks = res;
-    })
+    this.service.getTaskByCategoryId(this.selectedCategoryId).subscribe((response=>this.tasks=response.body));
+  }
+  onSelectStaff(event:any)
+  {
+    this.searchedRecords =true;
+    console.log(this.searchedRecords);
+    this.searchByStaff = true;
+    console.log(this.searchByStaff);
+    this.searchByTask = false;
+    console.log(this.searchByTask);
+    this.selectedStaffId = event.target.value;
+    this.service.getTaskByUserId(this.selectedStaffId).subscribe((response=>this.showByStaffId=response.body));
+  }
+  onSelectTask(event:any)
+  {
+    this.searchedRecords = true;
+    this.searchByStaff = false;
+    this.searchByTask = true;
+    this.selectedTaskId = event.target.value;
+    this.service.getAssignedTaskByTaskId(this.selectedTaskId).subscribe((response=>this.showByTaskId=response.body));
   }
   assignTask(){
     if(this.assignTaskForm.value.assignTaskData.deadline == "")
@@ -58,15 +76,23 @@ export class AdministrationComponent implements OnInit {
                                     "Progress",
                                     this.assignTaskForm.value.assignTaskData.task,
                                     this.assignTaskForm.value.assignTaskData.staff);
-                                    console.log(this.task);
-   this.service.assignTask(this.task).subscribe((res:string)=>{
-      this.successMessage = res;
-      this.success = true;
-   },((error)=>{
-    this.showError = true;
-    this.errorMsg = error;
-  }))
-   this.assignTaskForm.resetForm();
+                                    
+   this.service.assignTask(this.task).subscribe(response=>{
+    if(response.ok) {
+      //this.router.navigate(['/']);
+      this.toastr.successToastr(response.body['message'], 'Success!');
+      console.log(response.body['message']);
+    }
+   },
+   error => {
+     if(error.status === 400) {
+       this.toastr.errorToastr(error.error['message'], 'Alert!');
+    console.log(error.error['message']);
+   }
+ });
+  this.assignTaskForm.resetForm();
   }
 
+
+  
 }

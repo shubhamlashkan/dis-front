@@ -35,34 +35,37 @@
     <div class="col-lg-9 kyc-colm user-management">
       <div class="kyc-section rewards-section reports-sectn">
           <div class="row">   
-              <div class="input-group mb-1">
-                  <div class="input-group-prepend">
+              
+                  <div class="col-4">
                     <label class="input-group-text" for="inputGroupSelect01">Task assigned to</label>
-                  </div>
-                  <select class="custom-select" id="inputGroupSelect01">
-                    <option selected>Choose...</option>
-                    <option value="1">Somil Neema</option>
-                    <option value="2">Jyoti Tiwari</option>
-                    <option value="3">Ritambara Patidar</option>
-                  </select>
-                  <!-- Example single danger button -->
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Category
-                    </button>
-                    <div class="dropdown-menu">
-                     <a class="dropdown-item" style="text-decoration:None" href="#">Student</a>
-                    <a class="dropdown-item" style="text-decoration:None"href="#">Time Table</a>
-                    <a class="dropdown-item" style="text-decoration:None" href="#">Exam Work</a>
-                    <a class="dropdown-item" style="text-decoration:None" href="#">Administration</a>
-                    <a class="dropdown-item" style="text-decoration:None" href="#">Resources</a>
-                    <a class="dropdown-item" style="text-decoration:None" href="#">Other Tasks</a>
-
-                   
-                   </div>
+                    <select (change)="onSelectStaff($event)" class="dropdown-primary form-control" name="selectedStaff" required ngModel>
+                      <option value="" selected disabled>Staff</option>
+                      <option *ngFor="let staff of staffs" [value]="staff.id">
+                        {{staff.name}}
+                      </option>
+                    </select> 
                   </div>
                   
-                    <button type="button" class="btn btn-light" data-toggle="modal" data-target=".my-modal">Assign Task</button>
+                  <!-- Example single danger button -->
+                  <div class="col-6">
+                    <label class="input-group-text" for="inputGroupSelect01">Task By</label>
+                    <select (change)="onSelect($event)" class="dropdown-primary form-control" name="category" required ngModel>
+                      <option value="" selected disabled>Category</option>
+                      <option *ngFor="let category of categories" [value]="category.id">
+                        {{category.name}}
+                      </option>
+                    </select>
+                    <select (change)="onSelectTask($event)" class="dropdown-primary form-control" name="selectedTask" required ngModel>
+                      <option value="" selected disabled>Task</option>
+                      <option  *ngFor="let task of tasks" [value]="task.id">
+                        {{task.name}}
+                      </option>
+                    </select>  
+                  </div>
+                  <div class="col-2">
+                    <button type="button" class="btn btn-primary  " data-toggle="modal" data-target=".my-modal">Assign Task</button>
+                   
+                  </div>
                         
                     <div class="modal fade my-modal" id="myModal" role="dialog">
                       <div class="modal-dialog">
@@ -124,12 +127,7 @@
                                 </div>
                                   
                               </form>
-                              <div *ngIf="success" class="alert alert-success" role="alert">
-                                {{successMessage}}
-                              </div>
-                              <div *ngIf="showError" class="alert alert-success" role="alert">
-                                {{errorMsg}}
-                              </div>
+                              
                           </div>
                           
                         </div>
@@ -139,184 +137,127 @@
                           
                       
                   
-                </div>
+                
                    </div>
           
         
-      <!--Calendar comes in below div-->
-      <h3 class="heading">In Progress</h3>
-            <hr/>
+      <!--Search By Staff Result Start-->
+      <div *ngIf="searchedRecords">
+     <div *ngIf="searchByStaff">
+      
         <div class="row">
-          <div class="col-lg-3">
-            
-            
-            <div class="alert alert-success row">
-              <h4 class="col-12">Placement Incharge</h4>
-              <p class="col"> Start date: 24/08/2017</p>
-              <p class="col-6 heading"> Assigned to</p>
-              <p class="col-6 float-left"> Somil Neema</p>
-              
-                          
-            </div>
-            <div class="alert alert-success row">
-                <h4 class="col-12">Placement Incharge</h4>
-                <p class="col"> Start date: 24/08/2017</p>
+          <div>
+            <h3 class="heading">In Progress</h3>
+          </div>
+          <div  *ngFor="let t of showByStaffId" >
+            <div class="col-lg-4 " *ngIf="t.status=='Progress'">
+              <div class="alert alert-success row" >
+                <h4 class="col-12">{{t.taskName}}</h4>
+                <p class="col-12">Start date: {{t.createdDate}} </p>
                 <p class="col-6 heading"> Assigned to</p>
-                <p class="col-6 float-left"> Somil Neema</p>
-                
-                            
-              </div>
-             
+                <p class="col-6 float-left"> {{t.userName}}</p>          
+              </div>  
+            </div>
+
+          </div>
         </div>
-          
-          <div class="col-lg-3 pl-4">
-              <div class="alert alert-success row">
-                  <h4 class="col-12">Placement Incharge</h4>
-                  <p class="col"> Start date: 24/08/2017</p>
-                  <p class="col-7 heading"> Assigned to</p>
-                  <p class="col-5 float-left"> Somil Neema</p>
-                  
-                              
-                </div>
-                <div class="alert alert-success row">
-                    <h4 class="col-12">Placement Incharge</h4>
-                    <p class="col"> Start date: 24/08/2017</p>
-                    <p class="col-7 heading"> Assigned to</p>
-                    <p class="col-5 float-left"> Somil Neema</p>
-                    
-                                
-                  </div>
-                  
+    
             
-          </div>
-          <div class="col-lg-3 pl-4">
-              <div class="alert alert-success row">
-                  <h4 class="col-12">Placement Incharge</h4>
-                  <p class="col"> Start date: 24/08/2017</p>
-                  <p class="col-7 heading"> Assigned to</p>
-                  <p class="col-5 float-left"> Somil Neema</p>
-                  
-                              
-                </div>
-                <div class="alert alert-success row">
-                    <h4 class="col-12">Placement Incharge</h4>
-                    <p class="col"> Start date: 24/08/2017</p>
-                    <p class="col-7 heading"> Assigned to</p>
-                    <p class="col-5 float-left"> Somil Neema</p>
-                    
-                                
-                  </div>
-                  
-            
-          </div>
-          <div class="col-lg-3 pl-4">
-              <div class="alert alert-success row">
-                  <h4 class="col-12">Placement Incharge</h4>
-                  <p class="col"> Start date: 24/08/2017</p>
-                  <p class="col-7 heading"> Assigned to</p>
-                  <p class="col-5 float-left"> Somil Neema</p>
-                  
-                              
-                </div>
-                <div class="alert alert-success row">
-                    <h4 class="col-12">Placement Incharge</h4>
-                    <p class="col"> Start date: 24/08/2017</p>
-                    <p class="col-7 heading"> Assigned to</p>
-                    <p class="col-5 float-left"> Somil Neema</p>
-                    
-                                
-                  </div>
-                  
-            
-          </div>
-          </div>
-    <!--End Right Panel-->
-         <h3 class="heading">Completed</h3>
-            <hr/>
         <div class="row">
-          <div class="col-lg-3">
-            
-            
-              <div class="alert alert-success row">
-                  <h4 class="col-12">Placement Incharge</h4>
-                  <p class="col"> Start date: 24/08/2017</p>
-                  <p class="col-7 heading"> Assigned to</p>
-                  <p class="col-5 float-left"> Somil Neema</p>
-                  
-                              
-                </div>
-                <div class="alert alert-success row">
-                    <h4 class="col-12">Placement Incharge</h4>
-                    <p class="col"> Start date: 24/08/2017</p>
-                    <p class="col-7 heading"> Assigned to</p>
-                    <p class="col-5 float-left"> Somil Neema</p>
-                    
-                                
-                  </div>
-                 
-        </div>
-          
-          <div class="col-lg-3 pl-4">
-              <div class="alert alert-success row">
-                  <h4 class="col-12">Placement Incharge</h4>
-                  <p class="col"> Start date: 24/08/2017</p>
-                  <p class="col-7 heading"> Assigned to</p>
-                  <p class="col-5 float-left"> Somil Neema</p>
-                  
-                              
-                </div>
-                <div class="alert alert-success row">
-                    <h4 class="col-12">Placement Incharge</h4>
-                    <p class="col"> Start date: 24/08/2017</p>
-                    <p class="col-7 heading"> Assigned to</p>
-                    <p class="col-5 float-left"> Somil Neema</p>
-                    
-                                
-                  </div>
-                  
-            
-          </div>
-          <div class="col-lg-3 pl-4">
-              <div class="alert alert-success row">
-                  <h4 class="col-12">Placement Incharge</h4>
-                  <p class="col"> Start date: 24/08/2017</p>
-                  <p class="col-7 heading"> Assigned to</p>
-                  <p class="col-5 float-left"> Somil Neema</p>
-                  
-                              
-                </div>
-                <div class="alert alert-success row">
-                    <h4 class="col-12">Placement Incharge</h4>
-                    <p class="col"> Start date: 24/08/2017</p>
-                    <p class="col-7 heading"> Assigned to</p>
-                    <p class="col-5 float-left"> Somil Neema</p>
-                    
-                                
-                  </div>
-                  
-            
-          </div>
-          <div class="col-lg-3 pl-4">
-              <div class="alert alert-success row">
-                  <h4 class="col-12">Placement Incharge</h4>
-                  <p class="col"> Start date: 24/08/2017</p>
-                  <p class="col-7 heading"> Assigned to</p>
-                  <p class="col-5 float-left"> Somil Neema</p>
-                  
-                              
-                </div>
-                <div class="alert alert-success row">
-                    <h4 class="col-12">Placement Incharge</h4>
-                    <p class="col"> Start date: 24/08/2017</p>
-                    <p class="col-7 heading"> Assigned to</p>
-                    <p class="col-5 float-left"> Somil Neema</p>
-                    
-                                
-                  </div>
-                  
-            
-          </div>
+          <div>
+            <h3 class="heading">Completed</h3>
           </div> 
+          <div  *ngFor="let t of showByStaffId" >
+            <div class="col-lg-4 " *ngIf="t.status=='Completed'">
+              <div class="alert alert-success row" >
+                <h4 class="col-12">{{t.taskName}}</h4>
+                <p class="col-12">Start date: {{t.createdDate}} </p>
+                <p class="col-6 heading"> Assigned to</p>
+                <p class="col-6 float-left"> {{t.userName}}</p>          
+              </div>  
+            </div>
+
+          </div> 
+        </div> 
+      </div>
+<!--Search By Staff Result End-->
+<!--Search By Task Result Start-->
+      <div *ngIf="searchByTask">
+        
+        <div class="row">
+          <div>
+            <h3 class="heading">In Progress</h3>
+          </div>
+          <div  *ngFor="let t of showByTaskId" >
+            <div class="col-lg-4 " *ngIf="t.status=='Progress'">
+              <div class="alert alert-success row" >
+                <h4 class="col-12">{{t.taskName}}</h4>
+                <p class="col-12">Start date: {{t.createdDate}} </p>
+                <p class="col-6 heading"> Assigned to</p>
+                <p class="col-6 float-left"> {{t.userName}}</p>          
+              </div>  
+            </div>
+
+          </div>
+        </div>
+        
+        <div class="row">
+          <div>
+            <h3 class="heading">Completed</h3>
+            </div> 
+          <div  *ngFor="let t of showByTaskId" >
+            <div class="col-lg-4 " *ngIf="t.status=='Completed'">
+              <div class="alert alert-success row" >
+                <h4 class="col-12">{{t.taskName}}</h4>
+                <p class="col-12">Start date: {{t.createdDate}} </p>
+                <p class="col-6 heading"> Assigned to</p>
+                <p class="col-6 float-left"> {{t.userName}}</p>          
+              </div>  
+            </div>
+
+          </div> 
+        </div> 
+      </div>
+    </div>
+<!--Search By  Task Result End-->
+
+<div *ngIf="!searchedRecords">
+  <div class="row">
+    <div>
+      <h3 class="heading">In Progress</h3>
+    </div>
+    <div  *ngFor="let t of assignedTask" >
+      <div class="col-lg-4 " *ngIf="t.status=='Progress'">
+        <div class="alert alert-success row" >
+          <h4 class="col-12">{{t.taskName}}</h4>
+          <p class="col-12">Start date: {{t.createdDate}} </p>
+          <p class="col-6 heading"> Assigned to</p>
+          <p class="col-6 float-left"> {{t.userName}}</p>          
+        </div>  
+      </div>
+
+    </div>
+  </div>
+  
+  <div class="row">
+    <div>
+      <h3 class="heading">Completed</h3>
+      </div> 
+    <div  *ngFor="let t of assignedTask" >
+      <div class="col-lg-4" *ngIf="t.status=='Completed'">
+        <div class="alert alert-success row" >
+          <h4 class="col-12">{{t.taskName}}</h4>
+          <p class="col-12">Start date: {{t.createdDate}} </p>
+          <p class="col-6 heading"> Assigned to</p>
+          <p class="col-6 float-left"> {{t.userName}}</p>          
+        </div>  
+      </div>
+
+    </div> 
+  </div> 
+</div>
+
+
   <!--Notification Panel starts-->
   
   <!--Notification Panel Ends-->

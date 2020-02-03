@@ -232,7 +232,7 @@ getIssueThesisInfo(thesisId:number): Observable<checkPenaltyResponseThesis[]>{
       if(error.status==404){
         errorMessage = `${error.error.message}`;
       }
-      else if(error.status==500){
+      else if(error.status==500){ 
         errorMessage = "Records not found";
       }
       else if(error.status==0)
