@@ -30,6 +30,7 @@ export interface staffList{
 }
 
 export interface searchTask{
+    id:string;
     createdDate:string;
     deadline:string;
     description:string;

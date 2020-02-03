@@ -54,6 +54,10 @@ export class AdministrationService {
   {
     return this.http.get<searchTask[]>(this.apiUrl+'/getAssignTasksInfo',{observe:'response'});
   }
+  deleteTask(Id:string):Observable<HttpResponse<any>>
+  {
+    return this.http.delete(`${this.apiUrl}/deleteTask/${Id}`,{observe:'response'});
+  }
 
   /* Function to handle Error  */
   handleError(error) {

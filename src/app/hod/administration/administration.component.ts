@@ -13,6 +13,7 @@ import { ToastrManager } from 'ng6-toastr-notifications';
 export class AdministrationComponent implements OnInit {
  
   @ViewChild('f') assignTaskForm: NgForm;
+  @ViewChild('h') remove:NgForm;
  selectedCategoryId:string;
  private categories : categoryList[]=[];
  private tasks : taskList[]=[];
@@ -23,6 +24,7 @@ selectedTaskId:string;
  showByStaffId:searchTask[]=[];
  showByTaskId:searchTask[]=[];
  assignedTask:searchTask[]=[];
+ remTask:searchTask[]=[];
  searchByStaff:boolean = false;
  searchByTask:boolean = false; 
  searchedRecords:boolean = false;
@@ -39,17 +41,17 @@ selectedTaskId:string;
   
   onSelect(event:any){
     this.selectedCategoryId = event.target.value;
-    console.log(this.selectedCategoryId);
+    //console.log(this.selectedCategoryId);
     this.service.getTaskByCategoryId(this.selectedCategoryId).subscribe((response=>this.tasks=response.body));
   }
   onSelectStaff(event:any)
   {
     this.searchedRecords =true;
-    console.log(this.searchedRecords);
+    //console.log(this.searchedRecords);
     this.searchByStaff = true;
-    console.log(this.searchByStaff);
+    //console.log(this.searchByStaff);
     this.searchByTask = false;
-    console.log(this.searchByTask);
+    //console.log(this.searchByTask);
     this.selectedStaffId = event.target.value;
     this.service.getTaskByUserId(this.selectedStaffId).subscribe((response=>this.showByStaffId=response.body));
   }
@@ -60,6 +62,10 @@ selectedTaskId:string;
     this.searchByTask = true;
     this.selectedTaskId = event.target.value;
     this.service.getAssignedTaskByTaskId(this.selectedTaskId).subscribe((response=>this.showByTaskId=response.body));
+  }
+  getTask(taskId:string)
+  {
+    this.service.getAssignedTaskByTaskId(taskId).subscribe((response=>this.remTask=response.body));
   }
   assignTask(){
     if(this.assignTaskForm.value.assignTaskData.deadline == "")
@@ -93,6 +99,24 @@ selectedTaskId:string;
   this.assignTaskForm.resetForm();
   }
 
+
+  removeTask()
+  {
+    //console.log(this.remove.value.removeTaskData.Id);
+    this.service.deleteTask(this.remove.value.removeTaskData.Id).subscribe(response=>{
+      if(response.ok){
+        
+        this.toastr.successToastr(response.body['message'],'Success!');
+        console.log(response.body['message']);
+      }
+    },
+    error => {
+      if(error.status === 400) {
+        this.toastr.errorToastr(error.error['message'], 'Alert!');
+     console.log(error.error['message']);
+    }
+  });
+  }
 
   
 }
