@@ -1,3 +1,205 @@
-<p>
-  sem-time-table works!
-</p>
+
+  <div class = "row">
+    <div class = "col-9">
+
+    <h3 class="text-primary" >Semester Time Table</h3>
+    </div>
+    <div class = "col-3">
+    </div>
+
+</div>
+
+
+    <div class="input-group mb-1">
+      <ul class="nav nav-pills nav-fill col-lg-12" id="pills-tab" role="tablist">
+       
+        <li class="nav-item">
+          <a class="nav-link active" id="pills-add-tab" data-toggle="pill" href="#pills-add" role="tab" aria-controls="pills-add"
+            aria-selected="true">Add Time Table</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-update-tab" data-toggle="pill" href="#pills-update" role="tab" aria-controls="pills-update"
+            aria-selected="false">Update Time Table</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-delete-tab" data-toggle="pill" href="#pills-delete" role="tab" aria-controls="pills-delete"
+            aria-selected="false">Delete Time Table</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-show-tab" data-toggle="pill" href="#pills-show" role="tab" aria-controls="pills-show"
+            aria-selected="false">Show Time Table</a>
+        </li>
+        
+        
+      </ul>
+    </div>
+  
+  <div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-add" role="tabpanel" aria-labelledby="pills-add-tab">
+      <br>
+      <form #f="ngForm">
+        <div class = "row">
+  <div class = "col-4"> 
+    <select class="dropdown-primary form-control" required name="facultyName" required ngModel>
+    <option value="" selected disabled>Faculty Name</option>
+    <option value=" " > nandini </option>
+  </select>
+  </div>
+  <div class = "col-3">
+    <button type="submit" [disabled]="!f.valid" class="btn btn-default btnWidth" data-toggle="modal" data-target="#timetableAddModal" >Add Time Table</button>
+  </div>
+ 
+    </div> 
+      </form>
+
+
+      </div>
+      <div class="tab-pane fade" id="pills-update" role="tabpanel" aria-labelledby="pills-update-tab">
+      
+        <br>
+        <form #i="ngForm">
+        <div class = "row">
+          <div class = "col-4"> 
+            <select class="dropdown-primary form-control" required name="facultyName" required ngModel>
+            <option value="" selected disabled>Faculty Name</option>
+            <option value=" " > nandini </option>
+          </select>
+          </div>
+          <div class = "col-3">
+            <button type="submit" [disabled]="!i.valid" class="btn btn-default btnWidth" data-toggle="modal" data-target="#timetableEditModal" >update Time Table</button>
+          </div>
+         
+            </div>
+        </form>
+      </div>
+
+  </div>
+
+
+
+  <div class="modal fade" id="timetableAddModal" tabindex="-1" role="dialog" aria-labelledby="timetableAddModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="timetableAddModalLabel">Add Time Table</h5>
+                <button type="button"  class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form  #g="ngForm">
+                    <div ngModelGroup="dayData" id = "daytimetable">                                                                                                                                                     
+                      <div class="form-row">
+                          <div class="col-6">
+                             <select class="dropdown-primary form-control" name="days" required ngModel>
+                              <option value="" selected disabled>Select Day</option>
+                              <option> Monday    </option>
+                              <option> Tuesday    </option>
+                              <option> Wednesday    </option>
+                              <option> Thursday    </option>
+                              <option> Friday    </option>
+                            
+                            </select>
+                          </div>
+
+                          <div class="col-4">
+                            <button type="submit" (click)= "onAddDay();add()"  [disabled]="!g.valid"   class="btn btn-default btnWidth">Add</button>
+                          </div>
+                      </div>
+                    </div>
+                          </form>
+                         <div  *ngIf = "showDay" >
+                           <div  *ngFor="let container of containers">
+                         <form #h="ngForm">
+                            <div ngModelGroup="addtimetabledata" id = "addtimetable">    
+                              <br>
+                              <div class = "form-row">  
+                                <div class="col-4">
+                                  <select class="dropdown-primary form-control" name="subjectCode" required ngModel>
+                                    <option value="" selected disabled>subjectCode</option>
+                                    <option >C023559</option>
+                                    <option >C023559</option>
+                                    <option >C034563</option> 
+                                  </select>
+                                </div>
+                                <div class="col-4">
+                                  <select class="dropdown-primary form-control" name="lectureType" required ngModel>
+                                    <option value="" selected disabled>lectureType</option>
+                                    <option >Theory lecture</option>
+                                    <option >2 Theory lecture</option>
+                                    <option >lab</option> 
+                                  </select>
+                                 
+                                </div>
+                                <div class="col-4">
+                                  <select class="dropdown-primary form-control" name="roomNo" required ngModel>
+                                    <option value="" selected disabled>Room No.</option>
+                                    <option >LT-205</option>
+                                    <option >LT-203</option>
+                                    <option >AVLC</option> 
+                                  </select>
+                                </div>
+
+                              </div>
+                              <div class = "form-row">                                       
+                                <div class="col-4">
+                                  <label for="lectureTime">Lecture Time</label>
+                               <input type="time"  required id="lectureStartTime" class="form-control" name="lectureTime" > to 
+                               <input type="time"  required id="lectureEndTime" class="form-control" name="lectureEndTime" > 
+                              </div> 
+                              </div>
+                              <br>
+                              <div class = "form-row">
+                              <div class="col-4">
+                                <button type="submit"  class="btn btn-success btnWidth" [disabled]="!h.valid">Submit</button>
+                                
+                            </div>
+                            <div class = "col-4">
+
+                            </div>
+                              <div class="col-2">
+                                <button type="submit" class="btn btn-default btnWidth"  (click)="add()" [disabled]="!h.valid"> <i class="fa fa-plus"></i></button>
+                              </div> 
+                              <div class="col-2">
+                                <button type="submit"  class="btn btn-danger btnWidth" (click)="remove()">  <i class="fa fa-minus"></i></button>
+                            </div>
+
+                              </div>
+                              
+
+
+                              </div>
+
+                           </form>
+
+
+                           </div>
+                         </div>
+                        
+                        
+                        </div>
+
+           </div>
+        </div>
+    </div>  
+
+    <div class="modal fade" id="timetableEditModal" tabindex="-1" role="dialog" aria-labelledby="timetableEditModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="timetableEditModalLabel">Update Time Table</h5>
+                  <button type="button"  class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  
+                
+                         
+                          
+                          
+                          </div>
+  
+             </div>
+          </div>
+      </div>  

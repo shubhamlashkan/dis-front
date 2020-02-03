@@ -22,8 +22,8 @@ export class InfrastructureComponent implements OnInit {
     this.getallLabs();
     this.getallOthers();
     this.getFacultyRooms();
-    this.getFacultyData();
-    this.getStaffData();
+    // this.getFacultyData();
+    // this.getStaffData();
   }
   
   getallLabs(): void {
@@ -45,17 +45,17 @@ export class InfrastructureComponent implements OnInit {
   }
 
   
-  getFacultyData(): void{
-    this.faculty_service.getFacultyData()
-      .subscribe(data => this.fData=data);
-      console.log(this.fData);
-  }
+  // getFacultyData(): void{
+  //   this.faculty_service.getFacultyData()
+  //     .subscribe(data => this.fData=data);
+  //     console.log(this.fData);
+  // }
   
-  getStaffData(): void{
-    this.faculty_service.getStaffData()
-      .subscribe(data =>this.sData = data);
-      console.log(this.sData);
-  }
+  // getStaffData(): void{
+  //   this.faculty_service.getStaffData()
+  //     .subscribe(data =>this.sData = data);
+  //     console.log(this.sData);
+  // }
 
   ngOnInit() { 
   }

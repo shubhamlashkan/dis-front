@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { TimetableComponent } from './timetable/timetable.component';
 import { TimetableRoutingModule } from './timetable-routing.module';
 import { SemTimeTableComponent } from './sem-time-table/sem-time-table.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
     CommonModule,
-    TimetableRoutingModule
+    TimetableRoutingModule,FormsModule,HttpClientModule
   ],
   declarations: [TimetableComponent, SemTimeTableComponent],
   exports : [TimetableComponent]
