@@ -75,7 +75,7 @@
                             <!--En-->
                               
                               <!--En-->
-                            <h3 class="modal-title heading">Assign New Task</h3>
+                            <h3 class="modal-title ">Assign New Task</h3>
                                 <button type="button" class="close" (click)="ngOnInit()" data-dismiss="modal">&times;</button>
                             
                           </div>
@@ -155,7 +155,7 @@
                   <p class="col-4">Start date: {{t.createdDate}} </p>
                   <div class="col-2">
                     <button class="btn btn-danger" data-toggle="modal" 
-                    (click)="getTask(t.taskId)" data-target="#taskRemoveModal">Remove</button>
+                    (click)="getTask(t.id)" data-target="#taskRemoveModal">Remove</button>
                   </div>
                   <p class="col-6 heading"> Assigned to</p>
                   <p class="col-6 float-left"> {{t.userName}}</p>     
@@ -175,7 +175,7 @@
             <p class="col-4">Start date: {{t.createdDate}} </p>
             <div class="col-2">
               <button class="btn btn-danger" data-toggle="modal" 
-              (click)="getTask(t.taskId)" data-target="#taskRemoveModal">Remove</button>
+              (click)="getTask(t.id)" data-target="#taskRemoveModal">Remove</button>
             </div>
             <p class="col-6 heading"> Assigned to</p>
             <p class="col-6 float-left"> {{t.userName}}</p>     
@@ -199,7 +199,7 @@
             <p class="col-4">Start date: {{t.createdDate}} </p>
             <div class="col-2">
               <button class="btn btn-danger" data-toggle="modal" 
-              (click)="getTask(t.taskId)" data-target="#taskRemoveModal">Remove</button>
+              (click)="getTask(t.id)" data-target="#taskRemoveModal">Remove</button>
             </div>
             <p class="col-6 heading"> Assigned to</p>
             <p class="col-6 float-left"> {{t.userName}}</p>     
@@ -219,7 +219,7 @@
               <p class="col-4">Start date: {{t.createdDate}} </p>
               <div class="col-2">
                 <button class="btn btn-danger" data-toggle="modal" 
-                (click)="getTask(t.taskId)" data-target="#taskRemoveModal">Remove</button>
+                (click)="getTask(t.id)" data-target="#taskRemoveModal">Remove</button>
               </div>
               <p class="col-6 heading"> Assigned to</p>
               <p class="col-6 float-left"> {{t.userName}}</p>     
@@ -243,7 +243,7 @@
             <p class="col-4">Start date: {{t.createdDate}} </p>
             <div class="col-2">
               <button class="btn btn-danger" data-toggle="modal" 
-              (click)="getTask(t.taskId)" data-target="#taskRemoveModal">Remove</button>
+              (click)="getTask(t.id)" data-target="#taskRemoveModal">Remove</button>
             </div>
             <p class="col-6 heading"> Assigned to</p>
             <p class="col-6 float-left"> {{t.userName}}</p>          
@@ -263,7 +263,7 @@
               <p class="col-4">Start date: {{t.createdDate}} </p>
               <div class="col-2">
                 <button class="btn btn-danger" data-toggle="modal" 
-                (click)="getTask(t.taskId)" data-target="#taskRemoveModal">Remove</button>
+                (click)="getTask(t.id)" data-target="#taskRemoveModal">Remove</button>
               </div>
               <p class="col-6 heading"> Assigned to</p>
               <p class="col-6 float-left"> {{t.userName}}</p>              
@@ -284,9 +284,8 @@
         </button>
       </div>
       <div class="modal-body">
-        <form (ngSubmit)="removeTask(h)" #h="ngForm">
-          <div ngModelGroup="removeTaskData" >
-          <div *ngFor="let t of remTask">
+     
+          <!-- <div *ngFor="let t of remTask">
             <div class="form-row">
               <div class="col-4">
                 <label for="taskName">Task Name</label>
@@ -318,9 +317,24 @@
               </div>
               
             </div>
+          </div> -->
+          <div class="form-row">
+            <div class="col-7">
+              <h4>Are you sure you want to remove task ?</h4>
+            </div>
+            <div class="col-2">
+              <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth"
+                data-dismiss="modal">Cancel</button>
+            </div>
+            <div class="col-2">
+              <button type="submit"(click)="removeTask()" data-dismiss="modal" class="btn btn-primary btnWidth">Remove </button>
+            </div>
+            <!-- <div class="col-1">
+              <input type="hidden" name="Id" id="Id" [(ngModel)]="t.id">
+            </div> -->
+            
           </div>
-        </div>
-        </form>
+        
       </div>
 
     </div>

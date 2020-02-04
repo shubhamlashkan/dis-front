@@ -28,12 +28,14 @@ selectedTaskId:string;
  searchByStaff:boolean = false;
  searchByTask:boolean = false; 
  searchedRecords:boolean = false;
+ remId:string;
  constructor(private service: AdministrationService, public toastr: ToastrManager) { }
  
   ngOnInit() {
     this.searchByStaff= false;
     this.searchByTask = false;
     this.searchedRecords = false;
+    this.remId = null;
  this.service.getCategoryList().subscribe((response=>this.categories=response.body));
  this.service.getStaffList().subscribe((response=>this.staffs=response.body));
  this.service.assignTaskInfo().subscribe((response=>this.assignedTask=response.body));
@@ -63,9 +65,10 @@ selectedTaskId:string;
     this.selectedTaskId = event.target.value;
     this.service.getAssignedTaskByTaskId(this.selectedTaskId).subscribe((response=>this.showByTaskId=response.body));
   }
-  getTask(taskId:string)
+  getTask(id:string)
   {
-    this.service.getAssignedTaskByTaskId(taskId).subscribe((response=>this.remTask=response.body));
+    //this.service.getAssignedTaskByTaskId(taskId).subscribe((response=>this.remTask=response.body));
+    this.remId = id;
   }
   assignTask(){
     if(this.assignTaskForm.value.assignTaskData.deadline == "")
@@ -103,11 +106,13 @@ selectedTaskId:string;
   removeTask()
   {
     //console.log(this.remove.value.removeTaskData.Id);
-    this.service.deleteTask(this.remove.value.removeTaskData.Id).subscribe(response=>{
+    console.log(this.remId);
+    this.service.deleteTask(this.remId).subscribe(response=>{
       if(response.ok){
         
         this.toastr.successToastr(response.body['message'],'Success!');
         console.log(response.body['message']);
+        this.ngOnInit();
       }
     },
     error => {
