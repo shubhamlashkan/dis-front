@@ -33,4 +33,9 @@ export class FacultyDataService {
     return this.http.post<string>(this.baseUrl + '/addNewMember', Member,{ observe: 'response' });
   }
 
+  getStaffDataByName(name : string) : Observable<HttpResponse<any>>{
+    return this.http.get(`${this.baseUrl}/getStaffWithName/${name}`,{observe: 'response'});
+
+  }
+
 }
