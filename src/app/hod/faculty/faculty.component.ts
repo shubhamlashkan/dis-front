@@ -14,15 +14,19 @@ export class FacultyComponent implements OnInit {
   Member: addMember;
   responseAdd: string;
   errormsg : string;
+  searchedRecord : boolean;
  
 
 
 
   fData : facultyData[]= new Array(new facultyData());
   sData :  facultyData[] = new Array (new facultyData());
+  allData : facultyData[] = new Array(new facultyData());
+
   constructor(private faculty_service: FacultyDataService, public toastr: ToastrManager) { 
     this.getFacultyData();
     this.getStaffData();
+  
   }
 
   getFacultyData(): void{
@@ -35,6 +39,19 @@ export class FacultyComponent implements OnInit {
     this.faculty_service.getStaffData()
       .subscribe(data =>this.sData = data.body);
       console.log(this.sData);
+  }
+  getStaffDataByName(name: string){
+   
+    if(name == ''){
+      this.searchedRecord=false;
+    }
+    else{
+      this.faculty_service.getStaffDataByName(name).subscribe(response => this.allData= response.body,
+        );
+      console.log(this.allData);
+      this.searchedRecord=true;
+    }
+
   }
 onSubmit(){
   this.Member = new addMember(this.addMemberForm.value.addMemberData.class, this.addMemberForm.value.addMemberData.designation,
@@ -66,6 +83,8 @@ onSubmit(){
 
 }
   ngOnInit() {
+
+    this.searchedRecord = false;
   }
 
 }

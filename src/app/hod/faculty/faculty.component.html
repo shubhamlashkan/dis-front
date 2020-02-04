@@ -151,7 +151,7 @@
 <div class="container">
 
   <ul class="nav nav-pills nav-fill">
-    <input type="text" placeholder="Search.." name="search" style="width:700px;">
+    <input type="text" placeholder="Search.." name="search" style="width:700px;" (keyup)= "getStaffDataByName($event.target.value)">
     <li class="nav-item">
       <a class="nav-link active" id="sectionA-tab" data-toggle="pill" href="#sectionA" role="tab" aria-controls="sectionA"
         aria-selected="true">Faculty</a>
@@ -170,8 +170,50 @@
 
   <div class="tab-content ">
     <div class="tab-pane fade show active" id="sectionA" role="tabpane1" aria-labelledby="sectionA-tab">
-      <div class = "row">
+      <div class = "row" *ngIf = "!searchedRecord">
         <div class="col-lg-3 col-sm-6"  *ngFor='let f of fData'>
+          <div class="card hovercard">
+            <div class="cardheader">
+              <div class="dropleft">
+                <a href="#" id="dropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="true" style="text-decoration:none;margin-left: 85%;">
+                <i class="fa fa-ellipsis-v"></i>
+              </a>
+              <div class="dropdown-menu rounded-0 " aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" role="button" data-toggle="modal" data-target="#" aria-controls="cleanliness"
+                style="text-decoration:none;">
+                Time Table</a>
+                <a class="dropdown-item collapsed" href="hod/hod_tasks" role="button" data-toggle="collapse" style="text-decoration:none;">
+                  Assigned Tasks</a>
+                  <a class="dropdown-item collapsed" href="#" role="button" data-toggle="modal" data-target="#"
+                  aria-controls="equipments" style="text-decoration:none;">
+                  Assign New Tasks</a>
+                  <a class="dropdown-item collapsed" href="#" role="button" data-toggle="modal" data-target=".my-modal2"
+                    aria-controls="equipments" style="text-decoration:none;">
+                    Profile</a>
+                </div>
+          
+              </div>
+            </div>
+            <div class="avatar">
+              <img alt="" src="../../../assets/images/img_avatar3.png">
+            </div>
+            <div class="info">
+              <div class="title">
+                <a target="_blank" href="https://scripteden.com/">{{f.name}}</a>
+         
+              </div>
+              <div class="desc"> {{f.currentDesignation}}</div>
+              <div class="desc"><i class="fa fa-mobile"></i> {{f.mobileNo}}</div>
+              <div class="desc"><i class="fa fa-mobile"></i>{{f.alternateMobileNo}}</div>
+              <div class="desc"><i class="fa fa-envelope"></i>{{f.email}}</div>
+              </div>
+          </div>
+        </div>
+
+      </div>
+      <div class = "row" *ngIf = "searchedRecord">
+        <div class="col-lg-3 col-sm-6"  *ngFor='let f of allData'>
           <div class="card hovercard">
             <div class="cardheader">
               <div class="dropleft">
@@ -262,8 +304,50 @@
 
 
        <div class="tab-pane fade " id="sectionB" role="tabpane1" aria-labelledby="sectionB-tab">
-      <div class="row">
+      <div class="row" *ngIf = "!searchedRecord" >
         <div class="col-lg-3 col-sm-6" *ngFor='let f of sData' >
+
+          <div class="card hovercard">
+            <div class="cardheader">
+              <div class="dropleft">
+                <a href="#" id="dropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="true" style="text-decoration:none;margin-left: 85%;">
+                  <i class="fa fa-ellipsis-v"></i>
+                </a>
+                <div class="dropdown-menu rounded-0 " aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" role="button" data-toggle="modal" data-target=".my-modal" aria-controls="cleanliness"
+                    style="text-decoration:none;">
+                    Time Table</a>
+                  <a class="dropdown-item collapsed" href="hod/hod_tasks" role="button" data-toggle="collapse" style="text-decoration:none;">
+                    Assigned Tasks</a>
+                  <a class="dropdown-item collapsed" href="#" role="button" data-toggle="modal" data-target=".my-modal2"
+                    aria-controls="equipments" style="text-decoration:none;">
+                    Assign New Tasks</a>
+                  <a class="dropdown-item collapsed" href="#" role="button" data-toggle="modal" data-target=".my-modal2"
+                    aria-controls="equipments" style="text-decoration:none;">
+                    Profile</a>
+                </div>
+              </div>
+
+            </div>
+            <div class="avatar">
+              <img alt="" src="../../../assets/images/img_avatar3.png">
+            </div>
+            <div class="info">
+              <div class="title">
+                <a target="_blank" href="https://scripteden.com/">{{f.name}}</a>
+              </div>
+
+              <div class="desc"> {{f.currentDesignation}}</div>
+              <div class="desc"><i class="fa fa-mobile"></i> {{f.mobileNo}}</div>
+              <div class="desc"><i class="fa fa-mobile"></i> {{f.alternateMobileNo}}</div>
+              <div class="desc"><i class="fa fa-envelope"></i>{{f.email}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf = "searchedRecord" >
+        <div class="col-lg-3 col-sm-6" *ngFor='let f of allData' >
 
           <div class="card hovercard">
             <div class="cardheader">
