@@ -10,6 +10,7 @@ import { TimetableRoutingModule } from "./timetable/timetable-routing.module";
 
 
 
+
 const routes : Routes = [
     { 
         path : 'myduties',
@@ -23,7 +24,6 @@ const routes : Routes = [
         path : 'library',
         component : LibraryComponent
     }
-    
     
  
   

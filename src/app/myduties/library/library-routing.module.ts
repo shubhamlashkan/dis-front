@@ -12,10 +12,10 @@ const routes : Routes = [
   
     
       
-            {
-                path: "library",
-                component:LibraryComponent
-            },
+     {
+        path: "library",
+        component:LibraryComponent
+     },
     {
         path: "books",
         component:BooksComponent
