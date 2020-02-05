@@ -8,29 +8,46 @@ import { LibraryModule } from './library.module';
 import { ResearchComponent } from './research/research.component';
 import { MydutiesNavigationComponent } from '../myduties-navigation/myduties-navigation.component';
 
-const routes : Routes = [
+// const routes : Routes = [
   
     
       
-            {
-                path: "library",
-                component:LibraryComponent
-            },
-    {
-        path: "books",
-        component:BooksComponent
-    },
-    {
-        path:"thesis",
-        component:ThesisComponent
-    },
-    {
-        path:"history",
-        component:ResearchComponent
-    }
+//             {
+//                 path: "library",
+//                 component:LibraryComponent
+//             },
+//     {
+//         path: "books",
+//         component:BooksComponent
+//     },
+//     {
+//         path:"thesis",
+//         component:ThesisComponent
+//     },
+//     {
+//         path:"history",
+//         component:ResearchComponent
+//     }
 
     
-];
+// ];
+const routes: Routes = [
+    {
+      path: '', component:LibraryComponent, children: [
+        
+        {
+          path: 'books', component: BooksComponent
+        },
+        {
+          path: 'thesis', component: ThesisComponent
+        },
+        {
+          path: '', redirectTo: 'library', pathMatch: 'full'
+        },
+        
+      ]
+    }
+  ];
 @NgModule(
     {
         imports: [RouterModule.forChild(routes)],
