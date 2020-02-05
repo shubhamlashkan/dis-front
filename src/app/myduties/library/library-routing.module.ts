@@ -12,24 +12,6 @@ import { MydutiesNavigationComponent } from '../myduties-navigation/myduties-nav
   
     
       
-<<<<<<< HEAD
-     {
-        path: "library",
-        component:LibraryComponent
-     },
-    {
-        path: "books",
-        component:BooksComponent
-    },
-    {
-        path:"thesis",
-        component:ThesisComponent
-    },
-    {
-        path:"history",
-        component:ResearchComponent
-    }
-=======
 //             {
 //                 path: "library",
 //                 component:LibraryComponent
@@ -46,7 +28,6 @@ import { MydutiesNavigationComponent } from '../myduties-navigation/myduties-nav
 //         path:"history",
 //         component:ResearchComponent
 //     }
->>>>>>> 7961792271e171488a41f1919ed402aac0bdd78f
 
     
 // ];

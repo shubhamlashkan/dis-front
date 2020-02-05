@@ -1,3 +1,49 @@
-<p>
-  mytask works!
-</p>
+<div class="container">
+  <table  class="table table-striped">
+
+    <tr>
+
+      <th>S. No.</th>
+      <th>Assigned Date</th>
+
+      <th>Task Name</th>
+
+      <th>Description</th>
+
+      <th> Deadline</th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let task of showByStaffId; let i = index">
+      <td>
+        {{i+1}}
+      </td>
+      <td>
+        {{task.createdDate}}
+      </td>
+      <td>
+        {{task.taskName}}
+      </td>
+      <td >
+        <div *ngIf="task.description; then showdescription else notshow"></div>
+        <ng-template #showdescription>
+          {{task.description}}
+        </ng-template>
+        <ng-template #notshow>-----</ng-template>
+      </td>
+      <td>
+        <div *ngIf="task.deadline; then showdeadline else notshowdeadline"></div>
+        <ng-template #showdeadline>
+          {{task.deadline}}
+        </ng-template>
+        <ng-template #notshowdeadline>-----</ng-template>
+      </td>
+      <td>
+        <div *ngIf="task.status=='Progress'; then showButton else showCompleted"></div>
+        <ng-template #showButton>
+          <button class="btn btn-primary" (click)="markComplete(task.id)">Mark as Complete</button>
+        </ng-template>
+        <ng-template #showCompleted>{{task.status}}</ng-template>
+      </td>
+    </tr>
+  </table>
+</div>

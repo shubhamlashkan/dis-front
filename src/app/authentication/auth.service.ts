@@ -22,7 +22,7 @@ export class AuthService {
   private forgetPasswordUrl =`${apiSetting.apiGateway}/dis/forgotPassword`;
   private activateAccountUrl = `${apiSetting.apiGateway}/dis/preActivation`;
   private resetUrl = `${apiSetting.apiGateway}/dis/processResetPassword`;
-
+  apiUrl = `${apiSetting.apiUser}/staffProfile`;
   constructor(private http: HttpClient, private interceptor: AuthInterceptor, private route: ActivatedRoute) {
   }
 
@@ -56,5 +56,9 @@ export class AuthService {
     //console.log(info);
     // setting observe value as response to send full http response
     return this.http.post<string>(this.resetUrl, info, { observe: 'response' });
+  }
+
+  getMyUserId():Observable<HttpResponse<string>>{
+    return this.http.get<string>(`${this.apiUrl}/getMyUserID`,{observe:'response'});
   }
 }
