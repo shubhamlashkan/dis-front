@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { allBooks } from 'src/app/myduties/library/bookDataObj';
-import { LibraryService } from 'src/app/API_Service/library.service';
+import { LibraryService } from 'src/app/myduties/library/library.service';
 import { allThesis } from 'src/app/myduties/library/thesisDataObj';
 
 @Component({

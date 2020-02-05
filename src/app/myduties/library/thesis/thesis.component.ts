@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { allThesis, addThesisData, addThesisResponse, getThesisByThesisId, updateThesisData, updateThesisResponse, removeThesisData, course, librarySettingsthesis, checkLimitDataThesis, checkPenaltyDataThesis, checkPenaltyResponseThesis } from '../thesisDataObj';
-import { LibraryService } from 'src/app/API_Service/library.service';
+import { LibraryService } from '../library.service';
 import { updateBookData, librarySettings, issueBookData } from '../bookDataObj';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { apiSetting } from 'src/app/urls/apisetting';

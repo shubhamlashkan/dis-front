@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ComplaintsService } from 'src/app/API_Service/complaints.service';
+
 import { AddOtherComplaint } from '../complaints_other';
 import { AddAFacultyComplaint } from '../complaints_faculty';
 import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import { ComplaintsService } from '../complaints.service';
 
 @Component({
   selector: 'app-addacomplaint',

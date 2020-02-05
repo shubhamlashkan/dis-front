@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { LibraryService } from 'src/app/API_Service/library.service';
+import { LibraryService } from '../library.service';
 import { librarySettings, allBooks, addBookCategory, subjectCategory, acronym} from '../bookDataObj';
 import { NgForm } from '@angular/forms';
 import { allThesis } from '../thesisDataObj';

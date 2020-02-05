@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { LibraryService } from 'src/app/API_Service/library.service';
+import { LibraryService } from '../library.service';
 import { addBookData, addBookResponse, subjectCategory, allBooks, librarySettings, getBookByBookId, updateBookData, updateBookResponse, removeBookData, checkLimitData, issueBookData, checkPenaltyResponse, checkPenaltyData } from '../bookDataObj';
 
 
