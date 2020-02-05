@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LibraryService } from 'src/app/API_Service/library.service';
+import { LibraryService } from '../library.service';
 import { previousIssueHistoryBook } from '../bookDataObj';
 import { previousIssueHistoryThesis } from '../thesisDataObj';
 import { error } from 'util';
