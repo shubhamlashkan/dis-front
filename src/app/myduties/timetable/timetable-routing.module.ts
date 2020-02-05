@@ -6,17 +6,32 @@ import { SemTimeTableComponent } from './sem-time-table/sem-time-table.component
 
 
 
-const routes: Routes = [
-    {
-      path: 'timetable',
-      component: TimetableComponent
-    },
-    {
-      path:'sem-time-table',
-      component:SemTimeTableComponent
-    }
+// const routes: Routes = [
+//     {
+//       path: 'timetable',
+//       component: TimetableComponent
+//     },
+//     {
+//       path:'sem-time-table',
+//       component:SemTimeTableComponent
+//     }
     
    
+//   ];
+  const routes: Routes = [
+    {
+      path: 'timetable', component:TimetableComponent, children: [
+        
+        {
+          path: 'sem-time-table', component: SemTimeTableComponent
+        },
+       
+        {
+          path: '', redirectTo: 'timetable', pathMatch: 'full'
+        },
+        
+      ]
+    }
   ];
 
 
