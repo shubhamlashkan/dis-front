@@ -1,83 +1,255 @@
 
   <div class = "row">
-    <div class = "col-9">
+    <div class = "col-6">
 
     <h3 class="text-primary" >Semester Time Table</h3>
     </div>
-    <div class = "col-3">
+    <div class = "col-6">
+      <div class="input-group mb-1">
+        <ul class="nav nav-pills nav-fill col-lg-12" id="pills-tab" role="tablist">
+         
+          <li class="nav-item">
+            <a class="nav-link active" id="pills-add-tab" data-toggle="pill" href="#pills-add" role="tab"  aria-controls="pills-add"
+              aria-selected="true"><i class="fa fa-plus fa-fw fa-lg" aria-hidden="true"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pills-show-tab" data-toggle="pill" href="#pills-show" role="tab" aria-controls="pills-show"
+              aria-selected="false"><i class="fa fa-eye fa-fw fa-lg" aria-hidden="true"></i></a>
+          </li>
+          <li class = "nav-item">
+            <button class="btn btn-reset " data-toggle="modal" data-target="#changeSettingsModal"  ><i class="fa fa-gear fa-fw fa-lg" aria-hidden="true"></i></button>
+          </li>
+          
+        </ul>
+      </div>
     </div>
 
 </div>
 
 
-    <div class="input-group mb-1">
-      <ul class="nav nav-pills nav-fill col-lg-12" id="pills-tab" role="tablist">
-       
-        <li class="nav-item">
-          <a class="nav-link active" id="pills-add-tab" data-toggle="pill" href="#pills-add" role="tab" aria-controls="pills-add"
-            aria-selected="true">Add Time Table</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="pills-update-tab" data-toggle="pill" href="#pills-update" role="tab" aria-controls="pills-update"
-            aria-selected="false">Update Time Table</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="pills-delete-tab" data-toggle="pill" href="#pills-delete" role="tab" aria-controls="pills-delete"
-            aria-selected="false">Delete Time Table</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="pills-show-tab" data-toggle="pill" href="#pills-show" role="tab" aria-controls="pills-show"
-            aria-selected="false">Show Time Table</a>
-        </li>
-        
-        
-      </ul>
-    </div>
+    
   
   <div class="tab-content" id="pills-tabContent">
     <div class="tab-pane fade show active" id="pills-add" role="tabpanel" aria-labelledby="pills-add-tab">
       <br>
-      <form #f="ngForm">
-        <div class = "row">
-  <div class = "col-4"> 
-    <select class="dropdown-primary form-control" required name="facultyName" required ngModel>
-    <option value="" selected disabled>Faculty Name</option>
-    <option value=" " > nandini </option>
-  </select>
-  </div>
-  <div class = "col-3">
-    <button type="submit" [disabled]="!f.valid" class="btn btn-default btnWidth" data-toggle="modal" data-target="#timetableAddModal" >Add Time Table</button>
-  </div>
- 
-    </div> 
-      </form>
+    <div class="row">
+     
+      <div class="col-9">
+        <hr class="new1">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped">
+            <thead class="">
+              <tr>
+                <th scope="col">Timing</th>
+                <th scope="col">Monday</th>
+                <th scope="col">Tuesday</th>
+                <th scope="col">Wednesday</th>
+                <th scope="col">Thursday</th>
+                <th scope="col">Friday</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">10:00-11:00</th>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+              </tr>
+              <tr>
+                <th scope="row">11:00-12:00</th>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+              </tr>
+              <tr>
+                <th scope="row">12:00-1:00</th>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+              </tr>
+              <tr>
+                <th scope="row">1:00-2:00</th>
 
+              </tr>
+              <tr>
+                <th scope="row">2:00-3:00</th>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+              </tr>
+              <tr>
+                <th scope="row">3:00-4:00</th>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+              </tr>
+              <tr>
+                <th scope="row">4:00-5:00</th>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+              </tr>
+              <tr>
+                <th scope="row">5:00-6:00</th>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+              </tr>
+            </tbody>
+          </table>
 
-      </div>
-      <div class="tab-pane fade" id="pills-update" role="tabpanel" aria-labelledby="pills-update-tab">
-      
-        <br>
-        <form #i="ngForm">
-        <div class = "row">
-          <div class = "col-4"> 
-            <select class="dropdown-primary form-control" required name="facultyName" required ngModel>
-            <option value="" selected disabled>Faculty Name</option>
-            <option value=" " > nandini </option>
-          </select>
-          </div>
-          <div class = "col-3">
-            <button type="submit" [disabled]="!i.valid" class="btn btn-default btnWidth" data-toggle="modal" data-target="#timetableEditModal" >update Time Table</button>
+        </div>
+        <div class="row">
+          <div class="col-8">
+
           </div>
          
+          <div class="col-2">
+              <button type="button" class="btn btn-basic">Uncheck All</button>
+         
+          </div>
+          <div class="col-2">
+            <button type="button" class="btn btn-success">Save</button>
+          </div>
+          
+
+        </div>
+      </div>
+      <div class="col-3">
+        <hr class="new1">
+        <form>
+        
+          <br>
+        
+            <div >
+              <label class="control-label " for="facultyName"><strong>Faculty</strong></label>
+            </div>
+        
+         
+          <div >
+            <select class="dropdown-primary form-control" name="facultyName" required ngModel>
+              <option value="" selected disabled>Select Faculty</option>
+              <option> I  </option>
+              <option> II  </option>
+              <option> III  </option>
+              <option> IV   </option>
+             
+            </select>
+            </div>
+            <div >
+              <label class="control-label " for="course"><strong>Course</strong></label>
+            </div>
+        
+         
+          <div >
+            <select class="dropdown-primary form-control" name="course" required ngModel>
+              <option value="" selected disabled>Select Course</option>
+              <option> I  </option>
+              <option> II  </option>
+              <option> III  </option>
+              <option> IV   </option>
+             
+            </select>
+            </div>
+            <div >
+              <label class="control-label " for="sem"><strong>Semester</strong></label>
+            </div>
+        
+         
+          <div >
+            <select class="dropdown-primary form-control" name="sem" required ngModel>
+              <option value="" selected disabled>Select Semester</option>
+              <option> I  </option>
+              <option> II  </option>
+              <option> III  </option>
+              <option> IV   </option>
+             
+            </select>
+            </div>
+
+            <div >
+              <label class="control-label " for="scode"><strong>Subject Code</strong></label>
+            </div>
+        
+         
+          <div >
+            <select class="dropdown-primary form-control" name="scode" required ngModel>
+              <option value="" selected disabled>Select Class</option>
+              <option> I  </option>
+              <option> II  </option>
+              <option> III  </option>
+              <option> IV   </option>
+             
+            </select>
+            </div>
+         
+            <div >
+              <label class="control-label " for="ltype"><strong>Lecture Type</strong></label>
+            </div>
+        
+         
+          <div >
+            <select class="dropdown-primary form-control" name="ltype" required ngModel>
+              <option value="" selected disabled>Select Lecture Type</option>
+              <option> I  </option>
+              <option> II  </option>
+              <option> III  </option>
+              <option> IV   </option>
+             
+            </select>
+            </div>
+            <div >
+              <label class="control-label " for="roomNo"><strong>Room</strong></label>
+            </div>
+        
+         
+          <div >
+            <select class="dropdown-primary form-control" name="roomNo" required ngModel>
+              <option value="" selected disabled>Select Room No.</option>
+              <option> I  </option>
+              <option> II  </option>
+              <option> III  </option>
+              <option> IV   </option>
+             
+            </select>
             </div>
         </form>
+
+
+      </div>
+
+
+
+
+    </div>
+     
+
+      </div>
+      <div class="tab-pane fade" id="pills-show" role="tabpanel" aria-labelledby="pills-show-tab">
+      
+        <br>
+
       </div>
 
   </div>
 
 
 
-  <div class="modal fade" id="timetableAddModal" tabindex="-1" role="dialog" aria-labelledby="timetableAddModalLabel" aria-hidden="true">
+  <!-- <div class="modal fade" id="timetableAddModal" tabindex="-1" role="dialog" aria-labelledby="timetableAddModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -202,4 +374,78 @@
   
              </div>
           </div>
+      </div>    -->
+       <!-- <div class="row">
+     
+        <div class="col-6">
+          <h5 >Semester Time Table</h5>
+        </div>
+        <div class = "col-3"></div>
+        <div class="col-1">
+          <a class="btn btn-reset " id = "addtimetable-tab" role="tab" data-toggle="pill" href = "addtimetable" aria-controls="addtimetable" aria-selected="true"><i class="fa fa-plus fa-fw fa-lg" aria-hidden="true"></i></a>
+        </div>
+        <div class="col-1">
+          <a class="btn btn-reset " id = "showtimetable-tab" role="tab" data-toggle="pill" href = "showtimetable" aria-controls="showtimetable"  aria-selected="true"><i class="fa fa-eye fa-fw fa-lg" aria-hidden="true"></i></a>
+        </div>
+        <div class="col-1">
+            <button class="btn btn-reset " data-toggle="modal" data-target="#changeSettingsModal"  ><i class="fa fa-gear fa-fw fa-lg" aria-hidden="true"></i></button>
+        </div>
+       
+  
+    
+  
+      </div> -->
+       <div class="modal fade" id="changeSettingsModal" tabindex="-1" role="dialog" aria-labelledby="changeSettiingsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="changeSettiingsModalLabel">Update Settings</h5>
+              <button type="button" (click)="ngOnInit()" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body"> 
+               <!-- <div *ngIf="settingsChanged" class="alert alert-success" role="alert">
+                  Library Instruction Updated Successfully..!!
+              </div>  -->
+                <div>
+                <form >
+      
+                  <div id="update-settings" ngModelGroup="timetableSettings">
+                      <div class="form-row" >
+                          <div class="col-4">
+                              <label for="lectureLength">Lecture Length</label>
+                              <input type="number" min="1" required id="lectureLength" class="form-control" name="lectureLength" placeholder="minutes"> 
+                          </div> 
+                          <div class="col-4">
+                              <label for="lunchTime">Lunch Time</label>
+                           <input type="time"  required id="lunchStartTime" class="form-control" name="lunchTime" > to 
+                           <input type="time"  required id="lunchEndTime" class="form-control" name="lunchEndTime" > 
+                          </div> 
+                          <div class="col-1">
+                              <input type="hidden" class="form-control" id="id" name="id" >
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-row">
+                          <div class="col-3">
+      
+                          </div>
+                          <div class="col-3">
+                              <button type="submit"  class="btn btn-danger btnWidth" data-dismiss="modal">Cancel</button>
+                          </div>
+                            <div class="col-3">
+                                <button type="submit"  class="btn btn-primary btnWidth">Change Settings</button>
+                            </div>  
+                            <div class="col-3">
+                              </div>
+                        </div>
+                  </div>
+                  <br/>
+                </form>
+              </div>
+            </div>
+            
+          </div>
+        </div>
       </div>  
