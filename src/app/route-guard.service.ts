@@ -16,7 +16,7 @@ export class RouteGuardService implements CanActivate {
   return false;
   }
 
-  
+   
   isUserLoggedIn()
   {
     let user = sessionStorage.getItem('authenticaterUser');

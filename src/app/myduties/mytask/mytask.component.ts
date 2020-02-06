@@ -21,7 +21,7 @@ export class MytaskComponent implements OnInit {
   markComplete(id:string)
   {
     console.log(id);
-    this.setstatus="Complete";
+    this.setstatus="Completed";
     this.service.updateStatus(id,this.setstatus).subscribe(response=>{
       if(response.ok) {
         //this.router.navigate(['/']);

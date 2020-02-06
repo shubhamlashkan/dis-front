@@ -38,11 +38,20 @@
         <ng-template #notshowdeadline>-----</ng-template>
       </td>
       <td>
-        <div *ngIf="task.status=='Progress'; then showButton else showCompleted"></div>
+        <!-- <div *ngIf="task.status=='Progress'; then showButton else showCompleted"></div>
         <ng-template #showButton>
           <button class="btn btn-primary" (click)="markComplete(task.id)">Mark as Complete</button>
         </ng-template>
-        <ng-template #showCompleted>{{task.status}}</ng-template>
+        <ng-template #showCompleted>{{task.status}}</ng-template> -->
+        <div *ngIf="task.status=='Progress'">
+          <button class="btn btn-primary" (click)="markComplete(task.id)">Mark as Complete</button>
+        </div>
+        <div *ngIf="task.status=='Completed'">
+          {{task.status}}
+        </div>
+        <div *ngIf="!task.status">
+          Status Can't Be Changed 
+        </div>
       </td>
     </tr>
   </table>
