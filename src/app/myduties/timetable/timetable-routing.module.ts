@@ -27,7 +27,7 @@ import { SemTimeTableComponent } from './sem-time-table/sem-time-table.component
         },
        
         {
-          path: '', redirectTo: 'timetable', pathMatch: 'full'
+          path: '', redirectTo: 'sem-time-table', pathMatch: 'full'
         },
         
       ]

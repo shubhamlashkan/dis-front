@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { InfraService } from '../services/infra.service';
 import { Laboratory } from "../models/Laboratory";
 import { Others } from '../models/Others';
 import { FacultyRoom } from '../models/FacultyRoom';
 import { facultyData } from 'src/app/Model/facultyData';
 import { FacultyDataService } from 'src/app/hod/faculty/faculty-data.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-infrastructure',
@@ -12,18 +13,20 @@ import { FacultyDataService } from 'src/app/hod/faculty/faculty-data.service';
   styleUrls: ['./infrastructure.component.scss']
 })
 export class InfrastructureComponent implements OnInit {
+
+  @ViewChild('f') addInfraForm: NgForm;
   labs: Laboratory = new Laboratory();
   others: Others = new Others();
   facultyRooms: FacultyRoom = new FacultyRoom();
   lab: Laboratory = new Laboratory();
-  fData : facultyData=new facultyData();
-  sData : facultyData=new facultyData();
+  fData : facultyData[]= new Array(new facultyData());
+  sData :  facultyData[] = new Array (new facultyData());
   constructor(private infraservice: InfraService, private faculty_service: FacultyDataService) { 
     this.getallLabs();
     this.getallOthers();
     this.getFacultyRooms();
-    // this.getFacultyData();
-    // this.getStaffData();
+     this.getFacultyData();
+     this.getStaffData();
   }
   
   getallLabs(): void {
@@ -45,17 +48,18 @@ export class InfrastructureComponent implements OnInit {
   }
 
   
-  // getFacultyData(): void{
-  //   this.faculty_service.getFacultyData()
-  //     .subscribe(data => this.fData=data);
-  //     console.log(this.fData);
-  // }
   
-  // getStaffData(): void{
-  //   this.faculty_service.getStaffData()
-  //     .subscribe(data =>this.sData = data);
-  //     console.log(this.sData);
-  // }
+  getFacultyData(): void{
+    this.faculty_service.getFacultyData()
+      .subscribe(response => this.fData= response.body);
+      console.log(this.fData);
+  }
+  
+  getStaffData(): void{
+    this.faculty_service.getStaffData()
+      .subscribe(data =>this.sData = data.body);
+      console.log(this.sData);
+  }
 
   ngOnInit() { 
   }
