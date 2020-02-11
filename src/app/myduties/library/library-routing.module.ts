@@ -33,7 +33,7 @@ import { MydutiesNavigationComponent } from '../myduties-navigation/myduties-nav
 // ];
 const routes: Routes = [
     {
-      path: '', component:LibraryComponent, children: [
+      path: 'library', component:LibraryComponent, children: [
         
         {
           path: 'books', component: BooksComponent
