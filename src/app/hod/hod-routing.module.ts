@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'head',
     component: HodComponent,
     children: [
-      {
+      { 
         path: '',
         component: HomeComponent
       },

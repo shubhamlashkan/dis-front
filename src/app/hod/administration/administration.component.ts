@@ -29,6 +29,7 @@ selectedTaskId:string;
  searchByTask:boolean = false; 
  searchedRecords:boolean = false;
  remId:string;
+ taskStatus:string;
  constructor(private service: AdministrationService, public toastr: ToastrManager) { }
  
   ngOnInit() {
@@ -36,6 +37,7 @@ selectedTaskId:string;
     this.searchByTask = false;
     this.searchedRecords = false;
     this.remId = null;
+    this.taskStatus = null;
  this.service.getCategoryList().subscribe((response=>this.categories=response.body));
  this.service.getStaffList().subscribe((response=>this.staffs=response.body));
  this.service.assignTaskInfo().subscribe((response=>this.assignedTask=response.body));
@@ -71,18 +73,24 @@ selectedTaskId:string;
     this.remId = id;
   }
   assignTask(){
-    if(this.assignTaskForm.value.assignTaskData.deadline == "")
+    if(!this.assignTaskForm.value.assignTaskData.deadline)
     {
       this.assignTaskForm.value.assignTaskData.deadline = null;
-
+      this.taskStatus = null;
     }
-    if(this.assignTaskForm.value.assignTaskData.description=="")
+    else
+    {
+      this.taskStatus="Progress";
+    }
+    //console.log(this.assignTaskForm.value.assignTaskData.deadline);
+    //console.log(this.taskStatus);
+    if(!this.assignTaskForm.value.assignTaskData.description)
     {
       this.assignTaskForm.value.assignTaskData.description = null;
     }
     this.task = new assignTaskData(this.assignTaskForm.value.assignTaskData.deadline,
                                     this.assignTaskForm.value.assignTaskData.description,
-                                    "Progress",
+                                    this.taskStatus,
                                     this.assignTaskForm.value.assignTaskData.task,
                                     this.assignTaskForm.value.assignTaskData.staff);
                                     
