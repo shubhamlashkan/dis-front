@@ -35,9 +35,11 @@ const routes: Routes = [
           
       ]
       
-    },{
+    }
+    ,{
         path: 'mytask', component:MytaskComponent
       },
+       
   ];
   
 @NgModule(
