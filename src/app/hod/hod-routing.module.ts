@@ -22,7 +22,7 @@ import { RouteGuardService } from '../route-guard.service';
 //canActivate:[RouteGuardService],
 const routes: Routes = [
   { path: 'head',
-    component: HodComponent,
+    component: HodComponent,canActivate:[RouteGuardService],
     children: [
       { 
         path: '',

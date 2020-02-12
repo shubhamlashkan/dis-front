@@ -271,6 +271,26 @@
           </div>
         </div> 
       </div>
+
+      <div>
+        <h3 class="heading">Roles Assigned</h3>
+        </div> 
+        <div class="ScrollStyle">
+          <div  *ngFor="let t of assignedTask" >
+            <div class="col" *ngIf="!t.deadline">
+              <div class="alert alert-success row" >
+                <h4 class="col-6">{{t.taskName}}</h4>
+                <p class="col-4">Start date: {{t.createdDate}} </p>
+                <div class="col-2">
+                  <button class="btn btn-danger" data-toggle="modal" 
+                  (click)="getTask(t.id)" data-target="#taskRemoveModal">Remove</button>
+                </div>
+                <p class="col-6 heading"> Assigned to</p>
+                <p class="col-6 float-left"> {{t.userName}}</p>              
+              </div>  
+            </div>
+          </div> 
+        </div>
       
 </div>
 
