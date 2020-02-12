@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {TimetableComponent} from './timetable/timetable.component';
 import { SemTimeTableComponent } from './sem-time-table/sem-time-table.component';
+import { MidtermTimeTableComponent } from './midterm-time-table/midterm-time-table.component';
 
 
 
@@ -29,6 +30,9 @@ import { SemTimeTableComponent } from './sem-time-table/sem-time-table.component
         {
           path: '', redirectTo: 'sem-time-table', pathMatch: 'full'
         },
+        {
+          path:'midterm-time-table',component : MidtermTimeTableComponent
+        }
         
       ]
     }
