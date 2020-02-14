@@ -18,7 +18,7 @@ export class MydutiesNavigationComponent implements OnInit {
     
     this.roles = this.tokenStorage.getAuthorities();
     console.log(this.roles);
-    if(this.roles.includes("Mid Term Time Table") || this.roles.includes("Quiz Time Table") || this.roles.includes("Practical Time Table"))
+    if(this.roles.includes("Mid Term Time Table") || this.roles.includes("Quiz Time Table") || this.roles.includes("Practical Time Table") || this.roles.includes("Semester Time Table"))
     {
       this.timetable = true;
     }
