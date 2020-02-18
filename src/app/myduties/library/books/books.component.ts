@@ -73,7 +73,7 @@ export class BooksComponent implements OnInit {
       this.subject = res;
      // console.log(this.subject);
     });
-
+  
     /* Get All Books */
     this.service.getAllBooks().subscribe((bookData: allBooks[]) => {
       this.books = bookData;

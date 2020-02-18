@@ -16,12 +16,7 @@ export class ResearchComponent implements OnInit {
   errorMsg:string=null;
   showError:boolean = false;
   
-  selected:optionSearch = new optionSearch(1 ,'bookId');
-  options = [
-     new optionSearch(1, 'bookId' ),
-     new optionSearch(2, 'thesisId' ),
-     new optionSearch(3, 'username' ),
-  ];
+ 
   searchTerm:any=null;
   booksRes:previousIssueHistoryBook[];
   thesisRes:previousIssueHistoryThesis[];
@@ -30,9 +25,8 @@ export class ResearchComponent implements OnInit {
 
   ngOnInit() {
     this.searchBy=1;
-    this.showError = false;
   }
- 
+
   onSelect(event:any) { 
     //console.log(optionId);
     // this.selected = null;
@@ -63,7 +57,7 @@ findBy(typedValue)
         this.showError=true;
       this.showSearchedRecord= false;}));
     }
-    if(this.searchBy==2)
+   if(this.searchBy==2)
     {
       this.service.getPreviousIssuesByThesisId(this.searchTerm).subscribe((res:previousIssueHistoryThesis[])=>{
         this.thesisRes = res;
@@ -73,7 +67,7 @@ findBy(typedValue)
         this.showError=true;
       this.showSearchedRecord= false;}));
     }
-    if(this.searchBy==3)
+    if(this.searchBy==3) 
     {
         this.service.getPreviousIssuesByUsername(<string>this.searchTerm).subscribe((res:previousIssueHistoryBook[])=>{
           this.usernameRes=res;
