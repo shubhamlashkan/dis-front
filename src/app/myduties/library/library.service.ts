@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import {apiSetting} from '../urls/apisetting';
-import { allThesis, addThesisData, getThesisByThesisId, updateThesisData, course , librarySettingsthesis,checkPenaltyResponseThesis, previousIssueHistoryThesis } from '../myduties/library/thesisDataObj';
 
-import { addBookData, subjectCategory, allBooks, librarySettings, getBookByBookId, updateBookData, issueBookData, checkPenaltyResponse,  previousIssueHistoryBook, addBookCategory, acronym } from '../myduties/library/bookDataObj';
+import { allThesis, addThesisData, getThesisByThesisId, updateThesisData, course , librarySettingsthesis,checkPenaltyResponseThesis, previousIssueHistoryThesis } from './thesisDataObj' ;
+
+import { addBookData, subjectCategory, allBooks, librarySettings, getBookByBookId, updateBookData, issueBookData, checkPenaltyResponse,  previousIssueHistoryBook, addBookCategory, acronym } from './bookDataObj';
 
 import { catchError } from 'rxjs/operators';
+import { apiSetting } from 'src/app/urls/apisetting';
+
 
 @Injectable({
   providedIn: 'root'
@@ -232,7 +234,7 @@ getIssueThesisInfo(thesisId:number): Observable<checkPenaltyResponseThesis[]>{
       if(error.status==404){
         errorMessage = `${error.error.message}`;
       }
-      else if(error.status==500){
+      else if(error.status==500){ 
         errorMessage = "Records not found";
       }
       else if(error.status==0)

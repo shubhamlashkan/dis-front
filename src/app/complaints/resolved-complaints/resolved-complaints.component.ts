@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ComplaintsService } from 'src/app/API_Service/complaints.service';
+import { ComplaintsService } from '../complaints.service';
+
 @Component({
   selector: 'app-resolved-complaints',
   templateUrl: './resolved-complaints.component.html',

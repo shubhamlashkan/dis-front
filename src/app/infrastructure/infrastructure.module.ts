@@ -6,12 +6,13 @@ import { CentralInventoryComponent } from './central-inventory/central-inventory
 import { InfrastructureOutletComponent } from './infrastructure-outlet/infrastructure-outlet.component';
 import { InfrastructureComponent } from './infrastructure/infrastructure.component';
 import { InfrastructureTimeTableComponent } from './infrastructure-time-table/infrastructure-time-table.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
   imports: [
     CommonModule,
-    InfrastructureRoutingModule
+    InfrastructureRoutingModule,FormsModule
   ],
   declarations: [CentralInventoryComponent, InfrastructureOutletComponent, InfrastructureComponent, InfrastructureTimeTableComponent],
   exports: [CentralInventoryComponent, InfrastructureOutletComponent, InfrastructureComponent, InfrastructureTimeTableComponent]

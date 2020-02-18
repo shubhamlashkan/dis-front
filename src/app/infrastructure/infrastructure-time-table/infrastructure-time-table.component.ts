@@ -16,22 +16,22 @@ export class InfrastructureTimeTableComponent implements OnInit {
   lab : Laboratory = new Laboratory; 
   constructor(infraService: InfraService, private faculty_service: FacultyDataService) {
     this.lab = infraService.getInfraName();
-    this.getFacultyData();
-    this.getStaffData();
+    // this.getFacultyData();
+    // this.getStaffData();
    }
 
     
-  getFacultyData(): void{
-    this.faculty_service.getFacultyData()
-      .subscribe(data => this.fData=data);
-      console.log(this.fData);
-  }
+  // getFacultyData(): void{
+  //   this.faculty_service.getFacultyData()
+  //     .subscribe(data => this.fData=data);
+  //     console.log(this.fData);
+  // }
   
-  getStaffData(): void{
-    this.faculty_service.getStaffData()
-      .subscribe(data =>this.sData = data);
-      console.log(this.sData);
-  }
+  // getStaffData(): void{
+  //   this.faculty_service.getStaffData()
+  //     .subscribe(data =>this.sData = data);
+  //     console.log(this.sData);
+  // }
 
   ngOnInit() {
   }

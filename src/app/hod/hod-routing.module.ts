@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'head',
     component: HodComponent,canActivate:[RouteGuardService],
     children: [
-      {
+      { 
         path: '',
         component: HomeComponent
       },

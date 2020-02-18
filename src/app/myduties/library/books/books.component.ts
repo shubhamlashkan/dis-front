@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { LibraryService } from 'src/app/API_Service/library.service';
+import { LibraryService } from '../library.service';
 import { addBookData, addBookResponse, subjectCategory, allBooks, librarySettings, getBookByBookId, updateBookData, updateBookResponse, removeBookData, checkLimitData, issueBookData, checkPenaltyResponse, checkPenaltyData } from '../bookDataObj';
 
 
@@ -114,6 +114,7 @@ export class BooksComponent implements OnInit {
     //console.log(this.service.addBookDetails(this.Book));
     this.service.addBookDetails(this.Book).subscribe((res: addBookResponse) => {
       this.responseAdd = res;
+     // console.log(this.Book);
       // console.log(this.responseAdd.bookId);
       this.data = this.responseAdd.message + ' ' + this.responseAdd.bookId;
       this.showId = true;

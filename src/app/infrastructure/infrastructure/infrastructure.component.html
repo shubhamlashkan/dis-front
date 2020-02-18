@@ -14,10 +14,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form #f = "ngForm">
+          <div id="add-infrastructure" ngModelGroup="addInfraData">
           <div class="form-group">
             <label for="InfraTypes">Infrastructure Type</label>
-            <select class="form-control" id="InfraTypes">
+            <select class="form-control" id="InfraTypes" name="infraType" required ngModel >
               <option>Laboratory</option>
               <option>Classroom</option>
               <option>Facultyroom</option>
@@ -26,46 +27,41 @@
           </div>
           <div class="form-group">
             <label for="infraName">Name</label>
-            <input type="text" class="form-control" id="infraName">
+            <input type="text" class="form-control" id="infraName" name="infraName" required ngModel>
           </div>
           <div class="form-group">
             <label for="location">Location</label>
-            <div class="row pl-3">
-              <select class="form-control col-6" id="location">
-                <option>First Floor</option>
-                <option>Second Floor</option>
-                <option>Enter New Location</option>
-              </select>
-              <input type="text" class="form-control" id="location" style="width:220px; margin-left: 4px" disabled="true"
-                placeholder="Enter new Location">
-            </div>
+            <input type="text" class="form-control" id="infraLocation" name="infraLocation" required ngModel>
+            
           </div>
           <div class="form-group">
             <label for="incharge">Incharge</label>
-            <input type="text" class="form-control" list="suggestions" id="Incharge">
+            <input type="text" class="form-control" list="suggestions" id="Incharge" name="Incharge" required ngModel>
             <datalist id="suggestions"   style="overflow-y:absolute;height:100px;">
               <option *ngFor="let f of fData">{{f.name}}</option>
             </datalist>
           </div>
           <div class="form-group">
             <label for="associateIncharge">Associate Incharge</label>
-            <input type="text" class="form-control" list="suggestions2" id="associateIncharge">
+            <input type="text" class="form-control" list="suggestions2" id="associateIncharge" name="associateIncharge"  ngModel>
             <datalist id="suggestions2">
               <option *ngFor="let f of fData">{{f.name}}</option>
             </datalist>
           </div>
           <div class="form-group">
             <label for="staff">Staff</label>
-            <input type="text" class="form-control" list="suggestions1" id="staff">
+            <input type="text" class="form-control" list="suggestions1" id="staff" name="staff"  ngModel>
             <datalist id="suggestions1" style="height:180px">
               <option *ngFor="let s of sData">{{s.name}}</option>
             </datalist>
+          </div>
+         
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-primary" [disabled]="!f.valid">Submit</button>
       </div>
     </div>
   </div>
@@ -108,10 +104,10 @@
         <h4 id="lab">Labs</h4>
         <hr>
         <div class="row">
-          <div class="col-lg-4 kyc-section rewards-section reports-sectn pb-4" *ngFor='let inf of labs' style="background-color: rgb(208, 225, 245);">
+          <div class="col-lg-4 kyc-section rewards-section reports-sectn pb-4"  style="background-color: rgb(208, 225, 245);">
             <div class="inline-block">
               <div class="row">
-                <h5 class="col-9">{{inf.name}}</h5>
+                <h5 class="col-9">{{infname}}</h5>
                 <div class="col-2" style="text-decoration: none;">
                   <a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true" style="text-decoration:none; position: relative; bottom:10px; left: 20px;">
                     <i class="fa fa-arrow-right" routerLink="timetable" role="button" (click)="infraName(inf)"
@@ -123,8 +119,8 @@
             </div>
             <hr>
             <div>
-              <p>Location: {{ inf.location}}<br />
-                Incharge: {{ inf.incharge}}<br />
+              <p>Location: {{ inflocation}}<br />
+                Incharge: {{ infincharge}}<br />
                 Associate Incharge: {{ inf.associateIncharge}}<br />
                 Subjects: Operating Systems, DBMS, Computer Architecture<br />
                 Staff: {{inf.staff}}</p>
@@ -138,6 +134,30 @@
 
       <h4 id="Classroom ">Classrooms</h4>
       <hr>
+      <div class="row">
+        <div class="col-lg-4 kyc-section rewards-section reports-sectn pb-4"  style="background-color: rgb(208, 225, 245);">
+          <div class="inline-block">
+            <div class="row">
+              <h5 class="col-9">{{infname}}</h5>
+              <div class="col-2" style="text-decoration: none;">
+                <a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true" style="text-decoration:none; position: relative; bottom:10px; left: 20px;">
+                  <i class="fa fa-arrow-right" routerLink="timetable" role="button" (click)="infraName(inf)"
+                    aria-hidden="true"> </i>
+                </a>
+
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div>
+            <p>Location: {{ inflocation}}<br />
+              Incharge: {{ infincharge}}<br />
+              Associate Incharge: {{ inf.associateIncharge}}<br />
+              Subjects: Operating Systems, DBMS, Computer Architecture<br />
+              Staff: {{inf.staff}}</p>
+          </div>
+        </div>
+      </div>
 
     </div>
 

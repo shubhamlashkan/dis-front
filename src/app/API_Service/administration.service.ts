@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import {apiSetting} from '../urls/apisetting';
-import {categoryList} from '../hod/administration/administrationModel'
+import {categoryList, taskList, staffList, assignTaskData, searchTask} from '../hod/administration/administrationModel'
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AdministrationService {
+export class AdministrationService { 
 
   constructor(private http: HttpClient) {
 
@@ -25,16 +25,39 @@ export class AdministrationService {
     })
   };
 
-  getCategoryList():Observable<categoryList[]>
+  getCategoryList():Observable<HttpResponse<categoryList[]>>
   {
-      return this.http.get<categoryList[]>(this.apiUrl+'/getTaskCategoryList');
+      return this.http.get<categoryList[]>(this.apiUrl+'/getTaskCategoryList',{observe:'response'});
   }
-  getTaskByCategoryId(categoryId:string)
+  getTaskByCategoryId(categoryId:string):Observable<HttpResponse<taskList[]>>
   {
-      return this.http.get(`${this.apiUrl}/getgetTasksFromCategoryId/${categoryId}`)
+      return this.http.get<taskList[]>(`${this.apiUrl}/getTasksFromCategoryId/${categoryId}`,{observe:'response'});
+  }
+  getStaffList():Observable<HttpResponse<staffList[]>>{
+    return this.http.get<staffList[]>(this.apiUrl+'/getActiveStaffList',{observe:'response'});
   }
 
+  assignTask(task:assignTaskData):Observable<HttpResponse<any>>{
+  return this.http.post(this.apiUrl + '/assignTask', task, { observe: 'response' });
+  }
 
+  getTaskByUserId(userId:string):Observable<HttpResponse<searchTask[]>>
+  {
+    return this.http.get<searchTask[]>(`${this.apiUrl}/searchTaskByUserId/${userId}`,{observe:'response'})
+  }
+
+  getAssignedTaskByTaskId(taskId:string):Observable<HttpResponse<searchTask[]>>
+  {
+    return this.http.get<searchTask[]>(`${this.apiUrl}/searchTaskByTaskId/${taskId}`,{observe:'response'})
+  }
+  assignTaskInfo():Observable<HttpResponse<searchTask[]>>
+  {
+    return this.http.get<searchTask[]>(this.apiUrl+'/getAssignTasksInfo',{observe:'response'});
+  }
+  deleteTask(Id:string):Observable<HttpResponse<any>>
+  {
+    return this.http.delete(`${this.apiUrl}/deleteTask/${Id}`,{observe:'response'});
+  }
 
   /* Function to handle Error  */
   handleError(error) {
@@ -55,7 +78,7 @@ export class AdministrationService {
       }
       else if(error.status==400)
       {
-        errorMessage = "Invalid input";
+        errorMessage =`${error.error.message}` ;
       }
       else 
       {
@@ -64,6 +87,8 @@ export class AdministrationService {
       // server-side error
      // errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
+
+    console.log(errorMessage);
     //window.alert(errorMessage);
     return throwError(errorMessage);
   }
