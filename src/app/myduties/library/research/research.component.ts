@@ -16,16 +16,7 @@ export class ResearchComponent implements OnInit {
   errorMsg:string=null;
   showError:boolean = false;
   
-<<<<<<< HEAD
-  selected:optionSearch = new optionSearch(1 ,'bookId');
-  options = [
-     new optionSearch(1, 'bookId' ),
-     new optionSearch(2, 'thesisId' ),
-     new optionSearch(3, 'username' ),
-  ];
-=======
  
->>>>>>> dd6f97357c054b47ae307ab4a656273031a51c0e
   searchTerm:any=null;
   booksRes:previousIssueHistoryBook[];
   thesisRes:previousIssueHistoryThesis[];
@@ -34,14 +25,8 @@ export class ResearchComponent implements OnInit {
 
   ngOnInit() {
     this.searchBy=1;
-<<<<<<< HEAD
-    this.showError = false;
-  }
- 
-=======
   }
 
->>>>>>> dd6f97357c054b47ae307ab4a656273031a51c0e
   onSelect(event:any) { 
     //console.log(optionId);
     // this.selected = null;
@@ -54,10 +39,6 @@ export class ResearchComponent implements OnInit {
     //   }
     // }
     this.searchBy = event.target.value;
-<<<<<<< HEAD
-=======
-
->>>>>>> dd6f97357c054b47ae307ab4a656273031a51c0e
 }
  
 findBy(typedValue)
@@ -76,11 +57,7 @@ findBy(typedValue)
         this.showError=true;
       this.showSearchedRecord= false;}));
     }
-<<<<<<< HEAD
-    if(this.searchBy==2)
-=======
    if(this.searchBy==2)
->>>>>>> dd6f97357c054b47ae307ab4a656273031a51c0e
     {
       this.service.getPreviousIssuesByThesisId(this.searchTerm).subscribe((res:previousIssueHistoryThesis[])=>{
         this.thesisRes = res;
@@ -90,11 +67,7 @@ findBy(typedValue)
         this.showError=true;
       this.showSearchedRecord= false;}));
     }
-<<<<<<< HEAD
-    if(this.searchBy==3)
-=======
     if(this.searchBy==3) 
->>>>>>> dd6f97357c054b47ae307ab4a656273031a51c0e
     {
         this.service.getPreviousIssuesByUsername(<string>this.searchTerm).subscribe((res:previousIssueHistoryBook[])=>{
           this.usernameRes=res;
