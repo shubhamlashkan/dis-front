@@ -4,6 +4,6 @@ export class Urls{
    public static backendUrl = 'http://10.1.100.114'; 
    public static frontendUrl = 'http://localhost:4200'; 
 
- // public static backendUrl = 'http://10.1.100.76:8080'; 
-  //public static frontendUrl = 'http://10.1.100.76:4200'; 
+//  public static backendUrl = 'http://10.1.100.76:8080'; 
+//   public static frontendUrl = 'http://10.1.100.76:4200'; 
 }
