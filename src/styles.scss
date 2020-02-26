@@ -6,8 +6,11 @@
 @import "assets/css/font-awesome.min.css";
 @import "assets/css/tooltip.css";
 @import "assets/css/bootstrap-select.css";
-@import "assets/css/dataTables.min.css";
+//@import "assets/css/dataTables.min.css";
 @import "assets/css/bootstrap-select.css";
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
+@import '~@fullcalendar/timegrid/main.css';
 
 html, body { height: 100%; }
 body { margin: 0; font-family: 'Roboto', sans-serif; }

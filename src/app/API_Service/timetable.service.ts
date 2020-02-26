@@ -15,6 +15,6 @@ export class TimetableService {
     return this.http.get(`${this.baseUrl}/timetable/student`);
   }
   getFacultyTimeTable(): Observable<any>{
-    return this.http.get(`${this.baseUrl}/timetable/faculty/14`)
+    return this.http.get(`${this.baseUrl}/timetable/faculty/14`);
   }
 }

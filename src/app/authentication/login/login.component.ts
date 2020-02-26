@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
       data => {
         this.loading = false;
         console.log(data);
+        this.tokenStorage.saveUsername(data.username);
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveAuthorities(data.authorities);
 
@@ -50,8 +51,8 @@ export class LoginComponent implements OnInit {
         this.getValidated();
       },
       error => {
-        if(error.status === 400) {
-        //this.router.navigate(['/forgot-password']);
+        if (error.status === 400) {
+        // this.router.navigate(['/forgot-password']);
         this.toastr.errorToastr(error.error['message'], 'Alert!');
         console.log(error);
         this.isLoginFailed = true;

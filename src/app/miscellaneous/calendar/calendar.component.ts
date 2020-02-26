@@ -1,90 +1,53 @@
-import { Component, OnInit } from '@angular/core';
-import * as $ from 'jquery';
-import 'fullcalendar';
+import { TokenStorageService } from './../../authentication/token-storage.service';
+import { Component, ViewChild } from '@angular/core';
+import { FullCalendarComponent } from '@fullcalendar/angular';
+import { EventInput } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
+import bootstrapPlugin from '@fullcalendar/bootstrap';
+import { CalendarService } from './../../API_Service/calendar.service';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss']
 })
-export class CalendarComponent implements OnInit {
 
-  constructor() { }
+export class CalendarComponent {
+
+  constructor(private calendarService: CalendarService, private auth: TokenStorageService) {}
+
+  @ViewChild('calendar') calendarComponent: FullCalendarComponent; // the #calendar in the template
+
+  calendarVisible = true;
+  calendarPlugins = [dayGridPlugin, timeGridPlugin, interactionPlugin, bootstrapPlugin];
+  calendarWeekends = true;
+  calendarEvents: EventInput[] = [];
 
   ngOnInit() {
-    $('head').append('<link rel="stylesheet" href="../../../assets/css/fullcalendar.min.css" type="text/css" />');
-        $(document).ready(function() {
+    this.calendarService.getMyEvents(this.auth.getUsername()).subscribe( events => {
+      for (let e = 0; e < events.length; e++) {
+        this.calendarEvents = this.calendarEvents.concat({
+          id: events[e].eventId,
+          title: events[e].title,
+          start: events[e].startDate,
+          end: events[e].endDate,
+        });
+      }
+    });
+  }
 
-          $('#calendar').fullCalendar({
-            header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,basicWeek,basicDay,list'
-            },
-            defaultDate: '2018-09-06',
-            aspectRatio: 1,
-            navLinks: true, // can click day/week names to navigate views
-            editable: true,
-            eventLimit: true, // allow "more" link when too many events
-            events: [
-            {
-              title: 'All Day Event',
-              start: '2018-01-26'
-            },
-            {
-              title: 'Long Event',
-              start: '2018-03-07',
-              end: '2018-03-10'
-            },
-            {
-              id: 999,
-              title: 'Repeating Event',
-              start: '2018-01-13T16:00:00'
-            },
-            {
-              id: 999,
-              title: 'Repeating Event',
-              start: '2018-03-16T16:00:00'
-            },
-            {
-              title: 'Conference',
-              start: '2018-03-11',
-              end: '2018-03-13'
-            },
-            {
-              title: 'Meeting',
-              start: '2018-03-12T10:30:00',
-              end: '2018-03-12T12:30:00'
-            },
-            {
-              title: 'Lunch',
-              start: '2018-03-12T12:00:00'
-            },
-            {
-              title: 'Meeting',
-              start: '2018-03-12T14:30:00'
-            },
-            {
-              title: 'Happy Hour',
-              start: '2018-03-12T17:30:00'
-            },
-            {
-              title: 'Dinner',
-              start: '2018-03-12T20:00:00'
-            },
-            {
-              title: 'Birthday Party',
-              start: '2018-03-13T07:00:00'
-            },
-            {
-              title: 'Click for Google',
-              url: 'http://google.com/',
-              start: '2018-01-21'
-            }
-            ]
-          });
-          });
 
+
+  handleDateClick(arg) {
+    if (confirm('Would you like to add an event to ' + arg.dateStr + ' ?')) {
+      this.calendarEvents = this.calendarEvents.concat({ // add new event data. must create new array
+        title: 'New Event',
+        start: arg.date,
+        allDay: arg.allDay
+      });
+    }
   }
 
 }

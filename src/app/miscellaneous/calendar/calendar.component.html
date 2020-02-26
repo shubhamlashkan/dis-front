@@ -1,1 +1,21 @@
-<div id='calendar'></div>
+<full-calendar id="calendar"
+      defaultView="dayGridMonth"
+      [header]="{
+        left: 'prev,next',
+        center: 'title',
+        right: ' today dayGridMonth,timeGridDay'
+      }"
+      [buttonText]= "{
+        dayGridMonth: 'M',
+        timeGridDay: 'D'
+      }"
+      navLinks= true,
+      editable= true,
+      eventLimit= true,
+      themeSystem = 'bootstrap'
+      [plugins]="calendarPlugins"
+      [weekends]="calendarWeekends"
+      [events]="calendarEvents"
+      (dateClick)="handleDateClick($event)"
+      [aspectRatio] = "1"
+    ></full-calendar>
