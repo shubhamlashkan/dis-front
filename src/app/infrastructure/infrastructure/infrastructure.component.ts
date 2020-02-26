@@ -6,7 +6,7 @@ import { FacultyRoom } from '../models/FacultyRoom';
 import { facultyData } from 'src/app/Model/facultyData';
 import { FacultyDataService } from 'src/app/hod/faculty/faculty-data.service';
 import { NgForm } from '@angular/forms';
-import { facultyName, staffName, infraType, infrastructure, addInfra, addLoc } from '../models/infra';
+import { facultyName, staffName, infraType, infrastructure, addInfra, addLoc ,infrabyid} from '../models/infra';
 import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
@@ -17,6 +17,9 @@ import { ToastrManager } from 'ng6-toastr-notifications';
 export class InfrastructureComponent implements OnInit {
 
   @ViewChild('f') addInfraForm: NgForm;
+
+  @ViewChild('e') editInfraForm: NgForm;
+
   labs: Laboratory[] = new Array (new Laboratory());
   others: Others[] = new Array (new Others());
   crooms: Others[] = new Array (new Others());
@@ -27,12 +30,17 @@ export class InfrastructureComponent implements OnInit {
   infratype: infraType[]=[];
   locations: infraType[];
   infrastructure:infrastructure[];
+  infraById:infrastructure;
   showSearchedRecords:boolean;
   searchInfrastructure:string;
   infra : addInfra;
+  infraUpdate : addInfra;
   newLocation:addLoc;
   infraId:string;
   locAdd:string;
+  infrast : infrabyid;
+  facultyid:string;
+  staffid:string;
   constructor(private infraservice: InfraService,public toastr: ToastrManager) { 
     
   }
@@ -90,11 +98,31 @@ export class InfrastructureComponent implements OnInit {
     else{ 
       this.infraservice.getInfrastructure(searchInfrastructure).subscribe(response=>{this.infrastructure=response.body
       this.showSearchedRecords = true;
+      
+      
       });
     
     }
+  
    
   }
+  
+  
+  
+//  getInfraById(infraId : string): void{
+//    this.infraservice.getInfrastructureById(infraId).subscribe((body:any)=>{
+//       this.infrast = new infrabyid(JSON.parse(body));
+//       console.log(this.infrast);
+//    });
+   
+//  }
+getInfraById(infraId:string): void{
+  this.infraservice.getInfrastructureById(infraId).subscribe(response=>{this.infraById=response.body
+    console.log(this.infraById.noofChairs);
+  });
+
+}
+
   onAdd(){
 
     this.infra=new addInfra(this.addInfraForm.value.addInfraData.infraArea,
@@ -136,7 +164,8 @@ export class InfrastructureComponent implements OnInit {
                 if(!this.locations.includes(this.addInfraForm.value.addInfraData.infraLocation))
                 {
                   this.newLocation = new addLoc(this.addInfraForm.value.addInfraData.infraLocation);
-                  this.infraservice.addLocation(this.newLocation).subscribe(response=>this.locAdd=response.body);
+                  this.infraservice.addLocation(this.newLocation).subscribe(response=>{this.locAdd=response.body['message']});
+                  // console.log(this.locAdd);
                 }
                 this.addInfraForm.resetForm();    
 
@@ -145,6 +174,7 @@ export class InfrastructureComponent implements OnInit {
 
 getInfra(id:string){
 this.infraId=id;
+
 }
 removeInfra(){
   this.infraservice.deleteInfra(this.infraId).subscribe(response=>{
@@ -162,6 +192,60 @@ removeInfra(){
   }
 });
 }
+
+onUpdate()
+{
+  // for (let i of this.fData)
+  // {
+  //   if(i.name.includes( this.editInfraForm.value.editInfraData.incharge))
+  //   {
+  //     console.log(i.id);
+  //   } 
+  // }
+
+  this.infraUpdate=new addInfra(this.editInfraForm.value.editInfraData.infraArea,
+                          this.editInfraForm.value.editInfraData.associateIncharge,
+                          this.editInfraForm.value.editInfraData.attendant,
+                          this.infraById.createdBy,this.infraById.createdDate,
+                          this.editInfraForm.value.editInfraData.infraDes,
+                          this.editInfraForm.value.editInfraData.infraId,
+                          this.editInfraForm.value.editInfraData.incharge,
+                          this.editInfraForm.value.editInfraData.infraLocation,
+                          null,null,
+                          this.editInfraForm.value.editInfraData.infraName,
+                          this.editInfraForm.value.editInfraData.infraAcronym,
+                          this.infraById.noofAlmirah,
+                            this.infraById.noofChairs,
+                            this.infraById.noofComputerTables,
+                            this.infraById.noofTables,
+                          this.editInfraForm.value.editInfraData.staff,
+                          this.editInfraForm.value.editInfraData.infraType);
+               //console.log(this.editInfraForm.value.editInfraData.infraName);     
+               this.infraservice.updateInfrastructure(this.infraUpdate).subscribe( 
+                response => {
+          
+                if(response.ok) {
+                  //this.router.navigate(['/']);
+                  this.toastr.successToastr(response.body['message'], 'Success!');
+                  console.log(response.body['message']);
+                  this.ngOnInit();
+                }
+              },
+              error => {
+                if(error.status === 400) {
+                  this.toastr.errorToastr(error.error['message'], 'Alert!');
+              
+               console.log(error.error['message']);
+              
+              }
+            }
+         
+              );  
+
+             
+              this.addInfraForm.resetForm();    
+
+  }
   
   ngOnInit() { 
     this.searchInfrastructure = null;;

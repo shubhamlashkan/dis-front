@@ -1,9 +1,13 @@
 
 
 export interface facultyName{
+	id:string;
+	name:string;
 
 }
 export interface staffName{
+	id:string;
+	name:string;
 
 }
 export interface infraType{
@@ -32,6 +36,7 @@ export interface infrastructure{
   type: string;
 
 }
+
 
 export class addInfra{
 
@@ -88,3 +93,51 @@ export class addLoc
 	}
 }
 
+export class infrabyid{
+
+
+
+	constructor(infraResponse:any) {
+		this.area = infraResponse.area;
+		this.associateIncharge = infraResponse.associateIncharge;
+		this.attendant = infraResponse.attendant;
+		this.createdBy = infraResponse.createdBy;
+		this.createdDate = infraResponse.createdDate;
+		this.description = infraResponse.description;
+		this.id = infraResponse.id;
+		this.incharge = infraResponse.incharge;
+		this.location = infraResponse.location;
+		this.modifiedBy = infraResponse.modifiedBy;
+		this.modifiedDate = infraResponse.modifiedDate;
+		this.name = infraResponse.name;
+		this.nameAcronym = infraResponse.nameAcronym;
+		this.noofAlmirah = infraResponse.noofAlmirah;
+		this.noofChairs = infraResponse.noofChairs;
+		this.noofComputerTables = infraResponse.noofComputerTables;
+		this.noofTables = infraResponse.noofTables;
+		this.staff = infraResponse.staff;
+		this.type = infraResponse.type;
+	}
+	private area: string;
+	private associateIncharge: string;
+	private attendant: string;
+	private createdBy: string;
+	private createdDate: string;
+	private description: string;
+	private id: string;
+	private incharge: string;
+	private location: string;
+	private modifiedBy: string;
+	private modifiedDate:string;
+	private name: string;
+	private nameAcronym: string;
+	private noofAlmirah: number;
+	private noofChairs: number;
+	private noofComputerTables: number;
+	private noofTables: number;
+	private staff: string;
+    private type: string;
+    
+
+  
+  }

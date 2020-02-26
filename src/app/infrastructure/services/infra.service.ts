@@ -72,5 +72,11 @@ addLocation(location:addLoc):Observable<HttpResponse<string>>{
   getInfraName(): Laboratory{
     return this.lab;
   }
+  updateInfrastructure(updateinfra:addInfra) : Observable<HttpResponse<string>>{
+    return this.http.put<string>(`${this.baseUrl}/updateInfrastructure`,updateinfra,{observe: 'response'});
+  }
+  getInfrastructureById(infraId: string): Observable<HttpResponse<infrastructure>>{
+    return this.http.get<infrastructure>(`${this.baseUrl}/getInfrastructurebyId/${infraId}`,{observe: 'response'}); 
+  }
 
 }

@@ -31,7 +31,7 @@
             <label for="infraName">Name</label>
             <input type="text" class="form-control" id="infraName" name="infraName" required ngModel>
           </div>
-          <div class="col-6">
+          <div class="col-6">re Engineerin
             <label for="infraAcronym">Acronym</label>
             <input type="text" class="form-control" id="infraAcronym" name="infraAcronym" required ngModel>
           </div>
@@ -59,8 +59,8 @@
             <label for="incharge">Incharge</label>
             <select class="dropdown-primary form-control" name="incharge" required ngModel>
               <option value="" selected disabled>Incharge</option>
-              <option *ngFor="let f of fData" [value]="f">
-                {{f}}
+              <option *ngFor="let f of fData" [value]="f.id">
+                {{f.name}}
               </option>
             </select>
           </div>
@@ -68,8 +68,8 @@
             <label for="associateIncharge">Associate Incharge</label>
             <select class="dropdown-primary form-control" name="associateIncharge" required ngModel>
               <option value="" selected disabled>Associate Incharge</option>
-              <option *ngFor="let f of fData" [value]="f">
-                {{f}}
+              <option *ngFor="let f of fData" [value]="f.id">
+                {{f.name}}
               </option>
             </select>
           </div>
@@ -78,8 +78,8 @@
             <label for="staff">Staff</label>
             <select class="dropdown-primary form-control" name="staff" required ngModel>
               <option value="" selected disabled>Staff</option>
-              <option *ngFor="let s of sData" [value]="s">
-                {{s}}
+              <option *ngFor="let s of sData" [value]="s.id">
+                {{s.name}}
               </option>
             </select>
            
@@ -106,63 +106,117 @@
   </div>
 </div>
 
-<div class="modal fade" id="infraEditModal" tabindex="-1" role="dialog" aria-labelledby="infraEditModalLabel" aria-hidden="true">
+<div class="modal fade" id="infraEditModal" tabindex="-1" role="dialog" aria-labelledby="infraEditModal" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="infraEditModalLabel">{{lab.name}}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h5 class="modal-title" id="infraEditLabel"> Edit  Infrastructure</h5>
+        <button type="button" class="close" (click)="ngOnInit()" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="infraName">Edit Name</label>
-            <input type="text" class="form-control" id="{{lab.name}}" placeholder="{{lab.name}}">
+        <form  #e = "ngForm">
+          <div id="edit-infrastructure" ngModelGroup="editInfraData">
+            <div  >
+          <div class="form-group" >
+            <label for="InfraTypes">Change Infrastructure Type</label>
+            <select class="dropdown-primary form-control" name="infraType" required  [ngModel]="infraById?.type">
+              <option [value] = " " selected  ></option>
+              <option *ngFor="let i of infratype" [value]="i">
+                {{i}}
+              </option>
+            </select>
           </div>
-          <div class="form-group">
-            <label for="location">Edit Location</label>
-            <div class="row pl-3">
-              <select class="form-control col-6" id="location">
-                <option>First Floor</option>
-                <option>Second Floor</option>
-                <option>Enter New Location</option>
-              </select>
-              <input type="text" class="form-control" id="location" style="width:220px; margin-left: 4px" disabled="true"
-                placeholder="Enter new Location">
-            </div>
+          <div class="row">
+          <div class="col-6">
+            <label for="infraName">Change Name</label>
+            <input type="text" class="form-control" id="infraName" name="infraName" required [ngModel]="infraById?.name" >
           </div>
+
+          <div class="col-6">
+            <label for="infraAcronym">Change Acronym</label>
+            <input type="text" class="form-control" id="infraAcronym" name="infraAcronym" required [ngModel]="infraById?.nameAcronym">
+          </div>
+          </div>
+          <div class="row">
+          <div class="col-6">
+            <label for="location">Change Location</label>
+            <input type="text" class="form-control" list="suggestions2" id="infraLocation" name="infraLocation" required [ngModel]="infraById?.location">
+           <datalist id = "suggestions2">
+             <option *ngFor = "let l of locations">{{l}}</option>
+           </datalist>
+            
+          </div>
+          <div class="col-4">
+            <label for="infraArea">Change Area</label>
+            <input type="number" class="form-control" id="infraArea" name="infraArea" [ngModel]="infraById?.area" >
+          </div>
+          <div class="col-2">
+            <label for="areaUnit"> </label>
+          <p> Sq. feet  </p>
+          </div>
+          </div>
+
           <div class="form-group">
             <label for="incharge">Change Incharge</label>
-            <input type="text" class="form-control" list="suggestions" id="Incharge" placeholder="{{lab.incharge}}">
-            <datalist id="suggestions">
-              <option *ngFor="let f of fData">{{f.name}}</option>
-            </datalist>
+            <select class="dropdown-primary form-control" name="incharge" required [ngModel]="infraById?.incharge">
+              <option value = '' selected disabled></option>
+              <option *ngFor="let f of fData" [value]="f.id">
+                {{f.name}}
+              </option>
+            </select>
           </div>
           <div class="form-group">
             <label for="associateIncharge">Change Associate Incharge</label>
-            <input type="text" class="form-control" list="suggestions2" id="associateIncharge" placeholder="{{lab.associateIncharge}}">
-            <datalist id="suggestions2">
-              <option *ngFor="let f of fData">{{f.name}}</option>
-            </datalist>
+            <select class="dropdown-primary form-control" name="associateIncharge"  [ngModel]="infraById?.associateIncharge">
+              <option value="" selected disabled></option>
+              <option *ngFor="let f of fData" [value]="f.id">
+                {{f.name}}
+              </option>
+            </select>
           </div>
+          <div class="row">
+          <div class="col-6">
+            <label for="staff">Change Staff</label>
+            <select class="dropdown-primary form-control" name="staff" [ngModel]="infraById?.staff">
+              <option value="" selected disabled></option>
+              <option *ngFor="let s of sData" [value]="s.id">
+                {{s.name}}
+              </option>
+            </select>
+           
+          </div>
+          <div class="col-6">
+            <label for="attendant">Change Attendant</label>
+            <input type="text" class="form-control" id="attendant" name="attendant" [ngModel]="infraById?.attendant">
+          </div>
+          </div>
+          <div class="col-3">
+            <input type="hidden" name="infraId" id="infraId" [ngModel]="infraById?.id">
+          </div>
+         
           <div class="form-group">
-            <label for="staff">change Staff</label>
-            <input type="text" class="form-control" list="suggestions1" id="staff" placeholder="{{lab.staff}}">
-            <datalist id="suggestions1">
-              <option *ngFor="let s of sData">{{s.name}}</option>
-            </datalist>
+            <label for="infraDes">Change Description</label>
+            <textarea class="form-control" id="infraDes" name="infraDes" [ngModel]="infraById?.description"  ></textarea>
+          </div>
+          <div >
+            <input type="hidden" name="infraId" id="infraId" [ngModel]="infraById?.id">
+          </div>
+          
+            </div>
+         
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-secondary"(click)="ngOnInit()" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="onUpdate()">Update</button>
       </div>
     </div>
   </div>
 </div>
+
 <div class="modal fade" id="infraRemoveModal" tabindex="-1" role="dialog" aria-labelledby="infraRemoveModalLabel"aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -272,6 +326,7 @@
             <div class="inline-block">
               <div class="row">
                 <h5 class="col-9">{{f.name}}</h5>
+              
                 <div class="col-2" style="text-decoration: none;">
                   <a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true" style="text-decoration:none; position: relative; bottom:10px; left: 20px;">
                     <i class="fa fa-arrow-right" routerLink="timetable" role="button" (click)="infraName(inf)"
@@ -296,7 +351,7 @@
               </div>
               <div class="col-2">
                 <button class="btn btn-link " data-toggle="modal"
-                data-target="#infraEditModal" 
+                data-target="#infraEditModal" (click)="getInfraById(f.id)"
                  ><i class="fa fa-pencil fa-fw fa-lg" aria-hidden="true" ></i></button>
               </div>
               <div class="col-2">
@@ -344,7 +399,7 @@
             </div>
             <div class="col-2">
               <button class="btn btn-link " data-toggle="modal"
-              data-target="#infraEditModal" 
+              data-target="#infraEditModal" (click) = "getInfraById(f.id)"
                ><i class="fa fa-pencil fa-fw fa-lg" aria-hidden="true" ></i></button>
             </div>
             <div class="col-2">
