@@ -18,7 +18,7 @@ import { RouteGuardService } from '../route-guard.service';
 //canActivate:[RouteGuardService],
 const routes: Routes = [
   { path: 'student',
-    component: StudentComponent,canActivate:[RouteGuardService],
+    component: StudentComponent,
     children: [
       {
         path: '',

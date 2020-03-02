@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { settings } from '../timetableModel';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-timetable',
@@ -6,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./timetable.component.scss']
 })
 export class TimetableComponent implements OnInit {
+  
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  
 }

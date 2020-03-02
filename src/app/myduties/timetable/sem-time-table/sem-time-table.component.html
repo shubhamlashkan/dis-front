@@ -142,10 +142,10 @@
           <div >
             <select class="dropdown-primary form-control" name="facultyName" required ngModel>
               <option value="" selected disabled>Select Faculty</option>
-              <option> ABV  </option>
-              <option> JVK </option>
-              <option> KVJK  </option>
-              <option> JC    </option>
+              <option *ngFor="let f of fdata" [value]="f.id">
+                {{f.name}}
+              </option>
+              
              
             </select>
             </div>
@@ -349,11 +349,9 @@
               <div >
                 <select class="dropdown-primary form-control" name="facultyName" required ngModel>
                   <option value="" selected disabled>Select Faculty</option>
-                  <option> ABV  </option>
-                  <option> JVK </option>
-                  <option> KVJK  </option>
-                  <option> JC    </option>
-                 
+                  <option *ngFor="let f of fdata" [value]="f.id">
+                    {{f.name}}
+                  </option>
                 </select>
                 </div>
                 <div >
@@ -606,18 +604,18 @@
                   Library Instruction Updated Successfully..!!
               </div>  -->
                 <div>
-                <form >
+                <form #s = "ngForm" >
       
                   <div id="update-settings" ngModelGroup="timetableSettings">
                       <div class="form-row" >
                           <div class="col-4">
                               <label for="lectureLength">Lecture Length</label>
-                              <input type="number" min="1" required id="lectureLength" class="form-control" name="lectureLength" placeholder="minutes"> 
+                              <input type="number" min="1" required id="lectureLength" class="form-control" name="lectureLength" placeholder="minutes" ngModel> 
                           </div> 
                           <div class="col-4">
                               <label for="lunchTime">Lunch Time</label>
-                           <input type="time"  required id="lunchStartTime" class="form-control" name="lunchTime" > to 
-                           <input type="time"  required id="lunchEndTime" class="form-control" name="lunchEndTime" > 
+                           <input type="time"  required id="lunchStartTime" class="form-control" name="lunchTime" ngModel> to 
+                           <input type="time"  required id="lunchEndTime" class="form-control" name="lunchEndTime" ngModel> 
                           </div> 
                           <div class="col-1">
                               <input type="hidden" class="form-control" id="id" name="id" >
@@ -632,7 +630,7 @@
                               <button type="submit"  class="btn btn-danger btnWidth" data-dismiss="modal">Cancel</button>
                           </div>
                             <div class="col-3">
-                                <button type="submit"  class="btn btn-primary btnWidth">Change Settings</button>
+                                <button type="submit"  class="btn btn-primary btnWidth" (click) = "saveSetting()">Change Settings</button>
                             </div>  
                             <div class="col-3">
                               </div>

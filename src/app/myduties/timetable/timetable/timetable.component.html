@@ -78,7 +78,8 @@
           <form >
 
             <div id="update-settings" ngModelGroup="timetableSettings">
-                <div class="form-row" >
+              <form #s = "ngForm">
+                <div class="form-row"  ngModelGroup="settingData" >
                     <div class="col-4">
                         <label for="lectureLength">Lecture Length</label>
                         <input type="number" min="1" required id="lectureLength" class="form-control" name="lectureLength" placeholder="minutes"> 
@@ -101,11 +102,12 @@
                         <button type="submit"  class="btn btn-danger btnWidth" data-dismiss="modal">Cancel</button>
                     </div>
                       <div class="col-3">
-                          <button type="submit"  class="btn btn-primary btnWidth">Change Settings</button>
+                          <button type="submit"  class="btn btn-primary btnWidth" (click) = "onSave()">Change Settings</button>
                       </div>  
                       <div class="col-3">
                         </div>
                   </div>
+                  </form>
             </div>
             <br/>
           </form>
