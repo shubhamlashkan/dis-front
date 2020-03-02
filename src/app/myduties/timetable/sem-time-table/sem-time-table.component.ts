@@ -1,9 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+<<<<<<< HEAD
 import { checkList, TempList, settings, facultyName} from '../timetableModel';
 import { TimetableService } from '../timetable.service';
 import { element } from '@angular/core/src/render3/instructions';
 import { ToastrManager } from 'ng6-toastr-notifications';
+=======
+import { SemtimetableService } from '../semtimetable.service';
+import { SemTimeTableSettings } from '../semTimeTableModel';
+import { HttpClient } from '@angular/common/http';
+import { apiSetting } from 'src/app/urls/apisetting';
+import { map } from 'rxjs/operators';
+>>>>>>> db8b21fcc2ca14a666b6c35974b6ef4b31b01654
 
 @Component({
   selector: 'app-sem-time-table',
@@ -11,6 +19,7 @@ import { ToastrManager } from 'ng6-toastr-notifications';
   styleUrls: ['./sem-time-table.component.scss']
 })
 export class SemTimeTableComponent implements OnInit {
+<<<<<<< HEAD
  valueslist : checkList[]=[];
  xyzlist :TempList;
   days:string[]; 
@@ -149,5 +158,41 @@ this.timetableService.saveSetting(this.setting).subscribe(
   
 
     
+=======
+
+  semSettings:SemTimeTableSettings[]=[];
+  constructor(private service:SemtimetableService,private http: HttpClient) { }
+  ngOnInit() {
+    this.getSemTimeTableSettings();
+  }
+
+  
+  apiUrl: string = apiSetting.apiAcademics + '/timeTable'
+
+  getSemTimeTableSettings(){
+     return this.http.get<{[key:string]: SemTimeTableSettings}>(this.apiUrl+'/getSemTimeTableSettings').pipe(map(responseData => {
+      const semSettings: SemTimeTableSettings[] =[];
+      for(const key in responseData)
+      {
+        if(responseData.hasOwnProperty(key))
+        {
+          semSettings.push({ ...responseData[key], id:key})
+        }
+      }
+      return semSettings;
+    })).subscribe(semData=>{
+        this.semSettings = semData;
+         });
+  }
+
+  // getSemTimeTableSettings()
+  // {
+  //   this.service.getSemTimeTableSettings().subscribe(semData=>{
+  //     console.log(semData)
+  //   });
+    
+  // }
+ 
+>>>>>>> db8b21fcc2ca14a666b6c35974b6ef4b31b01654
 }
 

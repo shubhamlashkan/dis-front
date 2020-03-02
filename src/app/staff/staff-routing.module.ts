@@ -22,7 +22,7 @@ import { MydutiesModule } from '../myduties/myduties.module';
 const routes: Routes = [
   {
     path: 'staff',
-    component: StaffComponent,
+    component: StaffComponent,canActivate:[RouteGuardService],
     children: [
         {
           path: '',
