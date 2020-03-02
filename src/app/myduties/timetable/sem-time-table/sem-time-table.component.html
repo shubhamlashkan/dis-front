@@ -51,63 +51,62 @@
             <tbody>
               <tr>
                 <th scope="row">10:00-11:00</th>
+                <td *ngFor="let list of valueslist | slice:0:5;">
+          
+                    <input  type="checkbox" value="{{list}}"  (change)="onCheckboxChange(list,$event)">
+                </td>
+
+                <!-- <td><input type="checkbox" name="vehicle1" id = "vehicle" value="Bike"  data-valuetwo="1"></td>
+                <td><input type="checkbox" name="vehicle1"  id = "vehicle1" value="Bike"  data-valuetwo="2"></td>
                 <td><input type="checkbox" name="vehicle1" value="Bike"></td>
                 <td><input type="checkbox" name="vehicle1" value="Bike"></td>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td><input type="checkbox" name="vehicle1" value="Bike"></td> -->
               </tr>
               <tr>
                 <th scope="row">11:00-12:00</th>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td *ngFor="let list of valueslist | slice:5:10;">
+          
+                  <input  type="checkbox" id = "checkbox" name = "checkbox" value="{{list}}"  (change)="onCheckboxChange(list,$event)">
+              </td>
               </tr>
               <tr>
                 <th scope="row">12:00-1:00</th>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td *ngFor="let list of valueslist | slice:10:15;">
+          
+                  <input  type="checkbox" id = "checkbox" name = "checkbox"  value="{{list}}"  (change)="onCheckboxChange(list,$event)">
+              </td>
               </tr>
               <tr>
                 <th scope="row">1:00-2:00</th>
-
+                
               </tr>
               <tr>
                 <th scope="row">2:00-3:00</th>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td *ngFor="let list of valueslist | slice:15:20;">
+          
+                  <input  type="checkbox" value="{{list}}" id = "checkbox" name = "checkbox"  (change)="onCheckboxChange(list,$event)">
+              </td>
               </tr>
               <tr>
                 <th scope="row">3:00-4:00</th>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td *ngFor="let list of valueslist | slice:20:25;">
+          
+                  <input  type="checkbox" value="{{list}}" id = "checkbox" name = "checkbox" (change)="onCheckboxChange(list,$event)">
+              </td>
               </tr>
               <tr>
                 <th scope="row">4:00-5:00</th>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td *ngFor="let list of valueslist | slice:25:30;">
+          
+                  <input  type="checkbox" value="{{list}}" id = "checkbox"name = "checkbox"  (change)="onCheckboxChange(list,$event)">
+              </td>
               </tr>
               <tr>
                 <th scope="row">5:00-6:00</th>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
-                <td><input type="checkbox" name="vehicle1" value="Bike"></td>
+                <td *ngFor="let list of valueslist | slice:30:35;">
+          
+                  <input  type="checkbox" value="{{list}}" id = "checkbox" name = "checkbox"  (change)="onCheckboxChange(list,$event)">
+              </td>
               </tr>
             </tbody>
           </table>
@@ -119,11 +118,11 @@
           </div>
          
           <div class="col-2">
-              <button type="button" class="btn btn-basic">Uncheck All</button>
+              <button type="button" (click)="uncheckAll()" class="btn btn-basic">Uncheck All</button>
          
           </div>
           <div class="col-2">
-            <button type="button" class="btn btn-success">Save</button>
+            <button type="button" (click) = "get()" class="btn btn-success">Save</button>
           </div>
           
 
