@@ -12,6 +12,9 @@
       <div class="panel-headng">
         <h4>Sign Up</h4>
       </div>
+      <div class="loading-indicator">
+        <mat-spinner style="margin:0 auto;" mode="indeterminate" *ngIf="loading"></mat-spinner>
+      </div>
       <div class="login-form">
         <div class="sign-up-htm">
           <div class="group">
@@ -31,8 +34,8 @@
              <input id="pass" type="password" required [(ngModel)]="form.password" formControlName="password"  class="form-control" data-type="password" [ngClass]="{ 'is-invalid': submitted && formCtl.password.errors }" />
              <div *ngIf=" submitted && formCtl.password.errors" class="invalid-feedback">
                 <!-- <div *ngIf="formCtl.password.errors.required">Password is required</div> -->
-                <div *ngIf="formCtl.password.errors.pattern">Password must have at least one uppercase letter, one lowercase letter and one number</div>
-                <div *ngIf="formCtl.password.errors.minlength">Password must be at least 6 characters</div>
+                <div *ngIf="formCtl.password.errors.pattern">Password must have at least one uppercase letter, one lowercase letter, One Special Symbol and one number</div>
+                <div *ngIf="formCtl.password.errors.minlength">Password must be at least 8 characters</div>
             </div>
           </div>
 
@@ -85,7 +88,7 @@
 </div>
 
       <div class="group">
-        <input type="submit" class="button login-button" value="Sign Up">
+        <input type="submit" class="button login-button"  [disabled]="loading" value="Sign Up">
       </div>
       
       <div class="foot-lnk">

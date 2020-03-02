@@ -16,13 +16,7 @@ export class ResearchComponent implements OnInit {
   errorMsg:string=null;
   showError:boolean = false;
   
-  selected:optionSearch = new optionSearch(1 ,'bookId');
-  options = [
-     new optionSearch(1, 'bookId' ),
-     new optionSearch(2, 'thesisId' ),
-     new optionSearch(3, 'username' ),
-    
-  ];
+ 
   searchTerm:any=null;
   booksRes:previousIssueHistoryBook[];
   thesisRes:previousIssueHistoryThesis[];
@@ -30,21 +24,23 @@ export class ResearchComponent implements OnInit {
   constructor(private service: LibraryService) { }
 
   ngOnInit() {
+    this.searchBy=1;
   }
 
-  onSelect(optionId) { 
+  onSelect(event:any) { 
     //console.log(optionId);
-    this.selected = null;
-    for (var i = 0; i < this.options.length; i++)
-    {
-      if (this.options[i].id == optionId) {
-        this.selected = this.options[i];     
-        this.searchBy = this.options[i].id;
+    // this.selected = null;
+    // for (var i = 0; i < this.options.length; i++)
+    // {
+    //   if (this.options[i].id == optionId) {
+    //     this.selected = this.options[i];     
+    //     this.searchBy = this.options[i].id;
       
-      }
-    }
+    //   }
+    // }
+    this.searchBy = event.target.value;
 }
-
+ 
 findBy(typedValue)
   {
   //  console.log(this.searchBy);
@@ -61,7 +57,7 @@ findBy(typedValue)
         this.showError=true;
       this.showSearchedRecord= false;}));
     }
-    else if(this.searchBy==2)
+   if(this.searchBy==2)
     {
       this.service.getPreviousIssuesByThesisId(this.searchTerm).subscribe((res:previousIssueHistoryThesis[])=>{
         this.thesisRes = res;
@@ -71,7 +67,7 @@ findBy(typedValue)
         this.showError=true;
       this.showSearchedRecord= false;}));
     }
-    else 
+    if(this.searchBy==3) 
     {
         this.service.getPreviousIssuesByUsername(<string>this.searchTerm).subscribe((res:previousIssueHistoryBook[])=>{
           this.usernameRes=res;

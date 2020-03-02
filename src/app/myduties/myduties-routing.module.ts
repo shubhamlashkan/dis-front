@@ -24,29 +24,26 @@ import { MytaskComponent } from "./mytask/mytask.component";
 // ];
 
 const routes: Routes = [
-    
-
-
-      {
-        path:'mytask',component:MytaskComponent
-      },
-      {
-           path: '', component:MytaskComponent
-      }
-      
-// {
-//       path: '', component: MydutiesComponent, children: [
+    // {
+    //   path: '', component: MydutiesComponent, children: [
         
-//         { path: 'library', loadChildren : './library/library.module#LibraryModule'},
-//         // {
-//         //   path: '', redirectTo: 'mytask', pathMatch: 'full'
-//         // },
-      
+    //     { path: 'library', loadChildren : './library/library.module#LibraryModule'},
+    //     {
+    //       path: '', redirectTo: 'library', pathMatch: 'full'
+    //     },
         
           
-//       ]
+    //   ]
       
-//     },
+    // }
+     {
+        path: 'mytask', component:MytaskComponent
+      }, 
+      {
+        path:'',component:MytaskComponent
+      }
+      
+       
   ];
   
 @NgModule(

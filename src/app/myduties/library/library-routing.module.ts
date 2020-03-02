@@ -44,6 +44,9 @@ const routes: Routes = [
         {
           path: '', redirectTo: 'library', pathMatch: 'full'
         },
+        {
+          path:'history',component:ResearchComponent
+        }
         
       ]
     }

@@ -14,10 +14,11 @@ import { InfrastructureOutletComponent } from '../infrastructure/infrastructure-
 import { ProfileComponent } from '../conventional/profile/profile.component';
 import { TimetableComponent } from '../conventional/timetable/timetable.component';
 import { MyComplaintsComponent } from '../complaints/my-complaints/my-complaints.component';
-
+import { RouteGuardService } from '../route-guard.service';
+//canActivate:[RouteGuardService],
 const routes: Routes = [
   { path: 'student',
-    component: StudentComponent,
+    component: StudentComponent,canActivate:[RouteGuardService],
     children: [
       {
         path: '',

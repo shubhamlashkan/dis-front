@@ -8,7 +8,7 @@
     </select>
     <br/>
   </div>
-
+  
     <div class="col-lg-6">
       <ul class="searchbox float-right">
         <li class="">
@@ -42,7 +42,7 @@
   
   </div>
 <br>
-<div *ngIf="!showSearchedRecord">
+<div *ngIf="!showSearchedRecord" class="ScrollStyle">
   <table  class="table table-striped">
 
     <tr>
@@ -60,7 +60,7 @@
     </tr>
     <tr *ngFor="let book of books; let i = index">
       <td>{{i+1}}</td>
-      <td>{{book.title}}</td>
+      <td>{{book.title}}</td> 
       <td>{{book.authorName}} </td>
       <td>{{book.edition}}</td>
       <td>
@@ -101,7 +101,7 @@
   
 </div>
 
-  <div *ngIf="showSearchedRecord">
+  <div *ngIf="showSearchedRecord" class="ScrollStyle">
     <table  class="table table-striped">
 
       <tr >
