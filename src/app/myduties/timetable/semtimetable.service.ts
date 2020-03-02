@@ -16,7 +16,7 @@ export class SemtimetableService {
   apiUrl: string = apiSetting.apiAcademics + '/timeTable'
 
   getSemTimeTableSettings(){
-     return this.http.get<{[key:string]: SemTimeTableSettings}>(this.apiUrl+'/getSemTimeTableSettings').pipe(map(responseData => {
+     this.http.get<{[key:string]: SemTimeTableSettings}>(this.apiUrl+'/getSemTimeTableSettings').pipe(map(responseData => {
       const semSettings: SemTimeTableSettings[] =[];
       for(const key in responseData)
       {
@@ -25,7 +25,8 @@ export class SemtimetableService {
           semSettings.push({ ...responseData[key], id:key})
         }
       }
-      
-    }));
+      return semSettings;
+    })
+    );
   }
 }

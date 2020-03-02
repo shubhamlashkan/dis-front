@@ -1,5 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { SemtimetableService } from '../semtimetable.service';
+import { SemTimeTableSettings } from '../semTimeTableModel';
+import { HttpClient } from '@angular/common/http';
+import { apiSetting } from 'src/app/urls/apisetting';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-sem-time-table',
@@ -7,34 +12,38 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./sem-time-table.component.scss']
 })
 export class SemTimeTableComponent implements OnInit {
-  @ViewChild('f') facultyNameForm : NgForm;
-  @ViewChild('g') dayForm : NgForm;
-  @ViewChild('h') addTimetableForm : NgForm;
-  @ViewChild('i') facultyNameUpForm : NgForm;
 
-  showDay : boolean = false;
-  
-
-  constructor() { }
-
+  semSettings:SemTimeTableSettings[]=[];
+  constructor(private service:SemtimetableService,private http: HttpClient) { }
   ngOnInit() {
-    this.showDay = false;
-  }
-  onAddDay(){
-    this.showDay = true;
+    this.getSemTimeTableSettings();
   }
 
-  containers = [];
+  
+  apiUrl: string = apiSetting.apiAcademics + '/timeTable'
 
-  add() {
-    this.containers.push(this.containers.length);
+  getSemTimeTableSettings(){
+     return this.http.get<{[key:string]: SemTimeTableSettings}>(this.apiUrl+'/getSemTimeTableSettings').pipe(map(responseData => {
+      const semSettings: SemTimeTableSettings[] =[];
+      for(const key in responseData)
+      {
+        if(responseData.hasOwnProperty(key))
+        {
+          semSettings.push({ ...responseData[key], id:key})
+        }
+      }
+      return semSettings;
+    })).subscribe(semData=>{
+        this.semSettings = semData;
+         });
   }
-  remove()
-  {
-    this.containers.pop();
-  }
-  onAddTimetable(){
 
-  }
+  // getSemTimeTableSettings()
+  // {
+  //   this.service.getSemTimeTableSettings().subscribe(semData=>{
+  //     console.log(semData)
+  //   });
+    
+  // }
  
 }
