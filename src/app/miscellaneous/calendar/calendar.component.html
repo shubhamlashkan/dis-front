@@ -16,7 +16,7 @@
       [plugins]="calendarPlugins"
       [weekends]="calendarWeekends"
       [events]="calendarEvents"
-      (dateClick)="handleDateClick($event)"
+      (dateClick)="openDialog()"
       [aspectRatio] = "1"
     ></full-calendar>
 

@@ -7,13 +7,12 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
 import bootstrapPlugin from '@fullcalendar/bootstrap';
 import { CalendarService } from './../../API_Service/calendar.service';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDatepickerModule } from '@angular/material';
 
 export interface DialogData {
   animal: string;
   name: string;
 }
-
 
 
 @Component({
@@ -30,7 +29,7 @@ export class CalendarComponent {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      width: '250px',
+      width: '500px',
       data: {name: this.name, animal: this.animal}
     });
 
@@ -70,7 +69,6 @@ export class CalendarComponent {
         start: arg.date,
         allDay: arg.allDay
       });
-     
     }
   }
 
@@ -78,10 +76,14 @@ export class CalendarComponent {
 
 }
 
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'dialog-overview-example-dialog',
   templateUrl: './dialog-overview-example-dialog.html',
+  styleUrls: ['./dialog.scss']
 })
 export class DialogOverviewExampleDialog {
 
@@ -89,6 +91,25 @@ export class DialogOverviewExampleDialog {
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
+
+    myControl = new FormControl();
+    options: string[] = ['One', 'Two', 'Three'];
+    filteredOptions: Observable<string[]>;
+  
+    ngOnInit() {
+      this.filteredOptions = this.myControl.valueChanges
+        .pipe(
+          startWith(''),
+          map(value => this._filter(value))
+        );
+    }
+  
+    private _filter(value: string): string[] {
+      const filterValue = value.toLowerCase();
+  
+      return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    }
+  
   onNoClick(): void {
     this.dialogRef.close();
   }
