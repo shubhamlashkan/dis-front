@@ -17,3 +17,7 @@ hr.new1 {
   table {
     border: 1px solid black;
   }
+
+  input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
+    border: 1px solid red;
+}

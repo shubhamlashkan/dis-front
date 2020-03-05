@@ -118,7 +118,7 @@ export class InfrastructureComponent implements OnInit {
 //  }
 getInfraById(infraId:string): void{
   this.infraservice.getInfrastructureById(infraId).subscribe(response=>{this.infraById=response.body
-    console.log(this.infraById.noofChairs);
+    //console.log(this.infraById.noofChairs);
   });
 
 }
