@@ -62,28 +62,6 @@ export class checkList{
   export interface sCode{
   
   }
-export class semtimetable{
 
-	constructor($facultyId: string, $course: string, $sem: string, $year: string, $subCode: string, $lType: string, $roomId: string, $sTime: string, $Day: string, $eTime: string) {
-		this.facultyId = $facultyId;
-		this.course = $course;
-		this.sem = $sem;
-		this.year = $year;
-		this.subCode = $subCode;
-		this.lType = $lType;
-		this.roomId = $roomId;
-		this.sTime = $sTime;
-		this.Day = $Day;
-		this.eTime = $eTime;
-	}
-  private facultyId:string;
-  private course: string;
-  private sem:string;
-  private year:string;
-  private subCode:string;
-  private lType:string;
-  private roomId:string;
-  private  sTime : string;
-  private Day:string;
-  private eTime:string;
-}
+
+  

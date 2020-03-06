@@ -3,7 +3,7 @@ import { apiSetting } from 'src/app/urls/apisetting';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { settings, facultyName, semSetting, course, infraList, sCode } from './timetableModel';
 import { Observable } from 'rxjs';
-
+import {semTimeTable,getTimeTable} from './semTimeTableModel'
 @Injectable({
   providedIn: 'root'
 })
@@ -34,6 +34,24 @@ getClassroom(): Observable<HttpResponse<infraList[]>>{
 }
 getSubjectCode(course:string,year:string,sem:string) : Observable<HttpResponse<sCode[]>>{
   return this.http.get<sCode[]>(`${this.baseUrl}getSubjectCodesListByYearAndSemsterAndCourse/${year}/${sem}/${course}`,{observe:'response'});
+}
+
+
+saveSemTimeTable(sem:semTimeTable):Observable<HttpResponse<string>>{
+  return this.http.post<string>(`${this.baseUrl}addSemTimeTable`,sem,{observe:'response'})
+}
+
+getIdByCourse(course:string):Observable<HttpResponse<string>>{
+  return this.http.get<string>(`${this.baseUrl}getCourseIdByCourseName/${course}`,{observe:'response'});
+}
+
+getScodeByFacultyIdandSession(facultyId:string,session:string):Observable<HttpResponse<sCode[]>>{
+  return this.http.get<sCode[]>(`${this.baseUrl}getSubjectCodesByFacultyIdAndSession/${facultyId}/${session}`,{observe:'response'});
+}
+
+getTimeTableByScodeFacutlySession(facultyId:string,session:string,sCode:string):Observable<HttpResponse<getTimeTable>>
+{
+  return this.http.get<getTimeTable>(`${this.baseUrl}getTimeTableByFacultyIdSessionAndSubjectCode/${facultyId}/${session}/${sCode}`,{observe:'response'});
 }
 
 
