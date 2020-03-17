@@ -30,7 +30,7 @@ export class CalendarComponent {
 
   openDialog(event): void {
     const dialogRef = this.dialog.open(AddEventDialog, {
-      width: '500px',
+      width: '520px',
       data: event
     });
     dialogRef.afterClosed().subscribe(result => {

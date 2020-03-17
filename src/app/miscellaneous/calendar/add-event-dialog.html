@@ -1,11 +1,14 @@
 <div mat-dialog-content>
     <div class="close">
-        <i class="fa fa-times" aria-hidden="true" (click)="onNoClick()"></i>
+        <i class="fa fa-times fa-fw" aria-hidden="true" (click)="onNoClick()"></i>
       </div>
   <form class="form">
   <mat-form-field class="title">
-    <mat-label>Add tilte</mat-label>
-    <input matInput [(ngModel)]="title" [ngModelOptions]="{standalone: true}">
+    <mat-label >Add title</mat-label>
+    <input matInput [formControl]="titleFormController">
+    <mat-error *ngIf="titleFormController.hasError('required')">
+      Title is required
+    </mat-error>
     </mat-form-field>
 
     <mat-tab-group>
@@ -16,13 +19,12 @@
               </span>
 
           <mat-form-field class="date">
-            <mat-label>Start date</mat-label>
             <input matInput [matDatepicker]="picker1" (focus)="picker1.open()" (click)="picker1.open()" [(ngModel)]="startDate" [ngModelOptions]="{standalone: true}">
             <mat-datepicker #picker1></mat-datepicker>
           </mat-form-field>
 
           <mat-form-field *ngIf="addTime" class="time">
-              <mat-select [(ngModel)]="startTime" [ngModelOptions]="{standalone: true}" (selectionChange)="getEndTimeList()">
+              <mat-select [(ngModel)]="startTime" [ngModelOptions]="{standalone: true}">
                 <mat-option *ngFor="let st of startTimeList" [value]="st">
                   {{st}}
                 </mat-option>
@@ -33,7 +35,7 @@
             -
           </span>
 
-          <mat-form-field *ngIf="addTime" class="time">
+          <mat-form-field *ngIf="addTime" class="time" (click)="getEndTimeList()" [ngClass]="{dateValidate : !validateTime(endTime)}">
                   <mat-select [(ngModel)]="endTime" [ngModelOptions]="{standalone: true}">
                     <mat-option *ngFor="let et of endTimeList" [value]="et">
                       {{et}}
@@ -41,8 +43,7 @@
                   </mat-select>
           </mat-form-field>
 
-          <mat-form-field class = "date">
-            <mat-label>End date</mat-label>
+          <mat-form-field class = "date" [ngClass]="{dateValidate : !validateDate(endDate)}">
             <input matInput [matDatepicker]="picker2" (focus)="picker2.open()" (click)="picker2.open()" [(ngModel)]="endDate" [ngModelOptions]="{standalone: true}">
             <mat-datepicker #picker2></mat-datepicker>
           </mat-form-field>
@@ -59,7 +60,7 @@
                    placeholder="Add participants"
                    aria-label="Number"
                    matInput
-                   [formControl]="myControl"
+                   [formControl]="participantListController"
                    [matAutocomplete]="auto">
             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onEnter()">
               <mat-option *ngFor="let option of filteredOptions | async" [value]="option" >
@@ -69,12 +70,15 @@
           </mat-form-field>
           </div>
 
-          <div *ngFor="let participant of participantList; index as i" class="participantlist" >
-          {{participant}}
-          <span class="remove">
-          <i class="fa fa-times" aria-hidden="true" (click)="remove(i)"></i>
-          </span>
+          <div class="listblock" *ngIf="participantList.size !==0 ">
+          <div *ngFor="let participant of participantList; index as i" class="participantlist">
+              <span class="participantName">{{participant}}</span>
+              <span class="remove">
+              <i class="fa fa-times" aria-hidden="true" (click)="remove(participant)"></i>
+              </span>
+              <mat-divider></mat-divider>
           </div>
+        </div>
 
           <div>
               <span class="icon">
@@ -83,7 +87,10 @@
 
           <mat-form-field class="location">
             <mat-label>Location</mat-label>
-            <input matInput [(ngModel)]="location">
+            <input matInput [formControl]="locationFormController">
+            <mat-error *ngIf="locationFormController.hasError('required')">
+              Location is required
+            </mat-error>
           </mat-form-field>
           </div>
 
@@ -93,7 +100,11 @@
                 </span>
           <mat-form-field class="description">
             <mat-label>Add Description</mat-label>
-            <textarea matInput [(ngModel)]="description" [ngModelOptions]="{standalone: true}"></textarea>
+            <textarea matInput [(ngModel)]="description" 
+            [ngModelOptions]="{standalone: true}" 
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="1"></textarea>
           </mat-form-field>
           </div>
 
@@ -124,5 +135,5 @@
   </form>
 </div>
 <div mat-dialog-actions>
-  <button mat-button cdkFocusInitial (click)="onSubmit()">Save</button>
+  <button mat-button cdkFocusInitial (click)="onSubmit()" [disabled]="disabled()">Save</button>
 </div>  

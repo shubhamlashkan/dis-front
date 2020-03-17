@@ -12,6 +12,7 @@ const httpOptions = {
 export class CalendarService {
 
   private baseUrl = 'http://localhost:8080/dis/user/calendar';
+  private staffDataUrl = 'http://localhost:8080/dis/user/staffProfile'
 
   constructor(private http: HttpClient) { }
 
@@ -21,6 +22,10 @@ export class CalendarService {
 
   addEvent(event: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/addEvent`, event, httpOptions);
+  }
+
+  getAllEmployeeList(): Observable<any> {
+    return this.http.get(`${this.staffDataUrl}/getAllEmployeeNames`);
   }
 
 }

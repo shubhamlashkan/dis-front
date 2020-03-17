@@ -6,7 +6,7 @@ import { CalendarComponent} from './calendar/calendar.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { PiechartComponent } from './piechart/piechart.component';
 import { HtmlDownloaderComponent } from './html-downloader/html-downloader.component';
-import { MatDialogModule, MatFormFieldModule, MatInputModule, MatDatepickerModule,  MatTabsModule, MatOptionModule, MatAutocompleteModule, MatButtonModule, MatSelectModule, MatCheckboxModule  } from '@angular/material';
+import { MatDialogModule, MatFormFieldModule, MatInputModule, MatDatepickerModule,  MatTabsModule, MatOptionModule, MatAutocompleteModule, MatButtonModule, MatSelectModule, MatCheckboxModule, MatListModule, MatDividerModule} from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material';
 import { MatMomentDateModule } from "@angular/material-moment-adapter";
@@ -28,7 +28,9 @@ import { MatMomentDateModule } from "@angular/material-moment-adapter";
     MatSelectModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatListModule,
+    MatDividerModule
   ],
   declarations: [BarchartComponent, CalendarComponent, PiechartComponent, HtmlDownloaderComponent, AddEventDialog],
   exports: [CalendarComponent, BarchartComponent, PiechartComponent, HtmlDownloaderComponent],
