@@ -7,8 +7,9 @@ export class EventInfo {
     eventIncharge: string;
     createdBy: string;
     createdDate: Date;
+    location: string;
   
-    constructor(title: string, startDate: Date, endDate: Date, description: string, participants: string[], eventIncharge: string, createdBy: string, createdDate: Date) {
+    constructor(title: string, startDate: Date, endDate: Date, description: string, participants: string[], eventIncharge: string, createdBy: string, createdDate: Date, location: string) {
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -20,5 +21,6 @@ export class EventInfo {
         for (let i = 0; i < participants.length; i++) {
             this.participants.push({participantId: participants[i]});
         }
+        this.location = location;
     }
   }

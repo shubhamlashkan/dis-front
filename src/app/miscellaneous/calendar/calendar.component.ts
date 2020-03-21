@@ -8,7 +8,8 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
 import bootstrapPlugin from '@fullcalendar/bootstrap';
 import { CalendarService } from './../../API_Service/calendar.service';
-import { MatDialog} from '@angular/material';
+import { MatDialog, MatDialogConfig} from '@angular/material';
+import { ShowEventDialogComponent } from './show-event-dialog.component';
 
 @Component({
   selector: 'app-calendar',
@@ -38,9 +39,23 @@ export class CalendarComponent {
         id: result.eventId,
         title: result.title,
         start: result.startDate,
-        end: result.endDate
+        end: result.endDate,
+        description: result.description
       });
     });
+  }
+
+  handleEventClick(arg): void{
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      id: arg.event.id,
+      eid: arg.event.eventId,
+      title: arg.event.title,
+      desc: arg.event.extendedProps.description,
+      start: arg.event.start,
+      calendarApi : this.calendarApi
+    };
+    const dialogRef = this.dialog.open(ShowEventDialogComponent,dialogConfig);
   }
 
   ngOnInit() {
@@ -51,6 +66,7 @@ export class CalendarComponent {
           title: events[e].title,
           start: events[e].startDate,
           end: events[e].endDate,
+          description: events[e].description, //maybe change it later on
         });
       }
     });

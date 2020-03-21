@@ -17,5 +17,6 @@
       [weekends]="calendarWeekends"
       [events]="calendarEvents"
       (dateClick)="openDialog($event)"
+      (eventClick)="handleEventClick($event)"
       [aspectRatio] = "1"
     ></full-calendar>

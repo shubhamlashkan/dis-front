@@ -1,128 +1,139 @@
 <div mat-dialog-content>
-    <div class="close">
-        <i class="fa fa-times" aria-hidden="true" (click)="onNoClick()"></i>
-      </div>
-  <form class="form">
-  <mat-form-field class="title">
-    <mat-label>Add tilte</mat-label>
-    <input matInput [(ngModel)]="title" [ngModelOptions]="{standalone: true}">
-    </mat-form-field>
+  <div class="close">
+      <i class="fa fa-times fa-fw" aria-hidden="true" (click)="onNoClick()"></i>
+    </div>
+<form class="form">
+<mat-form-field class="title">
+  <mat-label >Add title</mat-label>
+  <input matInput [formControl]="titleFormController">
+  <mat-error *ngIf="titleFormController.hasError('required')">
+    Title is required
+  </mat-error>
+  </mat-form-field>
 
-    <mat-tab-group>
-      <mat-tab label="Event">
-        <div class="timeSelector">
-            <span class="icon">
-                <i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>
-              </span>
-
-          <mat-form-field class="date">
-            <mat-label>Start date</mat-label>
-            <input matInput [matDatepicker]="picker1" (focus)="picker1.open()" (click)="picker1.open()" [(ngModel)]="startDate" [ngModelOptions]="{standalone: true}">
-            <mat-datepicker #picker1></mat-datepicker>
-          </mat-form-field>
-
-          <mat-form-field *ngIf="addTime" class="time">
-              <mat-select [(ngModel)]="startTime" [ngModelOptions]="{standalone: true}" (selectionChange)="getEndTimeList()">
-                <mat-option *ngFor="let st of startTimeList" [value]="st">
-                  {{st}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-
-          <span class="dash">
-            -
-          </span>
-
-          <mat-form-field *ngIf="addTime" class="time">
-                  <mat-select [(ngModel)]="endTime" [ngModelOptions]="{standalone: true}">
-                    <mat-option *ngFor="let et of endTimeList" [value]="et">
-                      {{et}}
-                    </mat-option>
-                  </mat-select>
-          </mat-form-field>
-
-          <mat-form-field class = "date">
-            <mat-label>End date</mat-label>
-            <input matInput [matDatepicker]="picker2" (focus)="picker2.open()" (click)="picker2.open()" [(ngModel)]="endDate" [ngModelOptions]="{standalone: true}">
-            <mat-datepicker #picker2></mat-datepicker>
-          </mat-form-field>
-          <button mat-button class="timebutton" (click)="enableTimeFields()" *ngIf="!addTime">Add time</button>
-          </div>
-
-          <div>
-            <span class="icon">
-              <i class="fa fa-users" aria-hidden="true"></i>
+  <mat-tab-group>
+    <mat-tab label="Event">
+      <div class="timeSelector">
+          <span class="icon">
+              <i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>
             </span>
 
-          <mat-form-field class="participants">
-            <input type="text"
-                   placeholder="Add participants"
-                   aria-label="Number"
-                   matInput
-                   [formControl]="myControl"
-                   [matAutocomplete]="auto">
-            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onEnter()">
-              <mat-option *ngFor="let option of filteredOptions | async" [value]="option" >
-                {{option}}
-              </mat-option>
-            </mat-autocomplete>
-          </mat-form-field>
-          </div>
+        <mat-form-field class="date">
+          <input matInput [matDatepicker]="picker1" (focus)="picker1.open()" (click)="picker1.open()" [(ngModel)]="startDate" [ngModelOptions]="{standalone: true}">
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
 
-          <div *ngFor="let participant of participantList; index as i" class="participantlist" >
-          {{participant}}
-          <span class="remove">
-          <i class="fa fa-times" aria-hidden="true" (click)="remove(i)"></i>
-          </span>
-          </div>
-
-          <div>
-              <span class="icon">
-                  <i class="fa fa-map-marker" aria-hidden="true"></i>
-                </span>
-
-          <mat-form-field class="location">
-            <mat-label>Location</mat-label>
-            <input matInput [(ngModel)]="location">
-          </mat-form-field>
-          </div>
-
-          <div>
-              <span class="icon">
-                  <i class="fa fa-align-justify" aria-hidden="true"></i>
-                </span>
-          <mat-form-field class="description">
-            <mat-label>Add Description</mat-label>
-            <textarea matInput [(ngModel)]="description" [ngModelOptions]="{standalone: true}"></textarea>
-          </mat-form-field>
-          </div>
-
-      </mat-tab>
-      <mat-tab label="Reminder">
-        <div class="timeSelector">
-            <span class="icon">
-                <i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>
-              </span>
-          <mat-form-field class = "reminderdate">
-            <mat-label>Reminder date</mat-label>
-            <input matInput [matDatepicker]="picker3" (focus)="picker3.open()" (click)="picker3.open()" [(ngModel)]="endDate" [ngModelOptions]="{standalone: true}">
-            <mat-datepicker #picker3></mat-datepicker>
-          </mat-form-field>
-
-          <mat-form-field *ngIf="!addReminderTime" class="time">
-            <mat-select [value]="startTimeList[0]">
+        <mat-form-field *ngIf="addTime" class="time">
+            <mat-select [(ngModel)]="startTime" [ngModelOptions]="{standalone: true}">
               <mat-option *ngFor="let st of startTimeList" [value]="st">
                 {{st}}
               </mat-option>
             </mat-select>
           </mat-form-field>
 
-          <mat-checkbox class="timebutton" color='primary' [(ngModel)]="addReminderTime" [ngModelOptions]="{standalone: true}">All day</mat-checkbox>
+        <span class="dash">
+          -
+        </span>
+
+        <mat-form-field *ngIf="addTime" class="time" (click)="getEndTimeList()" [ngClass]="{dateValidate : !validateTime(endTime)}">
+                <mat-select [(ngModel)]="endTime" [ngModelOptions]="{standalone: true}">
+                  <mat-option *ngFor="let et of endTimeList" [value]="et">
+                    {{et}}
+                  </mat-option>
+                </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class = "date" [ngClass]="{dateValidate : !validateDate(endDate)}">
+          <input matInput [matDatepicker]="picker2" (focus)="picker2.open()" (click)="picker2.open()" [(ngModel)]="endDate" [ngModelOptions]="{standalone: true}">
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+        <button mat-button class="timebutton" (click)="enableTimeFields()" *ngIf="!addTime">Add time</button>
         </div>
-      </mat-tab>
-    </mat-tab-group>
-  </form>
+
+        <div>
+          <span class="icon">
+            <i class="fa fa-users" aria-hidden="true"></i>
+          </span>
+
+        <mat-form-field class="participants">
+          <input type="text"
+                 placeholder="Add participants"
+                 aria-label="Number"
+                 matInput
+                 [formControl]="participantListController"
+                 [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onEnter()">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option" >
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        </div>
+
+        <div class="listblock" *ngIf="participantList.size !==0 ">
+        <div *ngFor="let participant of participantList; index as i" class="participantlist">
+            <span class="participantName">{{participant}}</span>
+            <span class="remove">
+            <i class="fa fa-times" aria-hidden="true" (click)="remove(participant)"></i>
+            </span>
+            <mat-divider></mat-divider>
+        </div>
+      </div>
+
+        <div>
+            <span class="icon">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+              </span>
+
+        <mat-form-field class="location">
+          <mat-label>Location</mat-label>
+          <input matInput [formControl]="locationFormController">
+          <mat-error *ngIf="locationFormController.hasError('required')">
+            Location is required
+          </mat-error>
+        </mat-form-field>
+        </div>
+
+        <div>
+            <span class="icon">
+                <i class="fa fa-align-justify" aria-hidden="true"></i>
+              </span>
+        <mat-form-field class="description">
+          <mat-label>Add Description</mat-label>
+          <textarea matInput [(ngModel)]="description" 
+          [ngModelOptions]="{standalone: true}" 
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="1"></textarea>
+        </mat-form-field>
+        </div>
+
+    </mat-tab>
+    <mat-tab label="Reminder">
+      <div class="timeSelector">
+          <span class="icon">
+              <i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>
+            </span>
+        <mat-form-field class = "reminderdate">
+          <mat-label>Reminder date</mat-label>
+          <input matInput [matDatepicker]="picker3" (focus)="picker3.open()" (click)="picker3.open()" [(ngModel)]="endDate" [ngModelOptions]="{standalone: true}">
+          <mat-datepicker #picker3></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="!addReminderTime" class="time">
+          <mat-select [value]="startTimeList[0]">
+            <mat-option *ngFor="let st of startTimeList" [value]="st">
+              {{st}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-checkbox class="timebutton" color='primary' [(ngModel)]="addReminderTime" [ngModelOptions]="{standalone: true}">All day</mat-checkbox>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</form>
 </div>
 <div mat-dialog-actions>
-  <button mat-button cdkFocusInitial (click)="onSubmit()">Save</button>
+<button mat-button cdkFocusInitial (click)="onSubmit()" [disabled]="disabled()">Save</button>
 </div>  
