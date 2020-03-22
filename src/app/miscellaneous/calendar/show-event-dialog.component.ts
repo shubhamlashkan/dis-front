@@ -2,8 +2,6 @@ import { Component, OnInit , Inject, ViewChild} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material/dialog';
 import { CalendarService } from 'src/app/API_Service/calendar.service';
 import { UpdateEventDialogComponent } from './update-event-dialog.component';
-import { AlertsComponent } from 'src/app/staff/alerts/alerts.component';
-import { FullCalendarComponent } from '@fullcalendar/angular';
 
  
 @Component({
@@ -51,7 +49,7 @@ export class ShowEventDialogComponent implements OnInit {
       start: this.start,
       end: this.end,
     };
-    this.calendarApi.getEventById(dialogConfig.data.id).remove();
+    let removeId = this.calendarApi.id;
     const dialogReference = this.dialog.open(UpdateEventDialogComponent, dialogConfig);
     dialogReference.afterClosed().subscribe(result => {
       this.calendarApi.addEvent({
@@ -61,6 +59,7 @@ export class ShowEventDialogComponent implements OnInit {
         end: result.endDate,
         description: result.description
       });
+      this.calendarApi.getEventById(dialogConfig.data.id).remove();
     });
     this.dialogRef.close();
   }

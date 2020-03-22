@@ -66,7 +66,7 @@ export class CalendarComponent {
           title: events[e].title,
           start: events[e].startDate,
           end: events[e].endDate,
-          description: events[e].description, //maybe change it later on
+          description: events[e].description,
         });
       }
     });

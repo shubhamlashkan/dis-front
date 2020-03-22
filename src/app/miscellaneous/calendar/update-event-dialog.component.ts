@@ -90,12 +90,6 @@ export class UpdateEventDialogComponent implements OnInit {
       this.startTime = this.startTimeList[0];
       this.getEndTimeList();
       this.endTime = this.startTime;
-      if (!this.data.allDay) {
-        const sd = new Date(this.data.dateStr);
-        this.startTime = (sd.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'}));
-        const ed = new Date(sd.setTime(sd.setHours(sd.getHours() + 1)));
-        this.endTime = (ed.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'}));
-      }
       this.id = this.data.id;
     }
 
