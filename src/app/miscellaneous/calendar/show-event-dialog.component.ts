@@ -18,6 +18,7 @@ export class ShowEventDialogComponent implements OnInit {
   end: Date;
   eid: String;
   calendarApi: any;
+  editable: boolean;
 
   constructor(public dialogRef: MatDialogRef<ShowEventDialogComponent>,@Inject(MAT_DIALOG_DATA) data,
   private calendarService: CalendarService, private dialog: MatDialog){
@@ -27,6 +28,7 @@ export class ShowEventDialogComponent implements OnInit {
     this.start= data.start;
     this.eid = data.eid;
     this.calendarApi = data.calendarApi;
+    this.editable = data.editable;
    }
 
   ngOnInit() {

@@ -53,7 +53,8 @@ export class CalendarComponent {
       title: arg.event.title,
       desc: arg.event.extendedProps.description,
       start: arg.event.start,
-      calendarApi : this.calendarApi
+      calendarApi : this.calendarApi,
+      editable : arg.event.editable
     };
     const dialogRef = this.dialog.open(ShowEventDialogComponent,dialogConfig);
   }
@@ -67,7 +68,19 @@ export class CalendarComponent {
           start: events[e].startDate,
           end: events[e].endDate,
           description: events[e].description,
+          editable : true,
         });
+      }
+    });
+    this.calendarService.getPublicHolidays().subscribe( events=> { 
+      for (let e = 0; e < events.length; e++) {
+        this.calendarEvents = this.calendarEvents.concat({
+          title: events[e].name,
+          start: new Date(events[e].date),
+          end: new Date(events[e].date),
+          description: events[e].description,
+          editable : false,
+        })
       }
     });
   }
