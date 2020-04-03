@@ -1,23 +1,17 @@
+import { Component, OnInit, Inject, ViewChild, NgZone} from '@angular/core';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
-import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {map, startWith, take} from 'rxjs/operators';
+import { MatDialogRef, MAT_DIALOG_DATA, ErrorStateMatcher} from '@angular/material';
 import { EventInfo } from './event-info';
 import { TokenStorageService } from './../../authentication/token-storage.service';
-import { Component, Inject, ViewChild, NgZone } from '@angular/core';
 import { CalendarService } from './../../API_Service/calendar.service';
-import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import * as _moment from 'moment';
-import {ErrorStateMatcher} from '@angular/material/core';
-import {CdkTextareaAutosize} from '@angular/cdk/text-field';
-import {take} from 'rxjs/operators';
-
-
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+  isErrorState(control: FormControl | null, form: FormGroupDirective| NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
@@ -38,20 +32,12 @@ export const MY_FORMATS = {
   },
 };
 
-
 @Component({
-  selector: 'dialog-overview-example-dialog',
-  templateUrl: './add-event-dialog.html',
-  styleUrls: ['./add-event-dialog.scss'],
-  providers: [{
-    provide: DateAdapter,
-    useClass: MomentDateAdapter,
-    deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
-  },
-
-  {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS}, ]
+  selector: 'app-update-event-dialog',
+  templateUrl: './update-event-dialog.component.html',
+  styleUrls: ['./update-event-dialog.component.scss']
 })
-export class AddEventDialog {
+export class UpdateEventDialogComponent implements OnInit {
 
   addTime = false;
   addReminderTime = true;
@@ -68,9 +54,11 @@ export class AddEventDialog {
   organizer: string;
   employeeList: any;
   usernameList: string[] = [];
+  id: string;
+  title: string;
 
   constructor(
-    public dialogRef: MatDialogRef<AddEventDialog>,
+    public dialogRef: MatDialogRef<UpdateEventDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,  private auth: TokenStorageService, private calendarService: CalendarService, private _ngZone: NgZone) {}
     
     @ViewChild('autosize') autosize: CdkTextareaAutosize;
@@ -88,6 +76,8 @@ export class AddEventDialog {
     ngOnInit() {
       this.startDate = moment(this.data.dateStr);
       this.endDate = moment(this.data.dateStr);
+      this.description = this.data.desc;
+      this.title = this.data.title;
       this.employeeList = this.calendarService.getAllEmployeeList();
       Promise.all([this.generateOptions()]).then(value =>{
       this.filteredOptions = this.participantListController.valueChanges
@@ -100,12 +90,7 @@ export class AddEventDialog {
       this.startTime = this.startTimeList[0];
       this.getEndTimeList();
       this.endTime = this.startTime;
-      if (!this.data.allDay) {
-        const sd = new Date(this.data.dateStr);
-        this.startTime = (sd.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'}));
-        const ed = new Date(sd.setTime(sd.setHours(sd.getHours() + 1)));
-        this.endTime = (ed.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'}));
-      }
+      this.id = this.data.id;
     }
 
     triggerResize() {
@@ -201,7 +186,7 @@ export class AddEventDialog {
       return true;
     }
   }
-
+  //changes to be made for update form
   validateTime(endTime) {
     if(!this.endDate.isAfter(this.startDate)) {
       const splitted_stime = this.startTime.split(':');
@@ -246,7 +231,7 @@ export class AddEventDialog {
   }
 
   disabled() {
-    return ((this.titleFormController.hasError('required')) || (this.locationFormController.hasError('required')) || (!this.validateDate(this.endDate)) || (!this.validateTime(this.endTime)));
+    return ((this.titleFormController.hasError('required')) || (this.locationFormController.hasError('required')) || (!this.validateDate(this.endDate)));
   }
 
   onSubmit() {
@@ -284,3 +269,4 @@ export class AddEventDialog {
     });
   }
 }
+

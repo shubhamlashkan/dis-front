@@ -10,6 +10,8 @@ import { MatDialogModule, MatFormFieldModule, MatInputModule, MatDatepickerModul
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material';
 import { MatMomentDateModule } from "@angular/material-moment-adapter";
+import { ShowEventDialogComponent } from './calendar/show-event-dialog.component';
+import { UpdateEventDialogComponent } from './calendar/update-event-dialog.component';
 
 @NgModule({
   imports: [
@@ -22,6 +24,7 @@ import { MatMomentDateModule } from "@angular/material-moment-adapter";
     MatDatepickerModule,
     MatNativeDateModule,
     MatMomentDateModule,
+    MatDividerModule,
     MatTabsModule,
     MatOptionModule,
     MatButtonModule,
@@ -32,8 +35,8 @@ import { MatMomentDateModule } from "@angular/material-moment-adapter";
     MatListModule,
     MatDividerModule
   ],
-  declarations: [BarchartComponent, CalendarComponent, PiechartComponent, HtmlDownloaderComponent, AddEventDialog],
+  declarations: [BarchartComponent, CalendarComponent, PiechartComponent, HtmlDownloaderComponent, AddEventDialog, ShowEventDialogComponent, UpdateEventDialogComponent],
   exports: [CalendarComponent, BarchartComponent, PiechartComponent, HtmlDownloaderComponent],
-  entryComponents: [AddEventDialog]
+  entryComponents: [AddEventDialog,ShowEventDialogComponent,UpdateEventDialogComponent]
 })
 export class MiscellaneousModule { }

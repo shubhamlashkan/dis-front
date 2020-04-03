@@ -18,6 +18,7 @@ export class EventInfo {
         this.createdBy = createdBy;
         this.createdDate = createdDate;
         this.participants = [];
+        console.log(participants);
         for (let i = 0; i < participants.length; i++) {
             this.participants.push({participantId: participants[i]});
         }
