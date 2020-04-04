@@ -5,7 +5,7 @@
 <form class="form">
 <mat-form-field class="title">
   <mat-label >Add title</mat-label>
-  <input matInput [formControl]="titleFormController" [(ngModel)]="title">
+  <input matInput [formControl]="titleFormController" [(ngModel)] = "title"> 
   <mat-error *ngIf="titleFormController.hasError('required')">
     Title is required
   </mat-error>
@@ -31,9 +31,9 @@
             </mat-select>
           </mat-form-field>
 
-        <span class="dash">
-          -
-        </span>
+          <span class="dash">
+            -
+          </span>
 
         <mat-form-field *ngIf="addTime" class="time" (click)="getEndTimeList()" [ngClass]="{dateValidate : !validateTime(endTime)}">
                 <mat-select [(ngModel)]="endTime" [ngModelOptions]="{standalone: true}">
@@ -108,30 +108,30 @@
         </mat-form-field>
         </div>
 
-    </mat-tab>
-    <mat-tab label="Reminder">
-      <div class="timeSelector">
-          <span class="icon">
-              <i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>
-            </span>
-        <mat-form-field class = "reminderdate">
-          <mat-label>Reminder date</mat-label>
-          <input matInput [matDatepicker]="picker3" (focus)="picker3.open()" (click)="picker3.open()" [(ngModel)]="endDate" [ngModelOptions]="{standalone: true}">
-          <mat-datepicker #picker3></mat-datepicker>
-        </mat-form-field>
+  </mat-tab>
+  <mat-tab label="Reminder">
+    <div class="timeSelector">
+        <span class="icon">
+            <i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>
+          </span>
+      <mat-form-field class = "reminderdate">
+        <mat-label>Reminder date</mat-label>
+        <input matInput [matDatepicker]="picker3" (focus)="picker3.open()" (click)="picker3.open()" [(ngModel)]="endDate" [ngModelOptions]="{standalone: true}">
+        <mat-datepicker #picker3></mat-datepicker>
+      </mat-form-field>
 
-        <mat-form-field *ngIf="!addReminderTime" class="time">
-          <mat-select [value]="startTimeList[0]">
-            <mat-option *ngFor="let st of startTimeList" [value]="st">
-              {{st}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+      <mat-form-field *ngIf="!addReminderTime" class="time">
+        <mat-select [value]="startTimeList[0]">
+          <mat-option *ngFor="let st of startTimeList" [value]="st">
+            {{st}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-        <mat-checkbox class="timebutton" color='primary' [(ngModel)]="addReminderTime" [ngModelOptions]="{standalone: true}">All day</mat-checkbox>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
+      <mat-checkbox class="timebutton" color='primary' [(ngModel)]="addReminderTime" [ngModelOptions]="{standalone: true}">All day</mat-checkbox>
+    </div>
+  </mat-tab>
+</mat-tab-group>
 </form>
 </div>
 <div mat-dialog-actions>

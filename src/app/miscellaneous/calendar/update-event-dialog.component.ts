@@ -50,12 +50,12 @@ export class UpdateEventDialogComponent implements OnInit {
   participant: string;
   participantList = new Set<string>();
   eventInfo: EventInfo;
+  title: string;
+  id: string;
   description: string;
   organizer: string;
   employeeList: any;
   usernameList: string[] = [];
-  id: string;
-  title: string;
 
   constructor(
     public dialogRef: MatDialogRef<UpdateEventDialogComponent>,
@@ -76,9 +76,10 @@ export class UpdateEventDialogComponent implements OnInit {
     ngOnInit() {
       this.startDate = moment(this.data.dateStr);
       this.endDate = moment(this.data.dateStr);
+      this.employeeList = this.calendarService.getAllEmployeeList();
       this.description = this.data.desc;
       this.title = this.data.title;
-      this.employeeList = this.calendarService.getAllEmployeeList();
+      this.id = this.data.id;
       Promise.all([this.generateOptions()]).then(value =>{
       this.filteredOptions = this.participantListController.valueChanges
         .pipe(
@@ -90,7 +91,7 @@ export class UpdateEventDialogComponent implements OnInit {
       this.startTime = this.startTimeList[0];
       this.getEndTimeList();
       this.endTime = this.startTime;
-      this.id = this.data.id;
+      this.organizer = this.auth.getUsername();
     }
 
     triggerResize() {
@@ -109,14 +110,10 @@ export class UpdateEventDialogComponent implements OnInit {
             this.options.push(empList[i][1]);
           }
         }
-        console.log(this.options);
       });
     }
 
     onEnter() {
-      if (this.participantList.size === 0) {
-        this.participantList.add(this.organizer);
-      }
       this.participantList.add(this.participantListController.value);
       this.participantListController.setValue('');
     }
@@ -186,7 +183,7 @@ export class UpdateEventDialogComponent implements OnInit {
       return true;
     }
   }
-  //changes to be made for update form
+
   validateTime(endTime) {
     if(!this.endDate.isAfter(this.startDate)) {
       const splitted_stime = this.startTime.split(':');
@@ -237,35 +234,40 @@ export class UpdateEventDialogComponent implements OnInit {
   onSubmit() {
     const start = this.toDateTime(new Date(this.startDate), this.startTime);
     const end = this.toDateTime(new Date(this.endDate), this.endTime);
+    this.usernameList.push(this.organizer);
+    let flag = 0;
     this.employeeList.subscribe(emp => {
       this.participantList.forEach((participant) => {
+        flag = 0;
         for (let j = 0; j < emp.length; j++) {
-          console.log(participant);
-          console.log(emp[j][1]);
           if (participant === emp[j][1]) {
             this.usernameList.push(emp[j][0]);
+            flag = 1;
           }
-        }
+        };
+        if(flag === 0){
+          this.usernameList.push(participant);
+        };
       });
-      console.log(this.usernameList);
+      console.log(this.usernameList)
+      this.eventInfo = new EventInfo(
+        this.titleFormController.value,
+        start,
+        end,
+        this.description,
+        this.usernameList,
+        this.auth.getUsername(),
+        this.auth.getUsername(),
+        new Date(),
+        this.locationFormController.value
+      );
+      console.log(this.eventInfo);
+      let addedEvent = this.calendarService.updateEvent(this.eventInfo,this.id);
+      addedEvent.subscribe(
+        data => {
+          this.dialogRef.close(data);
+        }
+      );
     });
-    this.eventInfo = new EventInfo(
-      this.titleFormController.value,
-      start,
-      end,
-      this.description,
-      this.usernameList,
-      this.auth.getUsername(),
-      this.auth.getUsername(),
-      new Date(),
-      this.locationFormController.value
-    );
-    let addedEvent = this.calendarService.updateEvent(this.eventInfo,this.id);
-    addedEvent.subscribe(
-      data => {
-        this.dialogRef.close(data);
-      }
-    );
   }
 }
-
