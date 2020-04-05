@@ -1,0 +1,94 @@
+.date {
+    margin-right: 6px;
+    width: 20%;
+  }
+
+.description {
+    width: 80%;
+}
+
+.title {
+    width: 100%;
+}
+
+.form {
+    width: 100%;
+}
+
+.participants {
+    width: 80%;
+}
+
+.location {
+    width: 80%;
+    margin-left: 2%;
+}
+
+.mat-dialog-actions {
+    justify-content: flex-end;
+}
+
+.close {
+    justify-content: flex-end;
+}
+
+.timebutton {
+    margin-top: 20px;
+    float: right;
+}
+
+.time {
+    width: 20%;
+    margin-right: 6px;
+}
+
+.dash {
+    margin-top: 50px;
+    margin-right: 6px;
+    font-size: 30px;
+    width: 30px;
+}
+
+.icon {
+    margin-right: 12px;
+    font-size: 20px;
+}
+
+.timeSelector {
+    margin-top: 10px;
+}
+
+::ng-deep .mat-select-arrow {
+    width: 0;
+    height: 0;
+}
+
+.reminderdate {
+    margin-right: 12px;
+    width: 20%;
+  }
+
+.participantlist {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 3%;
+}
+
+.remove {
+    float: right;
+}
+
+.participantName {
+    margin-left: 2%;
+}
+
+.listblock {
+    margin-bottom: 2%;
+}
+
+.dateValidate {
+    width: 20%;
+    height: 45px; 
+    background-color: rgb(255, 230, 235);
+    border-radius: 10%;
+}

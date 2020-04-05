@@ -106,6 +106,7 @@ export class AddEventDialog {
         const ed = new Date(sd.setTime(sd.setHours(sd.getHours() + 1)));
         this.endTime = (ed.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'}));
       }
+      this.organizer = this.auth.getUsername();
     }
 
     triggerResize() {
@@ -124,14 +125,10 @@ export class AddEventDialog {
             this.options.push(empList[i][1]);
           }
         }
-        console.log(this.options);
       });
     }
 
     onEnter() {
-      if (this.participantList.size === 0) {
-        this.participantList.add(this.organizer);
-      }
       this.participantList.add(this.participantListController.value);
       this.participantListController.setValue('');
     }
@@ -252,14 +249,22 @@ export class AddEventDialog {
   onSubmit() {
     const start = this.toDateTime(new Date(this.startDate), this.startTime);
     const end = this.toDateTime(new Date(this.endDate), this.endTime);
+    this.participantList.add(this.organizer);
+    let flag = 0;
+    console.log(this.participantList)
     this.employeeList.subscribe(emp => {
       this.participantList.forEach((participant) => {
+        flag = 0;
         for (let j = 0; j < emp.length; j++) {
           console.log(participant);
           if (participant === emp[j][1]) {
             this.usernameList.push(emp[j][0]);
+            flag = 1;
           }
-        }
+        };
+        if(flag === 0){
+          this.usernameList.push(participant);
+        };
       });
       console.log(this.usernameList);
 

@@ -120,18 +120,18 @@
           <mat-datepicker #picker3></mat-datepicker>
         </mat-form-field>
 
-        <mat-form-field *ngIf="!addReminderTime" class="time">
-          <mat-select [value]="startTimeList[0]">
-            <mat-option *ngFor="let st of startTimeList" [value]="st">
-              {{st}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+      <mat-form-field *ngIf="!addReminderTime" class="time">
+        <mat-select [value]="startTimeList[0]">
+          <mat-option *ngFor="let st of startTimeList" [value]="st">
+            {{st}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-        <mat-checkbox class="timebutton" color='primary' [(ngModel)]="addReminderTime" [ngModelOptions]="{standalone: true}">All day</mat-checkbox>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
+      <mat-checkbox class="timebutton" color='primary' [(ngModel)]="addReminderTime" [ngModelOptions]="{standalone: true}">All day</mat-checkbox>
+    </div>
+  </mat-tab>
+</mat-tab-group>
 </form>
 </div>
 <div mat-dialog-actions>
