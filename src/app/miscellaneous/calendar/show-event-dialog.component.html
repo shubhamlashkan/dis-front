@@ -1,5 +1,5 @@
 <h2 mat-dialog-title>Title: {{title}}</h2>
-<mat-dialog-content>Description: {{desc}}<hr>Start Date: {{start | date:'dd-MM-yyyy'}}
+<mat-dialog-content>Description: {{desc}}<hr>Start Date: {{start | date:"medium"}}
 </mat-dialog-content>
 <mat-dialog-actions>
 <button class="mat-raised-button" (click)="onDelete()" *ngIf= "startEditable===true" >Delete</button>

@@ -41,8 +41,11 @@ export class CalendarComponent {
         start: result.startDate,
         end: result.endDate,
         description: result.description,
-        startEditable: true
+        startEditable: true,
+        location: result.location,
+        participants: result.participants,
       });
+      console.log(result)
     });
   }
 
@@ -55,7 +58,9 @@ export class CalendarComponent {
       desc: arg.event.extendedProps.description,
       start: arg.event.start,
       calendarApi : this.calendarApi,
-      startEditable: arg.event.startEditable
+      startEditable: arg.event.startEditable,
+      location: arg.event.extendedProps.location,
+      participants: arg.event.extendedProps.participants,
     };
     const dialogRef = this.dialog.open(ShowEventDialogComponent,dialogConfig);
   }
@@ -69,7 +74,9 @@ export class CalendarComponent {
           start: events[e].startDate,
           end: events[e].endDate,
           description: events[e].description,
-          startEditable: true
+          startEditable: true,
+          location: events[e].location,
+          participants: events[e].participants,
         });
       }
     });

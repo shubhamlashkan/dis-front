@@ -19,6 +19,8 @@ export class ShowEventDialogComponent implements OnInit {
   eid: String;
   calendarApi: any;
   startEditable: boolean;
+  location: string;
+  participants: any;
 
   constructor(public dialogRef: MatDialogRef<ShowEventDialogComponent>,@Inject(MAT_DIALOG_DATA) data,
   private calendarService: CalendarService, private dialog: MatDialog){
@@ -28,6 +30,8 @@ export class ShowEventDialogComponent implements OnInit {
     this.start= data.start;
     this.calendarApi = data.calendarApi;
     this.startEditable = data.startEditable;
+    this.location = data.location;
+    this.participants = data.participants;
    }
 
   ngOnInit() {
@@ -49,6 +53,8 @@ export class ShowEventDialogComponent implements OnInit {
       desc: this.desc,
       start: this.start,
       end: this.end,
+      location: this.location,
+      participants: this.participants,
     };
     let removeId = this.id;
     const dialogReference = this.dialog.open(UpdateEventDialogComponent, dialogConfig);
@@ -59,7 +65,9 @@ export class ShowEventDialogComponent implements OnInit {
         start: result.startDate,
         end: result.endDate,
         description: result.description,
-        startEditable: true
+        startEditable: true,
+        location: result.location,
+        participants: result.participants,
       });
       this.calendarApi.getEventById(removeId).remove();
     });

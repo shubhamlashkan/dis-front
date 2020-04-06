@@ -87,7 +87,7 @@
 
         <mat-form-field class="location">
           <mat-label>Location</mat-label>
-          <input matInput [formControl]="locationFormController">
+          <input matInput [formControl]="locationFormController" [(ngModel)]= "location">
           <mat-error *ngIf="locationFormController.hasError('required')">
             Location is required
           </mat-error>
