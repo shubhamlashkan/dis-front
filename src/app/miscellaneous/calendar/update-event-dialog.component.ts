@@ -234,7 +234,7 @@ export class UpdateEventDialogComponent implements OnInit {
   onSubmit() {
     const start = this.toDateTime(new Date(this.startDate), this.startTime);
     const end = this.toDateTime(new Date(this.endDate), this.endTime);
-    this.usernameList.push(this.organizer);
+    this.participantList.add(this.organizer);
     let flag = 0;
     this.employeeList.subscribe(emp => {
       this.participantList.forEach((participant) => {

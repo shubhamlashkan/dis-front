@@ -256,7 +256,6 @@ export class AddEventDialog {
       this.participantList.forEach((participant) => {
         flag = 0;
         for (let j = 0; j < emp.length; j++) {
-          console.log(participant);
           if (participant === emp[j][1]) {
             this.usernameList.push(emp[j][0]);
             flag = 1;
@@ -266,8 +265,7 @@ export class AddEventDialog {
           this.usernameList.push(participant);
         };
       });
-      console.log(this.usernameList);
-
+      console.log(this.usernameList)
       this.eventInfo = new EventInfo(
         this.titleFormController.value,
         start,

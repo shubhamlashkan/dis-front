@@ -35,14 +35,16 @@ export class CalendarComponent {
       data: event
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.calendarApi.addEvent({
-        id: result.eventId,
-        title: result.title,
-        start: result.startDate,
-        end: result.endDate,
-        description: result.description,
-        startEditable: true
-      });
+      if(typeof result !== 'undefined') {
+        this.calendarApi.addEvent({
+          id: result.eventId,
+          title: result.title,
+          start: result.startDate,
+          end: result.endDate,
+          description: result.description,
+          startEditable: true
+        });
+      }
     });
   }
 
