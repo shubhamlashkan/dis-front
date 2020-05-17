@@ -10,9 +10,6 @@
       Title is required
     </mat-error>
     </mat-form-field>
-
-    <mat-tab-group>
-      <mat-tab label="Event">
         <div class="timeSelector">
             <span class="icon">
                 <i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>
@@ -107,31 +104,6 @@
             cdkAutosizeMinRows="1"></textarea>
           </mat-form-field>
           </div>
-
-    </mat-tab>
-    <mat-tab label="Reminder">
-      <div class="timeSelector">
-          <span class="icon">
-              <i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>
-            </span>
-        <mat-form-field class = "reminderdate">
-          <mat-label>Reminder date</mat-label>
-          <input matInput [matDatepicker]="picker3" (focus)="picker3.open()" (click)="picker3.open()" [(ngModel)]="endDate" [ngModelOptions]="{standalone: true}">
-          <mat-datepicker #picker3></mat-datepicker>
-        </mat-form-field>
-
-      <mat-form-field *ngIf="!addReminderTime" class="time">
-        <mat-select [value]="startTimeList[0]">
-          <mat-option *ngFor="let st of startTimeList" [value]="st">
-            {{st}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-checkbox class="timebutton" color='primary' [(ngModel)]="addReminderTime" [ngModelOptions]="{standalone: true}">All day</mat-checkbox>
-    </div>
-  </mat-tab>
-</mat-tab-group>
 </form>
 </div>
 <div mat-dialog-actions>

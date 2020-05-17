@@ -19,6 +19,8 @@ export class ShowEventDialogComponent implements OnInit {
   eid: String;
   calendarApi: any;
   startEditable: boolean;
+  location: string;
+  participants: any;
 
   constructor(public dialogRef: MatDialogRef<ShowEventDialogComponent>,@Inject(MAT_DIALOG_DATA) data,
   private calendarService: CalendarService, private dialog: MatDialog){
@@ -28,6 +30,8 @@ export class ShowEventDialogComponent implements OnInit {
     this.start= data.start;
     this.calendarApi = data.calendarApi;
     this.startEditable = data.startEditable;
+    this.location = data.location;
+    this.participants = data.participants;
    }
 
   ngOnInit() {
@@ -43,26 +47,37 @@ export class ShowEventDialogComponent implements OnInit {
 
   onUpdate(){
     const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '520px';
     dialogConfig.data = {
       id: this.id,
       title: this.title,
       desc: this.desc,
       start: this.start,
       end: this.end,
+      location: this.location,
+      participants: this.participants,
     };
     let removeId = this.id;
     const dialogReference = this.dialog.open(UpdateEventDialogComponent, dialogConfig);
     dialogReference.afterClosed().subscribe(result => {
-      this.calendarApi.addEvent({
-        id: result.eventId,
-        title: result.title,
-        start: result.startDate,
-        end: result.endDate,
-        description: result.description,
-        startEditable: true
-      });
-      this.calendarApi.getEventById(removeId).remove();
+      if(result !== undefined) {
+        this.calendarApi.addEvent({
+          id: result.eventId,
+          title: result.title,
+          start: result.startDate,
+          end: result.endDate,
+          description: result.description,
+          startEditable: true,
+          location: result.location,
+          participants: result.participants,
+        });
+        this.calendarApi.getEventById(removeId).remove();
+      }
     });
+    this.dialogRef.close();
+  }
+
+  onNoClick(): void {
     this.dialogRef.close();
   }
 

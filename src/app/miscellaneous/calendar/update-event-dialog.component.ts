@@ -56,6 +56,7 @@ export class UpdateEventDialogComponent implements OnInit {
   organizer: string;
   employeeList: any;
   usernameList: string[] = [];
+  location: string;
 
   constructor(
     public dialogRef: MatDialogRef<UpdateEventDialogComponent>,
@@ -80,6 +81,7 @@ export class UpdateEventDialogComponent implements OnInit {
       this.description = this.data.desc;
       this.title = this.data.title;
       this.id = this.data.id;
+      this.location = this.data.location;
       Promise.all([this.generateOptions()]).then(value =>{
       this.filteredOptions = this.participantListController.valueChanges
         .pipe(
@@ -92,6 +94,18 @@ export class UpdateEventDialogComponent implements OnInit {
       this.getEndTimeList();
       this.endTime = this.startTime;
       this.organizer = this.auth.getUsername();
+      for(let e = 0; e < this.data.participants.length; e++){
+          this.usernameList.push(this.data.participants[e].participantId);
+      }
+      this.employeeList.subscribe( emp => {
+        this.usernameList.forEach((participant) => {
+          for( let j=0; j<emp.length; j++){
+            if (participant === emp[j][0]) {
+              this.participantList.add(emp[j][1]);
+            }
+          }
+        });
+      })
     }
 
     triggerResize() {
