@@ -28,6 +28,7 @@ export class ShowEventDialogComponent implements OnInit {
     this.desc= data.desc;
     this.id= data.id;
     this.start= data.start;
+    this.end = data.end;
     this.calendarApi = data.calendarApi;
     this.startEditable = data.startEditable;
     this.location = data.location;

@@ -59,6 +59,7 @@ export class CalendarComponent {
       title: arg.event.title,
       desc: arg.event.extendedProps.description,
       start: arg.event.start,
+      end: arg.event.end,
       calendarApi : this.calendarApi,
       startEditable: arg.event.startEditable,
       location: arg.event.extendedProps.location,

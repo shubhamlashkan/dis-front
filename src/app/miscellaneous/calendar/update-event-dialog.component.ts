@@ -75,8 +75,8 @@ export class UpdateEventDialogComponent implements OnInit {
     filteredOptions: Observable<string[]>;
   
     ngOnInit() {
-      this.startDate = moment(this.data.dateStr);
-      this.endDate = moment(this.data.dateStr);
+      this.startDate = moment(this.data.start);
+      this.endDate = moment(this.data.end);
       this.employeeList = this.calendarService.getAllEmployeeList();
       this.description = this.data.desc;
       this.title = this.data.title;
@@ -90,9 +90,9 @@ export class UpdateEventDialogComponent implements OnInit {
         );
       });
       this.generateTimelist();
-      this.startTime = this.startTimeList[0];
+      this.startTime = moment(this.data.start).format("hh:mm A");
       this.getEndTimeList();
-      this.endTime = this.startTime;
+      this.endTime = moment(this.data.end).format("hh:mm A");
       this.organizer = this.auth.getUsername();
       for(let e = 0; e < this.data.participants.length; e++){
           this.usernameList.push(this.data.participants[e].participantId);
