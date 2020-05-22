@@ -1,5 +1,7 @@
 import { EmployeeService } from './../employee.service';
 import { Component, OnInit } from '@angular/core';
+import { FacultyDataService } from 'src/app/hod/faculty/faculty-data.service';
+import { facultyData } from 'src/app/Model/facultyData';
 
 @Component({
   selector: 'app-staff',
@@ -7,14 +9,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./staff.component.scss']
 })
 export class StaffComponent implements OnInit {
+  sData :  facultyData[] = new Array (new facultyData());
 
-  constructor(private employeeHandler: EmployeeService) { }
-  staffList: any;
-  staffMembers: any[];
+  constructor(private faculty_service: FacultyDataService) {
+
+    this.getStaffData();
+   }
+   getStaffData(): void{
+    this.faculty_service.getStaffData()
+      .subscribe(data =>this.sData = data.body);
+      console.log(this.sData);
+  }
+
   ngOnInit() {
-    this.staffList = this.employeeHandler.getStaffDetails().subscribe(data => {
-      this.staffMembers = data;
-      console.log(this.staffMembers);
-    });
+
+
   }
 }

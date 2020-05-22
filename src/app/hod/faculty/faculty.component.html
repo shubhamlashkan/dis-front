@@ -90,14 +90,15 @@
     </div>
   </div>
 </div>
-<div class="modal fade my-modal2" id="myModal2" role="dialog">
+
+<!-- <div class="modal fade my-modal2" id="myModal2" role="dialog">
   <div class="modal-dialog">
 
     <div class="modal-content">
       <div class="modal-header">
-        <!--En-->
+        En-->
 
-        <!--En-->
+        <!-- En
         <h3 class="modal-title">Assign New Task</h3>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
 
@@ -146,11 +147,11 @@
 
     </div>
   </div>
-</div>
+</div> --> 
 <div class="container">
 
   <ul class="nav nav-pills nav-fill">
-    <input type="text" placeholder="Search.." name="search" style="width:700px;">
+    <input type="text" placeholder="Search.." name="search" style="width:700px;" (keyup)= "getStaffDataByName($event.target.value)">
     <li class="nav-item">
       <a class="nav-link active" id="sectionA-tab" data-toggle="pill" href="#sectionA" role="tab" aria-controls="sectionA"
         aria-selected="true">Faculty</a>
@@ -166,10 +167,145 @@
 
   </ul>
   <hr />
+
   <div class="tab-content ">
     <div class="tab-pane fade show active" id="sectionA" role="tabpane1" aria-labelledby="sectionA-tab">
-      <div class="row">
+      <div class = "row" *ngIf = "!searchedRecord">
+        <div class="col-lg-3 col-sm-6"  *ngFor='let f of fData'>
+          <div class="card hovercard">
+            <div class="cardheader">
+              <div class="dropleft">
+                <a href="#" id="dropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="true" style="text-decoration:none;margin-left: 85%;">
+                <i class="fa fa-ellipsis-v"></i>
+              </a>
+              <div class="dropdown-menu rounded-0 " aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" role="button" data-toggle="modal" data-target="#" aria-controls="cleanliness"
+                style="text-decoration:none;">
+                Time Table</a>
+                <a class="dropdown-item collapsed" href="hod/hod_tasks" role="button" data-toggle="collapse" style="text-decoration:none;">
+                  Assigned Tasks</a>
+                  <a class="dropdown-item collapsed" href="#" role="button" data-toggle="modal" data-target="#"
+                  aria-controls="equipments" style="text-decoration:none;">
+                  Assign New Tasks</a>
+                  <a class="dropdown-item collapsed" href="#" role="button" data-toggle="modal" data-target=".my-modal2"
+                    aria-controls="equipments" style="text-decoration:none;">
+                    Profile</a>
+                </div>
+          
+              </div>
+            </div>
+            <div class="avatar">
+              <img alt="" src="../../../assets/images/img_avatar3.png">
+            </div>
+            <div class="info">
+              <div class="title">
+                <a target="_blank" href="https://scripteden.com/">{{f.name}}</a>
+         
+              </div>
+              <div class="desc"> {{f.currentDesignation}}</div>
+              <div class="desc"><i class="fa fa-mobile"></i> {{f.mobileNo}}</div>
+              <div class="desc"><i class="fa fa-mobile"></i>{{f.alternateMobileNo}}</div>
+              <div class="desc"><i class="fa fa-envelope"></i>{{f.email}}</div>
+              </div>
+          </div>
+        </div>
+
+      </div>
+      <div class = "row" *ngIf = "searchedRecord">
+        <div class="col-lg-3 col-sm-6"  *ngFor='let f of allData'>
+          <div class="card hovercard">
+            <div class="cardheader">
+              <div class="dropleft">
+                <a href="#" id="dropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="true" style="text-decoration:none;margin-left: 85%;">
+                <i class="fa fa-ellipsis-v"></i>
+              </a>
+              <div class="dropdown-menu rounded-0 " aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" role="button" data-toggle="modal" data-target="#" aria-controls="cleanliness"
+                style="text-decoration:none;">
+                Time Table</a>
+                <a class="dropdown-item collapsed" href="hod/hod_tasks" role="button" data-toggle="collapse" style="text-decoration:none;">
+                  Assigned Tasks</a>
+                  <a class="dropdown-item collapsed" href="#" role="button" data-toggle="modal" data-target="#"
+                  aria-controls="equipments" style="text-decoration:none;">
+                  Assign New Tasks</a>
+                  <a class="dropdown-item collapsed" href="#" role="button" data-toggle="modal" data-target=".my-modal2"
+                    aria-controls="equipments" style="text-decoration:none;">
+                    Profile</a>
+                </div>
+          
+              </div>
+            </div>
+            <div class="avatar">
+              <img alt="" src="../../../assets/images/img_avatar3.png">
+            </div>
+            <div class="info">
+              <div class="title">
+                <a target="_blank" href="https://scripteden.com/">{{f.name}}</a>
+         
+              </div>
+              <div class="desc"> {{f.currentDesignation}}</div>
+              <div class="desc"><i class="fa fa-mobile"></i> {{f.mobileNo}}</div>
+              <div class="desc"><i class="fa fa-mobile"></i>{{f.alternateMobileNo}}</div>
+              <div class="desc"><i class="fa fa-envelope"></i>{{f.email}}</div>
+              </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+      
+      <!-- <div class="row">
         <div class="col-lg-3 col-sm-6" *ngFor='let f of fData'>
+ 
+          <div class="card hovercard">
+            <div class="cardheader">
+              <div class="dropleft">
+                <a href="#" id="dropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="true" style="text-decoration:none;margin-left: 85%;">nbvjsdb b
+                  <i class="fa fa-ellipsis-v"></i>
+                </a>
+                <div class="dropdown-menu rounded-0 " aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" role="button" data-toggle="modal" data-target=".my-modal" aria-controls="cleanliness"
+                    style="text-decoration:none;">
+                    Time Table</a>
+                  <a class="dropdown-item collapsed" href="hod/hod_tasks" role="button" data-toggle="collapse" style="text-decoration:none;">
+                    Assigned Tasks</a>
+                  <a class="dropdown-item collapsed" href="#" role="button" data-toggle="modal" data-target=".my-modal2"
+                    aria-controls="equipments" style="text-decoration:none;">
+                    Assign New Tasks</a>
+                  <a class="dropdown-item collapsed" href="#" role="button" data-toggle="modal" data-target=".my-modal2"
+                    aria-controls="equipments" style="text-decoration:none;">
+                    Profile</a>
+                </div>
+              </div>
+
+            </div>
+            <div class="avatar">
+              <img alt="" src="../../../assets/images/img_avatar3.png">
+            </div>
+            <div class="info">
+              <div class="title">
+                <a target="_blank" href="https://scripteden.com/">{{f.name}}</a>
+              </div>
+
+              <div class="desc"> {{f.currentDesignation}}</div>
+              <div class="desc"><i class="fa fa-mobile"></i> {{f.mobileNo}}</div>
+              <div class="desc"><i class="fa fa-mobile"></i> {{f.alternateMobileNo}}</div>
+              <div class="desc"><i class="fa fa-envelope"></i>{{f.email}}</div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+
+       <div class="tab-pane fade " id="sectionB" role="tabpane1" aria-labelledby="sectionB-tab">
+      <div class="row" *ngIf = "!searchedRecord" >
+        <div class="col-lg-3 col-sm-6" *ngFor='let f of sData' >
 
           <div class="card hovercard">
             <div class="cardheader">
@@ -210,10 +346,8 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="tab-pane fade show active" id="sectionB" role="tabpane1" aria-labelledby="sectionA-tab">
-      <div class="row">
-        <div class="col-lg-3 col-sm-6" *ngFor='let f of sData'>
+      <div class="row" *ngIf = "searchedRecord" >
+        <div class="col-lg-3 col-sm-6" *ngFor='let f of allData' >
 
           <div class="card hovercard">
             <div class="cardheader">
@@ -254,28 +388,96 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>   
 
-    <div class="tab-pane fade" id="sectionC" role="tabpane1" aria-labelledby="sectionB-tab">
+     <div class="tab-pane fade" id="sectionC" role="tabpane1" aria-labelledby="sectionB-tab">
       <div class="col-lg-12 kyc-colm user-management kyc-section rewards-section reports-sectn">
-        <form>
+        <form #f = "ngForm">
+          <div id="add-member" ngModelGroup="addMemberData">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-lg-4">
+                  <label class="control-label col-sm-2" for="emp_id" ><span class="mandatory">*</span>Employee_Id:</label>
+                </div>
+                <div class="col-lg-8">
+                  <input type="text" class="form-control" required id="emp_id" placeholder="Enter Employee Id:" name="emp_id" ngModel>
+                </div>
+              </div>
+            </div>
           <div class="form-group">
             <div class="row">
               <div class="col-lg-4">
-                <label class="control-label col-sm-2" for="name">Name:</label>
+                <label class="control-label col-sm-2" for="name" ><span class="mandatory">*</span>Name:</label>
               </div>
               <div class="col-lg-8">
-                <input type="name" class="form-control" id="name1" placeholder="Enter Name:" name="name1">
+                <input type="name" class="form-control" required id="name1" placeholder="Enter Name:" name="name1" ngModel>
+              </div>
+            </div>
+          </div>
+          <div class = "form-group">
+            <div class = "row">
+              <div class="col-lg-4">
+                <label class="control-label col-sm-2" for="name">Designation:</label>
+              </div>
+              <div class="col-lg-8">
+              <select class="dropdown-primary form-control" name="designation" required ngModel>
+                <option value="" selected disabled>Select Designation</option>
+                <option> HOD   </option>
+                <option> Professor   </option>
+                <option> Associate Professor  </option>
+                <option> Assistant Professor   </option>
+                <option> Programmer    </option>
+                <option> Computer Operator    </option>
+                <option> Technical Assistant    </option>
+                <option> Lab Technician    </option>
+                <option> LDC   </option>
+                <option> Attendant   </option>
+              </select>
+              </div>
+            </div>
+          </div>
+          <div class = "form-group">
+            <div class = "row">
+              <div class="col-lg-4">
+                <label class="control-label col-sm-2" for="name">Class:</label>
+              </div>
+              <div class="col-lg-8">
+              <select class="dropdown-primary form-control" name="class" required ngModel>
+                <option value="" selected disabled>Select Class</option>
+                <option> I  </option>
+                <option> II  </option>
+                <option> III  </option>
+                <option> IV   </option>
+               
+              </select>
+              </div>
+            </div>
+          </div>
+          <div class = "form-group">
+            <div class = "row">
+              <div class="col-lg-4">
+                <label class="control-label col-sm-2" for="type">Type:</label>
+              </div>
+              <div class="col-lg-8">
+              <select class="dropdown-primary form-control" name="type" required ngModel>
+                <option value="" selected disabled>Select Type</option>
+                <option> Regular  </option>
+                <option> Contract   </option>
+                <option> NPIU </option>
+                <option> Visiting   </option>
+                <option> Other   </option>
+              
+              </select>
               </div>
             </div>
           </div>
           <div class="form-group">
             <div class="row">
               <div class="col-lg-4">
-                <label class="control-label col-sm-2" for="date">Joining_date:</label>
+                <label class="control-label col-sm-2" for="date_j">Joining_date:</label>
               </div>
               <div class="col-lg-8">
-                <input type="date" class="form-control" id="date_j" placeholder="Enter Joining date:" name="date">
+                <input type="date" class="form-control" id="date_j" required placeholder="Enter Joining date:" name="date_j" ngModel>
               </div>
             </div>
           </div>
@@ -285,17 +487,17 @@
                 <label class="control-label col-sm-2" for="email">Email:</label>
               </div>
               <div class="col-lg-8">
-                <input type="email" class="form-control" id="email" placeholder="abc..@gmail.com" name="email">
+                <input type="email" class="form-control" required id="email" placeholder="abc..@gmail.com" name="email" ngModel>
               </div>
             </div>
           </div>
           <div class="form-group">
             <div class="row">
               <div class="col-lg-4">
-                <label class="control-label col-sm-2" for="date">Date_of_Birth:</label>
+                <label class="control-label col-sm-2"  for="dob">Date_of_Birth:</label>
               </div>
               <div class="col-lg-8">
-                <input type="date" class="form-control" id="dob" placeholder="Enter Date of Birth:" name="date">
+                <input type="date" class="form-control"  id="dob" placeholder="Enter Date of Birth:" name="dob" ngModel>
               </div>
             </div>
           </div>
@@ -305,25 +507,16 @@
                 <label class="control-label col-sm-2" for="number">Mobile_Number:</label>
               </div>
               <div class="col-lg-8">
-                <input type="number" class="form-control" id="number" placeholder="Enter Mobile_Number:" name="number">
+                <input type="number" class="form-control" id="number" placeholder="Enter Mobile_Number:" name="number" ngModel>
               </div>
             </div>
           </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col-lg-4">
-                <label class="control-label col-sm-2" for="address">Address:</label>
-              </div>
-              <div class="col-lg-8">
-                <input type="address" class="form-control" id="address" placeholder="Enter Address:" name="address">
-              </div>
-            </div>
+          
           </div>
-
         </form>
-        <button type="button" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-primary" (click)="onSubmit()" [disabled]="!f.valid">Submit</button>
       </div>
-    </div>
-  </div>
+    </div> 
+  </div> 
 
   <!--END grid script-->

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SidenavService } from 'src/app/API_Service/sidenav.service';
+import { TokenStorageService } from 'src/app/authentication';
 
 @Component({
   selector: 'app-navigation',
@@ -10,13 +11,20 @@ import { SidenavService } from 'src/app/API_Service/sidenav.service';
 })
 export class NavigationComponent implements OnInit {
 
+  
   constructor(private router : Router,private sidenav : SidenavService) { }
 
   ngOnInit() {
     
+  
+    
   }
   logout():void{
     window.sessionStorage.clear();
+    window.localStorage.clear();
+    sessionStorage.removeItem('authenticaterUser');
+    sessionStorage.removeItem('userType');
     this.router.navigate(['/login']);
   }
+  
 }

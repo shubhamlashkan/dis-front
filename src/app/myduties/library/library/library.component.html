@@ -2,23 +2,7 @@
   <div class = "row">
 
       <h4 class="col-6 text-primary" >Department Library</h4>
-      <div class="col-lg-3">
-          <select class="mdb-select md-form colorful-select dropdown-primary" style="float: right">
-            <option  value="" disabled selected>Search By</option>
-            <option  value="1">Title</option>
-            <option  value="2">Author</option>
-            <option  value="3">Book no</option>
-          </select>
-        </div>
-
-      <div class="col-lg-3">
-          <ul class="searchbox float-right">
-            <li class="">
-              <input class="form-control mr-sm-2 searchbox-width" type="search" placeholder="Search" aria-label="Search">
-              <i class="fa fa-search" style="position:absolute;top:11px;" aria-hidden="true"></i>
-            </li>
-          </ul>
-        </div>
+      
   </div>
   <hr>
   <div class="row">
@@ -31,7 +15,7 @@
                       <p style="font-size: small" routerLink="books">Books</p>
                     </div>
                     <div class="col-lg-6" style="margin: auto 0px;">
-                      <h3>{{length}}</h3>
+                      <h3>{{bookCount}}</h3>
                     </div>
                   </div>
                 </li>
@@ -42,27 +26,286 @@
                         <p style="font-size: small" routerLink="thesis">Thesis</p>
                       </div>
                       <div class="col-lg-6" style="margin: auto 0px;">
-                        <!-- <h3>{{thesisLength}}</h3> -->
-                        <h3>545</h3>
+                         <h3>{{thesisCount}}</h3> 
+                        
                       </div>
                     </div>
                   </li>
-                  <li style="cursor: pointer;">
+                 <li style="cursor:pointer;">
                     <div class="kyc-section rewards-section reports-sectn row" style="max-height: 100px; max-width: 250px; margin-bottom: 10px;" >
-                      <div class="col-lg-6 float-left">
-                        <a routerLink="researchpaper"><img src="../../../assets/images/researchpaper.png" style="width: 35px; height: 35px; "></a>
-                        <p routerLink="researchpaper" style="font-size: small">Research<br/>Papers</p>
+                      <div class="col-lg-6">
+                        <a routerLink="history"><img src="../../../assets//images/thesis.png" style="width: 35px; height: 35px; " ></a>
+                        <p style="font-size: small" routerLink="history">Issue History</p>
                       </div>
                       <div class="col-lg-6" style="margin: auto 0px;">
-                        <h3>605</h3>
+                         
+                        
                       </div>
                     </div>
-                  </li>
+                  </li> 
             </ul>
         </div>
         <div class="col-lg-9">
+            <div class="row">
+              <div class="col-lg-6">
+                  <h5 >Library Instruction</h5>
+                <br>
+                <ol type="1" *ngFor="let setting of setting">
+                    <li>
+                        Max no. of Books to be issued: {{setting.noOfBooksAllowed}}
+                    </li>
+                    <li>
+                        Penalty per day: {{setting.penaltyPerDay}}
+                    </li>
+                    <li>
+                        Return after: {{setting.returnDeadlineDays}}
+                    </li>
+                  </ol>
+              </div>
+              <div class="col-lg-3">
+
+              </div>
+              <div class="col-lg-3">
+                  <button class="btn btn-reset " data-toggle="modal" data-target="#changeSettingsModal"  ><i class="fa fa-gear fa-fw fa-lg" aria-hidden="true"></i></button>
+              </div>
+                
+            </div>
 <router-outlet></router-outlet>
             </div>
                 
     </div>
 </div>
+
+
+<div class="modal fade" id="changeSettingsModal" tabindex="-1" role="dialog" aria-labelledby="changeSettiingsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="changeSettiingsModalLabel">Settings</h5>
+          <button type="button" (click)="ngOnInit()" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <ul class="nav nav-tabs">
+          <li class="active"><a class="btn btn-link" data-toggle="tab" href="#updateSettings">Update Instruction</a></li>
+          <li><a  class="btn btn-link" data-toggle="tab" href="#addCategory">Add New Acronym</a></li>
+          <li><a class="btn btn-link" data-toggle="tab" href="#removeCategory">Remove Acronym</a></li>
+          <li><a class="btn btn-link" data-toggle="tab" href="#viewCategory">Search Acronym</a></li>
+        </ul>
+
+        <div class="tab-content">
+          <div id="updateSettings" class="tab-pane fade show active">
+            <div class="modal-body">
+              <h4>Update Instruction</h4>
+              <hr>
+              <div >
+                <form (ngSubmit)="change(f)" #f="ngForm" >
+    
+                  <div id="update-settings" ngModelGroup="librarySettings">
+                      <div class="form-row" *ngFor="let setting of setting">
+                          <div class="col-4">
+                              <label for="noOfBooksAllowed">Max. Books Allowed</label>
+                              <input type="number" min="1" required id="noOfBooksAllowed" class="form-control" name="noOfBooksAllowed"  [(ngModel)]="setting.noOfBooksAllowed" >
+                          </div> 
+                          <div class="col-4">
+                              <label for="penaltyPerDay">Penalty Per Day</label>
+                              <input type="number" min="0" required id="penaltyPerDay" class="form-control" name="penaltyPerDay" [(ngModel)]="setting.penaltyPerDay" >
+                          </div> 
+                          <div class="col-3">
+                              <label for="returnDeadlineDays">Return Days</label>
+                              <input type="number" min="1" required id="returnDeadlineDays" class="form-control" name="returnDeadlineDays" [(ngModel)]="setting.returnDeadlineDays" >
+                          </div>  
+                          <div class="col-1">
+                              <input type="hidden" class="form-control" id="id" name="id" [(ngModel)]="setting.id" >
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-row">
+                          <div class="col-3">
+      
+                          </div>
+                          <div class="col-3">
+                              <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth" data-dismiss="modal">Cancel</button>
+                          </div>
+                            <div class="col-3">
+                                <button type="submit" (click)="isButtonClicked()"  class="btn btn-primary btnWidth" [disabled]="!f.valid" >Change Settings</button>
+                            </div>  
+                            <div class="col-3">
+                              </div>
+                        </div>
+                  </div>
+                  <br/>
+                </form>
+              </div>
+              <div *ngIf="settingsChanged" class="alert alert-success " role="alert">
+                Library Instruction Updated Successfully..!!
+                
+            </div>
+            </div>            
+          </div>
+
+          <div id="addCategory" class="tab-pane fade">
+            <div class="modal-body">
+              <h4>Add New Acronym</h4>
+              <hr>
+              <div >
+                <form (ngSubmit)="onSubmit(g)" #g="ngForm" >
+    
+                  <div id="addNewCategory" ngModelGroup="addBookCategory">
+                      <div class="form-row">
+                          <div class="col-3">
+                              <label for="subjectName">Subject Name</label>
+                              <input type="text"  required id="subjectName" class="form-control" name="subjectName"  ngModel >
+                          </div> 
+                          <div class="col-3">
+                              <label for="subjectCategory">Subject Category</label>
+                              <input type="text" required id="subjectCategory" class="form-control" name="subjectCategory" ngModel >
+                          </div>  
+                        </div>
+                        <br>
+                        <div class="form-row">
+                          <div class="col-3">
+      
+                          </div>
+                          <div class="col-3">
+                              <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth" data-dismiss="modal">Cancel</button>
+                          </div>
+                            <div class="col-3">
+                                <button type="submit"  class="btn btn-primary btnWidth" [disabled]="!g.valid" >Add Category</button>
+                            </div>  
+                            <div class="col-3">
+                              </div>
+                        </div>
+                  </div>
+                  <br/>
+                </form>
+              </div>
+              <div *ngIf = "showError"  class="alert alert-danger " role="alert">
+                {{errorMsg}}
+               
+              </div>
+              <div *ngIf="categoryAdded" class="alert alert-success " role="alert">
+                  {{message}}
+               
+              </div>
+            </div>       
+          </div>
+
+          <div id="removeCategory" class="tab-pane fade">
+            <div class="modal-body">
+              <h4>Remove Acronym</h4>
+              <hr>
+              <div >
+                <form (ngSubmit)="removeCategory(h)" #h="ngForm" >
+    
+                  <div id="remCategory" ngModelGroup="removeBookCategory">
+                      <div class="form-row">
+                          <div class="col-3">
+                            <label >Subject Category</label>
+                            <select class="dropdown-primary form-control" name="subjectCategory" required ngModel >
+                              <option value="" selected disabled>Subject Category</option>
+                              <option *ngFor="let sub of subject" [value]="sub">
+                                {{sub}}
+                              </option>
+                            </select>   
+                          </div> 
+                          
+                        </div>
+                        <br>
+                        <div class="form-row">
+                          <div class="col-3">
+      
+                          </div>
+                          <div class="col-3">
+                              <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth" data-dismiss="modal">Cancel</button>
+                          </div>
+                            <div class="col-3">
+                                <button type="submit"  class="btn btn-primary btnWidth" [disabled]="!h.valid" >Remove Category</button>
+                            </div>  
+                            <div class="col-3">
+                              </div>
+                        </div>
+                  </div>
+                  <br/>
+                </form>
+              </div>
+              <div *ngIf="categoryRemoved" class="alert alert-success " role="alert">
+                {{messageRem}}
+            </div>
+            </div> 
+          </div>
+          <div id="viewCategory" class="tab-pane fade">
+            <div class="modal-body">
+              <h4>View Acronym</h4>
+              <hr>
+              <div >
+                <form (ngSubmit)="getAcronym(i)" #i="ngForm" >
+    
+                  <div id="viewCategory" ngModelGroup="viewBookCategory">
+                      <div class="form-row">
+                        <div class="col-6">
+                          
+                            <input type="radio" value="1" name="group1" [(ngModel)]="group1">Search Acronym By Subject Name
+                        
+                      
+                        </div>
+                          <!-- <div class="col-3">
+                            <label >Subject Category</label>
+                            <select class="dropdown-primary form-control" name="subjectCategory" required ngModel >
+                              <option value="" selected disabled>Subject Category</option>
+                              <option *ngFor="let sub of subject" [value]="sub">
+                                {{sub}}
+                              </option>
+                            </select>  
+                          </div>  -->
+                          <div class="col-6">
+                            <input type="radio"  value="2" name="group1" [(ngModel)]="group1">Search Subject By Acronym    
+                          </div>
+                        </div>
+                        <br>
+                        <div class="form-row">  
+                          <div class="col-3">
+                            <input type="text"  required id="subjectName" class="form-control" name="subjectName"  ngModel >
+                          </div>
+                          <div class="col-3">
+                              <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth" data-dismiss="modal">Cancel</button>
+                          </div>
+                            <div class="col-3">
+                                <button type="submit" [disabled]="!i.valid"  class="btn btn-primary btnWidth"  >Search</button>
+                            </div>  
+                            <div class="col-3">
+                              </div>
+                        </div>
+
+
+                  </div>
+                  <br/>
+                </form>
+              </div>
+              <div *ngIf="categoryExists" class="alert alert-danger" role="alert">
+                {{errorMsg}}
+            </div>
+           
+              <div *ngIf="categoryFound" >
+                <table  class="table table-striped">
+                  <tr >
+                    
+                    <th>Subject Name</th>
+            
+                    <th>Subject Acronym</th>
+                   
+                  </tr>  
+                  <tr *ngFor="let acronym of acronymList">
+                    <td>{{acronym.subjectName}}</td>
+                    <td>{{acronym.subjectCategory}}</td>
+                  </tr>
+                </table>
+              </div>
+            </div> 
+          </div>
+        </div>
+
+        
+      </div>
+    </div>
+  </div>

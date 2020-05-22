@@ -1,17 +1,30 @@
-<div class="kyc-section rewards-section reports-sectn">
-    <div class="row ">
-            <div class="card col-sm-3" *ngFor="let emp of staffMembers">
-              <div class=" card-body text-center">
-              <div class="profile-info">
-                  <div class="profile-icon">
-                    <img class="center" src="./../../../assets/images/img_avatar2.png" alt="" />
-                  </div>
-                </div>
-                <div class="center-text">  <!--text alignent issue-->
-                  <p>{{emp?.name}}<br>{{emp?.currentDesignation}}</p>
-                  <i class="fa fa-envelope"></i> {{emp?.email}}
-                </div>
-                </div>
-              </div>
+<div class="container">
+  
+
+<div class="tab-pane fade show active " id="sectionB" role="tabpane1" aria-labelledby="sectionB-tab">
+  <div class="row">
+    <div class="col-lg-3 col-sm-6" *ngFor = 'let f of sData'  >
+
+      <div class="card hovercard">
+        <div class="cardheader">
+         
+
+        </div>
+        <div class="avatar">
+          <img alt="" src="../../../assets/images/img_avatar3.png">
+        </div>
+        <div class="info">
+          <div class="title">
+            <a target="_blank" href="https://scripteden.com/">{{f.name}}</a>
+          </div>
+
+          <div class="desc"> {{f.currentDesignation}}</div>
+          <div class="desc"><i class="fa fa-mobile"></i> {{f.mobileNo}}</div>
+          <div class="desc"><i class="fa fa-mobile"></i> {{f.alternateMobileNo}}</div>
+          <div class="desc"><i class="fa fa-envelope"></i>{{f.email}}</div>
+        </div>
       </div>
+    </div>
+  </div>
+</div>  
 </div>

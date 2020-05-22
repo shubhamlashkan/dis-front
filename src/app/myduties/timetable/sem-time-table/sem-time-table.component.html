@@ -1,0 +1,1115 @@
+
+  <div class = "row">
+    <div class = "col-6">
+
+    <h3 class="text-primary" >Semester Time Table</h3>
+    </div>
+    <div class = "col-6">
+      <div class="input-group mb-1">
+        <ul class="nav nav-pills nav-fill col-lg-12" id="pills-tab" role="tablist">
+         
+          <li class="nav-item">
+            <a class="nav-link active" id="pills-add-tab" data-toggle="pill" href="#pills-add" role="tab"  aria-controls="pills-add"
+              aria-selected="true"><i class="fa fa-plus fa-fw fa-lg" aria-hidden="true"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pills-show-tab" data-toggle="pill" href="#pills-show" role="tab" aria-controls="pills-show"
+              aria-selected="false"><i class="fa fa-pencil fa-fw fa-lg" aria-hidden="true"></i></a>
+          </li>
+          <li class = "nav-item">
+            <button class="btn btn-reset " data-toggle="modal" data-target="#changeSettingsModal"  (click) = "getsetting()"  ><i class="fa fa-gear fa-fw fa-lg" aria-hidden="true"></i></button>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+</div>
+
+
+    
+  
+  <div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-add" role="tabpanel" aria-labelledby="pills-add-tab">
+      <br>
+      <form #save = "ngForm">
+        <div  id="add-sem-records" ngModelGroup="semtimetable">
+          <div class = "row">
+            <div class="col-9">
+              <div class="row">
+            <div class="col-6">
+              <h4>Add Faculty Time Table</h4>
+            </div>
+            <div class="col-3">
+              <div >
+                <label class="control-label" for="session"><strong>Session</strong></label>
+              </div>
+                 <div >
+              <select class="dropdown-primary form-control" required name="session" required ngModel>
+                <option value="" selected disabled>Select Session</option>
+                <option>
+                  {{toYear}} - {{currentYear}}
+                </option>
+                <option>
+                   {{currentYear}} - {{fromYear}}
+                </option>
+          
+              </select>
+              </div>
+            </div>
+            <div class="col-3">
+              <div >
+                <label class="control-label" for="withEffectFrom"><strong>W.e.f</strong></label>
+              </div>
+              <div>
+                <input class="form-control" type="date" name="withEffectFrom" ngModel required>
+              </div>
+    
+            </div>
+            </div>
+            </div>
+            <div class="col-3"></div>
+        
+          </div>
+    <div *ngIf="lectureInHr" class="row">
+      
+      
+      <div class="col-9">
+
+        <hr class="new1">
+      
+       
+        
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped">
+            <thead class="">
+              <tr>
+                <th scope="col">Timing</th>
+                <th scope="col">Monday</th>
+                <th scope="col">Tuesday</th>
+                <th scope="col">Wednesday</th>
+                <th scope="col">Thursday</th>
+                <th scope="col">Friday</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">10:00-11:00</th>
+                <td *ngFor="let list of valueslist | slice:0:5;">
+          
+                    <input  type="checkbox" value="{{list}}"  (change)="onCheckboxChange(list,$event)">
+                </td>
+
+               
+              </tr>
+              <tr>
+                <th scope="row">11:00-12:00</th>
+                <td *ngFor="let list of valueslist | slice:5:10;">
+          
+                  <input  type="checkbox" id = "checkbox" name = "checkbox" value="{{list}}"  (change)="onCheckboxChange(list,$event)">
+              </td>
+              </tr>
+              <tr>
+                <th scope="row">12:00-1:00</th>
+                <td *ngFor="let list of valueslist | slice:10:15;">
+          
+                  <input  type="checkbox" id = "checkbox" name = "checkbox"  value="{{list}}"  (change)="onCheckboxChange(list,$event)">
+              </td>
+              </tr>
+              <tr>
+                <th scope="row">1:00-2:00</th>
+                
+              </tr>
+              <tr>
+                <th scope="row">2:00-3:00</th>
+                <td *ngFor="let list of valueslist | slice:15:20;">
+          
+                  <input  type="checkbox" value="{{list}}" id = "checkbox" name = "checkbox"  (change)="onCheckboxChange(list,$event)">
+              </td>
+              </tr>
+              <tr>
+                <th scope="row">3:00-4:00</th>
+                <td *ngFor="let list of valueslist | slice:20:25;">
+          
+                  <input  type="checkbox" value="{{list}}" id = "checkbox" name = "checkbox" (change)="onCheckboxChange(list,$event)">
+              </td>
+              </tr>
+              <tr>
+                <th scope="row">4:00-5:00</th>
+                <td *ngFor="let list of valueslist | slice:25:30;">
+          
+                  <input  type="checkbox" value="{{list}}" id = "checkbox"name = "checkbox"  (change)="onCheckboxChange(list,$event)">
+              </td>
+              </tr>
+              <tr>
+                <th scope="row">5:00-6:00</th>
+                <td *ngFor="let list of valueslist | slice:30:35;">
+          
+                  <input  type="checkbox" value="{{list}}" id = "checkbox" name = "checkbox"  (change)="onCheckboxChange(list,$event)">
+              </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+        <div class="row">
+          <div class="col-8">
+
+          </div>
+         
+          <div class="col-2">
+              <button type="button" (click)="uncheckAll()" class="btn btn-basic">Uncheck All</button>
+         
+          </div>
+          <div class="col-2">
+            <button type="button" (click) = "onAdd()" class="btn btn-success">Save</button>
+          </div>
+          
+
+        </div>
+      </div>
+  
+      <div class="col-3">
+        <hr class="new1">
+       
+       
+        
+      
+        
+            <div >
+              <label class="control-label " for="facultyName"><strong>Faculty</strong></label>
+            </div>
+        
+         
+          <div >
+            <select class="dropdown-primary form-control" required name="facultyName" required ngModel>
+              <option value="" selected disabled>Select Faculty</option>
+              <option *ngFor="let f of fData" [value]="f.id">
+                {{f.name}}
+              </option>
+              
+             
+            </select>
+            </div>
+            <div >
+              <label class="control-label " for="course"><strong>Course</strong></label>
+            </div>
+      
+          <div >
+            <select class="dropdown-primary form-control" required name="course" (change)="onSelectCourse($event);getSubjectCode()" required ngModel>
+              <option value="" selected disabled>Select Course</option>
+              <option *ngFor="let c of course | slice: 0:2;" [value]="c">
+                {{c}}
+              </option>
+             
+            
+             
+            </select>
+            </div>
+            <div class = "row">
+            <div class = "col-6" >
+              <label class="control-label " for="year"><strong>Year</strong></label>
+            </div>
+            <div class = "col-6" >
+              <label class="control-label " for="sem"><strong>Semester</strong></label>
+            </div>
+            </div>
+
+        
+         <div class = "row">
+          <div class="col-6"  >
+            <select class="dropdown-primary form-control" required name="year"(change)="onSelectYear($event);getSubjectCode()" required ngModel>
+        
+              
+              <option *ngFor = "let y of yearList"  [value]="y">
+                {{y}}  </option>
+             
+            </select>
+            </div>
+            <div class="col-6" >
+              <select class="dropdown-primary form-control" required name="sem" (change)="onSelectSem($event);getSubjectCode()" required ngModel>
+         
+                <option> A </option>
+                <option> B  </option>
+                
+               
+              </select>
+              </div>
+         </div>
+
+            <div >
+              <label class="control-label " for="scode"><strong>Subject Code</strong></label>
+            </div>
+        
+         
+          <div >
+            <select class="dropdown-primary form-control" required name="scode" required ngModel>
+              <option value="" selected disabled>Select Subject</option>
+              <option *ngFor="let s of subCode" [value]="s">
+                {{s}}
+              </option>
+              
+             
+             
+            </select>
+            </div>
+         
+            <div >
+              <label class="control-label " for="ltype"><strong>Lecture Type</strong></label>
+            </div>
+        
+         
+          <div >
+            <select class="dropdown-primary form-control" required name="ltype" (change)="onSelectLectureType($event);getRoom()" required ngModel>
+              <option value="" selected disabled>Select Lecture Type</option>
+              <option> Theory  </option>
+              <option> Practical  </option>
+              
+             
+            </select>
+            </div>
+<div *ngIf="showBatch">
+            <div >
+              <label class="control-label " for="batch"><strong>Batch</strong></label>
+            </div>
+
+            <div class="row">
+            
+           
+              <div class="col-3" *ngFor="let list of batchList">
+                {{list}}   <input type="checkbox" class=" form-control" name="batch"  id = "batch" (change)="onBatchSelected(list,$event)" ngModel value="{{list}}"> 
+                 </div>
+              
+             
+            </div>
+</div>
+            <div >
+              <label class="control-label " for="roomNo"><strong>Room</strong></label>
+            </div>
+        
+         
+          <div >
+            <select class="dropdown-primary form-control" required name="roomNo" required ngModel>
+              <option value="" selected disabled>Select Room No.</option>
+              <option *ngFor="let i of infra" [value]="i.id">
+                {{i.name}}
+              </option>
+            </select>
+            </div>
+        
+
+
+      </div>
+
+
+
+
+    </div>
+    <div *ngIf="!lectureInHr" class="row">
+      
+      <div class="col-9">
+        <hr class="new1">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped">
+            <thead class="">
+              <tr>
+                <th scope="col">Timing</th>
+                <th scope="col">Monday</th>
+                <th scope="col">Tuesday</th>
+                <th scope="col">Wednesday</th>
+                <th scope="col">Thursday</th>
+                <th scope="col">Friday</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">10:00-10:50</th>
+                <td *ngFor="let list of valueslist | slice:0:5;">
+          
+                    <input  type="checkbox" value="{{list}}"  (change)="onCheckboxChange(list,$event)">
+                </td>
+
+             
+              </tr>
+              <tr>
+                <th scope="row">10:50-11:40</th>
+                <td *ngFor="let list of valueslist | slice:5:10;">
+          
+                  <input  type="checkbox" id = "checkbox" name = "checkbox" value="{{list}}"  (change)="onCheckboxChange(list,$event)">
+              </td>
+              </tr>
+              <tr>
+                <th scope="row">11:40-12:30</th>
+                <td *ngFor="let list of valueslist | slice:10:15;">
+          
+                  <input  type="checkbox" id = "checkbox" name = "checkbox"  value="{{list}}"  (change)="onCheckboxChange(list,$event)">
+              </td>
+              </tr>
+              <tr>
+                <th scope="row">12:30-1:20</th>
+                <td *ngFor="let list of valueslist | slice:15:20;">
+          
+                  <input  type="checkbox" id = "checkbox" name = "checkbox"  value="{{list}}"  (change)="onCheckboxChange(list,$event)">
+              </td>
+              </tr>
+              <tr>
+                <th scope="row">1:20-2:20</th>
+                
+              </tr>
+              <tr>
+                <th scope="row">2:20-3:10</th>
+                <td *ngFor="let list of valueslist | slice:20:25;">
+          
+                  <input  type="checkbox" value="{{list}}" id = "checkbox" name = "checkbox"  (change)="onCheckboxChange(list,$event)">
+              </td>
+              </tr>
+              <tr>
+                <th scope="row">3:10-4:00</th>
+                <td *ngFor="let list of valueslist | slice:25:30;">
+          
+                  <input  type="checkbox" value="{{list}}" id = "checkbox" name = "checkbox" (change)="onCheckboxChange(list,$event)">
+              </td>
+              </tr>
+              <tr>
+                <th scope="row">4:00-4:50</th>
+                <td *ngFor="let list of valueslist | slice:30:35;">
+          
+                  <input  type="checkbox" value="{{list}}" id = "checkbox"name = "checkbox"  (change)="onCheckboxChange(list,$event)">
+              </td>
+              </tr>
+              <tr>
+                <th scope="row">4:50-5:40</th>
+                <td *ngFor="let list of valueslist | slice:35:40;">
+          
+                  <input  type="checkbox" value="{{list}}" id = "checkbox" name = "checkbox"  (change)="onCheckboxChange(list,$event)">
+              </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+        <div class="row">
+          <div class="col-8">
+
+          </div>
+         
+          <div class="col-2">
+              <button type="button" (click)="uncheckAll()" class="btn btn-basic">Uncheck All</button>
+         
+          </div>
+          <div class="col-2">
+            <button type="button" (click) = "onAdd()" class="btn btn-success">Save</button>
+          </div>
+          
+
+        </div>
+      </div>
+  
+      <div class="col-3">
+        <hr class="new1">
+
+
+
+
+        <div class="row">
+          <div class="col-6">
+            <div >
+              <label class="control-label" for="session"><strong>Session</strong></label>
+            </div>
+               <div >
+            <select class="dropdown-primary form-control" required name="session" required ngModel>
+              <option value="" selected disabled>Select Session</option>
+              <option>
+                {{toYear}} - {{currentYear}}
+              </option>
+              <option>
+                 {{currentYear}} - {{fromYear}}
+              </option>
+              
+              
+             
+            </select>
+            </div>
+          </div>
+          <div class="col-6">
+            <div >
+              <label class="control-label" for="withEffectFrom"><strong>W.e.f</strong></label>
+            </div>
+            <div>
+              <input class="form-control" type="date" name="withEffectFrom" ngModel required>
+            </div>
+          </div>
+        </div>
+       
+         
+      
+        
+            <div >
+              <label class="control-label " for="facultyName"><strong>Faculty</strong></label>
+            </div>
+        
+         
+          <div >
+            <select class="dropdown-primary form-control" required name="facultyName" required ngModel>
+              <option value="" selected disabled>Select Faculty</option>
+              <option *ngFor="let f of fData" [value]="f.id">
+                {{f.name}}
+              </option>
+              
+             
+            </select>
+            </div>
+            <div >
+              <label class="control-label " for="course"><strong>Course</strong></label>
+            </div>
+      
+          <div >
+            <select class="dropdown-primary form-control" required name="course" (change)="onSelectCourse($event);getSubjectCode()" required ngModel>
+              <option value="" selected disabled>Select Course</option>
+              <option *ngFor="let c of course | slice: 0:2;" [value]="c">
+                {{c}}
+              </option>
+             
+            
+             
+            </select>
+            </div>
+            <div class = "row">
+            <div class = "col-6" >
+              <label class="control-label " for="year"><strong>Year</strong></label>
+            </div>
+            <div class = "col-6" >
+              <label class="control-label " for="sem"><strong>Semester</strong></label>
+            </div>
+            </div>
+
+        
+         <div class = "row">
+          <div class="col-6" >
+            <select class="dropdown-primary form-control" required name="year"(change)="onSelectYear($event);getSubjectCode()" required ngModel>
+        
+              
+              <option *ngFor = "let y of yearList"  [value]="y">
+                {{y}}  </option>
+             
+             
+            </select>
+            </div>
+            <div class="col-6" >
+              <select class="dropdown-primary form-control" required name="sem" (change)="onSelectSem($event);getSubjectCode()" required ngModel>
+         
+                <option> A </option>
+                <option> B  </option>
+                
+               
+              </select>
+              </div>
+         </div>
+
+            <div >
+              <label class="control-label " for="scode"><strong>Subject Code</strong></label>
+            </div>
+        
+         
+          <div >
+            <select class="dropdown-primary form-control" required name="scode" required ngModel>
+              <option value="" selected disabled>Select Subject</option>
+              <option *ngFor="let s of subCode" [value]="s">
+                {{s}}
+              </option>
+              
+             
+             
+            </select>
+            </div>
+         
+            <div >
+              <label class="control-label " for="ltype"><strong>Lecture Type</strong></label>
+            </div>
+        
+         
+          <div >
+            <select class="dropdown-primary form-control" required name="ltype" (change)="onSelectLectureType($event);getRoom()" required ngModel>
+              <option value="" selected disabled>Select Lecture Type</option>
+              <option> Theory  </option>
+              <option> Practical  </option>
+              
+             
+            </select>
+            </div>
+
+            <div *ngIf="showBatch">
+              <div >
+                <label class="control-label " for="batch"><strong>Batch</strong></label>
+              </div>
+  
+              <div class="row">
+              
+             
+                <div class="col-3" *ngFor="let list of batchList">
+               {{list}}   <input type="checkbox" class=" form-control" name="batch"  id ="batch" ngModel (change)="onBatchSelected(list,$event)" value="{{list}}"> 
+                </div>
+               
+              </div>
+  </div>
+
+            <div >
+              <label class="control-label " for="roomNo"><strong>Room</strong></label>
+            </div>
+        
+         
+          <div >
+            <select class="dropdown-primary form-control" required name="roomNo" required ngModel>
+              <option value="" selected disabled>Select Room No.</option>
+              <option *ngFor="let i of infra" [value]="i.id">
+                {{i.name}}
+              </option>
+            </select>
+            </div>
+          
+        
+        
+
+
+      </div>
+
+
+
+
+    </div>
+  </div>
+  </form>
+
+      </div>
+
+
+
+
+      <div class="tab-pane fade" id="pills-show" role="tabpanel" aria-labelledby="pills-show-tab">
+        <br>
+        <form #save = "ngForm">
+          <div  id="add-sem-records" ngModelGroup="semtimetable">
+            <div class = "row">
+              <div class="col-9">
+                <div class="row">
+              <div class="col-6">
+                <h4>Edit Faculty Time Table</h4>
+              </div>
+              <div class="col-3">
+                <div >
+                  <label class="control-label" for="session"><strong>Session</strong></label>
+                </div>
+                   <div >
+                <select class="dropdown-primary form-control" required name="session" (change)="onSelectSession($event)" required ngModel>
+                  <option value="" selected disabled>Select Session</option>
+                  <option>
+                    {{toYear}} - {{currentYear}}
+                  </option>
+                  <option>
+                     {{currentYear}} - {{fromYear}}
+                  </option>
+            
+                </select>
+                </div>
+              </div>
+              <div class="col-3">
+                <div >
+                  <label class="control-label" for="withEffectFrom"><strong>W.e.f</strong></label>
+                </div>
+                <div>
+                  <input class="form-control" type="date" name="withEffectFrom" ngModel required>
+                </div>
+      
+              </div>
+              </div>
+              </div>
+              <div class="col-3"></div>
+          
+            </div>
+      <div *ngIf="lectureInHr" class="row">
+        
+        <div class="col-9">
+          <hr class="new1">
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+              <thead class="">
+                <tr>
+                  <th scope="col">Timing</th>
+                  <th scope="col">Monday</th>
+                  <th scope="col">Tuesday</th>
+                  <th scope="col">Wednesday</th>
+                  <th scope="col">Thursday</th>
+                  <th scope="col">Friday</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">10:00-11:00</th>
+                  <td *ngFor="let list of valueslist | slice:0:5;">
+            
+                      <input   type="checkbox" value="{{list}}" id = "checkbox" name = "checkbox" (change)="onCheckboxChange(list,$event)">
+                  </td>
+  
+                 
+                </tr>
+                <tr>
+                  <th scope="row">11:00-12:00</th>
+                  <td *ngFor="let list of valueslist | slice:5:10;">
+            
+                    <input  type="checkbox" id = "checkbox" name = "checkbox" value="{{list}}"  (change)="onCheckboxChange(list,$event)">
+                </td>
+                </tr>
+                <tr>
+                  <th scope="row">12:00-1:00</th>
+                  <td *ngFor="let list of valueslist | slice:10:15; ">
+            
+                    <input   type="checkbox" id = "checkbox" name = "checkbox"  value="{{list}}"   (change)="onCheckboxChange(list,$event)">
+                </td>
+                </tr>
+                <tr>
+                  <th scope="row">1:00-2:00</th>
+                  
+                </tr>
+                <tr>
+                  <th scope="row">2:00-3:00</th>
+                  <td *ngFor="let list of valueslist | slice:15:20;">
+            
+                    <input  type="checkbox" value="{{list}}" id = "checkbox" name = "checkbox"  (change)="onCheckboxChange(list,$event)">
+                </td>
+                </tr>
+                <tr>
+                  <th scope="row">3:00-4:00</th>
+                  <td *ngFor="let list of valueslist | slice:20:25;">
+            
+                    <input  type="checkbox" value="{{list}}" id = "checkbox" name = "checkbox" (change)="onCheckboxChange(list,$event)">
+                </td>
+                </tr>
+                <tr>
+                  <th scope="row">4:00-5:00</th>
+                  <td *ngFor="let list of valueslist | slice:25:30;">
+            
+                    <input  type="checkbox" value="{{list}}" id = "checkbox"name = "checkbox"  (change)="onCheckboxChange(list,$event)">
+                </td>
+                </tr>
+                <tr>
+                  <th scope="row">5:00-6:00</th>
+                  <td *ngFor="let list of valueslist | slice:30:35;">
+            
+                    <input  type="checkbox" value="{{list}}" id = "checkbox" name = "checkbox"  (change)="onCheckboxChange(list,$event)">
+                </td>
+                </tr>
+              </tbody>
+            </table>
+  
+          </div>
+          <div class="row">
+            <div class="col-8">
+  
+            </div>
+           
+            <div class="col-2">
+                <button type="button" (click)="uncheckAll()" class="btn btn-basic">Uncheck All</button>
+           
+            </div>
+            <div class="col-2">
+              <button type="button" (click) = "onAdd()" class="btn btn-success">Save</button>
+            </div>
+            
+  
+          </div>
+        </div>
+    
+        <div class="col-3">
+          <hr class="new1">
+        
+         
+          
+        
+          
+              <div >
+                <label class="control-label " for="facultyName"><strong>Faculty</strong></label>
+              </div>
+          
+           
+            <div >
+              <select class="dropdown-primary form-control" required name="facultyName" (change)="onSelectFaculty($event);getScodeByFaculty()" required ngModel>
+                <option value="" selected disabled>Select Faculty</option>
+                <option *ngFor="let f of fData" [value]="f.id">
+                  {{f.name}}
+                </option>
+                
+               
+              </select>
+              </div>
+             
+              
+          
+          
+  
+              <div >
+                <label class="control-label " for="scode"><strong>Subject Code</strong></label>
+              </div>
+          
+           
+            <div >
+              <select class="dropdown-primary form-control" required name="scode" (change)="onSelectScode($event);getTimeTable()" required ngModel>
+                <option value="" selected disabled>Select Subject</option>
+                <option *ngFor="let s of subCode" [value]="s">
+                  {{s}}
+                </option>
+                
+               
+               
+              </select>
+              </div>
+           
+              <div >
+                <label class="control-label " for="ltype"><strong>Lecture Type</strong></label>
+              </div>
+          
+           
+            <div >
+              <select class="dropdown-primary form-control" required name="ltype" (change)="onSelectLectureType($event);getRoom()" required ngModel>
+                <option value="" selected disabled>Select Lecture Type</option>
+                <option> Theory  </option>
+                <option> Practical  </option>
+                
+               
+              </select>
+              </div>
+  <div *ngIf="showBatch">
+              <div >
+                <label class="control-label " for="batch"><strong>Batch</strong></label>
+              </div>
+  
+              <div class="row">
+              
+             
+                <div class="col-3" *ngFor="let list of batchList">
+                  {{list}}   <input type="checkbox" class=" form-control" name="batch"  id = "batch" (change)="onBatchSelected(list,$event)" ngModel value="{{list}}"> 
+                   </div>
+                
+               
+              </div>
+  </div>
+              <div >
+                <label class="control-label " for="roomNo"><strong>Room</strong></label>
+              </div>
+          
+           
+            <div >
+              <select class="dropdown-primary form-control" required name="roomNo" required ngModel>
+                <option value="" selected disabled>Select Room No.</option>
+                <option *ngFor="let i of infra" [value]="i.id">
+                  {{i.name}}
+                </option>
+              </select>
+              </div>
+          
+  
+  
+        </div>
+  
+  
+  
+  
+      </div>
+      <div *ngIf="!lectureInHr" class="row">
+        
+        <div class="col-9">
+          <hr class="new1">
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+              <thead class="">
+                <tr>
+                  <th scope="col">Timing</th>
+                  <th scope="col">Monday</th>
+                  <th scope="col">Tuesday</th>
+                  <th scope="col">Wednesday</th>
+                  <th scope="col">Thursday</th>
+                  <th scope="col">Friday</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">10:00-10:50</th>
+                  <td *ngFor="let list of valueslist | slice:0:5;">
+            
+                      <input  type="checkbox" value="{{list}}"  (change)="onCheckboxChange(list,$event)">
+                  </td>
+  
+               
+                </tr>
+                <tr>
+                  <th scope="row">10:50-11:40</th>
+                  <td *ngFor="let list of valueslist | slice:5:10;">
+            
+                    <input  type="checkbox" id = "checkbox" name = "checkbox" value="{{list}}"  (change)="onCheckboxChange(list,$event)">
+                </td>
+                </tr>
+                <tr>
+                  <th scope="row">11:40-12:30</th>
+                  <td *ngFor="let list of valueslist | slice:10:15;">
+            
+                    <input  type="checkbox" id = "checkbox" name = "checkbox"  value="{{list}}"  (change)="onCheckboxChange(list,$event)">
+                </td>
+                </tr>
+                <tr>
+                  <th scope="row">12:30-1:20</th>
+                  <td *ngFor="let list of valueslist | slice:15:20;">
+            
+                    <input  type="checkbox" id = "checkbox" name = "checkbox"  value="{{list}}"  (change)="onCheckboxChange(list,$event)">
+                </td>
+                </tr>
+                <tr>
+                  <th scope="row">1:20-2:20</th>
+                  
+                </tr>
+                <tr>
+                  <th scope="row">2:20-3:10</th>
+                  <td *ngFor="let list of valueslist | slice:20:25;">
+            
+                    <input  type="checkbox" value="{{list}}" id = "checkbox" name = "checkbox"  (change)="onCheckboxChange(list,$event)">
+                </td>
+                </tr>
+                <tr>
+                  <th scope="row">3:10-4:00</th>
+                  <td *ngFor="let list of valueslist | slice:25:30;">
+            
+                    <input  type="checkbox" value="{{list}}" id = "checkbox" name = "checkbox" (change)="onCheckboxChange(list,$event)">
+                </td>
+                </tr>
+                <tr>
+                  <th scope="row">4:00-4:50</th>
+                  <td *ngFor="let list of valueslist | slice:30:35;">
+            
+                    <input  type="checkbox" value="{{list}}" id = "checkbox"name = "checkbox"  (change)="onCheckboxChange(list,$event)">
+                </td>
+                </tr>
+                <tr>
+                  <th scope="row">4:50-5:40</th>
+                  <td *ngFor="let list of valueslist | slice:35:40;">
+            
+                    <input  type="checkbox" value="{{list}}" id = "checkbox" name = "checkbox"  (change)="onCheckboxChange(list,$event)">
+                </td>
+                </tr>
+              </tbody>
+            </table>
+  
+          </div>
+          <div class="row">
+            <div class="col-8">
+  
+            </div>
+           
+            <div class="col-2">
+                <button type="button" (click)="uncheckAll()" class="btn btn-basic">Uncheck All</button>
+           
+            </div>
+            <div class="col-2">
+              <button type="button" (click) = "onAdd()" class="btn btn-success">Save</button>
+            </div>
+            
+  
+          </div>
+        </div>
+    
+        <div class="col-3">
+          <hr class="new1">
+  
+  
+  
+  
+          <div class="row">
+            <div class="col-6">
+              <div >
+                <label class="control-label" for="session"><strong>Session</strong></label>
+              </div>
+                 <div >
+              <select class="dropdown-primary form-control" required name="session" required ngModel>
+                <option value="" selected disabled>Select Session</option>
+                <option>
+                  {{toYear}} - {{currentYear}}
+                </option>
+                <option>
+                   {{currentYear}} - {{fromYear}}
+                </option>
+                
+                
+               
+              </select>
+              </div>
+            </div>
+            <div class="col-6">
+              <div >
+                <label class="control-label" for="withEffectFrom"><strong>W.e.f</strong></label>
+              </div>
+              <div>
+                <input class="form-control" type="date" name="withEffectFrom" ngModel required>
+              </div>
+            </div>
+          </div>
+         
+           
+        
+          
+              <div >
+                <label class="control-label " for="facultyName"><strong>Faculty</strong></label>
+              </div>
+          
+           
+            <div >
+              <select class="dropdown-primary form-control" required name="facultyName" required ngModel>
+                <option value="" selected disabled>Select Faculty</option>
+                <option *ngFor="let f of fData" [value]="f.id">
+                  {{f.name}}
+                </option>
+                
+               
+              </select>
+              </div>
+             
+          
+          
+              <div >
+                <label class="control-label " for="scode"><strong>Subject Code</strong></label>
+              </div>
+          
+           
+            <div >
+              <select class="dropdown-primary form-control" required name="scode" required ngModel>
+                <option value="" selected disabled>Select Subject</option>
+                <option *ngFor="let s of subCode" [value]="s">
+                  {{s}}
+                </option>
+                
+               
+               
+              </select>
+              </div>
+           
+              <div >
+                <label class="control-label " for="ltype"><strong>Lecture Type</strong></label>
+              </div>
+          
+           
+            <div >
+              <select class="dropdown-primary form-control" required name="ltype" (change)="onSelectLectureType($event);getRoom()" required ngModel>
+                <option value="" selected disabled>Select Lecture Type</option>
+                <option> Theory  </option>
+                <option> Practical  </option>
+                
+               
+              </select>
+              </div>
+  
+              <div *ngIf="showBatch">
+                <div >
+                  <label class="control-label " for="batch"><strong>Batch</strong></label>
+                </div>
+    
+                <div class="row">
+                
+               
+                  <div class="col-3" *ngFor="let list of batchList">
+                 {{list}}   <input type="checkbox" class=" form-control" name="batch"  id ="batch" ngModel (change)="onBatchSelected(list,$event)" value="{{list}}"> 
+                  </div>
+                 
+                </div>
+    </div>
+  
+              <div >
+                <label class="control-label " for="roomNo"><strong>Room</strong></label>
+              </div>
+          
+           
+            <div >
+              <select class="dropdown-primary form-control" required name="roomNo" required ngModel>
+                <option value="" selected disabled>Select Room No.</option>
+                <option *ngFor="let i of infra" [value]="i.id">
+                  {{i.name}}
+                </option>
+              </select>
+              </div>
+            
+          
+          
+  
+  
+        </div>
+  
+  
+  
+  
+      </div>
+    </div>
+    </form>
+      
+   
+      </div>
+
+  </div>
+
+
+
+         <div class="modal fade" id="changeSettingsModal" tabindex="-1" role="dialog" aria-labelledby="changeSettiingsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="changeSettiingsModalLabel">Update Settings</h5>
+              <button type="button" (click)="ngOnInit()" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body"> 
+               <!-- <div *ngIf="settingsChanged" class="alert alert-success" role="alert">
+                  Library Instruction Updated Successfully..!!
+              </div>  -->
+                <div>
+                <form #s = "ngForm" >
+      
+                  <div id="update-settings" ngModelGroup="timetableSettings">
+                      <div class="form-row">
+                          <div class="col-4">
+                              <label for="lectureLength">Lecture Length</label>
+                              <select class="dropdown-primary form-control" required name="lectureLength" [ngModel]="semsettings?.lectureLength">
+                                <option value="" selected disabled>In Minutes</option>
+                                <option> 50  </option>
+                                <option> 60  </option>
+                                
+                               
+                              </select>
+                          </div> 
+                      
+                          <div class="col-4">
+                              <label for="lunchTime">Lunch Time</label>
+                           <input type="time"  required id="lunchStartTime" class="form-control" name="lunchTime" [ngModel]="semsettings?.lunchStartTime"> to 
+                           <input type="time"  required id="lunchEndTime" class="form-control" name="lunchEndTime" [ngModel]="semsettings?.lunchEndTime"> 
+                          </div> 
+                          <div class="col-1">
+                              <input type="hidden" class="form-control" id="id" name="id" [ngModel]="semsettings?.id" >
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-row">
+                          <div class="col-3">
+      
+                          </div>
+                          <div class="col-3">
+                              <button type="submit" (click)="ngOnInit()"  class="btn btn-danger btnWidth" data-dismiss="modal">Cancel</button>
+                          </div>
+                            <div class="col-3">
+                                <button type="submit"  class="btn btn-primary btnWidth" (click) = "saveSetting();ngOnInit()"  [disabled]="!s.valid">Change Settings</button>
+                            </div>  
+                            <div class="col-3">
+                              </div>
+                        </div>
+                  </div>
+                  <br/>
+                </form>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>  

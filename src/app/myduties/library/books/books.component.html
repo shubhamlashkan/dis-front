@@ -1,229 +1,652 @@
-<div class="d-flex justify-content-between">
-    <button class="btn btn-success" data-toggle="modal" data-target="#booksAddModal"  ><i class="fa fa-plus-circle fa-fw fa-lg" aria-hidden="true"></i>Add Book</button>
-    <button class="btn btn-success" data-toggle="modal" data-target="#booksIssueModal" (click)="initForm()" ><i class="fa fa-minus-circle fa-fw fa-lg" aria-hidden="true"></i>Issue Book</button>
-    <button class="btn btn-success" data-toggle="modal" data-target="#booksReturnModal" (click)="initForm()" ><i class="fa fa-plus-circle fa-fw fa-lg" aria-hidden="true"></i>Return Book</button>
+<div class="row">
+  <div class="col-lg-3"></div>
+  <div class="col-lg-3">
+    <select (change)="onSelect($event)"  class="mdb-select md-form colorful-select dropdown-primary" style="float: right">
+      <option selected value="1">Id</option>
+      <option value="2">Title</option>
+      <option value="3">Author</option>
+    </select>
+    <br/>
   </div>
-<br/>
-  <table class="table table-striped">
+  
+    <div class="col-lg-6">
+      <ul class="searchbox float-right">
+        <li class="">
+          <input class="form-control mr-sm-2 searchbox-width" type="search" placeholder="Search" aria-label="Search" name="searchValue" (keyup)="findBy($event.target.value)">
+          <i class="fa fa-search" style="position:absolute;top:11px;"  aria-hidden="true"></i>
+        </li>
+      </ul>
+    </div>
+</div>
+<br>
+<div *ngIf = "showError"  class="alert alert-danger" role="alert">
+    {{errorMsg}}
+  </div>
+<br>
+<br>
+<div class="form-row">
+  <div class="col-3">
+      <button class="btn btn-success " (click)="ngOnInit()" data-toggle="modal" data-target="#booksAddModal"><i
+        class="fa fa-plus-circle fa-fw fa-lg" aria-hidden="true"></i>Add Book</button>
+  </div>
+  <div class="col-3">
+      <button class="btn btn-success " data-toggle="modal" data-target="#booksReturnModal"><i
+        class="fa fa-plus-circle fa-fw fa-lg" aria-hidden="true"></i>Return Book</button>  
+  </div>
+  <div class="col-3">
 
-      <tr>
-        
-          <th class="col-lg-1" >S. No.</th>
-          <th class="col-lg-2">Book no</th>
-      
-          <th class="col-lg-4">Title</th>
-      
-          <th class="col-lg-2">Author </th>
-      
-          <th class="col-lg-1"> </th>
-          <th class="col-lg-2"></th>
-      </tr>     
-      <tr>
-        <td >1</td>
-        <td>121</td>
-        <td>Principles of Operating System </td>
-        <td>Galvin</td>
-        <td><button class="btn btn-primary">Edit</button></td>
-        <td><button class="btn btn-danger">Remove</button></td>
-      </tr>                       
-      <tr>
-        <td >1</td>
-        <td>121</td>
-        <td>Principles of Operating System </td>
-        <td>Galvin</td>
-        <td><button class="btn btn-primary">Edit</button> </td>
-        <td><button class="btn btn-danger">Remove</button></td>
+  </div>
+ <div class="col-3">
 
-      </tr>                       
-     </table>
+ </div>
+  
+  </div>
+<br>
+<div *ngIf="!showSearchedRecord" class="ScrollStyle">
+  <table  class="table table-striped">
+
+    <tr>
+
+      <th>S. No.</th>
+      <th>Title</th>
+
+      <th>Author</th>
+
+      <th>Edition </th>
+
+      <th> </th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let book of books; let i = index">
+      <td>{{i+1}}</td>
+      <td>{{book.title}}</td> 
+      <td>{{book.authorName}} </td>
+      <td>{{book.edition}}</td>
+      <td>
+        <div *ngIf="book.status=='Available'; then update else notupdate"></div>
+        <ng-template #update>
+          <button class="btn btn-primary" (click)="getBookByBookId(book.bookId)" data-toggle="modal"
+            data-target="#booksEditModal">Edit</button>
+        </ng-template>
+        <ng-template #notupdate>
+          <button class="btn btn-primary" (click)="getBookByBookId(book.bookId)" disabled data-toggle="modal"
+            data-target="#booksEditModal">Edit</button>
+        </ng-template>
+      </td>
+      <td>
+        <div *ngIf="book.status=='Available'; then remove else notremove"></div>
+        <ng-template #remove>
+          <button class="btn btn-danger" (click)="getBookByBookId(book.bookId)" data-toggle="modal"
+            data-target="#booksRemoveModal">Remove</button>
+        </ng-template>
+        <ng-template #notremove>
+          <button class="btn btn-danger" (click)="getBookByBookId(book.bookId)" disabled data-toggle="modal"
+            data-target="#booksRemoveModal">Remove</button>
+        </ng-template>
+      </td>
+      <td>
+        <div *ngIf="book.status=='Available'; then issue else notissue"></div>
+        <ng-template #issue>
+          <button class="btn btn-success" (click)="retrieveLibrarySettings(); getBookByBookId(book.bookId) "
+            data-toggle="modal" data-target="#booksIssueModal"><i class="fa fa-minus-circle fa-fw fa-lg"
+              aria-hidden="true"></i>Issue Book</button>
+        </ng-template>
+        <ng-template #notissue>
+          <button class = "btn btn-reset" (click)="getThesisByThesisId(thesises.thesisId)" disabled data-toggle="modal" data-target="#thesisEditModal">Not Available</button>
+        </ng-template>
+      </td>
+    </tr>
+  </table>
+  
+</div>
+
+  <div *ngIf="showSearchedRecord" class="ScrollStyle">
+    <table  class="table table-striped">
+
+      <tr >
+        <th >S. No.</th>
+        <th>Title</th>
+
+        <th>Author</th>
+
+        <th>Edition </th>
+
+        <th> </th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr  *ngFor="let searchedBook of searchedBooks; let i = index">
+          <td>{{i+1}}</td>
+        <td>{{searchedBook.title}}</td>
+        <td>{{searchedBook.authorName}} </td>
+        <td>{{searchedBook.edition}}</td>
+        <td>
+          <div *ngIf="searchedBook.status=='Available'; then update else notupdate"></div>
+          <ng-template #update>
+            <button class="btn btn-primary" (click)="getBookByBookId(searchedBook.bookId)" data-toggle="modal"
+              data-target="#booksEditModal">Edit</button>
+          </ng-template>
+          <ng-template #notupdate>
+            <button class="btn btn-primary" (click)="getBookByBookId(searchedBook.bookId)" disabled data-toggle="modal"
+              data-target="#booksEditModal">Edit</button>
+          </ng-template>
+        </td>
+        <td>
+          <div *ngIf="searchedBook.status=='Available'; then remove else notremove"></div>
+          <ng-template #remove>
+            <button class="btn btn-danger" (click)="getBookByBookId(searchedBook.bookId)" data-toggle="modal"
+              data-target="#booksRemoveModal">Remove</button>
+          </ng-template>
+          <ng-template #notremove>
+            <button class="btn btn-danger" (click)="getBookByBookId(searchedBook.bookId)" disabled data-toggle="modal"
+              data-target="#booksRemoveModal">Remove</button>
+          </ng-template>
+        </td>
+        <td>
+          <div *ngIf="searchedBook.status=='Available'; then issue else notissue"></div>
+          <ng-template #issue>
+            <button class="btn btn-success" (click)="retrieveLibrarySettings(); getBookByBookId(searchedBook.bookId) "
+              data-toggle="modal" data-target="#booksIssueModal"><i class="fa fa-minus-circle fa-fw fa-lg"
+                aria-hidden="true"></i>Issue Book</button>
+          </ng-template>
+          <ng-template #notissue>
+            <button class = "btn btn-reset" (click)="getThesisByThesisId(thesises.thesisId)" disabled data-toggle="modal" data-target="#thesisEditModal">Not Available</button>
+            </ng-template>
+        </td>
+      </tr>
+    </table>
+
+  </div>
 
 
-  <div class="modal fade" id="booksAddModal" tabindex="-1" role="dialog" aria-labelledby="booksAddModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="booksAddModalLabel">Add Book</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-              <div id="add-book-records" ngModelGroup="addBookData">
-                <div class="form-row">
-                  <div class="col-4">
-                    <label for="isbnNo">ISBN no.</label>
-                    <input type="text" id="isbnNo" class="form-control" name="isbnNo" ngModel>
-                  </div> 
-                  <div class="col-4">
-                    <label for="authorName">Author Name</label>
-                    <input type="text" id="authorName" class="form-control" name="authorName" ngModel>
-                  </div>
-                  <div class="col-4">
-                    <label for="title">Title<span class="mandatory">*</span></label>
-                    <input type="text" id="title" required class="form-control" name="title" ngModel>
-                  </div>
-                </div><br/>
-                <div class="form-row">
-                  <div class="col-4">
-                    <label for="publisher">Publisher</label>
-                    <input type="text" id="publisher" class="form-control" name="publisher" ngModel>
-                  </div>
-                  <div class="col-4">
-                    <label for="edition">Edition</label>
-                    <input type="text" id="edition" class="form-control" name="edition" ngModel>
-                  </div>
-                  <div class="col-4">
-                    <label for="publicationYear">Publication Year</label>
-                    <input type="text" id="publicationYear" class="form-control" name="publicationYear" ngModel>
-                  </div>
-                </div><br/>
-                <div class="form-row">
-                    <div class="col-4">
-                        <label for="price">Price</label>
-                        <input type="text" id="price" class="form-control" name="price" ngModel>
-                      </div>
-                  
-                  <div class="col-4">
-                    <label for="noOfPages">no. of Pages</label>
-                    <input type="text" id="noOfPages" class="form-control" name="noOfPages" ngModel>
-                  </div>
-                  <div class="col-4">
-                    <br>
-                      <select class="dropdown-primary" name="subjectCategory" required ngModel >
-                        <option  value="" disabled selected>Subject Category</option>
-                        <option  value="1">OS</option>
-                        <option  value="2">TOC</option>
-                        <option  value="3">URF</option>
-                      </select>
-                    </div>
-                    
-                </div><br/>
-                <div class="form-row">
-                    <div class="col-4">
-                        <label for="purchasedOn">Date of Purchase</label>
-                        <input type="date" id="purchasedOn" class="form-control" name="purchasedOn" ngModel>
-                      </div>
-                      <div class="col-8">
-                          <label for="remarks">Remarks</label>
-                          <textarea class="form-control" id="remarks" name="remarks" ngModel></textarea>
-                      </div>
-                </div>
-             
-                <div  class="d-flex justify-content-center mt-3">
-    
-                  <button type="submit" class="btn btn-primary btnWidth" [disabled]="!f.valid" >Add</button>
-                  
-                </div>
-     
-              </div>
-          </form>
-        </div>
-        
+<div class="modal fade" id="booksAddModal" tabindex="-1" role="dialog" aria-labelledby="booksAddModalLabel"aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="booksAddModalLabel">Add Book</h5>
+        <button type="button" (click)="ngOnInit()" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <div class="modal-body">
+        <div *ngIf="showId" class="alert alert-success" role="alert">
+          {{data}}
+        </div>
+      
+        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+          <div *ngIf="!showId" id="add-book-records" ngModelGroup="addBookData">
+            <div class="form-row">
+              <div class="col-4">
+                <label for="isbnNo">ISBN no.</label>
+                <input type="text" id="isbnNo" class="form-control" name="isbnNo" ngModel>
+              </div>
+              <div class="col-4">
+                 <label for="authorName">Author Name</label>
+                <input type="text" id="authorName" class="form-control" name="authorName" ngModel>
+              </div>
+              <div class="col-4">
+                <label for="title">Title<span class="mandatory">*</span></label>
+                <input type="text" id="title" required class="form-control" name="title" ngModel>
+              </div>
+            </div><br />
+            <div class="form-row">
+              <div class="col-4">
+                <label for="publisher">Publisher</label>
+                <input type="text" id="publisher" class="form-control" name="publisher" ngModel>
+              </div>
+              <div class="col-4">
+                <label for="edition">Edition</label>
+                <input type="text" id="edition" class="form-control" name="edition" ngModel>
+              </div>
+              <div class="col-4">
+                <label for="publicationYear">Publication Year</label>
+                <input type="number" id="publicationYear" class="form-control" name="publicationYear" ngModel>
+              </div>
+            </div><br />
+            <div class="form-row">
+              <div class="col-4">
+                <label for="price">Price</label>
+                <input type="number"  min="1" id="price" class="form-control" name="price" ngModel>
+              </div>
+
+              <div class="col-4">
+                <label for="noOfPages">no. of Pages</label>
+                <input type="number"  min="1" id="noOfPages" class="form-control" name="noOfPages" ngModel>
+              </div>
+              <div class="col-4">
+                <label >Subject Category</label>
+                <select class="dropdown-primary form-control" name="subjectCategory" required ngModel >
+                  <option value="" selected disabled>Subject Category</option>
+                  <option *ngFor="let sub of subject" [value]="sub">
+                    {{sub}}
+                  </option>
+                </select>
+              </div>
+
+            </div><br />
+            <div class="form-row">
+              <div class="col-4">
+           <label for ="purchasedOn"> Date of Purchase</label>
+                <input type="date" id="purchasedOn" class="form-control" name="purchasedOn" ngModel>
+              </div>
+              <div class="col-4">
+                <label for="remarks">Remarks</label>
+                <textarea class="form-control" id="remarks" name="remarks" ngModel></textarea>
+              </div>
+    
+            </div>
+
+            <div class="form-row">
+              <div class="col-3">
+
+              </div>
+              <div class="col-3">
+                <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth"
+                data-dismiss="modal">Cancel</button>
+              </div>
+              <div class="col-3">
+                <button type="submit" class="btn btn-primary btnWidth" [disabled]="!f.valid">Add</button>
+              </div>
+              <div class="col-3">
+
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+
     </div>
   </div>
-  
+</div>
 
-  <div class="modal fade" id="booksIssueModal" tabindex="-1" role="dialog" aria-labelledby="booksIssueModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="booksIssueModalLabel">Issue Book</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form  >
-            <div class="form-row">
-              <div class="col-4">
-                
-                <input type="text" required placeholder="Enter Enrollment No. or Faculty Name" class="form-control" name="enrollmentno" ngModel>
-              </div> 
-              
-              <div class="col-">
-                  <button type="submit" class="btn btn-success btnWidth" >Check Limit</button>
 
+<div class="modal fade" id="booksIssueModal" tabindex="-1" role="dialog" aria-labelledby="booksIssueModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="booksIssueModalLabel">Issue Book</h5>
+        <button type="button" (click)="ngOnInit()" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div *ngIf="bookIssued" class="alert alert-success" role="alert">
+              {{issueRes}}
+            </div>
+            <div *ngIf=!bookIssued>
+                <div >
+                    <h3>Library Instruction</h3>
+                    <ol type="1" *ngFor="let setting of setting">
+                      <li>
+                        Max no. of Books to be issued: {{setting.noOfBooksAllowed}}
+                      </li>
+                      <li>
+                        Penalty per day: {{setting.penaltyPerDay}}
+                      </li>
+                      <li>
+                        Return after: {{setting.returnDeadlineDays}}
+                      </li>
+                    </ol>
+                  </div>
+                  <form (ngSubmit)="checkLimit(i)" #i="ngForm">
+                    <div  id="check-limit" ngModelGroup="checkLimitData">
+                      <div class="form-row">
+                        <div class="col-4">
+                          <div *ngFor="let setting of setting">
+                            <input type="hidden" name="booksAllowed" [(ngModel)]="setting.noOfBooksAllowed">
+                          </div>
+                          <input type="text" required placeholder="Enter Enrollment No. or Faculty Name" class="form-control"
+                            name="enrollment" ngModel>
+                        </div>
+          
+                        <div class="col-">
+                          <button type="submit" data-target="show" [disabled]="!i.valid" class="btn btn-primary btnWidth">Check Limit</button>
+                        </div>
+                      </div><br />
+                    </div>
+                  </form>
+                  <div *ngIf = "showError"  class="alert alert-danger" role="alert">
+                      {{errorMsg}}
+                    </div>
+                  <div id="#show" *ngIf="allowIssueRequest ; then process "></div>
+                  <ng-template #process>
+                    <form (ngSubmit)="issueBook(j)" #j="ngForm">
+                      <div id="issue-book" ngModelGroup="issueBookData">
+                        <div *ngFor="let book of bookById">
+                          <div class="form-row">
+          
+                            <div class="col-4">
+                              <label for="title">Title<span class="mandatory">*</span></label>
+                              <input type="text" disabled id="title" required class="form-control" name="title" [(ngModel)]="book.title">
+                            </div>
+                            <div class="col-4">
+                              <label for="authorName">Author Name</label>
+                              <input type="text" disabled id="authorName" class="form-control" name="authorName"
+                                [(ngModel)]="book.authorName">
+                            </div>
+                            <div class="col-4">
+                              <label for="edition">Edition</label>
+                              <input type="text" disabled id="edition" class="form-control" name="edition"
+                                [(ngModel)]="book.edition">
+                            </div>
+                          </div>
+                          <br>
+                          <div class="form-row">
+                            <div class="col-4">
+                              <label for="enrollment"> Issue To: </label>
+                            </div>
+                            <div class="col-4">
+                              <input type="text" disabled id="enrollment" name="enrollment" [(ngModel)]="issueto">
+                            </div>
+                            <div class="col-4">
+          
+                            </div>
+                          </div>
+                          <br>
+                          <div class="form-row">
+          
+                            <div class="col-3">
+                          <button  class="btn btn-success btnWidth">Issue</button>
+                            </div>
+                            <div class="col-3">
+                                <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth"
+                                  data-dismiss="modal">Cancel</button>
+                              </div>
+                              <div>
+                              <input type="hidden" name="bookId" id="bookId" [(ngModel)]="book.bookId"></div>
+                              <div class="col-3"></div>
+          
+                           </div>
+          
+                        </div>
+                      </div>
+                    </form>
+                  </ng-template>
+            </div>
+        
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="booksReturnModal" tabindex="-1" role="dialog" aria-labelledby="booksReturnModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="booksReturnModalLabel">Return Book</h5>
+        <button type="button" class="close" (click)="ngOnInit()" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         
+    
+          <form (ngSubmit)="getPenalty(k)" #k="ngForm">
+            <div id="check-penalty" ngModelGroup="checkPenaltyData">
+              <div class="form-row"> <br />
+                <div class="col-4">
+                  <input type="text" required class="form-control" placeholder="Enter Book Number" name="bookId" ngModel>
+                </div>
+                <div class="col-4">
+                  <button type="submit" data-target="#showPenalty" [disabled]="!k.valid" class="btn btn-success btnWidth">Show Details</button>
+                </div>
               </div>
-              
-              
-  
-            </div><br/>
-            <div class="form-row">
-              <div class="col-4">
-                <label>Title</label>
-                <input type="text" class="form-control" name="title" ngModel>
-              </div>
-              <div class="col-4">
-                <label>Edition</label>
-                <input type="text" class="form-control" name="edition" ngModel>
-              </div>
-              <div class="col-4">
-                <label>Author Name</label>
-                <input type="text" class="form-control" name="authorName" ngModel>
-              </div>
-            </div><br/>
-            <div class="d-flex justify-content-center mt-3">
-             
-              <button type="submit" class="btn btn-success btnWidth" >Issue</button>
             </div>
           </form>
+          <br>
+          <div *ngIf = "showError"  class="alert alert-danger" role="alert">
+              {{errorMsg}}
+            </div>
+          <br>
+         <div *ngIf="showPenalty">
+         <form>
+           <div class="form-row">
+             <div class="col-3">
+                Issued To: {{penaltyRes.username}}
+             </div>
+             <div class="col-3">
+                Penalty: {{penaltyRes.penalty}} Rs.
+             </div>
+             <div class="col-6" *ngIf="!returnSuccess">
+                <div class="col-6">
+                    <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth"
+                              data-dismiss="modal">Cancel</button>
+                 </div>
+                 <br>
+                <div class="col-6">
+                    <button type="submit" (click)="returnBook()"  class="btn btn-primary btnWidth"
+                    >Return Book</button>
+                </div>
+     
+             </div>
+            </div>
+          </form>
+          <br>
+          <div *ngIf="returnSuccess" class="alert alert-success" role="alert">
+              "Book Returned Successfully Please Collect above mentioned penalty"
+            </div>
         </div>
-        
-      </div>
+    </div>
+
     </div>
   </div>
+</div>
 
 
-  <div class="modal fade" id="booksReturnModal" tabindex="-1" role="dialog" aria-labelledby="booksReturnModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="booksReturnModalLabel">Return Book</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-             <form  >
-                <div class="form-row"> <br/>
-                    <div class="col-4">
-                      <input type="text" class="form-control" placeholder="Enter Book Number" name="bookNo" ngModel>
-                    </div> 
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-success btnWidth" >Show Details</button>
-                    </div>
-                </div>
-              <div class="container">
-                  <table class="table table-striped">
 
-                      <tr>
-                        
-                          <th >S. No.</th>
-                      
-                          <th >Title</th>
-                      
-                          <th >Author </th>
-                      
-                          <th >Penalty</th>
-                      
-                          <th ></th>
-                      </tr>     
-                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                      </tr>                       
-                     </table>
-              </div>
-    
-                                      
-            </form>
-          </div>
-          
-        </div>
+
+
+
+
+<div class="modal fade" id="booksEditModal" tabindex="-1" role="dialog" aria-labelledby="booksEditModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="booksEditModalLabel">Update Book Info</h5>
+        <button type="button" (click)="ngOnInit()" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <div class="modal-body">
+          <div *ngIf="onSuccessfulUpdate" class="alert alert-success" role="alert">
+              {{msg}}
+            </div>
+        <form (ngSubmit)="update(g)" #g="ngForm">
+          <div *ngIf="!onSuccessfulUpdate"  id="update-books" ngModelGroup="updateBookData">
+            <div *ngFor="let book of bookById">
+              <div class="form-row">
+                <div class="col-4">
+                  <label for="isbnNo">ISBN no.</label>
+                  <input type="text" id="isbnNo" class="form-control" name="isbnNo" [(ngModel)]="book.isbn">
+                </div>
+                <div class="col-4">
+                  <label for="authorName">Author Name</label>
+                  <input type="text" id="authorName" class="form-control" name="authorName"
+                    [(ngModel)]="book.authorName">
+                </div>
+                <div class="col-4">
+                  <label for="title">Title<span class="mandatory">*</span></label>
+                  <input type="text" id="title" required class="form-control" name="title" [(ngModel)]="book.title">
+                </div>
+              </div>
+              <br>
+              <div class="form-row">
+                <div class="col-4">
+                  <label for="publisher">Publisher</label>
+                  <input type="text" id="publisher" class ="form-control" name = "publisher" [(ngModel)] = "book.publisher"></div>
+                <div class="col-4">
+                  <label for="edition">Edition</label>
+                  <input type="text" id="edition" class="form-control" name="edition" [(ngModel)]="book.edition">
+                </div>
+                <div class="col-4">
+                  <label for="publicationYear">Publication Year</label>
+                  <input type="number"  min="1" id="publicationYear" class="form-control" name="publicationYear"
+                    [(ngModel)]="book.yearOfPublication">
+                </div>
+              </div><br />
+              <div class="form-row">
+                <div class="col-4">
+                  <label for="price">Price</label>
+                  <input type="number"  min="1" id="price" class="form-control" name="price" [(ngModel)]="book.price">
+                </div>
+
+                <div class="col-4">
+                  <label for="noOfPages">no. of Pages</label>
+                  <input type="number"  min="1" id="noOfPages" class="form-control" name="noOfPages" [(ngModel)]="book.noOfPages">
+                </div>
+                <div class="col-4">
+                  <label for="purchasedOn">Date of Purchase</label>
+                  <input type="date" id="purchasedOn" class="form-control" name="purchasedOn"
+                    [(ngModel)]="book.purchaseDate">
+                </div>
+
+              </div><br />
+              <div class="form-row">
+                <div class="col-12">
+                  <label for="remarks">Remarks</label>
+                  <textarea class="form-control" id="remarks" name="remarks" [(ngModel)]="book.remarks"></textarea>
+                </div>
+              </div>
+              <br>
+              <div class="form-row">
+                <div class="col-3">
+                  <input type="hidden" name="bookId" id="bookId" [(ngModel)]="book.bookId">
+                </div>
+
+                <div class="col-3">
+                  <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth"
+                    data-dismiss="modal">Cancel</button>
+                </div>
+                <div class="col-3">
+                  <button type="submit" (click)="onUpdateButtonClick()"  [disabled]="!g.valid" class="btn btn-primary btnWidth">Update
+                  </button>
+                </div>
+                <div class="col-3">
+                  <input type="hidden" name="subjectCategory" id="subjectCategory" [(ngModel)]="book.subjectCategory">
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
     </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="modal fade" id="booksRemoveModal" tabindex="-1" role="dialog" aria-labelledby="booksRemoveModalLabel"aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="booksRemoveModalLabel">Remove Book</h5>
+        <button type="button" (click)="ngOnInit()" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="removeButton" class="alert alert-success" role="alert">
+          {{removeRes}}
+        </div>
+        <form (ngSubmit)="remove(h)" #h="ngForm">
+          <div *ngIf="!removeButton" id="remove-books" ngModelGroup="removeBookData">
+            <div *ngFor="let book of bookById">
+              <div class="form-row">
+                <div class="col-4">
+                  <label for="isbnNo">ISBN no.</label>
+                  <input type="text" id="isbnNo" class="form-control" disabled name="isbnNo" [(ngModel)]="book.isbn">
+                </div>
+                <div class="col-4">
+                  <label for="authorName">Author Name</label>
+                  <input type="text" id="authorName" class="form-control" disabled name="authorName" [(ngModel)]="book.authorName">
+                </div>
+
+                  <div class="col-4">
+                  <label for="title">Title<span class="mandatory">*</span></label>
+                  <input type="text" id="title" required disabled class="form-control" name="title" [(ngModel)]="book.title">
+                </div>
+              </div>
+              <br>
+              <div class="form-row">
+                <div class="col-4">
+                  <label for="publisher">Publisher</label>
+                  <input type="text" id="publisher" disabled class="form-control" name="publisher"  [(ngModel)]="book.publisherAndPlace">
+                </div>
+                <div class="col-4">
+                  <label for="edition">Edition</label>
+                  <input type="text" id="edition" disabled class="form-control" name="edition"
+                    [(ngModel)]="book.edition">
+                </div>
+                <div class="col-4">
+                  <label for="publicationYear">Publication Year</label>
+                  <input type="text" id="publicationYear" disabled class="form-control" name="publicationYear"
+                    [(ngModel)]="book.yearOfPublication">
+                </div>
+              </div><br />
+              <div class="form-row">
+                <div class="col-4">
+                  <label for="price">Price</label>
+                  <input type="text" id="price" disabled class="form-control" name="price" [(ngModel)]="book.price">
+                </div>
+
+                <div class="col-4">
+                  <label for="noOfPages">no. of Pages</label>
+                  <input type="text" id="noOfPages" disabled class="form-control" name="noOfPages"
+                    [(ngModel)]="book.noOfPages">
+                </div>
+                <div class="col-4">
+                  <label for="purchasedOn">Date of Purchase</label>
+                  <input type="date" id="purchasedOn" disabled class="form-control" name="purchasedOn"
+                    [(ngModel)]="book.purchaseDate">
+                </div>
+
+              </div><br />
+              <div class="form-row">
+                <div class="col-12">
+                  <label for="remarks">Remarks</label>
+                  <textarea class="form-control" disabled id="remarks" name="remarks"
+                    [(ngModel)]="book.remarks"></textarea>
+                </div>
+              </div>
+              <br>
+              <div class="form-row">
+                <div class="col-7">
+                  <h4>Are you sure you want to remove book ?</h4>
+                </div>
+
+                <div class="col-2">
+                  <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth"
+                    data-dismiss="modal">Cancel</button>
+                </div>
+                <div class="col-2">
+                  <button type="submit" class="btn btn-primary btnWidth">Remove </button>
+                </div>
+                <div class="col-1">
+                  <input type="hidden" name="bookId" id="bookId" [(ngModel)]="book.bookId">
+
+                  <input type="hidden" name="subjectCategory" id="subjectCategory" [(ngModel)]="book.subjectCategory">
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -19,16 +19,19 @@ export class SignUpComponent implements OnInit {
   isSignedUp = false;
   isSignUpFailed = false;
   errorMessage = '';
-
+  isValidated:boolean = false;
+  loading : boolean;
   constructor(private authService: AuthService, private formBuider: FormBuilder, public toastr: ToastrManager) { }
 
   ngOnInit() {
+    this.isValidated=false;
+    this.loading = false;
     this.registerForm = this.formBuider.group({
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       date: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')]],
-      phoneNo: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]],
+      phoneNo: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10),Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]], 
       // tslint:disable-next-line:max-line-length
       confirm_password: ['', [Validators.required]]
     }, {
@@ -43,36 +46,50 @@ export class SignUpComponent implements OnInit {
 
   onSubmit() {
 
-    this.signupInfo = new SignUpInfo(
-      this.form.username,
-      this.form.dob,
-      this.form.email,
-      this.form.password,
-      this.form.mobileNo);
+    if(!this.form.invalid)
+    {
+      this.isValidated = true;
+    }
 
-      this.authService.signUp(this.signupInfo).subscribe(
-        data => {
-          if(data.ok) {
-          console.log(data);
-          this.isSignedUp = true;
-          this.isSignUpFailed = false;
-          this.toastr.successToastr(data.body['message'], 'Success!');
+    if(this.isValidated)
+    {
+      this.loading = true;
+      this.signupInfo = new SignUpInfo(
+        this.form.username,
+        this.form.dob,
+        this.form.email,
+        this.form.password,
+        this.form.mobileNo);
+  
+        this.authService.signUp(this.signupInfo).subscribe(
+          data => {
+            this.loading = false;
+            if(data.ok) {
+              
+           // console.log(data);
+            this.isSignedUp = true;
+            this.isSignUpFailed = false;
+            this.toastr.successToastr(data.body['message'], 'Success!');
+            }
+          },
+          error => {
+            if(error.status === 400 ) {
+              this.loading=false;
+            this.toastr.errorToastr(error.error['message'], 'Alert!');
+           // console.log(error);
+            this.isSignUpFailed = true;
           }
-        },
-        error => {
-          if(error.status === 400) {
-          this.toastr.errorToastr(error.error['message'], 'Alert!');
-          console.log(error);
-          this.isSignUpFailed = true;
         }
-      }
-      );
+        );
+  
+      this.submitted = true;
+    }
 
-    this.submitted = true;
+   
 
         // stop here if form is invalid
-        if (this.registerForm.invalid) {
-            return;
-        }
+        // if (this.registerForm.invalid) {
+        //     return;
+        // }
       }
 }

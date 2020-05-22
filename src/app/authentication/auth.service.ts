@@ -7,21 +7,22 @@ import { ActivatedRoute } from '@angular/router';
 import { JwtResponse } from './jwt-response';
 import { AuthLoginInfo } from './login-info';
 import { SignUpInfo } from './signup-info';
+import { apiSetting } from '../urls/apisetting';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-};
+}; 
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
 
-  private loginUrl = 'http://localhost:8080/dis/signin';
-  private signupUrl = 'http://localhost:8080/dis/signup';
-  private validateUrl = 'http://localhost:8080/dis/getUserType';
-  private forgetPasswordUrl = 'http://localhost:8080/dis/forgotPassword';
-  private activateAccountUrl = 'http://localhost:8080/dis/preActivation';
-  private resetUrl = 'http://localhost:8080/dis/processResetPassword';
-
+  private loginUrl = `${apiSetting.apiGateway}/dis/signin`;
+  private signupUrl = `${apiSetting.apiGateway}/dis/signup`;
+  private validateUrl = `${apiSetting.apiGateway}/dis/getUserType`;
+  private forgetPasswordUrl =`${apiSetting.apiGateway}/dis/forgotPassword`;
+  private activateAccountUrl = `${apiSetting.apiGateway}/dis/preActivation`;
+  private resetUrl = `${apiSetting.apiGateway}/dis/processResetPassword`;
+  apiUrl = `${apiSetting.apiUser}/staffProfile`;
   constructor(private http: HttpClient, private interceptor: AuthInterceptor, private route: ActivatedRoute) {
   }
 
@@ -50,10 +51,14 @@ export class AuthService {
   // returns full http response
   resetPassword(newPassword): Observable<HttpResponse<string>> {
     const reset_token = this.route.snapshot.queryParams['resetToken'];
-    console.log(reset_token);
+   // console.log(reset_token);
     const info = {resetToken: reset_token, password: newPassword};
-    console.log(info);
+    //console.log(info);
     // setting observe value as response to send full http response
     return this.http.post<string>(this.resetUrl, info, { observe: 'response' });
+  }
+
+  getMyUserId():Observable<HttpResponse<string>>{
+    return this.http.get<string>(`${this.apiUrl}/getMyUserID`,{observe:'response'});
   }
 }

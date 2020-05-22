@@ -15,11 +15,14 @@ import { StudentModule } from './student/student.module';
 import { ConventionalModule } from '../conventional/conventional.module';
 import { InfrastructureModule } from '../infrastructure/infrastructure.module';
 import { InfrastructureOutletComponent } from '../infrastructure/infrastructure-outlet/infrastructure-outlet.component';
-
+import { RouteGuardService } from '../route-guard.service';
+import { MydutiesNavigationComponent } from '../myduties/myduties-navigation/myduties-navigation.component';
+import { MydutiesModule } from '../myduties/myduties.module';
+//canActivate:[RouteGuardService],
 const routes: Routes = [
   {
     path: 'staff',
-    component: StaffComponent,
+    component: StaffComponent,canActivate:[RouteGuardService],
     children: [
         {
           path: '',
@@ -33,6 +36,11 @@ const routes: Routes = [
         {
           path: 'staff_home',
           component: HomeComponent
+        },
+        {
+          path:'myduties',
+          component: MydutiesNavigationComponent,
+          loadChildren: () => MydutiesModule
         },
         {
           path: 'staff_infrastructure',

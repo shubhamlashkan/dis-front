@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   roles: string[] = [];
   loading : boolean;
   private loginInfo: AuthLoginInfo;
-
+  userID:string;
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private router: Router, public toastr: ToastrManager) { }
 
   ngOnInit() {
@@ -28,20 +28,21 @@ export class LoginComponent implements OnInit {
       this.roles = this.tokenStorage.getAuthorities();
       this.getValidated();
     }
+   
   }
 
   onSubmit() {
-    console.log(this.form);
+    //console.log(this.form);
     this.loading = true;
     this.loginInfo = new AuthLoginInfo(
       this.form.username,
       this.form.password);
-
+     // console.log('Before '+this.isUserLoggedIn());
     this.authService.attemptAuth(this.loginInfo).subscribe(
       data => {
         this.loading = false;
-        console.log(data);
-        this.tokenStorage.saveUsername(data.username);
+        //console.log(data);
+        sessionStorage.setItem('authenticaterUser',this.form.username);
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveAuthorities(data.authorities);
 
@@ -49,12 +50,22 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getAuthorities();
         this.getValidated();
+        this.authService.getMyUserId().subscribe(response => {
+          this.userID= response.body['message'];
+          // console.log(response.body['message']);
+          // console.log(this.userID);
+          sessionStorage.setItem('userId',this.userID);
+        })
+        
+       // sessionStorage.setItem('userId',this.userID);
+       // console.log('After '+this.isUserLoggedIn());
       },
       error => {
-        if (error.status === 400) {
-        // this.router.navigate(['/forgot-password']);
+        if(error.status === 404 || error.status === 400 ) {
+        //this.router.navigate(['/forgot-password']);
+        this.loading=false;
         this.toastr.errorToastr(error.error['message'], 'Alert!');
-        console.log(error);
+        //console.log(error);
         this.isLoginFailed = true;
       }
       });
@@ -64,9 +75,18 @@ export class LoginComponent implements OnInit {
     this.authService.validateUser().subscribe(
       tempData => {
         this.router.navigateByUrl('/' + tempData);
-        console.log(tempData);
-        localStorage.setItem('userType',tempData);
+       // console.log(tempData);
+        sessionStorage.setItem('userType',tempData);
       }
     );
   }
+
+  isUserLoggedIn()
+  {
+    let user = sessionStorage.getItem('authenticaterUser');
+    console.log(user);
+    return !(user===null);
+  }
+  
+
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ComplaintsService } from 'src/app/API_Service/complaints.service';
+
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ComplaintsService } from '../complaints.service';
 
 @Component({
   selector: 'app-side-navigation',
