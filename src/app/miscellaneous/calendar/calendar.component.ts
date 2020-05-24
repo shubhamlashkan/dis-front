@@ -53,6 +53,8 @@ export class CalendarComponent {
 
   handleEventClick(arg): void{
     const dialogConfig = new MatDialogConfig();
+    dialogConfig.minWidth = '400px';
+    dialogConfig.autoFocus = false;
     dialogConfig.data = {
       id: arg.event.id,
       eid: arg.event.eventId,

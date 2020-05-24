@@ -7,6 +7,8 @@ import { EventInfo } from './event-info';
 import { TokenStorageService } from './../../authentication/token-storage.service';
 import { CalendarService } from './../../API_Service/calendar.service';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import * as _moment from 'moment';
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -35,7 +37,14 @@ export const MY_FORMATS = {
 @Component({
   selector: 'app-update-event-dialog',
   templateUrl: './update-event-dialog.component.html',
-  styleUrls: ['./update-event-dialog.component.scss']
+  styleUrls: ['./update-event-dialog.component.scss'],
+  providers: [{
+    provide: DateAdapter,
+    useClass: MomentDateAdapter,
+    deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+  },
+
+  {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS}, ]
 })
 export class UpdateEventDialogComponent implements OnInit {
 
@@ -242,7 +251,7 @@ export class UpdateEventDialogComponent implements OnInit {
   }
 
   disabled() {
-    return ((this.titleFormController.hasError('required')) || (this.locationFormController.hasError('required')) || (!this.validateDate(this.endDate)));
+    return ((this.titleFormController.hasError('required')) || (this.locationFormController.hasError('required')) || (!this.validateDate(this.endDate)) || (!this.validateTime(this.endTime)));
   }
 
   onSubmit() {

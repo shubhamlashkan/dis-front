@@ -2,7 +2,9 @@ import { Component, OnInit , Inject, ViewChild} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material/dialog';
 import { CalendarService } from 'src/app/API_Service/calendar.service';
 import { UpdateEventDialogComponent } from './update-event-dialog.component';
+import * as _moment from 'moment';
 
+const moment = _moment;
  
 @Component({
   selector: 'app-show-event-dialog',
@@ -21,6 +23,8 @@ export class ShowEventDialogComponent implements OnInit {
   startEditable: boolean;
   location: string;
   participants: any;
+  st_date: any;
+  st_time: any;
 
   constructor(public dialogRef: MatDialogRef<ShowEventDialogComponent>,@Inject(MAT_DIALOG_DATA) data,
   private calendarService: CalendarService, private dialog: MatDialog){
@@ -36,6 +40,12 @@ export class ShowEventDialogComponent implements OnInit {
    }
 
   ngOnInit() {
+    let st = moment(this.start)
+    this.st_date = st.format('ll');
+    this.st_time = st.format('LT');
+    if(this.st_time === '12:00 AM'){
+      this.st_time = '';
+    }
   }
 
   onDelete(){
