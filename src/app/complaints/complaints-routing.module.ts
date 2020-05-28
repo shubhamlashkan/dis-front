@@ -6,6 +6,7 @@ import { ResolvedComplaintsComponent } from './resolved-complaints/resolved-comp
 import { SideNavigationComponent } from './side-navigation/side-navigation.component';
 import { MyComplaintsComponent } from './my-complaints/my-complaints.component';
 import { ResourceRequestComponent } from './resource-request/resource-request.component';
+import { DownloadComplaintReportComponent } from './download-complaint-report/download-complaint-report.component';
 var route : string = 'remaining_complaints';
 if(localStorage.getItem('userType') === 'student'){
   route = 'mycomplaints'
@@ -43,6 +44,10 @@ const routes: Routes = [
               {
                 path :'resource_request',
                 component : ResourceRequestComponent
+              },
+              {
+                path : 'download_complaint',
+                component : DownloadComplaintReportComponent
               }
             
             ]
