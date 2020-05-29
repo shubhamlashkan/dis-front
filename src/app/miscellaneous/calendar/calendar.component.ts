@@ -30,24 +30,27 @@ export class CalendarComponent {
   calendarEvents: EventInput[] = [];
 
   openDialog(event): void {
-    const dialogRef = this.dialog.open(AddEventDialog, {
-      width: '520px',
-      data: event
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result !== undefined) {
-      this.calendarApi.addEvent({
-        id: result.eventId,
-        title: result.title,
-        start: result.startDate,
-        end: result.endDate,
-        description: result.description,
-        startEditable: true,
-        location: result.location,
-        participants: result.participants,
+    console.log(this.auth.getAuthorities())
+    if(!(this.auth.getAuthorities().includes("student"))) {
+      const dialogRef = this.dialog.open(AddEventDialog, {
+        width: '520px',
+        data: event
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result !== undefined) {
+          this.calendarApi.addEvent({
+            id: result.eventId,
+            title: result.title,
+            start: result.startDate,
+            end: result.endDate,
+            description: result.description,
+            startEditable: true,
+            location: result.location,
+            participants: result.participants,
+          });
+        }
       });
     }
-    });
   }
 
   handleEventClick(arg): void{
