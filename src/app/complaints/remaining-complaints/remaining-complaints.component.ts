@@ -292,10 +292,10 @@ export class RemainingComplaintsComponent implements OnInit {
   updateComplaint(f : NgForm){
     let data = f.value;
     console.log(this.currentId);
-    if(this.currentId){
+    //if(this.currentId){
       data["id"] = this.currentId;
       data["type"]=this.seletedType;
-    }
+    //}
     console.log(data);
     this.complaints.editComplaints(data)
     .subscribe(

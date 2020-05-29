@@ -6,20 +6,20 @@
 <form [formGroup]="complaintForm" (ngSubmit)="onSubmit()">
   <div class="row mb-3">
     <div class="col-lg-3">
-      Select complaint type : 
+      Select complaint type : <span class="mandatory">*</span>
     </div>
     <div class="col-lg-9">
-      <select class="form-control" formControlName="complaintType">
+      <select class="form-control" formControlName="complaintType" required>
         <option *ngFor="let val of complaintTypes" [value]="val">{{val}}</option>
       </select>
     </div>
   </div>
   <div class="row mb-3">
     <div class="col-lg-3">
-      Date : 
+      Date : <span class="mandatory">*</span>
     </div>
     <div class="col-lg-9">
-      <input type="date" class="form-control" formControlName="createdDate">
+      <input type="date" class="form-control" formControlName="createdDate" required>
     </div>
   </div>
 
@@ -39,5 +39,5 @@
   </div>
   
   <button type="reset" class="btn btn-primary mr-3">Reset</button>
-  <button class="btn btn-success" type="submit">Generate pdf</button>
+  <button class="btn btn-success" type="submit" [disabled]="complaintForm.invalid">Generate pdf</button>
 </form>

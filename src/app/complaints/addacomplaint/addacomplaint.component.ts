@@ -31,7 +31,7 @@ export class AddacomplaintComponent implements OnInit {
   eccwForm: FormGroup;
   emrsForm: FormGroup;
   telephoneForm: FormGroup;
-
+  staffFacultyList = []
   completionMessage: string="Error has Occurred. Try after some time!!";
   showConfirmation: boolean;
   errorMessage: string = "Error has Occurred. Try after some time!!";
@@ -57,6 +57,13 @@ export class AddacomplaintComponent implements OnInit {
     this.staff=false;
     this.faculty=false;
     this.hod=false;
+    this.complaints.getStaffFacultyList()
+    .subscribe(
+      data=>{
+        this.staffFacultyList = data;
+        console.log(this.staffFacultyList);
+      }
+    )
     this.cleanlinessForm = this.fb.group({
       cleanlinessFields: this.fb.array([
         this.addCleanlinessFormGroup()
@@ -133,7 +140,8 @@ export class AddacomplaintComponent implements OnInit {
   addTelephoneFormGroup(): FormGroup {
     return this.fb.group({
       location: ['', Validators.required],
-      details: ['', Validators.required]
+      details: ['', Validators.required],
+      extensionNo: ['', Validators.required]
     })
   }
   addMoreEmrsComplaint(): void {
@@ -212,7 +220,8 @@ export class AddacomplaintComponent implements OnInit {
   }
   addOtherFormGroup(): FormGroup {
     return this.fb.group({
-      details: ['', Validators.required]
+      details: ['', Validators.required],
+      assignedTo : ['', Validators.required]
     })
   }
   onCleanlinessSubmit(details) {

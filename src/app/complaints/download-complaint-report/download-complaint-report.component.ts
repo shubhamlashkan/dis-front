@@ -6,6 +6,7 @@ import { EmrComplaintForm } from './complaint-report-interfaces/emr-complaint-fo
 import { EccwComplaintForm } from './complaint-report-interfaces/eccw-complaint-form';
 import { CwnComplaintForm } from './complaint-report-interfaces/cwn-complaint-form';
 import { FormGroup, FormControl } from '@angular/forms';
+import { ToastrManager } from 'ng6-toastr-notifications';
 import { ComplaintsService } from 'src/app/API_Service/complaints.service';
 import { ComplaintReportForm } from './complaint-report-interfaces/complaint-report-form';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -16,7 +17,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 
 export class DownloadComplaintReportComponent implements OnInit {
-  constructor(private complaintService: ComplaintsService) { }
+  constructor(private complaintService: ComplaintsService, private toastr : ToastrManager) { }
   complaintForm: FormGroup;
   telephoneComplaints: TelephoneComplaintForm[] = [];
   emrComplaints: EmrComplaintForm[] = [];
@@ -64,11 +65,15 @@ export class DownloadComplaintReportComponent implements OnInit {
           data=>{
               this.telephoneComplaints = data;
               console.log(this.telephoneComplaints)
-              documentDefinition = this.getEMRComplaintDocumentDefinition();
+              if(this.telephoneComplaints.length===0){ 
+                this.toastr.infoToastr("No telephone complaint on date : "+value.createdDate+".");
+              }
+              else{
+              documentDefinition = this.getTelephoneComplaintDocumentDefinition();
               pdfMake.createPdf(documentDefinition).download("ComplaintReport.pdf");
+            }
           }
         )
-        documentDefinition = this.getTelephoneComplaintDocumentDefinition();
         break;
       case "EMR":
         this.complaintService.getComplaintDownloadReport(value.complaintType, value.createdDate, value.location)
@@ -76,8 +81,13 @@ export class DownloadComplaintReportComponent implements OnInit {
             data => {
               this.emrComplaints = data;
               console.log(this.emrComplaints)
-              documentDefinition = this.getEMRComplaintDocumentDefinition();
-              pdfMake.createPdf(documentDefinition).download("ComplaintReport.pdf");
+              if(this.emrComplaints.length === 0 ){
+                this.toastr.infoToastr("No EMR complaint on date : "+value.createdDate+".")
+              }
+              else{
+                documentDefinition = this.getEMRComplaintDocumentDefinition();
+                pdfMake.createPdf(documentDefinition).download("ComplaintReport.pdf");
+              }
             }
           )
         break;
@@ -86,9 +96,14 @@ export class DownloadComplaintReportComponent implements OnInit {
         .subscribe(
           data => {
             this.eccwComplaints = data;
-            console.log(this.eccwComplaints)
+            console.log(this.eccwComplaints);
+            if(this.eccwComplaints.length === 0){
+              this.toastr.infoToastr("No ECCW complaint on date : "+value.createdDate+".")
+            }
+            else{
             documentDefinition = this.getECCWComplaintDocumentDefinition();
             pdfMake.createPdf(documentDefinition).download("ComplaintReport.pdf");
+            }
           }
         )
         break;
@@ -98,8 +113,13 @@ export class DownloadComplaintReportComponent implements OnInit {
           data => {
             this.cwnComplaints = data;
             console.log(this.cwnComplaints)
+            if(this.cwnComplaints.length === 0){
+              this.toastr.infoToastr("No CWN complaint on date : "+value.createdDate+".");
+            }
+            else{
             documentDefinition = this.getCwnComplaintDocumentDefinition();
             pdfMake.createPdf(documentDefinition).download("ComplaintReport.pdf");
+            }
           }
         )
         break;
@@ -577,7 +597,7 @@ export class DownloadComplaintReportComponent implements OnInit {
                 text: 'Location(Department/Section)',
                 style: 'tableHeader'
               }],
-              ...this.emrComplaints.map(
+              ...this.cwnComplaints.map(
                 complaint => {
                   return [complaint.sno,
                   complaint.location,
