@@ -12,10 +12,11 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { MyComplaintsComponent } from './my-complaints/my-complaints.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResourceRequestComponent } from './resource-request/resource-request.component';
+import { DownloadComplaintReportComponent } from './download-complaint-report/download-complaint-report.component';
 
 @NgModule({
   declarations: [TotalComplaintsComponent, ResolvedComplaintsComponent, RemainingComplaintsComponent,
-    SideNavigationComponent, ComplaintsComponent, AddacomplaintComponent, MyComplaintsComponent, ResourceRequestComponent,
+    SideNavigationComponent, ComplaintsComponent, AddacomplaintComponent, MyComplaintsComponent, ResourceRequestComponent, DownloadComplaintReportComponent
    ],
 
   imports: [
