@@ -3,7 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { FacultyComponent } from '../faculty/faculty.component';
 import { HomeComponent } from './home/home.component';
 import { FacultyhomeComponent } from './facultyhome/facultyhome.component';
-import { NotificationComponent } from './notification/notification.component';
+import { MiscellaneousModule } from 'src/app/miscellaneous/miscellaneous.module';
+import { NotificationsComponent } from 'src/app/miscellaneous/notifications/notifications.component';
 
 const routes: Routes = [
   {
@@ -20,7 +21,8 @@ const routes: Routes = [
       },
       {
         path: 'notification',
-        component: NotificationComponent
+        component : NotificationsComponent, 
+        loadChildren:() => MiscellaneousModule
       }
     ]
   },
@@ -34,7 +36,8 @@ const routes: Routes = [
       },
       {
         path: 'notification',
-        component: NotificationComponent
+        component : NotificationsComponent, 
+        loadChildren:() => MiscellaneousModule
       }
     ]
   },

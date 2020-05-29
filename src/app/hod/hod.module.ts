@@ -21,6 +21,8 @@ import { MeetingsComponent } from './meetings/meetings.component';
 import { ConventionalModule } from '../conventional/conventional.module';
 import { InfrastructureModule } from '../infrastructure/infrastructure.module';
 import { FormsModule } from '@angular/forms';
+import { MatIconModule, MatBadgeModule } from '@angular/material';
+import { NotificationsComponent } from '../miscellaneous/notifications/notifications.component';
 
 @NgModule({
   imports: [
@@ -30,7 +32,9 @@ import { FormsModule } from '@angular/forms';
     MiscellaneousModule,
     FooterModule,
     ConventionalModule,
-    FormsModule
+    FormsModule,
+    MatIconModule,
+    MatBadgeModule
     ],
   declarations: [
      HomeComponent,
@@ -46,7 +50,7 @@ import { FormsModule } from '@angular/forms';
      DocumentsComponent,
      ToDoComponent,
      MeetingsComponent],
-     providers: [CalendarComponent],
+     providers: [CalendarComponent , NotificationsComponent],
      exports:[
       
        StudentComponent

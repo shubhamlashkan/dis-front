@@ -18,6 +18,7 @@ import { InfrastructureModule } from '../infrastructure/infrastructure.module';
 import { Component } from 'fullcalendar';
 import { ProfileComponent } from '../conventional/profile/profile.component';
 import { ConventionalModule } from '../conventional/conventional.module';
+import { AlertsComponent } from './alerts/alerts.component';
 
 const routes: Routes = [
   { path: 'head',
@@ -87,6 +88,10 @@ const routes: Routes = [
         component : ProfileComponent,
         loadChildren: () => ConventionalModule 
       },
+      {
+        path: 'notification',
+        component : AlertsComponent, 
+      }
     ]
   }
 ];

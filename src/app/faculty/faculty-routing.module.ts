@@ -9,7 +9,6 @@ import { AboutComponent } from '../about/about/about.component';
 import { AboutModule } from '../about/about.module';
 import { ConventionalModule } from '../conventional/conventional.module';
 import { MydutiesModule } from '../myduties/myduties.module';
-
 import { InfrastructureModule } from '../infrastructure/infrastructure.module';
 import { InfrastructureOutletComponent } from '../infrastructure/infrastructure-outlet/infrastructure-outlet.component';
 import { ProfileComponent } from '../conventional/profile/profile.component';
@@ -44,10 +43,6 @@ const routes: Routes = [
         component: AttendanceComponent
       },
       {
-        path : 'navigation',
-        component : NavigationComponent
-      },
-      {
         path : 'documents',
         component : DocumentsComponent
       },
@@ -63,7 +58,9 @@ const routes: Routes = [
         loadChildren : '../complaints/complaints.module#ComplaintsModule'
       },
       {
-        path : 'timetable', component : TimetableComponent, loadChildren:() => ConventionalModule
+        path : 'timetable', 
+        component : TimetableComponent, 
+        loadChildren:() => ConventionalModule
       },
       {
         path : 'students',

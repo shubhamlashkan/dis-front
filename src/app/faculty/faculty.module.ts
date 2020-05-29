@@ -17,6 +17,7 @@ import { InfrastructureModule } from '../infrastructure/infrastructure.module';
 import { HodModule } from '../hod/hod.module';
 import { MydutiesNavigationComponent } from '../myduties/myduties-navigation/myduties-navigation.component';
 import { MydutiesModule } from '../myduties/myduties.module';
+import { MatBadgeModule, MatIconModule } from '@angular/material';
 @NgModule({
   imports: [
     CommonModule,
@@ -27,9 +28,9 @@ import { MydutiesModule } from '../myduties/myduties.module';
     InfrastructureModule,
     ConventionalModule,
     MydutiesModule,
-    
-    
-    HodModule
+    HodModule,
+    MatBadgeModule,
+    MatIconModule
   ],
   declarations: [
     AttendanceComponent, 

@@ -12,6 +12,7 @@ import { StaffComponent } from './staff/staff.component';
 import { SidenavigationComponent } from './sidenavigation/sidenavigation.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { ConventionalModule } from '../conventional/conventional.module';
+import { MatIconModule, MatBadgeModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -19,7 +20,9 @@ import { ConventionalModule } from '../conventional/conventional.module';
     StaffRoutingModule,
     MiscellaneousModule,
    // ComplaintsModule,
-    ConventionalModule
+    ConventionalModule,
+    MatIconModule,
+    MatBadgeModule
   ],
   declarations: [
     HomeComponent,
