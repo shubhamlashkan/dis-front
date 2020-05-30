@@ -6,7 +6,7 @@ import { CalendarComponent} from './calendar/calendar.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { PiechartComponent } from './piechart/piechart.component';
 import { HtmlDownloaderComponent } from './html-downloader/html-downloader.component';
-import { MatTooltipModule,MatIconModule,MatTableModule,MatPaginatorModule,MatSortModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatDatepickerModule,  MatTabsModule, MatOptionModule, MatAutocompleteModule, MatButtonModule, MatSelectModule, MatCheckboxModule, MatListModule, MatDividerModule} from '@angular/material';
+import { MatTooltipModule,MatIconModule,MatTableModule,MatPaginatorModule,MatSortModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatDatepickerModule,  MatTabsModule, MatOptionModule, MatAutocompleteModule, MatButtonModule, MatSelectModule, MatCheckboxModule, MatListModule, MatDividerModule, MatSnackBarModule} from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material';
 import { MatMomentDateModule } from "@angular/material-moment-adapter";
@@ -39,7 +39,8 @@ import { NotificationsComponent } from './notifications/notifications.component'
     MatListModule,
     MatDividerModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSnackBarModule,
   ],
   declarations: [BarchartComponent, CalendarComponent, PiechartComponent, HtmlDownloaderComponent, NotificationsComponent, AddEventDialog, ShowEventDialogComponent, UpdateEventDialogComponent, NotificationsComponent],
   exports: [CalendarComponent, BarchartComponent, PiechartComponent, HtmlDownloaderComponent,NotificationsComponent],

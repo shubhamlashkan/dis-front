@@ -21,4 +21,7 @@ export class NotificationsService {
   markAsRead(notification: Object): Observable<Object> {
     return this.http.post(`${this.baseUrl}/markAsRead`, notification,httpOptions);
   }
+  markAllAsRead(username: Object): Observable<Object> {
+    return this.http.post(`${this.baseUrl}/markAllAsRead`, username,httpOptions);
+  }
 }

@@ -1,6 +1,11 @@
 <div class="row">
-  <div class="col-lg-2" style="color:#f46404;">
+  <div class="col-lg-11" style="color:#f46404;">
     <h4>Notifications</h4>
+  </div>
+  <div class="col-lg-1">
+  <button color="primary" float-right mat-icon-button (click)="markAllAsRead();"  matTooltip="Mark All As Read" aria-label="mark read button">
+    <mat-icon style="font-size: 40px;"> check_box</mat-icon>
+  </button>
   </div>
   </div>
 
@@ -31,7 +36,7 @@
       <mat-datepicker #toDate></mat-datepicker>
     </mat-form-field>
   </div>
-   <button mat-raised-button color="primary" (click)="getDateRange(filterForm.value)">Submit</button>
+   <button mat-icon-button color="primary" (click)="getDateRange(filterForm.value)"> <mat-icon style="font-size: 40px;">pageview</mat-icon></button>
 </form>
 
 <div class="mat-elevation-z8">

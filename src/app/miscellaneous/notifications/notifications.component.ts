@@ -9,6 +9,7 @@ import { Subscription, timer } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { MatSnackBar } from '@angular/material';
 
 
 export interface UserData {
@@ -41,6 +42,9 @@ export class NotificationsComponent implements OnInit , OnDestroy{
     notificationId : null,
     username : null
   }
+  markAllAsReadData= {
+    username : null
+  }
   columnsToDisplay: string[] = ['date', 'heading','link' ,'status'];
   dataSource: MatTableDataSource<UserData>;
   expandedElement: UserData | null;
@@ -60,7 +64,7 @@ filterForm = new FormGroup({
 get fromDate() { return this.filterForm.get('fromDate').value; }
 get toDate() { return this.filterForm.get('toDate').value; }
 
-  constructor(private notificationsService : NotificationsService,private auth: TokenStorageService,private changeDetectorRefs: ChangeDetectorRef) {
+  constructor(private _snackBar: MatSnackBar,private notificationsService : NotificationsService,private auth: TokenStorageService,private changeDetectorRefs: ChangeDetectorRef) {
 
  
   }
@@ -119,9 +123,37 @@ get toDate() { return this.filterForm.get('toDate').value; }
     this.markAsReadData.username=this.auth.getUsername();
     this.notificationsService.markAsRead(this.markAsReadData).subscribe(data =>{
       //console.log(data)
+      this._snackBar.open('Notification marked as read', 'OK', {
+        duration: 5000,
+        horizontalPosition: "right",
+        verticalPosition:"top",
+      });
+    },
+    error=>{this._snackBar.open('Server Error', 'OK',{
+      duration: 5000,
+      horizontalPosition: "right",
+      verticalPosition:"top",
     });
+    }
+    );
   }
-
+  markAllAsRead(){
+    this.markAllAsReadData.username=this.auth.getUsername();
+    this.notificationsService.markAllAsRead(this.markAllAsReadData).subscribe(data =>{
+      //console.log(data)
+      this._snackBar.open('All notifications marked as read', 'OK', {
+        duration: 5000,
+        horizontalPosition: "right",
+        verticalPosition:"top",
+      });
+    },
+    error=>{this._snackBar.open('Server Error', 'OK',{
+      duration: 5000,
+      horizontalPosition: "right",
+      verticalPosition:"top",
+    });});
+  }
+ 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
