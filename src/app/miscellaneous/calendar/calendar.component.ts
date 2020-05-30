@@ -47,7 +47,6 @@ export class CalendarComponent {
             startEditable: true,
             location: result.location,
             participants: result.participants,
-            organizer: this.auth.getUsername(),
           });
         }
       });
@@ -69,7 +68,6 @@ export class CalendarComponent {
       startEditable: arg.event.startEditable,
       location: arg.event.extendedProps.location,
       participants: arg.event.extendedProps.participants,
-      organizer: arg.event.extendedProps.organizer,
     };
     const dialogRef = this.dialog.open(ShowEventDialogComponent,dialogConfig);
   }
@@ -77,18 +75,32 @@ export class CalendarComponent {
   ngOnInit() {
     this.calendarService.getMyEvents(this.auth.getUsername()).subscribe( events => {
       for (let e = 0; e < events.length; e++) {
+        if(events[e].createdBy == this.auth.getUsername()){
+          this.calendarEvents = this.calendarEvents.concat({
+            id: events[e].eventId,
+            title: events[e].title,
+            start: events[e].startDate,
+            end: events[e].endDate,
+            description: events[e].description,
+            startEditable: true,
+            location: events[e].location,
+            participants: events[e].participants,
+          });
+      }
+      else{
         this.calendarEvents = this.calendarEvents.concat({
           id: events[e].eventId,
           title: events[e].title,
           start: events[e].startDate,
           end: events[e].endDate,
           description: events[e].description,
-          startEditable: true,
+          startEditable: false,
           location: events[e].location,
           participants: events[e].participants,
           organizer: events[e].createdBy,
         });
       }
+    }
     });
     this.calendarService.getPublicHolidays().subscribe( events=> { 
       for (let e = 0; e < events.length; e++) {

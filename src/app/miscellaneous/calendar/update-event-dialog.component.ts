@@ -85,6 +85,7 @@ export class UpdateEventDialogComponent implements OnInit {
   
     ngOnInit() {
       this.startDate = moment(this.data.start);
+      console.log(this.data.end)
       this.endDate = moment(this.data.end);
       this.employeeList = this.calendarService.getAllEmployeeList();
       this.description = this.data.desc;

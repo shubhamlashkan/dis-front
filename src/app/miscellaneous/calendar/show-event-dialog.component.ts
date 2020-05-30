@@ -27,7 +27,6 @@ export class ShowEventDialogComponent implements OnInit {
   participants: any;
   st_date: any;
   st_time: any;
-  organizer: String;
 
   constructor(public dialogRef: MatDialogRef<ShowEventDialogComponent>,@Inject(MAT_DIALOG_DATA) data,
   private calendarService: CalendarService, private dialog: MatDialog,  private auth: TokenStorageService){
@@ -40,7 +39,6 @@ export class ShowEventDialogComponent implements OnInit {
     this.startEditable = data.startEditable;
     this.location = data.location;
     this.participants = data.participants;
-    this.organizer = data.organizer;
    }
 
   ngOnInit() {
@@ -50,23 +48,18 @@ export class ShowEventDialogComponent implements OnInit {
     if(this.st_time === '12:00 AM'){
       this.st_time = '';
     }
+
   }
 
   onDelete(){
-    if(this.organizer === this.auth.getUsername()){
-      if(confirm("Are you sure you want to delete this event?")){
-        this.calendarApi.getEventById(this.id).remove();
-        this.calendarService.deleteEvent(this.id); 
-        this.dialogRef.close();
-      }
-    }
-    else{
-      alert('You cannot delete this event');
+    if(confirm("Are you sure you want to delete this event?")){
+      this.calendarApi.getEventById(this.id).remove();
+      this.calendarService.deleteEvent(this.id); 
+      this.dialogRef.close();
     }
   }
 
   onUpdate(){
-    if(this.organizer === this.auth.getUsername()){
       const dialogConfig = new MatDialogConfig();
       dialogConfig.width = '520px';
       dialogConfig.data = {
@@ -96,10 +89,6 @@ export class ShowEventDialogComponent implements OnInit {
         }
       });
       this.dialogRef.close();
-  }
-  else{
-    alert('You cannot make changes to this event');
-  }
   }
 
   onNoClick(): void {
