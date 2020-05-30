@@ -4,7 +4,7 @@
   </div>
   <div class="col-lg-1">
   <button color="primary" float-right mat-icon-button (click)="markAllAsRead();"  matTooltip="Mark All As Read" aria-label="mark read button">
-    <mat-icon style="font-size: 40px;"> check_box</mat-icon>
+    <mat-icon style="font-size: 30px;"> assignment_turned_in</mat-icon>
   </button>
   </div>
   </div>
@@ -36,7 +36,7 @@
       <mat-datepicker #toDate></mat-datepicker>
     </mat-form-field>
   </div>
-   <button mat-icon-button color="primary" (click)="getDateRange(filterForm.value)"> <mat-icon style="font-size: 40px;">pageview</mat-icon></button>
+   <button mat-icon-button color="primary" (click)="getDateRange(filterForm.value)"> <mat-icon style="font-size: 30px;margin-top: 30%;">search</mat-icon></button>
 </form>
 
 <div class="mat-elevation-z8">
@@ -59,11 +59,11 @@
   </ng-container>
 
   <ng-container matColumnDef="status" >
-    <th mat-header-cell *matHeaderCellDef>Status </th>
+    <th mat-sort-header mat-header-cell *matHeaderCellDef>Status </th>
     <td mat-cell *matCellDef="let element"><button mat-icon-button (click)="element.read = !element.read ; markAsRead(element.id);"  matTooltip="Mark As Read"
       [matTooltipDisabled]="element.read" [disabled]="element.read" aria-label="mark read button">
-      <mat-icon *ngIf="element.read">mark_chat_read</mat-icon>
-	<mat-icon *ngIf="!element.read">mark_chat_unread</mat-icon>
+      <mat-icon *ngIf="element.read">assignment_turned_in</mat-icon>
+	<mat-icon color="warn" *ngIf="!element.read">assignment_late</mat-icon>
     </button></td>
   </ng-container>
 
