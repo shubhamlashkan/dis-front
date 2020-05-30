@@ -47,6 +47,7 @@ export class CalendarComponent {
             startEditable: true,
             location: result.location,
             participants: result.participants,
+            organizer: this.auth.getUsername(),
           });
         }
       });
@@ -57,7 +58,6 @@ export class CalendarComponent {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.minWidth = '400px';
     dialogConfig.autoFocus = false;
-    console.log(arg.event);
     dialogConfig.data = {
       id: arg.event.id,
       eid: arg.event.eventId,
@@ -69,6 +69,7 @@ export class CalendarComponent {
       startEditable: arg.event.startEditable,
       location: arg.event.extendedProps.location,
       participants: arg.event.extendedProps.participants,
+      organizer: arg.event.extendedProps.organizer,
     };
     const dialogRef = this.dialog.open(ShowEventDialogComponent,dialogConfig);
   }
@@ -85,6 +86,7 @@ export class CalendarComponent {
           startEditable: true,
           location: events[e].location,
           participants: events[e].participants,
+          organizer: events[e].createdBy,
         });
       }
     });

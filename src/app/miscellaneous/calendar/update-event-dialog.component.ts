@@ -4,12 +4,12 @@ import {Observable} from 'rxjs';
 import {map, startWith, take} from 'rxjs/operators';
 import { MatDialogRef, MAT_DIALOG_DATA, ErrorStateMatcher} from '@angular/material';
 import { EventInfo } from './event-info';
-import { TokenStorageService } from './../../authentication/token-storage.service';
 import { CalendarService } from './../../API_Service/calendar.service';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import * as _moment from 'moment';
+import { TokenStorageService } from './../../authentication/token-storage.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -69,7 +69,7 @@ export class UpdateEventDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<UpdateEventDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,  private auth: TokenStorageService, private calendarService: CalendarService, private _ngZone: NgZone) {}
+    @Inject(MAT_DIALOG_DATA) public data: any, private calendarService: CalendarService, private _ngZone: NgZone, private auth: TokenStorageService) {}
     
     @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
@@ -110,7 +110,9 @@ export class UpdateEventDialogComponent implements OnInit {
         this.usernameList.forEach((participant) => {
           for( let j=0; j<emp.length; j++){
             if (participant === emp[j][0]) {
-              this.participantList.add(emp[j][1]);
+              if(participant != this.auth.getUsername()){
+                this.participantList.add(emp[j][1]);
+              }
             }
           }
         });
@@ -280,8 +282,8 @@ export class UpdateEventDialogComponent implements OnInit {
         end,
         this.description,
         this.usernameList,
-        this.auth.getUsername(),
-        this.auth.getUsername(),
+        this.organizer,
+        this.organizer,
         new Date(),
         this.locationFormController.value
       );

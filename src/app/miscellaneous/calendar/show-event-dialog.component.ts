@@ -4,6 +4,8 @@ import { CalendarService } from 'src/app/API_Service/calendar.service';
 import { UpdateEventDialogComponent } from './update-event-dialog.component';
 import * as _moment from 'moment';
 
+import { TokenStorageService } from './../../authentication/token-storage.service';
+
 const moment = _moment;
  
 @Component({
@@ -25,9 +27,10 @@ export class ShowEventDialogComponent implements OnInit {
   participants: any;
   st_date: any;
   st_time: any;
+  organizer: String;
 
   constructor(public dialogRef: MatDialogRef<ShowEventDialogComponent>,@Inject(MAT_DIALOG_DATA) data,
-  private calendarService: CalendarService, private dialog: MatDialog){
+  private calendarService: CalendarService, private dialog: MatDialog,  private auth: TokenStorageService){
     this.title= data.title;
     this.desc= data.desc;
     this.id= data.id;
@@ -37,6 +40,7 @@ export class ShowEventDialogComponent implements OnInit {
     this.startEditable = data.startEditable;
     this.location = data.location;
     this.participants = data.participants;
+    this.organizer = data.organizer;
    }
 
   ngOnInit() {
@@ -49,43 +53,53 @@ export class ShowEventDialogComponent implements OnInit {
   }
 
   onDelete(){
+    if(this.organizer === this.auth.getUsername()){
       if(confirm("Are you sure you want to delete this event?")){
         this.calendarApi.getEventById(this.id).remove();
         this.calendarService.deleteEvent(this.id); 
         this.dialogRef.close();
       }
+    }
+    else{
+      alert('You cannot delete this event');
+    }
   }
 
   onUpdate(){
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '520px';
-    dialogConfig.data = {
-      id: this.id,
-      title: this.title,
-      desc: this.desc,
-      start: this.start,
-      end: this.end,
-      location: this.location,
-      participants: this.participants,
-    };
-    let removeId = this.id;
-    const dialogReference = this.dialog.open(UpdateEventDialogComponent, dialogConfig);
-    dialogReference.afterClosed().subscribe(result => {
-      if(result !== undefined) {
-        this.calendarApi.addEvent({
-          id: result.eventId,
-          title: result.title,
-          start: result.startDate,
-          end: result.endDate,
-          description: result.description,
-          startEditable: true,
-          location: result.location,
-          participants: result.participants,
-        });
-        this.calendarApi.getEventById(removeId).remove();
-      }
-    });
-    this.dialogRef.close();
+    if(this.organizer === this.auth.getUsername()){
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.width = '520px';
+      dialogConfig.data = {
+        id: this.id,
+        title: this.title,
+        desc: this.desc,
+        start: this.start,
+        end: this.end,
+        location: this.location,
+        participants: this.participants,
+      };
+      let removeId = this.id;
+      const dialogReference = this.dialog.open(UpdateEventDialogComponent, dialogConfig);
+      dialogReference.afterClosed().subscribe(result => {
+        if(result !== undefined) {
+          this.calendarApi.addEvent({
+            id: result.eventId,
+            title: result.title,
+            start: result.startDate,
+            end: result.endDate,
+            description: result.description,
+            startEditable: true,
+            location: result.location,
+            participants: result.participants,
+          });
+          this.calendarApi.getEventById(removeId).remove();
+        }
+      });
+      this.dialogRef.close();
+  }
+  else{
+    alert('You cannot make changes to this event');
+  }
   }
 
   onNoClick(): void {
