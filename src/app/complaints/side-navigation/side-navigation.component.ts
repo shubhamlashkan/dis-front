@@ -30,13 +30,13 @@ export class SideNavigationComponent implements OnInit {
     //   }
     // )
 
-    this.complaints.getPermissions()
-    .subscribe(
-      data => {
-        this.complaintPermissions = data;
-        console.log(this.complaintPermissions);
-      }
-    )
+    // this.complaints.getPermissions()
+    // .subscribe(
+    //   data => {
+    //     this.complaintPermissions = data;
+    //     console.log(this.complaintPermissions);
+    //   }
+    // )
     this.resourceFormGroup = this.fb.group({
       resource : ['',Validators.required],
       details : ['',Validators.required]

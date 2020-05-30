@@ -40,8 +40,8 @@ const routes: Routes = [
           loadChildren: () => InfrastructureModule
         },
         {
-          path: 'staff_alerts',
-          component: AlertsComponent
+          path: 'notification',
+          component : AlertsComponent, 
         },
         {
           path: 'staff_attendance',

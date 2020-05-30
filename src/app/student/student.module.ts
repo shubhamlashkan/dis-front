@@ -18,6 +18,7 @@ import { AttendanceComponent } from './attendance/attendance.component';
 import { MiscellaneousModule } from '../miscellaneous/miscellaneous.module';
 import { BarchartComponent } from '../miscellaneous/barchart/barchart.component';
 import { InfrastructureModule } from '../infrastructure/infrastructure.module';
+import { MatBadgeModule, MatIconModule } from '@angular/material';
 
 
 @NgModule({
@@ -28,7 +29,9 @@ import { InfrastructureModule } from '../infrastructure/infrastructure.module';
     AboutRoutingModule,
     MiscellaneousModule,
     ConventionalModule,
-    InfrastructureModule
+    InfrastructureModule,
+    MatIconModule,
+    MatBadgeModule
   ],
   declarations: [
     HomeComponent,
