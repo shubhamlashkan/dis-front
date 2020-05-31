@@ -15,46 +15,46 @@ export class ProfileService {
   constructor(private http: HttpClient) { }
  
   getProfileInfo(id, userType):Observable<any>{
-     return this.http.get(`${this.baseUrl}/staffBasicProfile?id=${id}&userType=${userType}`);
+     return this.http.get(`${this.baseUrl}/staffBasicProfile?userId=${id}&userType=${userType}`);
   }
 
   getStudentProfileInfo(id,userType):Observable<any>{
-    return this.http.get(`${this.baseUrl}/studentBasicProfile?id=${id}&userType=${userType}`);
+    return this.http.get(`${this.baseUrl}/studentBasicProfile?userId=${id}&userType=${userType}`);
   }
   getWorkExperienceInfo(id):Observable<any>{
-    return this.http.get(`${this.baseUrl}/userWorkExperience?id=${id}`);
+    return this.http.get(`${this.baseUrl}/userWorkExperience?userId=${id}`);
   }
 
   getUserQualificationInfo(id):Observable<any>{
-    return this.http.get(`${this.baseUrl}/userQualification?id=${id}`);
+    return this.http.get(`${this.baseUrl}/userQualification?userId=${id}`);
   }
 
   getUserResearchWorkInfo(id):Observable<any>{
-    return this.http.get(`${this.baseUrl}/userResearchWork?id=${id}`);
+    return this.http.get(`${this.baseUrl}/userResearchWork?userId=${id}`);
   }
 
   getUserInternshipInfo(id):Observable<any>{
-    return this.http.get(`${this.baseUrl}/userInternship?id=${id}`);
+    return this.http.get(`${this.baseUrl}/userInternship?userId=${id}`);
   }
 
   getUserProjectInfo(id):Observable<any>{
-    return this.http.get(`${this.baseUrl}/userProject?id=${id}`);
+    return this.http.get(`${this.baseUrl}/userProject?userId=${id}`);
   }
 
   getUserCompetitiveExamInfo(id):Observable<any>{
-    return this.http.get(`${this.baseUrl}/userCompetitiveExams?id=${id}`);
+    return this.http.get(`${this.baseUrl}/userCompetitiveExams?userId=${id}`);
   }
 
   getUserCulturalActivityInfo(id):Observable<any>{
-    return this.http.get(`${this.baseUrl}/userCulturalActivityAchievements?id=${id}`);
+    return this.http.get(`${this.baseUrl}/userCulturalActivityAchievements?userId=${id}`);
   }
 
   getUserTechnicalActivityInfo(id):Observable<any>{
-    return this.http.get(`${this.baseUrl}/userTechnicalActivity?id=${id}`);
+    return this.http.get(`${this.baseUrl}/userTechnicalActivity?userId=${id}`);
   }
 
   getUserAddressInfo(id):Observable<any>{
-    return this.http.get(`${this.baseUrl}/userAddress?id=${id}`);
+    return this.http.get(`${this.baseUrl}/userAddress?userId=${id}`);
   }
 
   getFacultyStaffList():Observable<any>{

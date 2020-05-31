@@ -66,6 +66,7 @@ export class UpdateEventDialogComponent implements OnInit {
   employeeList: any;
   usernameList: string[] = [];
   location: string;
+  selectedFile : File = null;
 
   constructor(
     public dialogRef: MatDialogRef<UpdateEventDialogComponent>,
@@ -130,9 +131,9 @@ export class UpdateEventDialogComponent implements OnInit {
       this.employeeList.subscribe(empList => {
         const currentUser = this.auth.getUsername();
         for (let i = 0; i < empList.length; i++) {
-          if (empList[i][0] === currentUser) {
-            this.organizer = empList[i][1];
-          } else {
+          if (empList[i][0] !== currentUser) {
+          //   this.organizer = empList[i][1];
+          // } else {
             this.options.push(empList[i][1]);
           }
         }
@@ -257,10 +258,13 @@ export class UpdateEventDialogComponent implements OnInit {
     return ((this.titleFormController.hasError('required')) || (this.locationFormController.hasError('required')) || (!this.validateDate(this.endDate)) || (!this.validateTime(this.endTime)));
   }
 
+  selectFile(event) {
+    this.selectedFile = event.target.files.item[0]; 
+  }
+
   onSubmit() {
     const start = this.toDateTime(new Date(this.startDate), this.startTime);
     const end = this.toDateTime(new Date(this.endDate), this.endTime);
-    this.participantList.add(this.organizer);
     this.usernameList = [];
     let flag = 0;
     this.employeeList.subscribe(emp => {
@@ -276,6 +280,7 @@ export class UpdateEventDialogComponent implements OnInit {
           this.usernameList.push(participant);
         };
       });
+      this.usernameList.push(this.organizer);
       console.log(this.usernameList)
       this.eventInfo = new EventInfo(
         this.titleFormController.value,
@@ -286,7 +291,8 @@ export class UpdateEventDialogComponent implements OnInit {
         this.organizer,
         this.organizer,
         new Date(),
-        this.locationFormController.value
+        this.locationFormController.value,
+        this.selectedFile
       );
       console.log(this.eventInfo);
       let addedEvent = this.calendarService.updateEvent(this.eventInfo,this.id);

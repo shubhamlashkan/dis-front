@@ -68,6 +68,7 @@ export class AddEventDialog {
   organizer: string;
   employeeList: any;
   usernameList: string[] = [];
+  selectedFile: File = null;
 
   constructor(
     public dialogRef: MatDialogRef<AddEventDialog>,
@@ -246,6 +247,11 @@ export class AddEventDialog {
     return ((this.titleFormController.hasError('required')) || (this.locationFormController.hasError('required')) || (!this.validateDate(this.endDate)) || (!this.validateTime(this.endTime)));
   }
 
+  selectFile(event) {
+    console.log(event.target.files.item(0));
+    this.selectedFile = event.target.files.item(0); 
+  }
+
   onSubmit() {
     const start = this.toDateTime(new Date(this.startDate), this.startTime);
     const end = this.toDateTime(new Date(this.endDate), this.endTime);
@@ -275,7 +281,8 @@ export class AddEventDialog {
         this.auth.getUsername(),
         this.auth.getUsername(),
         new Date(),
-        this.locationFormController.value
+        this.locationFormController.value,
+        this.selectedFile
       );
       console.log(this.eventInfo);
       let addedEvent = this.calendarService.addEvent(this.eventInfo);

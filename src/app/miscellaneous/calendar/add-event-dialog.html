@@ -103,6 +103,9 @@
             #autosize="cdkTextareaAutosize"
             cdkAutosizeMinRows="1"></textarea>
           </mat-form-field>
+          <span>
+            <input type="file" (change)="selectFile($event)"> 
+          </span>
           </div>
 </form>
 </div>

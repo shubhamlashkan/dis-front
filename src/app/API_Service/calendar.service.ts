@@ -39,5 +39,4 @@ export class CalendarService {
   getAllEmployeeList(): Observable<any> {
     return this.http.get(`${this.staffDataUrl}/getAllEmployeeNames`);
   }
-
 }
