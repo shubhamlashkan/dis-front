@@ -423,13 +423,14 @@ export class ProfileComponent implements OnInit {
       let data = this.userTechnicalActivityInfo[i];
       this.technicalActivityForm.setValue({
         'attendedOrganized': data.attendedOrganized,
-        'from': data.from,
+        'fromDate': data.fromDate,
         'nameOfCoordinator': data.nameOfCoordinator,
         'place': data.place,
-        'subject': data.subject,
-        'to': data.to,
+        'topicSubject': data.topicSubject,
+        'toDate': data.toDate,
         'type': data.type
       })
+      console.log(this.technicalActivityForm)
     }
   }
   updateTechnicalActivity(f: NgForm): void {

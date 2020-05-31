@@ -952,7 +952,7 @@
                 <h5>{{val.nameOfExam}} <a data-toggle="modal" [attr.data-target]="'#competitiveexam'"
                     (click)="fillCompetetiveExamData(i)"><i class="fa fa-pencil float-right"
                       style="font-size: 30px;"></i></a></h5>
-                <p>Registration No. : 1234<br />
+                <p>Registration No. : {{val.registrationNo}<br />
                   Year : {{val.year}}<br />
                   Score : {{val.score}}<br />
                   Rank : {{val.rank}}</p>
@@ -1304,13 +1304,13 @@
                 <i class="fa fa-trophy text-center" style="font-size: 60px;"></i>
               </div>
               <div class="col-11">
-                <h5>{{val.subject}}<a data-toggle="modal" [attr.data-target]="'#technicalactivity'"
+                <h5>{{val.topicSubject}}<a data-toggle="modal" [attr.data-target]="'#technicalactivity'"
                     (click)="fillTechnicalActivityData(i)"> <i class="fa fa-pencil float-right"
                       style="font-size: 30px;"></i></a></h5>
                 <p>{{val.type}}<br />
                   Place - {{val.place}}<br />
                   Attended / Organised - {{val.attendedOrganized}}<br />
-                  From : {{val.from}} To : {{val.to}}<br />
+                  From : {{val.fromDate}}  &nbsp;&nbsp; To : {{val.toDate}}<br />
                   Name of Coordinator - {{val.nameOfCoordinator}}
                 </p>
               </div>
@@ -1333,7 +1333,7 @@
                 <form #technicalActivityForm="ngForm">
                   <div class="form-group">
                     <label>Subject</label>
-                    <input class="form-control" type="text" name="subject" ngModel>
+                    <input class="form-control" type="text" name="topicSubject" ngModel>
                   </div>
                   <div class="row">
                     <div class="form-group col-lg-6">
@@ -1360,12 +1360,12 @@
                   <div class="row">
                     <div class="form-group col-lg-6">
                       <label>From</label>
-                      <input class="form-control" type="date" name="from" ngModel>
+                      <input class="form-control" type="date" name="fromDate" ngModel>
                     </div>
 
                     <div class="form-group col-lg-6">
                       <label>To</label>
-                      <input class="form-control" type="date" name="to" ngModel>
+                      <input class="form-control" type="date" name="toDate" ngModel>
                     </div>
                   </div>
                   <div class="d-flex justify-content-center mt-3">
