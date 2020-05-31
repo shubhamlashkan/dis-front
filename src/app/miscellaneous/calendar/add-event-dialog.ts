@@ -257,6 +257,7 @@ export class AddEventDialog {
     const end = this.toDateTime(new Date(this.endDate), this.endTime);
     this.participantList.add(this.organizer);
     let flag = 0;
+    let organizerUsername;
     console.log(this.participantList)
     this.employeeList.subscribe(emp => {
       this.participantList.forEach((participant) => {
@@ -265,6 +266,9 @@ export class AddEventDialog {
           if (participant === emp[j][1]) {
             this.usernameList.push(emp[j][0]);
             flag = 1;
+            if(participant === this.organizer){
+              organizerUsername = emp[j][0]
+            }
           }
         };
         if(flag === 0){
@@ -278,8 +282,8 @@ export class AddEventDialog {
         end,
         this.description,
         this.usernameList,
-        this.auth.getUsername(),
-        this.auth.getUsername(),
+        organizerUsername,
+        organizerUsername,
         new Date(),
         this.locationFormController.value,
         this.selectedFile

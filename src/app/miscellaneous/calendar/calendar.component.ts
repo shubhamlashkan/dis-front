@@ -73,9 +73,10 @@ export class CalendarComponent {
   }
 
   ngOnInit() {
+    alert(this.auth.getUsername())
     this.calendarService.getMyEvents(this.auth.getUsername()).subscribe( events => {
       for (let e = 0; e < events.length; e++) {
-        if(events[e].createdBy == this.auth.getUsername()){
+        if(events[e].eventIncharge == this.auth.getUsername()){
           this.calendarEvents = this.calendarEvents.concat({
             id: events[e].eventId,
             title: events[e].title,
