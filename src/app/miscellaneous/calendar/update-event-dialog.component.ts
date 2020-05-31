@@ -131,9 +131,9 @@ export class UpdateEventDialogComponent implements OnInit {
       this.employeeList.subscribe(empList => {
         const currentUser = this.auth.getUsername();
         for (let i = 0; i < empList.length; i++) {
-          if (empList[i][0] !== currentUser) {
-          //   this.organizer = empList[i][1];
-          // } else {
+          if (empList[i][0] === currentUser) {
+            this.organizer = empList[i][1];
+          } else {
             this.options.push(empList[i][1]);
           }
         }
