@@ -133,72 +133,25 @@ export class ProfileComponent implements OnInit {
           }
         )
 
-      this.profile.getUserInternshipInfo('')
-        .subscribe(
-          data => {
-            this.userInternshipInfo = data;
-            console.log(this.userInternshipInfo);
-          }
-        )
+      this.retrieveUserInternshipInfo();
 
-      this.profile.getUserProjectInfo('')
-        .subscribe(
-          data => {
-            this.userProjectInfo = data;
-            console.log(this.userProjectInfo);
-          }
-        )
+      this.retrieveUserProjectInfo()
 
     }
 
-    this.profile.getWorkExperienceInfo('')
-      .subscribe(
-        data => {
-          this.workExperienceInfo = data;
-          console.log(this.workExperienceInfo);
-        }
-      )
+    this.retrieveWorkExperienceInfo();
+
+    this.retrieveUserQualificationInfo() 
+
+    this.retrieveUserResearchWorkInfo()
+
+    this.retrieveUserCompetitiveExamInfo()
+
+    this.retrieveUserCulturalActivityInfo()
+
+    this.retrieveUserTechnicalActivityInfo() 
 
 
-    this.profile.getUserQualificationInfo('')
-      .subscribe(
-        data => {
-          this.userQualificationInfo = data;
-          console.log(this.userQualificationInfo);
-        }
-      )
-    this.profile.getUserResearchWorkInfo('')
-      .subscribe(
-        data => {
-          this.userResearchWorkInfo = data;
-          console.log(this.userResearchWorkInfo);
-        }
-      )
-
-
-    this.profile.getUserCompetitiveExamInfo('')
-      .subscribe(
-        data => {
-          this.userCompetitiveExamInfo = data;
-          console.log(this.userCompetitiveExamInfo);
-        }
-      )
-
-    this.profile.getUserCulturalActivityInfo('')
-      .subscribe(
-        data => {
-          this.userCulturalActivityInfo = data;
-          console.log(this.userCulturalActivityInfo);
-        }
-      )
-
-    this.profile.getUserTechnicalActivityInfo('')
-      .subscribe(
-        data => {
-          this.userTechnicalActivityInfo = data;
-          console.log(this.userTechnicalActivityInfo);
-        }
-      )
 
     this.profile.getUserAddressInfo('')
       .subscribe(
@@ -326,13 +279,14 @@ export class ProfileComponent implements OnInit {
         data => {
           console.log(data);
           this.toastr.successToastr(data.message, 'Success!');
+          this.retrieveWorkExperienceInfo();
+          this.selectedIndex = -1;
         },
         error => {
           this.toastr.errorToastr(this.completionMessage, 'Alert!')
           console.log(error)
         }
       )
-      this.selectedIndex = -1;
   }
 
   //education methods
@@ -369,12 +323,13 @@ export class ProfileComponent implements OnInit {
         data => {
           console.log(data);
           this.toastr.successToastr(data.message, 'Success!');
+          this.retrieveUserQualificationInfo()
+          this.selectedIndex = -1;
         },
         error => {
           this.toastr.errorToastr(this.completionMessage, 'Alert!')
         }
       )
-      this.selectedIndex = -1;
   }
 
   //research work methods
@@ -413,12 +368,13 @@ export class ProfileComponent implements OnInit {
         b => {
           console.log("step 4")
           this.toastr.successToastr('Success!');
+          this.retrieveUserResearchWorkInfo()
+          this.selectedIndex = -1;
         },
         error => {
           this.toastr.errorToastr(this.completionMessage, 'Alert!')
         }
       )
-    this.selectedIndex = -1;
   }
 
   fillCulturalActivityData(i: number) {
@@ -452,12 +408,13 @@ export class ProfileComponent implements OnInit {
         data => {
           console.log(data);
           this.toastr.successToastr(data.message, 'Success!');
+          this.retrieveUserCulturalActivityInfo()
+          this.selectedIndex = -1;
         },
         error => {
           this.toastr.errorToastr(this.completionMessage, 'Alert!')
         }
       )
-      this.selectedIndex = -1;
   }
 
   fillTechnicalActivityData(i: number): void {
@@ -488,12 +445,13 @@ export class ProfileComponent implements OnInit {
         data => {
           console.log(data);
           this.toastr.successToastr(data.message, 'Success!');
+          this.retrieveUserTechnicalActivityInfo();
+          this.selectedIndex = -1;
         },
         error => {
           this.toastr.errorToastr(this.completionMessage, 'Alert!')
         }
       )
-      this.selectedIndex = -1;
   }
   resetTechnicalActivity(): void {
     this.technicalActivityForm.reset();
@@ -526,12 +484,13 @@ export class ProfileComponent implements OnInit {
         data => {
           console.log(data);
           this.toastr.successToastr(data.message, 'Success!');
+          this.retrieveUserCompetitiveExamInfo()
+          this.selectedIndex = -1;
         },
         error => {
           this.toastr.errorToastr(this.completionMessage, 'Alert!')
         }
       )
-      this.selectedIndex = -1;
   }
   resetCompetetiveExam(): void {
     this.competitiveExamForm.reset();
@@ -565,12 +524,13 @@ export class ProfileComponent implements OnInit {
         data => {
           console.log(data);
           this.toastr.successToastr(data.message, 'Success!');
+          this.retrieveUserProjectInfo()
+          this.selectedIndex = -1;
         },
         error => {
           this.toastr.errorToastr(this.completionMessage, 'Alert!')
         }
       )
-      this.selectedIndex = -1;
   }
   resetProjectForm(): void {
     this.projectForm.reset();
@@ -604,6 +564,8 @@ export class ProfileComponent implements OnInit {
         data => {
           console.log(data);
           this.toastr.successToastr(data.message, 'Success!');
+          this.selectedIndex = -1;
+          this.retrieveUserInternshipInfo()
         },
         error => {
           this.toastr.errorToastr(this.completionMessage, 'Alert!')
@@ -772,5 +734,85 @@ export class ProfileComponent implements OnInit {
     this.showConfirmation = false;
   }
 
+  retrieveUserInternshipInfo() {
+     this.profile.getUserInternshipInfo('')
+    .subscribe(
+      data => {
+        this.userInternshipInfo = data;
+        console.log(this.userInternshipInfo);
+      }
+    )
+  }
+
+  retrieveWorkExperienceInfo() {
+    this.profile.getWorkExperienceInfo('')
+    .subscribe(
+      data => {
+        this.workExperienceInfo = data;
+        console.log(this.workExperienceInfo);
+      }
+    )
+
+  }
+
+  retrieveUserProjectInfo() {
+    this.profile.getUserProjectInfo('')
+        .subscribe(
+          data => {
+            this.userProjectInfo = data;
+            console.log(this.userProjectInfo);
+          }
+        )
+  }
+
+  retrieveUserQualificationInfo() {
+    this.profile.getUserQualificationInfo('')
+    .subscribe(
+      data => {
+        this.userQualificationInfo = data;
+        console.log(this.userQualificationInfo);
+      }
+    )
+  }
+
+  retrieveUserResearchWorkInfo() {
+    this.profile.getUserResearchWorkInfo('')
+      .subscribe(
+        data => {
+          this.userResearchWorkInfo = data;
+          console.log(this.userResearchWorkInfo);
+        }
+      )
+  }
+
+  retrieveUserCompetitiveExamInfo() {
+    this.profile.getUserCompetitiveExamInfo('')
+      .subscribe(
+        data => {
+          this.userCompetitiveExamInfo = data;
+          console.log(this.userCompetitiveExamInfo);
+        }
+      )
+  }
+
+  retrieveUserCulturalActivityInfo() {
+    this.profile.getUserCulturalActivityInfo('')
+    .subscribe(
+      data => {
+        this.userCulturalActivityInfo = data;
+        console.log(this.userCulturalActivityInfo);
+      }
+    )
+  }
+
+  retrieveUserTechnicalActivityInfo() {
+    this.profile.getUserTechnicalActivityInfo('')
+      .subscribe(
+        data => {
+          this.userTechnicalActivityInfo = data;
+          console.log(this.userTechnicalActivityInfo);
+        }
+      )
+  }
 
 }
