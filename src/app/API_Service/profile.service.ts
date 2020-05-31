@@ -102,4 +102,48 @@ export class ProfileService {
   editEducation(info: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/addUserQualification`, info, httpOptions);
   }
+
+
+  
+  deleteCompetitiveExam(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/deleteUserCompetitiveExam?id=${id}`)
+  }
+
+  deleteAddress(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/deleteUserAddress?id=${id}`)
+  }
+
+  deleteCulturalActivity(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/deleteUserCulturalActivityAchievement?id=${id}`)
+  }
+
+  deleteInternship(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/deleteUserInternship?id=${id}`)
+  }
+
+  deleteOtherAchievement(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/deleteUserOtherAchievement?id=${id}`)
+  }
+
+  deleteWorkExperience(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/deleteUserWorkExperience?id=${id}`)
+  }
+
+  deleteTechnicalActivity(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/deleteUserTechnicalActivity?id=${id}`)
+  }
+
+  deleteResearchWork(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/deleteUserResearchWork?id=${id}`)
+  }
+
+  deleteQualification(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/deleteUserQualification?id=${id}`)
+  }
+
+  deleteProject(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/deleteUserProject?id=${id}`)
+  }
+
+
 }

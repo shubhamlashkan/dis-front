@@ -495,7 +495,9 @@
             </div>
             <div class="col-11">
               <h5> <a data-toggle="modal" [attr.data-target]="'#experience'" (click)="fillWorkExperienceData(i)"> <i
-                    class="fa fa-pencil float-right" style="font-size: 30px;"></i></a></h5>
+                    class="fa fa-pencil float-right" style="font-size: 30px;"></i></a>
+                <a (click)="deleteWorkExperienceData(val.id)"><i class="fa fa-trash  float-right" aria-hidden="true"
+                    style="font-size: 30px;">&nbsp;&nbsp;</i></a></h5>
               <p>{{val.designation}}, {{val.organizationName}}<br />
                 Payscale : {{val.payScale}}<br />
                 {{val.dateOfJoining}} to {{val.dateOfLeaving}}<br />
@@ -588,7 +590,9 @@
                   {{val.collegeSchool}}
                 </span>
                 <a data-toggle="modal" [attr.data-target]="'#education'" (click)="fillEducationData(i)"><i
-                    class="fa fa-pencil float-right" style="font-size: 30px;"></i></a></h5>
+                    class="fa fa-pencil float-right" style="font-size: 30px;"></i></a>
+                <a (click)="deleteQualificationData(val.id)"><i class="fa fa-trash  float-right" aria-hidden="true"
+                    style="font-size: 30px;">&nbsp;&nbsp;</i></a></h5>
               <p>{{val.universityBoard}}<br />{{val.degreeCertificate}}, {{val.specialization}}<br />Year of Passing :
                 {{val.yearOfPassing}}<br />CGPA : {{val.percentageCgpa}}</p>
             </div>
@@ -660,6 +664,8 @@
               <h5>{{val.title}}
                 <a data-toggle="modal" [attr.data-target]="'#research'" (click)="fillResearchData(i)"><i
                     class="fa fa-pencil float-right" style="font-size: 30px;"></i></a>
+                <a (click)="deleteResearchWorkData(val.id)"><i class="fa fa-trash  float-right" aria-hidden="true"
+                    style="font-size: 30px;">&nbsp;&nbsp;</i></a>
               </h5>
               <p>{{val.yearOfPublication}}, {{val.publisher}}<br />
                 Guide : {{val.guideName}} <br />
@@ -795,7 +801,9 @@
               <div class="col-11">
                 <h5>{{val.subject}} <a data-toggle="modal" [attr.data-target]="'#internship'"
                     (click)="fillInternshipData(i)"><i class="fa fa-pencil float-right"
-                      style="font-size: 30px;"></i></a></h5>
+                      style="font-size: 30px;"></i></a>
+                  <a (click)="deleteInternshipData(val.id)"><i class="fa fa-trash  float-right" aria-hidden="true"
+                      style="font-size: 30px;">&nbsp;&nbsp;</i></a></h5>
                 <p>{{val.companyName}}<br />{{val.city}}, {{val.state}}, {{val.country}}<br />{{val.startDate}} -
                   {{val.endDate}}<br /></p>
               </div>
@@ -873,7 +881,9 @@
               </div>
               <div class="col-11">
                 <h5>{{val.title}} <a data-toggle="modal" [attr.data-target]="'#project'" (click)="fillProjectData(i)"><i
-                      class="fa fa-pencil float-right" style="font-size: 30px;"></i></a></h5>
+                      class="fa fa-pencil float-right" style="font-size: 30px;"></i></a>
+                  <a (click)="deleteProjectData(val.id)"><i class="fa fa-trash  float-right" aria-hidden="true"
+                      style="font-size: 30px;">&nbsp;&nbsp;</i></a></h5>
                 <p>{{val.from}} - {{val.to}}<br />Guide : {{val.guide}}<br />{{val.description}} <br />Other Creators :
                   {{val.otherCreators}} <br />My Role : {{val.role}}</p>
               </div>
@@ -951,8 +961,11 @@
               <div class="col-11">
                 <h5>{{val.nameOfExam}} <a data-toggle="modal" [attr.data-target]="'#competitiveexam'"
                     (click)="fillCompetetiveExamData(i)"><i class="fa fa-pencil float-right"
-                      style="font-size: 30px;"></i></a></h5>
-                <p>Registration No. : {{val.registrationNo}<br />
+                      style="font-size: 30px;"></i></a>
+                  <a (click)="deleteCompetetiveExamData(val.id)"><i class="fa fa-trash  float-right" aria-hidden="true"
+                      style="font-size: 30px;">&nbsp;&nbsp;</i></a>
+                </h5>
+                <p>Registration No. : {{val.registrationNo}}<br />
                   Year : {{val.year}}<br />
                   Score : {{val.score}}<br />
                   Rank : {{val.rank}}</p>
@@ -1228,7 +1241,9 @@
               <div class="col-11">
                 <h5>{{val.achievement}}<a data-toggle="modal" [attr.data-target]="'#culturalactivity'"
                     (click)="fillCulturalActivityData(i)"> <i class="fa fa-pencil float-right"
-                      style="font-size: 30px;"></i></a></h5>
+                      style="font-size: 30px;"></i></a>
+                  <a (click)="deleteCulturalActivityData(val.id)"><i class="fa fa-trash  float-right" aria-hidden="true"
+                      style="font-size: 30px;">&nbsp;&nbsp;</i></a></h5>
                 <h5>{{val.nameOfActivity}} - {{val.type}}</h5>
                 <p>{{val.date}}, {{val.place}}</p>
               </div>
@@ -1306,11 +1321,13 @@
               <div class="col-11">
                 <h5>{{val.topicSubject}}<a data-toggle="modal" [attr.data-target]="'#technicalactivity'"
                     (click)="fillTechnicalActivityData(i)"> <i class="fa fa-pencil float-right"
-                      style="font-size: 30px;"></i></a></h5>
+                      style="font-size: 30px;"></i></a>
+                  <a (click)="deleteTechnicalActivityData(val.id)"><i class="fa fa-trash  float-right"
+                      aria-hidden="true" style="font-size: 30px;">&nbsp;&nbsp;</i></a></h5>
                 <p>{{val.type}}<br />
                   Place - {{val.place}}<br />
                   Attended / Organised - {{val.attendedOrganized}}<br />
-                  From : {{val.fromDate}}  &nbsp;&nbsp; To : {{val.toDate}}<br />
+                  From : {{val.fromDate}} &nbsp;&nbsp; To : {{val.toDate}}<br />
                   Name of Coordinator - {{val.nameOfCoordinator}}
                 </p>
               </div>

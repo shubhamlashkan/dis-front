@@ -265,6 +265,21 @@ export class ProfileComponent implements OnInit {
     this.workExperienceForm.reset();
     this.selectedIndex = -1;
   }
+
+
+  deleteWorkExperienceData(id : number) {
+    this.profile.deleteWorkExperience(id)
+    .subscribe(
+      data => {
+        this.toastr.successToastr(data.message, 'Success!');
+        this.retrieveWorkExperienceInfo()
+      },
+      error => {
+        this.toastr.errorToastr(this.completionMessage, 'Alert!')
+      }
+    )
+  }
+
   updateExperienceData(f: NgForm): void {
     let data = f.value;
     //console.log(this.selectedIndex )
@@ -303,6 +318,20 @@ export class ProfileComponent implements OnInit {
         'yearOfPassing': data.yearOfPassing
       })
     }
+  }
+
+
+  deleteQualificationData(id : number) {
+    this.profile.deleteQualification(id)
+    .subscribe(
+      data => {
+        this.toastr.successToastr(data.message, 'Success!');
+        this.retrieveUserQualificationInfo()
+      },
+      error => {
+        this.toastr.errorToastr(this.completionMessage, 'Alert!')
+      }
+    )
   }
 
   resetEducationForm(): void {
@@ -355,6 +384,21 @@ export class ProfileComponent implements OnInit {
     this.researchForm.reset();
     this.selectedIndex = -1;
   }
+
+
+  deleteResearchWorkData(id : number) {
+    this.profile.deleteResearchWork(id)
+    .subscribe(
+      data => {
+        this.toastr.successToastr(data.message, 'Success!');
+        this.retrieveUserResearchWorkInfo()
+      },
+      error => {
+        this.toastr.errorToastr(this.completionMessage, 'Alert!')
+      }
+    )
+  }
+
   updateResearchWork(f: NgForm): void {
     let data = f.value;
     if (this.selectedIndex != -1) {
@@ -395,6 +439,21 @@ export class ProfileComponent implements OnInit {
     this.culturalActivityForm.reset();
     this.selectedIndex = -1;
   }
+
+
+  deleteCulturalActivityData(id : number) {
+    this.profile.deleteCulturalActivity(id)
+    .subscribe(
+      data => {
+        this.toastr.successToastr(data.message, 'Success!');
+        this.retrieveUserCulturalActivityInfo()
+      },
+      error => {
+        this.toastr.errorToastr(this.completionMessage, 'Alert!')
+      }
+    )
+  }
+
   updateCulturalActivity(f: NgForm) {
     let data = f.value;
     if (this.selectedIndex != -1) {
@@ -433,6 +492,21 @@ export class ProfileComponent implements OnInit {
       console.log(this.technicalActivityForm)
     }
   }
+
+
+  deleteTechnicalActivityData(id : number) {
+    this.profile.deleteTechnicalActivity(id)
+    .subscribe(
+      data => {
+        this.toastr.successToastr(data.message, 'Success!');
+        this.retrieveUserTechnicalActivityInfo()
+      },
+      error => {
+        this.toastr.errorToastr(this.completionMessage, 'Alert!')
+      }
+    )
+  }
+
   updateTechnicalActivity(f: NgForm): void {
     let data = f.value;
     if (this.selectedIndex != -1) {
@@ -472,6 +546,21 @@ export class ProfileComponent implements OnInit {
       })
     }
   }
+
+  deleteCompetetiveExamData(id : number) {
+    this.profile.deleteCompetitiveExam(id)
+    .subscribe(
+      data => {
+        this.toastr.successToastr(data.message, 'Success!');
+        this.retrieveUserCompetitiveExamInfo()
+      },
+      error => {
+        this.toastr.errorToastr(this.completionMessage, 'Alert!')
+      }
+    )
+  }
+    
+
   updateCompetitiveExamData(f: NgForm): void {
     let data = f.value;
     if (this.selectedIndex != -1) {
@@ -512,6 +601,21 @@ export class ProfileComponent implements OnInit {
       })
     }
   }
+  
+  
+  deleteProjectData(id : number) {
+    this.profile.deleteProject(id)
+    .subscribe(
+      data => {
+        this.toastr.successToastr(data.message, 'Success!');
+        this.retrieveUserProjectInfo()
+      },
+      error => {
+        this.toastr.errorToastr(this.completionMessage, 'Alert!')
+      }
+    )
+  }
+
   updateProjectData(f: NgForm): void {
     let data = f.value;
     if (this.selectedIndex != -1) {
@@ -552,6 +656,21 @@ export class ProfileComponent implements OnInit {
       })
     }
   }
+
+
+  deleteInternshipData(id : number) {
+    this.profile.deleteInternship(id)
+    .subscribe(
+      data => {
+        this.toastr.successToastr(data.message, 'Success!');
+        this.retrieveUserInternshipInfo()
+      },
+      error => {
+        this.toastr.errorToastr(this.completionMessage, 'Alert!')
+      }
+    )
+  }
+
   updateInternshipData(f: NgForm): void {
     let data = f.value;
     if (this.selectedIndex != -1) {
