@@ -263,17 +263,23 @@ export class UpdateEventDialogComponent implements OnInit {
     this.participantList.add(this.organizer);
     this.usernameList = [];
     let flag = 0;
+    let organizerUsername;
     this.employeeList.subscribe(emp => {
+      console.log(emp);
       this.participantList.forEach((participant) => {
         flag = 0;
         for (let j = 0; j < emp.length; j++) {
           if (participant === emp[j][1]) {
             this.usernameList.push(emp[j][0]);
             flag = 1;
+            if(this.organizer === participant){
+              organizerUsername = emp[j][0];
+            }
           }
         };
         if(flag === 0){
           this.usernameList.push(participant);
+          alert(1);
         };
       });
       console.log(this.usernameList)
@@ -283,8 +289,8 @@ export class UpdateEventDialogComponent implements OnInit {
         end,
         this.description,
         this.usernameList,
-        this.organizer,
-        this.organizer,
+        organizerUsername,
+        organizerUsername,
         new Date(),
         this.locationFormController.value
       );
