@@ -202,6 +202,28 @@ export class ComplaintsService {
     return this.http.get(`${this.baseUrl}/getMyComplaintsCount`);
   }
 
+  //resource-request (post, put services)
+  addAFacultyResourceRequest(info : any):Observable<any>{
+    return this.http.post<any>(`${this.baseUrl}/addFacultyResourceRequest`,info,httpOptions);
+  }
+
+  setRequestResolved(info : any):Observable<any>{
+    return this.http.put(`${this.baseUrl}/setFacultyRequestResolved/${info.id}`,httpOptions)
+  }
+
+  //resource-request
+  getAllFacultyRequestsForId():Observable<any> {
+    return this.http.get(`${this.baseUrl}/getAllFacultyRequestsForId`)
+  }
+
+  getAllUnresolvedRequests():Observable<any> {
+    return this.http.get(`${this.baseUrl}/getAllUnresolvedFacultyRequests`)
+  }
+
+  getAllResolvedRequests():Observable<any> {
+    return this.http.get(`${this.baseUrl}/getAllResolvedFacultyRequests`)
+  }
+
   //get permission 
   getPermissions():Observable<any>{
     return this.http.get(`${this.baseUrl}/addComplaintPermission`);
