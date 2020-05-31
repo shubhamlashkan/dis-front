@@ -11,6 +11,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ComplaintsService {
+ 
   urls = new Urls();
   private mainUrl = this.urls.mainurl;
   // private baseUrl = mainurl+'/dis/administrationn'
@@ -232,6 +233,14 @@ export class ComplaintsService {
 
   getStaffFacultyList():Observable<any>{
     return this.http.get("http://localhost:8080/dis/getStaffFacultyList");
+  }
+
+  getInfraInchargeDetails():Observable<any>{
+    return this.http.get("http://localhost:8080/dis/infrastructure/infra/getInfraInchargeDetails");
+  }
+
+  updateInfraIncharge(data: any) {
+    return this.http.post("http://localhost:8080/dis/infrastructure/infra/updateInfraInchargeDetails", data, httpOptions);
   }
 
 }

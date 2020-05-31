@@ -13,10 +13,12 @@ import { MyComplaintsComponent } from './my-complaints/my-complaints.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResourceRequestComponent } from './resource-request/resource-request.component';
 import { DownloadComplaintReportComponent } from './download-complaint-report/download-complaint-report.component';
-
+import { ChangeAuthorityComponent } from './change-authority/change-authority.component';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+import { MatTableModule } from '@angular/material';
 @NgModule({
   declarations: [TotalComplaintsComponent, ResolvedComplaintsComponent, RemainingComplaintsComponent,
-    SideNavigationComponent, ComplaintsComponent, AddacomplaintComponent, MyComplaintsComponent, ResourceRequestComponent, DownloadComplaintReportComponent
+    SideNavigationComponent, ComplaintsComponent, AddacomplaintComponent, MyComplaintsComponent, ResourceRequestComponent, DownloadComplaintReportComponent, ChangeAuthorityComponent
    ],
 
   imports: [
@@ -24,6 +26,7 @@ import { DownloadComplaintReportComponent } from './download-complaint-report/do
     CommonModule,
     ReactiveFormsModule,
     ComplaintsRoutingModule,
+    MatTableModule,
     ConfirmationPopoverModule.forRoot({
       confirmButtonType: 'primary' // set defaults here
     })

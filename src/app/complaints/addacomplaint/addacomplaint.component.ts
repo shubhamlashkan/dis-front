@@ -233,7 +233,7 @@ export class AddacomplaintComponent implements OnInit {
         this.toastr.successToastr(data.message, 'Success!');
       },
       error =>{
-        this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        this.toastr.errorToastr(error.error.message, 'Alert!')
       }
     )
   }
@@ -246,7 +246,7 @@ export class AddacomplaintComponent implements OnInit {
         this.toastr.successToastr(data.message, 'Success!');
       },
       error =>{
-        this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        this.toastr.errorToastr(error.error.message, 'Alert!')
       }
     )
   }
@@ -259,7 +259,7 @@ export class AddacomplaintComponent implements OnInit {
         this.toastr.successToastr(data.message, 'Success!');
       },
       error =>{
-        this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        this.toastr.errorToastr(error.error.message, 'Alert!')
       }
     )
   }
@@ -272,7 +272,7 @@ export class AddacomplaintComponent implements OnInit {
         this.toastr.successToastr(data.message, 'Success!');
       },
       error =>{
-        this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        this.toastr.errorToastr(error.error.message, 'Alert!')
       }
     )
   }
@@ -285,7 +285,7 @@ export class AddacomplaintComponent implements OnInit {
         this.toastr.successToastr(data.message, 'Success!');
       },
       error =>{
-        this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        this.toastr.errorToastr(error.error.message, 'Alert!')
       }
     )
   }
@@ -298,7 +298,7 @@ export class AddacomplaintComponent implements OnInit {
           this.toastr.successToastr(data.message, 'Success!');
         },
         error =>{
-          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+          this.toastr.errorToastr(error.error.message, 'Alert!')
         }
       )
   }
@@ -311,7 +311,7 @@ export class AddacomplaintComponent implements OnInit {
         this.toastr.successToastr(data.message, 'Success!');
       },
       error =>{
-        this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        this.toastr.errorToastr(error.error.message, 'Alert!')
       }
     )
   }
@@ -324,7 +324,7 @@ export class AddacomplaintComponent implements OnInit {
         this.toastr.successToastr(data.message, 'Success!');
       },
       error =>{
-        this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        this.toastr.errorToastr(error.error.message, 'Alert!')
       }
     )
   }
@@ -337,7 +337,7 @@ export class AddacomplaintComponent implements OnInit {
         this.toastr.successToastr(data.message, 'Success!');
       },
       error =>{
-        this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        this.toastr.errorToastr(error.error.message, 'Alert!')
       }
     )
   }

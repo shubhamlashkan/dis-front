@@ -113,7 +113,7 @@
               <a class="dropdown-item" class="filter-links" href='#' (click)="showFaculty()">
                 <i class="fa fa-users fa-fw" aria-hidden="true"></i> Faculty
               </a><br />
-             
+
             </ng-container>
 
 
@@ -127,148 +127,145 @@
 </div>
 <br>
 <div class="row">
-    <div  class="col-lg-12" >
+  <div class="col-lg-12">
     <app-addacomplaint></app-addacomplaint>
-    </div>
-    </div>
-  <br>
+  </div>
+</div>
+<br>
 <!--Notification Panel starts-->
 
-<div  style="padding-left:12px;padding-right:12px">
+<div style="padding-left:12px;padding-right:12px">
   <div *ngIf="cleanliness">
-  <div *ngFor="let val of cleanlinessResolvedComplaintsInfo">
-    <div class="alert alert-success row">
-     <h4 class="col-9">Complaint : {{val.type}}{{val.id}}</h4>
-     <h6 class="col-3"  style="text-align: right;" >Status : {{val.status}}</h6> 
-    <p class="col-8"> Date and Time : {{val.createdDate}}<br/>Location : {{val.location}}<br/>
-        Description : {{val.details}}<br/>
-      Level of Dust : {{val.levelOfDust}}</p>
-      <!--  Assigned to : Mr XYZ <br/>Work in progress<br/>	-->
+    <div *ngFor="let val of cleanlinessResolvedComplaintsInfo">
+      <div class="alert alert-success row">
+        <h4 class="col-9">Complaint : {{val.type}}{{val.id}}</h4>
+        <h6 class="col-3" style="text-align: right;">Status : {{val.status}}</h6>
+        <p class="col-8"> Date and Time : {{val.createdDate}}<br />Location : {{val.location}}<br />
+          Description : {{val.details}}<br />
+          Level of Dust : {{val.levelOfDust}}</p>
+        <!--  Assigned to : Mr XYZ <br/>Work in progress<br/>	-->
+      </div>
     </div>
-</div>
-</div>
-<div *ngIf="le">
+  </div>
+  <div *ngIf="le">
 
-<div *ngFor="let val of leResolvedComplaintsInfo">
-  <div class="alert alert-success row">
-   <h4 class="col-9">Complaint : {{val.type}}{{val.id}}</h4>
-   <h6 class="col-3"  style="text-align: right;" >Status : {{val.status}}</h6> 
-  <p class="col-8"> Date and Time : {{val.createdDate}}<br/>
-    System No. : {{val.systemNo}}<br/>
-    Lab : {{val.lab}}<br/>
-      Description : {{val.details}}<br/>
-    </p>
-    <!--  Assigned to : Mr XYZ <br/>Work in progress<br/>	-->
+    <div *ngFor="let val of leResolvedComplaintsInfo">
+      <div class="alert alert-success row">
+        <h4 class="col-9">Complaint : {{val.type}}{{val.id}}</h4>
+        <h6 class="col-3" style="text-align: right;">Status : {{val.status}}</h6>
+        <p class="col-8"> Date and Time : {{val.createdDate}}<br />
+          System No. : {{val.systemNo}}<br />
+          Lab : {{val.lab}}<br />
+          Description : {{val.details}}<br />
+        </p>
+        <!--  Assigned to : Mr XYZ <br/>Work in progress<br/>	-->
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="cwn">
+    <div *ngFor="let val of cwnResolvedComplaintsInfo">
+      <div class="alert alert-success row">
+        <h4 class="col-9">Complaint : {{val.type}}{{val.id}}</h4>
+        <h6 class="col-3" style="text-align: right;">Status : {{val.status}}</h6>
+        <p class="col-8"> Date and Time : {{val.createdDate}}<br />
+          Location : {{val.location}}<br />
+          Description : {{val.details}}<br />
+        </p>
+        <!--  Assigned to : Mr XYZ <br/>Work in progress<br/>	-->
+      </div>
+    </div>
+  </div>
+  <div *ngIf="ecc">
+
+    <div *ngFor="let val of eccwResolvedComplaintsInfo">
+      <div class="alert alert-success row">
+        <h4 class="col-9">Complaint : {{val.type}}{{val.id}}</h4>
+        <h6 class="col-3" style="text-align: right;">Status : {{val.status}}</h6>
+        <p class="col-8"> Date and Time : {{val.createdDate}}<br />
+          Location : {{val.location}}<br />
+          Description : {{val.details}}<br />
+        </p>
+        <!--  Assigned to : Mr XYZ <br/>Work in progress<br/>	-->
+      </div>
+    </div>
+  </div>
+  <div *ngIf="other">
+    <div *ngFor="let val of otherResolvedComplaintsInfo">
+      <div class="alert alert-success row">
+        <h4 class="col-9">Complaint : {{val.type}}{{val.id}}</h4>
+        <h6 class="col-3" style="text-align: right;">Status : {{val.status}}</h6>
+        <p class="col-8"> Date and Time : {{val.createdDate}}<br />
+          Description : {{val.details}}<br />
+          Assigned To : {{val.assignedTo}}<br />
+        </p>
+        <!--  Assigned to : Mr XYZ <br/>Work in progress<br/>	-->
+      </div>
+    </div>
+  </div>
+  <div *ngIf="faculty">
+    <div *ngFor="let val of facultyResolvedComplaintsInfo">
+      <div class="alert alert-success row">
+        <h4 class="col-9">Complaint : {{val.type}}{{val.id}}</h4>
+        <h6 class="col-3" style="text-align: right;">Status : {{val.status}}</h6>
+        <p class="col-8"> Date and Time : {{val.createdDate}}<br />
+          Description : {{val.details}}<br />
+          Faculty Name : {{val.facultyName}}<br />
+          Date of Resolution : {{val.dateOfResolution}}
+        </p>
+        <!--  Assigned to : Mr XYZ <br/>Work in progress<br/>	-->
+      </div>
+    </div>
+  </div>
+  <div *ngIf="stu">
+
+    <div *ngFor="let val of stuResolvedComplaintsInfo">
+      <div class="alert alert-success row">
+        <h4 class="col-9">Complaint : {{val.type}}{{val.id}}</h4>
+        <h6 class="col-3" style="text-align: right;">Status : {{val.status}}</h6>
+        <p class="col-8"> Date and Time : {{val.createdDate}}<br />
+          Description : {{val.details}}<br />
+          Student Name : {{val.studentName}}<br />
+          Student Roll No. : {{val.studentRollNo}}<br />
+          Student Year : {{val.year}}<br />
+          Date of Resolution : {{val.dateOfResolution}}<br />
+          <b>Remark : {{val.remarks}}</b>
+        </p>
+        <!--  Assigned to : Mr XYZ <br/>Work in progress<br/>	-->
+      </div>
+    </div>
+  </div>
+  <div *ngIf="telephone">
+
+    <div *ngFor="let val of telephoneResolvedComplaintsInfo">
+      <div class="alert alert-success row">
+        <h4 class="col-9">Complaint : {{val.type}}{{val.id}}</h4>
+        <h6 class="col-3" style="text-align: right;">Status : {{val.status}}</h6>
+        <p class="col-8"> Date and Time : {{val.createdDate}}<br />
+          Description : {{val.details}}<br />
+          Location : {{val.location}}<br />
+          Extension No. : {{val.extensionNo}}<br />
+          Date of Resolution : {{val.dateOfResolution}}<br />
+          <b>Remark : {{val.remarks}}</b>
+        </p>
+        <!--  Assigned to : Mr XYZ <br/>Work in progress<br/>	-->
+      </div>
+    </div>
+  </div>
+  <div *ngIf="emrs">
+    <div *ngFor="let val of emrsResolvedComplaintsInfo">
+      <div class="alert alert-success row">
+        <h4 class="col-9">Complaint : {{val.type}}{{val.id}}</h4>
+        <h6 class="col-3" style="text-align: right;">Status : {{val.status}}</h6>
+        <p class="col-8"> Date and Time : {{val.createdDate}}<br />
+          Description : {{val.details}}<br />
+          Location : {{val.location}}<br />
+          Date of Resolution : {{val.dateOfResolution}}<br />
+          <b>Remark : {{val.remarks}}</b>
+        </p>
+        <!--  Assigned to : Mr XYZ <br/>Work in progress<br/>	-->
+      </div>
+    </div>
   </div>
 </div>
-</div>
-
-<div *ngIf="cwn">
-<div *ngFor="let val of cwnResolvedComplaintsInfo">
-<div class="alert alert-success row">
- <h4 class="col-9">Complaint : {{val.type}}{{val.id}}</h4>
- <h6 class="col-3"  style="text-align: right;" >Status : {{val.status}}</h6> 
-<p class="col-8"> Date and Time : {{val.createdDate}}<br/>
-  Location : {{val.location}}<br/>
-    Description : {{val.details}}<br/>
-    Form Id : {{val.formId}}<br/>
-  </p>
-  <!--  Assigned to : Mr XYZ <br/>Work in progress<br/>	-->
-</div>
-</div>
-</div>
-<div *ngIf="ecc">
-
-<div *ngFor="let val of eccwResolvedComplaintsInfo">
-<div class="alert alert-success row">
-<h4 class="col-9">Complaint : {{val.type}}{{val.id}}</h4>
-<h6 class="col-3"  style="text-align: right;" >Status : {{val.status}}</h6> 
-<p class="col-8"> Date and Time : {{val.createdDate}}<br/>
-Location : {{val.location}}<br/>
-  Description : {{val.details}}<br/>
-  Form Id : {{val.formId}}<br/>
-</p>
-<!--  Assigned to : Mr XYZ <br/>Work in progress<br/>	-->
-</div>
-</div>
-</div>
-<div *ngIf="other">
-<div *ngFor="let val of otherResolvedComplaintsInfo">
-<div class="alert alert-success row">
-<h4 class="col-9">Complaint : {{val.type}}{{val.id}}</h4>
-<h6 class="col-3"  style="text-align: right;" >Status : {{val.status}}</h6> 
-<p class="col-8"> Date and Time : {{val.createdDate}}<br/>
-  Description : {{val.details}}<br/>
-  Assigned To : {{val.assignedTo}}<br/>
-</p>
-<!--  Assigned to : Mr XYZ <br/>Work in progress<br/>	-->
-</div>
-</div>
-</div>
-<div *ngIf="faculty">
-<div *ngFor="let val of facultyResolvedComplaintsInfo">
-<div class="alert alert-success row">
-<h4 class="col-9">Complaint : {{val.type}}{{val.id}}</h4>
-<h6 class="col-3"  style="text-align: right;" >Status : {{val.status}}</h6> 
-<p class="col-8"> Date and Time : {{val.createdDate}}<br/>
-  Description : {{val.details}}<br/>
-  Faculty Name : {{val.facultyName}}<br/>
-  Date of Resolution : {{val.dateOfResolution}}
-</p>
-<!--  Assigned to : Mr XYZ <br/>Work in progress<br/>	-->
-</div>
-</div>
-</div>
-<div *ngIf="stu">
-
-<div *ngFor="let val of stuResolvedComplaintsInfo">
-<div class="alert alert-success row">
-<h4 class="col-9">Complaint : {{val.type}}{{val.id}}</h4>
-<h6 class="col-3"  style="text-align: right;" >Status : {{val.status}}</h6> 
-<p class="col-8"> Date and Time : {{val.createdDate}}<br/>
-  Description : {{val.details}}<br/>
-  Student Name : {{val.studentName}}<br/>
-  Student Roll No. : {{val.studentRollNo}}<br/>
-  Student Year : {{val.year}}<br/>
-  Date of Resolution : {{val.dateOfResolution}}<br/>
-  <b>Remark : {{val.remarks}}</b>
-</p>
-<!--  Assigned to : Mr XYZ <br/>Work in progress<br/>	-->
-</div>
-</div>
-</div>
-<div *ngIf="telephone">
-
-<div *ngFor="let val of telephoneResolvedComplaintsInfo">
-<div class="alert alert-success row">
-<h4 class="col-9">Complaint : {{val.type}}{{val.id}}</h4>
-<h6 class="col-3"  style="text-align: right;" >Status : {{val.status}}</h6> 
-<p class="col-8"> Date and Time : {{val.createdDate}}<br/>
-  Description : {{val.details}}<br/>
- Location : {{val.location}}<br/>
- Extension No. : {{val.extension_no}}<br/>
-  Date of Resolution : {{val.dateOfResolution}}<br/>
-  <b>Remark : {{val.remarks}}</b>
-</p>
-<!--  Assigned to : Mr XYZ <br/>Work in progress<br/>	-->
-</div>
-</div>
-</div>
-<div *ngIf="emrs">
-<div *ngFor="let val of emrsResolvedComplaintsInfo">
-<div class="alert alert-success row">
-<h4 class="col-9">Complaint : {{val.type}}{{val.id}}</h4>
-<h6 class="col-3"  style="text-align: right;" >Status : {{val.status}}</h6> 
-<p class="col-8"> Date and Time : {{val.createdDate}}<br/>
-  Description : {{val.details}}<br/>
-  Location : {{val.location}}<br/>
-  Date of Resolution : {{val.dateOfResolution}}<br/>
-  Form Id : {{val.formId}}<br/>
-  <b>Remark : {{val.remarks}}</b>
-  </p>
-<!--  Assigned to : Mr XYZ <br/>Work in progress<br/>	-->
-</div>
-</div>
-</div>
-  </div>
 <!--Notification Panel Ends-->
