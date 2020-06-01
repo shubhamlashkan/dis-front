@@ -248,7 +248,6 @@ export class AddEventDialog {
   }
 
   selectFile(event) {
-    console.log(event.target.files.item(0));
     this.selectedFile = event.target.files.item(0); 
   }
 
@@ -286,10 +285,16 @@ export class AddEventDialog {
         organizerUsername,
         new Date(),
         this.locationFormController.value,
-        this.selectedFile
       );
       console.log(this.eventInfo);
-      let addedEvent = this.calendarService.addEvent(this.eventInfo);
+
+      const formData = new FormData();
+      formData.append('event', new Blob([JSON.stringify(this.eventInfo)], {
+        type: "application/json"
+    }));
+      formData.append('file', this.selectedFile, this.selectedFile.name);
+
+      let addedEvent = this.calendarService.addEvent(formData);
       addedEvent.subscribe(
         data => {
           this.dialogRef.close(data);

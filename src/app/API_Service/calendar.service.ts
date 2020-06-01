@@ -25,7 +25,7 @@ export class CalendarService {
   }
 
   addEvent(event: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/addEvent`, event, httpOptions);
+    return this.http.post(`${this.baseUrl}/addEvent`, event);
   }
 
   deleteEvent(eid: string): void {
@@ -33,7 +33,7 @@ export class CalendarService {
   }
 
   updateEvent(event: any,eventId: string): Observable<any>{
-    return this.http.post(`${this.baseUrl}/updateEvent?eventId=`+ eventId, event,httpOptions);
+    return this.http.post(`${this.baseUrl}/updateEvent?eventId=`+ eventId, event);
   }
 
   getAllEmployeeList(): Observable<any> {

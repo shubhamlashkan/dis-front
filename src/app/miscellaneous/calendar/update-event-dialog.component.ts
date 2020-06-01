@@ -66,7 +66,7 @@ export class UpdateEventDialogComponent implements OnInit {
   employeeList: any;
   usernameList: string[] = [];
   location: string;
-  selectedFile : File = null;
+  selectedFile: File = null
 
   constructor(
     public dialogRef: MatDialogRef<UpdateEventDialogComponent>,
@@ -259,12 +259,13 @@ export class UpdateEventDialogComponent implements OnInit {
   }
 
   selectFile(event) {
-    this.selectedFile = event.target.files.item[0]; 
+    this.selectedFile = event.target.files.item(0); 
   }
 
   onSubmit() {
     const start = this.toDateTime(new Date(this.startDate), this.startTime);
     const end = this.toDateTime(new Date(this.endDate), this.endTime);
+    this.participantList.add(this.organizer);
     this.usernameList = [];
     let flag = 0;
     let organizerUsername;
@@ -286,7 +287,6 @@ export class UpdateEventDialogComponent implements OnInit {
           alert(1);
         };
       });
-      this.usernameList.push(this.organizer);
       console.log(this.usernameList)
       this.eventInfo = new EventInfo(
         this.titleFormController.value,
@@ -297,11 +297,17 @@ export class UpdateEventDialogComponent implements OnInit {
         organizerUsername,
         organizerUsername,
         new Date(),
-        this.locationFormController.value,
-        this.selectedFile
+        this.locationFormController.value
       );
       console.log(this.eventInfo);
-      let addedEvent = this.calendarService.updateEvent(this.eventInfo,this.id);
+
+      const formData = new FormData();
+      formData.append('event', new Blob([JSON.stringify(this.eventInfo)], {
+        type: "application/json"
+        }));
+      formData.append('file', this.selectedFile, this.selectedFile.name);
+
+      let addedEvent = this.calendarService.updateEvent(formData,this.id);
       addedEvent.subscribe(
         data => {
           this.dialogRef.close(data);
