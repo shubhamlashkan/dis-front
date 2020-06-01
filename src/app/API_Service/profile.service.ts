@@ -146,4 +146,8 @@ export class ProfileService {
   }
 
 
+  uploadProfilePicture(image: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/updateProfilePicture`, image, httpOptions);
+  }
+
 }

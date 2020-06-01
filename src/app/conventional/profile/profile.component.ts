@@ -2,6 +2,9 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ProfileService } from 'src/app/API_Service/profile.service';
 import { FormControl, FormBuilder, FormGroup, FormArray, NgForm } from '@angular/forms';
 import { ToastrManager } from 'ng6-toastr-notifications';
+
+import { HttpClient } from '@angular/common/http';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -35,9 +38,17 @@ export class ProfileComponent implements OnInit {
   loading: boolean;
   studentProfile: any;
   staffBasicProfile: any;
+  selectedFile: File = null;
+
+
+  retrievedImage: any;
+  base64Data: any;
+  retrieveResonse: any;
 
   student: boolean;
   staff: boolean;
+  profileModal: boolean;
+  profilePictureUploadButton: boolean;
 
   //form groups
   editStaffBasicProfileFormGroup: FormGroup;
@@ -59,7 +70,8 @@ export class ProfileComponent implements OnInit {
   showConfirmation: boolean;
   staffListInfo: any;
 
-  constructor(private profile: ProfileService, private fb: FormBuilder, private toastr: ToastrManager) {
+  constructor(private profile: ProfileService, private fb: FormBuilder,
+    private toastr: ToastrManager, private httpClient: HttpClient) {
 
   }
 
@@ -68,6 +80,7 @@ export class ProfileComponent implements OnInit {
     this.staff = false;
     this.showConfirmation = false;
     this.selectedIndex = -1;
+    this.profilePictureUploadButton = true;
 
     this.profile.getProfileUserId()
       .subscribe(
@@ -141,7 +154,7 @@ export class ProfileComponent implements OnInit {
 
     this.retrieveWorkExperienceInfo();
 
-    this.retrieveUserQualificationInfo() 
+    this.retrieveUserQualificationInfo()
 
     this.retrieveUserResearchWorkInfo()
 
@@ -149,9 +162,9 @@ export class ProfileComponent implements OnInit {
 
     this.retrieveUserCulturalActivityInfo()
 
-    this.retrieveUserTechnicalActivityInfo() 
+    this.retrieveUserTechnicalActivityInfo()
 
-
+    this.getImage()
 
     this.profile.getUserAddressInfo('')
       .subscribe(
@@ -267,17 +280,17 @@ export class ProfileComponent implements OnInit {
   }
 
 
-  deleteWorkExperienceData(id : number) {
+  deleteWorkExperienceData(id: number) {
     this.profile.deleteWorkExperience(id)
-    .subscribe(
-      data => {
-        this.toastr.successToastr(data.message, 'Success!');
-        this.retrieveWorkExperienceInfo()
-      },
-      error => {
-        this.toastr.errorToastr(this.completionMessage, 'Alert!')
-      }
-    )
+      .subscribe(
+        data => {
+          this.toastr.successToastr(data.message, 'Success!');
+          this.retrieveWorkExperienceInfo()
+        },
+        error => {
+          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        }
+      )
   }
 
   updateExperienceData(f: NgForm): void {
@@ -321,17 +334,17 @@ export class ProfileComponent implements OnInit {
   }
 
 
-  deleteQualificationData(id : number) {
+  deleteQualificationData(id: number) {
     this.profile.deleteQualification(id)
-    .subscribe(
-      data => {
-        this.toastr.successToastr(data.message, 'Success!');
-        this.retrieveUserQualificationInfo()
-      },
-      error => {
-        this.toastr.errorToastr(this.completionMessage, 'Alert!')
-      }
-    )
+      .subscribe(
+        data => {
+          this.toastr.successToastr(data.message, 'Success!');
+          this.retrieveUserQualificationInfo()
+        },
+        error => {
+          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        }
+      )
   }
 
   resetEducationForm(): void {
@@ -386,17 +399,17 @@ export class ProfileComponent implements OnInit {
   }
 
 
-  deleteResearchWorkData(id : number) {
+  deleteResearchWorkData(id: number) {
     this.profile.deleteResearchWork(id)
-    .subscribe(
-      data => {
-        this.toastr.successToastr(data.message, 'Success!');
-        this.retrieveUserResearchWorkInfo()
-      },
-      error => {
-        this.toastr.errorToastr(this.completionMessage, 'Alert!')
-      }
-    )
+      .subscribe(
+        data => {
+          this.toastr.successToastr(data.message, 'Success!');
+          this.retrieveUserResearchWorkInfo()
+        },
+        error => {
+          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        }
+      )
   }
 
   updateResearchWork(f: NgForm): void {
@@ -410,7 +423,6 @@ export class ProfileComponent implements OnInit {
     this.profile.editPublication(data)
       .subscribe(
         b => {
-          console.log("step 4")
           this.toastr.successToastr('Success!');
           this.retrieveUserResearchWorkInfo()
           this.selectedIndex = -1;
@@ -441,17 +453,17 @@ export class ProfileComponent implements OnInit {
   }
 
 
-  deleteCulturalActivityData(id : number) {
+  deleteCulturalActivityData(id: number) {
     this.profile.deleteCulturalActivity(id)
-    .subscribe(
-      data => {
-        this.toastr.successToastr(data.message, 'Success!');
-        this.retrieveUserCulturalActivityInfo()
-      },
-      error => {
-        this.toastr.errorToastr(this.completionMessage, 'Alert!')
-      }
-    )
+      .subscribe(
+        data => {
+          this.toastr.successToastr(data.message, 'Success!');
+          this.retrieveUserCulturalActivityInfo()
+        },
+        error => {
+          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        }
+      )
   }
 
   updateCulturalActivity(f: NgForm) {
@@ -494,17 +506,17 @@ export class ProfileComponent implements OnInit {
   }
 
 
-  deleteTechnicalActivityData(id : number) {
+  deleteTechnicalActivityData(id: number) {
     this.profile.deleteTechnicalActivity(id)
-    .subscribe(
-      data => {
-        this.toastr.successToastr(data.message, 'Success!');
-        this.retrieveUserTechnicalActivityInfo()
-      },
-      error => {
-        this.toastr.errorToastr(this.completionMessage, 'Alert!')
-      }
-    )
+      .subscribe(
+        data => {
+          this.toastr.successToastr(data.message, 'Success!');
+          this.retrieveUserTechnicalActivityInfo()
+        },
+        error => {
+          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        }
+      )
   }
 
   updateTechnicalActivity(f: NgForm): void {
@@ -547,19 +559,19 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  deleteCompetetiveExamData(id : number) {
+  deleteCompetetiveExamData(id: number) {
     this.profile.deleteCompetitiveExam(id)
-    .subscribe(
-      data => {
-        this.toastr.successToastr(data.message, 'Success!');
-        this.retrieveUserCompetitiveExamInfo()
-      },
-      error => {
-        this.toastr.errorToastr(this.completionMessage, 'Alert!')
-      }
-    )
+      .subscribe(
+        data => {
+          this.toastr.successToastr(data.message, 'Success!');
+          this.retrieveUserCompetitiveExamInfo()
+        },
+        error => {
+          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        }
+      )
   }
-    
+
 
   updateCompetitiveExamData(f: NgForm): void {
     let data = f.value;
@@ -601,19 +613,19 @@ export class ProfileComponent implements OnInit {
       })
     }
   }
-  
-  
-  deleteProjectData(id : number) {
+
+
+  deleteProjectData(id: number) {
     this.profile.deleteProject(id)
-    .subscribe(
-      data => {
-        this.toastr.successToastr(data.message, 'Success!');
-        this.retrieveUserProjectInfo()
-      },
-      error => {
-        this.toastr.errorToastr(this.completionMessage, 'Alert!')
-      }
-    )
+      .subscribe(
+        data => {
+          this.toastr.successToastr(data.message, 'Success!');
+          this.retrieveUserProjectInfo()
+        },
+        error => {
+          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        }
+      )
   }
 
   updateProjectData(f: NgForm): void {
@@ -658,17 +670,17 @@ export class ProfileComponent implements OnInit {
   }
 
 
-  deleteInternshipData(id : number) {
+  deleteInternshipData(id: number) {
     this.profile.deleteInternship(id)
-    .subscribe(
-      data => {
-        this.toastr.successToastr(data.message, 'Success!');
-        this.retrieveUserInternshipInfo()
-      },
-      error => {
-        this.toastr.errorToastr(this.completionMessage, 'Alert!')
-      }
-    )
+      .subscribe(
+        data => {
+          this.toastr.successToastr(data.message, 'Success!');
+          this.retrieveUserInternshipInfo()
+        },
+        error => {
+          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        }
+      )
   }
 
   updateInternshipData(f: NgForm): void {
@@ -691,7 +703,7 @@ export class ProfileComponent implements OnInit {
           this.toastr.errorToastr(this.completionMessage, 'Alert!')
         }
       )
-      this.selectedIndex = -1;
+    this.selectedIndex = -1;
   }
   resetInternshipForm(): void {
     this.internshipForm.reset();
@@ -855,44 +867,44 @@ export class ProfileComponent implements OnInit {
   }
 
   retrieveUserInternshipInfo() {
-     this.profile.getUserInternshipInfo('')
-    .subscribe(
-      data => {
-        this.userInternshipInfo = data;
-        console.log(this.userInternshipInfo);
-      }
-    )
+    this.profile.getUserInternshipInfo('')
+      .subscribe(
+        data => {
+          this.userInternshipInfo = data;
+          console.log(this.userInternshipInfo);
+        }
+      )
   }
 
   retrieveWorkExperienceInfo() {
     this.profile.getWorkExperienceInfo('')
-    .subscribe(
-      data => {
-        this.workExperienceInfo = data;
-        console.log(this.workExperienceInfo);
-      }
-    )
+      .subscribe(
+        data => {
+          this.workExperienceInfo = data;
+          console.log(this.workExperienceInfo);
+        }
+      )
 
   }
 
   retrieveUserProjectInfo() {
     this.profile.getUserProjectInfo('')
-        .subscribe(
-          data => {
-            this.userProjectInfo = data;
-            console.log(this.userProjectInfo);
-          }
-        )
+      .subscribe(
+        data => {
+          this.userProjectInfo = data;
+          console.log(this.userProjectInfo);
+        }
+      )
   }
 
   retrieveUserQualificationInfo() {
     this.profile.getUserQualificationInfo('')
-    .subscribe(
-      data => {
-        this.userQualificationInfo = data;
-        console.log(this.userQualificationInfo);
-      }
-    )
+      .subscribe(
+        data => {
+          this.userQualificationInfo = data;
+          console.log(this.userQualificationInfo);
+        }
+      )
   }
 
   retrieveUserResearchWorkInfo() {
@@ -917,12 +929,12 @@ export class ProfileComponent implements OnInit {
 
   retrieveUserCulturalActivityInfo() {
     this.profile.getUserCulturalActivityInfo('')
-    .subscribe(
-      data => {
-        this.userCulturalActivityInfo = data;
-        console.log(this.userCulturalActivityInfo);
-      }
-    )
+      .subscribe(
+        data => {
+          this.userCulturalActivityInfo = data;
+          console.log(this.userCulturalActivityInfo);
+        }
+      )
   }
 
   retrieveUserTechnicalActivityInfo() {
@@ -933,6 +945,47 @@ export class ProfileComponent implements OnInit {
           console.log(this.userTechnicalActivityInfo);
         }
       )
+  }
+
+  showProfileModal() {
+    this.profileModal = true; // Show-Hide Modal Check
+
+  }
+  //Bootstrap Modal Close event
+  hideProfileModal() {
+    this.profileModal = false;
+  }
+
+  onFileSelected(event: any) {
+    this.selectedFile = <File>event.target.files[0];
+    console.log("Step 1")
+    console.log(this.selectedFile);
+    this.profilePictureUploadButton = false;
+  }
+
+  onUpload() {
+    console.log(this.selectedFile);
+    const uploadImageData = new FormData();
+    uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
+    this.httpClient.post('http://localhost:8080/dis/user/updateProfilePicture', uploadImageData, { observe: 'response' })
+      .subscribe((response) => {
+        if (response.status === 200) {
+          this.getImage()
+        } else {
+        }
+      }
+      );
+  }
+
+  getImage() {
+    this.httpClient.get('http://localhost:8080/dis/user/getProfilePicture')
+      .subscribe(
+        res => {
+          this.retrieveResonse = res;
+          this.base64Data = this.retrieveResonse.picByte;
+          this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
+        }
+      );
   }
 
 }
