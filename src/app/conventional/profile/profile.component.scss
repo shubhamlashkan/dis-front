@@ -18,6 +18,9 @@
     background-color: #1ba94c;
     color: white;
 }
+.fa {
+    color : #6d6c6d;
+  }
 .confirmationMessage{
     padding : 1% 2% 1% 2%;
     background-color: rgb(209, 206, 206);
@@ -40,4 +43,14 @@
     bottom: 0;
     right: 0;
   }
+
+  .icon {
+    height: 40px;
+    width: 40px;
+    display: block;
+}
   
+  .normal-text {
+    font-size: small;
+     color: #262323;
+  }

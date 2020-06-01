@@ -61,14 +61,18 @@ export class ProfileService {
     return this.http.get(`${this.baseUrl}/userAddress?userId=${id}`);
   }
 
+
+
   getFacultyStaffList(): Observable<any> {
     return this.http.get(`${this.baseUrl}/staffProfile/getFacultyData`);
   }
+
   getStaffList(): Observable<any> {
     return this.http.get(`${this.baseUrl}/staffProfile/getStaffData`);
   }
 
   //add service
+
   editStaffProfile(info: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/addStaffBasicProfile`, info, httpOptions);
   }
@@ -104,7 +108,7 @@ export class ProfileService {
   }
 
 
-  
+
   deleteCompetitiveExam(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/deleteUserCompetitiveExam?id=${id}`)
   }
@@ -146,8 +150,14 @@ export class ProfileService {
   }
 
 
-  uploadProfilePicture(image: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/updateProfilePicture`, image, httpOptions);
+
+  getProfilePicture(id: String): Observable<any> {
+    return this.http.get(`${this.baseUrl}/getProfilePicture?userId=${id}`)
+  }
+
+  uploadProfilePicture(uploadImageData: any): Observable<any> {
+    return this.http.post('http://localhost:8080/dis/user/updateProfilePicture', 
+    uploadImageData, { observe: 'response' })
   }
 
 }

@@ -25,6 +25,7 @@ export class ProfileComponent implements OnInit {
   id: string;
   type: string;
   form: any = {};
+  hideButtons: boolean;
   userInternshipInfo: any[] = [];
   userQualificationInfo: any[];
   workExperienceInfo: any[];
@@ -79,6 +80,7 @@ export class ProfileComponent implements OnInit {
     this.student = false;
     this.staff = false;
     this.showConfirmation = false;
+    this.hideButtons = false;
     this.selectedIndex = -1;
     this.profilePictureUploadButton = true;
 
@@ -164,7 +166,7 @@ export class ProfileComponent implements OnInit {
 
     this.retrieveUserTechnicalActivityInfo()
 
-    this.getImage()
+    this.getImage('')
 
     this.profile.getUserAddressInfo('')
       .subscribe(
@@ -229,7 +231,7 @@ export class ProfileComponent implements OnInit {
           this.toastr.successToastr(data.message, 'Success!');
         },
         error => {
-          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+          this.toastr.errorToastr(error.message, 'Alert!')
         }
       )
   }
@@ -247,7 +249,7 @@ export class ProfileComponent implements OnInit {
           this.toastr.successToastr(data.message, 'Success!');
         },
         error => {
-          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+          this.toastr.errorToastr(error.message, 'Alert!')
         }
       )
   }
@@ -288,7 +290,7 @@ export class ProfileComponent implements OnInit {
           this.retrieveWorkExperienceInfo()
         },
         error => {
-          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+          this.toastr.errorToastr(error.message, 'Alert!')
         }
       )
   }
@@ -311,7 +313,7 @@ export class ProfileComponent implements OnInit {
           this.selectedIndex = -1;
         },
         error => {
-          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+          this.toastr.errorToastr(error.message, 'Alert!')
           console.log(error)
         }
       )
@@ -342,7 +344,7 @@ export class ProfileComponent implements OnInit {
           this.retrieveUserQualificationInfo()
         },
         error => {
-          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+          this.toastr.errorToastr(error.message, 'Alert!')
         }
       )
   }
@@ -369,7 +371,7 @@ export class ProfileComponent implements OnInit {
           this.selectedIndex = -1;
         },
         error => {
-          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+          this.toastr.errorToastr(error.message, 'Alert!')
         }
       )
   }
@@ -407,7 +409,7 @@ export class ProfileComponent implements OnInit {
           this.retrieveUserResearchWorkInfo()
         },
         error => {
-          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+          this.toastr.errorToastr(error.message, 'Alert!')
         }
       )
   }
@@ -428,7 +430,7 @@ export class ProfileComponent implements OnInit {
           this.selectedIndex = -1;
         },
         error => {
-          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+          this.toastr.errorToastr(error.message, 'Alert!')
         }
       )
   }
@@ -461,7 +463,7 @@ export class ProfileComponent implements OnInit {
           this.retrieveUserCulturalActivityInfo()
         },
         error => {
-          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+          this.toastr.errorToastr(error.message, 'Alert!')
         }
       )
   }
@@ -483,7 +485,7 @@ export class ProfileComponent implements OnInit {
           this.selectedIndex = -1;
         },
         error => {
-          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+          this.toastr.errorToastr(error.message, 'Alert!')
         }
       )
   }
@@ -514,7 +516,7 @@ export class ProfileComponent implements OnInit {
           this.retrieveUserTechnicalActivityInfo()
         },
         error => {
-          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+          this.toastr.errorToastr(error.message, 'Alert!')
         }
       )
   }
@@ -536,7 +538,7 @@ export class ProfileComponent implements OnInit {
           this.selectedIndex = -1;
         },
         error => {
-          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+          this.toastr.errorToastr(error.message, 'Alert!')
         }
       )
   }
@@ -567,7 +569,7 @@ export class ProfileComponent implements OnInit {
           this.retrieveUserCompetitiveExamInfo()
         },
         error => {
-          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+          this.toastr.errorToastr(error.message, 'Alert!')
         }
       )
   }
@@ -590,7 +592,7 @@ export class ProfileComponent implements OnInit {
           this.selectedIndex = -1;
         },
         error => {
-          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+          this.toastr.errorToastr(error.message, 'Alert!')
         }
       )
   }
@@ -623,7 +625,7 @@ export class ProfileComponent implements OnInit {
           this.retrieveUserProjectInfo()
         },
         error => {
-          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+          this.toastr.errorToastr(error.message, 'Alert!')
         }
       )
   }
@@ -645,7 +647,7 @@ export class ProfileComponent implements OnInit {
           this.selectedIndex = -1;
         },
         error => {
-          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+          this.toastr.errorToastr(error.message, 'Alert!')
         }
       )
   }
@@ -678,7 +680,7 @@ export class ProfileComponent implements OnInit {
           this.retrieveUserInternshipInfo()
         },
         error => {
-          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+          this.toastr.errorToastr(error.message, 'Alert!')
         }
       )
   }
@@ -700,7 +702,7 @@ export class ProfileComponent implements OnInit {
           this.retrieveUserInternshipInfo()
         },
         error => {
-          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+          this.toastr.errorToastr(error.message, 'Alert!')
         }
       )
     this.selectedIndex = -1;
@@ -734,20 +736,14 @@ export class ProfileComponent implements OnInit {
           this.toastr.successToastr(data.message, 'Success!');
         },
         error => {
-          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+          this.toastr.errorToastr(error.message, 'Alert!')
         }
       )
   }
 
-  loadProfile(userId: number, userType: string): void {
+  loadProfile(userId: String, userType: string): void {
     this.loading = true;
-    this.profile.getUserTechnicalActivityInfo(userId)
-      .subscribe(
-        data => {
-          this.userTechnicalActivityInfo = data;
-          console.log(this.userTechnicalActivityInfo);
-        }
-      )
+    console.log("--------------------------------------" + userId + "----" + userType)
 
     if (userType != 'student') {
       this.staff = true;
@@ -788,6 +784,8 @@ export class ProfileComponent implements OnInit {
         }
       )
 
+    this.retrievedImage = null;
+    this.getImage(userId)
 
     this.profile.getUserQualificationInfo(userId)
       .subscribe(
@@ -967,25 +965,34 @@ export class ProfileComponent implements OnInit {
     console.log(this.selectedFile);
     const uploadImageData = new FormData();
     uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
-    this.httpClient.post('http://localhost:8080/dis/user/updateProfilePicture', uploadImageData, { observe: 'response' })
-      .subscribe((response) => {
-        if (response.status === 200) {
-          this.getImage()
-        } else {
+    this.profile.uploadProfilePicture(uploadImageData)
+      .subscribe((data) => {
+        this.toastr.successToastr(data.message, 'Success!');
+        this.selectedIndex = -1;
+      },
+        error => {
+          this.toastr.errorToastr(error.message, 'Alert!')
         }
-      }
       );
   }
 
-  getImage() {
-    this.httpClient.get('http://localhost:8080/dis/user/getProfilePicture')
-      .subscribe(
-        res => {
-          this.retrieveResonse = res;
-          this.base64Data = this.retrieveResonse.picByte;
-          this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
-        }
-      );
+  getImage(userId: String) {
+    this.profile.getProfilePicture(userId)
+    .subscribe(
+      res => {
+        this.retrieveResonse = res;
+        this.base64Data = this.retrieveResonse.picByte;
+        this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
+      }
+    );
+  }
+
+  hideButton() {
+    this.hideButtons = true;
+  }
+
+  showButton() {
+    this.hideButtons = false;
   }
 
 }
