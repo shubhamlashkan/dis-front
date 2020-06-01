@@ -109,7 +109,9 @@ export class CalendarComponent {
           start: new Date(events[e].date),
           end: new Date(events[e].date),
           description: events[e].description,
-          startEditable: false
+          startEditable: false,
+          backgroundColor: "purple",
+          textColor: "white",
         })
       }
     });

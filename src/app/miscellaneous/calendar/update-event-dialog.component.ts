@@ -262,6 +262,10 @@ export class UpdateEventDialogComponent implements OnInit {
     this.selectedFile = event.target.files.item(0); 
   }
 
+  deleteFile() {
+    this.selectedFile = null;
+  }
+
   onSubmit() {
     const start = this.toDateTime(new Date(this.startDate), this.startTime);
     const end = this.toDateTime(new Date(this.endDate), this.endTime);
@@ -305,7 +309,9 @@ export class UpdateEventDialogComponent implements OnInit {
       formData.append('event', new Blob([JSON.stringify(this.eventInfo)], {
         type: "application/json"
         }));
-      formData.append('file', this.selectedFile, this.selectedFile.name);
+        if(this.selectedFile != null) {
+          formData.append('file', this.selectedFile, this.selectedFile.name);
+        }
 
       let addedEvent = this.calendarService.updateEvent(formData,this.id);
       addedEvent.subscribe(

@@ -251,6 +251,10 @@ export class AddEventDialog {
     this.selectedFile = event.target.files.item(0); 
   }
 
+  deleteFile() {
+    this.selectedFile = null;
+  }
+
   onSubmit() {
     const start = this.toDateTime(new Date(this.startDate), this.startTime);
     const end = this.toDateTime(new Date(this.endDate), this.endTime);
@@ -292,7 +296,9 @@ export class AddEventDialog {
       formData.append('event', new Blob([JSON.stringify(this.eventInfo)], {
         type: "application/json"
     }));
+    if(this.selectedFile != null) {
       formData.append('file', this.selectedFile, this.selectedFile.name);
+    }
 
       let addedEvent = this.calendarService.addEvent(formData);
       addedEvent.subscribe(

@@ -103,7 +103,20 @@
             #autosize="cdkTextareaAutosize"
             cdkAutosizeMinRows="1"></textarea>
           </mat-form-field>
+          <div class="attachedFile" *ngIf="selectedFile!=null">
+            <mat-card class="custom">
+              <span class="file-icon">
+                <i class="fa fa-file fa-fw" aria-hidden="true"></i>
+              </span>
+              <span class="file-name">
+                {{selectedFile?.name}}
+              </span>
+              <span class="cross">
+                <i class="fa fa-times fa-fw" aria-hidden="true" (click)="deleteFile()"></i>
+              </span>
+            </mat-card>
           </div>
+        </div>
 </form>
 </div>
 <div mat-dialog-actions>
@@ -111,5 +124,5 @@
     <button mat-stroked-button color="primary" (click)="fileInput.click()" class="attachment"><i class="fa fa-paperclip" aria-hidden="true"></i> Attachment</button>
     <input type="file" multiple #fileInput (change)="selectFile($event)" style="display:none;"> 
   </span>
-  <button mat-button cdkFocusInitial (click)="onSubmit()" [disabled]="disabled()">Save</button>
+  <button class="save" mat-button cdkFocusInitial (click)="onSubmit()" [disabled]="disabled()">Save</button>
 </div>  

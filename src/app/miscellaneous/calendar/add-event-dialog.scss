@@ -58,6 +58,10 @@
     margin-top: 10px;
 }
 
+.save {
+    margin-left: 2%;
+}
+
 ::ng-deep .mat-select-arrow {
     width: 0;
     height: 0;
@@ -92,3 +96,28 @@
     background-color: rgb(255, 230, 235);
     border-radius: 10%;
 }
+
+.attachedFile {
+    margin-left: 8%;
+    margin-right: 15%;
+    height: 50%;
+}
+
+.cross {
+    float: right;
+    color: white;
+}
+
+.file-icon {
+    margin-right: 2%;
+    color: white;
+}
+
+.file-name {
+    color: white;
+}
+
+::ng-deep .mat-card{
+    padding:1% !important;
+    background-color: rgb(93, 154, 223);
+  }
