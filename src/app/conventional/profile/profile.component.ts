@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit {
   id: string;
   type: string;
   form: any = {};
+  hideButtons: boolean;
   userInternshipInfo: any[] = [];
   userQualificationInfo: any[];
   workExperienceInfo: any[];
@@ -67,6 +68,7 @@ export class ProfileComponent implements OnInit {
     this.student = false;
     this.staff = false;
     this.showConfirmation = false;
+    this.hideButtons = false;
     this.selectedIndex = -1;
 
     this.profile.getProfileUserId()
@@ -729,6 +731,7 @@ export class ProfileComponent implements OnInit {
 
   loadProfile(userId: number, userType: string): void {
     this.loading = true;
+    console.log("--------------------------------------" + userId + "----" + userType)
     this.profile.getUserTechnicalActivityInfo(userId)
       .subscribe(
         data => {
@@ -933,6 +936,14 @@ export class ProfileComponent implements OnInit {
           console.log(this.userTechnicalActivityInfo);
         }
       )
+  }
+
+  hideButton(){
+    this.hideButtons = true;
+  }
+
+  showButton(){
+    this.hideButtons = false;
   }
 
 }

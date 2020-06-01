@@ -16,7 +16,7 @@
             <div class="col-6">
               <h3 class="text-right">Employee Id : {{staffBasicProfile?.employeeId}}<a data-toggle="modal"
                   data-target="#staffBasicProfile" (click)="resetConfirmationMessge()">
-                  <i class="fa fa-pencil float-right" style="font-size: 30px; margin-left: 20px;"></i></a>
+                  <i *ngIf="!hideButtons" class="fa fa-pencil float-right" style="font-size: 30px; margin-left: 20px;"></i></a>
               </h3>
             </div>
           </div>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="col-lg-1 d-flex justify-content-end">
                   <a data-toggle="modal" data-target="#address" (click)="resetConfirmationMessge()">
-                    <i class="fa fa-pencil" style="font-size: 20px;"></i></a>
+                    <i *ngIf="!hideButtons" class="fa fa-pencil" style="font-size: 20px;"></i></a>
                 </div>
               </div>
 
@@ -133,67 +133,67 @@
               <!--Address Modal Ends-->
               <div class="float-right">
                 <div class="dropdown">
-                  <button type="button" class="btn btn-primary nav-link" href="" id="dropdownMenu2"
+                  <button *ngIf="!hideButtons" type="button" class="btn btn-primary nav-link" href="" id="dropdownMenu2"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add Profile Section</button>
 
                   <div class="dropdown-menu" aria-labelledby="dropdownMenu2" style="width: 300px;">
                     <p class="dropdown-item" data-toggle="modal" data-target="#experience">Work Experience
                       <span class="float-right">
-                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                        <i *ngIf="!hideButtons" class="fa fa-plus-square" style="size: 25px;"></i>
                       </span></p>
                     <hr>
 
                     <p class="dropdown-item" data-toggle="modal" data-target="#education">Education
                       <span class="float-right">
-                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                        <i *ngIf="!hideButtons" class="fa fa-plus-square" style="size: 25px;"></i>
                       </span></p>
                     <hr>
 
                     <p class="dropdown-item" data-toggle="modal" data-target="#research">Publications
                       <span class="float-right">
-                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                        <i *ngIf="!hideButtons" class="fa fa-plus-square" style="size: 25px;"></i>
                       </span></p>
                     <hr>
 
                     <p class="dropdown-item" data-toggle="modal" data-target="#internship">Internships
                       <span class="float-right">
-                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                        <i *ngIf="!hideButtons" class="fa fa-plus-square" style="size: 25px;"></i>
                       </span></p>
                     <hr>
 
                     <p class="dropdown-item" data-toggle="modal" data-target="#project">Projects
                       <span class="float-right">
-                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                        <i *ngIf="!hideButtons" class="fa fa-plus-square" style="size: 25px;"></i>
                       </span></p>
                     <hr>
 
                     <p class="dropdown-item" data-toggle="modal" data-target="#competetive">Competetive Exams
                       <span class="float-right">
-                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                        <i *ngIf="!hideButtons" class="fa fa-plus-square" style="size: 25px;"></i>
                       </span></p>
                     <hr>
 
                     <p class="dropdown-item" data-toggle="modal" data-target="#placement">Placements
                       <span class="float-right">
-                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                        <i *ngIf="!hideButtons" class="fa fa-plus-square" style="size: 25px;"></i>
                       </span></p>
                     <hr>
 
                     <p class="dropdown-item" data-toggle="modal" data-target="#culturalactivity">Cultural
                       Activities/Achievement
                       <span class="float-right">
-                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                        <i *ngIf="!hideButtons" class="fa fa-plus-square" style="size: 25px;"></i>
                       </span></p>
                     <hr>
                     <p class="dropdown-item" data-toggle="modal" data-target="#technicalactivity">Technical
                       Activities/Achievements
                       <span class="float-right">
-                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                        <i *ngIf="!hideButtons" class="fa fa-plus-square" style="size: 25px;"></i>
                       </span></p>
                     <hr>
                     <p class="dropdown-item" data-toggle="modal" data-target="#workshop">Workshops/Seminars
                       <span class="float-right">
-                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                        <i *ngIf="!hideButtons" class="fa fa-plus-square" style="size: 25px;"></i>
                       </span></p>
                     <hr>
 
@@ -292,7 +292,7 @@
             <div class="col-6">
               <h3 class="text-right">Enrollment Id : {{studentProfile?.enrollmentId}}<a data-toggle="modal"
                   data-target="#studentBasicProfile">
-                  <i class="fa fa-pencil float-right" style="font-size: 30px; margin-left: 20px;"></i></a></h3>
+                  <i *ngIf="!hideButtons" class="fa fa-pencil float-right" style="font-size: 30px; margin-left: 20px;"></i></a></h3>
             </div>
           </div>
           <hr>
@@ -353,61 +353,61 @@
                   <div class="dropdown-menu" aria-labelledby="dropdownMenu2" style="width: 300px;">
                     <p class="dropdown-item" data-toggle="modal" data-target="#experience_modal">Work Experience
                       <span class="float-right">
-                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                        <i *ngIf="!hideButtons" class="fa fa-plus-square" style="size: 25px;"></i>
                       </span></p>
                     <hr>
 
                     <p class="dropdown-item" data-toggle="modal" data-target="#education_modal">Education
                       <span class="float-right">
-                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                        <i *ngIf="!hideButtons" class="fa fa-plus-square" style="size: 25px;"></i>
                       </span></p>
                     <hr>
 
                     <p class="dropdown-item" data-toggle="modal" data-target="#publication_modal">Publications
                       <span class="float-right">
-                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                        <i *ngIf="!hideButtons" class="fa fa-plus-square" style="size: 25px;"></i>
                       </span></p>
                     <hr>
 
                     <p class="dropdown-item" data-toggle="modal" data-target="#internship_modal">Internships
                       <span class="float-right">
-                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                        <i *ngIf="!hideButtons" class="fa fa-plus-square" style="size: 25px;"></i>
                       </span></p>
                     <hr>
 
                     <p class="dropdown-item" data-toggle="modal" data-target="#project_modal">Projects
                       <span class="float-right">
-                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                        <i *ngIf="!hideButtons" class="fa fa-plus-square" style="size: 25px;"></i>
                       </span></p>
                     <hr>
 
                     <p class="dropdown-item" data-toggle="modal" data-target="#competetive_modal">Competetive Exams
                       <span class="float-right">
-                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                        <i *ngIf="!hideButtons" class="fa fa-plus-square" style="size: 25px;"></i>
                       </span></p>
                     <hr>
 
                     <p class="dropdown-item" data-toggle="modal" data-target="#placement_modal">Placements
                       <span class="float-right">
-                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                        <i *ngIf="!hideButtons" class="fa fa-plus-square" style="size: 25px;"></i>
                       </span></p>
                     <hr>
 
                     <p class="dropdown-item" data-toggle="modal" data-target="#culturalactivity_modal">Cultural
                       Activities/Achievement
                       <span class="float-right">
-                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                        <i *ngIf="!hideButtons" class="fa fa-plus-square" style="size: 25px;"></i>
                       </span></p>
                     <hr>
                     <p class="dropdown-item" data-toggle="modal" data-target="#technicalactivity_modal">Technical
                       Activities/Achievements
                       <span class="float-right">
-                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                        <i *ngIf="!hideButtons" class="fa fa-plus-square" style="size: 25px;"></i>
                       </span></p>
                     <hr>
                     <p class="dropdown-item" data-toggle="modal" data-target="#workshop_modal">Workshops/Seminars
                       <span class="float-right">
-                        <i class="fa fa-plus-square" style="size: 25px;"></i>
+                        <i *ngIf="!hideButtons" class="fa fa-plus-square" style="size: 25px;"></i>
                       </span></p>
                     <hr>
 
@@ -486,7 +486,7 @@
       <!--Work Experience-->
 
       <div class="kyc-section rewards-section reports-sectn">
-        <h3>Experience <a data-toggle="modal" data-target="#experience" (click)="resetWorkExperienceForm()"><i
+        <h3>Experience <a data-toggle="modal" data-target="#experience" (click)="resetWorkExperienceForm()"><i *ngIf="!hideButtons"
               class="fa fa-plus-square float-right" style="font-size: 30px;"></i></a></h3>
         <div *ngFor="let val of workExperienceInfo; let i = index">
           <div class="row">
@@ -494,9 +494,9 @@
               <i class="fa fa-suitcase text-center" style="font-size: 60px;"></i>
             </div>
             <div class="col-11">
-              <h5> <a data-toggle="modal" [attr.data-target]="'#experience'" (click)="fillWorkExperienceData(i)"> <i
+              <h5> <a data-toggle="modal" [attr.data-target]="'#experience'" (click)="fillWorkExperienceData(i)"> <i *ngIf="!hideButtons"
                     class="fa fa-pencil float-right" style="font-size: 30px;"></i></a>
-                <a (click)="deleteWorkExperienceData(val.id)"><i class="fa fa-trash  float-right" aria-hidden="true"
+                <a (click)="deleteWorkExperienceData(val.id)"><i *ngIf="!hideButtons" class="fa fa-trash  float-right" aria-hidden="true"
                     style="font-size: 30px;">&nbsp;&nbsp;</i></a></h5>
               <p>{{val.designation}}, {{val.organizationName}}<br />
                 Payscale : {{val.payScale}}<br />
@@ -575,7 +575,7 @@
 
       <!--Education starts-->
       <div class="kyc-section rewards-section reports-sectn">
-        <h3>Education <a data-toggle="modal" data-target="#education" (click)="resetEducationForm()"><i
+        <h3>Education <a data-toggle="modal" data-target="#education" (click)="resetEducationForm()"><i *ngIf="!hideButtons"
               class="fa fa-plus-square float-right" style="font-size: 30px;"></i></a>
         </h3>
         <ng-container *ngFor="let val of userQualificationInfo; let i = index">
@@ -589,9 +589,9 @@
                 <span *ngIf="val.collegeSchool; else notAvailable">
                   {{val.collegeSchool}}
                 </span>
-                <a data-toggle="modal" [attr.data-target]="'#education'" (click)="fillEducationData(i)"><i
+                <a data-toggle="modal" [attr.data-target]="'#education'" (click)="fillEducationData(i)"><i *ngIf="!hideButtons"
                     class="fa fa-pencil float-right" style="font-size: 30px;"></i></a>
-                <a (click)="deleteQualificationData(val.id)"><i class="fa fa-trash  float-right" aria-hidden="true"
+                <a (click)="deleteQualificationData(val.id)"><i *ngIf="!hideButtons" class="fa fa-trash  float-right" aria-hidden="true"
                     style="font-size: 30px;">&nbsp;&nbsp;</i></a></h5>
               <p>{{val.universityBoard}}<br />{{val.degreeCertificate}}, {{val.specialization}}<br />Year of Passing :
                 {{val.yearOfPassing}}<br />CGPA : {{val.percentageCgpa}}</p>
@@ -653,7 +653,7 @@
       <br />
       <!--research work-->
       <div class="kyc-section rewards-section reports-sectn">
-        <h3>Research Work <a data-toggle="modal" data-target="#research" (click)="resetResearchForm()"><i
+        <h3>Research Work <a data-toggle="modal" data-target="#research" (click)="resetResearchForm()"><i *ngIf="!hideButtons"
               class="fa fa-plus-square float-right" style="font-size: 30px;"></i></a></h3>
         <div *ngFor="let val of userResearchWorkInfo; let i = index">
           <div class="row">
@@ -662,9 +662,9 @@
             </div>
             <div class="col-11">
               <h5>{{val.title}}
-                <a data-toggle="modal" [attr.data-target]="'#research'" (click)="fillResearchData(i)"><i
+                <a data-toggle="modal" [attr.data-target]="'#research'" (click)="fillResearchData(i)"><i *ngIf="!hideButtons"
                     class="fa fa-pencil float-right" style="font-size: 30px;"></i></a>
-                <a (click)="deleteResearchWorkData(val.id)"><i class="fa fa-trash  float-right" aria-hidden="true"
+                <a (click)="deleteResearchWorkData(val.id)"><i *ngIf="!hideButtons" class="fa fa-trash  float-right" aria-hidden="true"
                     style="font-size: 30px;">&nbsp;&nbsp;</i></a>
               </h5>
               <p>{{val.yearOfPublication}}, {{val.publisher}}<br />
@@ -791,7 +791,7 @@
       <!--Internship starts-->
       <ng-container *ngIf="student">
         <div class="kyc-section rewards-section reports-sectn">
-          <h3>Internship <a data-toggle="modal" data-target="#internship" (click)="resetInternshipForm()"><i
+          <h3>Internship <a data-toggle="modal" data-target="#internship" (click)="resetInternshipForm()"><i *ngIf="!hideButtons"
                 class="fa fa-plus-square float-right" style="font-size: 30px;"></i></a></h3>
           <div *ngFor="let val of userInternshipInfo; let i = index">
             <div class="row">
@@ -800,9 +800,9 @@
               </div>
               <div class="col-11">
                 <h5>{{val.subject}} <a data-toggle="modal" [attr.data-target]="'#internship'"
-                    (click)="fillInternshipData(i)"><i class="fa fa-pencil float-right"
+                    (click)="fillInternshipData(i)"><i *ngIf="!hideButtons" class="fa fa-pencil float-right"
                       style="font-size: 30px;"></i></a>
-                  <a (click)="deleteInternshipData(val.id)"><i class="fa fa-trash  float-right" aria-hidden="true"
+                  <a (click)="deleteInternshipData(val.id)"><i *ngIf="!hideButtons" class="fa fa-trash  float-right" aria-hidden="true"
                       style="font-size: 30px;">&nbsp;&nbsp;</i></a></h5>
                 <p>{{val.companyName}}<br />{{val.city}}, {{val.state}}, {{val.country}}<br />{{val.startDate}} -
                   {{val.endDate}}<br /></p>
@@ -872,7 +872,7 @@
       <!--project starts-->
       <ng-container *ngIf="student">
         <div class="kyc-section rewards-section reports-sectn">
-          <h3>Projects <a data-toggle="modal" data-target="#project" (click)="resetProjectForm()"><i
+          <h3>Projects <a data-toggle="modal" data-target="#project" (click)="resetProjectForm()"><i *ngIf="!hideButtons"
                 class="fa fa-plus-square float-right" style="font-size: 30px;"></i></a></h3>
           <div *ngFor="let val of userProjectInfo; let i = index">
             <div class="row">
@@ -880,9 +880,9 @@
                 <i class="fa fa-code text-center" style="font-size: 60px;"></i>
               </div>
               <div class="col-11">
-                <h5>{{val.title}} <a data-toggle="modal" [attr.data-target]="'#project'" (click)="fillProjectData(i)"><i
+                <h5>{{val.title}} <a data-toggle="modal" [attr.data-target]="'#project'" (click)="fillProjectData(i)"><i *ngIf="!hideButtons"
                       class="fa fa-pencil float-right" style="font-size: 30px;"></i></a>
-                  <a (click)="deleteProjectData(val.id)"><i class="fa fa-trash  float-right" aria-hidden="true"
+                  <a (click)="deleteProjectData(val.id)"><i *ngIf="!hideButtons" class="fa fa-trash  float-right" aria-hidden="true"
                       style="font-size: 30px;">&nbsp;&nbsp;</i></a></h5>
                 <p>{{val.from}} - {{val.to}}<br />Guide : {{val.guide}}<br />{{val.description}} <br />Other Creators :
                   {{val.otherCreators}} <br />My Role : {{val.role}}</p>
@@ -951,7 +951,7 @@
       <ng-container>
         <div class="kyc-section rewards-section reports-sectn">
           <h3>Competetive Exams <a data-toggle="modal" data-target="#competitiveexam"
-              (click)="resetCompetetiveExam()"><i class="fa fa-plus-square float-right"
+              (click)="resetCompetetiveExam()"><i *ngIf="!hideButtons" class="fa fa-plus-square float-right"
                 style="font-size: 30px;"></i></a></h3>
           <div *ngFor="let val of userCompetitiveExamInfo;let i = index">
             <div class="row">
@@ -960,9 +960,9 @@
               </div>
               <div class="col-11">
                 <h5>{{val.nameOfExam}} <a data-toggle="modal" [attr.data-target]="'#competitiveexam'"
-                    (click)="fillCompetetiveExamData(i)"><i class="fa fa-pencil float-right"
+                    (click)="fillCompetetiveExamData(i)"><i *ngIf="!hideButtons" class="fa fa-pencil float-right"
                       style="font-size: 30px;"></i></a>
-                  <a (click)="deleteCompetetiveExamData(val.id)"><i class="fa fa-trash  float-right" aria-hidden="true"
+                  <a (click)="deleteCompetetiveExamData(val.id)"><i *ngIf="!hideButtons" class="fa fa-trash  float-right" aria-hidden="true"
                       style="font-size: 30px;">&nbsp;&nbsp;</i></a>
                 </h5>
                 <p>Registration No. : {{val.registrationNo}}<br />
@@ -1026,7 +1026,7 @@
 
       <ng-container *ngIf="student">
         <div class="kyc-section rewards-section reports-sectn">
-          <h3>Placements <i class="fa fa-plus-square float-right" style="font-size: 30px;"></i></h3>
+          <h3>Placements <i *ngIf="!hideButtons" class="fa fa-plus-square float-right" style="font-size: 30px;"></i></h3>
           <div *ngFor="let val of userPlacementInfo">
             <div class="row">
               <div class="col-1">
@@ -1034,7 +1034,7 @@
               </div>
               <div class="col-11">
                 <h5>Deloitte, Hyderabad (On Campus) <a data-toggle="modal" [attr.data-target]="'#placement' + val.id">
-                    <i class="fa fa-pencil float-right" style="font-size: 30px;"></i></a></h5>
+                    <i *ngIf="!hideButtons" class="fa fa-pencil float-right" style="font-size: 30px;"></i></a></h5>
                 <p>6.2 CTC<br />status</p>
               </div>
             </div>
@@ -1231,7 +1231,7 @@
       <ng-container>
         <div class="kyc-section rewards-section reports-sectn">
           <h3>Cultural Activities<a data-toggle="modal" data-target="#culturalactivity"
-              (click)="resetCulturalActivity()"> <i class="fa fa-plus-square float-right"
+              (click)="resetCulturalActivity()"> <i *ngIf="!hideButtons" class="fa fa-plus-square float-right"
                 style="font-size: 30px;"></i></a></h3>
           <div *ngFor="let val of userCulturalActivityInfo; let i = index">
             <div class="row">
@@ -1240,9 +1240,9 @@
               </div>
               <div class="col-11">
                 <h5>{{val.achievement}}<a data-toggle="modal" [attr.data-target]="'#culturalactivity'"
-                    (click)="fillCulturalActivityData(i)"> <i class="fa fa-pencil float-right"
+                    (click)="fillCulturalActivityData(i)"> <i *ngIf="!hideButtons" class="fa fa-pencil float-right"
                       style="font-size: 30px;"></i></a>
-                  <a (click)="deleteCulturalActivityData(val.id)"><i class="fa fa-trash  float-right" aria-hidden="true"
+                  <a (click)="deleteCulturalActivityData(val.id)"><i *ngIf="!hideButtons" class="fa fa-trash  float-right" aria-hidden="true"
                       style="font-size: 30px;">&nbsp;&nbsp;</i></a></h5>
                 <h5>{{val.nameOfActivity}} - {{val.type}}</h5>
                 <p>{{val.date}}, {{val.place}}</p>
@@ -1311,7 +1311,7 @@
       <ng-container>
         <div class="kyc-section rewards-section reports-sectn">
           <h3>Technical Activities<a data-toggle="modal" data-target="#technicalactivity"
-              (click)="resetTechnicalActivity()"> <i class="fa fa-plus-square float-right"
+              (click)="resetTechnicalActivity()"> <i *ngIf="!hideButtons" class="fa fa-plus-square float-right"
                 style="font-size: 30px;"></i></a></h3>
           <div *ngFor="let val of userTechnicalActivityInfo; let i = index">
             <div class="row">
@@ -1320,9 +1320,9 @@
               </div>
               <div class="col-11">
                 <h5>{{val.topicSubject}}<a data-toggle="modal" [attr.data-target]="'#technicalactivity'"
-                    (click)="fillTechnicalActivityData(i)"> <i class="fa fa-pencil float-right"
+                    (click)="fillTechnicalActivityData(i)"> <i *ngIf="!hideButtons" class="fa fa-pencil float-right"
                       style="font-size: 30px;"></i></a>
-                  <a (click)="deleteTechnicalActivityData(val.id)"><i class="fa fa-trash  float-right"
+                  <a (click)="deleteTechnicalActivityData(val.id)"><i *ngIf="!hideButtons" class="fa fa-trash  float-right"
                       aria-hidden="true" style="font-size: 30px;">&nbsp;&nbsp;</i></a></h5>
                 <p>{{val.type}}<br />
                   Place - {{val.place}}<br />
@@ -1408,7 +1408,7 @@
     <div class="col-lg-3 kyc-section rewards-section reports-sectn scroll-area" style="max-height: 1000px">
       <div class="position-static">
         <div class="d-flex justify-content-between">
-          <i class="fa fa-arrow-left facultyName" (click)="loadProfile('','')" style="font-size: 20px"
+          <i class="fa fa-arrow-left facultyName" (click)="loadProfile('','') ; showButton();" style="font-size: 20px"
             aria-hidden="true"></i>
           <h4>Employees </h4>
           <i class="fa fa-download" aria-hidden="true" style="font-size: 20px"></i>
@@ -1424,7 +1424,7 @@
             </div>
             <div class="col-9">
               <a class="facultyName" style="cursor: pointer;"
-                (click)="loadProfile(val.userId,val.userType)">{{val.name}} [{{val.nameAcronym}}]</a>
+                (click)="loadProfile(val.id,''); hideButton()">{{val.name}} [{{val.nameAcronym}}]</a>
               <p style="font-size:13px;">{{val.currentDesignation}}<br />
                 <i class="fa fa-envelope mr-1" aria-hidden="true"></i>{{val.email}}<br />
                 <i class="fa fa-mobile mr-1" aria-hidden="true"></i>{{val.mobileNo}}
@@ -1440,7 +1440,7 @@
               <div><img class="othersprofile" src="../../../assets/images/img_avatar2.png" alt="" /></div>
             </div>
             <div class="col-9">
-              <h6><a (click)="loadProfile(val.userId,val.userType)">{{val.name}} [{{val.nameAcronym}}]</a></h6>
+              <h6><a (click)="loadProfile(val.id,''); hideButton()">{{val.name}} [{{val.nameAcronym}}]</a></h6>
               <p style="font-size:13px;">{{val.currentDesignation}}<br />
                 <i class="fa fa-envelope mr-1" aria-hidden="true"></i>{{val.email}}<br />
                 <i class="fa fa-mobile mr-1" aria-hidden="true"></i>{{val.mobileNo}}
