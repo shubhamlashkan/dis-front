@@ -322,7 +322,7 @@
                 [ngClass]=" { 'has-error ' : val.controls.assignedTo.invalid && val.controls.assignedTo.touched }">
                  <select class="form-control" id="{{'assignedTo'+i}}" formControlName="assignedTo">
                   <option value="" disabled selected>Assigned to *</option>
-                  <option *ngFor="let val of staffFacultyList" [value]="val.id">{{val.userName}}</option>
+                  <option *ngFor="let val of staffFacultyList" [value]="val.userName">{{val.userName}}</option>
                 </select>  
                 <span class="help-block required-text"
                   *ngIf="val.controls.assignedTo.errors?.required && val.controls.assignedTo.touched">Assigned to is required</span>
