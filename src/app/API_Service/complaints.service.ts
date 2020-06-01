@@ -258,11 +258,11 @@ export class ComplaintsService {
   }
 
   getInfraInchargeDetails():Observable<any>{
-    return this.http.get("http://localhost:8080/dis/infrastructure/infra/getInfraInchargeDetails");
+    return this.http.get("http://localhost:8080/dis/infrastructure/infrastructure/getInfraInchargeDetails");
   }
 
   updateInfraIncharge(data: any) {
-    return this.http.post("http://localhost:8080/dis/infrastructure/infra/updateInfraInchargeDetails", data, httpOptions);
+    return this.http.post("http://localhost:8080/dis/infrastructure/infrastructure/updateInfraInchargeDetails", data, httpOptions);
   }
 
 }
