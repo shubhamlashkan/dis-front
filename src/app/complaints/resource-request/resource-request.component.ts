@@ -70,7 +70,7 @@ export class ResourceRequestComponent implements OnInit {
 
   authenticated() {
     if (window.sessionStorage.AuthUsername == 'pbamne' ||
-      window.sessionStorage.AuthUsername == 'uthakar') {
+      window.sessionStorage.AuthUsername == 'damehta') {
       return true
     } else {
       return false

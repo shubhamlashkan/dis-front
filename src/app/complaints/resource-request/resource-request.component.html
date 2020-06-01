@@ -145,7 +145,7 @@
         </div>
       </div>
       <div class="row">
-        <table class="customTable">
+        <table *ngIf="unresolvedArray.length>0" class="customTable">
           <th class="customTh">Date</th>
           <th class="customTh">Created By</th>
           <th class="customTh">Category</th>
