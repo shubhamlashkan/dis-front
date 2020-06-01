@@ -8,9 +8,8 @@ export class EventInfo {
     createdBy: string;
     createdDate: Date;
     location: string;
-    attachment: File;
   
-    constructor(title: string, startDate: Date, endDate: Date, description: string, participants: string[], eventIncharge: string, createdBy: string, createdDate: Date, location: string, attchment: File) {
+    constructor(title: string, startDate: Date, endDate: Date, description: string, participants: string[], eventIncharge: string, createdBy: string, createdDate: Date, location: string) {
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -24,6 +23,5 @@ export class EventInfo {
             this.participants.push({participantId: participants[i]});
         }
         this.location = location;
-        this.attachment = attchment;
     }
   }

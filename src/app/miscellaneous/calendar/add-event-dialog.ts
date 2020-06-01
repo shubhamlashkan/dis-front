@@ -286,10 +286,9 @@ export class AddEventDialog {
         organizerUsername,
         new Date(),
         this.locationFormController.value,
-        this.selectedFile
       );
       console.log(this.eventInfo);
-      let addedEvent = this.calendarService.addEvent(this.eventInfo);
+      let addedEvent = this.calendarService.addEvent(this.eventInfo,this.selectedFile);
       addedEvent.subscribe(
         data => {
           this.dialogRef.close(data);

@@ -24,8 +24,8 @@ export class CalendarService {
     return this.http.get(`${this.baseUrl}/getPublicHolidays`);
   }
 
-  addEvent(event: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/addEvent`, event, httpOptions);
+  addEvent(event: any, attachment: File): Observable<any> {
+    return this.http.post(`${this.baseUrl}/addEvent?attachment=` + attachment, event, httpOptions);
   }
 
   deleteEvent(eid: string): void {

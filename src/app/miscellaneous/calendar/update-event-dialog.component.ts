@@ -298,7 +298,7 @@ export class UpdateEventDialogComponent implements OnInit {
         organizerUsername,
         new Date(),
         this.locationFormController.value,
-        this.selectedFile
+       // this.selectedFile
       );
       console.log(this.eventInfo);
       let addedEvent = this.calendarService.updateEvent(this.eventInfo,this.id);
