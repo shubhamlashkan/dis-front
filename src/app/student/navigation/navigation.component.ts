@@ -25,7 +25,7 @@ export class NavigationComponent implements OnInit {
   refresh()
   {
     this.subscription = timer(0, 10000*3).pipe(
-      switchMap(() => this.notificationsService.getMyNotifications(this.auth.getUsername()))
+      switchMap(() => this.notificationsService.getMyNotifications())
     ).subscribe(notifi => {
       this.unreadNotifications=notifi.filter(e => !e.read).length;
     })

@@ -15,13 +15,13 @@ export class NotificationsService {
 
   constructor(private http :HttpClient) { }
 
-  getMyNotifications(username: String): Observable<any> {
-    return this.http.get(`${this.baseUrl}/getAllNotification/${username}`);
+  getMyNotifications(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/getAllNotifications`);
   }
-  markAsRead(notification: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/markAsRead`, notification,httpOptions);
+  markAsRead(notificationId : String): Observable<Object> {
+    return this.http.get(`${this.baseUrl}/markAsRead/${notificationId}`);
   }
-  markAllAsRead(username: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/markAllAsRead`, username,httpOptions);
+  markAllAsRead(): Observable<Object> {
+    return this.http.get(`${this.baseUrl}/markAllAsRead`);
   }
 }

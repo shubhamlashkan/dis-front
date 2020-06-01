@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, ChangeDetectorRef, OnDestroy} from '@angu
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort ,Sort} from '@angular/material/sort';
 import {MatTableDataSource, MatTable} from '@angular/material/table';
-import { TokenStorageService } from 'src/app/authentication/token-storage.service';
 import { NotificationsService } from 'src/app/API_Service/notifications.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { Subscription, timer } from 'rxjs';
@@ -38,13 +37,6 @@ export interface UserData {
 export class NotificationsComponent implements OnInit , OnDestroy{
 
   subscription: Subscription;
-  markAsReadData= {
-    notificationId : null,
-    username : null
-  }
-  markAllAsReadData= {
-    username : null
-  }
   columnsToDisplay: string[] = ['date', 'heading','link' ,'status'];
   dataSource: MatTableDataSource<UserData>;
   expandedElement: UserData | null;
@@ -64,10 +56,7 @@ filterForm = new FormGroup({
 get fromDate() { return this.filterForm.get('fromDate').value; }
 get toDate() { return this.filterForm.get('toDate').value; }
 
-  constructor(private _snackBar: MatSnackBar,private notificationsService : NotificationsService,private auth: TokenStorageService,private changeDetectorRefs: ChangeDetectorRef) {
-
- 
-  }
+  constructor(private _snackBar: MatSnackBar,private notificationsService : NotificationsService,private changeDetectorRefs: ChangeDetectorRef) { }
   notificationsData : UserData[]=[];
 
   ngOnInit() {
@@ -92,7 +81,7 @@ get toDate() { return this.filterForm.get('toDate').value; }
 
   refresh(){
     this.subscription = timer(0, 10000*3).pipe(
-      switchMap(() => this.notificationsService.getMyNotifications(this.auth.getUsername()))
+      switchMap(() => this.notificationsService.getMyNotifications())
     ).subscribe((notifi) => {
       this.notificationsData=notifi;
       this.dataSource = new MatTableDataSource(this.notificationsData);
@@ -119,9 +108,7 @@ get toDate() { return this.filterForm.get('toDate').value; }
 
   markAsRead(id :String)
   {
-    this.markAsReadData.notificationId=id;
-    this.markAsReadData.username=this.auth.getUsername();
-    this.notificationsService.markAsRead(this.markAsReadData).subscribe(data =>{
+    this.notificationsService.markAsRead(id).subscribe(data =>{
       //console.log(data)
       this._snackBar.open('Notification marked as read', 'OK', {
         duration: 5000,
@@ -138,8 +125,7 @@ get toDate() { return this.filterForm.get('toDate').value; }
     );
   }
   markAllAsRead(){
-    this.markAllAsReadData.username=this.auth.getUsername();
-    this.notificationsService.markAllAsRead(this.markAllAsReadData).subscribe(data =>{
+    this.notificationsService.markAllAsRead().subscribe(data =>{
       //console.log(data)
       this._snackBar.open('All notifications marked as read', 'OK', {
         duration: 5000,
