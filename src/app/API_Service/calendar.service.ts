@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json'})
+  headers: new HttpHeaders({ 'Content-Type': 'application/json'}),
 };
 
 @Injectable({
@@ -23,9 +23,8 @@ export class CalendarService {
   getPublicHolidays(): Observable<any>{
     return this.http.get(`${this.baseUrl}/getPublicHolidays`);
   }
-
-  addEvent(event: any, attachment: File): Observable<any> {
-    return this.http.post(`${this.baseUrl}/addEvent?attachment=` + attachment, event, httpOptions);
+  addEvent(event: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/addEvent`,event);
   }
 
   deleteEvent(eid: string): void {
@@ -33,7 +32,7 @@ export class CalendarService {
   }
 
   updateEvent(event: any,eventId: string): Observable<any>{
-    return this.http.post(`${this.baseUrl}/updateEvent?eventId=`+ eventId, event,httpOptions);
+    return this.http.post(`${this.baseUrl}/updateEvent?eventId=`+ eventId, event);
   }
 
   getAllEmployeeList(): Observable<any> {

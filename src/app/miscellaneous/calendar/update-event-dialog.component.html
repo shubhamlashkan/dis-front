@@ -103,12 +103,13 @@
           #autosize="cdkTextareaAutosize"
           cdkAutosizeMinRows="1"></textarea>
         </mat-form-field>
-        <span>
-          <input type="file" (change)="selectFile($event)"> 
-        </span>
         </div>
 </form>
 </div>
 <div mat-dialog-actions>
+  <span>
+    <button mat-stroked-button color="primary" (click)="fileInput.click()" class="attachment"><i class="fa fa-paperclip" aria-hidden="true"></i> Attachment</button>
+    <input type="file" multiple #fileInput (change)="selectFile($event)" style="display:none;"> 
+  </span>
 <button mat-button cdkFocusInitial (click)="onSubmit()" [disabled]="disabled()">Save</button>
 </div>  
