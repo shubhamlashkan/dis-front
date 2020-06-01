@@ -47,6 +47,7 @@ export class CalendarComponent {
             startEditable: true,
             location: result.location,
             participants: result.participants,
+            textColor: "white",
           });
         }
       });
@@ -85,6 +86,7 @@ export class CalendarComponent {
             startEditable: true,
             location: events[e].location,
             participants: events[e].participants,
+            textColor: "white",
           });
       }
       else{
@@ -98,6 +100,7 @@ export class CalendarComponent {
           location: events[e].location,
           participants: events[e].participants,
           organizer: events[e].createdBy,
+          textColor: "white",
         });
       }
     }
