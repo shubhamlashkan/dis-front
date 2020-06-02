@@ -70,7 +70,6 @@ export class ShowEventDialogComponent implements OnInit {
         end: this.end,
         location: this.location,
         participants: this.participants,
-        textColor: "white",
       };
       let removeId = this.id;
       const dialogReference = this.dialog.open(UpdateEventDialogComponent, dialogConfig);
@@ -85,6 +84,7 @@ export class ShowEventDialogComponent implements OnInit {
             startEditable: true,
             location: result.location,
             participants: result.participants,
+            textColor: "white",
           });
           this.calendarApi.getEventById(removeId).remove();
         }
