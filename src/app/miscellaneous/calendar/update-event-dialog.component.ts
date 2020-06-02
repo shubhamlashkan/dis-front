@@ -224,13 +224,13 @@ export class UpdateEventDialogComponent implements OnInit {
       if(emeridian === 'AM' && ehh === 12) {
         ehh = 0;
       }
-      if (emeridian === 'PM') {
+      if (emeridian === 'PM' && ehh!=12) {
         ehh = ehh + 12;
       }
       if(smeridian === 'AM' && shh === 12) {
         shh = 0;
       }
-      if (emeridian === 'PM') {
+      if (smeridian === 'PM' && shh!=12) {
         shh = shh + 12;
       }
       if(emeridian === smeridian) {
