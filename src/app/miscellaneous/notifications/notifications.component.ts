@@ -72,29 +72,24 @@ get toDate() { return this.filterForm.get('toDate').value; }
     }
   }
 
-  getDateRange(value) {
-    const fromDate = value.fromDate;
-    const toDate = value.toDate;
+ getDateRange(value) {
+    this.dataSource.data = this.notificationsData;
+    const fromDate = value.fromDate
+    const toDate = value.toDate
     this.dataSource.data = this.dataSource.data.filter(e=>e.date > fromDate && e.date < toDate ) ;
-    console.log(fromDate, toDate);
   }
 
+
   refresh(){
-    this.subscription = timer(0, 10000*3).pipe(
+    this.subscription = timer(0, 10000).pipe(
       switchMap(() => this.notificationsService.getMyNotifications())
     ).subscribe((notifi) => {
+	var check=JSON.stringify(notifi) === JSON.stringify(this.notificationsData);
+	//console.log(check);
+      if(!check){
       this.notificationsData=notifi;
       this.dataSource = new MatTableDataSource(this.notificationsData);
       console.log(this.notificationsData);
-
-    //   this.pipe = new DatePipe('en');
-    // console.log(this.dataSource.filterPredicate);
-    // const defaultPredicate=this.dataSource.filterPredicate;
-    // this.dataSource.filterPredicate = (data, filter) =>{
-    //   const formatted=this.pipe.transform(data.date,'MM/dd/yyyy');
-    //   return formatted.indexOf(filter) >= 0 || defaultPredicate(data,filter) ;
-    // }
-      //console.log(this.dataSource);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       const sortState: Sort = {active: 'date', direction: 'desc'};
@@ -103,6 +98,7 @@ get toDate() { return this.filterForm.get('toDate').value; }
       this.sort.sortChange.emit(sortState);
       this.changeDetectorRefs.detectChanges();
       //this.table.renderRows();
+    }
         });
   }
 
