@@ -66,7 +66,7 @@ export class UpdateEventDialogComponent implements OnInit {
   employeeList: any;
   usernameList: string[] = [];
   location: string;
-  selectedFile: File = null
+  selectedFile: File[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<UpdateEventDialogComponent>,
@@ -259,11 +259,13 @@ export class UpdateEventDialogComponent implements OnInit {
   }
 
   selectFile(event) {
-    this.selectedFile = event.target.files.item(0); 
+    for(let i=0; i<event.target.files.length; i++) {
+      this.selectedFile.push(event.target.files.item(i)); 
+    }
   }
 
-  deleteFile() {
-    this.selectedFile = null;
+  deleteFile(i) {
+    this.selectedFile.splice(i, 1);
   }
 
   onSubmit() {
@@ -309,8 +311,10 @@ export class UpdateEventDialogComponent implements OnInit {
       formData.append('event', new Blob([JSON.stringify(this.eventInfo)], {
         type: "application/json"
         }));
-        if(this.selectedFile != null) {
-          formData.append('file', this.selectedFile, this.selectedFile.name);
+        if(this.selectedFile.length !== 0) {
+          this.selectedFile.forEach(file => {
+            formData.append('file', file, file.name);
+          });
         }
 
       let addedEvent = this.calendarService.updateEvent(formData,this.id);

@@ -103,16 +103,16 @@
           #autosize="cdkTextareaAutosize"
           cdkAutosizeMinRows="1"></textarea>
         </mat-form-field>
-        <div class="attachedFile" *ngIf="selectedFile!=null">
-          <mat-card class="custom">
+        <div class="attachedFile">
+          <mat-card class="custom" *ngFor="let file of selectedFile; let i = index">
             <span class="file-icon">
               <i class="fa fa-file fa-fw" aria-hidden="true"></i>
             </span>
             <span class="file-name">
-              {{selectedFile?.name}}
+              {{file?.name}}
             </span>
             <span class="cross">
-              <i class="fa fa-times fa-fw" aria-hidden="true" (click)="deleteFile()"></i>
+              <i class="fa fa-times fa-fw" aria-hidden="true" (click)="deleteFile(i)"></i>
             </span>
           </mat-card>
         </div>
