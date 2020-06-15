@@ -28,7 +28,8 @@ form{
   }
   
   tr.element-row:not(.expanded-row):hover {
-    background: whitesmoke;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+  transform: scale(1);
   }
   
   tr.element-row:not(.expanded-row):active {
@@ -37,6 +38,7 @@ form{
   
   .element-row td {
     border-bottom-width: 0;
+    
   }
   
   .element-detail {
@@ -51,4 +53,37 @@ form{
   .element-description-attribution {
     opacity: 0.5;
   }
-  
+  .mat-column-favourite{
+  width: 10% !important;
+}
+.mat-column-date {
+  width: 20% !important;
+}
+.mat-column-heading {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  width: 43% !important;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+.mat-column-forwarded {
+  width: 4% !important;
+}
+.mat-column-link {
+  width: 7% !important;
+}
+.make-dark {
+  font-weight: bolder;
+}
+.make-light{
+  background: whitesmoke;
+}
+.tableContainer{
+  position: relative;
+  max-height: 35em;
+  min-height: 19em;
+  overflow: auto;
+}

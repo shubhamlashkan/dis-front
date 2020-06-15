@@ -13,6 +13,8 @@ import { MatMomentDateModule } from "@angular/material-moment-adapter";
 import { ShowEventDialogComponent } from './calendar/show-event-dialog.component';
 import { UpdateEventDialogComponent } from './calendar/update-event-dialog.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { DeleteDialogComponent } from './notifications/delete-dialog/delete-dialog.component';
+import { ForwardDialogComponent } from './notifications/forward-dialog/forward-dialog.component';
 
 @NgModule({
   imports: [
@@ -43,8 +45,8 @@ import { NotificationsComponent } from './notifications/notifications.component'
     MatSnackBarModule,
     MatCardModule,
   ],
-  declarations: [BarchartComponent, CalendarComponent, PiechartComponent, HtmlDownloaderComponent, NotificationsComponent, AddEventDialog, ShowEventDialogComponent, UpdateEventDialogComponent, NotificationsComponent],
+  declarations: [BarchartComponent, CalendarComponent, PiechartComponent, HtmlDownloaderComponent, NotificationsComponent, AddEventDialog, ShowEventDialogComponent, UpdateEventDialogComponent, NotificationsComponent, DeleteDialogComponent, ForwardDialogComponent],
   exports: [CalendarComponent, BarchartComponent, PiechartComponent, HtmlDownloaderComponent,NotificationsComponent],
-  entryComponents: [AddEventDialog,ShowEventDialogComponent,UpdateEventDialogComponent]
+  entryComponents: [AddEventDialog,ShowEventDialogComponent,UpdateEventDialogComponent,DeleteDialogComponent,ForwardDialogComponent]
 })
 export class MiscellaneousModule { }

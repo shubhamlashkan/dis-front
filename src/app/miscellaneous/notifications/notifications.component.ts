@@ -8,15 +8,20 @@ import { Subscription, timer } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { MatSnackBar } from '@angular/material';
-
+import { MatSnackBar, MatDialogConfig, MatDialog } from '@angular/material';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import { ForwardDialogComponent } from './forward-dialog/forward-dialog.component';
+import { Identifiers } from '@angular/compiler';
 
 export interface UserData {
   id: string;
   heading: string;
   description: string;
-  status: string;
-  date: Date
+  read: Boolean;
+  date: Date;
+  isFavourite: Boolean;
+  link: String;
+  comment: String
 }
 
 /**
@@ -37,10 +42,12 @@ export interface UserData {
 export class NotificationsComponent implements OnInit , OnDestroy{
 
   subscription: Subscription;
-  columnsToDisplay: string[] = ['date', 'heading','link' ,'status'];
+  columnsToDisplay: string[] = ['favourite' ,'date', 'heading','forwarded','link' ,'action'];
   dataSource: MatTableDataSource<UserData>;
   expandedElement: UserData | null;
   pipe: DatePipe;
+  showUnread=false;
+  showStarred=false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -56,7 +63,7 @@ filterForm = new FormGroup({
 get fromDate() { return this.filterForm.get('fromDate').value; }
 get toDate() { return this.filterForm.get('toDate').value; }
 
-  constructor(private _snackBar: MatSnackBar,private notificationsService : NotificationsService,private changeDetectorRefs: ChangeDetectorRef) { }
+  constructor(public dialog: MatDialog,private _snackBar: MatSnackBar,private notificationsService : NotificationsService,private changeDetectorRefs: ChangeDetectorRef) { }
   notificationsData : UserData[]=[];
 
   ngOnInit() {
@@ -90,12 +97,7 @@ get toDate() { return this.filterForm.get('toDate').value; }
       this.notificationsData=notifi;
       this.dataSource = new MatTableDataSource(this.notificationsData);
       console.log(this.notificationsData);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-      const sortState: Sort = {active: 'date', direction: 'desc'};
-      this.sort.active = sortState.active;
-      this.sort.direction = sortState.direction;
-      this.sort.sortChange.emit(sortState);
+      this.activePaginatorAndSort();
       this.changeDetectorRefs.detectChanges();
       //this.table.renderRows();
     }
@@ -135,7 +137,102 @@ get toDate() { return this.filterForm.get('toDate').value; }
       verticalPosition:"top",
     });});
   }
+
+  filter(){
+    if(this.showUnread && this.showStarred)
+    {
+      this.dataSource = new MatTableDataSource(this.notificationsData);
+      this.dataSource.data = this.dataSource.data.filter(e=>(!e.read && e.isFavourite));
+      this.activePaginatorAndSort();
+      
+    }
+    else if(!this.showUnread && this.showStarred)
+    {
+      this.dataSource = new MatTableDataSource(this.notificationsData);
+      this.dataSource.data = this.dataSource.data.filter(e=>(e.isFavourite));
+      this.activePaginatorAndSort();
+      
+    }
+    else if(this.showUnread && !this.showStarred)
+    {
+      this.dataSource = new MatTableDataSource(this.notificationsData);
+      this.dataSource.data = this.dataSource.data.filter(e=>(!e.read));
+      this.activePaginatorAndSort();
+      
+    }
+    else
+    {
+      this.dataSource = new MatTableDataSource(this.notificationsData);
+      this.activePaginatorAndSort();
+      
+    }
+  }
  
+  activePaginatorAndSort(){
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      const sortState: Sort = {active: 'date', direction: 'desc'};
+      this.sort.active = sortState.active;
+      this.sort.direction = sortState.direction;
+      this.sort.sortChange.emit(sortState);
+  }
+
+  markAsFavourite(id :String)
+  {
+    this.notificationsService.markAsFavourite(id).subscribe(data =>{
+    },
+    error=>{this._snackBar.open('Server Error', 'OK',{
+      duration: 5000,
+      horizontalPosition: "right",
+      verticalPosition:"top",
+    });
+    }
+    );
+  }
+
+  delete(id:String) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.maxWidth="400px";
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    const dialogRef = this.dialog.open(DeleteDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result)
+      {
+        this.notificationsService.delete(id).subscribe(data =>{
+        this.dataSource.data= this.dataSource.data.filter(e=>(e.id !==id));
+        this._snackBar.open('Notification deleted successfully', 'OK',{
+          duration: 5000,
+          horizontalPosition: "right",
+          verticalPosition:"top",
+        });
+        },
+        error=>{
+          this._snackBar.open('Server Error', 'OK',{
+          duration: 5000,
+          horizontalPosition: "right",
+          verticalPosition:"top",
+        });
+        }
+        );
+      }
+
+    });
+    }
+  forward(id:string,heading:string) {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.width ="520px"
+      dialogConfig.data = {
+        id: id,
+        heading: heading
+    };
+      const dialogRef = this.dialog.open(ForwardDialogComponent, dialogConfig);
+  
+      dialogRef.afterClosed().subscribe(result => {});
+      }
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
