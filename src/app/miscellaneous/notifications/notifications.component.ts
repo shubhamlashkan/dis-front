@@ -8,10 +8,11 @@ import { Subscription, timer } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { MatSnackBar, MatDialogConfig, MatDialog } from '@angular/material';
+import { MatSnackBar, MatDialogConfig, MatDialog, DateAdapter, MAT_DATE_LOCALE } from '@angular/material';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { ForwardDialogComponent } from './forward-dialog/forward-dialog.component';
-import { Identifiers } from '@angular/compiler';
+import * as _moment from 'moment';
+import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 
 export interface UserData {
   id: string;
@@ -24,13 +25,17 @@ export interface UserData {
   comment: String
 }
 
-/**
- * @title Data table with sorting, pagination, and filtering.
- */
+const moment = _moment;
+
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.component.html',
   styleUrls: ['./notifications.component.scss'],
+  providers: [{
+    provide: DateAdapter,
+    useClass: MomentDateAdapter,
+    deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+  }],
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({height: '0px', minHeight: '0'})),
@@ -46,6 +51,7 @@ export class NotificationsComponent implements OnInit , OnDestroy{
   dataSource: MatTableDataSource<UserData>;
   expandedElement: UserData | null;
   pipe: DatePipe;
+  startDate;
   showUnread=false;
   showStarred=false;
 
@@ -81,9 +87,15 @@ get toDate() { return this.filterForm.get('toDate').value; }
 
  getDateRange(value) {
     this.dataSource.data = this.notificationsData;
-    const fromDate = value.fromDate
-    const toDate = value.toDate
-    this.dataSource.data = this.dataSource.data.filter(e=>e.date > fromDate && e.date < toDate ) ;
+    const fromDate = moment(value.fromDate)
+    const toDate = moment(value.toDate)
+    this.dataSource.data = this.dataSource.data.filter(e=>moment(e.date) >= fromDate && moment(e.date) <= toDate ) ;
+    this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      const sortState: Sort = {active: 'date', direction: 'asc'};
+      this.sort.active = sortState.active;
+      this.sort.direction = sortState.direction;
+      this.sort.sortChange.emit(sortState);
   }
 
 
@@ -233,6 +245,12 @@ get toDate() { return this.filterForm.get('toDate').value; }
   
       dialogRef.afterClosed().subscribe(result => {});
       }
+  resetFilter(){
+    this.filterForm.reset();
+    this.dataSource = new MatTableDataSource(this.notificationsData);
+      this.activePaginatorAndSort();
+
+  }
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }

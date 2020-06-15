@@ -31,7 +31,8 @@
       <input matInput 
         [matDatepicker]="fromDate" 
         placeholder="From Date" 
-        formControlName="fromDate">
+        formControlName="fromDate"
+        [(ngModel)]="startDate">
       <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
       <mat-datepicker #fromDate></mat-datepicker>
     </mat-form-field>
@@ -41,12 +42,14 @@
       <input matInput 
         [matDatepicker]="toDate" 
         placeholder="To Date" 
-        formControlName="toDate">
+        formControlName="toDate"
+        [min]="startDate">
       <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
       <mat-datepicker #toDate></mat-datepicker>
     </mat-form-field>
   </div>
    <button mat-icon-button color="primary" (click)="getDateRange(filterForm.value)"> <mat-icon style="font-size: 30px;margin-top: 30%;">search</mat-icon></button>
+   <button matTooltip="Reset Filter" mat-icon-button color="warn" (click)="resetFilter()"> <mat-icon style="font-size: 30px;margin-top: 30%;">clear</mat-icon></button>
 </form>
 <div class="mat-elevation-z8">
   <div class="tableContainer">
