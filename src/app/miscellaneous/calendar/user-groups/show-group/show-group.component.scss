@@ -1,0 +1,84 @@
+.participant-type {
+    margin-left:auto; 
+    margin-right:0;
+    color: white;
+    font-size: 12px;
+    padding: 4px 10px;
+    background-color: rgb(31, 147, 214);
+    border-radius: 25px;
+    font-weight: 500;
+}
+
+
+
+.participant-list-heading {
+    margin-top: 25px;
+}
+
+.options {
+    margin-left:auto; 
+    margin-right:0;
+    margin-top: 5px;
+}
+
+.edit-icon {
+    margin-right: 5px;
+    color: green;
+    font-size: 25px;
+}
+
+.delete-icon {
+    margin-right: 5px;
+    color: red;
+    font-size: 25px;
+}
+
+.participant-name {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.participant-username {
+    margin-left: 10px;
+    font-size: 13px;
+    font-weight: 420;
+}
+
+.group-title {
+    font-size: 25px;
+    font-weight: 550;
+    text-transform: capitalize;
+    display: inline-block;
+}
+
+.full-title {
+    display: flex;
+    align-items: center;
+    line-height: 20px;
+}
+
+.group-icon {
+    font-size: 23px;
+    background: #e1e4e6;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle;
+    padding: 14px 16px;
+    margin-right: 10px;
+    line-height: 30px;
+}
+
+.user-icon {
+    font-size: 17px;
+    background: #e1e4e6;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px 13px;
+    margin-right: 10px;
+}
+
+.member-list {
+    max-height: 280px;
+    overflow-y: auto;
+}

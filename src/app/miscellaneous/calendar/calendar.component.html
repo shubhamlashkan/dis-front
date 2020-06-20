@@ -1,9 +1,10 @@
 <full-calendar #calendar
       defaultView="dayGridMonth"
+      [customButtons] =  "customButtonOption.customButtons"
       [header]="{
-        left: 'prev,next',
+        left: 'prev,next today',
         center: 'title',
-        right: ' today dayGridMonth,timeGridDay'
+        right: 'dayGridMonth,timeGridDay, manageGroups'
       }"
       [buttonText]= "{
         dayGridMonth: 'M',

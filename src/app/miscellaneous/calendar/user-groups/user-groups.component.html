@@ -1,0 +1,62 @@
+<div mat-dialog-content>
+  <span class="title">My Groups
+    <button mat-icon-button aria-label="delete" class="cancel">
+      <i class="fa fa-times"  aria-hidden="true" (click)="onNoClick()"></i>
+    </button>
+    <button mat-raised-button color="primary" (click)="openCreateForm()" class="create-toggle" *ngIf="openViewGroup"><i class="fa fa-plus" aria-hidden="true"></i> Create Group</button>
+  </span>
+</div>
+<div mat-dialog-content>
+
+  <div class="row">
+    <div class="col-lg-4">
+      <mat-form-field class="filter">
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
+      </mat-form-field>
+      <span>
+        <button mat-icon-button color="warn" aria-label="delete" class="delete-icon">
+          <i class="fa fa-trash delete-icon" aria-hidden="true" (click)="deleteGroup()"></i>
+        </button>
+      </span>
+      
+      <div class='group-list-display'>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="$event ? masterToggle() : null"
+                          [checked]="selection.hasValue() && isAllSelected()"
+                          [indeterminate]="selection.hasValue() && !isAllSelected()"
+                          [aria-label]="checkboxLabel()"
+                          color='primary'>
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()"
+                          (change)="$event ? selection.toggle(row) : null"
+                          [checked]="selection.isSelected(row)"
+                          [aria-label]="checkboxLabel(row)"
+                          color='primary'>
+            </mat-checkbox>
+          </td>
+        </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Group Name</th>
+          <td mat-cell *matCellDef="let element" class = "list-item"> {{element.groupName}} </td>
+        </ng-container>
+        
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row  (click)="getRecord(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      </div>
+      
+    </div>
+    <div class="col-lg-8">
+      <app-add-group-dialog *ngIf="openCreateGroup" (createdGroup) = getCreatedGroup($event)></app-add-group-dialog>
+      <app-show-group *ngIf="openViewGroup" [selectedGroup] = "selectedGroup" (finalUpdate) = refreshGroupList($event) (isDeleted) = refreshGroupList($event)></app-show-group>
+    </div>
+  </div>
+</div>

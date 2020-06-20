@@ -39,4 +39,24 @@ export class CalendarService {
   getAllEmployeeList(): Observable<any> {
     return this.http.get(`${this.staffDataUrl}/getAllEmployeeNames`);
   }
+
+  getMyGroups(pid: String): Observable<any> {
+    return this.http.get(`${this.baseUrl}/getMyGroup?userName=`+pid);
+  }
+
+  getAllUsers(pid: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/getAllUsers?username=`+pid);
+  }
+
+  createGroup(group: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/addGroup`, group);
+  }
+
+  updateGroup(group: any,groupId: string): Observable<any>{
+    return this.http.post(`${this.baseUrl}/updateGroup?groupId=`+ groupId, group);
+  }
+
+  deleteGroup(gid: string): Observable<any>{
+    return this.http.delete(`${this.baseUrl}/deleteGroup?groupId=` + gid)
+  }
 }

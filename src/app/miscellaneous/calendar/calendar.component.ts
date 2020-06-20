@@ -10,6 +10,7 @@ import bootstrapPlugin from '@fullcalendar/bootstrap';
 import { CalendarService } from './../../API_Service/calendar.service';
 import { MatDialog, MatDialogConfig} from '@angular/material';
 import { ShowEventDialogComponent } from './show-event-dialog.component';
+import { UserGroupsComponent } from './user-groups/user-groups.component';
 
 @Component({
   selector: 'app-calendar',
@@ -28,6 +29,7 @@ export class CalendarComponent {
   calendarPlugins = [dayGridPlugin, timeGridPlugin, interactionPlugin, bootstrapPlugin];
   calendarWeekends = true;
   calendarEvents: EventInput[] = [];
+  customButtonOption: any;
 
   openDialog(event): void {
     console.log(this.auth.getAuthorities())
@@ -53,6 +55,13 @@ export class CalendarComponent {
       });
     }
   }
+
+  myGroupsClickEvent(): void {
+    const dialogRef = this.dialog.open(UserGroupsComponent, {
+      width: '1000px'
+    });
+  }
+
 
   handleEventClick(arg): void{
     const dialogConfig = new MatDialogConfig();
@@ -118,6 +127,16 @@ export class CalendarComponent {
         })
       }
     });
+    
+    this.customButtonOption = {
+      customButtons: {
+        manageGroups: {
+          text: 'My Groups',
+          icon: 'fa-times',
+          click: () => this.myGroupsClickEvent()
+        }
+      },
+    }
   }
 
   ngAfterViewInit(): void {
