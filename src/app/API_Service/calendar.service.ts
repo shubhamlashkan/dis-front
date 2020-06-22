@@ -56,7 +56,8 @@ export class CalendarService {
     return this.http.post(`${this.baseUrl}/updateGroup?groupId=`+ groupId, group);
   }
 
-  deleteGroup(gid: string): Observable<any>{
-    return this.http.delete(`${this.baseUrl}/deleteGroup?groupId=` + gid)
+  deleteGroup(gids: string[]): Observable<any>{
+    console.log(gids);
+    return this.http.delete(`${this.baseUrl}/deleteGroup?groupId=` + gids)
   }
 }

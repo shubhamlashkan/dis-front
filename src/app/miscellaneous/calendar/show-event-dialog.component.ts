@@ -61,7 +61,7 @@ export class ShowEventDialogComponent implements OnInit {
 
   onUpdate(){
       const dialogConfig = new MatDialogConfig();
-      dialogConfig.width = '520px';
+      dialogConfig.width = '570px';
       dialogConfig.data = {
         id: this.id,
         title: this.title,

@@ -36,7 +36,7 @@ export class ShowGroupComponent implements OnChanges {
   }
 
   deleteGroup() {
-    let deleteResponse = this.calendarService.deleteGroup(this.currentGroup.groupId);
+    let deleteResponse = this.calendarService.deleteGroup([this.currentGroup.groupId]);
     deleteResponse.subscribe(() => {
       console.log("group deleted");
       this.isDeleted.emit(true);

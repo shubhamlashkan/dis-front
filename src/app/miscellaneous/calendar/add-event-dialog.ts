@@ -8,7 +8,7 @@ import { Component, Inject, ViewChild, NgZone } from '@angular/core';
 import { CalendarService } from './../../API_Service/calendar.service';
 import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import * as _moment from 'moment';
+import * as moment from 'moment';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {CdkTextareaAutosize} from '@angular/cdk/text-field';
 import {take} from 'rxjs/operators';
@@ -24,7 +24,11 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 }
 
 
-const moment = _moment;
+export interface userListObject {
+  userName: string;
+  name: string;
+  type: string;
+}
 
 export const MY_FORMATS = {
   parse: {
@@ -54,21 +58,25 @@ export const MY_FORMATS = {
 export class AddEventDialog {
 
   addTime = false;
-  addReminderTime = true;
-  startTimeList: string[] = [];
-  endTimeList: string[] = [];
-  startTime: string;
-  endTime: string;
+  startTimeList: moment.Moment[] = [];
+  endTimeList: moment.Moment[] = [];
+  startTime: moment.Moment;
+  endTime: moment.Moment;
   startDate;
   endDate;
-  participant: string;
-  participantList = new Set<string>();
   eventInfo: EventInfo;
   description: string;
   organizer: string;
-  employeeList: any;
-  usernameList: string[] = [];
   selectedFile: File[] = [];
+  options: userListObject[];
+  participantList = new Set<userListObject>();
+  filteredOptions: Observable<userListObject[]>;
+  academic_personnel: any = [];
+  be_students: any = [];
+  me_students: any = [];
+  phd_students: any = [];
+  groups: any = [];
+  participantListTypeFilter: string[];
 
   constructor(
     public dialogRef: MatDialogRef<AddEventDialog>,
@@ -83,31 +91,18 @@ export class AddEventDialog {
     locationFormController = new FormControl('', [
       Validators.required,
     ]);
-    options: string[] = [];
-    filteredOptions: Observable<string[]>;
   
     ngOnInit() {
+      this.organizer = this.auth.getUsername();
       this.startDate = moment(this.data.dateStr);
       this.endDate = moment(this.data.dateStr);
-      this.employeeList = this.calendarService.getAllEmployeeList();
-      Promise.all([this.generateOptions()]).then(value =>{
-      this.filteredOptions = this.participantListController.valueChanges
-        .pipe(
-          startWith(''),
-          map(value => this._filter(value))
-        );
-      });
-      this.generateTimelist();
+      console.log(this.startDate);
+      this.participantListTypeFilter = ['AP', 'Groups'];
+      this.resolveParticipants().then(userData => this.generateUserwiseLists(userData));
+      this.startTimeList = this.generateTimelist(this.startDate);
       this.startTime = this.startTimeList[0];
       this.getEndTimeList();
-      this.endTime = this.startTime;
-      if (!this.data.allDay) {
-        const sd = new Date(this.data.dateStr);
-        this.startTime = (sd.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'}));
-        const ed = new Date(sd.setTime(sd.setHours(sd.getHours() + 1)));
-        this.endTime = (ed.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'}));
-      }
-      this.organizer = this.auth.getUsername();
+      this.endTime = this.endTimeList[0];
     }
 
     triggerResize() {
@@ -116,19 +111,92 @@ export class AddEventDialog {
           .subscribe(() => this.autosize.resizeToFitContent(true));
     }
 
-    generateOptions() {
-      this.employeeList.subscribe(empList => {
-        const currentUser = this.auth.getUsername();
-        for (let i = 0; i < empList.length; i++) {
-          if (empList[i][0] === currentUser) {
-            this.organizer = empList[i][1];
-          } else {
-            this.options.push(empList[i][1]);
-          }
-        }
+    private resolveParticipants(): Promise<any> {
+      return new Promise((resolve) => {
+        this.calendarService.getAllUsers(this.organizer).subscribe(userData => {
+          resolve(userData);
+        });
       });
     }
 
+    generateUserwiseLists(data: any) {
+      console.log(data);
+      data.forEach(element => {
+        if(element.participantType === 'Academic Personnel') {
+          element.participant.forEach(participant => {
+            this.academic_personnel.push([participant[0], participant[1], 'Academic Personnel']);
+          });
+        } 
+        else if(element.participantType === 'Student') {
+          element.participant.forEach(participant => {
+            if(participant[2] === 'C1') {
+              this.be_students.push([participant[0], participant[1], 'B.E.']);
+            } 
+            else if(participant[2] === 'C2') {
+              this.me_students.push([participant[0], participant[1], 'M.E.']);
+            } 
+            else {
+              this.phd_students.push([participant[0], participant[1], 'PhD']);
+            }
+          });
+        }
+        else if(element.participantType === 'Group') {
+          element.participant.forEach(participant => {
+            this.groups.push([participant[1], participant[0], 'User Group']);
+          });
+        }
+      });
+      console.log(this.groups);
+      this.generateOptions();
+  }
+
+    generateOptions() {
+      this.options = [];
+      this.participantListTypeFilter.forEach(type => {
+        if(type === 'Groups') {
+          this.groups.forEach(group => {
+            this.options.push({userName: group[0], name: group[1], type: group[2]})
+          });
+        }
+        if(type === 'AP') {
+          this.academic_personnel.forEach(person => {
+            if(person[0] !== this.organizer) {
+              this.options.push({userName: person[0], name: person[1], type: person[2]})
+            }
+          });
+        }
+        if(type === 'BE') {
+          this.be_students.forEach(person => {
+            this.options.push({userName: person[0], name: person[1], type: person[2]})
+          });
+        }
+        if(type === 'ME') {
+          this.me_students.forEach(person => {
+            this.options.push({userName: person[0], name: person[1], type: person[2]})
+          });
+        }
+        if(type === 'PhD') {
+          this.phd_students.forEach(person => {
+            this.options.push({userName: person[0], name: person[1], type: person[2]})
+          });
+        }
+      })
+      this.filteredOptions = this.participantListController.valueChanges
+          .pipe(
+            startWith(''),
+            map(value => this._filter(value))
+          );
+      console.log(this.options);
+    }
+  
+    private _filter(value: string): userListObject[] {
+      if(typeof value === 'string') {
+        const filterValue = value.toLowerCase();
+        return this.options.filter(option => option.name.toLowerCase().includes(filterValue));
+      }
+    }
+
+    
     onEnter() {
       this.participantList.add(this.participantListController.value);
       this.participantListController.setValue('');
@@ -138,30 +206,24 @@ export class AddEventDialog {
       this.participantList.delete(participant);
     }
 
-    private generateTimelist(): void {
-      let dummyDate = new Date(2000, 1, 1, 0, 0, 0, 0);
-      this.startTimeList.push(dummyDate.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'}));
-      while (!(dummyDate.getHours() === 23 && dummyDate.getMinutes() === 45)) {
-        dummyDate = new Date(dummyDate.setTime(dummyDate.setMinutes(dummyDate.getMinutes() + 15)));
-        this.startTimeList.push(dummyDate.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'}));
+    private generateTimelist(from: moment.Moment): moment.Moment[] {
+      let dummyDate = from.clone();
+      let timeList: moment.Moment[] = [];
+      while (dummyDate.isSame(from, 'day')) {
+        timeList.push(dummyDate);
+        dummyDate = dummyDate.clone()
+        dummyDate = dummyDate.add(15, 'minutes')
       }
-    }
-  
-    private _filter(value: string): string[] {
-      const filterValue = value.toLowerCase();
-  
-      return this.options.filter(option => option.toLowerCase().includes(filterValue));
+      return timeList;
     }
 
     private getEndTimeList(): void {
-       const timeObj = this.startTime;
-       if (this.startDate.isSame(this.endDate)) {
-       const ind = this.startTimeList.findIndex(t => t === timeObj);
-       this.endTimeList = this.startTimeList.slice(ind, this.startTimeList.length);
-       this.endTime = this.endTimeList[0];
+      if (this.startDate.isSame(this.endDate)) {
+        this.endTimeList = this.generateTimelist(this.startTime);
        } else {
-         this.endTimeList = Object.assign([], this.startTimeList);
+         this.endTimeList = this.generateTimelist(this.endDate);
        }
+       this.endTime = this.endTimeList[0];
     }
   
   onNoClick(): void {
@@ -172,79 +234,24 @@ export class AddEventDialog {
     this.addTime = true;
   }
 
-  enableReminderTimeFields(): void {
-    this.addReminderTime = false;
-  }
-
-  toDateTime(date: Date, time: string): Date {
-    const splitted_time = time.split(':');
-    let hh = Number(splitted_time[0]);
-    const mm = Number(splitted_time[1].split(' ')[0]);
-    const meridian = splitted_time[1].split(' ')[1];
-    if(meridian === 'AM' && hh === 12) {
-      hh = 0;
-    }
-    if (meridian === 'PM') {
-      hh = hh + 12;
-    }
-    date.setHours(hh);
-    date.setMinutes(mm);
-    return date;
-  }
-
-  validateDate(endDate) {
-    if (endDate.isBefore(this.startDate)) {
+  validateEndDate() {
+    if (this.endDate.isBefore(this.startDate)) {
       return false;
     } else {
       return true;
     }
   }
 
-  validateTime(endTime) {
-    if(!this.endDate.isAfter(this.startDate)) {
-      const splitted_stime = this.startTime.split(':');
-      let shh = Number(splitted_stime[0]);
-      const smm = Number(splitted_stime[1].split(' ')[0]);
-      const smeridian = splitted_stime[1].split(' ')[1];
-      const splitted_etime = endTime.split(':');
-      let ehh = Number(splitted_etime[0]);
-      const emm = Number(splitted_etime[1].split(' ')[0]);
-      const emeridian = splitted_etime[1].split(' ')[1];
-      if(emeridian === 'AM' && ehh === 12) {
-        ehh = 0;
-      }
-      if (emeridian === 'PM' && ehh!=12) {
-        ehh = ehh + 12;
-      }
-      if(smeridian === 'AM' && shh === 12) {
-        shh = 0;
-      }
-      if (smeridian === 'PM' && shh!=12) {
-        shh = shh + 12;
-      }
-      if(emeridian === smeridian) {
-        if(shh > ehh) {
-          return false;
-        } else if(shh === ehh) {
-            if (smm > emm) {
-              return false;
-            } else {
-              return true;
-            }
-        } else {
-          return true;
-        }
-      } else if (smeridian === 'PM' && emeridian === 'AM') {
-          return false;
-      } else {
-        return true;
-      }
+  validateEndTime() {
+    if (this.endTime.isBefore(this.startTime)) {
+      return false;
+    } else {
+      return true;
     }
-  return true;
   }
 
   disabled() {
-    return ((this.titleFormController.hasError('required')) || (this.locationFormController.hasError('required')) || (!this.validateDate(this.endDate)) || (!this.validateTime(this.endTime)));
+    return ((this.titleFormController.hasError('required')) || (this.locationFormController.hasError('required')) || (!this.validateEndDate()) || (!this.validateEndTime()));
   }
 
   selectFile(event) {
@@ -257,38 +264,27 @@ export class AddEventDialog {
     this.selectedFile.splice(i, 1);
   }
 
+  getFinalPartcipantList() : string[]{
+    let participantNameSet: string[] = [];
+    this.participantList.forEach(particp => {
+        participantNameSet.push(particp.userName);
+    });
+    participantNameSet.push(this.organizer);
+    return participantNameSet;
+  }
+
   onSubmit() {
-    const start = this.toDateTime(new Date(this.startDate), this.startTime);
-    const end = this.toDateTime(new Date(this.endDate), this.endTime);
-    this.participantList.add(this.organizer);
-    let flag = 0;
-    let organizerUsername;
-    console.log(this.participantList)
-    this.employeeList.subscribe(emp => {
-      this.participantList.forEach((participant) => {
-        flag = 0;
-        for (let j = 0; j < emp.length; j++) {
-          if (participant === emp[j][1]) {
-            this.usernameList.push(emp[j][0]);
-            flag = 1;
-            if(participant === this.organizer){
-              organizerUsername = emp[j][0]
-            }
-          }
-        };
-        if(flag === 0){
-          this.usernameList.push(participant);
-        };
-      });
-      console.log(this.usernameList)
-      this.eventInfo = new EventInfo(
+    const start = this.startTime.toDate();
+    const end = this.endTime.toDate();
+    let partcipantList = this.getFinalPartcipantList();
+    this.eventInfo = new EventInfo(
         this.titleFormController.value,
         start,
         end,
         this.description,
-        this.usernameList,
-        organizerUsername,
-        organizerUsername,
+        partcipantList,
+        this.organizer,
+        this.organizer,
         new Date(),
         this.locationFormController.value,
       );
@@ -303,13 +299,11 @@ export class AddEventDialog {
         formData.append('file', file, file.name);
       });
     }
-
-      let addedEvent = this.calendarService.addEvent(formData);
+    let addedEvent = this.calendarService.addEvent(formData);
       addedEvent.subscribe(
         data => {
           this.dialogRef.close(data);
         }
       );
-    });
   }
 }

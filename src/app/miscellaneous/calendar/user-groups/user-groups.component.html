@@ -15,8 +15,8 @@
         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
       </mat-form-field>
       <span>
-        <button mat-icon-button color="warn" aria-label="delete" class="delete-icon">
-          <i class="fa fa-trash delete-icon" aria-hidden="true" (click)="deleteGroup()"></i>
+        <button mat-icon-button color="warn" aria-label="delete" class="delete-icon" (click)="deleteSelectedGroups()" [disabled]="selection.selected.length===0">
+          <i class="fa fa-trash delete-icon" aria-hidden="true"></i>
         </button>
       </span>
       

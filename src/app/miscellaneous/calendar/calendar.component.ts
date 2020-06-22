@@ -35,7 +35,7 @@ export class CalendarComponent {
     console.log(this.auth.getAuthorities())
     if(!(this.auth.getAuthorities().includes("student"))) {
       const dialogRef = this.dialog.open(AddEventDialog, {
-        width: '520px',
+        width: '570px',
         data: event
       });
       dialogRef.afterClosed().subscribe(result => {
@@ -58,7 +58,7 @@ export class CalendarComponent {
 
   myGroupsClickEvent(): void {
     const dialogRef = this.dialog.open(UserGroupsComponent, {
-      width: '1000px'
+      width: '1100px'
     });
   }
 

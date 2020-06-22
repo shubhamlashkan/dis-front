@@ -59,7 +59,7 @@ export class AddGroupDialogComponent implements OnInit {
   generateUserwiseLists(data: any) {
       console.log(data);
       data.forEach(element => {
-        if(element.participantType === 'Faculty and Staff') {
+        if(element.participantType === 'Academic Personnel') {
           element.participant.forEach(participant => {
             this.academic_personnel.push([participant[0], participant[1], 'Academic Personnel']);
           });

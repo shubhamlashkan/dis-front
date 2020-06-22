@@ -48,8 +48,8 @@ export class UserGroupsComponent implements OnInit {
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
     this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSource.data.forEach(row => this.selection.select(row));
+    this.selection.clear() :
+    this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
   /** The label for the checkbox on the passed row */
@@ -58,6 +58,17 @@ export class UserGroupsComponent implements OnInit {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.groupId}`;
+  }
+
+  deleteSelectedGroups() {
+    let grpsToBeDeleted: string[] =[];
+    this.selection.selected.forEach(grp => {
+      grpsToBeDeleted.push(grp.groupId);
+    });
+    let deleteResponse = this.calenderService.deleteGroup(grpsToBeDeleted);
+    deleteResponse.subscribe(() => {
+      this.displayAllGroups();
+    })
   }
 
   applyFilter(event: Event) {

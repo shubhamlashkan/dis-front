@@ -16,11 +16,11 @@
 }
 
 .participants {
-    width: 80%;
+    width: 90%;
 }
 
 .location {
-    width: 80%;
+    width: 85%;
     margin-left: 2%;
 }
 
@@ -58,6 +58,10 @@
     margin-top: 10px;
 }
 
+.save {
+    margin-left: 2%;
+}
+
 ::ng-deep .mat-select-arrow {
     width: 0;
     height: 0;
@@ -68,35 +72,12 @@
     width: 20%;
   }
 
-.participantlist {
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 3%;
-}
-
-.save {
-    margin-left: 2%;
-}
-
-.remove {
-    float: right;
-}
-
-.participantName {
-    margin-left: 2%;
-}
-
-.listblock {
-    margin-bottom: 2%;
-}
-
 .dateValidate {
     width: 20%;
     height: 45px; 
     background-color: rgb(255, 230, 235);
     border-radius: 10%;
 }
-
 
 .attachedFile {
     margin-left: 8%;
@@ -118,11 +99,94 @@
     color: white;
 }
 
-::ng-deep .mat-card{
+::ng-deep .custom{
     padding:1% !important;
     background-color: rgb(93, 154, 223);
   }
 
 .custom {
     margin-bottom: 5px;
+}
+
+.participants {
+    width: 85%;
+}
+
+.participantlist {
+    margin-left: 10%;
+    margin-top: 3%;
+}
+
+.remove {
+    margin-right: 0;
+    margin-left: auto;
+    margin-left: 10px;
+    font-size: 20px;
+    vertical-align: center;
+    cursor: pointer;
+}
+
+.participantName {
+    margin-left: 2%;
+}
+
+.listblock {
+    margin-bottom: 2%;
+    max-height: 245px;
+    overflow-y: auto; 
+}
+
+.participant-type-display {
+    margin-right: 0;
+    margin-left: auto;
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 3px 10px;
+    background-color: rgb(31, 147, 214);
+    border-radius: 25px;
+}
+
+.option-name {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.option-username {
+    font-size: 13px;
+}
+
+.mat-option {
+    height: 50px;
+    line-height: 17px;
+  }
+
+.participant-data {
+    line-height: 15px;
+}
+
+.participant-type{
+    float: right;
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 3px 10px;
+    background-color: rgb(31, 147, 214);
+    border-radius: 25px;
+}
+
+::ng-deep .typefilter div.mat-select-arrow-wrapper {
+    display: none;
+  }
+
+::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: unset;
+}
+
+::ng-deep .mat-option-pseudo-checkbox.mat-pseudo-checkbox-checked {
+    background-color: #3c84b4;
+}
+
+.filter-icon {
+    padding-left: 8px;
 }
