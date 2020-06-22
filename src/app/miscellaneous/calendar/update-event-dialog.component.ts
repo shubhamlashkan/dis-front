@@ -10,6 +10,7 @@ import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/mater
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import * as _moment from 'moment';
 import { TokenStorageService } from './../../authentication/token-storage.service';
+import { MatSnackBar } from '@angular/material';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -77,7 +78,7 @@ export class UpdateEventDialogComponent implements OnInit {
   id: any;
 
   constructor(
-    public dialogRef: MatDialogRef<UpdateEventDialogComponent>,
+    public dialogRef: MatDialogRef<UpdateEventDialogComponent>,private snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: any, private calendarService: CalendarService, private _ngZone: NgZone, private auth: TokenStorageService) {}
     
     @ViewChild('autosize') autosize: CdkTextareaAutosize;
@@ -104,7 +105,8 @@ export class UpdateEventDialogComponent implements OnInit {
       this.startTime = this.startTimeList[0];
       this.getEndTimeList();
       this.endTime = this.endTimeList[0];
-      console.log(this.participantList);
+      console.log(this.endDate);
+      console.log(this.endTime);
     }
 
     private resolveParticipants(): Promise<any> {
@@ -119,11 +121,13 @@ export class UpdateEventDialogComponent implements OnInit {
       let allUsersList = [...this.academic_personnel, ...this.groups, ...this.be_students, ...this.me_students, ...this.phd_students]
       console.log(allUsersList);
       this.data.participants.forEach(particp => {
-        allUsersList.forEach(user => {
-          if(user[0]=== particp.participantId) {
-            this.participantList.add({userName: user[0], name: user[1], type: user[2]})
-          }
-        });
+        if(particp.participantId !== this.organizer) {
+          allUsersList.forEach(user => {
+            if(user[0]=== particp.participantId) {
+              this.participantList.add({userName: user[0], name: user[1], type: user[2]})
+            }
+          });
+        }
       });
     }
 
@@ -312,8 +316,15 @@ export class UpdateEventDialogComponent implements OnInit {
     let updateEvent = this.calendarService.updateEvent(formData,this.id);
     updateEvent.subscribe(
         data => {
+          this.snackBar.open('Event updated', 'OK', {
+            duration: 5000
+          });
           this.dialogRef.close(data);
-        }
+        },
+        error => {this.snackBar.open('Oops! Server Error', 'OK',{
+          duration: 5000
+        });
+      }
       );
   }
 }

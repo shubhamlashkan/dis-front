@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
-import { MatDialogRef} from '@angular/material';
+import { MatDialogRef, MatSnackBar} from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { CalendarService } from '../../../API_Service/calendar.service';
 import { TokenStorageService } from '../../../authentication/token-storage.service';
@@ -13,7 +13,7 @@ import { group } from './group-model';
 })
 export class UserGroupsComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<UserGroupsComponent>, private calenderService: CalendarService, private storage: TokenStorageService) { }
+  constructor(public dialogRef: MatDialogRef<UserGroupsComponent>, private calenderService: CalendarService, private storage: TokenStorageService, private snackBar: MatSnackBar) { }
 
   displayedColumns: string[] = ['select', 'name'];
   selection = new SelectionModel<group>(true, []);
@@ -68,6 +68,13 @@ export class UserGroupsComponent implements OnInit {
     let deleteResponse = this.calenderService.deleteGroup(grpsToBeDeleted);
     deleteResponse.subscribe(() => {
       this.displayAllGroups();
+      this.snackBar.open('Groups deleted', 'OK', {
+        duration: 5000
+      });
+    },
+    error => {this.snackBar.open('Oops! Server Error', 'OK',{
+      duration: 5000,
+      });
     })
   }
 

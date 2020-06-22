@@ -12,6 +12,7 @@ import * as moment from 'moment';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {CdkTextareaAutosize} from '@angular/cdk/text-field';
 import {take} from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material';
 
 
 
@@ -79,7 +80,7 @@ export class AddEventDialog {
   participantListTypeFilter: string[];
 
   constructor(
-    public dialogRef: MatDialogRef<AddEventDialog>,
+    public dialogRef: MatDialogRef<AddEventDialog>,private snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: any,  private auth: TokenStorageService, private calendarService: CalendarService, private _ngZone: NgZone) {}
     
     @ViewChild('autosize') autosize: CdkTextareaAutosize;
@@ -302,8 +303,14 @@ export class AddEventDialog {
     let addedEvent = this.calendarService.addEvent(formData);
       addedEvent.subscribe(
         data => {
+          this.snackBar.open('Event saved', 'OK', {
+            duration: 5000
+          });
           this.dialogRef.close(data);
-        }
-      );
+        },
+        error => {this.snackBar.open('Oops! Server Error', 'OK',{
+          duration: 5000,
+        });
+        });
   }
 }

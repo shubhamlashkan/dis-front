@@ -28,8 +28,8 @@ export class CalendarService {
     return this.http.post(`${this.baseUrl}/addEvent`, event);
   }
 
-  deleteEvent(eid: string): void {
-    this.http.delete(`${this.baseUrl}/deleteEvent?eventId=` + eid).subscribe(() => console.log("user deleted"));
+  deleteEvent(eid: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/deleteEvent?eventId=` + eid);
   }
 
   updateEvent(event: any,eventId: string): Observable<any>{

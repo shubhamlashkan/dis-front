@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialog, MatDialogRef, MatDialogCon
 import { CalendarService } from 'src/app/API_Service/calendar.service';
 import { UpdateEventDialogComponent } from './update-event-dialog.component';
 import * as _moment from 'moment';
+import { MatSnackBar } from '@angular/material';
 
 import { TokenStorageService } from './../../authentication/token-storage.service';
 
@@ -28,7 +29,7 @@ export class ShowEventDialogComponent implements OnInit {
   st_date: any;
   st_time: any;
 
-  constructor(public dialogRef: MatDialogRef<ShowEventDialogComponent>,@Inject(MAT_DIALOG_DATA) data,
+  constructor(public dialogRef: MatDialogRef<ShowEventDialogComponent>,@Inject(MAT_DIALOG_DATA) data,private snackBar: MatSnackBar,
   private calendarService: CalendarService, private dialog: MatDialog,  private auth: TokenStorageService){
     this.title= data.title;
     this.desc= data.desc;
@@ -53,9 +54,18 @@ export class ShowEventDialogComponent implements OnInit {
 
   onDelete(){
     if(confirm("Are you sure you want to delete this event?")){
-      this.calendarApi.getEventById(this.id).remove();
-      this.calendarService.deleteEvent(this.id); 
-      this.dialogRef.close();
+      let deleteResponse = this.calendarService.deleteEvent(this.id); 
+      deleteResponse.subscribe(date => {
+        this.calendarApi.getEventById(this.id).remove();
+        this.snackBar.open('Event deleted', 'OK', {
+          duration: 5000
+         });
+        this.dialogRef.close();
+        },
+        error => {this.snackBar.open('Oops! Server Error', 'OK',{
+          duration: 5000
+        })
+      });
     }
   }
 
@@ -71,6 +81,7 @@ export class ShowEventDialogComponent implements OnInit {
         location: this.location,
         participants: this.participants,
       };
+      console.log(this.end);
       let removeId = this.id;
       const dialogReference = this.dialog.open(UpdateEventDialogComponent, dialogConfig);
       dialogReference.afterClosed().subscribe(result => {

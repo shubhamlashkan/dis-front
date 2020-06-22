@@ -11,6 +11,7 @@ import { CalendarService } from './../../API_Service/calendar.service';
 import { MatDialog, MatDialogConfig} from '@angular/material';
 import { ShowEventDialogComponent } from './show-event-dialog.component';
 import { UserGroupsComponent } from './user-groups/user-groups.component';
+import { AriaDescriber } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-calendar',
@@ -73,7 +74,7 @@ export class CalendarComponent {
       title: arg.event.title,
       desc: arg.event.extendedProps.description,
       start: arg.event.start,
-      end: arg.event.end,
+      end: arg.event.end || arg.event.start,
       calendarApi : this.calendarApi,
       startEditable: arg.event.startEditable,
       location: arg.event.extendedProps.location,
@@ -85,7 +86,7 @@ export class CalendarComponent {
   ngOnInit() {
     this.calendarService.getMyEvents(this.auth.getUsername()).subscribe( events => {
       for (let e = 0; e < events.length; e++) {
-        if(events[e].eventIncharge == this.auth.getUsername()){
+        if(events[e].eventIncharge === this.auth.getUsername()){
           this.calendarEvents = this.calendarEvents.concat({
             id: events[e].eventId,
             title: events[e].title,

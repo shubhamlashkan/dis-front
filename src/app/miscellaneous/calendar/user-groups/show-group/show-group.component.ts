@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { CalendarService } from '../../../../API_Service/calendar.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-show-group',
@@ -14,7 +15,7 @@ export class ShowGroupComponent implements OnChanges {
   currentGroup: any;
   showGroupData: boolean;
   showEditForm: boolean;
-  constructor(private calendarService: CalendarService) { }
+  constructor(private calendarService: CalendarService, private snackBar: MatSnackBar,) { }
 
   ngOnChanges() {
     this.showEditForm = false;
@@ -37,9 +38,16 @@ export class ShowGroupComponent implements OnChanges {
 
   deleteGroup() {
     let deleteResponse = this.calendarService.deleteGroup([this.currentGroup.groupId]);
-    deleteResponse.subscribe(() => {
-      console.log("group deleted");
+    deleteResponse.subscribe(data => {
       this.isDeleted.emit(true);
-    })
-  }
+      this.snackBar.open('Group deleted', 'OK', {
+        duration: 5000
+      });
+    },
+    error => {
+      this.snackBar.open('Oops! Server Error', 'OK',{
+        duration: 5000,
+        });
+      })
+    }
 }

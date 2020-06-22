@@ -5,6 +5,7 @@ import { map, startWith } from 'rxjs/operators';
 import { CalendarService } from '../../../../API_Service/calendar.service';
 import { TokenStorageService } from '../../../../authentication/token-storage.service';
 import { group_participant } from '../group_participant-model';
+import { MatSnackBar } from '@angular/material';
 
 export interface userListObject {
   userName: string;
@@ -37,7 +38,7 @@ export class AddGroupDialogComponent implements OnInit {
   is_phd_checked: boolean ;
   currentUser: string;
 
-  constructor(private calendarService: CalendarService, private storage: TokenStorageService) { }
+  constructor(private calendarService: CalendarService, private storage: TokenStorageService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.currentUser = this.storage.getUsername();
@@ -158,8 +159,14 @@ export class AddGroupDialogComponent implements OnInit {
     });
     grp_op.subscribe(new_grp => {
       this.createdGroup.emit(new_grp);
+      this.snackBar.open('Group created', 'OK', {
+        duration: 5000
+      });
+    },
+    error => {this.snackBar.open('Oops! Server Error', 'OK',{
+        duration: 5000,
+        });
     })
     this.resetForm();
   }
-
 }
