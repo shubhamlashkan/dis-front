@@ -10,7 +10,10 @@ import { ToastrManager } from 'ng6-toastr-notifications';
   styleUrls: ['./faculty.component.scss']
 })
 export class FacultyComponent implements OnInit {
+
+  //Forms Declared
   @ViewChild('f') addMemberForm : NgForm;
+  //Variable declared to send and receive data from API's
   Member: addMember;
   responseAdd: string;
   errormsg : string;
@@ -29,17 +32,20 @@ export class FacultyComponent implements OnInit {
   
   }
 
+  //Get Faculty Data
   getFacultyData(): void{
     this.faculty_service.getFacultyData()
       .subscribe(response => this.fData= response.body);
       console.log(this.fData);
   }
-  
+  //Get Staff Data
   getStaffData(): void{
     this.faculty_service.getStaffData()
       .subscribe(data =>this.sData = data.body);
       console.log(this.sData);
   }
+
+  //Search Staff Data by Name
   getStaffDataByName(name: string){
    
     if(name == ''){
@@ -53,6 +59,8 @@ export class FacultyComponent implements OnInit {
     }
 
   }
+
+  //Add New Faculty or Staff Details
 onSubmit(){
   this.Member = new addMember(this.addMemberForm.value.addMemberData.class, this.addMemberForm.value.addMemberData.designation,
     this.addMemberForm.value.addMemberData.dob, this.addMemberForm.value.addMemberData.email, this.addMemberForm.value.addMemberData.emp_id,

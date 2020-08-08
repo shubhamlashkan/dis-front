@@ -14,8 +14,10 @@ import { facultyTimeTableEntry,semTimeTable,getTimeTable} from '../semTimeTableM
   styleUrls: ['./sem-time-table.component.scss']
 })
 export class SemTimeTableComponent implements OnInit {
+    /* Forms Declared */
   @ViewChild('s') settingForm: NgForm;
   @ViewChild('save') checkForm: NgForm;
+    /* Variable declared*/
  valueslist : checkList[]=[];
  xyzlist :TempList;
   days:string[]; 
@@ -90,10 +92,12 @@ export class SemTimeTableComponent implements OnInit {
     this.getFacultyData();
     this.getsetting();
     this.getcourse();
+      /* List of batched*/
     this.batchList =  ["B1","B2","B3","B4"];
     this.batch = "";
     //console.log(this.batchList);
    this.today = new Date();
+     /* Calculating  Session from today date  */
    this.currentYear =this.today.getFullYear();
    this.toYear= this.currentYear-1;
    this.fromYear=this.currentYear+1;
@@ -154,7 +158,7 @@ export class SemTimeTableComponent implements OnInit {
     }
     console.log(this.checkedBatch);
   }
-
+/* To uncheck all checkboxes */
   uncheckAll()
   {
     this.valuesListSize = this.checkedList.length;
@@ -169,6 +173,7 @@ export class SemTimeTableComponent implements OnInit {
       // element.checked= false;
     }
 
+      /* Updating Time Table Settings */
 saveSetting(){
   this.setting=new settings(this.settingForm.value.timetableSettings.id,this.settingForm.value.timetableSettings.lectureLength,
                                  this.settingForm.value.timetableSettings.lunchEndTime,
@@ -198,13 +203,13 @@ this.timetableService.saveSetting(this.setting).subscribe(
 
   
 );
-              
+      /* Get all faculties names */         
   }
   getFacultyData(): void{
     this.timetableService.getFacultyName()
       .subscribe(response =>this.fData= response.body);  
   }
-
+    /* Get Time table settings */
   getsetting(): void{
     this.timetableService.getSetting().subscribe(response => {this.semsettings=response.body
 
@@ -232,6 +237,7 @@ this.timetableService.saveSetting(this.setting).subscribe(
 
     this.columnCount = this.days.length;
     this.rowCount = this.startTime.length;
+      /* Creatinf Check box based on settigs retrieved */
     for(var i=0;i<this.rowCount;i++)
     {
       for(var j=0;j<this.columnCount;j++)
@@ -245,17 +251,21 @@ this.timetableService.saveSetting(this.setting).subscribe(
     //console.log(this.
     });
   }
+    /* Get All courses*/
   getcourse() : void{
     this.timetableService.getCourse().subscribe(response => this.course=response.body);
   }
+  /* Set Year variable based on input*/
   onSelectYear(event:any) {
     this.year = event.target.value;
   
   } 
+  /* Set Sem variable based on input*/
   onSelectSem(event:any) {
     this.sem = event.target.value;
    
   }
+  /* Show year list based on course selected*/
   onSelectCourse(event:any){
     this.codeCourse = event.target.value;
     if(this.codeCourse=="BE"){
@@ -265,11 +275,13 @@ this.timetableService.saveSetting(this.setting).subscribe(
       this.yearList=["I","II"];
     }
   }
+  /* Set lType variable based on lecture type input */
   onSelectLectureType(event:any) {
     this.lType = event.target.value;
-    console.log(this.lType);
+   // console.log(this.lType);
    
   }
+  /* Fetch rooms list based on theory or practical lecture*/
   getRoom() : void{
     if(this.lType=="Theory"){
       this.timetableService.getClassroom().subscribe(response => this.infra=response.body
@@ -282,12 +294,14 @@ this.timetableService.saveSetting(this.setting).subscribe(
     }
 
   }
-
+/* Get Subject code on the basis of course,year and sem */
   getSubjectCode(): void{
     this.timetableService.getSubjectCode(this.codeCourse,this.year,this.sem).subscribe(response=> {this.subCode=response.body
       
     });
   }
+
+/* Check all the lecture of faculty on given day of specific subject and save */
   onAdd(){
 
     if(this.checkForm.value.semtimetable.ltype == "Theory")
@@ -305,7 +319,7 @@ this.timetableService.saveSetting(this.setting).subscribe(
         }
       }
     }
-    console.log(this.batch);
+    console.log(this.checkForm.value.semtimetable.withEffectFrom);
     for(var i = 0;i<this.checkedList.length;i++)
     { 
       // this.addSem[i] = new semtimetable(this.checkForm.value.semtimetable.facultyName,
@@ -320,17 +334,16 @@ this.timetableService.saveSetting(this.setting).subscribe(
       this.facultyTimeTableEntries[i] = new facultyTimeTableEntry(this.batch,null,null,this.checkedList[i].Day,
         this.checkedList[i].eTime,
                         this.checkForm.value.semtimetable.facultyName,null,null,null,this.checkForm.value.semtimetable.roomNo,null,this.checkedList[i].sTime,
-                        this.checkForm.value.semtimetable.withEffectFrom);
+                        "2020-06-30");
 
       
     }
 
 
     this.semData = new semTimeTable(this.checkForm.value.semtimetable.course,this.facultyTimeTableEntries,this.checkForm.value.semtimetable.ltype,
-      this.checkForm.value.semtimetable.sem,this.checkForm.value.semtimetable.session,this.checkForm.value.semtimetable.scode,this.checkForm.value.semtimetable.year);
+      this.checkForm.value.semtimetable.sem,this.session,this.checkForm.value.semtimetable.scode,this.checkForm.value.semtimetable.year);
 
       console.log(this.semData);
-    //  console.log(this.checkForm.value.semtimetable.withEffectFrom);
 
       this.timetableService.saveSemTimeTable(this.semData).subscribe(
         response => {
@@ -360,19 +373,19 @@ this.timetableService.saveSetting(this.setting).subscribe(
         //console.log(this.addSem[i]);
     }
   }
-
+/* Set Faculty ID based on faculty name */
   onSelectFaculty(event:any)
   {
     this.facultyId = event.target.value;
    // console.log(this.facultyId);
   }
-
+/*Set Session */
   onSelectSession(event:any)
   {
     this.session = event.target.value;
-    console.log(this.session);
+   // console.log(this.session);
   }
-
+  /* Get subject code*/
   getScodeByFaculty()
   {
     this.timetableService.getScodeByFacultyIdandSession(this.facultyId,this.session).subscribe(response => {this.subCode = response.body
@@ -386,7 +399,7 @@ this.timetableService.saveSetting(this.setting).subscribe(
     this.subjectEdit = event.target.value;
   }
 
-
+/* Get timetable by Subject code, faculty and session */
   getTimeTable()
   {
     this.timetableService.getTimeTableByScodeFacutlySession(this.facultyId,this.session,this.subjectEdit).subscribe(response => {this.getSemDataForEdit = response.body
@@ -402,16 +415,19 @@ this.timetableService.saveSetting(this.setting).subscribe(
       this.toBechecked = this.currentCheckList.length;
       console.log(this.currentCheckList);
       this.listSize = this.valueslist.length;
+      console.log(this.listSize);
       for(var i=0;i<this.listSize;i++)
       {
         for(var j=0;j<this.toBechecked;j++)
         {
           if(this.valueslist[i].Day == this.currentCheckList[j].Day && this.valueslist[i].sTime == this.currentCheckList[j].sTime && this.valueslist[i].eTime == this.currentCheckList[j].eTime)
           {
-          
+          var  name = "object_"+i;
+          console.log
             //console.log(val);
             //$("input[value='" + val + "']").prop('checked',true);
-            $("input[name='checkbox'][value='"+this.currentCheckList[j]+"']").prop('checked',true);
+            //$("input[name='checkbox'][value='"+this.currentCheckList[j]+"']").prop('checked',true);
+            $("#" + name).prop('checked', true);
           } 
         }
       }

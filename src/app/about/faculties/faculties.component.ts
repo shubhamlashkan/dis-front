@@ -14,6 +14,8 @@ export class FacultiesComponent implements OnInit {
   constructor(private faculty_service: FacultyDataService ) {
     this.getFacultyData();
    }
+
+   //Show All Faculty 
    getFacultyData(): void{
     this.faculty_service.getFacultyData()
       .subscribe(response => this.fData= response.body);

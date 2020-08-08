@@ -11,9 +11,11 @@ import { ToastrManager } from 'ng6-toastr-notifications';
   styleUrls: ['./administration.component.scss']
 })
 export class AdministrationComponent implements OnInit {
- 
+ /*All forms declared*/
   @ViewChild('f') assignTaskForm: NgForm;
   @ViewChild('h') remove:NgForm;
+
+  /*Variable declared to send and receive data using API's*/
  selectedCategoryId:string;
  private categories : categoryList[]=[];
  private tasks : taskList[]=[];
@@ -38,11 +40,15 @@ selectedTaskId:string;
     this.searchedRecords = false;
     this.remId = null;
     this.taskStatus = null;
+    /*Get Category of tasks */
  this.service.getCategoryList().subscribe((response=>this.categories=response.body));
+   /* Get Staff List */
  this.service.getStaffList().subscribe((response=>this.staffs=response.body));
+      /* Get Assigned Task Information */
  this.service.assignTaskInfo().subscribe((response=>this.assignedTask=response.body));
   }
   
+    /* Search Assigned Task by category id */
   onSelect(event:any){
     this.selectedCategoryId = event.target.value;
     //console.log(this.selectedCategoryId);
@@ -59,6 +65,7 @@ selectedTaskId:string;
     this.selectedStaffId = event.target.value;
     this.service.getTaskByUserId(this.selectedStaffId).subscribe((response=>this.showByStaffId=response.body));
   }
+    /* Search task by task ID */
   onSelectTask(event:any)
   {
     this.searchedRecords = true;
@@ -72,6 +79,8 @@ selectedTaskId:string;
     //this.service.getAssignedTaskByTaskId(taskId).subscribe((response=>this.remTask=response.body));
     this.remId = id;
   }
+
+    /* Assign new task */
   assignTask(){
     if(!this.assignTaskForm.value.assignTaskData.deadline)
     {
@@ -110,7 +119,7 @@ selectedTaskId:string;
   this.assignTaskForm.resetForm();
   }
 
-
+    /* Remove a task if assigned by mistake  */
   removeTask()
   {
     //console.log(this.remove.value.removeTaskData.Id);

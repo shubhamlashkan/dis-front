@@ -12,19 +12,21 @@ import { apiSetting } from 'src/app/urls/apisetting';
   styleUrls: ['./thesis.component.scss']
 })
 export class ThesisComponent implements OnInit {
+    /* Forms Declared */
   @ViewChild('f') addThesisForm : NgForm;
   @ViewChild('g') updateThesisForm:NgForm;
   @ViewChild('h') removeThesisForm:NgForm;
   @ViewChild('i') checkLimitForm:NgForm;
   @ViewChild('j') issueThesisForm:NgForm;
   @ViewChild('k') checkPenaltyForm: NgForm;
+   /* Variable Decalred to send data and receive response of API */
 showIssue : boolean=false;
   onSuccessfulUpdate:boolean = false;
   removeButton:boolean=false;
   updateButton:boolean=false;
    ShowId : boolean=false;
    Thesis : addThesisData;
-   responseAdd : addThesisResponse;
+   responseAdd : addThesisResponse; 
    data : string;
   thesis : allThesis[] = [];
   thesisById: getThesisByThesisId[] = [];
@@ -67,9 +69,12 @@ thesisAllowed : string;
     this.updateButton=false;
     this.removeButton=false;
     this.searchBy=1;
+
+    //Get All thesis to show on thesis page by default
     this.service.getAllThesis().subscribe((thesisData:allThesis[])=>{
       this.thesis = thesisData;
     });
+    //Get course required for Adding new thesis if it is submitted by B.E. or M.E. student
     this.service.getCourse().subscribe((courseList:course[])=>{
       this.course = courseList;
     })
@@ -82,6 +87,8 @@ thesisAllowed : string;
     this.addThesisForm.resetForm();
     this.showIssue= false;
   }
+
+  //Add New Thesis
   onSubmit (){
    // console.log(this.addThesisForm);
     this.Thesis = new addThesisData();
@@ -103,6 +110,8 @@ thesisAllowed : string;
 
   
   }
+
+  //Getting Library Instruction
   retrieveLibrarySettings() {
     this.service.getLibrarySettingsthesis().subscribe((libSettings: librarySettingsthesis[]) => {
       this.setting = libSettings;
@@ -110,7 +119,7 @@ thesisAllowed : string;
     });
   }
 
-
+  //If thesis is added then show thesis id generated
   onThesisAdded()
   {
     this.ShowId=true;    
@@ -120,7 +129,7 @@ thesisAllowed : string;
     this.updateButton=true;
   }
 
-
+//Search Thesis by thesis Id
  getThesisByThesisId(thesisId:number){
    this.service.getThesisByThesisId(thesisId).subscribe((thesisByIdData : getThesisByThesisId[])=>{
      this.thesisById = thesisByIdData;
@@ -128,6 +137,7 @@ thesisAllowed : string;
    });
  }
 
+ //Update Thesis Data by Thesis Id
  update(){
    if(this.updateButton)
    {
@@ -148,6 +158,7 @@ thesisAllowed : string;
    }
  }
 
+ //Remove thesis by thesisId
  remove(){
    this.service.removeThesisByThesisId(this.removeThesisForm.value.removeThesisData.thesisId).subscribe((res:string)=>{
 
@@ -158,6 +169,7 @@ thesisAllowed : string;
  }
 
 
+ //Check Issue limit by username for faculty and enrollment no for student
  checkLimit() {
   this.showError = false;
   this.checkIssue = new checkLimitDataThesis();
@@ -176,6 +188,8 @@ thesisAllowed : string;
     }
   });
 } 
+
+//Issue thesis by thesis id
 issueThesis() {
   
   this.issueData = new issueBookData(null,this.issueThesisForm.value.issueThesisData.thesisId,
@@ -194,7 +208,7 @@ issueThesis() {
     
   }
 
-
+//Check Penalty on book while returning it
 getPenalty() {
   this.showError = false;
   this.checkPenalty = new checkPenaltyDataThesis();
@@ -219,7 +233,7 @@ returnThesis(){
 }
 
 
-
+//Select Search by id,Title,Course,Submitted By, Guided By
 onSelect(event:any) { 
   // this.selected = null;
   // //console.log(optionId);

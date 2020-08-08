@@ -24,7 +24,7 @@ export class LibraryComponent implements OnInit {
     });
   }
 
-
+//Get All Books
   getBooks(){
    this.showBook = true;
     this.service.getAllBooks().subscribe((bookData: allBooks[]) => {
@@ -32,7 +32,7 @@ export class LibraryComponent implements OnInit {
       //console.log(this.books);
     });
   }
-
+//Get All Thesis
   getThesis(){
     this.showBook = false;
     this.service.getAllThesis().subscribe((thesisData:allThesis[])=>{

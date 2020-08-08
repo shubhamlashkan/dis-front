@@ -15,11 +15,11 @@ import { ToastrManager } from 'ng6-toastr-notifications';
   styleUrls: ['./infrastructure.component.scss']
 })
 export class InfrastructureComponent implements OnInit {
-
+  //Forms Declared
   @ViewChild('f') addInfraForm: NgForm;
 
   @ViewChild('e') editInfraForm: NgForm;
-
+  //Variable Declared to receive and Send data by API's
   labs: Laboratory[] = new Array (new Laboratory());
   others: Others[] = new Array (new Others());
   crooms: Others[] = new Array (new Others());
@@ -45,21 +45,23 @@ export class InfrastructureComponent implements OnInit {
     
   }
   
+  //Get Details of all the labs
   getallLabs(): void {
     this.infraservice.getLabs()
         .subscribe(response => this.labs = response.body);
   }
-
+  //Get Details of all classes
   getallClass(): void {
     this.infraservice.getClassroom()
         .subscribe(response => this.crooms = response.body);
   }
+
   getallOthers(): void {
     this.infraservice.getOtherInfra()
         .subscribe(response=>this.others=response.body);
     
   }
-
+  //Get Faculty Rooms 
   getFacultyRooms(): void{
     this.infraservice.getFacultyRooms()
       .subscribe(data =>this.facultyRooms = data);
@@ -70,27 +72,31 @@ export class InfrastructureComponent implements OnInit {
   }
 
   
-  
+  //Get All faculties 
   getFacultyData(): void{
     this.infraservice.getFacultyName()
       .subscribe(response => this.fData= response.body);
       
   }
   
+  //Get All staff
   getStaffData(): void{
     this.infraservice.getStaffName()
       .subscribe(data =>this.sData = data.body);
     
   }
+  //get type of infrastructure
   getInfraType(): void{
     this.infraservice.getInfraType()
       .subscribe(data =>this.infratype = data.body);
     
   }
+  //Get location of infrastructure
   getInfraLocation():void{
     this.infraservice.getLocation().subscribe(response => this.locations=response.body);
   }
 
+  //Search for infrastructure
   getInfrastructure(searchInfrastructure: string):void{
     if(searchInfrastructure==''){
       this.showSearchedRecords=false;
@@ -116,6 +122,8 @@ export class InfrastructureComponent implements OnInit {
 //    });
    
 //  }
+
+//get infrastructure by ID
 getInfraById(infraId:string): void{
   this.infraservice.getInfrastructureById(infraId).subscribe(response=>{this.infraById=response.body
     //console.log(this.infraById.noofChairs);
@@ -123,6 +131,8 @@ getInfraById(infraId:string): void{
 
 }
 
+
+//ADD new infrastructure
   onAdd(){
 
     this.infra=new addInfra(this.addInfraForm.value.addInfraData.infraArea,
@@ -176,6 +186,7 @@ getInfra(id:string){
 this.infraId=id;
 
 }
+//Remove infrastructure by ID
 removeInfra(){
   this.infraservice.deleteInfra(this.infraId).subscribe(response=>{
     if(response.ok){
@@ -193,6 +204,7 @@ removeInfra(){
 });
 }
 
+//Update Infrastructure details by ID
 onUpdate()
 {
   // for (let i of this.fData)

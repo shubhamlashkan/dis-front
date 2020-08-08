@@ -15,6 +15,7 @@ export class StaffComponent implements OnInit {
 
     this.getStaffData();
    }
+   //Show all staffs
    getStaffData(): void{
     this.faculty_service.getStaffData()
       .subscribe(data =>this.sData = data.body);

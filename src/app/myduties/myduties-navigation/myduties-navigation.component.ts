@@ -15,7 +15,6 @@ export class MydutiesNavigationComponent implements OnInit {
   constructor(private router : Router,private tokenStorage: TokenStorageService) { }
 
   ngOnInit() {
-    
     this.roles = this.tokenStorage.getAuthorities();
     console.log(this.roles);
     if(this.roles.includes("Mid Term Time Table") || this.roles.includes("Quiz Time Table") || this.roles.includes("Practical Time Table") || this.roles.includes("Semester Time Table"))
@@ -26,8 +25,6 @@ export class MydutiesNavigationComponent implements OnInit {
     {
       this.library = true;
     }
-  
-    
   }
     /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
 

@@ -45,7 +45,7 @@
                 <label class="control-label" for="session"><strong>Session</strong></label>
               </div>
                  <div >
-              <select class="dropdown-primary form-control" required name="session" required ngModel>
+              <select class="dropdown-primary form-control" required name="session" (change)="onSelectSession($event)" required ngModel>
                 <option value="" selected disabled>Select Session</option>
                 <option>
                   {{toYear}} - {{currentYear}}
@@ -62,7 +62,7 @@
                 <label class="control-label" for="withEffectFrom"><strong>W.e.f</strong></label>
               </div>
               <div>
-                <input class="form-control" type="date" name="withEffectFrom" ngModel required>
+                <input class="form-control" type="date" id="withEffectFrom" name="withEffectFrom" ngModel required>
               </div>
     
             </div>
@@ -417,7 +417,7 @@
               <label class="control-label" for="session"><strong>Session</strong></label>
             </div>
                <div >
-            <select class="dropdown-primary form-control" required name="session" required ngModel>
+            <select class="dropdown-primary form-control" required name="session" (change)="onSelectSession($event)" required ngModel>
               <option value="" selected disabled>Select Session</option>
               <option>
                 {{toYear}} - {{currentYear}}
@@ -645,25 +645,25 @@
               <tbody>
                 <tr>
                   <th scope="row">10:00-11:00</th>
-                  <td *ngFor="let list of valueslist | slice:0:5;">
+                  <td *ngFor="let list of valueslist | slice:0:5; let i = index">
             
-                      <input   type="checkbox" value="{{list}}" id = "checkbox" name = "checkbox" (change)="onCheckboxChange(list,$event)">
+                      <input   type="checkbox" value="{{list}}" id = "object_{{i}}" name = "checkbox" (change)="onCheckboxChange(list,$event)">
                   </td>
   
                  
                 </tr>
                 <tr>
                   <th scope="row">11:00-12:00</th>
-                  <td *ngFor="let list of valueslist | slice:5:10;">
+                  <td *ngFor="let list of valueslist | slice:5:10;let i = index">
             
-                    <input  type="checkbox" id = "checkbox" name = "checkbox" value="{{list}}"  (change)="onCheckboxChange(list,$event)">
+                    <input  type="checkbox" id = "object_{{i+5}}" name = "checkbox" value="{{list}}"  (change)="onCheckboxChange(list,$event)">
                 </td>
                 </tr>
                 <tr>
                   <th scope="row">12:00-1:00</th>
-                  <td *ngFor="let list of valueslist | slice:10:15; ">
+                  <td *ngFor="let list of valueslist | slice:10:15; let i = index">
             
-                    <input   type="checkbox" id = "checkbox" name = "checkbox"  value="{{list}}"   (change)="onCheckboxChange(list,$event)">
+                    <input   type="checkbox" id = "object_{{i+10}}" name = "checkbox"  value="{{list}}"   (change)="onCheckboxChange(list,$event)">
                 </td>
                 </tr>
                 <tr>
@@ -672,30 +672,30 @@
                 </tr>
                 <tr>
                   <th scope="row">2:00-3:00</th>
-                  <td *ngFor="let list of valueslist | slice:15:20;">
+                  <td *ngFor="let list of valueslist | slice:15:20;let i = index">
             
-                    <input  type="checkbox" value="{{list}}" id = "checkbox" name = "checkbox"  (change)="onCheckboxChange(list,$event)">
+                    <input  type="checkbox" value="{{list}}" id = "object_{{i+15}}" name = "checkbox"  (change)="onCheckboxChange(list,$event)">
                 </td>
                 </tr>
                 <tr>
                   <th scope="row">3:00-4:00</th>
-                  <td *ngFor="let list of valueslist | slice:20:25;">
+                  <td *ngFor="let list of valueslist | slice:20:25;let i = index">
             
-                    <input  type="checkbox" value="{{list}}" id = "checkbox" name = "checkbox" (change)="onCheckboxChange(list,$event)">
+                    <input  type="checkbox" value="{{list}}" id = "object_{{i+20}}" name = "checkbox" (change)="onCheckboxChange(list,$event)">
                 </td>
                 </tr>
                 <tr>
                   <th scope="row">4:00-5:00</th>
-                  <td *ngFor="let list of valueslist | slice:25:30;">
+                  <td *ngFor="let list of valueslist | slice:25:30;let i = index">
             
-                    <input  type="checkbox" value="{{list}}" id = "checkbox"name = "checkbox"  (change)="onCheckboxChange(list,$event)">
+                    <input  type="checkbox" value="{{list}}" id = "object_{{i+25}}" name = "checkbox"  (change)="onCheckboxChange(list,$event)">
                 </td>
                 </tr>
                 <tr>
                   <th scope="row">5:00-6:00</th>
-                  <td *ngFor="let list of valueslist | slice:30:35;">
+                  <td *ngFor="let list of valueslist | slice:30:35;let i = index">
             
-                    <input  type="checkbox" value="{{list}}" id = "checkbox" name = "checkbox"  (change)="onCheckboxChange(list,$event)">
+                    <input  type="checkbox" value="{{list}}" id = "object_{{i+30}}" name = "checkbox"  (change)="onCheckboxChange(list,$event)">
                 </td>
                 </tr>
               </tbody>

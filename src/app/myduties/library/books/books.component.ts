@@ -202,8 +202,10 @@ export class BooksComponent implements OnInit {
         this.allowIssueRequest = true;
         this.issueto = this.checkIssue.enrollment;
       }
-      else {
+      else { 
         this.allowIssueRequest = false;
+        this.showError = true;
+        this.errorMsg = "Issue Limit Exceed";
       }
     });
   }
