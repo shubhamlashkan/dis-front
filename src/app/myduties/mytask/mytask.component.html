@@ -1,6 +1,7 @@
-<div class="container">
+<div class="container" >
+  <div id="pdfTable" #pdfTable>
   <table  class="table table-striped">
-
+  <h1>{{name}}</h1>
     <tr>
 
       <th>S. No.</th>
@@ -55,4 +56,7 @@
       </td>
     </tr>
   </table>
+  
 </div>
+</div>
+<div><button class="btn btn-primary" (click)="downloadAsPDF()">Save </button></div>
