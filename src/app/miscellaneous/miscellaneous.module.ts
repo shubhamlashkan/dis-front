@@ -17,6 +17,8 @@ import { UserGroupsComponent } from './calendar/user-groups/user-groups.componen
 import { AddGroupDialogComponent } from './calendar/user-groups/add-group-dialog/add-group-dialog.component';
 import { ShowGroupComponent } from './calendar/user-groups/show-group/show-group.component';
 import { UpdateGroupComponent } from './calendar/user-groups/update-group/update-group.component';
+import { DeleteDialogComponent } from './notifications/delete-dialog/delete-dialog.component';
+import { ForwardDialogComponent } from './notifications/forward-dialog/forward-dialog.component';
 
 @NgModule({
   imports: [
@@ -49,8 +51,8 @@ import { UpdateGroupComponent } from './calendar/user-groups/update-group/update
     MatChipsModule,
     FormsModule
   ],
-  declarations: [BarchartComponent, CalendarComponent, PiechartComponent, HtmlDownloaderComponent, NotificationsComponent, AddEventDialog, ShowEventDialogComponent, UpdateEventDialogComponent, NotificationsComponent, UserGroupsComponent, AddGroupDialogComponent, ShowGroupComponent, UpdateGroupComponent],
+  declarations: [BarchartComponent, CalendarComponent, PiechartComponent, HtmlDownloaderComponent, NotificationsComponent, AddEventDialog, ShowEventDialogComponent, UpdateEventDialogComponent, NotificationsComponent, UserGroupsComponent, AddGroupDialogComponent, ShowGroupComponent, UpdateGroupComponent, DeleteDialogComponent, ForwardDialogComponent],
   exports: [CalendarComponent, BarchartComponent, PiechartComponent, HtmlDownloaderComponent,NotificationsComponent],
-  entryComponents: [AddEventDialog,ShowEventDialogComponent,UpdateEventDialogComponent, UserGroupsComponent]
+  entryComponents: [AddEventDialog,ShowEventDialogComponent,UpdateEventDialogComponent, UserGroupsComponent,DeleteDialogComponent,ForwardDialogComponent]
 })
 export class MiscellaneousModule { }

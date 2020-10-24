@@ -12,7 +12,7 @@ const httpOptions = {
 export class NotificationsService {
 
   private baseUrl = 'http://localhost:8080/dis/user/userNotificationController';
-
+  private staffDataUrl = 'http://localhost:8080/dis/user/staffProfile';
   constructor(private http :HttpClient) { }
 
   getMyNotifications(): Observable<any> {
@@ -23,5 +23,17 @@ export class NotificationsService {
   }
   markAllAsRead(): Observable<Object> {
     return this.http.get(`${this.baseUrl}/markAllAsRead`);
+  }
+  markAsFavourite(notificationId : String): Observable<Object> {
+    return this.http.get(`${this.baseUrl}/markAsFavourite/${notificationId}`);
+  }
+  delete(notificationId : String): Observable<Object> {
+    return this.http.get(`${this.baseUrl}/deleteNotification/${notificationId}`);
+  }
+  forward(forwardData:any) : Observable<Object> {
+    return this.http.post(`${this.baseUrl}/forwardNotification/`,forwardData);
+  }
+  getAllEmployeeList(): Observable<any> {
+    return this.http.get(`${this.staffDataUrl}/getAllEmployeeNames`);
   }
 }
