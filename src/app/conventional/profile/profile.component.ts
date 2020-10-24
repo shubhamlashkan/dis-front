@@ -2,13 +2,16 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ProfileService } from 'src/app/API_Service/profile.service';
 import { FormControl, FormBuilder, FormGroup, FormArray, NgForm } from '@angular/forms';
 import { ToastrManager } from 'ng6-toastr-notifications';
+
+import { HttpClient } from '@angular/common/http';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  @ViewChild('workExperience') workExperienceForm: NgForm;
+  @ViewChild('workExperienceForm') workExperienceForm: NgForm;
   @ViewChild('educationForm') educationForm: NgForm;
   @ViewChild('researchForm') researchForm: NgForm;
   @ViewChild('culturalActivityForm') culturalActivityForm: NgForm;
@@ -18,8 +21,9 @@ export class ProfileComponent implements OnInit {
   @ViewChild('internshipForm') internshipForm: NgForm;
   selectedIndex: number;
   userType: string = localStorage.getItem('userType');
-  id : string;
-  type : string;
+  userId: string;
+  id: string;
+  type: string;
   form: any = {};
   userInternshipInfo: any[] = [];
   userQualificationInfo: any[];
@@ -31,12 +35,20 @@ export class ProfileComponent implements OnInit {
   userAddressInfo: any[];
   facultyStaffListInfo: any[];
   userResearchWorkInfo: any[];
-  loading : boolean;
+  loading: boolean;
   studentProfile: any;
   staffBasicProfile: any;
+  selectedFile: File = null;
+
+
+  retrievedImage: any;
+  base64Data: any;
+  retrieveResonse: any;
 
   student: boolean;
   staff: boolean;
+  profileModal: boolean;
+  profilePictureUploadButton: boolean;
 
   //form groups
   editStaffBasicProfileFormGroup: FormGroup;
@@ -57,8 +69,9 @@ export class ProfileComponent implements OnInit {
   completionMessage: string = "Error has Occurred. Try after some time!!";
   showConfirmation: boolean;
   staffListInfo: any;
-  
-  constructor(private profile: ProfileService, private fb: FormBuilder, private toastr : ToastrManager) {
+
+  constructor(private profile: ProfileService, private fb: FormBuilder,
+    private toastr: ToastrManager, private httpClient: HttpClient) {
 
   }
 
@@ -66,10 +79,21 @@ export class ProfileComponent implements OnInit {
     this.student = false;
     this.staff = false;
     this.showConfirmation = false;
-   
+    this.selectedIndex = -1;
+    this.profilePictureUploadButton = true;
+
+    this.profile.getProfileUserId()
+      .subscribe(
+        data => {
+          this.userId = data["message"];
+          console.log("------------ userId-------------" + this.userId);
+        }
+      )
+
+
     if (this.userType != 'student') {
       this.staff = true;
-      this.profile.getProfileInfo('','')
+      this.profile.getProfileInfo('', '')
         .subscribe(
           data => {
             this.staffBasicProfile = data;
@@ -98,7 +122,7 @@ export class ProfileComponent implements OnInit {
     }
     if (this.userType === 'student') {
       this.student = true;
-      this.profile.getStudentProfileInfo('','')
+      this.profile.getStudentProfileInfo('', '')
         .subscribe(
           data => {
             this.studentProfile = data;
@@ -122,76 +146,25 @@ export class ProfileComponent implements OnInit {
           }
         )
 
-      this.profile.getUserInternshipInfo('')
-        .subscribe(
-          data => {
-            this.userInternshipInfo = data;
-            console.log(this.userInternshipInfo);
-          }
-        )
+      this.retrieveUserInternshipInfo();
 
-      this.profile.getUserProjectInfo('')
-        .subscribe(
-          data => {
-            this.userProjectInfo = data;
-            console.log(this.userProjectInfo);
-          }
-        )
+      this.retrieveUserProjectInfo()
 
     }
 
+    this.retrieveWorkExperienceInfo();
 
+    this.retrieveUserQualificationInfo()
 
+    this.retrieveUserResearchWorkInfo()
 
-    this.profile.getWorkExperienceInfo('')
-      .subscribe(
-        data => {
-          this.workExperienceInfo = data;
-          console.log(this.workExperienceInfo);
-        }
-      )
+    this.retrieveUserCompetitiveExamInfo()
 
+    this.retrieveUserCulturalActivityInfo()
 
-    this.profile.getUserQualificationInfo('')
-      .subscribe(
-        data => {
-          this.userQualificationInfo = data;
-          console.log(this.userQualificationInfo);
-        }
-      )
-    this.profile.getUserResearchWorkInfo('')
-      .subscribe(
-        data => {
-          this.userResearchWorkInfo = data;
-          console.log(this.userResearchWorkInfo);
-        }
-      )
+    this.retrieveUserTechnicalActivityInfo()
 
-
-
-    this.profile.getUserCompetitiveExamInfo('')
-      .subscribe(
-        data => {
-          this.userCompetitiveExamInfo = data;
-          console.log(this.userCompetitiveExamInfo);
-        }
-      )
-
-    this.profile.getUserCulturalActivityInfo('')
-      .subscribe(
-        data => {
-          this.userCulturalActivityInfo = data;
-          console.log(this.userCulturalActivityInfo);
-        }
-      )
-
-    this.profile.getUserTechnicalActivityInfo('')
-      .subscribe(
-        data => {
-          this.userTechnicalActivityInfo = data;
-          console.log(this.userTechnicalActivityInfo);
-        }
-      )
+    this.getImage()
 
     this.profile.getUserAddressInfo('')
       .subscribe(
@@ -229,51 +202,54 @@ export class ProfileComponent implements OnInit {
         }
       )
 
-      this.profile.getStaffList()
+    this.profile.getStaffList()
       .subscribe(
         data => {
           this.staffListInfo = data;
           console.log(this.staffListInfo);
         }, error => {
-          if(error.status === 500) {
-          this.toastr.errorToastr(error.error['message'], 'Alert!');
-          console.log(error);
-         
-        }
+          if (error.status === 500) {
+            this.toastr.errorToastr(error.error['message'], 'Alert!');
+            console.log(error);
+
+          }
         });
   }
-  
+
+
   updateStaffBasicProfileData(details): void {
     if (this.staffBasicProfile) {
       details["userId"] = this.staffBasicProfile.userId;
     }
     console.log(details);
     this.profile.editStaffProfile(details)
-    .subscribe(
-      data => {
-        console.log(data);
-        this.toastr.successToastr(data.message, 'Success!');
-      },
-      error =>{
-        this.toastr.errorToastr(this.completionMessage, 'Alert!')
-      }
-    )
+      .subscribe(
+        data => {
+          console.log(data);
+          this.toastr.successToastr(data.message, 'Success!');
+        },
+        error => {
+          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        }
+      )
   }
+
+
   updateStudentBasicProfileData(details): void {
     if (this.studentProfile) {
       details["userId"] = this.studentProfile.userId;
     }
     console.log(details);
     this.profile.editStudentProfile(details)
-    .subscribe(
-      data => {
-        console.log(data);
-        this.toastr.successToastr(data.message, 'Success!');
-      },
-      error =>{
-        this.toastr.errorToastr(this.completionMessage, 'Alert!')
-      }
-    )
+      .subscribe(
+        data => {
+          console.log(data);
+          this.toastr.successToastr(data.message, 'Success!');
+        },
+        error => {
+          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        }
+      )
   }
 
 
@@ -283,6 +259,7 @@ export class ProfileComponent implements OnInit {
     this.selectedIndex = i;
     if (this.workExperienceInfo) {
       let data = this.workExperienceInfo[i];
+      console.log("step 1")
       console.log(this.workExperienceInfo);
       this.workExperienceForm.setValue({
         'organizationName': data.organizationName,
@@ -292,33 +269,52 @@ export class ProfileComponent implements OnInit {
         'city': data.city,
         'state': data.state,
         'country': data.country,
-        'payscale': data.payscale,
+        'payScale': data.payScale
       })
     }
   }
+
   resetWorkExperienceForm(): void {
     this.workExperienceForm.reset();
+    this.selectedIndex = -1;
   }
+
+
+  deleteWorkExperienceData(id: number) {
+    this.profile.deleteWorkExperience(id)
+      .subscribe(
+        data => {
+          this.toastr.successToastr(data.message, 'Success!');
+          this.retrieveWorkExperienceInfo()
+        },
+        error => {
+          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        }
+      )
+  }
+
   updateExperienceData(f: NgForm): void {
     let data = f.value;
     //console.log(this.selectedIndex )
-    if (this.workExperienceInfo) {
-      let userId = this.workExperienceInfo[this.selectedIndex].userId;
-      console.log(userId);
-      data["userId"] = userId
+    if (this.selectedIndex != -1) {
+      let id = this.workExperienceInfo[this.selectedIndex].id;
+      data["id"] = id;
     }
+    data["userId"] = this.userId
     console.log(data);
     this.profile.editWorkExperience(data)
-    .subscribe(
-      data => {
-        console.log(data);
-        this.toastr.successToastr(data.message, 'Success!');
-      },
-      error =>{
-        this.toastr.errorToastr(this.completionMessage, 'Alert!')
-        console.log(error)
-      }
-    )
+      .subscribe(
+        data => {
+          console.log(data);
+          this.toastr.successToastr(data.message, 'Success!');
+          this.retrieveWorkExperienceInfo();
+          this.selectedIndex = -1;
+        },
+        error => {
+          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+          console.log(error)
+        }
+      )
   }
 
   //education methods
@@ -337,34 +333,50 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+
+  deleteQualificationData(id: number) {
+    this.profile.deleteQualification(id)
+      .subscribe(
+        data => {
+          this.toastr.successToastr(data.message, 'Success!');
+          this.retrieveUserQualificationInfo()
+        },
+        error => {
+          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        }
+      )
+  }
+
   resetEducationForm(): void {
     this.educationForm.reset();
+    this.selectedIndex = -1;
   }
   updateEducationData(f: NgForm) {
     let data = f.value;
     //console.log(this.selectedIndex )
-    if (this.userQualificationInfo) {
-      let userId = this.userQualificationInfo[this.selectedIndex].userId;
-      console.log(userId);
-      data["userId"] = userId
+    if (this.selectedIndex != -1) {
+      let id = this.userQualificationInfo[this.selectedIndex].id;
+      data["id"] = id;
     }
+    data["userId"] = this.userId
     console.log(data);
     this.profile.editEducation(data)
-    .subscribe(
-      data => {
-        console.log(data);
-        this.toastr.successToastr(data.message, 'Success!');
-      },
-      error =>{
-        this.toastr.errorToastr(this.completionMessage, 'Alert!')
-      }
-    )
+      .subscribe(
+        data => {
+          console.log(data);
+          this.toastr.successToastr(data.message, 'Success!');
+          this.retrieveUserQualificationInfo()
+          this.selectedIndex = -1;
+        },
+        error => {
+          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        }
+      )
   }
 
   //research work methods
   fillResearchData(i: number): void {
     this.selectedIndex = i;
-    console.log(this.selectedIndex)
     if (this.userResearchWorkInfo) {
       let data = this.userResearchWorkInfo[i];
       console.log(data);
@@ -378,30 +390,47 @@ export class ProfileComponent implements OnInit {
         'subcategory': data.subcategory,
         'yearOfPublication': data.yearOfPublication
       })
+      console.log(this.researchForm)
     }
   }
   resetResearchForm(): void {
     this.researchForm.reset();
+    this.selectedIndex = -1;
   }
+
+
+  deleteResearchWorkData(id: number) {
+    this.profile.deleteResearchWork(id)
+      .subscribe(
+        data => {
+          this.toastr.successToastr(data.message, 'Success!');
+          this.retrieveUserResearchWorkInfo()
+        },
+        error => {
+          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        }
+      )
+  }
+
   updateResearchWork(f: NgForm): void {
     let data = f.value;
-    //console.log(this.selectedIndex )
-    if (this.userResearchWorkInfo) {
-      let userId = this.userResearchWorkInfo[this.selectedIndex].userId;
-      console.log(userId);
-      data["userId"] = userId
+    if (this.selectedIndex != -1) {
+      let id = this.userResearchWorkInfo[this.selectedIndex].id;
+      data["id"] = id;
     }
+    data["userId"] = this.userId
     console.log(data);
     this.profile.editPublication(data)
-    .subscribe(
-      data => {
-        console.log(data);
-        this.toastr.successToastr(data.message, 'Success!');
-      },
-      error =>{
-        this.toastr.errorToastr(this.completionMessage, 'Alert!')
-      }
-    )
+      .subscribe(
+        b => {
+          this.toastr.successToastr('Success!');
+          this.retrieveUserResearchWorkInfo()
+          this.selectedIndex = -1;
+        },
+        error => {
+          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        }
+      )
   }
 
   fillCulturalActivityData(i: number) {
@@ -420,23 +449,43 @@ export class ProfileComponent implements OnInit {
   }
   resetCulturalActivity(): void {
     this.culturalActivityForm.reset();
+    this.selectedIndex = -1;
   }
+
+
+  deleteCulturalActivityData(id: number) {
+    this.profile.deleteCulturalActivity(id)
+      .subscribe(
+        data => {
+          this.toastr.successToastr(data.message, 'Success!');
+          this.retrieveUserCulturalActivityInfo()
+        },
+        error => {
+          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        }
+      )
+  }
+
   updateCulturalActivity(f: NgForm) {
     let data = f.value;
-    if (this.userCulturalActivityInfo) {
-      data["userId"] = this.userCulturalActivityInfo[this.selectedIndex].userId;
+    if (this.selectedIndex != -1) {
+      let id = this.userCulturalActivityInfo[this.selectedIndex].id;
+      data["id"] = id;
     }
+    data["userId"] = this.userId
     console.log(data);
     this.profile.editCultural(data)
-    .subscribe(
-      data => {
-        console.log(data);
-        this.toastr.successToastr(data.message, 'Success!');
-      },
-      error =>{
-        this.toastr.errorToastr(this.completionMessage, 'Alert!')
-      }
-    )
+      .subscribe(
+        data => {
+          console.log(data);
+          this.toastr.successToastr(data.message, 'Success!');
+          this.retrieveUserCulturalActivityInfo()
+          this.selectedIndex = -1;
+        },
+        error => {
+          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        }
+      )
   }
 
   fillTechnicalActivityData(i: number): void {
@@ -445,34 +494,55 @@ export class ProfileComponent implements OnInit {
       let data = this.userTechnicalActivityInfo[i];
       this.technicalActivityForm.setValue({
         'attendedOrganized': data.attendedOrganized,
-        'from': data.from,
+        'fromDate': data.fromDate,
         'nameOfCoordinator': data.nameOfCoordinator,
         'place': data.place,
-        'subject': data.subject,
-        'to': data.to,
+        'topicSubject': data.topicSubject,
+        'toDate': data.toDate,
         'type': data.type
       })
+      console.log(this.technicalActivityForm)
     }
   }
+
+
+  deleteTechnicalActivityData(id: number) {
+    this.profile.deleteTechnicalActivity(id)
+      .subscribe(
+        data => {
+          this.toastr.successToastr(data.message, 'Success!');
+          this.retrieveUserTechnicalActivityInfo()
+        },
+        error => {
+          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        }
+      )
+  }
+
   updateTechnicalActivity(f: NgForm): void {
     let data = f.value;
-    if (this.userTechnicalActivityInfo) {
-      data["userId"] = this.userCulturalActivityInfo[this.selectedIndex].userId;
+    if (this.selectedIndex != -1) {
+      let id = this.userTechnicalActivityInfo[this.selectedIndex].id;
+      data["id"] = id;
     }
+    data["userId"] = this.userId
     console.log(data);
     this.profile.editTechnical(data)
-    .subscribe(
-      data => {
-        console.log(data);
-        this.toastr.successToastr(data.message, 'Success!');
-      },
-      error =>{
-        this.toastr.errorToastr(this.completionMessage, 'Alert!')
-      }
-    )
+      .subscribe(
+        data => {
+          console.log(data);
+          this.toastr.successToastr(data.message, 'Success!');
+          this.retrieveUserTechnicalActivityInfo();
+          this.selectedIndex = -1;
+        },
+        error => {
+          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        }
+      )
   }
   resetTechnicalActivity(): void {
     this.technicalActivityForm.reset();
+    this.selectedIndex = -1;
   }
 
   fillCompetetiveExamData(i: number) {
@@ -488,25 +558,45 @@ export class ProfileComponent implements OnInit {
       })
     }
   }
+
+  deleteCompetetiveExamData(id: number) {
+    this.profile.deleteCompetitiveExam(id)
+      .subscribe(
+        data => {
+          this.toastr.successToastr(data.message, 'Success!');
+          this.retrieveUserCompetitiveExamInfo()
+        },
+        error => {
+          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        }
+      )
+  }
+
+
   updateCompetitiveExamData(f: NgForm): void {
     let data = f.value;
-    if (this.userCompetitiveExamInfo) {
-      data["userId"] = this.userCompetitiveExamInfo[this.selectedIndex].userId;
+    if (this.selectedIndex != -1) {
+      let id = this.userCompetitiveExamInfo[this.selectedIndex].id;
+      data["id"] = id;
     }
+    data["userId"] = this.userId
     console.log(data);
     this.profile.editCompetitive(data)
-    .subscribe(
-      data => {
-        console.log(data);
-        this.toastr.successToastr(data.message, 'Success!');
-      },
-      error =>{
-        this.toastr.errorToastr(this.completionMessage, 'Alert!')
-      }
-    )
+      .subscribe(
+        data => {
+          console.log(data);
+          this.toastr.successToastr(data.message, 'Success!');
+          this.retrieveUserCompetitiveExamInfo()
+          this.selectedIndex = -1;
+        },
+        error => {
+          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        }
+      )
   }
   resetCompetetiveExam(): void {
     this.competitiveExamForm.reset();
+    this.selectedIndex = -1;
   }
   fillProjectData(i: number) {
     this.selectedIndex = i;
@@ -523,25 +613,45 @@ export class ProfileComponent implements OnInit {
       })
     }
   }
+
+
+  deleteProjectData(id: number) {
+    this.profile.deleteProject(id)
+      .subscribe(
+        data => {
+          this.toastr.successToastr(data.message, 'Success!');
+          this.retrieveUserProjectInfo()
+        },
+        error => {
+          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        }
+      )
+  }
+
   updateProjectData(f: NgForm): void {
     let data = f.value;
-    if (this.userProjectInfo) {
-      data["userId"] = this.userProjectInfo[this.selectedIndex].userId;
+    if (this.selectedIndex != -1) {
+      let id = this.userProjectInfo[this.selectedIndex].id;
+      data["id"] = id;
     }
+    data["userId"] = this.userId
     console.log(data);
     this.profile.editProjects(data)
-    .subscribe(
-      data => {
-        console.log(data);
-        this.toastr.successToastr(data.message, 'Success!');
-      },
-      error =>{
-        this.toastr.errorToastr(this.completionMessage, 'Alert!')
-      }
-    )
+      .subscribe(
+        data => {
+          console.log(data);
+          this.toastr.successToastr(data.message, 'Success!');
+          this.retrieveUserProjectInfo()
+          this.selectedIndex = -1;
+        },
+        error => {
+          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        }
+      )
   }
   resetProjectForm(): void {
     this.projectForm.reset();
+    this.selectedIndex = -1;
   }
   fillInternshipData(i: number): void {
     this.selectedIndex = i;
@@ -558,57 +668,78 @@ export class ProfileComponent implements OnInit {
       })
     }
   }
+
+
+  deleteInternshipData(id: number) {
+    this.profile.deleteInternship(id)
+      .subscribe(
+        data => {
+          this.toastr.successToastr(data.message, 'Success!');
+          this.retrieveUserInternshipInfo()
+        },
+        error => {
+          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        }
+      )
+  }
+
   updateInternshipData(f: NgForm): void {
     let data = f.value;
-    if (this.userInternshipInfo) {
-      data["userId"] = this.userInternshipInfo[this.selectedIndex].userId;
+    if (this.selectedIndex != -1) {
+      let id = this.userInternshipInfo[this.selectedIndex].id;
+      data["id"] = id;
     }
+    data["userId"] = this.userId
     console.log(data);
     this.profile.editInternship(data)
-    .subscribe(
-      data => {
-        console.log(data);
-        this.toastr.successToastr(data.message, 'Success!');
-      },
-      error =>{
-        this.toastr.errorToastr(this.completionMessage, 'Alert!')
-      }
-    )
+      .subscribe(
+        data => {
+          console.log(data);
+          this.toastr.successToastr(data.message, 'Success!');
+          this.selectedIndex = -1;
+          this.retrieveUserInternshipInfo()
+        },
+        error => {
+          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        }
+      )
+    this.selectedIndex = -1;
   }
   resetInternshipForm(): void {
     this.internshipForm.reset();
+    this.selectedIndex = -1;
   }
 
- 
+
   getControls() {
     if (this.addressFormGroup) {
       return (<FormArray>this.addressFormGroup.get('addresses')).controls;
 
     }
   }
+
   updateAddresses(detail) {
     let data = detail['addresses'];
     console.log(data);
-    if(this.userAddressInfo){
-      for(let i=0;i<data.length;i++)
-      {
-        data[i]["userId"]=this.userAddressInfo[0].userId
+    if (this.userAddressInfo) {
+      for (let i = 0; i < data.length; i++) {
+        data[i]["userId"] = this.userAddressInfo[0].userId
       }
-      
+
     }
     this.profile.editUserAddress(data)
-    .subscribe(
-      data => {
-        console.log(data);
-        this.toastr.successToastr(data.message, 'Success!');
-      },
-      error =>{
-        this.toastr.errorToastr(this.completionMessage, 'Alert!')
-      }
-    )
+      .subscribe(
+        data => {
+          console.log(data);
+          this.toastr.successToastr(data.message, 'Success!');
+        },
+        error => {
+          this.toastr.errorToastr(this.completionMessage, 'Alert!')
+        }
+      )
   }
 
-  loadProfile(userId : number,userType : string ):void{
+  loadProfile(userId: number, userType: string): void {
     this.loading = true;
     this.profile.getUserTechnicalActivityInfo(userId)
       .subscribe(
@@ -618,120 +749,243 @@ export class ProfileComponent implements OnInit {
         }
       )
 
-      if (userType != 'student') {
-        this.staff = true;
-        this.profile.getProfileInfo(userId,userType)
-          .subscribe(
-            data => {
-              this.staffBasicProfile = data;
-              console.log(this.staffBasicProfile);
-              this.editStaffBasicProfileFormGroup = this.fb.group({
-                mobileNo: [''],
-                alternateMobileNo: [''],
-                bloodGroup: [''],
-                dob: [''],
-                areaOfSpecialization: [''],
-                fatherName: [''],
-                motherName: [''],
-              })
-              if (this.staffBasicProfile != undefined) {
-                this.mobileNo = this.staffBasicProfile.mobileNo;
-                this.alternateMobileNo = this.staffBasicProfile.alternateMobileNo;
-                this.bloodGroup = this.staffBasicProfile.bloodGroup;
-                this.dob = this.staffBasicProfile.dob;
-                this.areaOfSpecialization = this.staffBasicProfile.areaOfSpecialization;
-                this.fatherName = this.staffBasicProfile.fatherName;
-                this.motherName = this.staffBasicProfile.motherName;
-              }
-            },
-          )
-  
-      }
-      
+    if (userType != 'student') {
+      this.staff = true;
+      this.profile.getProfileInfo(userId, userType)
+        .subscribe(
+          data => {
+            this.staffBasicProfile = data;
+            console.log(this.staffBasicProfile);
+            this.editStaffBasicProfileFormGroup = this.fb.group({
+              mobileNo: [''],
+              alternateMobileNo: [''],
+              bloodGroup: [''],
+              dob: [''],
+              areaOfSpecialization: [''],
+              fatherName: [''],
+              motherName: [''],
+            })
+            if (this.staffBasicProfile != undefined) {
+              this.mobileNo = this.staffBasicProfile.mobileNo;
+              this.alternateMobileNo = this.staffBasicProfile.alternateMobileNo;
+              this.bloodGroup = this.staffBasicProfile.bloodGroup;
+              this.dob = this.staffBasicProfile.dob;
+              this.areaOfSpecialization = this.staffBasicProfile.areaOfSpecialization;
+              this.fatherName = this.staffBasicProfile.fatherName;
+              this.motherName = this.staffBasicProfile.motherName;
+            }
+          },
+        )
+
+    }
+
 
     this.profile.getWorkExperienceInfo(userId)
-    .subscribe(
-      data => {
-        this.workExperienceInfo = data;
-        console.log(this.workExperienceInfo);
-      }
-    )
-
-
-  this.profile.getUserQualificationInfo(userId)
-    .subscribe(
-      data => {
-        this.userQualificationInfo = data;
-        console.log(this.userQualificationInfo);
-      }
-    )
-  this.profile.getUserResearchWorkInfo(userId)
-    .subscribe(
-      data => {
-        this.userResearchWorkInfo = data;
-        console.log(this.userResearchWorkInfo);
-      }
-    )
-
-
-
-  this.profile.getUserCompetitiveExamInfo(userId)
-    .subscribe(
-      data => {
-        this.userCompetitiveExamInfo = data;
-        console.log(this.userCompetitiveExamInfo);
-      }
-    )
-
-  this.profile.getUserCulturalActivityInfo(userId)
-    .subscribe(
-      data => {
-        this.userCulturalActivityInfo = data;
-        console.log(this.userCulturalActivityInfo);
-      }
-    )
-
-  this.profile.getUserTechnicalActivityInfo(userId)
-    .subscribe(
-      data => {
-        this.userTechnicalActivityInfo = data;
-        console.log(this.userTechnicalActivityInfo);
-      }
-    )
-
-  this.profile.getUserAddressInfo(userId)
-    .subscribe(
-      data => {
-        this.loading = false;
-        this.userAddressInfo = data;
-        console.log(this.userAddressInfo);
-        let addresses = new FormArray([]);
-        if (this.userAddressInfo != undefined) {
-          for (let address of this.userAddressInfo) {
-            addresses.push(
-              new FormGroup({
-                'addressLine1': new FormControl(address.addressLine1),
-                'addressLine2': new FormControl(address.addressLine2),
-                'city': new FormControl(address.city),
-                'country': new FormControl(address.country),
-                'state': new FormControl(address.state),
-                'pincode': new FormControl(address.pincode),
-                'type': new FormControl(address.type)
-              })
-            )
-          }
-          this.addressFormGroup = new FormGroup({
-            'addresses': addresses
-          })
-
+      .subscribe(
+        data => {
+          this.workExperienceInfo = data;
+          console.log(this.workExperienceInfo);
         }
-      }
-    )
+      )
 
-  
+
+    this.profile.getUserQualificationInfo(userId)
+      .subscribe(
+        data => {
+          this.userQualificationInfo = data;
+          console.log(this.userQualificationInfo);
+        }
+      )
+    this.profile.getUserResearchWorkInfo(userId)
+      .subscribe(
+        data => {
+          this.userResearchWorkInfo = data;
+          console.log(this.userResearchWorkInfo);
+        }
+      )
+
+
+
+    this.profile.getUserCompetitiveExamInfo(userId)
+      .subscribe(
+        data => {
+          this.userCompetitiveExamInfo = Object.values(data);
+          console.log(this.userCompetitiveExamInfo);
+        }
+      )
+
+    this.profile.getUserCulturalActivityInfo(userId)
+      .subscribe(
+        data => {
+          this.userCulturalActivityInfo = data;
+          console.log(this.userCulturalActivityInfo);
+        }
+      )
+
+    this.profile.getUserTechnicalActivityInfo(userId)
+      .subscribe(
+        data => {
+          this.userTechnicalActivityInfo = data;
+          console.log(this.userTechnicalActivityInfo);
+        }
+      )
+
+    this.profile.getUserAddressInfo(userId)
+      .subscribe(
+        data => {
+          this.loading = false;
+          this.userAddressInfo = data;
+          console.log(this.userAddressInfo);
+          let addresses = new FormArray([]);
+          if (this.userAddressInfo != undefined) {
+            for (let address of this.userAddressInfo) {
+              addresses.push(
+                new FormGroup({
+                  'addressLine1': new FormControl(address.addressLine1),
+                  'addressLine2': new FormControl(address.addressLine2),
+                  'city': new FormControl(address.city),
+                  'country': new FormControl(address.country),
+                  'state': new FormControl(address.state),
+                  'pincode': new FormControl(address.pincode),
+                  'type': new FormControl(address.type)
+                })
+              )
+            }
+            this.addressFormGroup = new FormGroup({
+              'addresses': addresses
+            })
+
+          }
+        }
+      )
+
+
   }
 
   resetConfirmationMessge(): void {
     this.showConfirmation = false;
   }
+
+  retrieveUserInternshipInfo() {
+    this.profile.getUserInternshipInfo('')
+      .subscribe(
+        data => {
+          this.userInternshipInfo = data;
+          console.log(this.userInternshipInfo);
+        }
+      )
+  }
+
+  retrieveWorkExperienceInfo() {
+    this.profile.getWorkExperienceInfo('')
+      .subscribe(
+        data => {
+          this.workExperienceInfo = data;
+          console.log(this.workExperienceInfo);
+        }
+      )
+
+  }
+
+  retrieveUserProjectInfo() {
+    this.profile.getUserProjectInfo('')
+      .subscribe(
+        data => {
+          this.userProjectInfo = data;
+          console.log(this.userProjectInfo);
+        }
+      )
+  }
+
+  retrieveUserQualificationInfo() {
+    this.profile.getUserQualificationInfo('')
+      .subscribe(
+        data => {
+          this.userQualificationInfo = data;
+          console.log(this.userQualificationInfo);
+        }
+      )
+  }
+
+  retrieveUserResearchWorkInfo() {
+    this.profile.getUserResearchWorkInfo('')
+      .subscribe(
+        data => {
+          this.userResearchWorkInfo = data;
+          console.log(this.userResearchWorkInfo);
+        }
+      )
+  }
+
+  retrieveUserCompetitiveExamInfo() {
+    this.profile.getUserCompetitiveExamInfo('')
+      .subscribe(
+        data => {
+          this.userCompetitiveExamInfo = data;
+          console.log(this.userCompetitiveExamInfo);
+        }
+      )
+  }
+
+  retrieveUserCulturalActivityInfo() {
+    this.profile.getUserCulturalActivityInfo('')
+      .subscribe(
+        data => {
+          this.userCulturalActivityInfo = data;
+          console.log(this.userCulturalActivityInfo);
+        }
+      )
+  }
+
+  retrieveUserTechnicalActivityInfo() {
+    this.profile.getUserTechnicalActivityInfo('')
+      .subscribe(
+        data => {
+          this.userTechnicalActivityInfo = data;
+          console.log(this.userTechnicalActivityInfo);
+        }
+      )
+  }
+
+  showProfileModal() {
+    this.profileModal = true; // Show-Hide Modal Check
+
+  }
+  //Bootstrap Modal Close event
+  hideProfileModal() {
+    this.profileModal = false;
+  }
+
+  onFileSelected(event: any) {
+    this.selectedFile = <File>event.target.files[0];
+    console.log("Step 1")
+    console.log(this.selectedFile);
+    this.profilePictureUploadButton = false;
+  }
+
+  onUpload() {
+    console.log(this.selectedFile);
+    const uploadImageData = new FormData();
+    uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
+    this.httpClient.post('http://localhost:8080/dis/user/updateProfilePicture', uploadImageData, { observe: 'response' })
+      .subscribe((response) => {
+        if (response.status === 200) {
+          this.getImage()
+        } else {
+        }
+      }
+      );
+  }
+
+  getImage() {
+    this.httpClient.get('http://localhost:8080/dis/user/getProfilePicture')
+      .subscribe(
+        res => {
+          this.retrieveResonse = res;
+          this.base64Data = this.retrieveResonse.picByte;
+          this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
+        }
+      );
+  }
+
 }
