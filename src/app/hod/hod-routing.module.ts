@@ -79,8 +79,7 @@ const routes: Routes = [
         component: MeetingsComponent
       },
       {
-        path :'complaints',
-        //component:ComplaintsComponent,
+        path : 'complaints',
         loadChildren : '../complaints/complaints.module#ComplaintsModule'
       },
       {

@@ -61,7 +61,6 @@ const routes: Routes = [
         component : ProfileComponent,
         loadChildren: () => ConventionalModule 
       },
-     
       {
         path : 'complaints',
         loadChildren : '../complaints/complaints.module#ComplaintsModule'

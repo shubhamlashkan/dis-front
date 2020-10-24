@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
       this.getValidated();
     }
   }
-
   onSubmit() {
     console.log(this.form);
     this.loading = true;

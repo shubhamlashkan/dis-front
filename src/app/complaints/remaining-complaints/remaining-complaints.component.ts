@@ -10,14 +10,14 @@ import { ToastrManager } from 'ng6-toastr-notifications';
   styleUrls: ['./remaining-complaints.component.scss'],
 })
 export class RemainingComplaintsComponent implements OnInit {
-  userType : string = localStorage.getItem('userType');
-  @ViewChild('editComplaintForm') editComplaintForm : NgForm;
-  @ViewChild('editOtherComplaintForm') editOtherComplaintForm : NgForm;
-  student : boolean;
-  staff : boolean;
-  isFaculty : boolean;
-  hod : boolean;
-  count:number=0;
+  userType: string = localStorage.getItem('userType');
+  @ViewChild('editComplaintForm') editComplaintForm: NgForm;
+  @ViewChild('editOtherComplaintForm') editOtherComplaintForm: NgForm;
+  student: boolean;
+  staff: boolean;
+  isFaculty: boolean;
+  hod: boolean;
+  count: number = 0;
   cleanliness: boolean;
   le: boolean;
   cwn: boolean;
@@ -46,24 +46,24 @@ export class RemainingComplaintsComponent implements OnInit {
   emrsRemainingComplaintsInfo: any[];
   telephoneRemainingComplaintsInfo: any[];
 
-  selectedIndex : number;
-  currentId : number;
+  selectedIndex: number;
+  currentId: number;
   seletedType: string;
-  completionMessage: string="Error has Occurred. Try after some time!!";;
+  completionMessage: string = "Error has Occurred. Try after some time!!";;
   showConfirmation: boolean;
-  constructor(private complaints: ComplaintsService, private toastr : ToastrManager) { }
+  constructor(private complaints: ComplaintsService, private toastr: ToastrManager) { }
 
   ngOnInit() {
     this.showConfirmation = false;
-    this.student=false;
-    this.staff=false;
-    this.isFaculty=false;
-    this.hod=false;
+    this.student = false;
+    this.staff = false;
+    this.isFaculty = false;
+    this.hod = false;
 
-    this.student=false;
-    this.staff=false;
-    this.isFaculty=false;
-    this.hod=false;
+    this.student = false;
+    this.staff = false;
+    this.isFaculty = false;
+    this.hod = false;
 
     this.cleanliness = true;
     this.le = true;
@@ -75,21 +75,19 @@ export class RemainingComplaintsComponent implements OnInit {
     this.emrs = true;
     this.telephone = true;
 
-    if( this.userType === "student")
-    {
+    if (this.userType === "student") {
       this.student = true;
     }
-    if( this.userType === "staff"){
+    if (this.userType === "staff") {
       this.staff = true;
     }
-    if( this.userType === "head"){
+    if (this.userType === "head") {
       this.hod = true;
     }
-    if(this.userType === "faculty")
-    {
+    if (this.userType === "faculty") {
       this.isFaculty = true;
     }
- 
+
     this.cleanlinessRemainingComplaintsData = this.complaints.getRemainingCleanlinessComplaint()
       .subscribe(
         data => {
@@ -173,8 +171,8 @@ export class RemainingComplaintsComponent implements OnInit {
     this.stu = true;
     this.emrs = true;
     this.telephone = true;
-    }
- showOther() {
+  }
+  showOther() {
     this.cleanliness = false;
     this.le = false;
     this.cwn = false;
@@ -272,75 +270,77 @@ export class RemainingComplaintsComponent implements OnInit {
     this.stu = false;
     this.emrs = false;
     this.telephone = true;
-   }
+  }
   // public popoverTitle: string = 'Is complaint is resolved?';
   // public popoverMessage: string = 'Do you want to continue?';
   // public confirmClicked: boolean = false;
   // public cancelClicked: boolean = false;
-  editComplaint(i : number, type : string, remarks : string, status : string, Id : number):void{
+  /*
+  Since only those complaints are shown to a person of which he/she is incharge of so there is no need to check if the user has permission or not
+  */
+  editComplaint(i: number, type: string, remarks: string, status: string, Id: number): void {
     console.log(i);
     console.log(type);
     this.selectedIndex = i;
     this.currentId = Id;
     this.seletedType = type;
-    this.showConfirmation=false;
+    this.showConfirmation = false;
     this.editComplaintForm.setValue({
-      'status' : status,
-      'remarks' : remarks
+      'status': status,
+      'remarks': remarks
     })
   }
-  updateComplaint(f : NgForm){
+  updateComplaint(f: NgForm) {
     let data = f.value;
     console.log(this.currentId);
-    //if(this.currentId){
-      data["id"] = this.currentId;
-      data["type"]=this.seletedType;
-    //}
+    data["id"] = this.currentId;
+    data["type"] = this.seletedType;
     console.log(data);
     this.complaints.editComplaints(data)
-    .subscribe(
-      data => {
-        console.log(data);
-        this.toastr.successToastr(data.message, 'Success!');
-      },
-      error =>{
-        this.toastr.errorToastr(this.completionMessage, 'Alert!')
-      }
-    )
+      .subscribe(
+        data => {
+          console.log(data);
+          this.toastr.successToastr(data.message, 'Success!');
+        },
+        error => {
+          this.toastr.errorToastr(error.error.message, 'Alert!')
+        }
+      )
+
   }
-  editOtherComplaint(i : number, type : string, remarks : string, status : string, Id : number, assignedTo : string):void{
+  editOtherComplaint(i: number, type: string, remarks: string, status: string, Id: number, assignedTo: string): void {
     console.log(i);
     console.log(type);
     this.selectedIndex = i;
     this.currentId = Id;
     this.seletedType = type;
-    this.showConfirmation=false;
+    this.showConfirmation = false;
     this.editOtherComplaintForm.setValue({
-      'status' : status,
-      'remarks' : remarks,
-      'assignedTo' : assignedTo
+      'status': status,
+      'remarks': remarks,
+      'assignedTo': assignedTo
     })
   }
-  updateOtherComplaint(f : NgForm){
+  updateOtherComplaint(f: NgForm) {
     let data = f.value;
     console.log(this.currentId);
-    if(this.currentId!=undefined && this.seletedType!=undefined){
+    if (this.currentId != undefined && this.seletedType != undefined) {
       data["id"] = this.currentId;
-      data["type"]=this.seletedType;
+      data["type"] = this.seletedType;
     }
     console.log(data);
     this.complaints.editComplaints(data)
-    .subscribe(
-      data => {
-        console.log(data);
-        this.toastr.successToastr(data.message, 'Success!');
-      },
-      error =>{
-        this.toastr.errorToastr(this.completionMessage, 'Alert!')
-      }
-    )
+      .subscribe(
+        data => {
+          console.log(data);
+          this.toastr.successToastr(data.message, 'Success!');
+        },
+        error => {
+          this.toastr.errorToastr(error.error.message, 'Alert!')
+        }
+      )
   }
-  resetConfirmationMessage():void{
+  resetConfirmationMessage(): void {
     this.showConfirmation = true;
   }
 }

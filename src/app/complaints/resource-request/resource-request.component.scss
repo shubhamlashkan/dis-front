@@ -1,19 +1,64 @@
 .customDiv{
-    padding-bottom: 10px;
+    padding-bottom: 20px;
 }
 
 .customTable{
     padding:0px;
     width:100%;
+    table-layout: fixed;
+}
+
+.customTh
+{
+    border: 1px solid grey;
+    text-align: center;
+    padding : 8px;
+    font-size: 16px;
+    color: rgb(9, 9, 197);
+    border : none;
+    text-align: justify;
 }
 
 .customTd
 {
-    border: 2px solid grey;
+    border-bottom: 1px solid rgb(233, 233, 233);
+    border-top: 1px solid rgb(233, 233, 233);
     text-align: center;
-    font-size: 16px;
-    color: blue;
+    padding : 8px;
+    font-size: 14px;
+    color: rgb(73, 73, 77);
+    text-align : left;
 }
+
+.customTr:hover {
+    background-color: rgb(230, 234, 248);
+}
+
+.cutomTb {
+    display: block;
+    overflow: auto;
+}
+
+.customButton {
+    color: #494949 !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #ffffff;
+    padding : 8px;
+    border: 2px solid #494949 !important;
+    display: inline-block;
+    transition: all 0.4s ease 0s;
+    height : 80%;
+    float : right;
+}
+
+.customButton:hover {
+    color: #ffffff !important;
+    background:rgb(44, 44, 187);
+    border-color:rgb(44, 44, 187) !important;
+    transition: all 0.4s ease 0s;  
+}
+    
 
 textarea.ng-invalid.ng-touched,input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
     border: 1px solid red;
