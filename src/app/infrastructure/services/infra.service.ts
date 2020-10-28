@@ -5,6 +5,8 @@ import { Laboratory } from '../models/Laboratory';
 import { Others } from '../models/Others';
 import { apiSetting } from 'src/app/urls/apisetting';
 import { facultyName, staffName,infraType, infrastructure, addInfra, addLoc } from '../models/infra';
+import { addEquip, equipment } from '../models/equipment';
+import { addBill, bill } from '../models/bill';
 
 @Injectable({
   providedIn: 'root'
@@ -77,6 +79,40 @@ addLocation(location:addLoc):Observable<HttpResponse<string>>{
   }
   getInfrastructureById(infraId: string): Observable<HttpResponse<infrastructure>>{
     return this.http.get<infrastructure>(`${this.baseUrl}/getInfrastructurebyId/${infraId}`,{observe: 'response'}); 
+  }
+
+
+
+  addEquipment(Equip : addEquip) : Observable<HttpResponse<string>> {
+    return this.http.post<string>(this.baseUrl + '/addEquipmentDetails', Equip,{ observe: 'response' });
+  }
+  getEquipmentByType(type: string): Observable<HttpResponse<equipment[]>>{
+    return this.http.get<equipment[]>(`${this.baseUrl}/getEquipmentByType/${type}`,{observe: 'response'}); 
+  }
+  getEquipmentByRoom(room: string): Observable<HttpResponse<equipment[]>>{
+    return this.http.get<equipment[]>(`${this.baseUrl}/getEquipmentByLab/${room}`,{observe: 'response'}); 
+  }
+  deleteEquipment(Id:string):Observable<HttpResponse<any>>
+  {
+    return this.http.delete(`${this.baseUrl}/deleteEquipmentDetailsWithId/${Id}`,{observe:'response'});
+  }
+
+
+  addBill (bill : addBill) : Observable<HttpResponse<string>> {
+    return this.http.post<string>(this.baseUrl + '/addStockBill', bill,{ observe: 'response' });
+  }
+  getBill( ): Observable<HttpResponse<bill[]>>{
+    return this.http.get<bill[]>(`${this.baseUrl}/getStockBill`,{observe: 'response'}); 
+  }
+  getBillByDate(date:string): Observable<HttpResponse<bill[]>>{
+    return this.http.get<bill[]>(`${this.baseUrl}/getStockBillByDateOfPurchase/${date}`,{observe: 'response'}); 
+  }
+  getBillBySupplierName(name:string): Observable<HttpResponse<bill[]>>{
+    return this.http.get<bill[]>(`${this.baseUrl}/getStockBillBySupplierName/${name}`,{observe: 'response'}); 
+  }
+  deleteBill(Id:string):Observable<HttpResponse<any>>
+  {
+    return this.http.delete(`${this.baseUrl}/deleteBillDetailsWithId/${Id}`,{observe:'response'});
   }
 
 }

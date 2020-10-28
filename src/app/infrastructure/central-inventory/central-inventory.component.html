@@ -3,11 +3,11 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Add Inventory</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" (click)="ngOnInit()" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" action="/action_page.php">
-          <div class="row">
+        <form class="form-horizontal" #f = "ngForm">
+          <div class="row" ngModelGroup="addEquipData">
             <div class="col-lg-6">
               
               <div class="form-group">
@@ -16,7 +16,7 @@
                     <label class="control-label col-sm-2" for="name">Name:</label>
                   </div>
                   <div class="col-lg-8">
-                    <input type="name" class="form-control" id="name" placeholder="Enter name of equipment" name="name">
+                    <input type="name" class="form-control" id="name" placeholder="Enter name of equipment" name="name" required ngModel>
                   </div>
                 </div>
               </div>
@@ -26,8 +26,8 @@
                     <label class="control-label col-sm-2" for="quantity">Quantity:</label>
                   </div>
                   <div class="col-lg-8">
-                    <input type="number" class="form-control" id="Quantity" placeholder="Enter Number of item"
-                      name="Quantity">
+                    <input type="number" class="form-control" id="quantity" placeholder="Enter Number of item"
+                      name="Quantity" required ngModel>
                   </div>
                 </div>
               </div>
@@ -37,7 +37,7 @@
                     <label class="control-label col-sm-2" for="number">Bill_No.:</label>
                   </div>
                   <div class="col-lg-8">
-                    <input type="number" class="form-control" id="bill_no" placeholder="Enter Bill NUmber" name="number">
+                    <input type="number" class="form-control" id="bill_no" placeholder="Enter Bill NUmber" name="bill_no">
                   </div>
                 </div>
               </div>
@@ -54,11 +54,35 @@
                           <select class="dropdown-primary form-control" name="type" required ngModel>
                               <option value="" selected disabled>Type</option>
                               <option>
-                                mouse
+                                CPU
                               </option>
                               <option>
-                                  monitor
+                                  printer
                                 </option>
+                                <option>
+                                    mouse
+                                  </option>
+                                  <option>
+                                      monitor
+                                    </option>
+                                    <option>
+                                        AC
+                                      </option>
+                                      <option>
+                                          projector
+                                        </option>
+                                        <option>
+                                          Table
+                                          </option>
+                                          <option>
+                                              Chair
+                                            </option>
+                                            <option>
+                                                Desk
+                                              </option>
+                                              <option>
+                                                  Others
+                                                </option>
                             </select>
                       </div>
                     </div>
@@ -93,7 +117,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+        <button type="button" class="btn btn-primary"  [disabled]="!f.valid"data-dismiss="modal">Submit</button>
       </div>
     </div>
   </div>
@@ -125,7 +149,7 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+          <button type="button" class="btn btn-primary" [disabled]="!f.valid" data-dismiss="modal">Submit</button>
         </div>
       </div>
     </div>
@@ -136,11 +160,11 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Add Bill Information</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" (click)="ngOnInit()" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" action="/action_page.php">
-          <div class="row">
+        <form class="form-horizontal" #g = "ngForm" >
+          <div class="row" ngModelGroup="addBillData">
             <div class="col-lg-6">
               <div class="form-group">
                 <div class="row">
@@ -149,7 +173,7 @@
                   </div>
                   <div class="col-lg-8">
                     <input type="stock_id" class="form-control" id="order_no" placeholder="Enter Order_Number"
-                      name="order_no">
+                      name="order_no" required ngModel>
                   </div>
                 </div>
               </div>
@@ -159,7 +183,7 @@
                     <label class="control-label col-sm-2" for="name">Name:</label>
                   </div>
                   <div class="col-lg-8">
-                    <input type="name" class="form-control" id="name_s" placeholder="Enter name of Supplier" name="name_s">
+                    <input type="name" class="form-control" id="name_s" placeholder="Enter name of Supplier" name="name_s" required ngModel>
                   </div>
                 </div>
               </div>
@@ -170,7 +194,7 @@
                   </div>
                   <div class="col-lg-8">
                     <input type="address" class="form-control" id="address" placeholder="Enter Address of Supplier"
-                      name="address">
+                      name="address" required ngModel>
                   </div>
                 </div>
               </div>
@@ -180,7 +204,7 @@
                     <label class="control-label col-sm-2" for="number">Bill_No.:</label>
                   </div>
                   <div class="col-lg-8">
-                    <input type="number" class="form-control" id="bill_no" placeholder="Enter Bill NUmber" name="number">
+                    <input type="number" class="form-control" id="bill_no" placeholder="Enter Bill NUmber" name="number" required ngModel>
                   </div>
                 </div>
               </div>
@@ -190,7 +214,7 @@
                     <label class="control-label col-sm-2" for="date">Date:</label>
                   </div>
                   <div class="col-lg-8">
-                    <input type="date" class="form-control" id="date" placeholder="Enter Date of Purchase" name="date">
+                    <input type="date" class="form-control" id="date" placeholder="Enter Date of Purchase" name="date" required ngModel>
                   </div>
                 </div>
               </div>
@@ -201,7 +225,7 @@
                   </div>
                   <div class="col-lg-8">
                     <input type="item_name" class="form-control" id="item_name" placeholder="Enter Item Name"
-                      name="item_name">
+                      name="item_name" required ngModel>
                   </div>
                 </div>
               </div>
@@ -224,7 +248,7 @@
                     <label class="control-label col-sm-2" for="quantity">Quantity:</label>
                   </div>
                   <div class="col-lg-8">
-                    <input type="number" class="form-control" id="quantity" placeholder="Enter Quantity" name="quantity">
+                    <input type="number" class="form-control" id="quantity" placeholder="Enter Quantity" name="quantity" required ngModel>
                   </div>
                 </div>
               </div>
@@ -234,7 +258,7 @@
                     <label class="control-label col-sm-2" for="price">Price:</label>
                   </div>
                   <div class="col-lg-8">
-                    <input type="price" class="form-control" id="price" placeholder="Enter Price" name="price">
+                    <input type="price" class="form-control" id="price" placeholder="Enter Price" name="price" required ngModel>
                   </div>
                 </div>
               </div>
@@ -264,7 +288,7 @@
                     <label class="control-label col-sm-2" for="price_t">Total_Price:</label>
                   </div>
                   <div class="col-lg-8">
-                    <input type="price_t" class="form-control" id="price_t" placeholder="Enter Total_Price:" name="price_t">
+                    <input type="price_t" class="form-control" id="price_t" placeholder="Enter Total_Price:" name="price_t" required ngModel>
                   </div>
                 </div>
               </div>
@@ -284,7 +308,7 @@
        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+        <button type="button" class="btn btn-primary" [disabled]="!g.valid" data-dismiss="modal">Submit</button>
       </div>
     </div>
 
@@ -296,7 +320,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">{{equipType}}</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" (click)="ngOnInit()">&times;</button>
       </div>
       <div class="modal-body">
         <div  class="ScrollStyle">
@@ -380,14 +404,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Update Inventory</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" (click)="ngOnInit()">&times;</button>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" action="/action_page.php">
+        <form class="form-horizontal"  #e = "ngForm">
           <div class="row">
             <div class="col-lg-6">
               
-              <div class="form-group">
+              <div class="form-group" ngModelGroup="editInfraData">
                 <div class="row">
                   <div class="col-lg-4">
                     <label class="control-label col-sm-2" for="name">Name:</label>
@@ -488,7 +512,7 @@
       <div class="modal-body">
           <div class="form-row">
             <div class="col-7">
-              <h4>Are you sure you want to remove task ?</h4>
+              <h4>Are you sure you want to remove ?</h4>
             </div>
             <div class="col-2">
               <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth"
@@ -514,10 +538,24 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Stock Bills</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" (click)="ngOnInit()">&times;</button>
       </div>
       <div class="modal-body">
         <div  class="ScrollStyle">
+            <div class="row">
+                <div class="form-group">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <label class="control-label col-sm-2" for="category">Enter {{searchBill}}</label>
+                      </div>
+                      <div class="col-lg-8">
+                        <input type="name" class="form-control" id="category" placeholder="Enter new Category" name="category">
+                      </div>
+                    </div>
+                  </div>
+              
+            </div>
+           
           <table  class="table table-striped">
         
             <tr>
@@ -552,7 +590,7 @@
               <td>
               
                     <button class="btn btn-primary " data-toggle="modal" data-dismiss="modal"
-                    data-target="#RemoveEquipment" (click) = "getInfra(f.id)" >Show</button>
+                    data-target="#ShowFullBill"  >Show</button>
               </td>
               <td>
               </td>
@@ -573,11 +611,11 @@
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title">Update Bill</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <button type="button" class="close" data-dismiss="modal" (click)="ngOnInit()">&times;</button>
         </div>
         <div class="modal-body">
-          <form class="form-horizontal" action="/action_page.php">
-            <div class="row">
+          <form class="form-horizontal" #b = "ngForm">
+            <div class="row" ngModelGroup="editBillData">
               <div class="col-lg-6">
                 <div class="form-group">
                   <div class="row">
@@ -727,6 +765,160 @@
   
     </div>
   </div>
+  <div class="modal fade" id="ShowFullBill" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Bill</h4>
+            <button type="button" class="close" data-dismiss="modal" (click)="ngOnInit()">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal">
+              <div class="row" >
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <label class="control-label col-sm-2" for="order_no">Order_No:</label>
+                      </div>
+                      <div class="col-lg-8">
+                    
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <label class="control-label col-sm-2" for="name">Name:</label>
+                      </div>
+                      <div class="col-lg-8">
+                      
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <label class="control-label col-sm-2" for="address">Address:</label>
+                      </div>
+                      <div class="col-lg-8">
+                        
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <label class="control-label col-sm-2" for="number">Bill_No.:</label>
+                      </div>
+                      <div class="col-lg-8">
+                        
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <label class="control-label col-sm-2" for="date">Date:</label>
+                      </div>
+                      <div class="col-lg-8">
+                        
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <label class="control-label col-sm-2" for="item_name">Item_Name:</label>
+                      </div>
+                      <div class="col-lg-8">
+                       
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <label class="control-label col-sm-2" for="specification">Specification:</label>
+                      </div>
+                      <div class="col-lg-8">
+                        
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <label class="control-label col-sm-2" for="quantity">Quantity:</label>
+                      </div>
+                      <div class="col-lg-8">
+                       
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <label class="control-label col-sm-2" for="price">Price:</label>
+                      </div>
+                      <div class="col-lg-8">
+                       
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <label class="control-label col-sm-2" for="">CGST:</label>
+                      </div>
+                      <div class="col-lg-8">
+                      
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <label class="control-label col-sm-2" for="sgst">SGST:</label>
+                      </div>
+                      <div class="col-lg-8">
+                        
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <label class="control-label col-sm-2" for="price_t">Total_Price:</label>
+                      </div>
+                      <div class="col-lg-8">
+                      
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-lg-2.5">
+                    <label class="control-label col-sm-2" for="duration">Warranty_period:</label>
+                  </div>
+                  <div class="col-lg-9.5">
+                    
+                  </div>
+                </div>
+              </div>
+           </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Delete</button>
+          </div>
+        </div>
+    
+      </div>
+    </div>
 
 
 <nav class="navbar navbar-dark bg-dark">
@@ -738,7 +930,7 @@
   <div class="row">
     <div class="col-lg-9 kyc-colm user-management" style="border-right: 1px solid grey">
       <nav class=" navbar-dark bg-dark">
-        <span class="navbar-brand mb-0 h1 pl-4">Equipments<button type="button" class="btn btn-default"
+        <span class="navbar-brand mb-0 h1 pl-4">Equipments  <button type="button" class="btn btn-default"
           id = "dropdownMenuLink"  style="margin-left: 700px" data-toggle="dropdown" ><i class="fa fa-plus"
               aria-hidden="true"></i></button>
               <div class="dropdown-menu rounded-0 " aria-labelledby="dropdownMenuLink">
@@ -896,27 +1088,26 @@
             </div>
 
             <div class="card">
-              <div class="card-header" id="headingOne">
+              <div class="card-header" id="headingFour">
                 <h2 class="mb-0">
                   <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFour"
-                    aria-expanded="true" aria-controls="collapseOne">
+                    aria-expanded="true" aria-controls="collapseFour">
                     Stock Bills
                   </button>
                 </h2>
               </div>
 
-              <div id="collapseFour" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+              <div id="collapseFour" class="btn btn-link collapsed" aria-labelledby="headingFour" data-parent="#accordionExample">
                 <div class="card-body">
                   <div class="list-group">
           
-                    <button class="list-group-item" style="margin-left: 30px" (click)='showEquipmentbyRoom("Software lab")' data-toggle="modal"
+                    <button class="list-group-item" style="margin-left: 30px" (click)='showBillBy("Bill no")' data-toggle="modal"
                     data-target="#ShowBills"   aria-controls="equipments">Bill no</button>
-                    <button class="list-group-item" style="margin-left: 30px" (click)='showEquipmentbyRoom("Project and research lab")' data-toggle="modal"
+                    <button class="list-group-item" style="margin-left: 30px" (click)= 'showBillBy("Supplier Name")'data-toggle="modal"
                     data-target="#ShowBills"   aria-controls="equipments">Supplier Name</button>
-                    <button class="list-group-item" style="margin-left: 30px" (click)='showEquipmentbyRoom("CNDC lab")' data-toggle="modal"
+                    <button class="list-group-item" style="margin-left: 30px" (click)='showBillBy("Date of purchase")'data-toggle="modal"
                     data-target="#ShowBils"   aria-controls="equipments">Date</button>
-                    <button class="list-group-item" style="margin-left: 30px" (click)='showEquipmentbyRoom("General lab")' data-toggle="modal"
-                    data-target="#ShowBills"   aria-controls="equipments">General lab</button>
+                    
     
                   </div>
                 </div>

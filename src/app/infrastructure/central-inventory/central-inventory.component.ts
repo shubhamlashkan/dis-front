@@ -1,4 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { addEquip, equipment } from '../models/equipment';
+import { NgForm } from '@angular/forms';
+import { InfraService } from '../services/infra.service';
+import { ToastrManager } from 'ng6-toastr-notifications';
+import { addBill, bill } from '../models/bill';
+import { Laboratory } from '../models/Laboratory';
+import { Others } from '../models/Others';
+import { FacultyRoom } from '../models/FacultyRoom';
 
 @Component({
   selector: 'app-central-inventory',
@@ -6,19 +14,165 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./central-inventory.component.scss']
 })
 export class CentralInventoryComponent implements OnInit {
-equipment : string;
+  @ViewChild('f') addEquipForm : NgForm;
+  @ViewChild('g') addBillForm : NgForm;
+
+equipments : string;
 equipType: string;
-  constructor() { }
+equip : addEquip;
+bill : addBill;
+equipByRoom : equipment[] =[];
+billBy : string;
+searchBill : string;
+billKey : string;
+stockBill : bill[] = [];
+labs: Laboratory[] = [];
+  others : Others[] = [];
+  crooms: Others[] = new Array (new Others());
+  facultyRooms: FacultyRoom[] = [];
+  constructor(private infraservice: InfraService,public toastr: ToastrManager) { }
 
   ngOnInit() {
   }
-showEquipment(equipment:string) : void{
-  console.log(equipment);
-  this.equipType= equipment;
+showEquipment(equipments:string) : void{
+ // console.log(equipments);
+  this.equipType= equipments;
+  this.infraservice.getEquipmentByType(this.equipType).subscribe(response=>{this.equipByRoom=response.body
+    //console.log(this.infraById.noofChairs);
+  });
 }
 showEquipmentbyRoom(room:string) : void{
-  console.log(room);
+  //console.log(room);
   this.equipType= room;
+    this.infraservice.getEquipmentByRoom(this.equipType).subscribe(response=>{this.equipByRoom=response.body
+      //console.log(this.infraById.noofChairs);
+    });
+  
+  }
+
+
+onAddEquip(){
+  this.equip=new addEquip(this.addEquipForm.value.addEquipData.bill_no,
+    null, null,
+    this.addEquipForm.value.addEquipData.name,
+    this.addEquipForm.value.addEquipData.type,
+    null, null, null, 
+    this.addEquipForm.value.addEquipData.quantity,
+    this.addEquipForm.value.addEquipData.room);
+   console.log(this.equip);
+ this.infraservice.addEquipment(this.equip).subscribe( 
+    response => {
+
+    if(response.ok) {
+      //this.router.navigate(['/']);
+      this.toastr.successToastr(response.body['message'],'Success!');
+      console.log(response.body['message']);
+      this.ngOnInit();
+    }
+  },
+  error => {
+    if(error.status === 400) {
+      this.toastr.errorToastr(error.error['message'], 'Alert!');
+  
+   console.log(error.error['message']);
+  
+  }
 }
+
+  );
+}
+
+onAddBill(){
+  this.bill=new addBill(this.addBillForm.value.addBillData.address,
+    this.addBillForm.value.addBillData.bill_no,
+    this.addBillForm.value.addBillData.cgst,
+    null, null,
+    this.addBillForm.value.addBillData.date,
+    null,
+    this.addBillForm.value.addBillData.item_name,
+    null, null,
+    this.addBillForm.value.addBillData.name_s,
+    this.addBillForm.value.addBillData.order_no,
+    this.addBillForm.value.addBillData.price,
+    this.addBillForm.value.addBillData.quantity,
+    this.addBillForm.value.addBillData.sgst,
+    this.addBillForm.value.addBillData.sp,
+    null,
+    this.addBillForm.value.addBillData.price_t,
+    this.addBillForm.value.addBillData.duration
+    );
+   console.log(this.bill);
+ this.infraservice.addBill(this.bill).subscribe( 
+    response => {
+
+    if(response.ok) {
+      this.toastr.successToastr(response.body['message'],'Success!');
+      console.log(response.body['message']);
+      this.ngOnInit();
+    }
+  },
+  error => {
+    if(error.status === 400) {
+      this.toastr.errorToastr(error.error['message'], 'Alert!');
+  
+   console.log(error.error['message']);
+  
+  }
+}
+
+  );
+}
+ 
+showBillBy(billBy : string){
+  this.searchBill=billBy;
+// console.log(billBy);
+this.infraservice.getBill().subscribe(response=>{this.stockBill =response.body
+  //console.log(this.infraById.noofChairs);
+});
+}
+
+getBill(searchValue: string){
+this.billKey = searchValue;
+// if(this.searchBill == "Bill No")  {
+//   this.infraservice.getBill(this.equipType).subscribe(response=>{this.equipByRoom=response.body
+//     //console.log(this.infraById.noofChairs);
+//   });
+// }
+if(this.searchBill == "Supplier Name"){
+  this.infraservice.getBillBySupplierName(this.billKey).subscribe(response=>{this.stockBill =response.body
+    //console.log(this.infraById.noofChairs);
+  });
+  
+}
+if(this.searchBill == "Date of Purchase"){
+  this.infraservice.getBillByDate(this.billKey).subscribe(response=>{this.stockBill =response.body
+    //console.log(this.infraById.noofChairs);
+  });
+  
+}
+}
+getallLabs(): void {
+  this.infraservice.getLabs()
+      .subscribe(response => this.labs = response.body);
+}
+//Get Details of all classes
+getallClass(): void {
+  this.infraservice.getClassroom()
+      .subscribe(response => this.crooms = response.body);
+}
+
+getallOthers(): void {
+  this.infraservice.getOtherInfra()
+      .subscribe(response=>this.others=response.body);
+  
+}
+//Get Faculty Rooms 
+getFacultyRooms(): void{
+  this.infraservice.getFacultyRooms()
+    .subscribe(data =>this.facultyRooms = data);
+}
+
+
+
 
 }
