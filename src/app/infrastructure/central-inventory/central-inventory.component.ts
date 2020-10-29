@@ -34,6 +34,7 @@ labs: Laboratory[] = [];
 
   ngOnInit() {
   }
+// for getting equipment from their types (mouse, monitor etc.)
 showEquipment(equipments:string) : void{
  // console.log(equipments);
   this.equipType= equipments;
@@ -41,6 +42,7 @@ showEquipment(equipments:string) : void{
     //console.log(this.infraById.noofChairs);
   });
 }
+//for getting equipment of any room 
 showEquipmentbyRoom(room:string) : void{
   //console.log(room);
   this.equipType= room;
@@ -50,7 +52,7 @@ showEquipmentbyRoom(room:string) : void{
   
   }
 
-
+// to add new equipment
 onAddEquip(){
   this.equip=new addEquip(this.addEquipForm.value.addEquipData.bill_no,
     null, null,
@@ -81,7 +83,7 @@ onAddEquip(){
 
   );
 }
-
+// to add new bill
 onAddBill(){
   this.bill=new addBill(this.addBillForm.value.addBillData.address,
     this.addBillForm.value.addBillData.bill_no,
@@ -123,14 +125,14 @@ onAddBill(){
   );
 }
  
+
+// to select option (supplier name, bill no date etc. willl be called on particular button)
 showBillBy(billBy : string){
   this.searchBill=billBy;
-// console.log(billBy);
 this.infraservice.getBill().subscribe(response=>{this.stockBill =response.body
-  //console.log(this.infraById.noofChairs);
 });
 }
-
+// to get bill from search value
 getBill(searchValue: string){
 this.billKey = searchValue;
 // if(this.searchBill == "Bill No")  {
@@ -151,6 +153,7 @@ if(this.searchBill == "Date of Purchase"){
   
 }
 }
+// to get name of all the labs
 getallLabs(): void {
   this.infraservice.getLabs()
       .subscribe(response => this.labs = response.body);
@@ -160,7 +163,7 @@ getallClass(): void {
   this.infraservice.getClassroom()
       .subscribe(response => this.crooms = response.body);
 }
-
+// to get name of other rooms
 getallOthers(): void {
   this.infraservice.getOtherInfra()
       .subscribe(response=>this.others=response.body);
