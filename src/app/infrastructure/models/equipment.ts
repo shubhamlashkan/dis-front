@@ -36,3 +36,10 @@ export interface equipment{
     noOfEquipment : number;
     roomName : string;
 }
+
+export interface equipmentType
+{
+    id:string;
+    type:string;
+}
+

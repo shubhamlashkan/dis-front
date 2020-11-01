@@ -89,7 +89,6 @@ export class InfrastructureComponent implements OnInit {
   getInfraType(): void{
     this.infraservice.getInfraType()
       .subscribe(data =>this.infratype = data.body);
-    
   }
   //Get location of infrastructure
   getInfraLocation():void{

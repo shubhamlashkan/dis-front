@@ -8,7 +8,7 @@ private createdBy: string;
 private createdDate: string;
   private dateOfPurchase : Date;
   private id : string;
-  private itemName : string;
+  private itmeName : string;
   private modifiedBy: string;
   private modifiedDate:string;
   private nameOfSupplier : string;
@@ -21,7 +21,7 @@ private createdDate: string;
   private totalPrice : number;
   private warrantyPeriod : number;
   constructor($addressOfSupplier : string,$billNo : string,$cgst : number,$createdBy: string, $createdDate: string, 
-$dateOfPurchase : Date, $id : string, $itemName : string, $modifiedBy: string,$modifiedDate:string,
+$dateOfPurchase : Date, $id : string, $itmeName : string, $modifiedBy: string,$modifiedDate:string,
  $nameOfSupplier : string, $orderNo : string, $price : number, $quantity : number, $sgst : number,
   $specifications : string, $status : string, $totalPrice : number, $warrantyPeriod : number){
       this.addressOfSupplier = $addressOfSupplier;
@@ -31,7 +31,7 @@ $dateOfPurchase : Date, $id : string, $itemName : string, $modifiedBy: string,$m
       this.createdDate = $createdDate;
       this.dateOfPurchase = $dateOfPurchase;
       this.id = $id;
-      this.itemName = $itemName;
+      this.itmeName = $itmeName;
       this.modifiedBy = $modifiedBy;
       this.modifiedDate = $modifiedDate;
       this.nameOfSupplier = $nameOfSupplier;
@@ -56,7 +56,7 @@ createdBy: string;
 createdDate: string;
   dateOfPurchase : Date;
   id : string;
-   itemName : string;
+   itmeName : string;
  modifiedBy: string;
   modifiedDate:string;
    nameOfSupplier : string;
@@ -68,4 +68,8 @@ createdDate: string;
    status : string;
    totalPrice : number;
    warrantyPeriod : number;
+}
+
+export interface infraType{
+
 }
