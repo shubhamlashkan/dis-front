@@ -25,7 +25,7 @@ import { AlertsComponent } from './alerts/alerts.component';
 const routes: Routes = [
   { path: 'head',
     component: HodComponent,
-    canActivate:[RouteGuardService],
+    //canActivate:[RouteGuardService],
     children: [
       { 
         path: '',

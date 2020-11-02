@@ -12,16 +12,8 @@ export class FacultyComponent implements OnInit {
 
   ngOnInit() {
 
-    if(!this.isUserLoggedIn())
-    {
-      this.router.navigate(['login']);
-    }
+ 
   }
 
-  isUserLoggedIn()
-  {
-    let user = sessionStorage.getItem('authenticaterUser');
-    return !(user===null);
-  }
 
 }
