@@ -11,12 +11,12 @@ export class SidenavigationComponent implements OnInit {
   userName: any;
   usertime: any;
   userId: any;
-
+  
   constructor(private sidenav : SidenavService) { }
   userData :any;
   ngOnInit() {
     this.sidenav.getSideNavData()
-    .subscribe(
+    .subscribe( 
       data=>{
         console.log(data);
         this.userData = data;
