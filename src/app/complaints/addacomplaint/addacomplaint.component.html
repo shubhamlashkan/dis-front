@@ -19,7 +19,7 @@
                 </a>
                 <a class="dropdown-item collapsed" href="#" role="button" data-toggle="collapse" data-target="#equipments"
                   aria-expanded="false" aria-controls="equipments" style="text-decoration:none;" (click)="resetForm()">
-                  <i class="fa fa-desktop fa-fw" aria-hidden="true"> Lab Equipments</i>
+                  <i class="fa fa-desktop fa-fw" aria-hidden="true"> Lab Eq.</i>
                 </a>
                 <a class="dropdown-item collapsed" href="#" role="button" data-toggle="collapse"
                 data-target="#otherComplaints" aria-expanded="false" aria-controls="otherComplaints"
@@ -40,7 +40,7 @@
                 </a>
                 <a class="dropdown-item collapsed" href="#" role="button" data-toggle="collapse" data-target="#equipments"
                 aria-expanded="false" aria-controls="equipments" style="text-decoration:none;" (click)="resetForm()">
-                <i class="fa fa-desktop fa-fw" aria-hidden="true"> Lab Equipments</i>
+                <i class="fa fa-desktop fa-fw" aria-hidden="true"> Lab Eq.</i>
               </a>
                   <a class="dropdown-item collapsed" href="#" role="button" data-toggle="collapse"
                   data-target="#cwnComplaint" aria-expanded="false" aria-controls="cwnComplaints"
@@ -81,7 +81,7 @@
             </a>
             <a class="dropdown-item collapsed" href="#" role="button" data-toggle="collapse" data-target="#equipments"
               aria-expanded="false" aria-controls="equipments" style="text-decoration:none;" (click)="resetForm()">
-              <i class="fa fa-desktop fa-fw" aria-hidden="true"> Lab Equipments</i>
+              <i class="fa fa-desktop fa-fw" aria-hidden="true"> Lab Eq.</i>
             </a>
             <a class="dropdown-item collapsed" href="#" role="button" data-toggle="collapse"
             data-target="#otherComplaints" aria-expanded="false" aria-controls="otherComplaints"
@@ -260,7 +260,7 @@
                   </div>
                   <div class="col"
                     [ngClass]=" { 'has-error ' : val.controls.year.invalid && val.controls.year.touched }">
-                    <input class="form-control" type="text" placeholder="Year" id="{{'year'+i}}" formControlName="year">
+                    <input class="form-control" type="number" placeholder="Year" id="{{'year'+i}}" formControlName="year">
                     <span class="help-block required-text"
                       *ngIf="val.controls.year.errors?.required && val.controls.year.touched">Year is required</span>
                   </div>
@@ -317,6 +317,16 @@
                     *ngIf="val.controls.details.errors?.required && val.controls.details.touched">
                     Detail is required</span>
                 </div>
+
+                <div class="form-group"
+                [ngClass]=" { 'has-error ' : val.controls.assignedTo.invalid && val.controls.assignedTo.touched }">
+                 <select class="form-control" id="{{'assignedTo'+i}}" formControlName="assignedTo">
+                  <option value="" disabled selected>Assigned to *</option>
+                  <option *ngFor="let val of staffFacultyList" [value]="val.userName">{{val.userName}}</option>
+                </select>  
+                <span class="help-block required-text"
+                  *ngIf="val.controls.assignedTo.errors?.required && val.controls.assignedTo.touched">Assigned to is required</span>
+              </div>
               </div>
             </div>
             <!-- <div class="form-group">
@@ -571,13 +581,21 @@
                     <span class="help-block required-text"
                       *ngIf="val.controls.location.errors?.required && val.controls.location.touched">Location is required</span>
                   </div>
-                  <div class="col-9"
+                  <div class="col-6"
                     [ngClass]="{'has-error' : val.controls.details.invalid && val.controls.details.touched}">
                     <input class="form-control" id="{{'details'+i}}" placeholder="Details *"
                       formControlName="details" >
                     <span class="help-block required-text"
                       *ngIf="val.controls.details.errors?.required && val.controls.details.touched">
                       Detail is required</span>
+                  </div>
+                  <div class="col-3"
+                    [ngClass]="{'has-error' : val.controls.extensionNo.invalid && val.controls.extensionNo.touched}">
+                    <input class="form-control" id="{{'extensionNo'+i}}" placeholder="Extension no. *"
+                      formControlName="extensionNo" >
+                    <span class="help-block required-text"
+                      *ngIf="val.controls.extensionNo.errors?.required && val.controls.extensionNo.touched">
+                      Extension no. is required</span>
                   </div>
                 </div>
                 </div>

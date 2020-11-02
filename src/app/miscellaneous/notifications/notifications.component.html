@@ -1,0 +1,140 @@
+<div class="row">
+  <div class="col-lg-10" style="color:#f46404;">
+    <h4>Notifications</h4>
+  </div>
+  <div class="col-lg-2">
+
+    <button float-right mat-icon-button (click)="showUnread = !showUnread; filter();" aria-label="Show only unread">
+      <mat-icon matTooltip=" Unread notifications" color="warn" style="font-size: 30px;" *ngIf="showUnread"> remove_done </mat-icon>
+      <mat-icon matTooltip="All notifications" color="primary" style="font-size: 30px;" *ngIf="!showUnread"> notifications_active</mat-icon>
+    </button>
+
+    <button float-right mat-icon-button (click)="showStarred = !showStarred; filter()" aria-label="Show only starred">
+      <mat-icon matTooltip="Not starred" style="font-size: 30px;" *ngIf="!showStarred"> star_border</mat-icon>
+      <mat-icon matTooltip="Starred"  style="font-size: 30px; color:#ffc107;" *ngIf="showStarred">star</mat-icon>
+    </button>
+
+    <button float-right mat-icon-button (click)="markAllAsRead();"  matTooltip="Mark All As Read" aria-label="mark read button">
+      <mat-icon style="color: #28a745; font-size: 30px;"> assignment_turned_in</mat-icon>
+    </button>
+    </div>
+  </div>
+<form class="date-block" [formGroup]="filterForm">
+  <div class="date-block__list1">
+  <mat-form-field>
+    <mat-label>Search</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Meeting">
+  </mat-form-field>
+</div>
+	<div class="date-block__list">
+    <mat-form-field>
+      <input matInput 
+        [matDatepicker]="fromDate" 
+        placeholder="From Date" 
+        formControlName="fromDate"
+        [(ngModel)]="startDate">
+      <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+      <mat-datepicker #fromDate></mat-datepicker>
+    </mat-form-field>
+  </div>
+  	<div class="date-block__list">
+    <mat-form-field>
+      <input matInput 
+        [matDatepicker]="toDate" 
+        placeholder="To Date" 
+        formControlName="toDate"
+        [min]="startDate">
+      <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+      <mat-datepicker #toDate></mat-datepicker>
+    </mat-form-field>
+  </div>
+   <button mat-icon-button color="primary" (click)="getDateRange(filterForm.value)"> <mat-icon style="font-size: 30px;margin-top: 30%;">search</mat-icon></button>
+   <button matTooltip="Reset Filter" mat-icon-button color="warn" (click)="resetFilter()"> <mat-icon style="font-size: 30px;margin-top: 30%;">clear</mat-icon></button>
+</form>
+<div class="mat-elevation-z8">
+  <div class="tableContainer">
+   
+<table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows >
+  <ng-container matColumnDef="favourite" >
+    <th mat-header-cell *matHeaderCellDef>Favourite </th>
+    <td mat-cell *matCellDef="let element"> 
+      <button mat-icon-button (click)="element.isFavourite = !element.isFavourite ; markAsFavourite(element.id);" aria-label="mark as Favourite button">
+      <mat-icon matTooltip="Starred" style="color:#ffc107;" *ngIf="element.isFavourite">star</mat-icon>
+	    <mat-icon matTooltip="Not starred " *ngIf="!element.isFavourite">star_border</mat-icon>
+    </button>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="date">
+    <th mat-sort-header mat-header-cell *matHeaderCellDef>Date And Time </th>
+    <td mat-cell *matCellDef="let element"> {{element.date | date:'dd/MM/yyyy hh:mm:ss'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="heading" >
+    <th mat-sort-header mat-header-cell *matHeaderCellDef>Heading </th>
+    <td mat-cell *matCellDef="let element"> {{element.heading}} </td>
+  </ng-container>
+  <ng-container matColumnDef="forwarded" >
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element"> 
+      <mat-icon matTooltip="Forwarded" *ngIf="element.comment" style="color: #6c757d;transform: scaleX(-1)">reply</mat-icon>  
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="link" >
+    <th mat-header-cell *matHeaderCellDef>Link </th>
+    <td mat-cell *matCellDef="let element"><a mat-icon-button aria-label="new tab button" [disabled]="!element.link" [href]="element.link">
+      <mat-icon>link</mat-icon>
+    </a></td>
+  </ng-container>
+
+  <ng-container matColumnDef="action" >
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let element">
+
+      <button mat-icon-button (click)="element.read = !element.read ; markAsRead(element.id);"  matTooltip="Mark As Read"
+      [matTooltipDisabled]="element.read" [disabled]="element.read" aria-label="mark read button">
+      <mat-icon style="color: #28a745;" *ngIf="element.read">done_all</mat-icon>
+	    <mat-icon color="warn" *ngIf="!element.read">remove_done</mat-icon>
+    </button>
+
+    <button mat-icon-button (click)="forward(element.id,element.heading);" matTooltip="Forward"
+      aria-label="forward button">
+	    <mat-icon >send</mat-icon>
+    </button>
+
+    <button mat-icon-button (click)="delete(element.id);" matTooltip="Delete"
+      aria-label="delete button">
+	    <mat-icon >delete_forever</mat-icon>
+    </button>
+
+
+  </td>
+  </ng-container>
+
+  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+  <ng-container matColumnDef="expandedDetail">
+    <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+      <div class="element-detail"
+           [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'"> 
+        <div style="white-space:pre-wrap;" class="element-description">
+          {{element.description}}
+          <hr *ngIf="element.comment">
+          <span *ngIf="element.comment"> Comment: {{element.comment}}</span>
+        </div>
+        
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+  [class.make-dark]="!element.read"
+  [class.make-light]="element.read"
+      class="element-row"
+      [class.expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element">
+  </tr>
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+</table>
+</div>
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

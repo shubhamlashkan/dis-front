@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
     }
    
   }
-
   onSubmit() {
     //console.log(this.form);
     this.loading = true;
@@ -41,8 +40,8 @@ export class LoginComponent implements OnInit {
     this.authService.attemptAuth(this.loginInfo).subscribe(
       data => {
         this.loading = false;
-        //console.log(data);
-        sessionStorage.setItem('authenticaterUser',this.form.username);
+        console.log(data);
+        this.tokenStorage.saveUsername(data.username);
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveAuthorities(data.authorities);
 
@@ -61,9 +60,8 @@ export class LoginComponent implements OnInit {
        // console.log('After '+this.isUserLoggedIn());
       },
       error => {
-        if(error.status === 404 || error.status === 400 ) {
-        //this.router.navigate(['/forgot-password']);
-        this.loading=false;
+        if (error.status === 400) {
+        // this.router.navigate(['/forgot-password']);
         this.toastr.errorToastr(error.error['message'], 'Alert!');
         //console.log(error);
         this.isLoginFailed = true;

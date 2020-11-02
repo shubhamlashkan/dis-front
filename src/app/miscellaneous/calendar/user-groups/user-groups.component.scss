@@ -1,0 +1,66 @@
+table {
+    width: 100%;
+  }
+  
+.group-list-display {
+  max-height: 440px;
+  overflow-y: auto;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .edit-icon {
+    font-size: 20px;
+    margin-right: 20px;
+    color: green;
+  }
+
+  .delete-icon {
+    font-size: 25px;
+    margin-top: 10px;
+    float: right;
+    padding-right: 5px;
+    padding-bottom: 4px;
+  }
+
+  .create {
+      margin: 0 10px;
+      float: right;
+  }
+
+  .delete {
+      margin: 0 10px;
+      float: right;
+  }
+
+  .title {
+      font-size: 30px;      
+  }
+
+  /deep/ .mat-dialog-content {
+    max-height: 500px;
+}
+
+.filter {
+  width: 86%;
+}
+
+.create-toggle {
+  margin-left: auto;
+  float: right;
+}
+
+.cancel {
+  float: right;
+  font-size: 25px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  color: rgb(91, 94, 91);
+}
+
+.list-item {
+  cursor: pointer;
+}

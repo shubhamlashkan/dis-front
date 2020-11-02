@@ -20,6 +20,8 @@ import { ProfileComponent } from '../conventional/profile/profile.component';
 import { ConventionalModule } from '../conventional/conventional.module';
 // import { RouteGuardService } from '../route-guard.service';
 //canActivate:[RouteGuardService],
+import { AlertsComponent } from './alerts/alerts.component';
+
 const routes: Routes = [
   { path: 'head',
     component: HodComponent,
@@ -80,8 +82,7 @@ const routes: Routes = [
         component: MeetingsComponent
       },
       {
-        path :'complaints',
-        //component:ComplaintsComponent,
+        path : 'complaints',
         loadChildren : '../complaints/complaints.module#ComplaintsModule'
       },
       {
@@ -89,6 +90,10 @@ const routes: Routes = [
         component : ProfileComponent,
         loadChildren: () => ConventionalModule 
       },
+      {
+        path: 'notification',
+        component : AlertsComponent, 
+      }
     ]
   }
 ];

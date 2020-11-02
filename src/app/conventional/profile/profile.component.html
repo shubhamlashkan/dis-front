@@ -1,3 +1,5 @@
+<button (click) = "getImage()">Click</button>
+
 <div class="container">
   <div class="row">
     <div class="loading-indicator">
@@ -23,7 +25,36 @@
           <hr>
           <div class="row">
             <div class="col-3">
-              <div><img class="profilepic" src="../../../assets/images/profile-pic_02.jpg" alt="" /></div>
+              <div>
+                <a data-toggle="modal" (click)="showProfileModal()">
+                  <img id="imageresource" class="profilepic" [src]="retrievedImage" />
+                </a></div>
+            </div>
+            <div [style.display]="profileModal ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1"
+              role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">{{staffBasicProfile?.nameAcronym}}</h4>
+                  </div>
+                  <div class="modal-body">
+                    <img [src]="retrievedImage" style="width: 425px; height: 425px; margin-left: 20px;">
+                    <div style="margin-top: 20px;">
+                      <label class="image-upload-container btn btn-bwm">
+                        <span>Edit Profile Picture : </span>
+                        <input type="file" accept="image/*" style="margin-left: 20px; width: 275px;"
+                          (change)="onFileSelected($event)">
+                      </label>
+                      <div class="button-row"><button mat-raised-button color="primary" style="width: 100%;"
+                          (click)="onUpload()" [hidden]="profilePictureUploadButton">Upload</button></div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                      (click)="hideProfileModal()">Close</button>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="col-9">
               <div class=row>
@@ -68,7 +99,7 @@
 
 
               <!--Address Modal starts-->
-              <div class="modal fade" id="address" role="dialog">
+              <!-- <div class="modal fade" id="address" role="dialog">
                 <div class="modal-dialog modal-lg">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -76,7 +107,7 @@
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
-                      <form [formGroup]="addressFormGroup" (ngSubmit)="updateAddresses(addressFormGroup.value)">
+                      <form [formGroup]="addressFormGroup">
                         <div formArrayName="addresses">
                           <div *ngFor="let addressCtrl of getControls(); let i = index" [formGroupName]="i">
                             <div class="form-row">
@@ -115,21 +146,22 @@
                           </div>
                         </div>
                         <ng-container *ngIf="showConfirmation">
-                            <div class="form-group">
-                              <div class="d-flex justify-content-center">
-                                <span class="confirmationMessage">{{completionMessage}}</span>
-                              </div>
+                          <div class="form-group">
+                            <div class="d-flex justify-content-center">
+                              <span class="confirmationMessage">{{completionMessage}}</span>
                             </div>
-                            </ng-container>
+                          </div>
+                        </ng-container>
                         <div class="d-flex justify-content-center mt-3">
                           <button type="reset" class="btn btn-danger mr-3 btnWidth">Reset</button>
-                          <button type="submit" class="btn btn-success btnWidth"  data-dismiss="modal">Update</button>
+                          <button type="submit" class="btn btn-success btnWidth"
+                            (click)="updateAddresses(addressFormGroup.value)" data-dismiss="modal">Update</button>
                         </div>
                       </form>
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <!--Address Modal Ends-->
               <div class="float-right">
                 <div class="dropdown">
@@ -208,7 +240,6 @@
           <div class="modal fade" id="staffBasicProfile" role="dialog">
             <div class="modal-dialog modal-lg">
 
-              <!-- Modal content-->
               <div class="modal-content">
                 <div class="modal-header">
                   <h4 class="modal-title">Edit profile</h4>
@@ -260,15 +291,15 @@
 
                     </div>
                     <ng-container *ngIf="showConfirmation">
-                        <div class="form-group">
-                          <div class="d-flex justify-content-center">
-                            <span class="confirmationMessage">{{completionMessage}}</span>
-                          </div>
+                      <div class="form-group">
+                        <div class="d-flex justify-content-center">
+                          <span class="confirmationMessage">{{completionMessage}}</span>
                         </div>
-                        </ng-container>
+                      </div>
+                    </ng-container>
                     <div class="form-group d-flex justify-content-center mt-3">
                       <button type='reset' class="btn btn-secondary mr-4 btnWidth">Reset</button>
-                      <button type="submit" class="btn btn-primary"  data-dismiss="modal">Update Data</button>
+                      <button type="submit" class="btn btn-primary" data-dismiss="modal">Update Data</button>
 
                     </div>
                   </form>
@@ -468,7 +499,7 @@
 
                     <div class="form-group d-flex justify-content-center mt-3">
                       <button type='reset' class="btn btn-secondary mr-4 btnWidth">Reset</button>
-                      <button type="submit" class="btn btn-primary"  data-dismiss="modal">Update Data</button>
+                      <button type="submit" class="btn btn-primary" data-dismiss="modal">Update Data</button>
 
                     </div>
                   </form>
@@ -496,10 +527,12 @@
             </div>
             <div class="col-11">
               <h5> <a data-toggle="modal" [attr.data-target]="'#experience'" (click)="fillWorkExperienceData(i)"> <i
-                    class="fa fa-pencil float-right" style="font-size: 30px;"></i></a></h5>
+                    class="fa fa-pencil float-right" style="font-size: 30px;"></i></a>
+                <a (click)="deleteWorkExperienceData(val.id)"><i class="fa fa-trash  float-right" aria-hidden="true"
+                    style="font-size: 30px;">&nbsp;&nbsp;</i></a></h5>
               <p>{{val.designation}}, {{val.organizationName}}<br />
-                Payscale : {{val.Payscale}}<br />
-                {{val.dateOfJoining}} - {{val.dateOfLeaving}}<br />
+                Payscale : {{val.payScale}}<br />
+                {{val.dateOfJoining}} to {{val.dateOfLeaving}}<br />
                 {{val.city}}, {{val?.state}}, {{val.country}}
               </p>
             </div>
@@ -507,7 +540,7 @@
           <hr>
         </div>
       </div>
-      <!--Work Experience Modal starts-->
+      <!--Work e Modal starts-->
       <div class="modal fade" id="experience" role="dialog">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -516,7 +549,7 @@
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-              <form (ngSubmit)="updateExperienceData(workExperience)" #workExperience="ngForm">
+              <form #workExperienceForm="ngForm">
                 <div class="form-row">
                   <div class="col">
                     <label>Organization name</label>
@@ -554,12 +587,13 @@
                   </div>
                   <div class="col">
                     <label>Payscale</label>
-                    <input class="form-control" id="payscale" type="text" name="payscale" ngModel>
+                    <input class="form-control" id="payScale" type="text" name="payScale" ngModel>
                   </div>
                 </div>
                 <div class="d-flex justify-content-center mt-3">
                   <button type="reset" class="btn btn-danger mr-3 btnWidth">Reset</button>
-                  <button type="submit" class="btn btn-success btnWidth"  data-dismiss="modal">Update</button>
+                  <button type="submit" class="btn btn-success btnWidth"
+                    (click)="updateExperienceData(workExperienceForm)" data-dismiss="modal">Update</button>
                 </div>
               </form>
             </div>
@@ -588,7 +622,9 @@
                   {{val.collegeSchool}}
                 </span>
                 <a data-toggle="modal" [attr.data-target]="'#education'" (click)="fillEducationData(i)"><i
-                    class="fa fa-pencil float-right" style="font-size: 30px;"></i></a></h5>
+                    class="fa fa-pencil float-right" style="font-size: 30px;"></i></a>
+                <a (click)="deleteQualificationData(val.id)"><i class="fa fa-trash  float-right" aria-hidden="true"
+                    style="font-size: 30px;">&nbsp;&nbsp;</i></a></h5>
               <p>{{val.universityBoard}}<br />{{val.degreeCertificate}}, {{val.specialization}}<br />Year of Passing :
                 {{val.yearOfPassing}}<br />CGPA : {{val.percentageCgpa}}</p>
             </div>
@@ -606,7 +642,7 @@
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-              <form (ngSubmit)="updateEducationData(educationForm)" #educationForm="ngForm">
+              <form #educationForm="ngForm">
                 <div class="form-group">
                   <label>Degree/Certificate</label>
                   <input class="form-control" id="degreeCertificate" type="text" name="degreeCertificate" ngModel>
@@ -636,7 +672,8 @@
 
                 <div class="d-flex justify-content-center mt-3">
                   <button type="reset" class="btn btn-danger mr-3 btnWidth">Reset</button>
-                  <button type="submit" class="btn btn-success btnWidth"  data-dismiss="modal">Update</button>
+                  <button type="submit" class="btn btn-success btnWidth" (click)="updateEducationData(educationForm)"
+                    data-dismiss="modal">Update</button>
                 </div>
               </form>
             </div>
@@ -659,6 +696,8 @@
               <h5>{{val.title}}
                 <a data-toggle="modal" [attr.data-target]="'#research'" (click)="fillResearchData(i)"><i
                     class="fa fa-pencil float-right" style="font-size: 30px;"></i></a>
+                <a (click)="deleteResearchWorkData(val.id)"><i class="fa fa-trash  float-right" aria-hidden="true"
+                    style="font-size: 30px;">&nbsp;&nbsp;</i></a>
               </h5>
               <p>{{val.yearOfPublication}}, {{val.publisher}}<br />
                 Guide : {{val.guideName}} <br />
@@ -680,7 +719,7 @@
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-              <form #researchForm="ngForm" (ngSubmit)="updateResearchWork(researchForm)">
+              <form #researchForm="ngForm">
                 <div class="form-row">
                   <div class="col-1">
                     <label for="publicationTitle">Title : </label>
@@ -770,7 +809,8 @@
                 </div>
                 <div class="d-flex justify-content-center mt-3">
                   <button type="reset" class="btn btn-danger mr-3 btnWidth">Reset</button>
-                  <button type="submit" class="btn btn-success btnWidth"  data-dismiss="modal">Update</button>
+                  <button type="submit" class="btn btn-success btnWidth" (click)="updateResearchWork(researchForm)"
+                    data-dismiss="modal">Update</button>
                 </div>
               </form>
             </div>
@@ -793,7 +833,9 @@
               <div class="col-11">
                 <h5>{{val.subject}} <a data-toggle="modal" [attr.data-target]="'#internship'"
                     (click)="fillInternshipData(i)"><i class="fa fa-pencil float-right"
-                      style="font-size: 30px;"></i></a></h5>
+                      style="font-size: 30px;"></i></a>
+                  <a (click)="deleteInternshipData(val.id)"><i class="fa fa-trash  float-right" aria-hidden="true"
+                      style="font-size: 30px;">&nbsp;&nbsp;</i></a></h5>
                 <p>{{val.companyName}}<br />{{val.city}}, {{val.state}}, {{val.country}}<br />{{val.startDate}} -
                   {{val.endDate}}<br /></p>
               </div>
@@ -810,7 +852,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
               </div>
               <div class="modal-body">
-                <form (ngSubmit)="updateInternshipData(internshipForm)" #internshipForm="ngForm">
+                <form #internshipForm="ngForm">
                   <div class="form-group">
                     <label>Field of Internship</label>
                     <input class="form-control" type="text" name="subject" ngModel>
@@ -846,7 +888,8 @@
                   </div>
                   <div class="d-flex justify-content-center mt-3">
                     <button type="reset" class="btn btn-danger mr-3 btnWidth">Reset</button>
-                    <button type="submit" class="btn btn-success btnWidth"  data-dismiss="modal">Update</button>
+                    <button type="submit" class="btn btn-success btnWidth"
+                      (click)="updateInternshipData(internshipForm)" data-dismiss="modal">Update</button>
                   </div>
                 </form>
               </div>
@@ -870,7 +913,9 @@
               </div>
               <div class="col-11">
                 <h5>{{val.title}} <a data-toggle="modal" [attr.data-target]="'#project'" (click)="fillProjectData(i)"><i
-                      class="fa fa-pencil float-right" style="font-size: 30px;"></i></a></h5>
+                      class="fa fa-pencil float-right" style="font-size: 30px;"></i></a>
+                  <a (click)="deleteProjectData(val.id)"><i class="fa fa-trash  float-right" aria-hidden="true"
+                      style="font-size: 30px;">&nbsp;&nbsp;</i></a></h5>
                 <p>{{val.from}} - {{val.to}}<br />Guide : {{val.guide}}<br />{{val.description}} <br />Other Creators :
                   {{val.otherCreators}} <br />My Role : {{val.role}}</p>
               </div>
@@ -887,7 +932,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
               </div>
               <div class="modal-body">
-                <form (ngSubmit)="updateProjectData(projectForm)" #projectForm="ngForm">
+                <form #projectForm="ngForm">
                   <div class="form-group">
                     <label>Title</label>
                     <input class="form-control" type="text" name="title" ngModel>
@@ -923,7 +968,8 @@
                   </div>
                   <div class="d-flex justify-content-center mt-3">
                     <button type="reset" class="btn btn-danger mr-3 btnWidth">Reset</button>
-                    <button type="submit" class="btn btn-success btnWidth"  data-dismiss="modal">Update</button>
+                    <button type="submit" class="btn btn-success btnWidth" (click)="updateProjectData(projectForm)"
+                      data-dismiss="modal">Update</button>
                   </div>
                 </form>
               </div>
@@ -947,7 +993,10 @@
               <div class="col-11">
                 <h5>{{val.nameOfExam}} <a data-toggle="modal" [attr.data-target]="'#competitiveexam'"
                     (click)="fillCompetetiveExamData(i)"><i class="fa fa-pencil float-right"
-                      style="font-size: 30px;"></i></a></h5>
+                      style="font-size: 30px;"></i></a>
+                  <a (click)="deleteCompetetiveExamData(val.id)"><i class="fa fa-trash  float-right" aria-hidden="true"
+                      style="font-size: 30px;">&nbsp;&nbsp;</i></a>
+                </h5>
                 <p>Registration No. : {{val.registrationNo}}<br />
                   Year : {{val.year}}<br />
                   Score : {{val.score}}<br />
@@ -967,7 +1016,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
               </div>
               <div class="modal-body">
-                <form (ngSubmit)="updateCompetitiveExamData(competitiveExamForm)" #competitiveExamForm="ngForm">
+                <form #competitiveExamForm="ngForm">
                   <div class="form-group">
                     <label>Name of Exam</label>
                     <input type="text" class="form-control" name="nameOfExam" ngModel>
@@ -995,7 +1044,8 @@
                   </div>
                   <div class="d-flex justify-content-center mt-3">
                     <button type="reset" class="btn btn-danger mr-3 btnWidth">Reset</button>
-                    <button type="submit" class="btn btn-success btnWidth" data-dismiss="modal">Update</button>
+                    <button type="submit" class="btn btn-success btnWidth"
+                      (click)="updateCompetitiveExamData(competitiveExamForm)" data-dismiss="modal">Update</button>
                   </div>
                 </form>
               </div>
@@ -1223,7 +1273,9 @@
               <div class="col-11">
                 <h5>{{val.achievement}}<a data-toggle="modal" [attr.data-target]="'#culturalactivity'"
                     (click)="fillCulturalActivityData(i)"> <i class="fa fa-pencil float-right"
-                      style="font-size: 30px;"></i></a></h5>
+                      style="font-size: 30px;"></i></a>
+                  <a (click)="deleteCulturalActivityData(val.id)"><i class="fa fa-trash  float-right" aria-hidden="true"
+                      style="font-size: 30px;">&nbsp;&nbsp;</i></a></h5>
                 <h5>{{val.nameOfActivity}} - {{val.type}}</h5>
                 <p>{{val.date}}, {{val.place}}</p>
               </div>
@@ -1243,7 +1295,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
               </div>
               <div class="modal-body">
-                <form (ngSubmit)="updateCulturalActivity(culturalActivityForm)" #culturalActivityForm="ngForm">
+                <form #culturalActivityForm="ngForm">
                   <div class="form-group">
                     <label>Name of Activity</label>
                     <input class="form-control" type="text" name="nameOfActivity" ngModel>
@@ -1272,7 +1324,8 @@
                   </div>
                   <div class="d-flex justify-content-center mt-3">
                     <button type="reset" class="btn btn-danger mr-3 btnWidth">Reset</button>
-                    <button type="submit" class="btn btn-success btnWidth"  data-dismiss="modal">Update</button>
+                    <button type="submit" class="btn btn-success btnWidth"
+                      (click)="updateCulturalActivity(culturalActivityForm)" data-dismiss="modal">Update</button>
                   </div>
                 </form>
               </div>
@@ -1298,13 +1351,15 @@
                 <i class="fa fa-trophy text-center" style="font-size: 60px;"></i>
               </div>
               <div class="col-11">
-                <h5>{{val.subject}}<a data-toggle="modal" [attr.data-target]="'#technicalactivity'"
+                <h5>{{val.topicSubject}}<a data-toggle="modal" [attr.data-target]="'#technicalactivity'"
                     (click)="fillTechnicalActivityData(i)"> <i class="fa fa-pencil float-right"
-                      style="font-size: 30px;"></i></a></h5>
+                      style="font-size: 30px;"></i></a>
+                  <a (click)="deleteTechnicalActivityData(val.id)"><i class="fa fa-trash  float-right"
+                      aria-hidden="true" style="font-size: 30px;">&nbsp;&nbsp;</i></a></h5>
                 <p>{{val.type}}<br />
                   Place - {{val.place}}<br />
                   Attended / Organised - {{val.attendedOrganized}}<br />
-                  From : {{val.from}} To : {{val.to}}<br />
+                  From : {{val.fromDate}} &nbsp;&nbsp; To : {{val.toDate}}<br />
                   Name of Coordinator - {{val.nameOfCoordinator}}
                 </p>
               </div>
@@ -1324,10 +1379,10 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
               </div>
               <div class="modal-body">
-                <form (ngSubmit)="updateTechnicalActivity(technicalActivityForm)" #technicalActivityForm="ngForm">
+                <form #technicalActivityForm="ngForm">
                   <div class="form-group">
                     <label>Subject</label>
-                    <input class="form-control" type="text" name="subject" ngModel>
+                    <input class="form-control" type="text" name="topicSubject" ngModel>
                   </div>
                   <div class="row">
                     <div class="form-group col-lg-6">
@@ -1354,17 +1409,18 @@
                   <div class="row">
                     <div class="form-group col-lg-6">
                       <label>From</label>
-                      <input class="form-control" type="date" name="from" ngModel>
+                      <input class="form-control" type="date" name="fromDate" ngModel>
                     </div>
 
                     <div class="form-group col-lg-6">
                       <label>To</label>
-                      <input class="form-control" type="date" name="to" ngModel>
+                      <input class="form-control" type="date" name="toDate" ngModel>
                     </div>
                   </div>
                   <div class="d-flex justify-content-center mt-3">
                     <button type="reset" class="btn btn-danger mr-3 btnWidth">Reset</button>
-                    <button type="submit" class="btn btn-success btnWidth" data-dismiss="modal">Update</button>
+                    <button type="submit" class="btn btn-success btnWidth"
+                      (click)="updateTechnicalActivity(technicalActivityForm)" data-dismiss="modal">Update</button>
                   </div>
                 </form>
               </div>
@@ -1383,8 +1439,9 @@
     <!--Start Right Panel-->
     <div class="col-lg-3 kyc-section rewards-section reports-sectn scroll-area" style="max-height: 1000px">
       <div class="position-static">
-          <div class="d-flex justify-content-between">
-          <i class="fa fa-arrow-left facultyName" (click)="loadProfile('','')"  style="font-size: 20px" aria-hidden="true"></i>
+        <div class="d-flex justify-content-between">
+          <i class="fa fa-arrow-left facultyName" (click)="loadProfile('','')" style="font-size: 20px"
+            aria-hidden="true"></i>
           <h4>Employees </h4>
           <i class="fa fa-download" aria-hidden="true" style="font-size: 20px"></i>
         </div>
@@ -1398,7 +1455,8 @@
               <div><img class="othersprofile" src="../../../assets/images/img_avatar3.png" alt="" /></div>
             </div>
             <div class="col-9">
-              <a class="facultyName" style="cursor: pointer;" (click)="loadProfile(val.userId,val.userType)" >{{val.name}} [{{val.nameAcronym}}]</a>
+              <a class="facultyName" style="cursor: pointer;"
+                (click)="loadProfile(val.userId,val.userType)">{{val.name}} [{{val.nameAcronym}}]</a>
               <p style="font-size:13px;">{{val.currentDesignation}}<br />
                 <i class="fa fa-envelope mr-1" aria-hidden="true"></i>{{val.email}}<br />
                 <i class="fa fa-mobile mr-1" aria-hidden="true"></i>{{val.mobileNo}}
@@ -1414,7 +1472,7 @@
               <div><img class="othersprofile" src="../../../assets/images/img_avatar2.png" alt="" /></div>
             </div>
             <div class="col-9">
-              <h6><a  (click)="loadProfile(val.userId,val.userType)">{{val.name}} [{{val.nameAcronym}}]</a></h6>
+              <h6><a (click)="loadProfile(val.userId,val.userType)">{{val.name}} [{{val.nameAcronym}}]</a></h6>
               <p style="font-size:13px;">{{val.currentDesignation}}<br />
                 <i class="fa fa-envelope mr-1" aria-hidden="true"></i>{{val.email}}<br />
                 <i class="fa fa-mobile mr-1" aria-hidden="true"></i>{{val.mobileNo}}

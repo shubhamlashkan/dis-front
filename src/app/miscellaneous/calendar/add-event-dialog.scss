@@ -1,0 +1,194 @@
+.date {
+    margin-right: 6px;
+    width: 20%;
+  }
+
+.description {
+    width: 80%;
+}
+
+.title {
+    width: 100%;
+}
+
+.form {
+    width: 100%;
+}
+
+.participants {
+    width: 90%;
+}
+
+.location {
+    width: 85%;
+    margin-left: 2%;
+}
+
+.mat-dialog-actions {
+    justify-content: flex-end;
+}
+
+.close {
+    justify-content: flex-end;
+}
+
+.timebutton {
+    margin-top: 20px;
+    float: right;
+}
+
+.time {
+    width: 20%;
+    margin-right: 6px;
+}
+
+.dash {
+    margin-top: 50px;
+    margin-right: 6px;
+    font-size: 30px;
+    width: 30px;
+}
+
+.icon {
+    margin-right: 12px;
+    font-size: 20px;
+}
+
+.timeSelector {
+    margin-top: 10px;
+}
+
+.save {
+    margin-left: 2%;
+}
+
+::ng-deep .mat-select-arrow {
+    width: 0;
+    height: 0;
+}
+
+.reminderdate {
+    margin-right: 12px;
+    width: 20%;
+  }
+
+.dateValidate {
+    width: 20%;
+    height: 45px; 
+    background-color: rgb(255, 230, 235);
+    border-radius: 10%;
+}
+
+.attachedFile {
+    margin-left: 8%;
+    margin-right: 15%;
+    height: 50%;
+}
+
+.cross {
+    float: right;
+    color: white;
+}
+
+.file-icon {
+    margin-right: 2%;
+    color: white;
+}
+
+.file-name {
+    color: white;
+}
+
+::ng-deep .custom{
+    padding:1% !important;
+    background-color: rgb(93, 154, 223);
+  }
+
+.custom {
+    margin-bottom: 5px;
+}
+
+.participants {
+    width: 85%;
+}
+
+.participantlist {
+    margin-left: 10%;
+    margin-top: 3%;
+}
+
+.remove {
+    margin-right: 0;
+    margin-left: auto;
+    margin-left: 10px;
+    font-size: 20px;
+    vertical-align: center;
+    cursor: pointer;
+}
+
+.participantName {
+    margin-left: 2%;
+}
+
+.listblock {
+    margin-bottom: 2%;
+    max-height: 245px;
+    overflow-y: auto; 
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.participant-type-display {
+    margin-right: 0;
+    margin-left: auto;
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 3px 10px;
+    background-color: rgb(31, 147, 214);
+    border-radius: 25px;
+}
+
+.option-name {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.option-username {
+    font-size: 13px;
+}
+
+.mat-option {
+    height: 50px;
+    line-height: 17px;
+  }
+
+.participant-data {
+    line-height: 15px;
+}
+
+.participant-type{
+    float: right;
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 3px 10px;
+    background-color: rgb(31, 147, 214);
+    border-radius: 25px;
+}
+
+::ng-deep .typefilter div.mat-select-arrow-wrapper {
+    display: none;
+  }
+
+::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: unset;
+}
+
+::ng-deep .mat-option-pseudo-checkbox.mat-pseudo-checkbox-checked {
+    background-color: #3c84b4;
+}
+
+.filter-icon {
+    padding-left: 8px;
+}

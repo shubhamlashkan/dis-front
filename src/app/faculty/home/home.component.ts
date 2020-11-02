@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TimetableService } from 'src/app/API_Service/timetable.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private timetable : TimetableService) { }
 
   ngOnInit() {
+    this.timetable.getFacultyTimeTable()
+    .subscribe(
+      data=>{
+        console.log(data);
+      }
+    )
   }
 
 }

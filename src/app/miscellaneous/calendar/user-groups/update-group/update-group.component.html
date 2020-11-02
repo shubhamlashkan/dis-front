@@ -1,0 +1,78 @@
+<mat-card>
+  <div class="new-group-tag">
+    <span class="icon">
+      <i class="fa fa-users" aria-hidden="true"></i>
+    </span>
+    User Group
+  </div>
+  <form class="example-form">
+    <mat-form-field class="groupName">
+      <mat-label >Group Name</mat-label>
+      <input matInput [formControl]="titleFormController">
+      <mat-error *ngIf="titleFormController.hasError('required')">
+        Group name is required
+      </mat-error>
+      </mat-form-field>
+
+      <div class="row">
+        <div class="col-lg-8">
+          <div>
+            <span>
+              <i class="material-icons participant-icon">group</i>
+            </span>
+            <mat-form-field class="participants">
+              <input type="text"
+                    placeholder="Add participants"
+                    aria-label="Number"
+                    matInput
+                    [formControl]="participantListController"
+                    [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onEnter()">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  <span>
+                    <span class="option-name">{{option.name}}</span>
+                    <span class="participant-type">
+                      {{option.type}}
+                    </span>
+                    <br>
+                    <span class="option-username">{{option.userName}}</span>
+                  </span>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+
+          <div class="listblock" *ngIf="participantList.size !==0 ">
+          <mat-list *ngFor="let participant of participantList; index as i">
+            <mat-list-item class="list-item">
+              <div class="participant-data">
+                  <span class="option-name">{{participant.name}}</span>
+                  <br>
+                  <span class="option-username">{{participant.userName}}</span>
+              </div>
+              <div class="participant-type-display">
+                {{participant.type}}
+              </div>
+              <div class="remove">
+                <i class="fa fa-times" aria-hidden="true" (click)="remove(participant)"></i>
+              </div>
+              <mat-divider></mat-divider>
+            </mat-list-item>
+          </mat-list>
+        </div>
+
+
+        </div>
+
+        <div class='col-lg-4'>
+          <mat-checkbox color='primary' [(ngModel)]="is_academic_checked" (change)="generateOptions()" [ngModelOptions]="{standalone: true}">Academic Personnel</mat-checkbox>
+          <mat-checkbox color='primary' [(ngModel)]="is_be_checked" (change)="generateOptions()" [ngModelOptions]="{standalone: true}">BE Students</mat-checkbox>
+          <mat-checkbox color='primary' [(ngModel)]="is_me_checked" (change)="generateOptions()" [ngModelOptions]="{standalone: true}">ME Students</mat-checkbox>
+          <mat-checkbox color='primary' [(ngModel)]="is_phd_checked" (change)="generateOptions()" [ngModelOptions]="{standalone: true}">Phd Students</mat-checkbox>
+        </div>
+      </div>
+  </form>
+  <mat-card-actions align="end" class="update">
+    <button mat-raised-button color="primary" (click)="updateCurrentGroup()" [disabled]="validate()">Save</button>
+  </mat-card-actions>
+</mat-card>

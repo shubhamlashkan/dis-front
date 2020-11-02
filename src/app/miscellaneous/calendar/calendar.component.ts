@@ -1,90 +1,146 @@
-import { Component, OnInit } from '@angular/core';
-import * as $ from 'jquery';
-import 'fullcalendar';
+import { AddEventDialog } from './add-event-dialog';
+import { TokenStorageService } from './../../authentication/token-storage.service';
+import { Component, ViewChild, Inject } from '@angular/core';
+import { FullCalendarComponent } from '@fullcalendar/angular';
+import { EventInput } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
+import bootstrapPlugin from '@fullcalendar/bootstrap';
+import { CalendarService } from './../../API_Service/calendar.service';
+import { MatDialog, MatDialogConfig} from '@angular/material';
+import { ShowEventDialogComponent } from './show-event-dialog.component';
+import { UserGroupsComponent } from './user-groups/user-groups.component';
+import { AriaDescriber } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss']
 })
-export class CalendarComponent implements OnInit {
 
-  constructor() { }
+export class CalendarComponent {
+  @ViewChild('calendar') calendarComponent: FullCalendarComponent; // the #calendar in the template
 
-  ngOnInit() {
-    $('head').append('<link rel="stylesheet" href="../../../assets/css/fullcalendar.min.css" type="text/css" />');
-        $(document).ready(function() {
+  constructor(private calendarService: CalendarService, private auth: TokenStorageService, public dialog: MatDialog) {}
+ 
+  calendarApi: any;
+  calendarModal : boolean = false;
+  calendarVisible = true;
+  calendarPlugins = [dayGridPlugin, timeGridPlugin, interactionPlugin, bootstrapPlugin];
+  calendarWeekends = true;
+  calendarEvents: EventInput[] = [];
+  customButtonOption: any;
 
-          $('#calendar').fullCalendar({
-            header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,basicWeek,basicDay,list'
-            },
-            defaultDate: '2018-09-06',
-            aspectRatio: 1,
-            navLinks: true, // can click day/week names to navigate views
-            editable: true,
-            eventLimit: true, // allow "more" link when too many events
-            events: [
-            {
-              title: 'All Day Event',
-              start: '2018-01-26'
-            },
-            {
-              title: 'Long Event',
-              start: '2018-03-07',
-              end: '2018-03-10'
-            },
-            {
-              id: 999,
-              title: 'Repeating Event',
-              start: '2018-01-13T16:00:00'
-            },
-            {
-              id: 999,
-              title: 'Repeating Event',
-              start: '2018-03-16T16:00:00'
-            },
-            {
-              title: 'Conference',
-              start: '2018-03-11',
-              end: '2018-03-13'
-            },
-            {
-              title: 'Meeting',
-              start: '2018-03-12T10:30:00',
-              end: '2018-03-12T12:30:00'
-            },
-            {
-              title: 'Lunch',
-              start: '2018-03-12T12:00:00'
-            },
-            {
-              title: 'Meeting',
-              start: '2018-03-12T14:30:00'
-            },
-            {
-              title: 'Happy Hour',
-              start: '2018-03-12T17:30:00'
-            },
-            {
-              title: 'Dinner',
-              start: '2018-03-12T20:00:00'
-            },
-            {
-              title: 'Birthday Party',
-              start: '2018-03-13T07:00:00'
-            },
-            {
-              title: 'Click for Google',
-              url: 'http://google.com/',
-              start: '2018-01-21'
-            }
-            ]
+  openDialog(event): void {
+    console.log(this.auth.getAuthorities())
+    if(!(this.auth.getAuthorities().includes("student"))) {
+      const dialogRef = this.dialog.open(AddEventDialog, {
+        width: '570px',
+        data: event
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result !== undefined) {
+          this.calendarApi.addEvent({
+            id: result.eventId,
+            title: result.title,
+            start: result.startDate,
+            end: result.endDate,
+            description: result.description,
+            startEditable: true,
+            location: result.location,
+            participants: result.participants,
+            textColor: "white",
           });
-          });
-
+        }
+      });
+    }
   }
 
+  myGroupsClickEvent(): void {
+    const dialogRef = this.dialog.open(UserGroupsComponent, {
+      width: '1100px'
+    });
+  }
+
+
+  handleEventClick(arg): void{
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.minWidth = '400px';
+    dialogConfig.autoFocus = false;
+    dialogConfig.data = {
+      id: arg.event.id,
+      eid: arg.event.eventId,
+      title: arg.event.title,
+      desc: arg.event.extendedProps.description,
+      start: arg.event.start,
+      end: arg.event.end || arg.event.start,
+      calendarApi : this.calendarApi,
+      startEditable: arg.event.startEditable,
+      location: arg.event.extendedProps.location,
+      participants: arg.event.extendedProps.participants,
+    };
+    const dialogRef = this.dialog.open(ShowEventDialogComponent,dialogConfig);
+  }
+
+  ngOnInit() {
+    this.calendarService.getMyEvents(this.auth.getUsername()).subscribe( events => {
+      for (let e = 0; e < events.length; e++) {
+        if(events[e].eventIncharge === this.auth.getUsername()){
+          this.calendarEvents = this.calendarEvents.concat({
+            id: events[e].eventId,
+            title: events[e].title,
+            start: events[e].startDate,
+            end: events[e].endDate,
+            description: events[e].description,
+            startEditable: true,
+            location: events[e].location,
+            participants: events[e].participants,
+            textColor: "white",
+          });
+      }
+      else{
+        this.calendarEvents = this.calendarEvents.concat({
+          id: events[e].eventId,
+          title: events[e].title,
+          start: events[e].startDate,
+          end: events[e].endDate,
+          description: events[e].description,
+          startEditable: false,
+          location: events[e].location,
+          participants: events[e].participants,
+          organizer: events[e].createdBy,
+          textColor: "white",
+        });
+      }
+    }
+    });
+    this.calendarService.getPublicHolidays().subscribe( events=> { 
+      for (let e = 0; e < events.length; e++) {
+        this.calendarEvents = this.calendarEvents.concat({
+          title: events[e].name,
+          start: new Date(events[e].date),
+          end: new Date(events[e].date),
+          description: events[e].description,
+          startEditable: false,
+          backgroundColor: "purple",
+          textColor: "white",
+        })
+      }
+    });
+    
+    this.customButtonOption = {
+      customButtons: {
+        manageGroups: {
+          text: 'My Groups',
+          icon: 'fa-times',
+          click: () => this.myGroupsClickEvent()
+        }
+      },
+    }
+  }
+
+  ngAfterViewInit(): void {
+    this.calendarApi = this.calendarComponent.getApi();
+    }
 }

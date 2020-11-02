@@ -7,10 +7,10 @@
       </div> -->
       <div class=" profile-info">
         <div class="profile-content">
+          <ng-container *ngIf="userType != 'student'">
           <div class="text-center">
             <img src="../../../assets/images/meter.png" style="width: 50%;height:50%;">
           </div>
-          <ng-container *ngIf="userType != 'student'">
               <div class="txt-info three">
                     <h5><a routerLink='resource_request' >Request Resources</a></h5>
               </div>
@@ -27,12 +27,24 @@
             <h5 ><a routerLink='total_complaints'>Total Complaints</a></h5>
           </div>
         </ng-container>
-          <ng-container *ngIf="userType == 'student' || userType != 'head'">
+          <ng-container *ngIf="userType != 'head'">
           <div class="txt-info">
             <h3 style="color: #f55831;">{{my}}</h3>
             <h5><a routerLink='mycomplaints'>My Complaints</a></h5>
           </div>
         </ng-container>
+        <ng-container *ngIf="userType != 'student'">
+        <div class="txt-info three">
+          <h5><a routerLink='download_complaint'>Download Complaint</a></h5>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="userType == 'head'">
+        <!-- <ng-container> -->
+        <div class="txt-info three">
+          <!-- <i class="fa fa-address-book fa-4x" aria-hidden="true"></i> -->
+          <h5><a class="nav-link" routerLink="change_authority">Change Authority</a></h5>
+        </div>
+      </ng-container>
         <!--- <ng-container *ngIf=" userType == 'faculty' || userType == 'staff'">
             <div class="kyc-section rewards-section reports-sectn top-buffer">
              <div style="text-align-last: center;">

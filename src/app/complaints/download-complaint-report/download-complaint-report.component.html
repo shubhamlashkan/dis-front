@@ -1,0 +1,43 @@
+
+ <div class="heading">
+  <h3>Download Complaint</h3>
+</div>
+<hr>
+<form [formGroup]="complaintForm" (ngSubmit)="onSubmit()">
+  <div class="row mb-3">
+    <div class="col-lg-3">
+      Select complaint type : <span class="mandatory">*</span>
+    </div>
+    <div class="col-lg-9">
+      <select class="form-control" formControlName="complaintType" required>
+        <option *ngFor="let val of complaintTypes" [value]="val">{{val}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-lg-3">
+      Date : <span class="mandatory">*</span>
+    </div>
+    <div class="col-lg-9">
+      <input type="date" class="form-control" formControlName="createdDate" required>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    Note : If you want complaint of a particular location then select location else leave it blank.
+  </div>
+  
+  <div class="row mb-3">
+    <div class="col-lg-3">
+      Select complaint type : 
+    </div>
+    <div class="col-lg-9">
+      <select class="form-control" formControlName="location">
+        <option *ngFor="let lab of locations" [value]="lab">{{lab}}</option>
+      </select>
+    </div>
+  </div>
+  
+  <button type="reset" class="btn btn-primary mr-3">Reset</button>
+  <button class="btn btn-success" type="submit" [disabled]="complaintForm.invalid">Generate pdf</button>
+</form>

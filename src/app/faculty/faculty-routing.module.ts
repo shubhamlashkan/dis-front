@@ -3,13 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { FacultyComponent } from './faculty/faculty.component';
 import { AttendanceComponent } from './attendance/attendance.component';
 import { NavigationComponent } from './navigation/navigation.component';
-import { HomeRoutingModule } from './home/home-routing.module';
 import { DocumentsComponent } from './documents/documents.component';
 import { AboutComponent } from '../about/about/about.component';
 import { AboutModule } from '../about/about.module';
 import { ConventionalModule } from '../conventional/conventional.module';
 import { MydutiesModule } from '../myduties/myduties.module';
-
 import { InfrastructureModule } from '../infrastructure/infrastructure.module';
 import { InfrastructureOutletComponent } from '../infrastructure/infrastructure-outlet/infrastructure-outlet.component';
 import { ProfileComponent } from '../conventional/profile/profile.component';
@@ -20,6 +18,8 @@ import { LibraryComponent } from '../myduties/library/library/library.component'
 import { MydutiesNavigationComponent } from '../myduties/myduties-navigation/myduties-navigation.component';
 // import { RouteGuardService } from '../route-guard.service';
 import { FacultyModule } from './faculty.module';
+import { HomeComponent } from './home/home.component';
+import { AlertsComponent } from './alerts/alerts.component';
 
 //canActivate:[RouteGuardService],
 const routes: Routes = [
@@ -27,6 +27,14 @@ const routes: Routes = [
     path : 'faculty',
     component : FacultyComponent,
     children : [
+      {
+        path: '',
+        component: HomeComponent
+      },
+      {
+        path: 'home',
+        component: HomeComponent
+      },
       {
         path: 'about',
         component: AboutComponent,
@@ -47,10 +55,6 @@ const routes: Routes = [
         component: AttendanceComponent
       },
       {
-        path : 'navigation',
-        component : NavigationComponent
-      },
-      {
         path : 'documents',
         component : DocumentsComponent
       },
@@ -60,27 +64,31 @@ const routes: Routes = [
         component : ProfileComponent,
         loadChildren: () => ConventionalModule 
       },
-     
       {
         path : 'complaints',
         loadChildren : '../complaints/complaints.module#ComplaintsModule'
       },
       {
-        path : 'timetable', component : TimetableComponent, loadChildren:() => ConventionalModule
+        path : 'timetable', 
+        component : TimetableComponent, 
+        loadChildren:() => ConventionalModule
       },
       {
         path : 'students',
         component : StudentComponent,
         loadChildren:()  => HodModule
       },
+      {
+        path: 'notification',
+        component : AlertsComponent, 
+      }
       
      ]
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes), HomeRoutingModule
-   ],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class FacultyRoutingModule { }

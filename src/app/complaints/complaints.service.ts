@@ -11,10 +11,12 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ComplaintsService {
+ 
   urls = new Urls();
   private mainUrl = this.urls.mainurl;
   // private baseUrl = mainurl+'/dis/administrationn'
   private baseUrl="http://localhost:8080/dis/administration";
+  //private baseUrl="http://localhost:8083";
   constructor(private http: HttpClient) { }
 
   getRemainingCleanlinessComplaint():Observable<any>{
@@ -202,10 +204,32 @@ export class ComplaintsService {
     return this.http.get(`${this.baseUrl}/getMyComplaintsCount`);
   }
 
-  //get permission 
-  getPermissions():Observable<any>{
-    return this.http.get(`${this.baseUrl}/addComplaintPermission`);
+  //resource-request (post, put services)
+  addAFacultyResourceRequest(info : any):Observable<any>{
+    return this.http.post<any>(`${this.baseUrl}/addFacultyResourceRequest`,info,httpOptions);
   }
+
+  setRequestResolved(info : any):Observable<any>{
+    return this.http.put(`${this.baseUrl}/setFacultyRequestResolved/${info.id}`,httpOptions)
+  }
+
+  //resource-request
+  getAllFacultyRequestsForId():Observable<any> {
+    return this.http.get(`${this.baseUrl}/getAllFacultyRequestsForId`)
+  }
+
+  getAllUnresolvedRequests():Observable<any> {
+    return this.http.get(`${this.baseUrl}/getAllUnresolvedFacultyRequests`)
+  }
+
+  getAllResolvedRequests():Observable<any> {
+    return this.http.get(`${this.baseUrl}/getAllResolvedFacultyRequests`)
+  }
+
+  //get permission 
+  // getPermissions():Observable<any>{
+  //   return this.http.get(`${this.baseUrl}/addComplaintPermission`);
+  // }
   getLocation():Observable<any>{
     return this.http.get('http://localhost:8080/dis/infrastructure/getLocationDropDown');
   }
@@ -218,4 +242,27 @@ export class ComplaintsService {
   editComplaints(info : any):Observable<any>{
     return this.http.put(`${this.baseUrl}/editComplaint`,info,httpOptions);
   }
+
+  //download complaint report
+
+  getComplaintDownloadReport(complaintType : string, createdDate : string, location : string):Observable<any>{
+    return this.http.get(`${this.baseUrl}/getComplaintsOnDate?complaintType=${complaintType}&createdDate=${createdDate}&location=${location}`);
+  }
+
+  getTelephoneComplaintDownloadReport(complaintType : string, createdDate : string, location : string):Observable<any>{
+    return this.http.get(`${this.baseUrl}/getTelephoneComplaintsOnDate?complaintType=${complaintType}&createdDate=${createdDate}&location=${location}`);
+  }
+
+  getStaffFacultyList():Observable<any>{
+    return this.http.get("http://localhost:8080/dis/getStaffFacultyList");
+  }
+
+  getInfraInchargeDetails():Observable<any>{
+    return this.http.get("http://localhost:8080/dis/infrastructure/infrastructure/getInfraInchargeDetails");
+  }
+
+  updateInfraIncharge(data: any) {
+    return this.http.post("http://localhost:8080/dis/infrastructure/infrastructure/updateInfraInchargeDetails", data, httpOptions);
+  }
+
 }

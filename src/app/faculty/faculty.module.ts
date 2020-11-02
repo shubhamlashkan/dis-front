@@ -7,7 +7,6 @@ import { FacultyRoutingModule } from './faculty-routing.module';
 import { AttendanceComponent } from './attendance/attendance.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FacultyComponent } from './faculty/faculty.component';
-import { HomeModule } from './home/home.module';
 import { SidenavigationComponent } from '../faculty/sidenavigation/sidenavigation.component';
 import { DocumentsComponent } from './documents/documents.component';
 import { MiscellaneousModule } from 'src/app/miscellaneous/miscellaneous.module';
@@ -17,26 +16,30 @@ import { InfrastructureModule } from '../infrastructure/infrastructure.module';
 import { HodModule } from '../hod/hod.module';
 import { MydutiesNavigationComponent } from '../myduties/myduties-navigation/myduties-navigation.component';
 import { MydutiesModule } from '../myduties/myduties.module';
+import { MatBadgeModule, MatIconModule } from '@angular/material';
+import { AlertsComponent } from './alerts/alerts.component';
+import { HomeComponent } from './home/home.component';
 @NgModule({
   imports: [
     CommonModule,
     FacultyRoutingModule,
-    HomeModule,
     MiscellaneousModule,
     AboutModule,
     InfrastructureModule,
     ConventionalModule,
     MydutiesModule,
-    
-    
-    HodModule
+    HodModule,
+    MatBadgeModule,
+    MatIconModule
   ],
   declarations: [
     AttendanceComponent, 
     NavigationComponent,
     FacultyComponent, 
     SidenavigationComponent, 
-    DocumentsComponent
+    DocumentsComponent,
+    AlertsComponent,
+    HomeComponent
   ],
   providers: [PiechartComponent]
 })

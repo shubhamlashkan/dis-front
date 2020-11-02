@@ -42,24 +42,24 @@ export class MytaskComponent implements OnInit {
     })
   }
 
-  public downloadAsPDF() {
-    const doc = new jsPDF();
+  // public downloadAsPDF() {
+  //   const doc = new jsPDF();
 
-    const specialElementHandlers = {
-      '#editor': function (element, renderer) {
-        return true;
-      }
-    };
+  //   const specialElementHandlers = {
+  //     '#editor': function (element, renderer) {
+  //       return true;
+  //     }
+  //   };
 
-    const pdfTable = this.pdfTable.nativeElement;
+  //   const pdfTable = this.pdfTable.nativeElement;
 
-    doc.fromHTML(pdfTable.innerHTML, 15, 15, {
-      width: 190,
-      'elementHandlers': specialElementHandlers
-    });
+  //   doc.fromHTML(pdfTable.innerHTML, 15, 15, {
+  //     width: 190,
+  //     'elementHandlers': specialElementHandlers
+  //   });
 
-    doc.save('tableToPdf.pdf');
-  }
+  //   doc.save('tableToPdf.pdf');
+  // }
 
   
 }

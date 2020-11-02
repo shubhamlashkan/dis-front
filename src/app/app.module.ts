@@ -21,7 +21,6 @@ import { InfrastructureModule } from './infrastructure/infrastructure.module';
 import { MatTableModule, MatSortModule } from '@angular/material';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,

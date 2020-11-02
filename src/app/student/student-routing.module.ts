@@ -55,8 +55,8 @@ const routes: Routes = [
         component: AssignmentsComponent
       },
       {
-        path: 'student_alerts',
-        component: AlertsComponent
+        path: 'notification',
+        component : AlertsComponent, 
       },
       {
         path: 'student_profile',

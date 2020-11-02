@@ -101,7 +101,7 @@ export class TotalComplaintsComponent implements OnInit {
   .subscribe(
     data=>{
       this.eccwTotalComplaintsInfo=data;
-      console.log(this.cleanlinessTotalComplaintsInfo);
+      console.log(this.eccwTotalComplaintsInfo);
     }
   )
 
