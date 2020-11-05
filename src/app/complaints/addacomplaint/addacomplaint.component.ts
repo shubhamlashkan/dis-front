@@ -14,7 +14,7 @@ import { ComplaintsService } from '../complaints.service';
 
 
 export class AddacomplaintComponent implements OnInit {
-  userType : string = localStorage.getItem('userType');
+  userType : string = sessionStorage.getItem('userType');
   student : boolean;
   staff : boolean;
   faculty : boolean;
