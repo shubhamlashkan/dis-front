@@ -53,7 +53,7 @@ getInfrastructure(infraname:string):Observable<HttpResponse<infrastructure[]>>
 }
 
 addInfrastructure(Infra : addInfra) : Observable<HttpResponse<string>> {
-  return this.http.post<string>(this.baseUrl + '/addNewInfrastructure', Infra,{ observe: 'response' });
+  return this.http.post<string>(this.baseUrl + 'addNewInfrastructure', Infra,{ observe: 'response' });
 }
 // updateInfrastructure(infraId:string,infra:addInfra) : Observable<HttpResponse<string>>{
 //   return this.http.put<string>(`${this.baseUrl}/updateBook/${bookId}`,infra,{ observe: 'response' })

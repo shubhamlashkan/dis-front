@@ -10,9 +10,9 @@ import * as jsPDF from 'jspdf';
 })
 export class MytaskComponent implements OnInit {
 
-  name = 'Assigned Task ';
+ //name = 'Assigned Task ';
 
-  @ViewChild('pdfTable') pdfTable: ElementRef;
+  //@ViewChild('pdfTable') pdfTable: ElementRef;
 
   showByStaffId:searchTask[]=[];
   constructor(private service: MytaskService,public toastr: ToastrManager) { }

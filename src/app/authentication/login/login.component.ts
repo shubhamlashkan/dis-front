@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
       data => {
         this.loading = false;
         console.log(data);
+        sessionStorage.setItem('authenticaterUser',this.form.username);
         this.tokenStorage.saveUsername(data.username);
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveAuthorities(data.authorities);
@@ -53,6 +54,7 @@ export class LoginComponent implements OnInit {
           this.userID= response.body['message'];
           // console.log(response.body['message']);
           // console.log(this.userID);
+          console.log(this.userID);
           sessionStorage.setItem('userId',this.userID);
         })
         
@@ -75,7 +77,7 @@ export class LoginComponent implements OnInit {
       tempData => {
         this.router.navigateByUrl('/' + tempData);
        console.log(tempData);
-        localStorage.setItem('userType',tempData);
+        sessionStorage.setItem('userType',tempData);
       }
     );
   }
