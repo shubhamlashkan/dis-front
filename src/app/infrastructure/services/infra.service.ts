@@ -60,7 +60,7 @@ addInfrastructure(Infra : addInfra) : Observable<HttpResponse<string>> {
 // }
 deleteInfra(Id:string):Observable<HttpResponse<any>>
   {
-    return this.http.delete(`${this.baseUrl}/deleteInfrastructure/${Id}`,{observe:'response'});
+    return this.http.delete(`${this.baseUrl}deleteInfrastructure/${Id}`,{observe:'response'});
   }
 
 addLocation(location:addLoc):Observable<HttpResponse<string>>{
@@ -75,10 +75,10 @@ addLocation(location:addLoc):Observable<HttpResponse<string>>{
     return this.lab;
   }
   updateInfrastructure(updateinfra:addInfra) : Observable<HttpResponse<string>>{
-    return this.http.put<string>(`${this.baseUrl}/updateInfrastructure`,updateinfra,{observe: 'response'});
+    return this.http.put<string>(`${this.baseUrl}updateInfrastructure`,updateinfra,{observe: 'response'});
   }
   getInfrastructureById(infraId: string): Observable<HttpResponse<infrastructure>>{
-    return this.http.get<infrastructure>(`${this.baseUrl}/getInfrastructurebyId/${infraId}`,{observe: 'response'}); 
+    return this.http.get<infrastructure>(`${this.baseUrl}getInfrastructurebyId/${infraId}`,{observe: 'response'}); 
   }
 
 
