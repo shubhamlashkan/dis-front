@@ -64,7 +64,7 @@ export class InfrastructureComponent implements OnInit {
   //Get Faculty Rooms 
   getFacultyRooms(): void{
     this.infraservice.getFacultyRooms()
-      .subscribe(data =>this.facultyRooms = data);
+      .subscribe(data => this.facultyRooms = data);
   }
 
   infraName(l: Laboratory): void{

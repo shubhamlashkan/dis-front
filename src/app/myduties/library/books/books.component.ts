@@ -99,7 +99,7 @@ export class BooksComponent implements OnInit {
     this.Book = new addBookData(this.addBookForm.value.addBookData.authorName, this.addBookForm.value.addBookData.edition,
       this.addBookForm.value.addBookData.isbnNo, this.addBookForm.value.addBookData.noOfPages, this.addBookForm.value.addBookData.price,
       this.addBookForm.value.addBookData.publisher, this.addBookForm.value.addBookData.purchasedOn, this.addBookForm.value.addBookData.remarks,
-      this.addBookForm.value.addBookData.subjectCategory, this.addBookForm.value.addBookData.title, this.addBookForm.value.addBookData.publicationYear);
+      this.addBookForm.value.addBookData.subjectCategory, this.addBookForm.value.addBookData.title, null);
     // this.Book.authorName = this.addBookForm.value.addBookData.authorName;
     // this.Book.edition = this.addBookForm.value.addBookData.edition;
     // this.Book.isbn = this.addBookForm.value.addBookData.isbnNo;
@@ -144,11 +144,11 @@ export class BooksComponent implements OnInit {
     this.updateButton = true;
   }
 
-  /* Get book b Book Id */ 
+  /* Get book by Book Id */ 
   getBookByBookId(bookId: string) {
     this.service.getBookByBookId(bookId).subscribe((bookByIdData: getBookByBookId[]) => {
       this.bookById = bookByIdData;
-      //console.log(this.bookById);
+      console.log(this.bookById);
     });
   }
 
@@ -165,8 +165,9 @@ export class BooksComponent implements OnInit {
         this.updateBookForm.value.updateBookData.remarks,
         this.updateBookForm.value.updateBookData.subjectCategory,
         this.updateBookForm.value.updateBookData.title,
-        this.updateBookForm.value.updateBookData.publicationYear);
-      //console.log(this.updatedata);
+        null);
+
+      console.log(this.updatedata);
       this.service.updateBookByBookId(this.updateBookForm.value.updateBookData.bookId, this.updatedata).subscribe((res: updateBookResponse) => {
         this.responseUpdate = res;
         this.msg = this.responseUpdate.message + this.responseUpdate.bookId;

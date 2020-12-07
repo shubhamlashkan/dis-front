@@ -199,10 +199,10 @@
                 <label for="edition">Edition</label>
                 <input type="text" id="edition" class="form-control" name="edition" ngModel>
               </div>
-              <div class="col-4">
+              <!-- <div class="col-4">
                 <label for="publicationYear">Publication Year</label>
-                <input type="number" id="publicationYear" class="form-control" name="publicationYear" ngModel>
-              </div>
+                <input type="date" id="publicationYear" class="form-control" name="publicationYear" ngModel>
+              </div> -->
             </div><br />
             <div class="form-row">
               <div class="col-4">
@@ -479,21 +479,21 @@
               <div class="form-row">
                 <div class="col-4">
                   <label for="publisher">Publisher</label>
-                  <input type="text" id="publisher" class ="form-control" name = "publisher" [(ngModel)] = "book.publisher"></div>
+                  <input type="text" id="publisher" class ="form-control" name = "publisher" [(ngModel)] = "book.publisherAndPlace"></div>
                 <div class="col-4">
                   <label for="edition">Edition</label>
                   <input type="text" id="edition" class="form-control" name="edition" [(ngModel)]="book.edition">
                 </div>
-                <div class="col-4">
+                <!-- <div class="col-4">
                   <label for="publicationYear">Publication Year</label>
-                  <input type="number"  min="1" id="publicationYear" class="form-control" name="publicationYear"
+                  <input type="date"  id="publicationYear" class="form-control" name="publicationYear"
                     [(ngModel)]="book.yearOfPublication">
-                </div>
+                </div> -->
               </div><br />
               <div class="form-row">
                 <div class="col-4">
                   <label for="price">Price</label>
-                  <input type="number"  min="1" id="price" class="form-control" name="price" [(ngModel)]="book.price">
+                  <input type="number" min="1" id="price" class="form-control" name="price" [(ngModel)]="book.price">
                 </div>
 
                 <div class="col-4">
