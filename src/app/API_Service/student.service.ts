@@ -26,12 +26,17 @@ export class StudentService {
     this.moodleUserId=this.sessionStorageService.getMoodleUserId();
     return this.http.get<any[]>(`${this.gradeUrl}/getStudentsOverviewReport/${this.moodleUserId}`);
   }
+  public getStudentUserReport(courseId:any):Observable<any>{
+    this.moodleUserId=this.sessionStorageService.getMoodleUserId();
+    return this.http.get<any[]>(`${this.gradeUrl}/getStudentsUserReport/${courseId}/${this.moodleUserId}`);
+  }
+
   public getAllCourses():Observable<any>{
     this.moodleUserId=this.sessionStorageService.getMoodleUserId();
     return this.http.get<any[]>(`${this.assnsUrl}/getAllCoursesOfStudent/${this.moodleUserId}`)
   }
   public getStudentSubjectReport(courseId:any):Observable<any>
-  
+   
   {
     this.moodleUserId=this.sessionStorageService.getMoodleUserId();
     return this.http.get<any[]>(`${this.assnsUrl}/getStudentSubjectReport/${this.moodleUserId}/${courseId}`);

@@ -219,7 +219,18 @@
         <li class="nav-item">
           <a class="nav-link" routerLink='infrastructure'><i class="fa fa-institution" aria-hidden="true"></i> Infrastructure</a>
         </li>
-      
+        <li class="nav-item profile dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false" >
+            <i class="fa fa-mortar-board" aria-hidden="true"></i> Moodle
+          </a>
+          <div class="dropdown-menu rounded-0" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" routerLink='class_attendance'>
+              Attendance</a>
+            <a class="dropdown-item" routerLink='grades'> Grades</a>
+            <a class="dropdown-item"  routerLink='assignments'> Assignments</a>
+          </div>
+        </li>
         <!-- <li class="nav-item">
           <a class="nav-link" routerLink='student'><i class="fa fa-graduation-cap" aria-hidden="true"></i> Students</a>
         </li>

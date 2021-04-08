@@ -25,20 +25,25 @@ export class GradesComponent implements OnInit {
     this.studentService.getStudentOverviewReport().subscribe(data=>{
       this.overviewReport=data;
      
-    })
+    }) 
     this.studentService.getAllCourses().subscribe(data=>{
       this.subjects=data;
-      this.studentService.getStudentSubjectReport(this.subjects[0].courseId).subscribe(data=>{
+      console.log(data)
+      this.studentService.getStudentUserReport(this.subjects[0].courseId).subscribe(data=>{
         this.subjectReport=data;
         this.courseId=this.subjects[0].courseId;
-      
+        
       })
     })
    
   }
   getSubjectReport(){
-    this.studentService.getStudentSubjectReport(this.courseId).subscribe(data=>{
+    // this.studentService.getStudentSubjectReport(this.courseId).subscribe(data=>{
+    //   this.subjectReport=data;
+    // })
+    this.studentService.getStudentUserReport(this.courseId).subscribe(data=>{
       this.subjectReport=data;
+      
     })
   }
  

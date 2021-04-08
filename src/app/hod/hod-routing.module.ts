@@ -21,6 +21,11 @@ import { ConventionalModule } from '../conventional/conventional.module';
 import { RouteGuardService } from '../route-guard.service';
 
 import { AlertsComponent } from './alerts/alerts.component';
+import { ClassAttendanceComponent } from '../faculty/class-attendance/class-attendance.component';
+import { FacultyModule } from '../faculty/faculty.module';
+
+import { AssignmentsComponent } from '../faculty/assignments/assignments.component';
+import { GradesComponent } from '../faculty/grades/grades.component';
 
 const routes: Routes = [
   { path: 'head',
@@ -39,6 +44,21 @@ const routes: Routes = [
         path: 'hod_about',
         component: AboutComponent,
         loadChildren: () => AboutModule
+      },
+      {
+        path: 'class_attendance',
+        component: ClassAttendanceComponent,
+        
+      },
+      {
+        path: 'grades',
+        component: GradesComponent,
+        
+      },
+      {
+        path: 'assignments',
+        component: AssignmentsComponent,
+        
       },
       {
         path: 'documents',
