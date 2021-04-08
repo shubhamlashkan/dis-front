@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   loading : boolean;
   private loginInfo: AuthLoginInfo;
   userID:string;
+  moodleUserId: any;
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private router: Router, public toastr: ToastrManager) { }
 
   ngOnInit() {
@@ -52,10 +53,12 @@ export class LoginComponent implements OnInit {
         this.getValidated();
         this.authService.getMyUserId().subscribe(response => {
           this.userID= response.body['message'];
-          // console.log(response.body['message']);
-          // console.log(this.userID);
-          console.log(this.userID);
+          // console.log(response.body[s
           sessionStorage.setItem('userId',this.userID);
+        })
+        this.authService.getMoodleUserId(data.username).subscribe(data=>{
+          this.moodleUserId=data;
+          sessionStorage.setItem('moodleUserId',this.moodleUserId);
         })
         
        // sessionStorage.setItem('userId',this.userID);

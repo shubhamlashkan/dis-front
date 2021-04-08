@@ -10,7 +10,6 @@ const httpOptions = {
 
 export class ProfileService {
 
-
   private baseUrl = "http://localhost:8080/dis/user";
   constructor(private http: HttpClient) { }
 

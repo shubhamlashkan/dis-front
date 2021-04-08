@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class StudentSignUpService {
 
-  private baseUrl = 'http://localhost:8090/dis';
+  private baseUrl = 'http://13.126.18.214:8080/dis';
 
   constructor(private http: HttpClient) { }
 

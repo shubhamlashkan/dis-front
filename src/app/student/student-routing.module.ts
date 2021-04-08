@@ -14,8 +14,10 @@ import { InfrastructureOutletComponent } from '../infrastructure/infrastructure-
 import { ProfileComponent } from '../conventional/profile/profile.component';
 import { TimetableComponent } from '../conventional/timetable/timetable.component';
 import { MyComplaintsComponent } from '../complaints/my-complaints/my-complaints.component';
-// import { RouteGuardService } from '../route-guard.service';
-//canActivate:[RouteGuardService],
+import { RouteGuardService } from '../route-guard.service';
+import { QuizComponent } from './quiz/quiz.component';
+import { QuizReviewComponent } from './quiz-review/quiz-review.component';
+canActivate:[RouteGuardService];
 const routes: Routes = [
   { path: 'student',
     component: StudentComponent,
@@ -61,6 +63,14 @@ const routes: Routes = [
       {
         path: 'student_profile',
         component: ProfileComponent
+      },
+      {
+        path: 'quiz',
+        component: QuizComponent
+      },
+      {
+        path: 'quiz_review/:id',
+        component: QuizReviewComponent
       },
      
     ]

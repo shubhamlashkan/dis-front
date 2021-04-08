@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { StudentService } from 'src/app/API_Service/student.service';
 import { BarchartComponent } from './../../miscellaneous/barchart/barchart.component';
-
+import {StudentAttenance} from './../../Model/studentAttendance.model';
 @Component({
   selector: 'app-attendance',
   templateUrl: './attendance.component.html',
@@ -8,11 +9,17 @@ import { BarchartComponent } from './../../miscellaneous/barchart/barchart.compo
 })
 export class AttendanceComponent implements OnInit {
 
-  bar = [];
-  constructor(public chart: BarchartComponent) { }
+  bar:StudentAttenance[] ;
+  constructor(public chart: BarchartComponent,public studentService:StudentService) { }
 
   ngOnInit() {
-    this.bar = this.chart.getBarChart('barChart');
+   
+    this.studentService.getStudentAttendance().subscribe(data=>{
+       this.bar=data;
+      //  console.log(data);
+       this.chart.getBarChart('barChart',this.bar);
+    });
+     
   }
 
   openNav() {

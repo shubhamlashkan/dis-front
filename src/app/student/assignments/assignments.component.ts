@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StudentService } from 'src/app/API_Service/student.service';
 import { SemesterSubjectsService } from './../../API_Service/SemesterSubjectsService';
 
 @Component({
@@ -8,12 +9,31 @@ import { SemesterSubjectsService } from './../../API_Service/SemesterSubjectsSer
 })
 export class AssignmentsComponent implements OnInit {
 
-  subjects: any;
-
-  constructor(private semSubjects: SemesterSubjectsService) { }
-
+  courses: any[];
+  assignments:any[];
+  constructor(private semSubjects: SemesterSubjectsService,private studentService: StudentService) { }
+  showCourse :any={};
   ngOnInit() {
-    this.subjects = this.semSubjects.getSubjectList();
+    
+    // this.subjects = this.semSubjects.getSubjectList();
+    this.studentService.getAllCourses().subscribe(data=>{
+      this.courses=data;
+      this.studentService.getAssignments(this.courses[0].courseId).subscribe(data=>{
+        // console.log(data);
+        this.showCourse.name=this.courses[0].courseName
+      this.showCourse.code=this.courses[0].courseCode
+        this.assignments=data;
+      })
+    })
   }
-
+  getAssignments(courseId){
+    this.showCourse={};
+    this.showCourse.name=this.courses[courseId].courseName
+    this.showCourse.code=this.courses[courseId].courseCode
+    courseId=this.courses[courseId].courseId;
+    this.studentService.getAssignments(courseId).subscribe(data=>{
+      // console.log(data);
+      this.assignments=data;
+    })
+  }
 }

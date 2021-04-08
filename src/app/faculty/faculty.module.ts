@@ -2,7 +2,7 @@ import { PiechartComponent } from './../miscellaneous/piechart/piechart.componen
 import { AboutModule } from './../about/about.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { FormsModule } from '@angular/forms';
 import { FacultyRoutingModule } from './faculty-routing.module';
 import { AttendanceComponent } from './attendance/attendance.component';
 import { NavigationComponent } from './navigation/navigation.component';
@@ -19,8 +19,12 @@ import { MydutiesModule } from '../myduties/myduties.module';
 import { MatBadgeModule, MatIconModule } from '@angular/material';
 import { AlertsComponent } from './alerts/alerts.component';
 import { HomeComponent } from './home/home.component';
+import { ClassAttendanceComponent } from './class-attendance/class-attendance.component';
+import { GradesComponent } from './grades/grades.component';
+import { AssignmentsComponent } from './assignments/assignments.component';
 @NgModule({
   imports: [
+    FormsModule ,
     CommonModule,
     FacultyRoutingModule,
     MiscellaneousModule,
@@ -39,7 +43,10 @@ import { HomeComponent } from './home/home.component';
     SidenavigationComponent, 
     DocumentsComponent,
     AlertsComponent,
-    HomeComponent
+    HomeComponent,
+    ClassAttendanceComponent,
+    GradesComponent,
+    AssignmentsComponent
   ],
   providers: [PiechartComponent]
 })

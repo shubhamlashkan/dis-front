@@ -12,19 +12,21 @@
     <div class="col-lg-9 kyc-colm user-management">
         <div class="kyc-section rewards-section reports-sectn">
 
-        <ul class="nav nav-tabs">
-          <li class="nav-item"  *ngFor="let sub of subjects">
-            <a class="nav-link active" href="#" style="text-decoration:none">{{sub.subCode}}</a>
-          </li>
+        <ul class="nav nav-tabs nav-fill">
+         
+		  <li class="nav-item" *ngFor="let course of courses;let i=index" (click)="getAssignments(i)">
+			  <a  class="nav-link active">{{course.courseName}}</a>
+		  </li>
+		  
         </ul>
 		<!--End Right Panel-->
-		<div id="accordion">
+		<div id="accordion" >
 
 		<!--Notification Panel starts-->
 		<div class="notifiactiion heading">
 		<br/>
 		<br/>
-			<h2>CO24007: Theory Of Computation</h2>
+			<h2>{{this.showCourse.code}}: {{this.showCourse.name}} </h2>
 			<hr/>
 		</div>
 		<div class="card">
@@ -39,23 +41,15 @@
 		<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
 		<div class="card-body">
 
-		<div>
-			<div class="alert alert-success row">
-				<h4 class="col-8">Assignment # 2 : Conversions of DFAs and NFAs</h4>		<h6 class="col-4">By: Mrs Rithambara Patidar</h6>
-				<p class="col-8"> Date of Submission  :  29/8/2018</p>
+		<div *ngFor="let assign of assignments">
+			<div  class="alert alert-success row" *ngIf="!assign.submitted">
+				<h4 class="col-8">{{assign.assignmentName}}</h4>		<h6 class="col-4">By:Prof {{assign.courseTeacherFirstName}} {{assign.courseTeacherLastName}}</h6>
+				<p class="col-8"> Date of Submission  : {{assign.dueDate}}</p>
 				<div class="col-4">
-				<img class="download float-left" src="images/download.png" alt=""/>
-				<a href="#"> download Report</a>
+					<p>grades: {{assign.gradeObtained}}/{{assign.gradeMaximum}}</p>
 				</div>
 			</div>
-			<div class="alert alert-success row">
-				<h4 class="col-8">Assignment # 3 : Turing Machine</h4>		<h6 class="col-4">By: Mrs Rithambara Patidar</h6>
-				<p class="col-8"> Date of Submission  :  01/9/2018</p>
-				<div class="col-4">
-				<img class="download float-left" src="images/download.png" alt=""/>
-				<a href="#"> download Report</a>
-				</div>
-			</div>
+			
 		</div>
 		</div>
 		</div>
@@ -68,15 +62,14 @@
       </h5>
     </div>
     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-      <div class="card-body">
-			<div class="alert alert-success row">
-				<h4 class="col-8">Assignment # 1 : Constructing NFAs and DFAs</h4>		<h6 class="col-4">By: Mrs Rithambara Patidar</h6>
-				<p class="col-8"> Date of Submission  :  11/8/2018</p>
-				<div class="col-4">
-				<img class="download float-left" src="images/download.png" alt=""/>
-				<a href="#"> download Report</a>
-				</div>
+      <div class="card-body " *ngFor="let assign of assignments">
+		<div class="alert alert-success row m-0 " *ngIf="assign.submitted">
+			<h4 class="col-8">{{assign.assignmentName}}</h4>		<h6 class="col-4">By: Prof {{assign.courseTeacherFirstName}} {{assign.courseTeacherLastName}}</h6>
+			<p class="col-8"> Date of Submission  : {{assign.dueDate}}</p>
+			<div class="col-4">
+			<p>grades: {{assign.gradeObtained}}/{{assign.gradeMaximum}}</p>
 			</div>
+		</div>
 		</div>
 		<!--Notification Panel Ends-->
         </div>
@@ -87,6 +80,7 @@
 
     </div>
   </div>
+  <button class="btn btn-success">Export as csv</button>
   <!--Middle Section finish-->
 </div>
 </div>

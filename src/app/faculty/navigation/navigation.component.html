@@ -74,6 +74,31 @@
               <a class="nav-link" routerLink='infrastructure'><i class="fa fa-institution" aria-hidden="true"></i>
                 Infrastructure </a>
             </li>
+           <!-- <li class=" mr-2 dropdown">
+              <a class="nav-link dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" > 
+                <i class="  fa fa-mortar-board" aria-hidden="true"></i>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" routerLink='class_attendance'>Attendance</a>
+                  <a class="dropdown-item" routerLink='grades'>Grades</a>
+                  <a class="dropdown-item" routerLink='assignments'>Assignments</a>
+                  
+                  
+                </div>
+                Moodle </a>
+              
+            </li> -->
+            <li class="nav-item profile dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false" >
+                <i class="fa fa-mortar-board" aria-hidden="true"></i> Moodle
+              </a>
+              <div class="dropdown-menu rounded-0" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" routerLink='class_attendance'>
+                  Attendance</a>
+                <a class="dropdown-item" routerLink='grades'> Grades</a>
+                <a class="dropdown-item"  routerLink='assignments'> Assignments</a>
+              </div>
+            </li>
             <!-- <li class="nav-item">
               <a class="nav-link" routerLink='documents'><i class="fa fa-file" aria-hidden="true"></i> Documents </a>
             </li>
@@ -130,7 +155,7 @@
 
     <!--Middle Section finish-->
     <!--Footer Start-->
-    <footer class="index-footer">
+    <footer class="index-footer footer">
       <p>Copyright <i class="fa fa-copyright" aria-hidden="true"></i> 2018-19 All right reserved by SGSITS</p>
     </footer>
     <!--Footer Finish-->

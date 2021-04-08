@@ -15,7 +15,7 @@ const httpOptions = {
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
-
+  private moodleUrl=`${apiSetting.apiMoodle}`;
   private loginUrl = `${apiSetting.apiGateway}/dis/signin`;
   private signupUrl = `${apiSetting.apiGateway}/dis/signup`;
   private validateUrl = `${apiSetting.apiGateway}/dis/getUserType`;
@@ -27,7 +27,7 @@ export class AuthService {
   }
 
   attemptAuth(credentials: AuthLoginInfo): Observable<JwtResponse> {
-    return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions);
+    return this.http.post<JwtResponse>(this.loginUrl , credentials, httpOptions);
   }
 
   signUp(info: SignUpInfo): Observable<HttpResponse<string>> {
@@ -60,5 +60,8 @@ export class AuthService {
 
   getMyUserId():Observable<HttpResponse<string>>{
     return this.http.get<string>(`${this.apiUrl}/getMyUserID`,{observe:'response'});
+  }
+  getMoodleUserId(username:string):Observable<Object>{
+    return this.http.get<string>(`${this.moodleUrl}/grades/getStudentsUserId/${username}`);
   }
 }

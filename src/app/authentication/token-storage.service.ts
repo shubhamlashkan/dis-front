@@ -47,7 +47,9 @@ export class TokenStorageService {
     window.sessionStorage.removeItem(AUTHORITIES_KEY);
     window.sessionStorage.setItem(AUTHORITIES_KEY, JSON.stringify(authorities));
   }
-
+  public getMoodleUserId(){
+    return sessionStorage.getItem('moodleUserId');
+  }
   public getAuthorities(): string[] {
     this.roles = [];
 

@@ -20,8 +20,10 @@ import { RouteGuardService } from '../route-guard.service';
 import { FacultyModule } from './faculty.module';
 import { HomeComponent } from './home/home.component';
 import { AlertsComponent } from './alerts/alerts.component';
-
-//canActivate:[RouteGuardService],
+import { ClassAttendanceComponent } from './class-attendance/class-attendance.component';
+import {GradesComponent} from './grades/grades.component'
+import { AssignmentsComponent } from './assignments/assignments.component';
+canActivate:[RouteGuardService]
 const routes: Routes = [
   {
     path : 'faculty',
@@ -81,7 +83,19 @@ const routes: Routes = [
       {
         path: 'notification',
         component : AlertsComponent, 
-      }
+      },
+      {
+        path: 'class_attendance',
+        component: ClassAttendanceComponent
+      },
+      {
+        path: 'grades',
+        component: GradesComponent
+      },
+      {
+        path: 'assignments',
+        component:  AssignmentsComponent
+      },
       
      ]
   }

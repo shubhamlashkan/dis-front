@@ -1,6 +1,7 @@
 import { ConventionalModule } from './../conventional/conventional.module';
 import { AboutRoutingModule } from './../about/about-routing.module';
 import { AboutModule } from './../about/about.module';
+import { FormsModule } from '@angular/forms';
 import { CalendarComponent } from './../miscellaneous/calendar/calendar.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
@@ -19,10 +20,13 @@ import { MiscellaneousModule } from '../miscellaneous/miscellaneous.module';
 import { BarchartComponent } from '../miscellaneous/barchart/barchart.component';
 import { InfrastructureModule } from '../infrastructure/infrastructure.module';
 import { MatBadgeModule, MatIconModule } from '@angular/material';
+import { QuizComponent } from './quiz/quiz.component';
+import { QuizReviewComponent } from './quiz-review/quiz-review.component';
 
 
 @NgModule({
   imports: [
+    FormsModule,
     CommonModule,
     StudentRoutingModule,
     AboutModule,
@@ -42,7 +46,9 @@ import { MatBadgeModule, MatIconModule } from '@angular/material';
     ComplaintsComponent,
     StudentComponent,
     AttendanceComponent,
-    SidenavigationComponent
+    SidenavigationComponent,
+    QuizComponent,
+    QuizReviewComponent
   ],
   providers: [BarchartComponent],
   exports: [NavigationComponent]
