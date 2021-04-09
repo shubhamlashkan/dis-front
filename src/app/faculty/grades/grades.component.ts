@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FacultyService } from 'src/app/API_Service/faculty.service';
+import { JsonToCSVService } from 'src/app/API_Service/json-to-csv.service';
+import { TwoDToOneDService } from 'src/app/API_Service/two-dto-one-d.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-grades',
@@ -18,7 +21,7 @@ export class GradesComponent implements OnInit {
   showAll:boolean;
   graderReportGradeItems:any[];
 
-  constructor(private facultyService:FacultyService) { }
+  constructor(private facultyService:FacultyService,private TwoDToOneD: TwoDToOneDService,private jsonToCSV: JsonToCSVService) { }
  
   ngOnInit() {
     this.selectItem="0"
@@ -49,6 +52,7 @@ export class GradesComponent implements OnInit {
     this.facultyService.getGraderReport(this.selectCourse,this.selectItem).subscribe(data=>{
       this.graderReport=data;
       this.graderReportGradeItems=this.graderReport[0];
+      
     })
     if(this.selectItem=="0"){
       this.showAll=true;
@@ -62,7 +66,6 @@ export class GradesComponent implements OnInit {
   
     this.facultyService.getUserReport(this.selectCourse,this.selectStudent).subscribe(data=>{
       this.userReport=data;
-      console.log(this.userReport);
     })
   }
   changeItems(){
@@ -77,5 +80,16 @@ export class GradesComponent implements OnInit {
       this.selectStudent=this.students[0].id;
     })
   }
+  getCSV(tableId){
+    console.log(tableId);
+    let element = document.getElementById(tableId);
+    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
  
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+ 
+    /* save to file */  
+    XLSX.writeFile(wb, `${tableId}.xlsx`);
+  }
 }

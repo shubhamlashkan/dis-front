@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { StudentService } from 'src/app/API_Service/student.service';
 import { Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/authentication';
-
+import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-grades',
   templateUrl: './grades.component.html',
@@ -46,5 +46,16 @@ export class GradesComponent implements OnInit {
       
     })
   }
+  getCSV(tableId){
+    console.log(tableId);
+    let element = document.getElementById(tableId);
+    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
  
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+ 
+    /* save to file */  
+    XLSX.writeFile(wb, `${tableId}.xlsx`);
+  }
 }

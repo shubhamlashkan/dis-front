@@ -3,6 +3,7 @@ import { data } from 'jquery';
 import { JsonToCSVService } from 'src/app/API_Service/json-to-csv.service';
 import { TokenStorageService } from 'src/app/authentication';
 import {FacultyService} from './../../API_Service/faculty.service';
+import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-class-attendance',
   templateUrl: './class-attendance.component.html',
@@ -35,7 +36,6 @@ export class ClassAttendanceComponent implements OnInit {
           this.getAttendanceByMonth();
           this.facultyService.getStudentOfCourse(this.coursename[0].shortname).subscribe(data=>{
               this.noOfStudents=data.length;
-        
           })
         })
       }) 
@@ -71,7 +71,15 @@ export class ClassAttendanceComponent implements OnInit {
     }
     
   }     
-  getCSV(){
-    this.jsonToCSV.downloadFile(this.attendance, 'attendanceCSV');
+  getCSV(tableId){
+    let element = document.getElementById(tableId);
+    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+ 
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+ 
+    /* save to file */  
+    XLSX.writeFile(wb, `${tableId}.xlsx`);
   }                     
 }
