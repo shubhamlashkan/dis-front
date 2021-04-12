@@ -81,15 +81,42 @@ export class GradesComponent implements OnInit {
     })
   }
   getCSV(tableId){
-    console.log(tableId);
-    let element = document.getElementById(tableId);
-    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
- 
-    /* generate workbook and add the worksheet */
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
- 
-    /* save to file */  
-    XLSX.writeFile(wb, `${tableId}.xlsx`);
+    if(tableId=='userTable' && this.selectStudent=='0'){
+     
+      for(var i=0;i<this.userReport.length;i++){
+        let element = document.getElementById(this.userReport[i][0].firstName);
+        const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+     
+        /* generate workbook and add the worksheet */
+        
+        XLSX.utils.book_append_sheet(wb, ws,`${this.userReport[i][0].firstName}`);
+       
+      }
+     
+      /* save to file */  
+      
+    }else if(tableId=='userTable'){
+      let element = document.getElementById(this.userReport[0][0].firstName);
+      const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+   
+      /* generate workbook and add the worksheet */
+    
+      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+   
+      /* save to file */  
+     
+    }else{
+      let element = document.getElementById(tableId);
+      const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+   
+      /* generate workbook and add the worksheet */
+     
+      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+   
+      /* save to file */  
+     
+    }
+    XLSX.writeFile(wb, `${tableId}.xlsx`)
   }
 }

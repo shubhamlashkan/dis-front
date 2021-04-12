@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { JsonToCSVService } from 'src/app/API_Service/json-to-csv.service';
 import { StudentService } from 'src/app/API_Service/student.service';
 import { BarchartComponent } from './../../miscellaneous/barchart/barchart.component';
 import {StudentAttenance} from './../../Model/studentAttendance.model';
@@ -10,13 +11,13 @@ import {StudentAttenance} from './../../Model/studentAttendance.model';
 export class AttendanceComponent implements OnInit {
 
   bar:StudentAttenance[] ;
-  constructor(public chart: BarchartComponent,public studentService:StudentService) { }
+  constructor(public chart: BarchartComponent,public studentService:StudentService,private jsonToCSV: JsonToCSVService ) { }
 
   ngOnInit() {
    
     this.studentService.getStudentAttendance().subscribe(data=>{
        this.bar=data;
-      //  console.log(data);
+       console.log(data);
        this.chart.getBarChart('barChart',this.bar);
     });
      
@@ -48,5 +49,8 @@ export class AttendanceComponent implements OnInit {
     document.getElementById('leaveinfo').style.display = 'none';
     this.closeNav();
   }
-
+  getCSV(){
+    console.log(Object.keys);
+    this.jsonToCSV.downloadFile(this.bar,'attendance',["username","firstname","lastname","coursename","attendance","slot","percentage"]);
+  }
 }

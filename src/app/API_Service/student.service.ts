@@ -54,6 +54,11 @@ export class StudentService {
     this.moodleUserId=this.sessionStorageService.getMoodleUserId();
     return this.http.get<any[]>(`${this.assnsUrl}/getStudentSubjectReport/${this.moodleUserId}/${courseId}`);
   }
+  public getNoOfPendingAssignments()
+  :Observable<any>{
+    this.moodleUserId=this.sessionStorageService.getMoodleUserId();
+    return this.http.get<any[]>(`${this.assnsUrl}/getNumberOfPendingAssignments/${this.moodleUserId}`);
+  }
   // public login(Student: Object): Observable<Object> {
   //   return this.http.post(`${this.baseUrl}` + `/login`, Student);
   // }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { JsonToCSVService } from 'src/app/API_Service/json-to-csv.service';
 import { StudentService } from 'src/app/API_Service/student.service';
 import { SemesterSubjectsService } from './../../API_Service/SemesterSubjectsService';
 
@@ -11,7 +12,7 @@ export class AssignmentsComponent implements OnInit {
 
   courses: any[];
   assignments:any[];
-  constructor(private semSubjects: SemesterSubjectsService,private studentService: StudentService) { }
+  constructor(private semSubjects: SemesterSubjectsService,private studentService: StudentService,private jsonToCSV: JsonToCSVService) { }
   showCourse :any={};
   ngOnInit() {
     
@@ -32,8 +33,11 @@ export class AssignmentsComponent implements OnInit {
     this.showCourse.code=this.courses[courseId].courseCode
     courseId=this.courses[courseId].courseId;
     this.studentService.getAssignments(courseId).subscribe(data=>{
-      // console.log(data);
+      console.log(data);
       this.assignments=data;
     })
+  }
+  getCSV(){
+    this.jsonToCSV.downloadFile(this.assignments,"assignments",["courseCode","courseName","assignmentName","submitted","gradeObtained","gradeMaximum","dateOfCreation","dueDate","dateOfSubmission"])
   }
 }

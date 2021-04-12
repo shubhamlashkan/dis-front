@@ -65,7 +65,7 @@
       <div class="card-body " *ngFor="let assign of assignments">
 		<div class="alert alert-success row m-0 " *ngIf="assign.submitted">
 			<h4 class="col-8">{{assign.assignmentName}}</h4>		<h6 class="col-4">By: Prof {{assign.courseTeacherFirstName}} {{assign.courseTeacherLastName}}</h6>
-			<p class="col-8"> Date of Submission  : {{assign.dueDate}}</p>
+			<p class="col-8"> Date of Submission  : {{assign.dateOfSubmission}}</p>
 			<div class="col-4">
 			<p>grades: {{assign.gradeObtained}}/{{assign.gradeMaximum}}</p>
 			</div>
@@ -80,7 +80,8 @@
 
     </div>
   </div>
-  <button class="btn btn-success">Export as csv</button>
+  <br>
+  <button (click)="getCSV()" class="btn btn-success">Export as csv</button>
   <!--Middle Section finish-->
 </div>
 </div>

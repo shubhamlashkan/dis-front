@@ -37,10 +37,8 @@ export class GradesComponent implements OnInit {
     })
    
   }
-  getSubjectReport(){
-    // this.studentService.getStudentSubjectReport(this.courseId).subscribe(data=>{
-    //   this.subjectReport=data;
-    // })
+  getUserReport(){
+   
     this.studentService.getStudentUserReport(this.courseId).subscribe(data=>{
       this.subjectReport=data;
       

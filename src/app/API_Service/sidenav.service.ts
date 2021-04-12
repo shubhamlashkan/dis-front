@@ -10,6 +10,6 @@ export class SidenavService {
   private baseUrl = this.urls.mainurl;
   constructor(private http : HttpClient) { }
   getSideNavData():Observable<any>{
-    return this.http.get('http://13.126.254.128:8080/dis/user/getSideNavigation');
+    return this.http.get('http://13.126.254.128:8081/dis/user/getSideNavigation');
   }
 }
