@@ -69,7 +69,7 @@ export class AssignmentsComponent implements OnInit {
   getCSV(){
     let element = document.getElementById('assignExcel');
     const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
- 
+    ws['!cols'].push({ width: 20 },{ width: 20 },{ width: 20 },{ width: 15 },{ width: 25 },{ width: 25 })
     /* generate workbook and add the worksheet */
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');

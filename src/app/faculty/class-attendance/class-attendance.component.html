@@ -77,10 +77,10 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="bg-light" *ngFor="let data of filteredAttendance">
+                <tr class="bg-light" *ngFor="let data of filteredAttendance;let i=index">
                   <td scope="col">{{data.firstname}} {{data.lastname}}</td>
                   <td scope="col">{{data.coursename}}</td>
-                  <td scope="col">2/2</td>
+                  <td scope="col" *ngFor="let slot of slots[i]">{{slot.attendance}}  /  {{slot.slot}}</td>
                 
               </tbody>
             </table>
