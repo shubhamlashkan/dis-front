@@ -8,6 +8,10 @@ import { LibraryComponent } from "./library/library/library.component";
 import { TimetableRoutingModule } from "./timetable/timetable-routing.module";
 import { MydutiesComponent } from "./myduties/myduties.component";
 import { MytaskComponent } from "./mytask/mytask.component";
+import { ProjectguideallotmentComponent } from "./projectguideallotment/projectguideallotment.component";
+import { ExpertlectureComponent } from "./expertlecture/expertlecture.component";
+import { IndustryvisitComponent } from "./industryvisit/industryvisit.component";
+import { MescholarshipComponent } from "./mescholarship/mescholarship.component";
 
 
 
@@ -41,6 +45,18 @@ const routes: Routes = [
       }, 
       {
         path:'',component:MytaskComponent
+      },
+      {
+        path: 'projectguideallotment',component: ProjectguideallotmentComponent
+      },
+      {
+        path: 'expertlecture',component: ExpertlectureComponent
+      },
+      {
+        path: 'industryvisit',component: IndustryvisitComponent
+      },
+      {
+        path: 'mescholarship',component: MescholarshipComponent
       }
       
        
