@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { NgForm } from "@angular/forms";
+import { ToastrManager } from "ng6-toastr-notifications";
 import { IndustryvisitService } from "src/app/API_Service/industryvisit.service";
 
 
@@ -15,17 +16,12 @@ export class IndustryVisits{
 	) {}
 }
 
-export class AddIndustryVisits{
+export class UpdateIndustryDetails{
 	constructor(
 		public participants,
-		public address,
-		public city,
-		public companyName,
 		public coordinator1,
 		public coordinator2,
 		public date,
-		public pin,
-		public state,
 		public time
 	) {}
 }
@@ -46,7 +42,8 @@ export class IndustryDetails{
 		public industryVisitId,
 		public notesheet,
 		public status,
-		public totalExpenditure
+		public totalExpenditure,
+		public remarks
 
 	) {}
 }
@@ -63,7 +60,7 @@ export class IndustryDetails{
 
 
 export class IndustryvisitComponent implements OnInit {
-	constructor(private industryVisitService: IndustryvisitService) {}
+	constructor(private industryVisitService: IndustryvisitService, public toastr: ToastrManager) {}
 	pendingVisits:IndustryVisits[];
 	upcomingVisits: IndustryVisits[];
 	completedVisits: IndustryVisits[];
@@ -73,6 +70,8 @@ export class IndustryvisitComponent implements OnInit {
 	changeVisitID: string;
 	deleteVisit:any[];
 	notesheet:File;
+	editingVisit: UpdateIndustryDetails;
+	editingVisitID: string;
 
 	@ViewChild("f1") addIndustryVisitForm: NgForm;
 
@@ -91,19 +90,46 @@ export class IndustryvisitComponent implements OnInit {
 	changeTab3() {
 		this.activeTab = 3;
 	}
-	editIndustryVisit(){
-
+	editIndustryVisit(visit){
+		this.editingVisitID=visit.industryVisitId;
+		this.editingVisit=new UpdateIndustryDetails(visit.participants, visit.coordinator1, visit.coordinator2, visit.date, visit.time);
 	}
+	updateIndustryVisit(){
+		if (confirm("Do you want to update this visit?")) {
+			this.industryVisitService.updateIndustryVisit(this.editingVisitID, this.editingVisit).subscribe(
+				(response) => {
+					this.refreshVisits();
+					this.toastr.successToastr(response.message, 'Success!', {toastTimeout: 3000});
+				},
+				(error) => {
+					this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
+				}
+			);
+		}
+	}
+
+	updateRemarks(){
+		this.industryVisitService.updateRemarks(this.industryDetails.industryVisitId, this.industryDetails.remarks).subscribe(
+			(response) => {
+				this.refreshVisits();
+				this.toastr.successToastr(response.message, 'Success!', {toastTimeout: 3000});
+			},
+			(error) => {
+				this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
+			}
+		);
+	}
+
 	deleteIndustry(name, industryVisitId){
 		if (confirm("Do you want to delete visit to " + name + "?")) {
 			
 			this.industryVisitService.deleteIndustryVisit(industryVisitId).subscribe(
 				(response) => {
-					console.log(response);
+					this.refreshVisits();
+					this.toastr.successToastr(response.message, 'Success!', {toastTimeout: 3000});
 				},
 				(error) => {
-					alert(error.error.text);
-					this.refreshVisits();
+					this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
 				}
 			);
 		}
@@ -193,9 +219,10 @@ export class IndustryvisitComponent implements OnInit {
 				.subscribe(
 					(response) => {
 						this.refreshVisits();
+						this.toastr.successToastr(response.message, 'Success!', {toastTimeout: 3000});
 					},
 					(error) => {
-						alert(error.error.text);
+						this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
 						this.refreshVisits();
 					}
 				);
@@ -220,12 +247,11 @@ export class IndustryvisitComponent implements OnInit {
 	addIndustryVisit(){
 		this.industryVisitService.addIndustryVisit(this.addIndustryVisitForm.form.value).subscribe(
 			(response) => {
-				console.log(response);
 				this.refreshPendingVisits();
+				this.toastr.successToastr(response.message, 'Success!', {toastTimeout: 3000});
 			},
 			(error) => {
-				alert(error.error.text);
-				this.refreshPendingVisits();
+				this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
 			}
 		);
 	}

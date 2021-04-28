@@ -1,31 +1,42 @@
-.space{
-    margin: 0 0 0 20%;
+.theading{
+    background-color: gray;
+    font-size: 1.2em;
+    text-align: center;
 }
-.lessSpace{
-    margin: 0 10% 0 1%,
-}
-
 .center {
     display: flex;
     justify-content: center;
-}
-.wrapper {
-    margin-left: 50%;
-}
+  }
 thead{
     font-size: 1.2em;
     text-align: center;
+}
+h6{
+    text-align: center;
+    width: 100%;
+    font-size: 1.2em;
 }
 label, select{
     font-size: 1.1em;
 }
 table tr td:first-child{
     font-weight: 700;
+    font-size: 1.1em;
+}
+input[type='checkbox'] {
+    position: relative;
 }
 td{
-    padding: 1.05em;
+    padding: 1.02em;
     text-align: center;
     font-size: 1.2em;
+}
+#year{
+    text-align: center;
+    margin-left: 46%;
+}
+#groupsize{
+    margin-left: 1%;
 }
 .box {
     padding: 1%;
@@ -51,3 +62,13 @@ td{
     margin:0%;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   }
+  .last{
+    margin-bottom: 50px;
+}
+// table{
+//     text-align: center;
+//     font-family: Arial;
+//     font-size: 15px;
+//     width: 600px;
+//     color: black;
+// }

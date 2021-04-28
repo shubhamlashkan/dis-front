@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormArray, FormControl, NgForm } from "@angular/forms";
 import { ExpertlectureService } from "src/app/API_Service/expertlecture.service";
+import { ToastrManager } from 'ng6-toastr-notifications';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export class Expert {
 	constructor(
@@ -47,31 +49,23 @@ export class LectureDetails {
 		public time,
 		public topic,
 		public totalAmount,
-		public venue
+		public venue,
+		public remarks
+	) {}
+}
+export class UpdateLecture {
+	constructor(
+		public coordinator,
+		public venue,
+		public conveyance,
+		public audience,
+		public honorarium,
+		public time,
+		public date
 	) {}
 }
 
-export class Lecture {
-	constructor(
-		public coordinator: string,
-		public attendance,
-		public conveyance: number,
-		public course: string,
-		public date: Date,
-		public expertLectureId: string,
-		public expertName: string,
-		public expertDesignation: string,
-		public honorarium: number,
-		public notesheet: string,
-		public payment_status: string,
-		public status: string,
-		public time: string,
-		public topic: string,
-		public totalAmount: number,
-		public venue: string,
-		public audience: string
-	) {}
-}
+
 @Component({
 	selector: "app-expertlecture",
 	templateUrl: "./expertlecture.component.html",
@@ -81,11 +75,19 @@ export class ExpertlectureComponent implements OnInit {
 	@ViewChild("f1") addExpertForm: NgForm;
 	@ViewChild("f2") addExpertLectureForm: NgForm;
 	@ViewChild("f3") showExpertDetails: NgForm;
+	@ViewChild("f4") showExpertDetails1: NgForm;
+	@ViewChild("f5") showExpertDetails2: NgForm;
+	@ViewChild("f6") showExpertDetails3: NgForm;
+	@ViewChild("f7") showExpertDetails4: NgForm;
 
-	constructor(private expertService: ExpertlectureService) {
+	constructor(private expertService: ExpertlectureService, public toastr: ToastrManager) {
 		
 	}
-
+	paymentStatusList: Array<any> = [
+		{ name: "Pending"},
+		{ name: "Initiated"},
+		{ name: "Completed"}
+	];
 	courses: Array<any> = [
 		{ name: "BE-I", value: "BE-I" },
 		{ name: "BE-II", value: "BE-II" },
@@ -95,9 +97,9 @@ export class ExpertlectureComponent implements OnInit {
 		{ name: "ME-II", value: "ME-II" },
 	];
 	experts: Expert[];
-	pendingLectures: Lecture[];
-	upcommingLectures: Lecture[];
-	completedLectures: Lecture[];
+	pendingLectures: LectureDetails[];
+	upcommingLectures: LectureDetails[];
+	completedLectures: LectureDetails[];
 	nd: ExpertName[];
 	selectedExpert = "None";
 	deleteExpertLecture: any[];
@@ -107,6 +109,7 @@ export class ExpertlectureComponent implements OnInit {
 	selectedAudience: any[];
 	notesheet: File;
 	editExpert = "None";
+
 	// editExpertLecture: any[];
 	// selectedCourse;
 	// years: any[];
@@ -116,6 +119,8 @@ export class ExpertlectureComponent implements OnInit {
 	activeTab = 1;
 	editingExpert: Expert;
 	lectureDetails: LectureDetails;
+	editingLecture: UpdateLecture;
+	editingLectureID: string;
 
 	ngOnInit() {
 		this.deleteExpertLecture=[];
@@ -128,11 +133,11 @@ export class ExpertlectureComponent implements OnInit {
 		this.addExpertForm.form.value.designation = this.addExpertForm.form.value.designation.trim();
 		this.expertService.addExpert(this.addExpertForm.form.value).subscribe(
 			(response) => {
-				console.log(response);
+				this.toastr.successToastr(response.message, 'Success!', {toastTimeout: 3000});
 				this.refreshExperts();
 			},
 			(error) => {
-				alert(error.error.text);
+				this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
 				this.refreshExperts();
 			}
 		);
@@ -160,10 +165,11 @@ export class ExpertlectureComponent implements OnInit {
 			// delete this.editingExpert.expertId;
 			this.expertService.deleteExpert(this.editingExpert.expertId).subscribe(
 				(response) => {
-					console.log(response);
+					this.toastr.successToastr(response.message, 'Success!', {toastTimeout: 3000});
+					this.refreshExperts();
 				},
 				(error) => {
-					alert(error.error.text);
+					this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
 					this.refreshExperts();
 				}
 			);
@@ -174,10 +180,11 @@ export class ExpertlectureComponent implements OnInit {
 		if (confirm("Do you want to delete " + name + "?")) {
 			this.expertService.deleteExpertLecture(expertLectureID).subscribe(
 				(response) => {
-					console.log(response);
+					this.toastr.successToastr(response.message, 'Success!', {toastTimeout: 3000});
+					this.refreshLectures();
 				},
 				(error) => {
-					alert(error.error.text);
+					this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
 					this.refreshLectures();
 				}
 			);
@@ -206,18 +213,6 @@ export class ExpertlectureComponent implements OnInit {
 		else return 1;
 	}
 
-	// getCourses() {
-	// 	console.log(this.selectedCourse);
-	// 	if (this.selectedCourse == "B. Tech") {
-	// 		this.years = ["I year", "II year", "III year", "IV year"];
-	// 		console.log(this.years);
-	// 		return 1;
-	// 	} else if (this.selectedCourse == "M. Tech") {
-	// 		this.years = ["I year", "II year"];
-	// 		return 1;
-	// 	}
-	// 	return 0;
-	// }
 	changeTab1() {
 		this.activeTab = 1;
 	}
@@ -246,10 +241,11 @@ export class ExpertlectureComponent implements OnInit {
 				.subscribe(
 					(response) => {
 						// console.log(response);
+						this.toastr.successToastr(response.message, 'Success!', {toastTimeout: 3000});
 						this.refreshLectures();
 					},
 					(error) => {
-						alert(error.error.text);
+						this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
 						this.refreshLectures();
 					}
 				);
@@ -260,26 +256,7 @@ export class ExpertlectureComponent implements OnInit {
 	}
 	downloadAttendance(){
 		let url=this.expertService.downloadAttendance(this.lectureDetails.expertLectureId);
-		// console.log(url);
 		window.location.href=url;
-		// this.expertService
-		// 	.downloadAttendance(this.lectureDetails.expertLectureId)
-		// 	.subscribe((response) => {
-		// 		console.log(response);
-		// 		let blob:any = new Blob([response]);
-		// 		// saveAs(blob);
-		// 		const url = window.URL.createObjectURL(blob);
-		// 		window.open(url);
-		// 	//window.location.href = response.url;
-		// 	},
-		// 	(error) => {
-		// 		console.log(error.url);
-		// 		let blob:any = new Blob([error.error.text], { type: 'application/pdf; charset=utf-8' });
-		// 		// const url = window.URL.createObjectURL(blob);
-		// 		// window.open(url);
-		// 		saveAs(blob,"Gunjan.pdf");
-		// 	}
-		// 	);
 	}
 	downloadNotesheet(){
 		let url=this.expertService.downloadNotesheet(this.lectureDetails.expertLectureId);
@@ -296,9 +273,39 @@ export class ExpertlectureComponent implements OnInit {
 				this.lectureDetails = response;
 			});
 	}
-	editExpertLecture(){
-		alert("Edit lecture")
+	editExpertLecture(lecture){
+		this.expertService.getExpertLectureDetails(lecture.expertLectureId).subscribe((response) => {
+				lecture = response;
+				this.editingLecture = new UpdateLecture(lecture.coordinator, lecture.venue, lecture.conveyance, lecture.audience, lecture.honorarium, lecture.time, lecture.date);
+				this.editingLectureID=lecture.expertLectureId
+			});
 	}
+
+	updateExpertLecture(){
+		if (confirm("Do you want to edit this lecture?")) {
+			this.expertService.updateExpertLecture(this.editingLectureID, this.editingLecture).subscribe(
+				(response) => {
+					this.toastr.successToastr(response.message, 'Success!', {toastTimeout: 3000});
+					this.editingLecture = null;
+					this.editingLectureID = null;
+				},
+				(error) => {
+					this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
+				}
+			);
+		}
+	}
+	updatePayementStatusAndRemarks(){
+		this.expertService.updatePaymentStatusAndRemarks(this.lectureDetails.expertLectureId, this.lectureDetails.paymentStatus, this.lectureDetails.remarks).subscribe(
+			(response) => {
+				this.toastr.successToastr(response.message, 'Success!', {toastTimeout: 3000});
+			},
+			(error) => {
+				this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
+			}
+		);
+	}
+
 	refreshLectures() {
 		if(this.activeTab==1)
 			this.refreshPendingLectures();
@@ -318,9 +325,12 @@ export class ExpertlectureComponent implements OnInit {
 	editExpertDetails() {
 		if (confirm("Do you want to edit " + this.editingExpert.name + " ?")) {
 			this.expertService.updateExpert(this.editingExpert).subscribe(
-				(response) => {},
+				(response) => {
+					this.toastr.successToastr(response.message, 'Success!', {toastTimeout: 3000});
+
+				},
 				(error) => {
-					alert(error.error.text);
+					this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
 				}
 			);
 		}
@@ -387,20 +397,17 @@ export class ExpertlectureComponent implements OnInit {
 			this.addExpertLectureForm.form.value.audience=this.selectedAudience.join(",");
 		else
 			this.addExpertLectureForm.form.value.audience="BE-I,BE-II,BE-III,BE-IV,ME-I,ME-II"
-		// this.addExpertLectureForm.form.value.year = this.selectedYear;
-		// this.addExpertLectureForm.form.value.course = "Computer Science";
-		// console.log(JSON.stringify(this.addExpertLectureForm.form.value));
 		this.expertService
 			.addExpertLecture(this.addExpertLectureForm.form.value)
 			.subscribe(
 				(response) => {
 					// console.log(response);
+					this.toastr.successToastr(response.message, 'Success!', {toastTimeout: 3000});
 					this.refreshLectures();
 				},
 				(error) => {
 					// console.log(error);
-					alert(error.error.text);
-					this.refreshLectures();
+					this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
 				}
 			);
 	}

@@ -12,15 +12,13 @@ import { MescholarshipComponent } from './mescholarship/mescholarship.component'
 import { IndustryvisitComponent } from './industryvisit/industryvisit.component';
 import { ExpertlectureComponent } from './expertlecture/expertlecture.component';
 
-
 @NgModule({
   imports: [
     CommonModule,
     LibraryModule,
     TimetableModule,
     MydutiesRoutingModule,
-    FormsModule
-    
+    FormsModule,
   ],
   declarations: [MydutiesNavigationComponent, MydutiesComponent, MytaskComponent, ProjectguideallotmentComponent, MescholarshipComponent, IndustryvisitComponent, ExpertlectureComponent]
 })

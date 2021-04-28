@@ -40,6 +40,21 @@ export class IndustryvisitService {
 		);
 	}
 
+	updateRemarks(industryVisitId, remarks) {
+		let params = new HttpParams();
+    	params = params.append("remarks", remarks);
+		return this.http.put<any>(
+			`${this.baseUrl}/industryVisit/updateRemarks/${industryVisitId}`,params
+		);
+	}
+
+	updateIndustryVisit(industryVisitId, visit) {
+		return this.http.put<any>(
+			`${this.baseUrl}/industryVisit/editIndustryVisit/${industryVisitId}`,
+			visit
+		);
+	}
+
   addIndustryVisit(visit) {
 		return this.http.post<any>(
 			`${this.baseUrl}/industryVisit/addIndustryVisit`,
@@ -48,11 +63,6 @@ export class IndustryvisitService {
 	}
 
 
-  editIndustryVisit(visit){
-    return this.http.put(
-			`${this.baseUrl}/industryVisit/editIndustryVisit`,
-			visit);
-  }
 
   updateIndustryVisitStatus(industryVisitId, file) {
 		return this.http.put<any>(
@@ -65,7 +75,7 @@ export class IndustryvisitService {
 		);
 	}
 	deleteIndustryVisit(visitID) {
-		return this.http.delete(
+		return this.http.delete<any>(
 			`${this.baseUrl}/industryVisit/deleteIndustryVisit/${visitID}`);
 	}
 	

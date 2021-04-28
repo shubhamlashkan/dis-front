@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import {
-	Lecture,
 	LectureDetails,
 } from "../myduties/expertlecture/expertlecture.component";
 import { apiSetting } from "../urls/apisetting";
@@ -14,19 +13,19 @@ export class ExpertlectureService {
 	constructor(private http: HttpClient) {}
 
 	retrievePendingExpertLectures() {
-		return this.http.get<Lecture[]>(
+		return this.http.get<LectureDetails[]>(
 			`${this.baseUrl}/expertLecture/getExpertLecturesByStatus/pending`
 		);
 	}
 
 	retrieveUpcommingExpertLectures() {
-		return this.http.get<Lecture[]>(
+		return this.http.get<LectureDetails[]>(
 			`${this.baseUrl}/expertLecture/getExpertLecturesByStatus/upcoming`
 		);
 	}
 
 	retrieveCompletedExpertLectures() {
-		return this.http.get<Lecture[]>(
+		return this.http.get<LectureDetails[]>(
 			`${this.baseUrl}/expertLecture/getExpertLecturesByStatus/completed`
 		);
 	}
@@ -51,6 +50,14 @@ export class ExpertlectureService {
 			params: params,
 		});
 	}
+	updatePaymentStatusAndRemarks(expertLectureID, payment_status, remarks) {
+		let params = new HttpParams();
+		params = params.append("payment_status", payment_status);
+		params = params.append("remarks", remarks);
+		return this.http.put<any>(`${this.baseUrl}/expertLecture/updatePaymentStatusAndRemarks/${expertLectureID}`, 
+			params
+		);
+	}
 	updateExpert(expert) {
 		return this.http.put<any>(
 			`${this.baseUrl}/expertLecture/editExpert`,
@@ -58,15 +65,22 @@ export class ExpertlectureService {
 		);
 	}
 
+	updateExpertLecture(expertLectureID,lecture){
+		return this.http.put<any>(
+			`${this.baseUrl}/expertLecture/editExpertLecture/${expertLectureID}`,
+			lecture
+		);
+	}
+
 
 
 	deleteExpert(expertID) {
-		return this.http.delete(
+		return this.http.delete<any>(
 			`${this.baseUrl}/expertLecture/deleteExpert/${expertID}`);
 	}
 
 	deleteExpertLecture(expertLectureID) {
-		return this.http.delete(
+		return this.http.delete<any>(
 			`${this.baseUrl}/expertLecture/deleteExpertLecture/${expertLectureID}`);
 	}
 
@@ -74,7 +88,7 @@ export class ExpertlectureService {
 		let params = new HttpParams();
 		params = params.append("keyword", keyword);
 		params = params.append("status", activeTab);
-		return this.http.get<Lecture[]>(
+		return this.http.get<LectureDetails[]>(
 			`${this.baseUrl}/expertLecture/searchExpertLectures`,{
 				params: params
 			}

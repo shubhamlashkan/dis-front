@@ -275,26 +275,27 @@
 													</option>
 												</select>
 											</div>
+											<div class="modal-footer">
+												<button
+													type="button"
+													class="btn btn-secondary"
+													data-dismiss="modal"
+												>
+													Close
+												</button>
+												<button
+													type="button"
+													class="btn btn-primary"
+													data-dismiss="modal"
+													[disabled]="f1.invalid"
+													(click)="allotguide()"
+												>
+													Allot
+												</button>
+											</div>
 										</form>
 									</div>
-									<div class="modal-footer">
-										<button
-											type="button"
-											class="btn btn-secondary"
-											data-dismiss="modal"
-										>
-											Close
-										</button>
-										<button
-											type="button"
-											class="btn btn-primary"
-											data-dismiss="modal"
-											[disabled]="f1.invalid"
-											(click)="allotguide()"
-										>
-											Allot
-										</button>
-									</div>
+									
 								</div>
 							</div>
 						</div>
@@ -462,6 +463,7 @@
 								</tr>
 							</table>
 						</div>
+						<div class="last"></div>
 					</div>
 				</div>
 			</div>

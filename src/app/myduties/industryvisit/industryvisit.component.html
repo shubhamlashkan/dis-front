@@ -160,26 +160,27 @@
 									</div>
 								</div>
 							</div>
+							<div class="modal-footer">
+								<button
+									type="button"
+									class="btn btn-secondary"
+									data-dismiss="modal"
+								>
+									Close
+								</button>
+								<button
+									type="button"
+									class="btn btn-primary"
+									data-dismiss="modal"
+									(click)="addIndustryVisit()"
+									[disabled]="f1.invalid"
+								>
+									Add Industry Visit
+								</button>
+							</div>
 						</form>
 					</div>
-					<div class="modal-footer">
-						<button
-							type="button"
-							class="btn btn-secondary"
-							data-dismiss="modal"
-						>
-							Close
-						</button>
-						<button
-							type="button"
-							class="btn btn-primary"
-							data-dismiss="modal"
-							(click)="addIndustryVisit()"
-							[disabled]="f1.invalid"
-						>
-							Add Industry Visit
-						</button>
-					</div>
+					
 				</div>
 			</div>
 		</div>
@@ -362,6 +363,17 @@
 									disabled
 								/>
 							</div>
+							<div class="form-group">
+								<label for="remarks">Remarks</label>
+								<input
+									type="text"
+									class="form-control"
+									id="remarks"
+									name="remarks"
+									[(ngModel)]="industryDetails.remarks"
+									ngModel
+								/>
+							</div>
 						</form>
 					</div>
 					<div class="modal-footer">
@@ -376,8 +388,9 @@
 							type="button"
 							class="btn btn-primary"
 							data-dismiss="modal"
+							(click)="updateRemarks()"
 						>
-							Done
+							Save Changes
 						</button>
 					</div>
 				</div>
@@ -422,26 +435,27 @@
 									ngModel
 								/>
 							</div>
+							<div class="modal-footer">
+								<button
+									type="button"
+									class="btn btn-secondary"
+									data-dismiss="modal"
+								>
+									Close
+								</button>
+								<button
+									type="button"
+									class="btn btn-primary"
+									data-dismiss="modal"
+									(click)="changeStatus()"
+									[disabled]="f3.invalid"
+								>
+									Change status to Upcoming
+								</button>
+							</div>
 						</form>
 					</div>
-					<div class="modal-footer">
-						<button
-							type="button"
-							class="btn btn-secondary"
-							data-dismiss="modal"
-						>
-							Close
-						</button>
-						<button
-							type="button"
-							class="btn btn-primary"
-							data-dismiss="modal"
-							(click)="changeStatus()"
-							[disabled]="f3.invalid"
-						>
-							Change status to Upcoming
-						</button>
-					</div>
+					
 				</div>
 			</div>
 		</div>
@@ -506,6 +520,122 @@
 							Change status to Completed
 						</button>
 					</div>
+				</div>
+			</div>
+		</div>
+		<div
+			class="modal fade"
+			id="exampleModal5"
+			tabindex="-1"
+			role="dialog"
+			aria-labelledby="exampleModalLabel5"
+			aria-hidden="true"
+		>
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel5">
+							Update Industry Visit
+						</h5>
+						<button
+							type="button"
+							class="close"
+							data-dismiss="modal"
+							aria-label="Close"
+						>
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div
+							class="alert alert-warning"
+							*ngIf="f1.dirty && f1.invalid"
+						>
+							Enter all required values
+						</div>
+						<form #f5="ngForm" *ngIf="editingVisit">
+							<div class="form-group">
+								<label for="participants">Participants</label>
+								<input
+									type="text"
+									class="form-control"
+									id="participants"
+									name="participants"
+									[(ngModel)]="editingVisit.participants"
+									required
+									ngModel
+								/>
+							</div>
+							<!-- <small></small> -->
+							<div class="form-group">
+								<label for="coordinator1">Coordinator-1</label>
+								<input
+									type="text"
+									class="form-control"
+									id="coordinator1"
+									name="coordinator1"
+									[(ngModel)]="editingVisit.coordinator1"
+									required
+									ngModel
+								/>
+							</div>
+							<div class="form-group">
+								<label for="coordinator2">Coordinator-2</label>
+								<input
+									type="text"
+									class="form-control"
+									id="coordinator2"
+									name="coordinator2"
+									[(ngModel)]="editingVisit.coordinator2"
+									required
+									ngModel
+								/>
+							</div>
+							<div class="form-group">
+								<label for="date">Date of Visit</label>
+								<input
+									type="date"
+									class="form-control"
+									id="date"
+									name="date"
+									[(ngModel)]="editingVisit.date"
+									required
+									ngModel
+								/>
+							</div>
+							<div class="form-group">
+								<label for="time">Time</label>
+								<input
+									type="time"
+									class="form-control"
+									id="time"
+									name="time"
+									[(ngModel)]="editingVisit.time"
+									required
+									ngModel
+								/>
+							</div>
+							<div class="modal-footer">
+								<button
+									type="button"
+									class="btn btn-secondary"
+									data-dismiss="modal"
+								>
+									Close
+								</button>
+								<button
+									type="button"
+									class="btn btn-primary"
+									data-dismiss="modal"
+									(click)="updateIndustryVisit()"
+									[disabled]="f5.invalid"
+								>
+									Update Industry Visit
+								</button>
+							</div>
+						</form>
+					</div>
+					
 				</div>
 			</div>
 		</div>
@@ -722,7 +852,9 @@
 							<button
 							type="button"
 							class="beautify1 btn btn-warning"
-							(click)="editIndustryVisit()"
+							data-toggle="modal"
+							data-target="#exampleModal5"
+							(click)="editIndustryVisit(visit)"
 						>
 							<i
 								class="fa fa-pencil"
