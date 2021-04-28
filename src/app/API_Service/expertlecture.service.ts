@@ -102,6 +102,13 @@ export class ExpertlectureService {
 		);
 	}
 
+	uploadImages(lectureID, file) {
+		return this.http.post<any>(
+			`${this.baseUrl}/expertLecture/uploadImages/${lectureID}`,
+			file
+		);
+	}
+
 	addExpertLecture(lecture) {
 		return this.http.post<any>(
 			`${this.baseUrl}/expertLecture/addExpertLecture`,
@@ -126,6 +133,17 @@ export class ExpertlectureService {
 		// return this.http.get<any>(
 		// 	`${this.baseUrl}/expertLecture/downloadNotesheet/${lectureID}`);
 		return `${this.baseUrl}/expertLecture/downloadNotesheet/${lectureID}`
+
+	}
+
+	viewImages(lectureId){
+		let params = new HttpParams();
+		params = params.append("expert_lecture_id", lectureId);
+		const options = { params: params};
+		return this.http.get<any>(
+			`${this.baseUrl}/expertLecture/images`,options
+		);
+
 
 	}
 }

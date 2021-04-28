@@ -75,10 +75,6 @@ export class ExpertlectureComponent implements OnInit {
 	@ViewChild("f1") addExpertForm: NgForm;
 	@ViewChild("f2") addExpertLectureForm: NgForm;
 	@ViewChild("f3") showExpertDetails: NgForm;
-	@ViewChild("f4") showExpertDetails1: NgForm;
-	@ViewChild("f5") showExpertDetails2: NgForm;
-	@ViewChild("f6") showExpertDetails3: NgForm;
-	@ViewChild("f7") showExpertDetails4: NgForm;
 
 	constructor(private expertService: ExpertlectureService, public toastr: ToastrManager) {
 		
@@ -109,6 +105,7 @@ export class ExpertlectureComponent implements OnInit {
 	selectedAudience: any[];
 	notesheet: File;
 	editExpert = "None";
+	imagesList: any;
 
 	// editExpertLecture: any[];
 	// selectedCourse;
@@ -231,8 +228,34 @@ export class ExpertlectureComponent implements OnInit {
 	selectFileInput(file){
 		this.notesheet=file[0];
 	}
+	selectPhotoInput(file){
+		this.imagesList=file;
+	}
 	changeStatus() {
-		// alert("Changing Status!");
+		if (confirm("Do you want to change status of " + this.changeTopic + "?")) {
+			const formData= new FormData();
+			formData.append('file',this.notesheet);
+			this.expertService
+				.updateExpertLectureStatus(this.changeExpertLectureID,formData)
+				.subscribe(
+					(response) => {
+						// console.log(response);
+						this.toastr.successToastr(response.message, 'Success!', {toastTimeout: 3000});
+						this.refreshLectures();
+						this.notesheet=null;
+					},
+					(error) => {
+						this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
+						this.refreshLectures();
+					}
+				);
+		}
+		else{
+			this.refreshLectures();
+		}
+	}
+
+	changeStatus2() {
 		if (confirm("Do you want to change status of " + this.changeTopic + "?")) {
 			const formData= new FormData();
 			formData.append('file',this.notesheet);
@@ -249,17 +272,46 @@ export class ExpertlectureComponent implements OnInit {
 						this.refreshLectures();
 					}
 				);
+			const formData2= new FormData();
+			for(var i=0;i<this.imagesList.length;i++)
+				formData2.append('photos',this.imagesList[i]);
+				this.expertService
+				.uploadImages(this.changeExpertLectureID,formData2)
+				.subscribe(
+					(response) => {
+						this.toastr.successToastr(response.message, 'Success!', {toastTimeout: 3000});
+						this.refreshLectures();
+						this.imagesList=null;
+					},
+					(error) => {
+						this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
+						this.refreshLectures();
+					}
+				);
 		}
 		else{
 			this.refreshLectures();
 		}
 	}
+
 	downloadAttendance(){
 		let url=this.expertService.downloadAttendance(this.lectureDetails.expertLectureId);
 		window.location.href=url;
 	}
 	downloadNotesheet(){
 		let url=this.expertService.downloadNotesheet(this.lectureDetails.expertLectureId);
+		window.location.href=url;
+	}
+
+	viewPhotos(lectureId){
+		this.expertService
+			.viewImages(lectureId)
+			.subscribe((response) => {
+				this.imagesList = response;
+			});
+	}
+
+	downloadPhoto(url){
 		window.location.href=url;
 	}
 	reportGeneration() {
@@ -270,6 +322,7 @@ export class ExpertlectureComponent implements OnInit {
 		this.expertService
 			.getExpertLectureDetails(lectureId)
 			.subscribe((response) => {
+				console.log(response);
 				this.lectureDetails = response;
 			});
 	}

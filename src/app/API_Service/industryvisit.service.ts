@@ -55,6 +55,22 @@ export class IndustryvisitService {
 		);
 	}
 
+	viewImages(visitID){
+		let params = new HttpParams();
+		params = params.append("industry_visit_id", visitID);
+		const options = { params: params};
+		return this.http.get<any>(
+			`${this.baseUrl}/industryVisit/images`,options
+		);
+	}
+
+	uploadImages(visitID, file) {
+		return this.http.post<any>(
+			`${this.baseUrl}/industryVisit/uploadImages/${visitID}`,
+			file
+		);
+	}
+
   addIndustryVisit(visit) {
 		return this.http.post<any>(
 			`${this.baseUrl}/industryVisit/addIndustryVisit`,

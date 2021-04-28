@@ -72,6 +72,7 @@ export class IndustryvisitComponent implements OnInit {
 	notesheet:File;
 	editingVisit: UpdateIndustryDetails;
 	editingVisitID: string;
+	imagesList: any
 
 	@ViewChild("f1") addIndustryVisitForm: NgForm;
 
@@ -119,6 +120,8 @@ export class IndustryvisitComponent implements OnInit {
 			}
 		);
 	}
+
+	
 
 	deleteIndustry(name, industryVisitId){
 		if (confirm("Do you want to delete visit to " + name + "?")) {
@@ -209,6 +212,9 @@ export class IndustryvisitComponent implements OnInit {
 	selectFileInput(file){
 		this.notesheet=file[0];
 	}
+	selectPhotoInput(file){
+		this.imagesList=file;
+	}
 	changeStatus() {
 		// alert("Changing Status!");
 		if (confirm("Do you want to change status of " + this.changeCompanyName + "?")) {
@@ -220,6 +226,7 @@ export class IndustryvisitComponent implements OnInit {
 					(response) => {
 						this.refreshVisits();
 						this.toastr.successToastr(response.message, 'Success!', {toastTimeout: 3000});
+						this.notesheet=null;
 					},
 					(error) => {
 						this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
@@ -230,6 +237,58 @@ export class IndustryvisitComponent implements OnInit {
 		else{
 			this.refreshVisits();
 		}
+	}
+
+	changeStatus2() {
+		// alert("Changing Status!");
+		if (confirm("Do you want to change status of " + this.changeCompanyName + "?")) {
+			const formData= new FormData();
+			formData.append('file',this.notesheet);
+			this.industryVisitService
+				.updateIndustryVisitStatus(this.changeVisitID, formData)
+				.subscribe(
+					(response) => {
+						this.refreshVisits();
+						this.toastr.successToastr(response.message, 'Success!', {toastTimeout: 3000});
+						this.notesheet=null;
+					},
+					(error) => {
+						this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
+						this.refreshVisits();
+					}
+				);
+				const formData2= new FormData();
+			for(var i=0;i<this.imagesList.length;i++)
+				formData2.append('photos',this.imagesList[i]);
+				this.industryVisitService
+				.uploadImages(this.changeVisitID, formData2)
+				.subscribe(
+					(response) => {
+						this.refreshVisits();
+						this.toastr.successToastr(response.message, 'Success!', {toastTimeout: 3000});
+						this.imagesList=null;
+					},
+					(error) => {
+						this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
+						this.refreshVisits();
+					}
+				);
+			
+			
+		}
+		else{
+			this.refreshVisits();
+		}
+	}
+	viewPhotos(visitId){
+		this.industryVisitService
+			.viewImages(visitId)
+			.subscribe((response) => {
+				this.imagesList = response;
+			});
+	}
+	downloadPhoto(url){
+		window.location.href=url;
 	}
 	downloadNotesheet(){
 		let url=this.industryVisitService.downloadNotesheet(this.industryDetails.industryVisitId);

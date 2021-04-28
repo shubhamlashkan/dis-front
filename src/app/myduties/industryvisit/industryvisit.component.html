@@ -231,7 +231,7 @@
 									class="btn btn-secondary btn-sm"
 									(click)="downloadAttendance()"
 								>
-									Download Attendance
+								<i class="fa fa-download" aria-hidden="true"></i> Download Attendance
 								</button>
 							</div>
 							<div class="form-group">
@@ -242,7 +242,7 @@
 									class="btn btn-secondary btn-sm"
 									(click)="downloadNotesheet()"
 								>
-									Download Notesheet
+								<i class="fa fa-download" aria-hidden="true"></i> Download Notesheet
 								</button>
 							</div>
 							<!-- <small></small> -->
@@ -364,6 +364,14 @@
 								/>
 							</div>
 							<div class="form-group">
+								<label >Photographs</label>
+								<ul>
+									<li *ngFor = "let image of imagesList" class="fake-link" >
+									   <a (click)="downloadPhoto(image.url)"><i class="fa fa-file-image-o" aria-hidden="true"></i> {{ image.name }}</a></li>
+								
+								 </ul>
+							  </div>
+							<div class="form-group">
 								<label for="remarks">Remarks</label>
 								<input
 									type="text"
@@ -422,7 +430,7 @@
 					<div class="modal-body">
 						<form #f3="ngForm">
 							<div class="form-group">
-								<label for="notesheet">Select Notesheet</label>
+								<label for="notesheet"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Select Notesheet</label>
 								<input
 									type="file"
 									class="form-control-file"
@@ -500,26 +508,41 @@
 									ngModel
 								/>
 							</div>
+							<div class="form-group">
+								<label for="photograph"><i class="fa fa-file-image-o" aria-hidden="true"></i> Select Photograph</label>
+								<input
+									type="file"
+									accept="image/*"
+									class="form-control-file"
+									id="photograph"
+									name="photo"
+									(change)="selectPhotoInput($event.target.files)"
+									required
+									multiple
+									ngModel
+								/>
+						</div>
+						<div class="modal-footer">
+							<button
+								type="button"
+								class="btn btn-secondary"
+								data-dismiss="modal"
+							>
+								Close
+							</button>
+							<button
+								type="button"
+								class="btn btn-primary"
+								data-dismiss="modal"
+								(click)="changeStatus2()"
+								[disabled]="f4.invalid"
+							>
+								Change status to Completed
+							</button>
+						</div>
 						</form>
 					</div>
-					<div class="modal-footer">
-						<button
-							type="button"
-							class="btn btn-secondary"
-							data-dismiss="modal"
-						>
-							Close
-						</button>
-						<button
-							type="button"
-							class="btn btn-primary"
-							data-dismiss="modal"
-							(click)="changeStatus()"
-							[disabled]="f4.invalid"
-						>
-							Change status to Completed
-						</button>
-					</div>
+					
 				</div>
 			</div>
 		</div>
@@ -744,10 +767,8 @@
 										)
 									"
 								>
-									<i
-										class="fa fa-ban"
-										aria-hidden="true"
-									></i></button
+								<i class="fa fa-trash" aria-hidden="true"></i>
+									</button
 							></span>
 							<td>
 								<strong>{{ visit.date | date }}</strong>
@@ -769,7 +790,7 @@
 											visit.industryVisitId
 										)
 									"
-								>
+								><i class="fa fa-bell" aria-hidden="true"></i>
 									Change Status
 								</button>
 								<!-- <div class="row">
@@ -844,10 +865,9 @@
 										)
 									"
 								>
-									<i
-										class="fa fa-ban"
-										aria-hidden="true"
-									></i></button
+								<i class="fa fa-trash" aria-hidden="true"></i>
+									
+									</button
 							><br>
 							<button
 							type="button"
@@ -880,7 +900,7 @@
 											visit.industryVisitId
 										)
 									"
-								>
+								><i class="fa fa-bell" aria-hidden="true"></i>
 									Change Status
 								</button>
 								<!-- <div class="row">
@@ -953,16 +973,13 @@
 									type="button"
 									class="btn btn-primary btn-sm"
 									(click)="
-										getVisitDetails(visit.industryVisitId)
+										getVisitDetails(visit.industryVisitId);viewPhotos(visit.industryVisitId);
 									"
 									data-toggle="modal"
 									data-target="#exampleModal2"
 									aria-hidden="true"
 								>
-									<i
-										class="fa fa-address-card-o"
-										aria-hidden="true"
-									></i>
+								<i class="fa fa-book" aria-hidden="true"></i>
 									View Details
 								</button>
 							</td>

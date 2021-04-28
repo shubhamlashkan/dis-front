@@ -884,7 +884,7 @@
                   (click)="deleteExpert(); resetExpert()"
                   *ngIf="editingExpert"
                 >
-                  <i class="fa fa-ban" aria-hidden="true"></i>
+				<i class="fa fa-trash" aria-hidden="true"></i>
                   Delete
                 </button>
                 <button
@@ -930,7 +930,7 @@
           <div class="modal-body">
             <form #f4="ngForm">
               <div class="form-group">
-                <label for="notesheet">Select Notesheet</label>
+                <label for="notesheet"> <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Select Notesheet</label>
                 <input
                   type="file"
                   class="form-control-file"
@@ -1001,18 +1001,20 @@
                   ngModel
                 />
               </div>
-              <!-- <div class="form-group">
-								<label for="photograph">Select Photograph</label>
+              <div class="form-group">
+								<label for="photograph"><i class="fa fa-file-image-o" aria-hidden="true"></i> Select Photograph</label>
 								<input
 									type="file"
+									accept="image/*"
 									class="form-control-file"
 									id="photograph"
 									name="photo"
-									(change)="selectFileInput($event.target.files)"
+									(change)="selectPhotoInput($event.target.files)"
 									required
+									multiple
 									ngModel
 								/>
-							</div> -->
+						</div>
 
               <div class="modal-footer">
                 <button
@@ -1026,7 +1028,7 @@
                   type="button"
                   class="btn btn-primary"
                   data-dismiss="modal"
-                  (click)="changeStatus()"
+                  (click)="changeStatus2()"
                   [disabled]="!f6.valid"
                 >
                   Change status to Completed
@@ -1222,7 +1224,7 @@
                   class="btn btn-secondary btn-sm"
                   (click)="downloadAttendance()"
                 >
-                  Download Attendance
+				<i class="fa fa-download" aria-hidden="true"></i> Download Attendance
                 </button>
               </div>
               <div class="form-group">
@@ -1233,7 +1235,7 @@
                   class="btn btn-secondary btn-sm"
                   (click)="downloadNotesheet()"
                 >
-                  Download Notesheet
+				<i class="fa fa-download" aria-hidden="true"></i> Download Notesheet
                 </button>
               </div>
               <div class="form-group">
@@ -1338,6 +1340,15 @@
                   ngModel
                 />
               </div>
+			  <div class="form-group">
+                <label >Photographs</label>
+				<ul>
+					<li *ngFor = "let image of imagesList" class="fake-link" >
+					   <a (click)="downloadPhoto(image.url)"><i class="fa fa-file-image-o" aria-hidden="true"></i> {{ image.name }}</a></li>
+				
+				 </ul>
+              </div>
+
               <div class="form-group">
                 <label for="paymentStatus">Payment Status</label>
                 <select
@@ -1514,7 +1525,7 @@
                     deleteLecture(lecture.topic, lecture.expertLectureId)
                   "
                 >
-                  <i class="fa fa-ban" aria-hidden="true"></i>
+				<i class="fa fa-trash" aria-hidden="true"></i>
                 </button>
               </span>
               <td>
@@ -1538,6 +1549,7 @@
                     )
                   "
                 >
+				<i class="fa fa-bell" aria-hidden="true"></i>
                   Change Status
                 </button>
                 <!-- <div class="row">
@@ -1614,7 +1626,7 @@
                     deleteLecture(lecture.topic, lecture.expertLectureId)
                   "
                 >
-                  <i class="fa fa-ban" aria-hidden="true"></i>
+				<i class="fa fa-trash" aria-hidden="true"></i>
                 </button>
                 <br />
                 <button
@@ -1647,7 +1659,7 @@
                       lecture.topic
                     )
                   "
-                >
+                ><i class="fa fa-bell" aria-hidden="true"></i>
                   Change Status
                 </button>
                 <!-- <div class="row">
@@ -1704,12 +1716,12 @@
                 <button
                   type="button"
                   class="btn btn-primary btn-sm"
-                  (click)="getLectureDetails(lecture.expertLectureId)"
+                  (click)="getLectureDetails(lecture.expertLectureId);viewPhotos(lecture.expertLectureId);"
                   data-toggle="modal"
                   data-target="#exampleModal5"
                   aria-hidden="true"
                 >
-                  <i class="fa fa-address-card-o" aria-hidden="true"></i>
+				<i class="fa fa-book" aria-hidden="true"></i>
                   View Details
                 </button>
               </td>
