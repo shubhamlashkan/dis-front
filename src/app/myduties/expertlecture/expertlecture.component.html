@@ -1497,6 +1497,7 @@
         <div style="overflow: auto; height: 600px" class="table-responsive">
           <table class="table table-striped">
             <thead>
+			  <th></th>
               <th>Topic</th>
               <th>Date</th>
               <th>Expert Name</th>
@@ -1509,25 +1510,27 @@
             </thead>
             <tr
               *ngFor="let lecture of pendingLectures"
-              (mouseover)="deleteExpertLecture.push(lecture.expertLectureId)"
-              (mouseout)="deleteExpertLecture.pop()"
             >
               <!-- *ngIf="deleteExpertLecture.includes(lecture.expertLectureId)" -->
-              <span
-                [hidden]="
-                  !deleteExpertLecture.includes(lecture.expertLectureId)
-                "
-              >
                 <button
                   type="button"
-                  class="beautify btn btn-danger"
+                  class="beautify1 btn btn-danger button"
                   (click)="
                     deleteLecture(lecture.topic, lecture.expertLectureId)
                   "
                 >
 				<i class="fa fa-trash" aria-hidden="true"></i>
                 </button>
-              </span>
+				<br />
+                <button
+                  type="button"
+                  class="beautify1 btn btn-warning button"
+                  data-toggle="modal"
+                  data-target="#exampleModal7"
+                  (click)="editExpertLecture(lecture)"
+                >
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                </button>
               <td>
                 <strong>{{ lecture.topic }}</strong>
               </td>
@@ -1601,6 +1604,7 @@
         <div style="overflow: auto; height: 600px" class="table-responsive">
           <table class="table table-striped">
             <thead>
+				<th></th>
               <th>Topic</th>
               <th>Date</th>
               <th>Expert Name</th>
@@ -1611,17 +1615,10 @@
             </thead>
             <tr
               *ngFor="let lecture of upcommingLectures"
-              (mouseover)="deleteExpertLecture.push(lecture.expertLectureId)"
-              (mouseout)="deleteExpertLecture.pop()"
             >
-              <span
-                [hidden]="
-                  !deleteExpertLecture.includes(lecture.expertLectureId)
-                "
-              >
                 <button
                   type="button"
-                  class="beautify1 btn btn-danger"
+                  class="beautify1 btn btn-danger button"
                   (click)="
                     deleteLecture(lecture.topic, lecture.expertLectureId)
                   "
@@ -1631,14 +1628,13 @@
                 <br />
                 <button
                   type="button"
-                  class="beautify1 btn btn-warning"
+                  class="beautify1 btn btn-warning button"
                   data-toggle="modal"
                   data-target="#exampleModal7"
                   (click)="editExpertLecture(lecture)"
                 >
                   <i class="fa fa-pencil" aria-hidden="true"></i>
                 </button>
-              </span>
               <td>
                 <strong>{{ lecture.topic }}</strong>
               </td>

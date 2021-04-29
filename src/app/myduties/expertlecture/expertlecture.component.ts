@@ -98,7 +98,6 @@ export class ExpertlectureComponent implements OnInit {
 	completedLectures: LectureDetails[];
 	nd: ExpertName[];
 	selectedExpert = "None";
-	deleteExpertLecture: any[];
 	changeTopic: string;
 	changeExpertLectureID: string;
 	// selectedYear;
@@ -120,7 +119,6 @@ export class ExpertlectureComponent implements OnInit {
 	editingLectureID: string;
 
 	ngOnInit() {
-		this.deleteExpertLecture=[];
 		this.refreshLectures();
 		this.selectedAudience = [];
 		// this.editExpertLecture = [];
@@ -134,7 +132,7 @@ export class ExpertlectureComponent implements OnInit {
 				this.refreshExperts();
 			},
 			(error) => {
-				this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
+				this.toastr.errorToastr(error.message,"Alert!", {toastTimeout: 3000});
 				this.refreshExperts();
 			}
 		);
@@ -166,7 +164,7 @@ export class ExpertlectureComponent implements OnInit {
 					this.refreshExperts();
 				},
 				(error) => {
-					this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
+					this.toastr.errorToastr(error.message,"Alert!", {toastTimeout: 3000});
 					this.refreshExperts();
 				}
 			);
@@ -181,7 +179,7 @@ export class ExpertlectureComponent implements OnInit {
 					this.refreshLectures();
 				},
 				(error) => {
-					this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
+					this.toastr.errorToastr(error.message,"Alert!", {toastTimeout: 3000});
 					this.refreshLectures();
 				}
 			);
@@ -245,7 +243,7 @@ export class ExpertlectureComponent implements OnInit {
 						this.notesheet=null;
 					},
 					(error) => {
-						this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
+						this.toastr.errorToastr(error.message,"Alert!", {toastTimeout: 3000});
 						this.refreshLectures();
 					}
 				);
@@ -268,7 +266,7 @@ export class ExpertlectureComponent implements OnInit {
 						this.refreshLectures();
 					},
 					(error) => {
-						this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
+						this.toastr.errorToastr(error.message,"Alert!", {toastTimeout: 3000});
 						this.refreshLectures();
 					}
 				);
@@ -284,7 +282,7 @@ export class ExpertlectureComponent implements OnInit {
 						this.imagesList=null;
 					},
 					(error) => {
-						this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
+						this.toastr.errorToastr(error.message,"Alert!", {toastTimeout: 3000});
 						this.refreshLectures();
 					}
 				);
@@ -343,7 +341,7 @@ export class ExpertlectureComponent implements OnInit {
 					this.editingLectureID = null;
 				},
 				(error) => {
-					this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
+					this.toastr.errorToastr(error.message,"Alert!", {toastTimeout: 3000});
 				}
 			);
 		}
@@ -354,7 +352,7 @@ export class ExpertlectureComponent implements OnInit {
 				this.toastr.successToastr(response.message, 'Success!', {toastTimeout: 3000});
 			},
 			(error) => {
-				this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
+				this.toastr.errorToastr(error.message,"Alert!", {toastTimeout: 3000});
 			}
 		);
 	}
@@ -383,7 +381,7 @@ export class ExpertlectureComponent implements OnInit {
 
 				},
 				(error) => {
-					this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
+					this.toastr.errorToastr(error.message,"Alert!", {toastTimeout: 3000});
 				}
 			);
 		}
@@ -460,7 +458,7 @@ export class ExpertlectureComponent implements OnInit {
 				},
 				(error) => {
 					// console.log(error);
-					this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
+					this.toastr.errorToastr(error.message,"Alert!", {toastTimeout: 3000});
 				}
 			);
 	}

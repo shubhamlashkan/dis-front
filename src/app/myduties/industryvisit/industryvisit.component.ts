@@ -68,7 +68,6 @@ export class IndustryvisitComponent implements OnInit {
 	industryDetails: IndustryDetails;
 	changeCompanyName: string;
 	changeVisitID: string;
-	deleteVisit:any[];
 	notesheet:File;
 	editingVisit: UpdateIndustryDetails;
 	editingVisitID: string;
@@ -79,7 +78,6 @@ export class IndustryvisitComponent implements OnInit {
   activeTab=1;
 	ngOnInit() {
 		this.refreshVisits();
-		this.deleteVisit=[];
 	}
   changeTab1() {
 		this.activeTab = 1;
@@ -103,7 +101,7 @@ export class IndustryvisitComponent implements OnInit {
 					this.toastr.successToastr(response.message, 'Success!', {toastTimeout: 3000});
 				},
 				(error) => {
-					this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
+					this.toastr.errorToastr(error.message,"Alert!", {toastTimeout: 3000});
 				}
 			);
 		}
@@ -116,7 +114,7 @@ export class IndustryvisitComponent implements OnInit {
 				this.toastr.successToastr(response.message, 'Success!', {toastTimeout: 3000});
 			},
 			(error) => {
-				this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
+				this.toastr.errorToastr(error.message,"Alert!", {toastTimeout: 3000});
 			}
 		);
 	}
@@ -132,7 +130,7 @@ export class IndustryvisitComponent implements OnInit {
 					this.toastr.successToastr(response.message, 'Success!', {toastTimeout: 3000});
 				},
 				(error) => {
-					this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
+					this.toastr.errorToastr(error.message,"Alert!", {toastTimeout: 3000});
 				}
 			);
 		}
@@ -229,7 +227,7 @@ export class IndustryvisitComponent implements OnInit {
 						this.notesheet=null;
 					},
 					(error) => {
-						this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
+						this.toastr.errorToastr(error.message,"Alert!", {toastTimeout: 3000});
 						this.refreshVisits();
 					}
 				);
@@ -253,7 +251,7 @@ export class IndustryvisitComponent implements OnInit {
 						this.notesheet=null;
 					},
 					(error) => {
-						this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
+						this.toastr.errorToastr(error.message,"Alert!", {toastTimeout: 3000});
 						this.refreshVisits();
 					}
 				);
@@ -269,7 +267,7 @@ export class IndustryvisitComponent implements OnInit {
 						this.imagesList=null;
 					},
 					(error) => {
-						this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
+						this.toastr.errorToastr(error.message,"Alert!", {toastTimeout: 3000});
 						this.refreshVisits();
 					}
 				);
@@ -310,7 +308,7 @@ export class IndustryvisitComponent implements OnInit {
 				this.toastr.successToastr(response.message, 'Success!', {toastTimeout: 3000});
 			},
 			(error) => {
-				this.toastr.errorToastr(error.error.text,"Alert!", {toastTimeout: 3000});
+				this.toastr.errorToastr(error.message,"Alert!", {toastTimeout: 3000});
 			}
 		);
 	}

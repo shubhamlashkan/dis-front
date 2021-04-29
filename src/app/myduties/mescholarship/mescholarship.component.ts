@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { ToastrManager } from "ng6-toastr-notifications";
 import { MescholarshipService } from "src/app/API_Service/mescholarship.service";
 
 export class StudentDetails {
@@ -23,7 +24,7 @@ export class RevokeScholarship {
 	styleUrls: ["./mescholarship.component.scss"],
 })
 export class MescholarshipComponent implements OnInit {
-	constructor(private meScholarshipService: MescholarshipService) {}
+	constructor(private meScholarshipService: MescholarshipService, public toastr: ToastrManager) {}
 	selectedYear = "1";
 	notApproved: StudentDetails[];
 	approved: StudentDetails[];
@@ -82,16 +83,17 @@ export class MescholarshipComponent implements OnInit {
 		if (
 			confirm("Do you want to approve selected students for scholarship?")
 		) {
-			console.log(this.awardScholarship);
 			this.meScholarshipService
 				.approveScholarship(this.awardScholarship)
 				.subscribe(
 					(response) => {
-						console.log(response);
+						this.toastr.successToastr(response.message, 'Success!', {toastTimeout: 3000});
+						this.refreshNotApproved();
+						this.refreshApproved();
+						this.awardScholarship = [];
 					},
 					(error) => {
-						console.log(error);
-						alert(error.error.text);
+						this.toastr.errorToastr(error.message,"Alert!", {toastTimeout: 3000});
 						this.refreshNotApproved();
 						this.refreshApproved();
 						this.awardScholarship = [];
@@ -114,14 +116,15 @@ export class MescholarshipComponent implements OnInit {
 			let cancel = new RevokeScholarship(this.cancelStudents);
 			this.meScholarshipService.deleteScholarship(cancel).subscribe(
 				(response) => {
-					console.log(response);
-				},
-				(error) => {
-					console.log(error);
-					alert(error.error.text);
 					this.refreshNotApproved();
 					this.refreshApproved();
 					this.cancelStudents = [];
+					this.toastr.successToastr(response.message, 'Success!', {toastTimeout: 3000});
+				},
+				(error) => {
+					console.log(error);
+					this.toastr.errorToastr(error.message,"Alert!", {toastTimeout: 3000});
+					
 				}
 			);
 		}
@@ -140,8 +143,7 @@ export class MescholarshipComponent implements OnInit {
 							this.notApproved = response;
 						},
 						(error) => {
-							console.log(error);
-							this.refreshNotApproved();
+							this.toastr.errorToastr(error.message,"Alert!", {toastTimeout: 3000});
 						}
 					);
 			} else {
@@ -155,8 +157,7 @@ export class MescholarshipComponent implements OnInit {
 							this.approved = response;
 						},
 						(error) => {
-							console.log(error);
-							this.refreshApproved();
+							this.toastr.errorToastr(error.message,"Alert!", {toastTimeout: 3000});
 						}
 					);
 			}

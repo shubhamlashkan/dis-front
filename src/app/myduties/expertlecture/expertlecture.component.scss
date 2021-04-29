@@ -71,3 +71,11 @@ td{
     text-decoration: underline;
     cursor: pointer;
 }
+
+.button {
+    opacity: 0;
+  }
+  
+  tr:hover .button {
+    opacity: 1;
+  }

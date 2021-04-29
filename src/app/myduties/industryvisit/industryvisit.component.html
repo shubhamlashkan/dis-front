@@ -737,6 +737,7 @@
 				>
 					<table class="table table-striped">
 						<thead>
+							<th></th>
 							<th>Date</th>
 							<th>Time</th>
 							<th>Company Name</th>
@@ -747,19 +748,10 @@
 						</thead>
 						<tr
 							*ngFor="let visit of pendingVisits"
-							(mouseover)="
-								deleteVisit.push(visit.industryVisitId)
-							"
-							(mouseout)="deleteVisit.pop()"
 						>
-							<span
-								[hidden]="
-									!deleteVisit.includes(visit.industryVisitId)
-								"
-							>
 								<button
 									type="button"
-									class="beautify btn btn-danger"
+									class="beautify1 btn btn-danger button"
 									(click)="
 										deleteIndustry(
 											visit.companyName,
@@ -769,7 +761,19 @@
 								>
 								<i class="fa fa-trash" aria-hidden="true"></i>
 									</button
-							></span>
+							>
+							<br>
+							<button
+							type="button"
+							class="beautify1 btn btn-warning button"
+							data-toggle="modal"
+							data-target="#exampleModal5"
+							(click)="editIndustryVisit(visit)">
+							<i
+								class="fa fa-pencil"
+								aria-hidden="true"
+							></i></button>
+
 							<td>
 								<strong>{{ visit.date | date }}</strong>
 							</td>
@@ -845,19 +849,10 @@
 						</thead>
 						<tr
 							*ngFor="let visit of upcomingVisits"
-							(mouseover)="
-								deleteVisit.push(visit.industryVisitId)
-							"
-							(mouseout)="deleteVisit.pop()"
 						>
-							<span
-								[hidden]="
-									!deleteVisit.includes(visit.industryVisitId)
-								"
-							>
 								<button
 									type="button"
-									class="beautify1 btn btn-danger"
+									class="beautify1 btn btn-danger button"
 									(click)="
 										deleteIndustry(
 											visit.companyName,
@@ -871,7 +866,7 @@
 							><br>
 							<button
 							type="button"
-							class="beautify1 btn btn-warning"
+							class="beautify1 btn btn-warning button"
 							data-toggle="modal"
 							data-target="#exampleModal5"
 							(click)="editIndustryVisit(visit)"
@@ -879,7 +874,7 @@
 							<i
 								class="fa fa-pencil"
 								aria-hidden="true"
-							></i></button></span>
+							></i></button>
 							<td>
 								<strong>{{ visit.date | date }}</strong>
 							</td>
