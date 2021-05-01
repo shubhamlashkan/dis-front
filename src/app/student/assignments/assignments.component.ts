@@ -39,6 +39,6 @@ export class AssignmentsComponent implements OnInit {
   }
   getCSV(){
    
-    this.jsonToCSV.downloadFile(this.assignments,`${this.showCourse.name}_${this.assignments}`,["courseCode","courseName","assignmentName","submitted","gradeObtained","gradeMaximum","dateOfCreation","dueDate","dateOfSubmission"])
+    this.jsonToCSV.downloadFile(this.assignments,`${this.showCourse.name}_assignments`,["courseCode","courseName","assignmentName","submitted","gradeObtained","gradeMaximum","dateOfCreation","dueDate","dateOfSubmission"])
   }
 }
