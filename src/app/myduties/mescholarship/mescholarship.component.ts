@@ -102,6 +102,10 @@ export class MescholarshipComponent implements OnInit {
 		}
 	}
 
+	downloadForm(){
+		alert("Form download");
+	}
+
 	removeStudents(enrollment) {
 		let index = this.cancelStudents.indexOf(enrollment);
 		if (index > -1) {

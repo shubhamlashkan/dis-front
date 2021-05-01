@@ -63,6 +63,8 @@
 							<th>Name</th>
 							<th>Email</th>
 							<th>Attendance</th>
+							<th>Submit Date</th>
+							<th>Download</th>
 							<th>Select</th>
 						</thead>
 						<tr *ngFor="let student of notApproved">
@@ -71,6 +73,14 @@
 							<td *ngIf="student.email">{{ student.email }}</td>
 							<td *ngIf="!student.email">Not available</td>
 							<td>{{ student.attendance }}</td>
+							<td>--</td>
+							<td><button
+								type="button"
+								class="btn btn-secondary btn-sm"
+								(click)="downloadForm()"
+							  >
+							  <i class="fa fa-download" aria-hidden="true"></i> Download Form
+							  </button></td>
 							<td style="text-align: center; vertical-align: sub">
 								<input
 								  class="form-check-input"
