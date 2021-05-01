@@ -15,7 +15,7 @@ export class BarchartComponent implements OnInit {
   }
 
   getBarChart(idname,bars) {
-    this.overallAttendance=bars[0].percentage;
+    this.overallAttendance=0;
     var label=[];
     var percentage=[];
     var color=[];
@@ -23,7 +23,6 @@ export class BarchartComponent implements OnInit {
       var cc=bars[i].coursecode;
       var per=bars[i].percentage;
       this.overallAttendance+=per;
-      this.overallAttendance/=2;
       
       var slot=`${cc},\n ${bars[i].attendance}/${bars[i].slot} `;
       if(per<60){
@@ -44,6 +43,8 @@ export class BarchartComponent implements OnInit {
     
   }
   getChart(idname,label,percentage,color){
+    this.overallAttendance/=color.length
+    
     this.overallAttendance=this.overallAttendance.toFixed(2);
     return new Chart(idname, {
       type: 'bar',

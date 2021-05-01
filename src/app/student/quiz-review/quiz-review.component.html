@@ -24,7 +24,7 @@
            </div>
            <div class="col-md">
             
-             <p >  <b>{{q.questionText| slice:3:-4}}</b></p>
+             <p >  <b innerHTML="{{q.questionText}}"></b></p>
               <ul class="list-group" >
                 
                 <li class="list-group-item "  *ngFor="let option of q.options"  >
