@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
     this.authService.attemptAuth(this.loginInfo).subscribe(
       data => {
         this.loading = false;
-        console.log(data);
+        // console.log(data);
         sessionStorage.setItem('authenticaterUser',this.form.username);
         this.tokenStorage.saveUsername(data.username);
         this.tokenStorage.saveToken(data.accessToken);

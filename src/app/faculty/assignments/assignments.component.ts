@@ -21,6 +21,7 @@ export class AssignmentsComponent implements OnInit {
   ngOnInit() {
     this.facultyService.getAllCourses().subscribe(data=>{
       this.courses=data;
+      console.log(data);
       this.selectCourse=this.courses[0].id;
       this.facultyService.getStudentOfCourse(this.courses[0].id).subscribe(data=>{
         this.students=data;
@@ -67,14 +68,14 @@ export class AssignmentsComponent implements OnInit {
     })
   }
   getCSV(){
-    let element = document.getElementById('assignExcel');
+    let element = document.getElementById('AssignmentsReport');
     const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
     ws['!cols'].push({ width: 20 },{ width: 20 },{ width: 20 },{ width: 15 },{ width: 25 },{ width: 25 })
     /* generate workbook and add the worksheet */
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
- 
+  
     /* save to file */  
-    XLSX.writeFile(wb, "AssignExcel.xlsx");
+    XLSX.writeFile(wb, "AssignmentsReport.xlsx");
   }
 }

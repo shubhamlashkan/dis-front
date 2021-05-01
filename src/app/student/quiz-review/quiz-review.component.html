@@ -8,7 +8,9 @@
     
      <div class="col-lg-9">
       <nav class="navbar navbar-light bg-primary">
-        <span class="navbar-brand mb-0 h1 text-white">{{quizDetails[0].quizName}}</span>
+        <span class="navbar-brand mb-0 h1 text-white" innerHTML=" {{quizDetails[0].quizName}}">
+          
+        </span>
       </nav>
       <div *ngFor="let q of quizDetails" class="quizs" id="{{q.slot}}">
         <div class="quizs " >
@@ -24,15 +26,18 @@
             
              <p >  <b>{{q.questionText| slice:3:-4}}</b></p>
               <ul class="list-group" >
-                <li class="list-group-item "  *ngFor="let option of q.options" >{{option}}</li>
+                
+                <li class="list-group-item "  *ngFor="let option of q.options"  >
+                  <div innerHTML="{{option}}"></div>
+                </li>
                 
                
                
               </ul>
               <br>
               <ul class="list-group">
-                <li class="list-group-item "> <span> <b>Correct Answer is</b></span>  : {{q.correctAnswer}}</li>
-                <li class="list-group-item "> <span> <b>Your Response is</b></span>  : {{q.userResponse}}</li>
+                <li class="list-group-item "> <span> <b>Correct Answer </b></span>  : {{q.correctAnswer}}</li>
+                <li class="list-group-item "> <span> <b>Your Response </b></span>  : {{q.userResponse}}</li>
                 </ul>
            </div>
           </div>

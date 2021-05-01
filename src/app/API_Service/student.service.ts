@@ -19,45 +19,36 @@ export class StudentService {
    }
  
   public getStudentAttendance():Observable<StudentAttenance[]>{
-    this.moodleUserId=this.sessionStorageService.getMoodleUserId();
-    return this.http.get<StudentAttenance[]>(`${this.moodleUrl}`+`/getIndividualStudentAttendance/`);
+    return this.http.get<StudentAttenance[]>(`${this.moodleUrl}/getIndividualStudentAttendance/`);
   }
   public getStudentOverviewReport():Observable<any>{
-    this.moodleUserId=this.sessionStorageService.getMoodleUserId();
-    return this.http.get<any[]>(`${this.gradeUrl}/getStudentsOverviewReport/${this.moodleUserId}`);
+    return this.http.get<any[]>(`${this.gradeUrl}/getStudentsOverviewReport/`);
   }
   public getStudentUserReport(courseId:any):Observable<any>{
-    this.moodleUserId=this.sessionStorageService.getMoodleUserId();
-    return this.http.get<any[]>(`${this.gradeUrl}/getStudentsUserReport/${courseId}/${this.moodleUserId}`);
+    return this.http.get<any[]>(`${this.gradeUrl}/getStudentsUserReport/${courseId}/`);
   }
 
   public getAllCourses():Observable<any>{
-    this.moodleUserId=this.sessionStorageService.getMoodleUserId();
-    return this.http.get<any[]>(`${this.assnsUrl}/getAllCoursesOfStudent/${this.moodleUserId}`)
+    return this.http.get<any[]>(`${this.assnsUrl}/getAllCoursesOfStudent/`)
   }
   public getStudentSubjectReport(courseId:any):Observable<any>
    
   {
-    this.moodleUserId=this.sessionStorageService.getMoodleUserId();
-    return this.http.get<any[]>(`${this.assnsUrl}/getStudentSubjectReport/${this.moodleUserId}/${courseId}`);
+    return this.http.get<any[]>(`${this.assnsUrl}/getStudentSubjectReport/${courseId}`);
   }
   public getQuiz(courseId:any):Observable<any>{
-    this.moodleUserId=this.sessionStorageService.getMoodleUserId();
-    return this.http.get<any[]>(`${this.quizUrl}/getQuizzesOfCourse/${this.moodleUserId}/${courseId}`);
+    return this.http.get<any[]>(`${this.quizUrl}/getQuizzesOfCourse/${courseId}`);
   }
   public getCompleteQuiz(quizId:any)
   :Observable<any>{
-    this.moodleUserId=this.sessionStorageService.getMoodleUserId();
-    return this.http.get<any[]>(`${this.quizUrl}/getCompleteQuiz/${this.moodleUserId}/${quizId}`);
+    return this.http.get<any[]>(`${this.quizUrl}/getCompleteQuiz/${quizId}`);
   }
   public getAssignments(courseId:any):Observable<any>{
-    this.moodleUserId=this.sessionStorageService.getMoodleUserId();
-    return this.http.get<any[]>(`${this.assnsUrl}/getStudentSubjectReport/${this.moodleUserId}/${courseId}`);
+    return this.http.get<any[]>(`${this.assnsUrl}/getStudentSubjectReport/${courseId}`);
   }
   public getNoOfPendingAssignments()
   :Observable<any>{
-    this.moodleUserId=this.sessionStorageService.getMoodleUserId();
-    return this.http.get<any[]>(`${this.assnsUrl}/getNumberOfPendingAssignments/${this.moodleUserId}`);
+    return this.http.get<any[]>(`${this.assnsUrl}/getNumberOfPendingAssignments/`);
   }
   // public login(Student: Object): Observable<Object> {
   //   return this.http.post(`${this.baseUrl}` + `/login`, Student);

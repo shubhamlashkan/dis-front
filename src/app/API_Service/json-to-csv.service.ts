@@ -39,7 +39,7 @@ ConvertToCSV(objArray, headerList) {
          for (let index in headerList) {
             let head = headerList[index];
 
-             line += ',' + array[i][head];
+             line += ' , ' + array[i][head];
          }
          str += line + '\r\n';
      }

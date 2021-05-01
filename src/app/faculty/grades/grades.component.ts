@@ -11,6 +11,7 @@ import * as XLSX from 'xlsx';
 })
 export class GradesComponent implements OnInit {
   courses:any[];
+  coursename:any;
   gradeItem:any[];
   students:any[];
   selectCourse:any;
@@ -49,6 +50,7 @@ export class GradesComponent implements OnInit {
     
   }
   getGraderReport(){
+    console.log(this.coursename);
     this.facultyService.getGraderReport(this.selectCourse,this.selectItem).subscribe(data=>{
       this.graderReport=data;
       this.graderReportGradeItems=this.graderReport[0];
@@ -110,12 +112,8 @@ export class GradesComponent implements OnInit {
       let element = document.getElementById(tableId);
       const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
    
-      /* generate workbook and add the worksheet */
-     
       XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-   
-      /* save to file */  
-     
+
     }
     XLSX.writeFile(wb, `${tableId}.xlsx`)
   }

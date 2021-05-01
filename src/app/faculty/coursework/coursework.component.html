@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="row">
+      <!--Start Left Panel-->
+      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 profile-info">
+          <app-sidenavigation></app-sidenavigation>
+      </div>
+      <div class="col-lg-9">
+        <ul class="nav nav-tabs nav-fill">
+          
+          
+          <li class="nav-item navbar navbar-light bg-primary">
+            <a  data-toggle="tab"class="nav-link  text-white "> Coursework</a>
+          </li>
+          
+        </ul>
+        <br>
+        <span class="mx-2 my-5 h6">Grade category</span><select class="form-select form-select-lg mx-2 my-5" aria-label=".form-select-lg example" [(ngModel)]="courseId">
+              <option   *ngFor="let name of coursename;let i=index"  value="{{name.id}}"   selected>{{name.fullname}}
+              </option>
+            </select>
+            <button type="submit" class="btn btn-success btn-small mx-2" (click)="onSubmit()">Submit</button>
+        <form class="">
+          <div class="form-group row" *ngFor="let item of gradeItem;let i=index" > 
+            <label  for="" class="control-label col-sm-7">{{item.itemName}}</label>
+            <input type="number" min='0' class="form-control col-sm-1" [(ngModel)]="per[i]" [ngModelOptions]="{standalone: true}">
+            <input class="col-sm-1" type="checkbox">
+          </div>
+          <button (click)="getCW()" type="submit" class="btn btn-success">Submit</button>
+        </form>
+      </div>
+    </div>
+    <br>
+    <div *ngIf="show"   class="table-responsive-lg ">
+
+    
+    <table  class="table table-striped table-bordered table-hover " id="graderTable">
+      <thead class="">
+        <tr class="bg-light">
+          <th scope="col">Student Name</th>
+          <th scope="col">Course</th>
+          <!-- <th scope="col" *ngFor="let item of graderReportGradeItems">{{item.gradeItemName}}  -->
+          <!-- </th> -->
+          <th>CW</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let report of graderReport">
+          <th scope="col">{{report[0].firstName}} {{report[0].lastName}}</th>
+          <td>{{report[0].courseName}}</td>
+          <!-- <td *ngFor="let grade of report">{{grade.gradeObtained}}</td> -->
+          <td>{{report.CW|number}}</td>
+        </tr>
+        
+       
+      </tbody>
+    </table>
+    <br>
+    <button (click)="getCSV('graderTable')"  class="btn btn-success mb-5 ">Export as csv</button>
+    <br>
+  </div>
+   
+</div>
+        
