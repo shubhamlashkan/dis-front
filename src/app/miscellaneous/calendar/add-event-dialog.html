@@ -1,0 +1,159 @@
+<div mat-dialog-content>
+    <div class="close">
+        <i class="fa fa-times fa-fw" aria-hidden="true" (click)="onNoClick()"></i>
+      </div>
+  <form class="form">
+  <mat-form-field class="title">
+    <mat-label >Add title</mat-label>
+    <input matInput [formControl]="titleFormController">
+    <mat-error *ngIf="titleFormController.hasError('required')">
+      Title is required
+    </mat-error>
+    </mat-form-field>
+        <div class="timeSelector">
+            <span class="icon">
+                <i class="fa fa-clock-o fa-lg" aria-hidden="true"></i>
+              </span>
+
+          <mat-form-field class="date">
+            <input matInput [matDatepicker]="picker1" (focus)="picker1.open()" (click)="picker1.open()" [(ngModel)]="startDate" [ngModelOptions]="{standalone: true}">
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field *ngIf="addTime" class="time">
+              <mat-select [(ngModel)]="startTime" [ngModelOptions]="{standalone: true}">
+                <mat-option *ngFor="let st of startTimeList" [value]="st" (click)="getEndTimeList()">
+                  {{st | date: 'shortTime'}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <span class="dash">
+              -
+            </span>
+
+          <mat-form-field *ngIf="addTime" class="time" [ngClass]="{dateValidate : !validateEndTime(endTime)}" (click)="getEndTimeList()">
+                  <mat-select [(ngModel)]="endTime" [ngModelOptions]="{standalone: true}">
+                    <mat-option *ngFor="let et of endTimeList" [value]="et">
+                      {{et | date: 'shortTime'}}
+                    </mat-option>
+                  </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class = "date" [ngClass]="{dateValidate : !validateEndDate(endDate)}">
+            <input matInput [matDatepicker]="picker2" (focus)="picker2.open()" (click)="picker2.open()" [(ngModel)]="endDate" [ngModelOptions]="{standalone: true}">
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+          <button mat-button class="timebutton" (click)="enableTimeFields()" *ngIf="!addTime">Add time</button>
+          </div>
+
+              <div>
+                <span class="icon">
+                  <i class="fa fa-users" aria-hidden="true"></i>
+                </span>
+                <mat-form-field class="participants">
+                  <input type="text"
+                        placeholder="Add participants"
+                        aria-label="Number"
+                        matInput
+                        [formControl]="participantListController"
+                        [matAutocomplete]="auto">
+                  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onEnter()">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                      <span>
+                        <span class="option-name">{{option.name}}</span>
+                        <span class="participant-type">
+                          {{option.type}}
+                        </span>
+                        <br>
+                        <span class="option-username" *ngIf = "option.type !== 'User Group'">{{option.userName}}</span>
+                      </span>
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+
+                <span>
+                  <button class='filter-icon' mat-icon-button matTooltip="Participant type Filters" (click)=select.open() type="button">
+
+                    <mat-icon>filter_list</mat-icon>
+          
+                    <mat-select #select class="typefilter" multiple [(value)]="participantListTypeFilter">
+                      <mat-option value="Groups" (click)="generateOptions()">My Groups</mat-option>
+                      <mat-option value="AP" (click)="generateOptions()">Academic Personnel</mat-option>
+                      <mat-option value="BE" (click)="generateOptions()">B.E.</mat-option>
+                      <mat-option value="ME" (click)="generateOptions()">M.E.</mat-option>
+                      <mat-option value="hD" (click)="generateOptions()">PhD</mat-option>
+                    </mat-select>
+                  </button>
+
+                </span>
+              </div>
+
+              <div class="listblock" *ngIf="participantList.size !==0 ">
+                <mat-list *ngFor="let participant of participantList; index as i">
+                  <mat-list-item class="list-item">
+                    <div class="participant-data">
+                        <span class="option-name">{{participant.name}}</span>
+                        <br>
+                        <span class="option-username" *ngIf = "participant.type !== 'User Group'">{{participant.userName}}</span>
+                    </div>
+                    <div class="participant-type-display">
+                      {{participant.type}}
+                    </div>
+                    <div class="remove">
+                      <i class="fa fa-times" aria-hidden="true" (click)="remove(participant)"></i>
+                    </div>
+                    <mat-divider></mat-divider>
+                  </mat-list-item>
+                </mat-list>
+              </div>
+
+          <div>
+              <span class="icon">
+                  <i class="fa fa-map-marker" aria-hidden="true"></i>
+                </span>
+
+          <mat-form-field class="location">
+            <mat-label>Location</mat-label>
+            <input matInput [formControl]="locationFormController">
+            <mat-error *ngIf="locationFormController.hasError('required')">
+              Location is required
+            </mat-error>
+          </mat-form-field>
+          </div>
+
+          <div>
+              <span class="icon">
+                  <i class="fa fa-align-justify" aria-hidden="true"></i>
+                </span>
+          <mat-form-field class="description">
+            <mat-label>Add Description</mat-label>
+            <textarea matInput [(ngModel)]="description" 
+            [ngModelOptions]="{standalone: true}" 
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="1"></textarea>
+          </mat-form-field>
+          <div class="attachedFile">
+            <mat-card class="custom" *ngFor="let file of selectedFile; let i = index">
+              <span class="file-icon">
+                <i class="fa fa-file fa-fw" aria-hidden="true"></i>
+              </span>
+              <span class="file-name">
+                {{file?.name}}
+              </span>
+              <span class="cross">
+                <i class="fa fa-times fa-fw" aria-hidden="true" (click)="deleteFile(i)"></i>
+              </span>
+            </mat-card>
+          </div>
+        </div>
+</form>
+</div>
+<div mat-dialog-actions>
+  <span>
+    <button mat-stroked-button color="primary" (click)="fileInput.click()" class="attachment"><i class="fa fa-paperclip" aria-hidden="true"></i> Attachment</button>
+    <input type="file" multiple #fileInput (change)="selectFile($event)" style="display:none;"> 
+  </span>
+  <button class="save" mat-button cdkFocusInitial (click)="onSubmit()" [disabled]="disabled()">Save</button>
+</div>  

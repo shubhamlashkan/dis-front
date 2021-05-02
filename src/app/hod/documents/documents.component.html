@@ -1,0 +1,84 @@
+<!-- Tooltip -->
+<link href="../../../assets/css/tooltip.css" rel="stylesheet" type="text/css" />
+<script src="js/tooltip.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+<script type="text/javascript" src="../../../assets/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script type="text/javascript" src="../../../assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../../assets/js/bootstrap-datepicker.js"></script>  
+
+<!--grid script-->
+<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+
+<script>
+  $(document).ready(function(){
+    $('#myTable').dataTable();
+  });
+</script> 
+<!--END grid script-->
+<div class="container">
+  <div class="row">
+
+<!--Start Left Panel-->
+    <div class="col-lg-3 profile-info">
+      <app-sidenavigation></app-sidenavigation>
+    </div>
+<!--End Left Panel-->
+<div class="col-lg-9 kyc-colm user-management">
+  <div class="kyc-section rewards-section reports-sectn">
+
+
+    <!--Start Right Panel-->
+   
+      <ul class="nav nav-pills nav-fill">
+        <ng-container *ngFor="let val of getSectionInfo">  
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" [attr.href]="'#section' + val.id">{{val.sectionName}}</a>
+          </li>
+        </ng-container>  
+        </ul>
+        
+        <div class="tab-content">
+          <div *ngFor="let sectionData of getFolderInSection;let i = index;">
+          <div id="section{{i}}" class="tab-pane">
+            <hr>  
+            <div class="panel-group">
+              <div *ngFor="let val of sectionData">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                          <i class="fa fa-folder-open" aria-hidden="true"></i>
+                        <a data-toggle="collapse" style="text-decoration:None" [attr.href]="'#collapse' + val.sectionId + val.id">  Folder {{val.id}}</a>
+                      </h4>
+                    </div>
+                    <div id="collapse{{val.sectionId}}{{val.id}}" class="panel-collapse collapse">
+                      <ul class="list-group">
+                        <li class="list-group-item"><i class="fa fa-file" aria-hidden="true"></i>  Document 1</li>
+                        <li class="list-group-item"><i class="fa fa-file" aria-hidden="true"></i>  Document 2</li>
+                        <li class="list-group-item"><i class="fa fa-file" aria-hidden="true"></i>  Document 3</li>
+                        <li class="list-group-item"><i class="fa fa-file" aria-hidden="true"></i>  Document 4</li>
+                        <li class="list-group-item"><i class="fa fa-file" aria-hidden="true"></i>  Document 5</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>    
+                </div>
+                <hr/>
+          </div>
+          <!-- <div id="section2" class="tab-pane fade">
+            <h3>Menu 1</h3>
+            <p>Some content in menu 1.</p>
+          </div>
+          <div id="section3" class="tab-pane fade">
+            <h3>Menu 2</h3>
+            <p>Some content in menu 2.</p>
+          </div> -->
+        </div>
+        
+</div>
+</div>
+</div>  
+</div>

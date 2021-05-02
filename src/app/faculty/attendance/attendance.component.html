@@ -1,0 +1,477 @@
+<!-- Tooltip -->
+<link href="../../../assets/css/tooltip.css" rel="stylesheet" type="text/css" />
+<script src="js/tooltip.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="../../../assets/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script type="text/javascript" src="../../../assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../../assets/js/bootstrap-datepicker.js"></script>  
+
+<!--grid script-->
+<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 kyc-colm user-management">
+      <div class="kyc-section rewards-section reports-sectn">
+        <!--Start Left Panel-->
+        <div class="row">
+          <div class="col-lg-6" style="border-right:1px solid #ADAAAA;">
+            <div class="">
+              <div class="row">
+                <div class="col page-headng" style="width:150%;">
+                  <h3>Calendar</h3>
+                  <div id='calendar'>
+                    <app-calendar></app-calendar>
+                  </div>
+                  <br>
+                  <div class="col page-headng" style="width:150%;">
+                    <h3>My Leave Account</h3>
+                    <table class="table table-bordered ">
+                      <thead style="background-color:darkcyan; font-weight : bold;">
+                        <tr>
+                          <td>Leave Type</td>
+                          <td>Leave Name</td>
+                          <td>Leaves Left</td>
+                          <td>Leaves Applied</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let ann of myLeaveAccount.annual" style="background-color:mediumspringgreen"> 
+                          <td>Annual Leave</td>
+                          <td>{{ann.leaveName}}</td>
+                          <td>{{ann.leavesLeft}}</td>
+                          <td>{{ann.leavesApplied}}</td>
+                        </tr>
+                        <tr *ngFor="let lLong of  myLeaveAccount.lifelong " style="background-color:tomato"> 
+                          <td>Lifelong Leave</td>
+                          <td>{{lLong.leaveName}}</td>
+                          <td>{{lLong.leavesLeft}}</td>
+                          <td>{{lLong.leavesApplied}}</td>
+                        </tr>
+    
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--End Left Panel-->
+
+          <!--Start Right Panel-->
+          <div class="col-lg-6">
+            <div class="container">
+
+              <ul class="nav nav-pills nav-fill">
+               
+                <li class="nav-item">
+                  <a class="nav-link active nav-fill  show active" id="sectionA-tab" data-toggle="pill" href="#sectionA" role="tab" aria-controls="sectionA"
+                    aria-selected="true">Apply for Leaves</a>
+                </li>
+                
+                <li class="nav-item">
+                  <a class="nav-link pl-2" id="sectionB-tab " data-toggle="pill" href="#sectionB" role="tab" aria-controls="sectionB"
+                    aria-selected="true">My Requests</a>
+                </li>
+            
+              </ul>
+              <hr />
+            </div>
+            <div class="tab-content" id="pills-tabContent">
+              <div class="tab-pane fade show active" id="sectionA" role="tabpane1" aria-labelledby="sectionA-tab">
+                <div class="col-lg-12 kyc-colm user-management kyc-section rewards-section reports-sectn">
+                   <!-- start -->
+                <div class=""  *ngIf="showNullError">
+                  
+                  <p class="alert alert-danger">
+                      <strong>This field cannot be blank</strong> 
+        
+                  </p>
+                
+              </div>
+              <div class=""  *ngIf="showPastDateError">
+                  
+                <p class="alert alert-danger">
+                    <strong>Cannot apply leave for a date that has already passed.</strong> 
+      
+                </p>
+              
+            </div>
+                <div class=""  *ngIf="showMsg">
+                  
+                    <p class="alert alert-success">
+                        <strong>Request sent</strong> 
+          
+                    </p>
+                  
+                </div>
+                <div class=""  *ngIf="showDateError">
+                  
+                  <p class="alert alert-danger">
+                      <strong>From date cannot be more than to date</strong> 
+        
+                  </p>
+                
+              </div>
+              <div class=""  *ngIf="showCreditError">
+                  
+                <p class="alert alert-danger">
+                    <strong>Leaves have not been creditecd for new session</strong> 
+      
+                </p>
+              
+            </div>
+                <form (ngSubmit)="onSubmit()" #f="ngForm">
+                 
+                  <label class="control-label" for="Type of leave">Leave Type : </label>
+                  <div>
+                     <select id="leavetype" ngModel="Select" name="leaveType" class="form-control" required>
+                      <option *ngFor="let leave of leave_type" value="{{leave.leaveName}}">{{leave.leaveName}}</option>
+                
+                    </select> 
+                  </div> 
+      
+                  
+                  <br>
+  
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <label for="From">From : </label>
+                      <input type="date" name="from" id="from" ngModel style="margin-left:2%;">
+                    </div>
+                    <div class="col-lg-6">
+                      <label for="To">To : </label>
+                      <input type="date" name="to" id="to" ngModel style="margin-left:2%;" >
+                    </div>
+                  </div>
+                  <br>
+                  
+                  <label class="control-label" for="fromDuration">From Duration:</label>
+                  <div class="row" style="margin-left:1%;">
+                    <!-- Material inline 1 -->
+                    <div class="form-check col-lg-4">
+                      <input type="radio" ngModel   class="form-check-input" id="materialInline1" name="fromDuration" value="First Half">
+                      <label class="form-check-label" for="materialInline1">First Half</label>
+                    </div>
+  
+                    <!-- Material inline 2 -->
+                    <div class="form-check col-lg-4">
+                      <input type="radio" value="Second Half" class="form-check-input" ngModel id="materialInline2" name="fromDuration">
+                      <label class="form-check-label" for="materialInline2">Second Half</label>
+                    </div>
+  
+                    <!-- Material inline 3 -->
+                    <div class="form-check col-lg-4">
+                      <input type="radio" value="full" class="form-check-input" ngModel  id="materialInline3" name="fromDuration">
+                      <label class="form-check-label" for="materialInline3">Full Day</label>
+                    </div>
+                  </div>
+                  <br>
+                  <label class="control-label" for="toDuration">To Duration:</label>
+                  <div class="row" style="margin-left:1%;">
+                    <!-- Material inline 1 -->
+                    <div class="form-check col-lg-4">
+                      <input type="radio" ngModel   class="form-check-input" id="toDurationFirstHalf" name="toDuration" value="First Half">
+                      <label class="form-check-label" for="materialInline1">First Half</label>
+                    </div>
+  
+                    <!-- Material inline 2 -->
+                    <div class="form-check col-lg-4">
+                      <input type="radio" value="Second Half" class="form-check-input" ngModel id="toDurationSecondHalf" name="toDuration">
+                      <label class="form-check-label" for="materialInline2">Second Half</label>
+                    </div>
+  
+                    <!-- Material inline 3 -->
+                    <div class="form-check col-lg-4">
+                      <input type="radio" value="full" class="form-check-input" ngModel  id="toDurationFull" name="toDuration">
+                      <label class="form-check-label" for="materialInline3">Full Day</label>
+                    </div>
+                  </div>
+                  <br>
+                  <label class="control-label" for="considerHolidays">Consider public holidays as Leaves</label>
+                  <div class="row" style="margin-left:1%;">
+                    
+                    <div class="form-check col-lg-4">
+                      <input type="radio" ngModel   class="form-check-input" id="considerHolidays0" name="considerHolidays" value="true">
+                      <label class="form-check-label" for="materialInline1">Yes</label>
+                    </div>
+  
+                    
+                    <div class="form-check col-lg-4">
+                      <input type="radio" value="false" class="form-check-input" ngModel id="considerHolidays1" name="considerHolidays">
+                      <label class="form-check-label" for="materialInline2">No</label>
+                    </div>
+  
+                    
+                    
+                  </div>
+                  
+                  <br>
+                  <div>
+                    <label for="reason">Reason : </label>
+                    <textarea ngModel name="reason" class="form-control" placeholder="Due to some family problem i am not able to come."
+                      rows="10" id="reason"></textarea>
+                  </div>
+                  <br>
+                  <div class="form-actions row text-center ">
+                    <div class="col-lg-6 col-md-4">
+                      <button type="button" (click)="onReset()" class="btn btn-primary button-width float-right">Reset</button>
+                    </div>
+                    <div class="col-lg-6 col-md-4">
+                      <button type="submit"  class="btn btn-success button-width float-left">Proceed</button>
+                    </div>
+                  </div>
+                  
+                </form>
+
+                </div>
+              
+               
+              </div>
+              <div class="tab-pane fade " id="sectionB" role="tabpane1" aria-labelledby="sectionB-tab">
+                <div class="">
+                  
+                  <div>
+                    <h3 *ngIf="myLeaveRequests.length!=0">Requests</h3>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Select Status</mat-label>
+                      <br>
+                      <mat-select ngModel="Select" class="form-control" id="status" name="status" (ngModelChange)="getLeavesByStatus($event)">
+                        
+                        <mat-option value="pending">Pending</mat-option>
+                        <mat-option value="approved">Approved</mat-option>
+                        <mat-option value="declined">Declined</mat-option>
+                        <mat-option value="rejoined">Rejoined</mat-option>
+                        <mat-option value="cancelled">Cancelled</mat-option>
+                        
+      
+                      </mat-select>
+                    </mat-form-field>
+                  <div class="ScrollStyle">
+                    <div *ngFor="let req of myLeaveRequests">
+            
+                      <div class="alert alert-success row al">
+                          <p class="col-8">No of Days: {{req.noOfDays}}</p>
+                          <p class="col-8"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Date From: {{req.fromDate}} To: {{req.toDate}}</p>
+                          <p class="col-8"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>From Duration: {{req.fromDuration}} To Duration: {{req.toDuration}}</p>
+                          <p class="col-4" style="font-weight: bold;">Status: {{req.status}}</p>
+                          <br>
+                          <p> Remarks: {{req.remarks}}</p>
+                          <br>
+                          <div  *ngIf="req.status === 'pending'">
+                            <p class="col-2"><button type="button" class="btn btn-success"  data-toggle="modal"
+                              data-target="#addInfra"
+                              title="Cancel this leave request"
+                              aria-hidden="true"
+                              (click)="getLeaveRequest(req.leaveId)">Cancel</button></p>
+                        
+                        
+                        
+                            </div>
+                          
+
+                          <div
+                            class="modal fade"
+                            id="addInfra"
+                            tabindex="-1"
+                            role="dialog"
+                            aria-labelledby="cancelleave"
+                            aria-hidden="true"
+                          >
+                          
+                          <form  (ngSubmit)="cancel()" #f="ngForm">
+                            <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+                              <div class="modal-content">
+                                <div class=""  *ngIf="showconfirmationCancel">
+                                          
+                                  <p class="alert alert-success">
+                                      <strong>Leaves Caneclled</strong> 
+  
+                                  </p>
+                                
+                                </div>
+                                <div class="modal-header">
+                                  <h5 class="modal-title text-center" id="cancelleave">
+                                    Cancel Leave Request
+                                  </h5>
+                                  <button
+                                    type="button"
+                                    class="close"
+                                    data-dismiss="modal"
+                                    aria-label="Close"
+                                    (click)="ngOnInit()"
+                                  >
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <h6>Do you want to cancel this leave request</h6>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="ngOnInit()">
+                                    No
+                                  </button>
+                                  <button type="submit" class="btn btn-primary " >
+                                    Yes
+                                  </button>
+
+                                  
+                                </div>
+                                
+                              </div>
+                            </div>
+                          </form>
+                          </div>
+                          <!-- <div  *ngIf="req.status === 'approved'">
+                            <p class="col-2"><button type="button" class="btn btn-danger"  data-toggle="modal"
+                              data-target="#cancelAfterapprove"
+                              title="Cancel this leave request"
+                              aria-hidden="true"
+                              (click)="getLeaveRequest(req.leaveId)">Cancel</button></p>
+                          </div>
+                          
+
+                          <div
+                            class="modal fade"
+                            id="cancelAfterapprove"
+                            tabindex="-1"
+                            role="dialog"
+                            aria-labelledby="cancelleave"
+                            aria-hidden="true"
+                          >
+                          
+                          <form  (ngSubmit)="cancelAfterApproval()" #cancelAfterApprove="ngForm">
+                            <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+                              <div class="modal-content">
+                   
+                                <div class="modal-header">
+                                  <h5 class="modal-title text-center" id="cancelleave">
+                                    Cancel Leave Request
+                                  </h5>
+                                  <button
+                                    type="button"
+                                    class="close"
+                                    data-dismiss="modal"
+                                    aria-label="Close"
+                                    (click)="ngOnInit()"
+                                  >
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <h6>Do you want to cancel this leave request</h6>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="ngOnInit()">
+                                    No
+                                  </button>
+                                  <button type="submit" class="btn btn-primary " >
+                                    Yes
+                                  </button>
+
+                                  
+                                </div>
+                                
+                              </div>
+                            </div>
+                          </form>
+                          </div> -->
+                          <div *ngIf="req.status === 'approved'">
+                            <p class="col-2"><button type="button" class="btn btn-primary" data-toggle="modal"
+                              data-target="#Rejoin"
+                              title="Rejoin"
+                              aria-hidden="true"
+                              (click)="getLeaveRequest(req.leaveId)">Rejoin</button></p>
+                          </div>
+                          
+                      
+                      </div>
+                      <!-- hdjs -->
+                      <div
+                      class="modal fade"
+                      id="Rejoin"
+                      tabindex="-1"
+                      role="dialog"
+                      aria-labelledby="RejoinLabel"
+                      aria-hidden="true"
+                    >
+                      <form  (ngSubmit)="Rejoin(req)" #rejoin="ngForm">
+                        <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+                          <div class="modal-content">
+                            <div class=""  *ngIf="showconfirmationRejoin">
+                                          
+                              <p class="alert alert-success">
+                                  <strong>The Field has been Successfully Updated..!</strong> 
+
+                              </p>
+                            
+                            </div>
+                            <div class="modal-header">
+                              <h5 class="modal-title text-center" id="addInfraLabel">
+                                Add the New Rejoining Date
+                              </h5>
+                              <button
+                                type="button"
+                                class="close"
+                                data-dismiss="modal"
+                                aria-label="Close"
+                                (click)="ngOnInit()"
+                              >
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <label for="To">Rejoining : </label>
+                                    <input type="date" name="rejoinTo" ngModel style="margin-left:2%;">
+                              <br>
+                              <label class="control-label" for="toDuration">To Duration:</label>
+                              <div class="row" style="margin-left:1%;">
+                                <!-- Material inline 1 -->
+                                <div class="form-check col-lg-4">
+                                  <input type="radio" ngModel   class="form-check-input" id="rejointoDurationFirstHalf" name="rejointoDuration" value="First Half">
+                                  <label class="form-check-label" for="materialInline1">First Half</label>
+                                </div>
+              
+                                <!-- Material inline 2 -->
+                                <div class="form-check col-lg-4">
+                                  <input type="radio" value="Second Half" class="form-check-input" ngModel id="rejointoDurationSecondHalf" name="rejointoDuration">
+                                  <label class="form-check-label" for="materialInline2">Second Half</label>
+                                </div>
+              
+                               
+                              </div>
+                             
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="ngOnInit()">
+                                Close
+                              </button>
+                              <button type="submit" class="btn btn-primary">
+                                Submit
+                              </button>
+                            </div>
+                           
+                          </div>
+                        </div>
+                      </form>
+                      </div>
+
+                  </div>
+                  </div>
+                   
+                </div>
+              </div>
+              </div>
+            </div>
+            
+            
+        </div>
+      </div>
+    </div>
+    <!--End Right Panel-->
+  </div>
+</div>
+</div>

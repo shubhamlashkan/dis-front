@@ -1,0 +1,59 @@
+<div class="close">
+  <button mat-icon-button mat-dialog-close><mat-icon>close</mat-icon></button>
+</div>
+<h2 mat-dialog-title>Forward Notification</h2>
+<div mat-dialog-content>
+<form class="form">
+  <mat-label class="title" >Heading : {{heading}}</mat-label>
+        <div>
+          <span class="icon">
+            <i class="fa fa-users" aria-hidden="true"></i>
+          </span>
+
+        <mat-form-field class="participants">
+          <input type="text"
+                 placeholder="Add participants"
+                 aria-label="Number"
+                 matInput
+                 [formControl]="participantListController"
+                 [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onEnter()">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option" >
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        </div>
+
+        <div class="listblock" *ngIf="participantList.size !==0 ">
+        <div *ngFor="let participant of participantList; index as i" class="participantlist">
+            <span class="participantName">{{participant}}</span>
+            <span class="remove">
+            <i class="fa fa-times" aria-hidden="true" (click)="remove(participant)"></i>
+            </span>
+            <mat-divider></mat-divider>
+        </div>
+      </div>
+
+        <div>
+            <span class="icon">
+                <i class="fa fa-align-justify" aria-hidden="true"></i>
+              </span>
+        <mat-form-field class="comment">
+          <mat-label>Add Comment</mat-label>
+          <textarea matInput [(ngModel)]="comment" 
+          [ngModelOptions]="{standalone: true}" 
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="1"></textarea>
+          <!-- <mat-error *ngIf="commentFormController.hasError('required')">
+            Comment is required
+          </mat-error> -->
+        </mat-form-field>
+      </div>
+</form>
+</div>
+<div mat-dialog-actions  align="end">
+<button mat-button mat-dialog-close>Cancel</button>
+<button mat-raised-button color="primary" cdkFocusInitial (click)="onSubmit()" >Save</button>
+</div>  

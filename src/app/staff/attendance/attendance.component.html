@@ -1,0 +1,151 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 kyc-colm user-management">
+      <div class="kyc-section rewards-section reports-sectn">
+        <!--Start Left Panel-->
+        <div class="row">
+          <div class="col-lg-6" style="border-right:1px solid #ADAAAA;">
+            <div class="">
+              <div class="row">
+                <div class="col page-headng" style="width:150%;">
+                  <h3>Calendar</h3>
+                  <div id='calendar'>
+                    <app-calendar></app-calendar>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-lg-5">
+                  <select class="form-control">
+                    <option>Select Month</option>
+                    <option>January</option>
+                    <option>February</option>
+                    <option>March</option>
+                    <option>April</option>
+                    <option>May</option>
+                    <option>June</option>
+                    <option>July</option>
+                    <option>August</option>
+                    <option>September</option>
+                    <option>October</option>
+                    <option>November</option>
+                    <option>December</option>
+                  </select>
+                  <div class="leave-box row">
+                    <div class="col-7">
+                      <p>Total Leave</p>
+                      <p>CL left</p>
+                      <p>Total PL</p>
+                      <p>PL left</p>
+                    </div>
+                    <div class="col-3">
+                      <p>:</p>
+                      <p>:</p>
+                      <p>:</p>
+                      <p>:</p>
+                    </div>
+                    <div class="col-2">
+                      <p>9</p>
+                      <p>3</p>
+                      <p>8</p>
+                      <p>6</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-7 pieChart">
+                  <h5 style="color:#1488CC">Attendance</h5>
+                  <div class="row">
+
+                    <div class="col-lg-12">
+                        <canvas id="pieChart" width="300" height="300"></canvas>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+          <!--End Left Panel-->
+
+          <!--Start Right Panel-->
+          <div class="col-lg-6">
+            <div class="">
+              <div class="page-headng">
+                <h3>Apply for Leave</h3>
+              </div>
+              <form>
+                <label class="">Description : </label>
+                <br>
+                <input class="form-control col-lg" type="text" name="" placeholder="enter description..">
+                <br>
+                <label class="control-label" for="Type of leave">Leave Type : </label>
+                <div>
+                  <select id="leavetype" class="form-control">
+                    <option>Select</option>
+                    <option>CL</option>
+                    <option>PL</option>
+                    <option>OL</option>
+                  </select>
+                </div>
+                <br>
+                <div class="row" style="margin-left:1%;">
+                  <!-- Material inline 1 -->
+                  <div class="form-check col-lg-4">
+                    <input type="radio" class="form-check-input" id="materialInline1" name="inlineMaterialRadiosExample">
+                    <label class="form-check-label" for="materialInline1">First Half</label>
+                  </div>
+
+                  <!-- Material inline 2 -->
+                  <div class="form-check col-lg-4">
+                    <input type="radio" class="form-check-input" id="materialInline2" name="inlineMaterialRadiosExample">
+                    <label class="form-check-label" for="materialInline2">Second Half</label>
+                  </div>
+
+                  <!-- Material inline 3 -->
+                  <div class="form-check col-lg-4">
+                    <input type="radio" class="form-check-input" id="materialInline3" name="inlineMaterialRadiosExample">
+                    <label class="form-check-label" for="materialInline3">Full Day</label>
+                  </div>
+                </div>
+                <br>
+
+                <div class="row">
+                  <div class="col-lg-6">
+                    <label for="From">From : </label>
+                    <input type="date" name="From" style="margin-left:2%;">
+                  </div>
+                  <div class="col-lg-6">
+                    <label for="To">To : </label>
+                    <input type="date" name="To" style="margin-left:2%;">
+                  </div>
+                </div>
+                <br>
+                <div>
+                  <label for="reason">Reason : </label>
+                  <textarea class="form-control" placeholder="Due to some family problem i am not able to come."
+                    rows="10" id="reason"></textarea>
+                </div>
+                <br>
+                <div class="form-actions row text-center ">
+                  <div class="col-lg-6 col-md-4">
+                    <button type="submit" class="btn btn-primary button-width float-right">Reset</button>
+                  </div>
+                  <div class="col-lg-6 col-md-4">
+                    <button type="submit" class="btn btn-success button-width float-left">Proceed</button>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End Right Panel-->
+  </div>
+</div>
+<!--Middle Section finish-->

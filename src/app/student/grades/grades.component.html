@@ -1,0 +1,92 @@
+<div class="container">
+  <div class="row">
+
+<!--Start Left Panel-->
+    <div class="col-lg-3 profile-info">
+      <app-sidenavigation></app-sidenavigation>
+    </div>
+  <!--End Left Panel-->
+
+
+    <!--Start Main Panel-->
+  <div class="col-lg-9 kyc-colm user-management">
+      <div class="kyc-section rewards-section reports-sectn">
+
+        <ul class="nav nav-tabs">
+          <li class="nav-item"  *ngFor="let sub of subjects">
+            <a class="nav-link active" href="#" style="text-decoration:none">{{sub.subCode}}</a>
+          </li>
+        </ul>
+  <!--End Right Panel-->
+  <div id="accordion">
+
+  <!--Notification Panel starts-->
+  <div class="notifiactiion heading">
+  <br/>
+  <br/>
+    <h2>CO24007: Theory Of Computation</h2>
+    <hr/>
+  </div>
+  <div class="card">
+  <div class="card-header" id="headingOne">
+  <h5 class="mb-0">
+      <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="text-decoration:none">
+        <h5>Quiz</h5>
+      </button>
+  </h5>
+  </div>
+
+  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+  <div class="card-body">
+
+  <div>
+    <div class="alert alert-success row">
+      <h4 class="col-8">Quiz  # 2 : Conversions of DFAs and NFAs</h4>		<h4 class="col-4">Grade : 6.75/10</h4>
+      <p class="col-8"> Date of Submission  :  29/8/2018</p>
+      <div class="col-4">
+      <img class="download float-left" src="images/download.png" alt=""/>
+      <a href="#"> download Report</a>
+      </div>
+    </div>
+    <div class="alert alert-success row">
+      <h4 class="col-8">Quiz # 3 : Turing Machine</h4>		<h4 class="col-4">Grade : 6.75/10</h4>
+      <p class="col-8"> Date of Submission  :  01/9/2018</p>
+      <div class="col-4">
+      <img class="download float-left" src="images/download.png" alt=""/>
+      <a href="#"> download Report</a>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  <div class="card">
+  <div class="card-header" id="headingThree">
+    <h5 class="mb-0">
+      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="text-decoration:none">
+        <h5>Midsem</h5>
+      </button>
+    </h5>
+  </div>
+  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+    <div class="card-body">
+    <div class="alert alert-success row">
+    <div class = "row">
+      <h4 class="col-6">MST # 1</h4>
+      <h4 class = "col-6" align="right"> Marks : 20.5/25</h4>
+      <p class="col"> Date of Exam  :  11/8/2018</p>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!--Notification Panel Ends-->
+      </div>
+      </div>
+    </div>
+
+  <!--End Right Panel-->
+
+  </div>
+</div>
+<!--Middle Section finish-->
+</div>
+</div>
