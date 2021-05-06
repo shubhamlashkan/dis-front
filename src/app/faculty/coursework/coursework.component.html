@@ -7,13 +7,16 @@
       <div class="col-lg-9">
         <ul class="nav nav-tabs nav-fill">
           
-          
-          <li class="nav-item navbar navbar-light bg-primary">
-            <a  data-toggle="tab"class="nav-link  text-white "> Coursework</a>
+          <li class="nav-item">
+            <a href="#currentDate" data-toggle="tab" class="nav-link active  ">Course Work</a>
           </li>
-          
+          <li class="nav-item">
+            <a href="#from" data-toggle="tab" class="nav-link">Session Work</a>
+          </li>
+        
         </ul>
         <br>
+
         <span class="mx-2 my-5 h6">Grade category</span><select class="form-select form-select-lg mx-2 my-5" aria-label=".form-select-lg example" [(ngModel)]="courseId">
               <option   *ngFor="let name of coursename;let i=index"  value="{{name.id}}"   selected>{{name.fullname}}
               </option>

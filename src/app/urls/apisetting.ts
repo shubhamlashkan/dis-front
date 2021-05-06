@@ -19,6 +19,6 @@ public static apiMoodle =Urls.moodle+':8087';
 // public static apiGateway =Urls.backendUrl;
 
 
-public static apieureka ="15.206.116.134"+ ':8761';
+public static apieureka ="localhost"+ ':8761';
 }
 
