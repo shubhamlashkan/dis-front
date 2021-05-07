@@ -1,66 +1,260 @@
 <div class="container">
   <div class="row">
-      <!--Start Left Panel-->
-      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 profile-info">
-          <app-sidenavigation></app-sidenavigation>
-      </div>
-      <div class="col-lg-9">
-        <ul class="nav nav-tabs nav-fill">
-          
-          <li class="nav-item">
-            <a href="#currentDate" data-toggle="tab" class="nav-link active  ">Course Work</a>
-          </li>
-          <li class="nav-item">
-            <a href="#from" data-toggle="tab" class="nav-link">Session Work</a>
-          </li>
-        
-        </ul>
-        <br>
-
-        <span class="mx-2 my-5 h6">Grade category</span><select class="form-select form-select-lg mx-2 my-5" aria-label=".form-select-lg example" [(ngModel)]="courseId">
-              <option   *ngFor="let name of coursename;let i=index"  value="{{name.id}}"   selected>{{name.fullname}}
-              </option>
-            </select>
-            <button type="submit" class="btn btn-success btn-small mx-2" (click)="onSubmit()">Submit</button>
-        <form class="">
-          <div class="form-group row" *ngFor="let item of gradeItem;let i=index" > 
-            <label  for="" class="control-label col-sm-7">{{item.itemName}}</label>
-            <input type="number" min='0' class="form-control col-sm-1" [(ngModel)]="per[i]" [ngModelOptions]="{standalone: true}">
-            <input class="col-sm-1" type="checkbox">
-          </div>
-          <button (click)="getCW()" type="submit" class="btn btn-success">Submit</button>
-        </form>
-      </div>
+    <!--Start Left Panel-->
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 profile-info">
+      <app-sidenavigation></app-sidenavigation>
     </div>
-    <br>
-    <div *ngIf="show"   class="table-responsive-lg ">
+    <div class="col-lg-9">
+      <!-- <ul class="nav nav-tabs nav-fill">
+        <li class="nav-item">
+          <a href="#currentDate" data-toggle="tab" class="nav-link active"
+            >Course Work</a
+          >
+        </li>
+        <li class="nav-item">
+          <a href="#from" data-toggle="tab" class="nav-link">Session Work</a>
+        </li>
+      </ul> -->
+      <ul class="nav nav-pills mb-3 nav-fill red" id="pane" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="pill" href="#cw" (click)="changeTab1()"
+            >Course Work</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="pill" href="sw" (click)="changeTab2()">Sessional Work</a>
+        </li>
+      </ul>
+      <br />
+      <div class="tab-content" id="pane">
+        <div id="cw" class="tab-pane active">
+          <form #f1="ngForm" class="form-inline">
+            <div class="form-group">
+              <h5>Grade category</h5>
+              <select
+                class="form-select form-select-lg mx-2 my-5"
+                aria-label=".form-select-lg example"
+                [(ngModel)]="courseId"
+                name="courseId"
+              >
+                <option
+                  *ngFor="let name of coursename; let i = index"
+                  value="{{ name.id }}"
+                  selected
+                >
+                  {{ name.fullname }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group space">
+              <h5>Criterion</h5>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="radio"
+                  id="inlineRadio1"
+                  value="normal"
+                  [(ngModel)]="criterion"
+                />
+                <label class="form-check-label" for="inlineRadio1"
+                  >Normal</label
+                >
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="radio"
+                  id="inlineRadio2"
+                  value="relative"
+                  [(ngModel)]="criterion"
+                />
+                <label class="form-check-label" for="inlineRadio2"
+                  >Relative</label
+                >
+              </div>
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary btn-md space"
+              (click)="onSubmit()"
+            >
+              Submit
+            </button>
+            &nbsp;&nbsp;
+            <button
+              type="button"
+              class="btn btn-warning btn-md"
+              (click)="reset()"
+            >
+              Reset
+            </button>
+          </form>
 
-    
-    <table  class="table table-striped table-bordered table-hover " id="graderTable">
-      <thead class="">
-        <tr class="bg-light">
-          <th scope="col">Student Name</th>
-          <th scope="col">Course</th>
-          <!-- <th scope="col" *ngFor="let item of graderReportGradeItems">{{item.gradeItemName}}  -->
-          <!-- </th> -->
-          <th>CW</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let report of graderReport">
-          <th scope="col">{{report[0].firstName}} {{report[0].lastName}}</th>
-          <td>{{report[0].courseName}}</td>
-          <!-- <td *ngFor="let grade of report">{{grade.gradeObtained}}</td> -->
-          <td>{{report.CW|number}}</td>
-        </tr>
-        
-       
-      </tbody>
-    </table>
-    <br>
-    <button (click)="getCSV('graderTable')"  class="btn btn-success mb-5 ">Export as csv</button>
-    <br>
+          <div
+            class="modal fade"
+            id="exampleModal1"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel1"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel1">
+                    Input Weightage
+                  </h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form #f3="ngForm">
+                    <!-- <div class="alert alert-warning" *ngIf="f3.dirty && f3.invalid">Enter all required values</div> -->
+                    <div class="alert alert-warning">
+                      Automatically, higher weightage will be alloted to the best grading item.
+                    </div>
+                    <ul *ngFor="let tagName of tags | keyvalue">
+                      <li *ngIf="selectedTagName.includes(tagName.key)">
+                        <div class="form-group">
+                          <h4>{{ tagName.key }}</h4>
+                          <input
+                            type="number"
+                            class="form-control col-md-3"
+                            id="weightage"
+                            name="{{tagName.key}}"
+                            min="0"
+                            max="100"
+                            required
+                            ngModel
+                          />
+                        </div>
+                        <ul *ngFor="let gradeItem of tagName.value">
+                          <li *ngIf="selectedGradeItem.includes(gradeItem)">
+                            <div>
+                              <label for="weightage2">{{ gradeItem }}</label>
+                              <input
+                                type="number"
+                                min="0"
+                                max="100"
+                                class="form-control col-md-3"
+                                id="weightage2"
+                                name="{{gradeItem}}"
+                                required
+                                ngModel
+                              />
+                            </div>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button
+                        type="submit"
+                        class="btn btn-primary"
+                        data-dismiss="modal"
+                        (click)="calculateMarks()"
+                        [disabled]="f3.invalid"
+                      >
+                        Calcuate Marks
+                      </button>
+                    </div>
+                  </form>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+
+          <form #f2="ngForm">
+            <ul *ngFor="let tagName of tags | keyvalue">
+              <li>
+                <h4>{{ tagName.key }}</h4>
+
+                <div
+                  class="form-check form-check-inline"
+                  *ngFor="let gradeItem of tagName.value"
+                >
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    [value]="gradeItem"
+                    name="gradeItems"
+                    (change)="onCheckboxChange($event, gradeItem, tagName.key)"
+                  />
+                  <label class="form-check-label">{{ gradeItem }}</label>
+                  &nbsp;
+                </div>
+              </li>
+              <br />
+            </ul>
+            <div class="d-flex justify-content-center">
+              <button
+                type="submit"
+                class="btn btn-success"
+                data-toggle="modal"
+                data-target="#exampleModal1"
+                aria-hidden="true"
+              >
+                Input Weightage
+              </button>
+            </div>
+            <!-- <button (click)="getCW()" type="submit" class="btn btn-success">
+              Submit
+            </button> -->
+          </form>
+          <div *ngIf="show" class="table-responsive-lg">
+            <table
+              class="table table-striped table-bordered table-hover"
+              id="graderTable"
+            >
+              <thead>
+                <tr class="bg-light">
+                  <th scope="col">Student Name</th>
+                  <th scope="col">Course</th>
+                  
+                  <!-- <th scope="col" *ngFor="let item of graderReportGradeItems">{{item.gradeItemName}}  -->
+                  <!-- </th> -->
+                  <th>{{currentTab}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let report of graderReport">
+                  <th scope="col">
+                    {{ report[0].firstName }} {{ report[0].lastName }}
+                  </th>
+                  <td>{{ report[0].courseName }}</td>
+                  <!-- <td *ngFor="let grade of report">{{grade.gradeObtained}}</td> -->
+                  <td *ngIf="checkTab()">{{ report.CW | number }}</td>
+                  <td *ngIf="!checkTab()">{{ report.SW | number }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <br />
+            <button (click)="getCSV('graderTable')" class="btn btn-success mb-5">
+              Export as csv
+            </button>
+            <br />
+          </div>
+        </div>
+      </div>
+      <br />
+     
+    </div>
   </div>
-   
 </div>
-        

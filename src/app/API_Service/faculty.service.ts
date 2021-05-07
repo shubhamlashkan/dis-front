@@ -33,6 +33,13 @@ export class FacultyService {
       `${this.gradesUrl}/getGradeItemsOfCourse/${courseId}`
     );
   }
+
+  getAllTags(courseId:any):Observable<any>{
+    return this.http.get<any[]>(
+      `${this.gradesUrl}/getAllTagsOfCourse/${courseId}`
+    );
+  }
+
   getStudentOfCourse(courseId:any):Observable<any>{
     return this.http.get<any[]>(`${this.gradesUrl}/getStudentsOfCourse/${courseId}`);
   }
@@ -51,4 +58,6 @@ export class FacultyService {
   getSideNavigationDetails():Observable<any>{
     return this.http.get<any[]>(`${this.userUrl}/sideNavigation/getSideNavigationDetails`);
   }
+
+
 }
