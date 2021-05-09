@@ -48,7 +48,7 @@
                 <th scope="col">Course</th>
                 <th scope="col">Grade Item</th>
                 <th scope="col">Grade</th>
-                <th scope="col">Range</th>
+                <th scope="col">Total Marks</th>
                 <th scope="col">Percentage</th>
                 
               </tr>
@@ -59,7 +59,7 @@
                 <td>{{report.courseName}}</td>
                 <td>{{report.gradeItemName}}</td>
                 <td>{{report.gradeObtained}}</td>
-                <td>0-{{report.gradeTotal}}</td>
+                <td>{{report.gradeTotal}}</td>
                 <td>{{(report.gradeObtained/report.gradeTotal)*100 | number}}</td>
               </tr>
               

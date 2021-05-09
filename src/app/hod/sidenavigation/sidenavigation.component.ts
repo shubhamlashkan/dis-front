@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FacultyService } from 'src/app/API_Service/faculty.service';
 import { SidenavService } from 'src/app/API_Service/sidenav.service';
 
 @Component({
@@ -9,23 +10,15 @@ import { SidenavService } from 'src/app/API_Service/sidenav.service';
 })
 export class SidenavigationComponent implements OnInit {
   userData: any;
-  userName: any;
-  usertime: any;
-  userId: any;
 
-  constructor(private sidenav : SidenavService) { }
+
+  constructor(private facultyService:FacultyService ) { }
 
   ngOnInit() {
-    this.sidenav.getSideNavData()
-    .subscribe(
-      data=>{
-        console.log(data);
-        this.userData = data;
-        this.userName = this.userData[0];
-        this.usertime = this.userData[1],
-        this.userId = this.userData[2];
-      }
-    )
+    this.facultyService.getSideNavigationDetails().subscribe(data=>{
+      this.userData=data;
+      console.log(data);
+    })
   }
 
 }

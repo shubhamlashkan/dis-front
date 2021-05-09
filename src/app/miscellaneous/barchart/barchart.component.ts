@@ -7,7 +7,9 @@ import { Chart } from 'chart.js';
   styleUrls: ['./barchart.component.scss']
 })
 export class BarchartComponent implements OnInit {
- 
+  overallAttendance:any;
+  attend:any;
+  total:any;
   constructor() { }
 
   ngOnInit() {
@@ -15,12 +17,17 @@ export class BarchartComponent implements OnInit {
   }
 
   getBarChart(idname,bars) {
+    this.overallAttendance=0;
+    this.total=0;
+    this.attend=0;
     var label=[];
     var percentage=[];
     var color=[];
     for( var i=0; i<bars.length;i++){
       var cc=bars[i].coursecode;
       var per=bars[i].percentage;
+      this.total+=bars[i].slot
+      this.attend+=bars[i].attendance
       var slot=`${cc},\n ${bars[i].attendance}/${bars[i].slot} `;
       if(per<60){
         color.push("red");
@@ -36,10 +43,14 @@ export class BarchartComponent implements OnInit {
        return this.getChart(idname,label,percentage,color);
      }
     }
+
     
   }
   getChart(idname,label,percentage,color){
-   
+
+    console.log(this.attend,this.total)
+    this.overallAttendance=(this.attend/this.total)*100;
+    this.overallAttendance=this.overallAttendance.toFixed(2);
     return new Chart(idname, {
       type: 'bar',
       data: {
@@ -58,7 +69,7 @@ export class BarchartComponent implements OnInit {
           enabled:true
         },
         title: {
-          text: 'Attendance till current date',
+          text: `Overall Attendance till current date ${this.overallAttendance}`,
           display: true
         },
         scales: {

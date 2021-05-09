@@ -13,6 +13,7 @@ export class FacultyService {
   private attendanceUrl = apiSetting.apiMoodle+'/moodle';
   private gradesUrl=apiSetting.apiMoodle+'/grades'
   private assnsUrl=apiSetting.apiMoodle+'/assns';
+  private userUrl=apiSetting.apiUser
   username:any;
   constructor(private http: HttpClient,private sessionStorageService:TokenStorageService) {
     
@@ -32,6 +33,13 @@ export class FacultyService {
       `${this.gradesUrl}/getGradeItemsOfCourse/${courseId}`
     );
   }
+
+  getAllTags(courseId:any):Observable<any>{
+    return this.http.get<any[]>(
+      `${this.gradesUrl}/getAllTagsOfCourse/${courseId}`
+    );
+  }
+
   getStudentOfCourse(courseId:any):Observable<any>{
     return this.http.get<any[]>(`${this.gradesUrl}/getStudentsOfCourse/${courseId}`);
   }
@@ -47,4 +55,9 @@ export class FacultyService {
   getAssignments(courseId:any,userId:any,assignId:any):Observable<any>{
     return this.http.get<any[]>(`${this.assnsUrl}/getTeachersReport/${courseId}/${userId}/${assignId}`);
   }
+  getSideNavigationDetails():Observable<any>{
+    return this.http.get<any[]>(`${this.userUrl}/sideNavigation/getSideNavigationDetails`);
+  }
+
+
 }

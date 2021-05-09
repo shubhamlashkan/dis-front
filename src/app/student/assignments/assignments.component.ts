@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JsonToCSVService } from 'src/app/API_Service/json-to-csv.service';
 import { StudentService } from 'src/app/API_Service/student.service';
 import { SemesterSubjectsService } from './../../API_Service/SemesterSubjectsService';
-
+import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-assignments',
   templateUrl: './assignments.component.html',
@@ -38,6 +38,7 @@ export class AssignmentsComponent implements OnInit {
     })
   }
   getCSV(){
-    this.jsonToCSV.downloadFile(this.assignments,"assignments",["courseCode","courseName","assignmentName","submitted","gradeObtained","gradeMaximum","dateOfCreation","dueDate","dateOfSubmission"])
+   
+    this.jsonToCSV.downloadFile(this.assignments,`${this.showCourse.name}_assignments`,["courseCode","courseName","assignmentName","submitted","gradeObtained","gradeMaximum","dateOfCreation","dueDate","dateOfSubmission"])
   }
 }

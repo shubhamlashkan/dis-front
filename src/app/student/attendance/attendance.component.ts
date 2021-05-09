@@ -17,7 +17,6 @@ export class AttendanceComponent implements OnInit {
    
     this.studentService.getStudentAttendance().subscribe(data=>{
        this.bar=data;
-       console.log(data);
        this.chart.getBarChart('barChart',this.bar);
     });
      
@@ -50,7 +49,6 @@ export class AttendanceComponent implements OnInit {
     this.closeNav();
   }
   getCSV(){
-    console.log(Object.keys);
-    this.jsonToCSV.downloadFile(this.bar,'attendance',["username","firstname","lastname","coursename","attendance","slot","percentage"]);
+    this.jsonToCSV.downloadFile(this.bar,'AttendanceReport',["username","firstname","lastname","coursename","attendance","slot","percentage"]);
   }
 }

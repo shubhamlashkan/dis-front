@@ -15,20 +15,17 @@ export class GradesComponent implements OnInit {
   overviewReport:any[];
   courseId:any;
   subjectReport:any[];
-  constructor(private semSubjects: SemesterSubjectsService,private studentService: StudentService,private router: Router,private session: TokenStorageService) { 
+  constructor(private semSubjects: SemesterSubjectsService,private studentService: StudentService,private session: TokenStorageService) { 
     
   }
 
   ngOnInit() {
-    this.subjects = this.semSubjects.getSubjectList();
-    console.log(this.session.getMoodleUserId());
     this.studentService.getStudentOverviewReport().subscribe(data=>{
       this.overviewReport=data;
      
     }) 
     this.studentService.getAllCourses().subscribe(data=>{
       this.subjects=data;
-      console.log(data)
       this.studentService.getStudentUserReport(this.subjects[0].courseId).subscribe(data=>{
         this.subjectReport=data;
         this.courseId=this.subjects[0].courseId;
@@ -45,7 +42,6 @@ export class GradesComponent implements OnInit {
     })
   }
   getCSV(tableId){
-    console.log(tableId);
     let element = document.getElementById(tableId);
     const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
  

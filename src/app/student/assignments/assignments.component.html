@@ -33,7 +33,7 @@
 		<div class="card-header" id="headingOne">
 		<h5 class="mb-0">
         <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="text-decoration:none">
-          <h5>Pending Assignments</h5>
+          <h5>Pending Activities</h5>
         </button>
 		</h5>
 		</div>
@@ -42,14 +42,13 @@
 		<div class="card-body">
 
 		<div *ngFor="let assign of assignments">
-			<div  class="alert alert-success row" *ngIf="!assign.submitted">
+			<div  class="alert alert-success row" *ngIf="!assign.submitted" >
 				<h4 class="col-8">{{assign.assignmentName}}</h4>		<h6 class="col-4">By:Prof {{assign.courseTeacherFirstName}} {{assign.courseTeacherLastName}}</h6>
 				<p class="col-8"> Date of Submission  : {{assign.dueDate}}</p>
 				<div class="col-4">
 					<p>grades: {{assign.gradeObtained}}/{{assign.gradeMaximum}}</p>
 				</div>
 			</div>
-			
 		</div>
 		</div>
 		</div>
@@ -57,7 +56,7 @@
     <div class="card-header" id="headingThree">
       <h5 class="mb-0">
         <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="text-decoration:none">
-          <h5>Completed Assignments</h5>
+          <h5>Completed Activities</h5>
         </button>
       </h5>
     </div>

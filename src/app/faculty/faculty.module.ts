@@ -22,6 +22,7 @@ import { HomeComponent } from './home/home.component';
 import { ClassAttendanceComponent } from './class-attendance/class-attendance.component';
 import { GradesComponent } from './grades/grades.component';
 import { AssignmentsComponent } from './assignments/assignments.component';
+import { CourseworkComponent } from './coursework/coursework.component';
 @NgModule({
   imports: [
     FormsModule ,
@@ -46,7 +47,8 @@ import { AssignmentsComponent } from './assignments/assignments.component';
     HomeComponent,
     ClassAttendanceComponent,
     GradesComponent,
-    AssignmentsComponent
+    AssignmentsComponent,
+    CourseworkComponent
   ],
   providers: [PiechartComponent]
 })

@@ -23,6 +23,7 @@ import { AlertsComponent } from './alerts/alerts.component';
 import { ClassAttendanceComponent } from './class-attendance/class-attendance.component';
 import {GradesComponent} from './grades/grades.component'
 import { AssignmentsComponent } from './assignments/assignments.component';
+import { CourseworkComponent } from './coursework/coursework.component';
 canActivate:[RouteGuardService]
 const routes: Routes = [
   {
@@ -95,6 +96,10 @@ const routes: Routes = [
       {
         path: 'assignments',
         component:  AssignmentsComponent
+      },
+      {
+        path: 'coursework',
+        component: CourseworkComponent
       },
       
      ]

@@ -92,12 +92,17 @@ export class ClassAttendanceComponent implements OnInit {
   getCSV(tableId){
     let element = document.getElementById(tableId);
     const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
-    ws['!cols'].push({ width: 20 },{ width: 20 },{ width: 20 },{ width: 30 },{ width: 30 },{ width: 30 })
+    ws['!cols'].push({ width: 20 },{ width: 20 },{ width: 30 },{ width: 30 },{ width: 30 },{ width: 30 })
     /* generate workbook and add the worksheet */
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
  
     /* save to file */  
-    XLSX.writeFile(wb, `${tableId}.xlsx`);
+    if(tableId=='month'){
+      XLSX.writeFile(wb, `${this.courseId}_${this.month}_${tableId}.xlsx`);
+      
+    }else{
+      XLSX.writeFile(wb, `${this.courseId}_${tableId}.xlsx`);
+    }
   }                     
 }
