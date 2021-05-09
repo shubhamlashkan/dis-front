@@ -1,5 +1,5 @@
 export class Urls{
-    public  mainurl = "http://10.1.18.240:8080";
+    public  mainurl = "http://localhost:8080";
 
    //public static backendUrl = 'http://10.1.100.114'; 
    public static frontendUrl = 'http://localhost:4200'; 

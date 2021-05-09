@@ -6,16 +6,20 @@ import { MydutiesNavigationComponent } from './myduties-navigation/myduties-navi
 import { TimetableModule } from './timetable/timetable.module';
 import { MydutiesComponent } from './myduties/myduties.component';
 import { MytaskComponent } from './mytask/mytask.component';
-
+import { FormsModule } from '@angular/forms';
+import { ProjectguideallotmentComponent } from './projectguideallotment/projectguideallotment.component';
+import { MescholarshipComponent } from './mescholarship/mescholarship.component';
+import { IndustryvisitComponent } from './industryvisit/industryvisit.component';
+import { ExpertlectureComponent } from './expertlecture/expertlecture.component';
 
 @NgModule({
   imports: [
     CommonModule,
     LibraryModule,
     TimetableModule,
-    MydutiesRoutingModule
-    
+    MydutiesRoutingModule,
+    FormsModule,
   ],
-  declarations: [MydutiesNavigationComponent, MydutiesComponent, MytaskComponent]
+  declarations: [MydutiesNavigationComponent, MydutiesComponent, MytaskComponent, ProjectguideallotmentComponent, MescholarshipComponent, IndustryvisitComponent, ExpertlectureComponent]
 })
 export class MydutiesModule { }

@@ -1,0 +1,1734 @@
+<br />
+<div class="row center">
+  <div class="col-lg-12">
+    <div
+      class="modal fade"
+      id="exampleModal1"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel1">Add Expert</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="alert alert-warning" *ngIf="f1.dirty && f1.invalid">
+              Enter all required values
+            </div>
+            <form #f1="ngForm">
+              <div class="form-group">
+                <label for="expertName">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="expertName"
+                  name="name"
+                  required
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="designation">Designation</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="designation"
+                  name="designation"
+                  required
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                  id="email"
+                  name="email"
+                  ngModel
+                  required
+                  #emailref1="ngModel"
+                />
+                <div
+                  *ngIf="
+                    emailref1.errors && (emailref1.touched || emailref1.dirty)
+                  "
+                  class="alert alert-danger"
+                >
+                  <div [hidden]="!emailref1.errors?.pattern">Invalid Email</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="mobileNumber">Mobile Number</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="mobileNo"
+                  id="mobileNumber"
+                  pattern="^((\\+91-?)|0)?[0-9]{10}$"
+                  ngModel
+                  #mobNumber1="ngModel"
+                  required
+                />
+                <div
+                  *ngIf="
+                    mobNumber1.errors &&
+                    (mobNumber1.touched || mobNumber1.dirty)
+                  "
+                  class="alert alert-danger"
+                >
+                  <div *ngIf="mobNumber1.errors.pattern">
+                    Invalid Mobile Number
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="dateOfBirth">Date of birth</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="dateOfBirth"
+                  name="dob"
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="fatherName">Father's / Husband's Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="fatherName"
+                  name="fathersName"
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="address">Office Address</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="address"
+                  name="officeAddress"
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="city">City</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="city"
+                  name="city"
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="state">State</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="state"
+                  name="state"
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="country">Country</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="country"
+                  name="country"
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="pinCode">PIN code</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="pinCode"
+                  name="pinCode"
+                  ngModel
+                  #pinCode1="ngModel"
+                  pattern="^[1-9][0-9]{5}$"
+                />
+                <div
+                  *ngIf="
+                    pinCode1.errors && (pinCode1.touched || pinCode1.dirty)
+                  "
+                  class="alert alert-danger"
+                >
+                  <div *ngIf="pinCode1.errors.pattern">Invalid Pin Code</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="aadhar">Aadhaar Number</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  pattern="^[2-9]{1}[0-9]{11}$"
+                  id="aadhar"
+                  name="aadhaarNo"
+                  #aadhar1="ngModel"
+                  ngModel
+                />
+                <div
+                  *ngIf="aadhar1.errors && (aadhar1.touched || aadhar1.dirty)"
+                  class="alert alert-danger"
+                >
+                  <div *ngIf="aadhar1.errors.pattern">
+                    Invalid Aadhaar Number
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="pan">PAN card</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  pattern="^[A-Z]{5}[0-9]{4}[A-Z]$"
+                  id="pan"
+                  name="panNo"
+                  #pan1="ngModel"
+                  ngModel
+                />
+                <div
+                  *ngIf="pan1.errors && (pan1.touched || pan1.dirty)"
+                  class="alert alert-danger"
+                >
+                  <div *ngIf="pan1.errors.pattern">Invalid PAN Number</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="gst">GST Number</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  pattern="^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[0-9]{1}[A-Z]{1}[0-9]{1}$"
+                  id="gst"
+                  name="gstNo"
+                  #gst1="ngModel"
+                  ngModel
+                />
+                <div
+                  *ngIf="gst1.errors && (gst1.touched || gst1.dirty)"
+                  class="alert alert-danger"
+                >
+                  <div *ngIf="gst1.errors.pattern">Invalid GST Number</div>
+                </div>
+              </div>
+              <br />
+              <h3>Bank Details</h3>
+
+              <div class="form-group">
+                <label for="bankName">Bank Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="bankName"
+                  name="bankName"
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="ifsc">IFSC</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  pattern="^[A-Z]{4}[A-Z0-9]{7}$"
+                  id="ifsc"
+                  name="ifsc"
+                  #ifsc1="ngModel"
+                  ngModel
+                />
+                <div
+                  *ngIf="ifsc1.errors && (ifsc1.touched || ifsc1.dirty)"
+                  class="alert alert-danger"
+                >
+                  <div *ngIf="ifsc1.errors.pattern">Invalid IFSC Code</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="accountNumber">Account Number</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  pattern="^\d{9,18}$"
+                  id="accountNumber"
+                  name="accountNo"
+                  #accountNumber1="ngModel"
+                  ngModel
+                />
+                <div
+                  *ngIf="
+                    accountNumber1.errors &&
+                    (accountNumber1.touched || accountNumber1.dirty)
+                  "
+                  class="alert alert-danger"
+                >
+                  <div *ngIf="accountNumber1.errors.pattern">
+                    Invalid Bank Account Number
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="teqip">Unique ID Number (TEQIP)</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="teqip"
+                  name="uniqueTeqipId"
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="type">Type</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="Type"
+                  name="type"
+                  ngModel
+                />
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-dismiss="modal"
+                  type="submit"
+                  [disabled]="!f1.valid"
+                  (click)="addExpert()"
+                >
+                  Add Expert
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="exampleModal2"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel2"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel2">
+              Add Expert Lecture
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #f2="ngForm">
+              <div class="alert alert-warning" *ngIf="f2.dirty && f2.invalid">
+                Enter all required values
+              </div>
+              <div class="form-group">
+                <label for="topic">Topic</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="topic"
+                  name="topic"
+                  required
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="coordinator">Coordinator</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="coordinator"
+                  name="coordinator"
+                  required
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label>Audience </label>
+                <br />
+                <small>
+                  <div
+                    class="form-check form-check-inline"
+                    *ngFor="let data of courses"
+                  >
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      [value]="data.value"
+                      (change)="onCheckboxChange($event, data.value)"
+                    />
+                    <label class="form-check-label">{{ data.name }}</label>
+                  </div>
+                </small>
+              </div>
+              <!-- <div class="form-group">
+								<label for="course">Course</label>
+								<select
+									class="form-control"
+									id="course"
+									[(ngModel)]="selectedCourse"
+									name="course"
+									required
+								>
+									
+									<option value="B. Tech">B. Tech</option>
+									<option value="M. Tech">M. Tech</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="year">Year</label>
+								<select
+									class="form-control"
+									id="year"
+									name="year"
+									required
+									(click)="getCourses()"
+									[(ngModel)]="selectedYear"
+								>
+									<option value="None">Select Year</option>
+									<option *ngFor="let y of years">
+										{{ y }}
+									</option>
+								</select>
+							</div> -->
+              <div class="form-group">
+                <label for="expert">Expert</label>
+                <select
+                  class="form-control"
+                  id="expert"
+                  [(ngModel)]="selectedExpert"
+                  name="expertName"
+                  required
+                >
+                  <option value="None">Select Expert</option>
+                  <!-- <option value="starter" selected>Choose Mentor</option>  -->
+                  <option *ngFor="let expert of nd">
+                    {{ expert.expertName }} | {{ expert.expertDesignation }}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="date">Date</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="date"
+                  name="date"
+                  required
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="time">Time</label>
+                <input
+                  type="time"
+                  class="form-control"
+                  id="time"
+                  name="time"
+                  required
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="venue">Venue</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="venue"
+                  name="venue"
+                  required
+                  ngModel
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="conveyance">Conveyance</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="conveyance"
+                  name="conveyance"
+                  required
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="honorarium">Honorarium</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="honorarium"
+                  name="honorarium"
+                  required
+                  ngModel
+                />
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  data-dismiss="modal"
+                  (click)="addExpertLecture()"
+                  [disabled]="!f2.valid"
+                >
+                  Add Expert Lecture
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="exampleModal3"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel3"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel3">Edit Expert</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #f3="ngForm">
+              <div class="form-group">
+                <label for="editExpert">Select Expert</label>
+                <select
+                  class="form-control"
+                  id="editExpert"
+                  [(ngModel)]="editExpert"
+                  name="edit"
+                  required
+                >
+                  <!-- <option value="starter" selected>Choose Mentor</option>  -->
+                  <option value="None">Select Expert</option>
+                  <option *ngFor="let expert of nd" ng>
+                    {{ expert.expertName }} |
+                    {{ expert.expertDesignation }}
+                  </option>
+                </select>
+              </div>
+              <button
+                type="button"
+                class="btn btn-primary btn-sm"
+                (click)="checkExpert()"
+              >
+                <i class="fa fa-newspaper-o" aria-hidden="true"></i> Show
+                Details
+              </button>
+            </form>
+            <br />
+
+            <form #f4="ngForm" *ngIf="checkDisplay()">
+              <div class="form-group">
+                <label for="expertName">Expert Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="expertName"
+                  name="name"
+                  [(ngModel)]="editingExpert.name"
+                  required
+                  disabled
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="designation">Designation</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="designation"
+                  name="designation"
+                  [(ngModel)]="editingExpert.designation"
+                  required
+                  ngModel
+                  disabled
+                />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  required="required"
+                  [(ngModel)]="editingExpert.email"
+                  disabled
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="mobileNumber">Mobile Number</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="mobileNumber"
+                  name="mobileNo"
+                  [(ngModel)]="editingExpert.mobileNo"
+                  pattern="^((\\+91-?)|0)?[0-9]{10}$"
+                  ngModel
+                  #mobNumber1="ngModel"
+                  required
+                />
+                <div
+                  *ngIf="
+                    mobNumber1.errors &&
+                    (mobNumber1.touched || mobNumber1.dirty)
+                  "
+                  class="alert alert-danger"
+                >
+                  <div *ngIf="mobNumber1.errors.pattern">
+                    Invalid Mobile Number
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="dateOfBirth">Date of birth</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="dateOfBirth"
+                  name="dob"
+                  [(ngModel)]="editingExpert.dob"
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="fatherName">Father's / Husband's Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="fatherName"
+                  name="fathersName"
+                  [(ngModel)]="editingExpert.fathersName"
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="address">Office Address</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="address"
+                  name="officeAddress"
+                  [(ngModel)]="editingExpert.officeAddress"
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="city">City</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="city"
+                  name="city"
+                  [(ngModel)]="editingExpert.city"
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="state">State</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="state"
+                  name="state"
+                  [(ngModel)]="editingExpert.state"
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="country">Country</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="country"
+                  name="country"
+                  [(ngModel)]="editingExpert.country"
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="pinCode">PIN code</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="pinCode"
+                  name="pinCode"
+                  [(ngModel)]="editingExpert.pinCode"
+                  ngModel
+                  #pinCode1="ngModel"
+                  pattern="^[1-9][0-9]{5}$"
+                />
+                <div
+                  *ngIf="
+                    pinCode1.errors && (pinCode1.touched || pinCode1.dirty)
+                  "
+                  class="alert alert-danger"
+                >
+                  <div *ngIf="pinCode1.errors.pattern">Invalid Pin Code</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="aadhar">Aadhaar Number</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="aadhar"
+                  name="aadhaarNo"
+                  [(ngModel)]="editingExpert.aadhaarNo"
+                  pattern="^[2-9]{1}[0-9]{11}$"
+                  #aadhar1="ngModel"
+                  ngModel
+                />
+                <div
+                  *ngIf="aadhar1.errors && (aadhar1.touched || aadhar1.dirty)"
+                  class="alert alert-danger"
+                >
+                  <div *ngIf="aadhar1.errors.pattern">
+                    Invalid Aadhaar Number
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="pan">PAN card</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="pan"
+                  name="panNo"
+                  [(ngModel)]="editingExpert.panNo"
+                  pattern="^[A-Z]{5}[0-9]{4}[A-Z]$"
+                  #pan1="ngModel"
+                  ngModel
+                />
+                <div
+                  *ngIf="pan1.errors && (pan1.touched || pan1.dirty)"
+                  class="alert alert-danger"
+                >
+                  <div *ngIf="pan1.errors.pattern">Invalid PAN Number</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="gst">GST Number</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  pattern="^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[0-9]{1}[A-Z]{1}[0-9]{1}$"
+                  id="gst"
+                  [(ngModel)]="editingExpert.gstNo"
+                  name="gstNo"
+                  #gst1="ngModel"
+                  ngModel
+                />
+                <div
+                  *ngIf="gst1.errors && (gst1.touched || gst1.dirty)"
+                  class="alert alert-danger"
+                >
+                  <div *ngIf="gst1.errors.pattern">Invalid GST Number</div>
+                </div>
+              </div>
+              <br />
+              <h3>Bank Details</h3>
+
+              <div class="form-group">
+                <label for="bankName">Bank Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="bankName"
+                  name="bankName"
+                  [(ngModel)]="editingExpert.bankName"
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="ifsc">IFSC</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="ifsc"
+                  name="ifsc"
+                  [(ngModel)]="editingExpert.ifsc"
+                  pattern="^[A-Z]{4}[A-Z0-9]{7}$"
+                  #ifsc1="ngModel"
+                  ngModel
+                />
+                <div
+                  *ngIf="ifsc1.errors && (ifsc1.touched || ifsc1.dirty)"
+                  class="alert alert-danger"
+                >
+                  <div *ngIf="ifsc1.errors.pattern">Invalid IFSC Code</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="accountNumber">Account Number</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="accountNumber"
+                  name="accountNo"
+                  pattern="^\d{9,18}$"
+                  [(ngModel)]="editingExpert.accountNo"
+                  #accountNumber1="ngModel"
+                  ngModel
+                />
+                <div
+                  *ngIf="
+                    accountNumber1.errors &&
+                    (accountNumber1.touched || accountNumber1.dirty)
+                  "
+                  class="alert alert-danger"
+                >
+                  <div *ngIf="accountNumber1.errors.pattern">
+                    Invalid Bank Account Number
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="teqip">Unique ID Number (TEQIP)</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="teqip"
+                  name="uniqueTeqipId"
+                  [(ngModel)]="editingExpert.uniqueTeqipId"
+                  required
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="type">Type</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="Type"
+                  name="type"
+                  [(ngModel)]="editingExpert.type"
+                  required
+                  ngModel
+                />
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                  (click)="resetExpert()"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-dismiss="modal"
+                  (click)="deleteExpert(); resetExpert()"
+                  *ngIf="editingExpert"
+                >
+				<i class="fa fa-trash" aria-hidden="true"></i>
+                  Delete
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-dismiss="modal"
+                  data-toggle="modal"
+                  data-target="#exampleModal3"
+                  aria-hidden="true"
+                  (click)="editExpertDetails(); resetExpert()"
+                >
+                  <i class="fa fa-pencil" aria-hidden="true"></i> Save Changes
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="exampleModal4"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel4"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel4">
+              Upload Notesheet
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #f4="ngForm">
+              <div class="form-group">
+                <label for="notesheet"> <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Select Notesheet</label>
+                <input
+                  type="file"
+                  class="form-control-file"
+                  id="notesheet"
+                  name="file"
+                  (change)="selectFileInput($event.target.files)"
+                  required
+                  ngModel
+                />
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-dismiss="modal"
+                  (click)="changeStatus()"
+                  [disabled]="!f4.valid"
+                >
+                  Change status to Upcoming
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="exampleModal6"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel6"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel6">
+              Upload Attendance
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #f6="ngForm">
+              <div class="form-group">
+                <label for="attendance">Select Attendance</label>
+                <input
+                  type="file"
+                  class="form-control-file"
+                  id="attendance"
+                  name="file"
+                  (change)="selectFileInput($event.target.files)"
+                  required
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+								<label for="photograph"><i class="fa fa-file-image-o" aria-hidden="true"></i> Select Photograph</label>
+								<input
+									type="file"
+									accept="image/*"
+									class="form-control-file"
+									id="photograph"
+									name="photo"
+									(change)="selectPhotoInput($event.target.files)"
+									required
+									multiple
+									ngModel
+								/>
+						</div>
+
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-dismiss="modal"
+                  (click)="changeStatus2()"
+                  [disabled]="!f6.valid"
+                >
+                  Change status to Completed
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="exampleModal7"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel7"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel7">
+              Edit Expert Lecture
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #f7="ngForm" *ngIf="editingLecture">
+              <div class="form-group">
+                <label for="coordinator">Coordinator</label>
+                <input
+                  class="form-control"
+                  id="coordinator"
+                  [(ngModel)]="editingLecture.coordinator"
+                  name="coo"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="audience">Audience</label>
+                <input
+                  class="form-control"
+                  id="cours"
+                  [(ngModel)]="editingLecture.audience"
+                  name="aud"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="venue">Venue</label>
+                <input
+                  class="form-control"
+                  id="venue"
+                  name="venu"
+                  [(ngModel)]="editingLecture.venue"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="dat">Date</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="dat"
+                  name="f"
+                  [(ngModel)]="editingLecture.date"
+                  name="g"
+                  required
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="tim">Time</label>
+                <input
+                  type="time"
+                  class="form-control"
+                  id="tim"
+                  [(ngModel)]="editingLecture.time"
+                  name="h"
+                  required
+                  ngModel
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="conveyanc">Conveyance</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="conveyanc"
+                  name="convey"
+                  [(ngModel)]="editingLecture.conveyance"
+                  required
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="honorariu">Honorarium</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="honorariu"
+                  name="honor"
+                  [(ngModel)]="editingLecture.honorarium"
+                  required
+                  ngModel
+                />
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-dismiss="modal"
+                  [disabled]="!f7.valid"
+                  (click)="updateExpertLecture()"
+                >
+                  Save Changes
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="exampleModal5"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel5"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel5">
+              Details of Expert Lecture
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #f5="ngForm" *ngIf="lectureDetails">
+              <div class="form-group">
+                <label for="topi">Topic</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="topi"
+                  name="a"
+                  [(ngModel)]="lectureDetails.topic"
+                  disabled
+                  required
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="cours">Audience</label>
+                <input
+                  class="form-control"
+                  id="cours"
+                  [(ngModel)]="lectureDetails.audience"
+                  disabled
+                  name="b"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label>Attendance</label>
+                <br />
+                <button
+                  type="button"
+                  class="btn btn-secondary btn-sm"
+                  (click)="downloadAttendance()"
+                >
+				<i class="fa fa-download" aria-hidden="true"></i> Download Attendance
+                </button>
+              </div>
+              <div class="form-group">
+                <label>Notesheet</label>
+                <br />
+                <button
+                  type="button"
+                  class="btn btn-secondary btn-sm"
+                  (click)="downloadNotesheet()"
+                >
+				<i class="fa fa-download" aria-hidden="true"></i> Download Notesheet
+                </button>
+              </div>
+              <div class="form-group">
+                <label for="exper">Expert Name</label>
+                <input
+                  class="form-control"
+                  id="exper"
+                  [(ngModel)]="lectureDetails.expertName"
+                  disabled
+                  name="d"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="expe">Expert Designation</label>
+                <input
+                  class="form-control"
+                  id="expe"
+                  [(ngModel)]="lectureDetails.expertDesignation"
+                  disabled
+                  name="e"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="dat">Date</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="dat"
+                  name="f"
+                  [(ngModel)]="lectureDetails.date"
+                  name="g"
+                  disabled
+                  required
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="tim">Time</label>
+                <input
+                  type="time"
+                  class="form-control"
+                  id="tim"
+                  [(ngModel)]="lectureDetails.time"
+                  name="h"
+                  disabled
+                  required
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="venu">Venue</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="venu"
+                  name="i"
+                  [(ngModel)]="lectureDetails.venue"
+                  disabled
+                  required
+                  ngModel
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="conveyanc">Conveyance</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="conveyanc"
+                  name="j"
+                  [(ngModel)]="lectureDetails.conveyance"
+                  disabled
+                  required
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="honorariu">Honorarium</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="honorariu"
+                  name="k"
+                  [(ngModel)]="lectureDetails.honorarium"
+                  disabled
+                  required
+                  ngModel
+                />
+              </div>
+              <div class="form-group">
+                <label for="totalAmount">Total Amount</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="totalAmount"
+                  name="l"
+                  [(ngModel)]="lectureDetails.totalAmount"
+                  disabled
+                  required
+                  ngModel
+                />
+              </div>
+			  <div class="form-group">
+                <label >Photographs</label>
+				<ul>
+					<li *ngFor = "let image of imagesList" class="fake-link" >
+					   <a (click)="downloadPhoto(image.url)"><i class="fa fa-file-image-o" aria-hidden="true"></i> {{ image.name }}</a></li>
+				
+				 </ul>
+              </div>
+
+              <div class="form-group">
+                <label for="paymentStatus">Payment Status</label>
+                <select
+                  class="form-control"
+                  id="paymentStatus"
+                  name="paymentStatus"
+                  [(ngModel)]="lectureDetails.paymentStatus"
+                  required
+                >
+                  <!-- <option value="lectureDetails.paymentStatus" selected>{{ lectureDetails.paymentStatus }}</option>  -->
+                  -->
+                  <option
+                    *ngFor="let status of paymentStatusList"
+                    value="{{ status.name }}"
+                  >
+                    {{ status.name }}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="remarks">Remarks</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="remarks"
+                  name="remarks"
+                  [(ngModel)]="lectureDetails.remarks"
+                  ngModel
+                />
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-dismiss="modal"
+                  (click)="updatePayementStatusAndRemarks()"
+                >
+                  Done
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <input
+      type="text"
+      class="form-control form-group"
+      placeholder="Search by Topic"
+      class="col-md-4"
+      [(ngModel)]="searchTopic"
+      (keyup.enter)="searchExpertLecture()"
+    />
+    <button
+      type="button"
+      class="btn btn-info lessSpace btn-sm"
+      (click)="searchExpertLecture()"
+    >
+      <i class="fa fa-search" aria-hidden="true"></i> Search
+    </button>
+    <button
+      type="button"
+      class="btn btn-success space btn-sm"
+      data-toggle="modal"
+      data-target="#exampleModal1"
+      aria-hidden="true"
+    >
+      <i class="fa fa-plus" aria-hidden="true"></i>
+      Add Expert
+    </button>
+    <button
+      type="button"
+      class="btn btn-success space btn-sm"
+      data-toggle="modal"
+      data-target="#exampleModal2"
+      aria-hidden="true"
+    >
+      <i class="fa fa-plus" aria-hidden="true"></i>
+      Add Expert Lecture
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary space btn-sm"
+      data-toggle="modal"
+      data-target="#exampleModal3"
+      aria-hidden="true"
+      (click)="refreshExperts()"
+    >
+      <i class="fa fa-pencil" aria-hidden="true"></i> Edit Experts
+    </button>
+  </div>
+</div>
+
+<br />
+
+<div class="row center">
+  <div class="col-lg-8">
+    <ul class="nav nav-pills mb-3 nav-fill red" id="pane" role="tablist">
+      <li class="nav-item">
+        <a
+          class="nav-link active"
+          data-toggle="pill"
+          href="#Pending"
+          (click)="refreshPendingLectures(); changeTab1()"
+          >Pending</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          data-toggle="pill"
+          href="#Upcoming"
+          (click)="refreshUpcommingLectures(); changeTab2()"
+          >Upcoming</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          data-toggle="pill"
+          href="#Completed"
+          (click)="refreshCompletedLectures(); changeTab3()"
+          >Completed</a
+        >
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="tab-content" id="pane">
+  <div id="Pending" class="tab-pane active">
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- <div class="table-responsive">
+					<table class="table table-striped">
+						
+					</table>
+				</div> -->
+        <div style="overflow: auto; height: 600px" class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+			  <th></th>
+              <th>Topic</th>
+              <th>Date</th>
+              <th>Expert Name</th>
+              <th>Designation</th>
+              <th>Coordinator</th>
+              <th>Audience</th>
+              <th>Status</th>
+              <!-- <th>Send Invite</th> -->
+              <!-- <th>Generate Notesheet</th> -->
+            </thead>
+            <tr
+              *ngFor="let lecture of pendingLectures"
+            >
+              <!-- *ngIf="deleteExpertLecture.includes(lecture.expertLectureId)" -->
+                <button
+                  type="button"
+                  class="beautify1 btn btn-danger button"
+                  (click)="
+                    deleteLecture(lecture.topic, lecture.expertLectureId)
+                  "
+                >
+				<i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
+				<br />
+                <button
+                  type="button"
+                  class="beautify1 btn btn-warning button"
+                  data-toggle="modal"
+                  data-target="#exampleModal7"
+                  (click)="editExpertLecture(lecture)"
+                >
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                </button>
+              <td>
+                <strong>{{ lecture.topic }}</strong>
+              </td>
+              <td>{{ lecture.date | date }}</td>
+              <td>{{ lecture.expertName }}</td>
+              <td>{{ lecture.expertDesignation }}</td>
+              <td>{{ lecture.coordinator }}</td>
+              <td>{{ lecture.audience }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-secondary btn-sm"
+                  data-toggle="modal"
+                  data-target="#exampleModal4"
+                  (click)="
+                    changeStatusToUpcoming(
+                      lecture.expertLectureId,
+                      lecture.topic
+                    )
+                  "
+                >
+				<i class="fa fa-bell" aria-hidden="true"></i>
+                  Change Status
+                </button>
+                <!-- <div class="row">
+									<div class="col-xs-3" id="year">
+										<select
+											class="form-control"
+											name="status"
+											(change)="
+												changeStatus(
+													lecture.expertLectureId,
+													lecture.topic
+												)
+											"
+										>
+											<option value="pending">
+												Pending
+											</option>
+											<option value="upcoming">
+												Upcoming
+											</option>
+										</select>
+									</div>
+								</div> -->
+              </td>
+              <!-- <td><button type="button" class="btn btn-primary btn-sm"><i class="fa fa-location-arrow" aria-hidden="true"></i> Send</button></td> -->
+              <!-- <td>
+								<button
+									type="button"
+									class="btn btn-info btn-sm"
+									(click)="reportGeneration()"
+								>
+									Notesheet
+								</button>
+							</td> -->
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="Upcoming" class="tab-pane">
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- <div class="table-responsive">
+					<table class="table table-striped">
+						
+					</table>
+				</div> -->
+        <div style="overflow: auto; height: 600px" class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+				<th></th>
+              <th>Topic</th>
+              <th>Date</th>
+              <th>Expert Name</th>
+              <th>Designation</th>
+              <th>Coordinator</th>
+              <th>Audience</th>
+              <th>Status</th>
+            </thead>
+            <tr
+              *ngFor="let lecture of upcommingLectures"
+            >
+                <button
+                  type="button"
+                  class="beautify1 btn btn-danger button"
+                  (click)="
+                    deleteLecture(lecture.topic, lecture.expertLectureId)
+                  "
+                >
+				<i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
+                <br />
+                <button
+                  type="button"
+                  class="beautify1 btn btn-warning button"
+                  data-toggle="modal"
+                  data-target="#exampleModal7"
+                  (click)="editExpertLecture(lecture)"
+                >
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                </button>
+              <td>
+                <strong>{{ lecture.topic }}</strong>
+              </td>
+              <td>{{ lecture.date | date }}</td>
+              <td>{{ lecture.expertName }}</td>
+              <td>{{ lecture.expertDesignation }}</td>
+              <td>{{ lecture.coordinator }}</td>
+              <td>{{ lecture.audience }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-secondary btn-sm"
+                  data-toggle="modal"
+                  data-target="#exampleModal6"
+                  (click)="
+                    changeStatusToUpcoming(
+                      lecture.expertLectureId,
+                      lecture.topic
+                    )
+                  "
+                ><i class="fa fa-bell" aria-hidden="true"></i>
+                  Change Status
+                </button>
+                <!-- <div class="row">
+									<div class="col-xs-3" id="year">
+										<select
+											class="form-control"
+											name="status"
+											(change)="
+												changeStatus(
+													lecture.expertLectureId,
+													lecture.topic
+												)
+											"
+										>
+											<option value="2">Upcoming</option>
+											<option value="3">Completed</option>
+										</select>
+									</div>
+								</div> -->
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="Completed" class="tab-pane">
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- <div class="table-responsive">
+					<table class="table table-striped">
+						
+					</table>
+				</div> -->
+        <div style="overflow: auto; height: 600px" class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <th>Topic</th>
+              <th>Date</th>
+              <th>Expert Name</th>
+              <th>Designation</th>
+              <th>Coordinator</th>
+              <th>Audience</th>
+              <th>Details</th>
+            </thead>
+            <tr *ngFor="let lecture of completedLectures">
+              <td>{{ lecture.topic }}</td>
+              <td>{{ lecture.date | date }}</td>
+              <td>{{ lecture.expertName }}</td>
+              <td>{{ lecture.expertDesignation }}</td>
+              <td>{{ lecture.coordinator }}</td>
+              <td>{{ lecture.audience }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-primary btn-sm"
+                  (click)="getLectureDetails(lecture.expertLectureId);viewPhotos(lecture.expertLectureId);"
+                  data-toggle="modal"
+                  data-target="#exampleModal5"
+                  aria-hidden="true"
+                >
+				<i class="fa fa-book" aria-hidden="true"></i>
+                  View Details
+                </button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- <button type="button" class="btn btn-success btn-sm wrapper">
+			View Summary
+		</button> -->
+  </div>
+  <div class="last"></div>
+</div>
