@@ -1,0 +1,27 @@
+
+<mat-dialog-content>
+    <div>
+        <span class="iconbutton close">
+            <i class="fa fa-times" aria-hidden="true" (click)="onNoClick()"></i>
+       </span>
+        <span class="iconbutton close">
+            <i class="fa fa-trash" aria-hidden="true" (click)="onDelete()" *ngIf= "startEditable===true"></i>
+        </span>
+        <span class="iconbutton close">
+            <i class="fa fa-pencil" aria-hidden="true" (click)="onUpdate()" *ngIf= "startEditable===true"></i>
+        </span>
+    </div>
+</mat-dialog-content>
+<div>
+    <div class="head">
+        <div class='float-left'><i class="fa fa-square icon-title" aria-hidden="true"></i></div>
+        <div class="title"><h3>{{title}}</h3></div>
+        <div class="date">{{st_date}}  {{st_time}}</div>
+    </div>
+    <div *ngIf="desc!=null">
+        <span class='float-left'><i class="fa fa-align-justify icon-desc" aria-hidden="true"></i></span>
+        <div class="description">
+            {{desc}}
+        </div>
+    </div>
+</div>

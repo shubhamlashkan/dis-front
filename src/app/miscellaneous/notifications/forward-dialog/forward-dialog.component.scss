@@ -1,0 +1,67 @@
+.date {
+    margin-right: 6px;
+    width: 20%;
+  }
+
+.comment {
+    width: 80%;
+}
+
+.title {
+    width: 100%;
+}
+
+.form {
+    width: 100%;
+}
+
+.participants {
+    width: 80%;
+}
+
+.mat-dialog-actions {
+    justify-content: flex-end;
+}
+
+.close {
+    justify-content: flex-end;
+}
+
+
+.icon {
+    margin-right: 12px;
+    font-size: 20px;
+}
+
+::ng-deep .mat-select-arrow {
+    width: 0;
+    height: 0;
+}
+
+.participantlist {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 3%;
+}
+
+.remove {
+    float: right;
+}
+
+.participantName {
+    margin-left: 2%;
+}
+
+.listblock {
+    margin-bottom: 2%;
+}
+
+.cross {
+    float: right;
+    color: white;
+}
+
+::ng-deep .mat-card{
+    padding:1% !important;
+    background-color: rgb(93, 154, 223);
+  }

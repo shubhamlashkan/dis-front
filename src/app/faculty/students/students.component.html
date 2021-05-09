@@ -1,0 +1,177 @@
+<div class="container">
+
+  <div class="tab-content ">
+
+     <div class="tab-pane fade show active" id="sectionC" role="tabpane1" aria-labelledby="sectionC-tab">
+      <div class="col-lg-12 kyc-colm user-management kyc-section rewards-section reports-sectn">
+        <!-- START -->
+        <div class="col-lg-6" >
+          <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#my-modal1">Add Through Form</button>
+          <p class="col-6 float-left" style="color:#1488CC;"><a href="{{baseUrl}}/downloadEnrollmentTemplate/Excel Enrollment Template.xlsx" download="Excel Enrollment Template.xlsx" style="float:right;"><i class="fa fa-download fa-fw"></i>Download Template</a></p>
+        </div>
+        <div class="modal fade my-modal" id="my-modal1" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title ">Add Student Excel Form</h3>
+                        <button type="button" class="close" (click)="ngOnInit()" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form (ngSubmit)="onSubmit1()" #addS="ngForm">
+                        <div>
+                            <div class="alert alert-warning" role="alert">
+                              Please Refer template
+                            </div>
+                            <div>
+                                    <label for="file">Choose File</label>
+                                    <input type="file"
+                                        id="file"
+                                        name='file'
+                                        (change)="handleFileInput($event.target.files)" ngModel>
+                            </div>
+                            <br>
+                            <div class="form-actions row text-center ">
+                                    <div class="col-lg-6 col-md-4">
+                                        <button type="submit"  class="btn btn-success button-width float-left">Proceed</button>
+                                    </div>
+                            </div>
+                        </div>
+                    </form>         
+                </div>  
+              </div> 
+            </div>
+          </div>
+        <br>
+        <!-- END -->
+        <form #addStudent = "ngForm">
+          <div id="add-member">
+            <div class="">
+              <div class="row">
+                <div class="col-lg-4">
+                  <label class="control-label col-sm-2" for="enrollmentId" ><span class="mandatory">*</span>Enrollment_Id:</label>
+                </div>
+                <div class="col-lg-8">
+                  <input type="text" class="form-control" required id="enrollmentId" placeholder="Enter Enrollment Id:" name="enrollmentId" ngModel>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="">
+              <div class="row">
+                <div class="col-lg-4">
+                  <label class="control-label col-sm-2" for="fullName" ><span class="mandatory">*</span>Name:</label>
+                </div>
+                <div class="col-lg-8">
+                  <input type="name" class="form-control" required id="fullName" placeholder="Enter Name:" name="fullName" ngModel>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class = "">
+              <div class = "row">
+                <div class="col-lg-4">
+                  <label class="control-label col-sm-2" for="admissionYear">Admission Year:</label>
+                </div>
+                <div class="col-lg-8">
+                  <input type="text" class="form-control" required id="admissionYear" placeholder="2017" name="admissionYear" ngModel>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class = "">
+              <div class = "row">
+                <div class="col-lg-4">
+                  <label class="control-label col-sm-2" for="courseId">Course_Id:</label>
+                </div>
+                <div class="col-lg-8">
+                  <input type="text" class="form-control" required id="courseId" placeholder="C1" name="courseId" ngModel>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class = "">
+              <div class = "row">
+                <div class="col-lg-4">
+                  <label class="control-label col-sm-2" for="category">Category:</label>
+                </div>
+                <div class="col-lg-8">
+                  <input type="text" class="form-control" required id="category" placeholder="General" name="category" ngModel>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="">
+              <div class="row">
+                <div class="col-lg-4">
+                  <label class="control-label col-sm-2" for="dob">DOB:</label>
+                </div>
+                <div class="col-lg-8">
+                  <input type="date" class="form-control" id="dob" required placeholder="Enter BirthDate" name="dob" ngModel>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="">
+              <div class="row">
+                <div class="col-lg-4">
+                  <label class="control-label col-sm-2" for="bloodgroup">BloodGroup:</label>
+                </div>
+                <div class="col-lg-8">
+                  <input type="text" class="form-control" required id="bloodGroup" placeholder="O+" name="bloodGroup" ngModel>
+                </div>
+              </div> 
+            </div>
+            <br>
+            <div class="">
+              <div class="row">
+                <div class="col-lg-4">
+                  <label class="control-label col-sm-2"  for="gender">Gender:</label>
+                </div>
+                <div class="col-lg-8">
+                  <input type="text" class="form-control"  id="gender" placeholder="Male" name="gender" ngModel>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="">
+              <div class="row">
+                <div class="col-lg-4">
+                  <label class="control-label col-sm-2" for="mobileNo">Mobile_Number:</label>
+                </div>
+                <div class="col-lg-8">
+                  <input type="number" class="form-control" id="mobileNo" placeholder="Enter Mobile_Number" name="mobileNo" ngModel>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="">
+              <div class="row">
+                <div class="col-lg-4">
+                  <label class="control-label col-sm-2" for="schemeSemester">Semester Scheme:</label>
+                </div>
+                <div class="col-lg-8">
+                  <input type="number" class="form-control" id="schemeSemester" placeholder="2" name="schemeSemester" ngModel>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="">
+              <div class="row">
+                <div class="col-lg-4">
+                  <label class="control-label col-sm-2" for="schemeYear">Semester Year:</label>
+                </div>
+                <div class="col-lg-8">
+                  <input type="number" class="form-control" id="schemeYear" placeholder="2017" name="schemeYear" ngModel>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <button type="button" class="btn btn-primary" (click)="onSubmit()" >Submit</button>
+        </form>
+      </div>
+    </div> 
+  </div>
+</div>
+
+  <!--END grid script-->

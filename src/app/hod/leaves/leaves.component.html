@@ -1,0 +1,536 @@
+<!-- Tooltip -->
+<link href="../../../assets/css/tooltip.css" rel="stylesheet" type="text/css" />
+<script src="js/tooltip.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+<script type="text/javascript" src="../../../assets/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+  crossorigin="anonymous"></script>
+<script type="text/javascript" src="../../../assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../../assets/js/bootstrap-datepicker.js"></script>
+
+<!--grid script-->
+<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $('#myTable').dataTable();
+  });
+</script>
+<!--END grid script-->
+<div class="container">
+  <div class="row">
+    
+    <div class="col-lg-3 profile-info">
+      <app-sidenavigation></app-sidenavigation>
+     
+    </div>
+
+    <div class="col-lg-9 kyc-colm user-management ">
+      <div class="kyc-section rewards-section reports-sectn">
+        <ul class="nav nav-pills nav-fill" id="myTab">
+          <li class="nav-item">
+            
+            <a class="nav-link active  nav-fill show active" id="sectionX-tab" data-toggle="pill" href="#sectionX" role="tab" aria-controls="sectionX"
+              aria-selected="true">Leave Request</a>
+          </li>
+         
+          <li class="nav-item">
+            <a class="nav-link nav-fill " id="sectionY-tab" data-toggle="pill" href="#sectionY" role="tab" aria-controls="sectionY"
+              aria-selected="true">Credit Leaves</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-fill" id="sectionZ-tab" data-toggle="pill" href="#sectionZ" role="tab" aria-controls="sectionZ"
+              aria-selected="true">Create New Leaves</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-fill " id="sectionW-tab" data-toggle="pill" href="#sectionW" role="tab" aria-controls="sectionW"
+              aria-selected="true">View Leave Account</a>
+          </li>
+          
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+          
+          <div class="tab-pane fade show active" id="sectionX" role="tabpane1" aria-labelledby="sectionX-tab">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-6">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Filter By faculty</mat-label>
+                    <br>
+    
+                    <mat-select ngModel="Select"ngModel="Select" class="form-control" id="select_faculty" name="select_faculty" (ngModelChange)="getLeavesByName($event)">
+                      
+                      <mat-option *ngFor="let staff of staffs" [value]="staff.name">
+                        {{staff.name}}
+                      </mat-option>
+    
+                    </mat-select>
+                  </mat-form-field>
+
+                </div>
+                <div class="col-lg-6">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Select Status</mat-label>
+                    <br>
+                    <mat-select ngModel="Select"ngModel="Select" class="form-control" id="select_faculty" name="select_faculty" (ngModelChange)="getLeavesByStatus($event)">
+                      
+                      <mat-option value="pending">Pending</mat-option>
+                      <mat-option value="approved">Approved</mat-option>
+                      <mat-option value="declined">Declined</mat-option>
+                      
+    
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+              </div>
+             
+              
+
+              <div>
+                <table class="table table-bordered "  id="myTable">
+                  <thead>
+                    <br>
+                    <tr style="background-color:rgb(166, 168, 177); font-weight : bold; ">
+                    
+                              <td>Faculty Name</td>
+                              <td>Type of leave</td>
+                              <td>From</td>
+                              <td>From Duration</td>
+                              <td>To</td>
+                              <td>To Duration</td>
+                              <td>Status</td>
+                              <td>Accept</td>
+                          
+                    </tr>
+                  </thead>
+                      <tbody  *ngFor="let req of leaveRequests">
+                            <tr class="table-success">
+                              <td>{{req.appliedBy}}</td>
+                              <td>{{req.typeOfLeave}}</td>
+                              <td>{{req.fromDate}}</td>
+                              <td>{{req.fromDuration}}</td>
+                              <td>{{req.toDate}}</td>
+                              <td>{{req.toDuration}}</td>
+                              <td>{{req.status}}</td>                                 
+                              <td><button type="button" class="btn btn-success" data-toggle="modal"
+                                data-target="#acceptleave"
+                                title="Accept Leave"
+                                aria-hidden="true">Accept</button>
+                                <div
+                                    class="modal fade"
+                                    id="acceptleave"
+                                    tabindex="-1"
+                                    role="dialog"
+                                    aria-labelledby="acceptleave"
+                                    aria-hidden="true"
+                                  >
+                                  <form  (ngSubmit)="Accept(req)" #f="ngForm">
+                                    <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+                                      <div class="modal-content">
+                                        <div class=""  *ngIf="showconfirmationAccept">
+                                                  
+                                          <p class="alert alert-success">
+                                              <strong>Leaves Accepted</strong> 
+        
+                                          </p>
+                                        
+                                        </div>
+                                        <div class="modal-header">
+                                          <h5 class="modal-title text-center" id="acceptleave">
+                                            Accept Leave Request
+                                          </h5>
+                                          <button
+                                            type="button"
+                                            class="close"
+                                            data-dismiss="modal"
+                                            aria-label="Close"
+                                          >
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+                                          
+                                          <h6>Do you want to accept this leave request</h6>
+                                          <div>
+                                            <label for="reason">Add remark: </label>
+                                            <textarea ngModel name="acceptRemark" class="form-control" placeholder="Accepted leave because.."
+                                              rows="8" id="acceptRemark"></textarea>
+                                          </div>
+                                        </div>
+                                       
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                            No
+                                          </button>
+                                          <button type="submit" class="btn btn-success" >
+                                            Yes
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </form>
+                                  </div>
+                                  <button type="button" class="btn btn-danger" data-toggle="modal"
+                                  data-target="#addInfra"
+                                  title="Decline Request"
+                                  aria-hidden="true">Decline</button>
+                                  <div
+                                      class="modal fade"
+                                      id="addInfra"
+                                      tabindex="-1"
+                                      role="dialog"
+                                      aria-labelledby="cancelleave"
+                                      aria-hidden="true"
+                                    >
+                                    <form  (ngSubmit)="Decline(req)" #f="ngForm">
+                                      <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+                                        <div class="modal-content">
+                                          <div class=""  *ngIf="showconfirmationDecline">
+                                                    
+                                            <p class="alert alert-danger">
+                                                <strong>Leaves Disapproved</strong> 
+    
+                                            </p>
+                                          
+                                          </div>
+                                          <div class="modal-header">
+                                            <h5 class="modal-title text-center" id="cancelleave">
+                                              Decline Leave Request
+                                            </h5>
+                                            <button
+                                              type="button"
+                                              class="close"
+                                              data-dismiss="modal"
+                                              aria-label="Close"
+                                            >
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <div class="modal-body">
+                                            
+                                            <h6>Do you want to decline this leave request</h6>
+                                            <div>
+                                              <label for="reason">Add remark: </label>
+                                              <textarea ngModel name="declineRemark" class="form-control" placeholder="Declined leave because.."
+                                                rows="8" id="declineRemark"></textarea>
+                                            </div>
+                                          </div>
+                                        
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                              No
+                                            </button>
+                                            <button type="submit" class="btn btn-danger " >
+                                              Yes
+                                            </button>
+    
+                                            
+                                          </div>
+                                          
+                                        </div>
+                                      </div>
+                                    </form>
+                                    </div>
+                                    <button type="button" class="btn btn-info"  data-toggle="modal"
+                                  data-target="#Modify"
+                                  title="Modify"
+                                  aria-hidden="true">Modify</button>
+                                  <!-- Modify starts -->
+                                  <div
+                                  class="modal fade"
+                                  id="Modify"
+                                  tabindex="-1"
+                                  role="dialog"
+                                  aria-labelledby="modifyLabel"
+                                  aria-hidden="true"
+                                  >
+                                  <form  (ngSubmit)="Modify(req)" #modify="ngForm">
+                                    <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+                                      <div class="modal-content">
+                                        <div class=""  *ngIf="showconfirmationModify">
+                                                      
+                                          <p class="alert alert-success">
+                                              <strong>The Request has been Successfully Modified..!</strong>
+                                          </p>
+                                        
+                                        </div>
+                                        <div class="modal-header">
+                                          <h5 class="modal-title text-center" id="modifyLabel">
+                                            Modify Requests
+                                          </h5>
+                                          <button
+                                            type="button"
+                                            class="close"
+                                            data-dismiss="modal"
+                                            aria-label="Close"
+                                          >
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+                                          <div class="input-group mb-1">
+                                            <div class="input-group-prepend">
+                                              <div class="row">
+                                                <div class="col-lg-6">
+                                                  <label for="From">From : </label>
+                                                  <input type="date" name="from" ngModel>
+                                                  <label for="To">To : </label>
+                                                  <input type="date" name="to" ngModel>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                            Close
+                                          </button>
+                                          <button type="submit" class="btn btn-primary " >
+                                            Submit
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </form>
+                                  </div>
+                                </td>
+                            </tr>
+                    </tbody>
+                        </table>
+              </div>
+            </div>
+            <hr>
+          </div>
+            
+            <div class="tab-pane fade" id="sectionY" role="tabpane1" aria-labelledby="sectionY-tab">
+              <div class="col-lg-12 kyc-colm user-management kyc-section rewards-section reports-sectn">
+                <br>
+               
+              <div class=""  *ngIf="showCreditMsg">
+                                        
+                <p class="alert alert-success">
+                    <strong>The Leaves have been credited Successfully</strong>
+                </p>
+              
+              </div>
+              <form (ngSubmit)="creditLeaveSubmit()" #credit="ngForm">
+        
+                <label class="control-label" for="Type of leave">Leave Type : </label>
+                <div>
+                  
+    
+                   <select id="leavetype" ngModel="Select" name="leaveType" class="form-control" required>
+                    <option value="{{leave.leaveName}}" *ngFor="let leave of leave_type">{{leave.leaveName}}</option>
+              
+                  </select> 
+                </div> 
+                
+                <br>
+                <div>
+                  <label  class="control-label" for="number of leaves">Number of leaves: </label>
+                  <input type="number" ngModel class="form-control" id="number_of_leaves" placeholder="Enter Number of leaves" name="number_of_leaves" required>
+                </div>
+                <br>
+                <mat-form-field appearance="fill">
+                  <mat-label>Select Faculty</mat-label>
+
+                  <mat-select ngModel="Select"  multiple ngModel="Select" class="form-control" id="select_faculty" name="select_faculty">
+                    
+                    <mat-option *ngFor="let staff of staffs" [value]="staff.name">
+                      {{staff.name}}
+                    </mat-option>
+
+                  </mat-select>
+                </mat-form-field>
+                <!-- <div>
+                  <label for="select faculty">Select Faculty </label>
+                  <ng-multiselect-dropdown ngModel="Select" class="form-control" id="select_faculty" name="select_faculty" required
+                    [placeholder]="'Select faculty'"
+                    [data]="dropdownList"
+                    [(ngModel)]="selectedItems"
+                    [settings]="dropdownSettings"
+                    (onSelect)="onItemSelect($event)"
+                    (onSelectAll)="onSelectAll($event)"
+    
+                  >
+                </ng-multiselect-dropdown>
+                </div> -->
+                
+              
+                
+                <br>
+                <div class="form-actions row text-center ">
+                  <div class="col-lg-6 col-md-4">
+                    <button type="button" (click)="creditLeavesReset()" class="btn btn-primary button-width float-right">Reset</button>
+                  </div>
+                  <div class="col-lg-6 col-md-4">
+                    <button type="submit"  class="btn btn-success button-width float-left">Proceed</button>
+                  </div>
+                </div>
+                
+              </form>
+              
+              </div>
+              
+              
+    
+            </div>
+    
+            <div class="tab-pane fade" id="sectionZ" role="tabpane1" aria-labelledby="sectionZ-tab" >
+              <div class="col-lg-12 kyc-colm user-management kyc-section rewards-section reports-sectn">
+                <div class=""  *ngIf="showCreatetMsg">
+                                        
+                  <p class="alert alert-success">
+                      <strong>Leave Created Successfully</strong>
+                  </p>
+                
+                </div>
+                <form (ngSubmit)="CreateLeaveSubmit()" #form="ngForm">
+                  <label class=""> Leave Name: </label>
+                  <br>
+                  <input  class="form-control col-lg" type="text" ngModel name="name" placeholder="enter leave name.."  >
+                  <br>
+                  <label class="control-label" for="Type of leave">Leave Type : </label>
+                  <div>
+                    <select id="leaveType" ngModel="Select" name="leaveType" class="form-control" >
+                
+                      <option value="annual">annual</option>
+                      <option value="lifelong">lifelong</option>
+                    </select>
+                  </div>
+                  <br>
+                  
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <label for="from">From : </label>
+                      <input type="date" ngModel name="from"  style="margin-left:2%;">
+                    </div>
+                    <div class="col-lg-6">
+                      <label for="to">To : </label>
+                      <input type="date" ngModel name="to" style="margin-left:2%;">
+                    </div>
+                  </div>
+                  <br>
+                 
+                  <br>
+                  <div>
+                    <label  class="control-label" for="number of leaves">Number of leaves: </label>
+                    <input type="number" ngModel class="form-control" id="number_of_leaves" placeholder="Enter Number of leaves" name="number_of_leaves" required>
+                  </div>
+                  <br>
+                  <div>
+                  
+                    <label for="description">Description : </label>
+                    <textarea ngModel name="description" class="form-control" placeholder="New leave."
+                      rows="10" id="description"></textarea>
+                  </div>
+                  <br>
+                  <div class="form-actions row text-center ">
+                    <div class="col-lg-6 col-md-4">
+                      <button type="button" (click)="CreateLeaveReset" class="btn btn-primary button-width float-right">Reset</button>
+                    </div>
+                    <div class="col-lg-6 col-md-4">
+                      <button type="submit"  class="btn btn-success button-width float-left">Proceed</button>
+                    </div>
+                  </div>
+                  
+                </form>
+    
+              </div>
+             
+            </div>
+
+            <div class="tab-pane fade" id="sectionW" role="tabpane1" aria-labelledby="sectionW-tab">
+              <div class="col-lg-12 kyc-colm user-management kyc-section rewards-section reports-sectn">
+                <mat-form-field appearance="fill">
+                  <mat-label>Filter By faculty</mat-label>
+                  <br>
+  
+                  <mat-select ngModel="Select" class="form-control" id="getLeavesLeft" name="getLeavesLeft" (ngModelChange)="getLeavesLeft($event)">
+                    
+                    <mat-option *ngFor="let staff of staffs" [value]="staff.name">
+                      {{staff.name}}
+                    </mat-option>
+  
+                  </mat-select>
+                </mat-form-field>
+
+                <div class="row">
+                  <div class="col-lg-5 kyc-colm user-management kyc-section rewards-section reports-sectn">
+                    <h5>Annual Leaves</h5>
+                    <div class="leave-box row">
+                      
+                      
+                      <div *ngFor="let i of leavesLeft">
+                        <div *ngFor="let ann of i.annual">
+                          {{ann.leaveName}} 
+                          
+                        </div>
+          
+                    </div>
+                    <div class="col-3">
+                        <div *ngFor="let i of leavesLeft">
+                          <div *ngFor="let ann of i.annual">
+                            {{ann.leavesLeft}} 
+                            
+                          </div>
+                         
+                          
+                      </div>
+                        
+                        
+                      </div>
+
+                    
+                  </div>
+                </div>
+
+                <div class="col-lg-2"></div>
+
+                <!-- lifelong leaves -->
+                <div class="col-lg-5 kyc-colm user-management kyc-section rewards-section reports-sectn">
+                  <h5>Lifelong Leaves</h5>
+                  <div class="leave-box row">
+                    
+                    <br>
+                    <div *ngFor="let i of leavesLeft">
+                      <div *ngFor="let lLong of i.lifelong">
+                        {{lLong.leaveName}} 
+                        
+                      </div>
+        
+                  </div>
+                  <div class="col-3">
+                      <div *ngFor="let i of leavesLeft">
+                        <div *ngFor="let lLong of i.lifelong">
+                          {{lLong.leavesLeft}} 
+                          
+                        </div>
+                       
+                        
+                    </div>
+                      
+                      
+                    </div>
+
+                  
+                </div>
+              </div>
+                  
+                </div>
+              </div>
+            </div>
+    
+        </div>
+    
+        </div>
+        </div>
+
+  </div>
+
+</div>
+

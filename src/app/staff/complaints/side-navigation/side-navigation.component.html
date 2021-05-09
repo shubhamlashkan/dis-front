@@ -1,0 +1,99 @@
+<div class="container">
+  <div class="row">
+  <div class="col-lg-3 kyc-colm user-management">
+        
+  <div class="kyc-section rewards-section reports-sectn">
+    <div style="text-align-last: center;">
+      <a href=""><i class="fa fa-cart-plus icon" aria-hidden="true"></i></a>
+    </div>
+  
+    <div style="text-align-last: center;">
+      <h5><a class="request-resources" href="#requestResource" data-toggle="modal" data-target="#requestResource"
+          data-whatever="@mdo">Request Resources</a></h5>
+    </div>
+  </div>
+  
+  <div class=" profile-info top-buffer">
+    <div class="profile-content">
+      <div class="complaint-meter">
+        <h5 class="text-center">Complaint Meter</h5>
+      </div>
+      
+      <div class="txt-info three">
+        <div class="request-resources">
+          <h3 style="padding-right: 25%; padding-left: 25%">11</h3>
+          <h5><a class="complaint-rem" routerLink='remaining_complaints'>Complaint Remaining</a></h5>
+        </div>
+  
+      </div>
+      <div class="txt-info">
+        <h3 style="color: #58c365;">12</h3>
+        <h5><a routerLink='resolved_complaints' style="color:#58c365">Resolved Complaints</a></h5>
+      </div>
+      <div class="txt-info one">
+        <h3>36</h3>
+        <h5 style="color:#0085cc"><a routerLink='total_complaints'>Total Complaints</a></h5>
+      </div>
+  
+    </div>
+  </div>
+  </div>
+  <div class="col-lg-9 kyc-colm user-management">
+    <div class="kyc-section rewards-section reports-sectn">
+  
+  <router-outlet></router-outlet>
+  </div>
+  </div>
+  </div>
+  </div>
+  <div class="modal fade" id="requestResource" tabindex="-1" role="dialog" aria-labelledby="requestResourceLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header modal-head">
+        <h5 class="modal-title " id="requestResourceLabel " style="color:white;">Request Resources</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="product-name" class="col-form-label">Product Name :</label>
+            <input class="form-control" placeholder="enter product name...">
+          </div>
+          <div class="form-group">
+            <label for="modal-no" class="col-form-label">Model No. :</label>
+            <input class="form-control" style="margin-right:3%;" placeholder="enter model no...">
+            <label for="modal-no" class="col-form-label">Quantity :</label>
+            <select class="form-control" id="quantity">
+              <option>Select</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+            </select>
+  
+          </div>
+          <div class="form-group">
+            <label for="modal-no" class="col-form-label">From :</label><br>
+            <input type="checkbox" > PG Lab<br>
+            <input type="checkbox"> GCL Lab<br>
+            <input type="checkbox" > SE Lab<br>
+  
+            <input type="checkbox" checked> CNDC Lab<br><br>
+          </div>
+        </form>
+      </div>
+      <div class="form-actions buttonClear row">
+        <div class="col-md-6">
+          <button type="submit" class="btn btn-primary button-Reset button-width" style="margin-left:80px">Reset</button>
+        </div>
+        <div class="col-md-6">
+          <button type="submit" class="btn btn-secondary button-Reset button-width" style="margin-right: 100px">Proceed</button>
+        </div>
+  
+      </div>
+  
+    </div>
+  </div>
+  </div>

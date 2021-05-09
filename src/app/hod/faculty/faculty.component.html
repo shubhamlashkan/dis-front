@@ -1,0 +1,1514 @@
+<div class="modal fade my-modal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="col-lg-12 kyc-colm user-management">
+
+
+        <div class="row page-headng">
+
+          <div class="col-lg-12">
+            <h3>Time Table <button type="button" class="close" data-dismiss="modal">&times;</button></h3>
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Timing</th>
+                  <th scope="col">Monday</th>
+                  <th scope="col">Tuesday</th>
+                  <th scope="col">Wednesday</th>
+                  <th scope="col">Thursday</th>
+                  <th scope="col">Friday</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">10:00-11:00</th>
+                  <td>CO34007</td>
+                  <td>CO34002</td>
+                  <td>CO34008</td>
+                  <td>CO34005</td>
+                  <td>CO34007</td>
+                </tr>
+                <tr>
+                  <th scope="row">11:00-12:00</th>
+                  <td>CO34002</td>
+                  <td>CO34005</td>
+                  <td>CO34007</td>
+                  <td>CO34008</td>
+                  <td>CO34007</td>
+                </tr>
+                <tr>
+                  <th scope="row">12:00-1:00</th>
+                  <td></td>
+                  <td>EC34007</td>
+                  <td>EC34007</td>
+                  <td>EC34007</td>
+                  <td>EC34007</td>
+                </tr>
+                <tr>
+                  <th scope="row">1:00-2:00</th>
+
+                </tr>
+                <tr>
+                  <th scope="row">2:00-3:00</th>
+                  <td>CO34007</td>
+                  <td></td>
+                  <td>CO34008</td>
+                  <td>CO34005</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th scope="row">3:00-4:00</th>
+                  <td>CO34007</td>
+                  <td>CO34002</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th scope="row">4:00-5:00</th>
+                  <td>CO34007</td>
+                  <td>CO34002</td>
+                  <td>CO34008</td>
+                  <td>CO34005</td>
+                  <td>CO34007</td>
+                </tr>
+                <tr>
+                  <th scope="row">5:00-6:00</th>
+                  <td>CO34007</td>
+                  <td>CO34002</td>
+                  <td>CO34008</td>
+                  <td>CO34005</td>
+                  <td>CO34007</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <ul class="nav nav-pills nav-fill">
+    <input type="text" placeholder="Search.." name="search" style="width:700px;" (keyup)= "getStaffDataByName($event.target.value)">
+    <li class="nav-item">
+      <a class="nav-link active" id="sectionA-tab" data-toggle="pill" href="#sectionA" role="tab" aria-controls="sectionA"
+        aria-selected="true">Faculty</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " id="sectionB-tab" data-toggle="pill" href="#sectionB" role="tab" aria-controls="sectionB"
+        aria-selected="true">Staff</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link pl-2" id="sectionC-tab" data-toggle="pill" href="#sectionC" role="tab" aria-controls="sectionC-tab"
+        aria-selected="true">Add Member</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link nav-fill " id="sectionE-tab" data-toggle="pill" href="#sectionE" role="tab" aria-controls="sectionE"
+        aria-selected="true">Select Panel</a>
+    </li>
+
+  </ul>
+
+  <div class="tab-content ">
+    <div class="tab-pane fade show active" id="sectionA" role="tabpane1" aria-labelledby="sectionA-tab">
+      <div class = "row" *ngIf = "!searchedRecord">
+        <div class="col-lg-3 col-sm-6"  *ngFor='let f of fData'>
+          <div class="card hovercard">
+            <div class="cardheader">
+              <div class="dropleft">
+                <a href="#" id="dropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="true" style="text-decoration:none;margin-left: 85%;">
+                <i class="fa fa-ellipsis-v"></i>
+              </a>
+              <div class="dropdown-menu rounded-0 " aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" role="button" data-toggle="modal" data-target="#" aria-controls="cleanliness"
+                style="text-decoration:none;">
+                Time Table</a>
+                <a class="dropdown-item collapsed" href="hod/hod_tasks" role="button" data-toggle="collapse" style="text-decoration:none;">
+                  Assigned Tasks</a>
+                  <a class="dropdown-item collapsed" href="#" role="button" data-toggle="modal" data-target="#"
+                  aria-controls="equipments" style="text-decoration:none;">
+                  Assign New Tasks</a>
+                  <a class="dropdown-item collapsed" href="#" role="button" data-toggle="modal" data-target=".my-modal2"
+                    aria-controls="equipments" style="text-decoration:none;">
+                    Profile</a>
+                </div>
+          
+              </div>
+            </div>
+            <div class="avatar">
+              <img alt="" src="../../../assets/images/img_avatar3.png">
+            </div>
+            <div class="info">
+              <div class="title">
+                <a target="_blank" href="https://scripteden.com/">{{f.name}}</a>
+         
+              </div>
+              <div class="desc"> {{f.currentDesignation}}</div>
+              <div class="desc"><i class="fa fa-mobile"></i> {{f.mobileNo}}</div>
+              <div class="desc"><i class="fa fa-mobile"></i>{{f.alternateMobileNo}}</div>
+              <div class="desc"><i class="fa fa-envelope"></i>{{f.email}}</div>
+              </div>
+          </div>
+        </div>
+
+      </div>
+      <div class = "row" *ngIf = "searchedRecord">
+        <div class="col-lg-3 col-sm-6"  *ngFor='let f of allData'>
+          <div class="card hovercard">
+            <div class="cardheader">
+              <div class="dropleft">
+                <a href="#" id="dropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="true" style="text-decoration:none;margin-left: 85%;">
+                <i class="fa fa-ellipsis-v"></i>
+              </a>
+              <div class="dropdown-menu rounded-0 " aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" role="button" data-toggle="modal" data-target="#" aria-controls="cleanliness"
+                style="text-decoration:none;">
+                Time Table</a>
+                <a class="dropdown-item collapsed" href="hod/hod_tasks" role="button" data-toggle="collapse" style="text-decoration:none;">
+                  Assigned Tasks</a>
+                  <a class="dropdown-item collapsed" href="#" role="button" data-toggle="modal" data-target="#"
+                  aria-controls="equipments" style="text-decoration:none;">
+                  Assign New Tasks</a>
+                  <a class="dropdown-item collapsed" href="#" role="button" data-toggle="modal" data-target=".my-modal2"
+                    aria-controls="equipments" style="text-decoration:none;">
+                    Profile</a>
+                </div>
+          
+              </div>
+            </div>
+            <div class="avatar">
+              <img alt="" src="../../../assets/images/img_avatar3.png">
+            </div>
+            <div class="info">
+              <div class="title">
+                <a target="_blank" href="https://scripteden.com/">{{f.name}}</a>
+         
+              </div>
+              <div class="desc"> {{f.currentDesignation}}</div>
+              <div class="desc"><i class="fa fa-mobile"></i> {{f.mobileNo}}</div>
+              <div class="desc"><i class="fa fa-mobile"></i>{{f.alternateMobileNo}}</div>
+              <div class="desc"><i class="fa fa-envelope"></i>{{f.email}}</div>
+              </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+      
+      <!-- <div class="row">
+        <div class="col-lg-3 col-sm-6" *ngFor='let f of fData'>
+ 
+          <div class="card hovercard">
+            <div class="cardheader">
+              <div class="dropleft">
+                <a href="#" id="dropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="true" style="text-decoration:none;margin-left: 85%;">nbvjsdb b
+                  <i class="fa fa-ellipsis-v"></i>
+                </a>
+                <div class="dropdown-menu rounded-0 " aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" role="button" data-toggle="modal" data-target=".my-modal" aria-controls="cleanliness"
+                    style="text-decoration:none;">
+                    Time Table</a>
+                  <a class="dropdown-item collapsed" href="hod/hod_tasks" role="button" data-toggle="collapse" style="text-decoration:none;">
+                    Assigned Tasks</a>
+                  <a class="dropdown-item collapsed" href="#" role="button" data-toggle="modal" data-target=".my-modal2"
+                    aria-controls="equipments" style="text-decoration:none;">
+                    Assign New Tasks</a>
+                  <a class="dropdown-item collapsed" href="#" role="button" data-toggle="modal" data-target=".my-modal2"
+                    aria-controls="equipments" style="text-decoration:none;">
+                    Profile</a>
+                </div>
+              </div>
+
+            </div>
+            <div class="avatar">
+              <img alt="" src="../../../assets/images/img_avatar3.png">
+            </div>
+            <div class="info">
+              <div class="title">
+                <a target="_blank" href="https://scripteden.com/">{{f.name}}</a>
+              </div>
+
+              <div class="desc"> {{f.currentDesignation}}</div>
+              <div class="desc"><i class="fa fa-mobile"></i> {{f.mobileNo}}</div>
+              <div class="desc"><i class="fa fa-mobile"></i> {{f.alternateMobileNo}}</div>
+              <div class="desc"><i class="fa fa-envelope"></i>{{f.email}}</div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+
+    <div class="tab-pane fade " id="sectionB" role="tabpane1" aria-labelledby="sectionB-tab">
+      <div class="row" *ngIf = "!searchedRecord" >
+        <div class="col-lg-3 col-sm-6" *ngFor='let f of sData' >
+
+          <div class="card hovercard">
+            <div class="cardheader">
+              <div class="dropleft">
+                <a href="#" id="dropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="true" style="text-decoration:none;margin-left: 85%;">
+                  <i class="fa fa-ellipsis-v"></i>
+                </a>
+                <div class="dropdown-menu rounded-0 " aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" role="button" data-toggle="modal" data-target=".my-modal" aria-controls="cleanliness"
+                    style="text-decoration:none;">
+                    Time Table</a>
+                  <a class="dropdown-item collapsed" href="hod/hod_tasks" role="button" data-toggle="collapse" style="text-decoration:none;">
+                    Assigned Tasks</a>
+                  <a class="dropdown-item collapsed" href="#" role="button" data-toggle="modal" data-target=".my-modal2"
+                    aria-controls="equipments" style="text-decoration:none;">
+                    Assign New Tasks</a>
+                  <a class="dropdown-item collapsed" href="#" role="button" data-toggle="modal" data-target=".my-modal2"
+                    aria-controls="equipments" style="text-decoration:none;">
+                    Profile</a>
+                </div>
+              </div>
+
+            </div>
+            <div class="avatar">
+              <img alt="" src="../../../assets/images/img_avatar3.png">
+            </div>
+            <div class="info">
+              <div class="title">
+                <a target="_blank" href="https://scripteden.com/">{{f.name}}</a>
+              </div>
+
+              <div class="desc"> {{f.currentDesignation}}</div>
+              <div class="desc"><i class="fa fa-mobile"></i> {{f.mobileNo}}</div>
+              <div class="desc"><i class="fa fa-mobile"></i> {{f.alternateMobileNo}}</div>
+              <div class="desc"><i class="fa fa-envelope"></i>{{f.email}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf = "searchedRecord" >
+        <div class="col-lg-3 col-sm-6" *ngFor='let f of allData' >
+
+          <div class="card hovercard">
+            <div class="cardheader">
+              <div class="dropleft">
+                <a href="#" id="dropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="true" style="text-decoration:none;margin-left: 85%;">
+                  <i class="fa fa-ellipsis-v"></i>
+                </a>
+                <div class="dropdown-menu rounded-0 " aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" role="button" data-toggle="modal" data-target=".my-modal" aria-controls="cleanliness"
+                    style="text-decoration:none;">
+                    Time Table</a>
+                  <a class="dropdown-item collapsed" href="hod/hod_tasks" role="button" data-toggle="collapse" style="text-decoration:none;">
+                    Assigned Tasks</a>
+                  <a class="dropdown-item collapsed" href="#" role="button" data-toggle="modal" data-target=".my-modal2"
+                    aria-controls="equipments" style="text-decoration:none;">
+                    Assign New Tasks</a>
+                  <a class="dropdown-item collapsed" href="#" role="button" data-toggle="modal" data-target=".my-modal2"
+                    aria-controls="equipments" style="text-decoration:none;">
+                    Profile</a>
+                </div>
+              </div>
+
+            </div>
+            <div class="avatar">
+              <img alt="" src="../../../assets/images/img_avatar3.png">
+            </div>
+            <div class="info">
+              <div class="title">
+                <a target="_blank" href="https://scripteden.com/">{{f.name}}</a>
+              </div>
+
+              <div class="desc"> {{f.currentDesignation}}</div>
+              <div class="desc"><i class="fa fa-mobile"></i> {{f.mobileNo}}</div>
+              <div class="desc"><i class="fa fa-mobile"></i> {{f.alternateMobileNo}}</div>
+              <div class="desc"><i class="fa fa-envelope"></i>{{f.email}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>   
+
+     <div class="tab-pane fade" id="sectionC" role="tabpane1" aria-labelledby="sectionC-tab">
+      <div class="col-lg-12 kyc-colm user-management kyc-section rewards-section reports-sectn">
+        <!-- START -->
+        <div class="col-lg-6" >
+          <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#my-modal1">Add Through Form</button>
+          <p class="col-6 float-left" style="color:#1488CC;"><a href="{{baseUrl}}/downloadEnrollmentTemplate/Excel Enrollment Template.xlsx" download="Excel Enrollment Template.xlsx" style="float:right;"><i class="fa fa-download fa-fw"></i>Download Template</a></p>
+        </div>
+        <div class="modal fade my-modal" id="my-modal1" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title ">Add Faculty Excel Form</h3>
+                        <button type="button" class="close" (click)="ngOnInit()" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form (ngSubmit)="onSubmit1()" #addSyllabus="ngForm">
+                        <div>
+                          <div class="alert alert-warning" role="alert">
+                            Please Refer template
+                          </div>
+                            <div>
+                                    <label for="file">Choose File</label>
+                                    <input type="file"
+                                        id="file"
+                                        name='file'
+                                        (change)="handleFileInput($event.target.files)" ngModel>
+                            </div>
+                            <br>
+                            <div class="form-actions row text-center ">
+                                    <div class="col-lg-6 col-md-4">
+                                        <button type="submit"  class="btn btn-success button-width float-left">Proceed</button>
+                                    </div>
+                            </div>
+                        </div>
+                    </form>         
+                </div>  
+              </div> 
+            </div>
+          </div>
+        <br>
+        <!-- END -->
+        <form #f = "ngForm">
+          <div id="add-member" ngModelGroup="addMemberData">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-lg-4">
+                  <label class="control-label col-sm-2" for="emp_id" ><span class="mandatory">*</span>Employee_Id:</label>
+                </div>
+                <div class="col-lg-8">
+                  <input type="text" class="form-control" required id="emp_id" placeholder="Enter Employee Id:" name="emp_id" ngModel>
+                </div>
+              </div>
+            </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-4">
+                <label class="control-label col-sm-2" for="name" ><span class="mandatory">*</span>Name:</label>
+              </div>
+              <div class="col-lg-8">
+                <input type="name" class="form-control" required id="name1" placeholder="Enter Name:" name="name1" ngModel>
+              </div>
+            </div>
+          </div>
+          <div class = "form-group">
+            <div class = "row">
+              <div class="col-lg-4">
+                <label class="control-label col-sm-2" for="name">Designation:</label>
+              </div>
+              <div class="col-lg-8">
+              <select class="dropdown-primary form-control" name="designation" required ngModel>
+                <option value="" selected disabled>Select Designation</option>
+                <option>HOD</option>
+                <option>Professor</option>
+                <option>Associate Professor</option>
+                <option>Assistant Professor</option>
+                <option>Programmer</option>
+                <option>Computer Operator</option>
+                <option>Technical Assistant</option>
+                <option>Lab Technician</option>
+                <option>LDC</option>
+                <option>Attendant</option>
+              </select>
+              </div>
+            </div>
+          </div>
+          <div class = "form-group">
+            <div class = "row">
+              <div class="col-lg-4">
+                <label class="control-label col-sm-2" for="name">Class:</label>
+              </div>
+              <div class="col-lg-8">
+              <select class="dropdown-primary form-control" name="class" required ngModel>
+                <option value="" selected disabled>Select Class</option>
+                <option> I  </option>
+                <option> II  </option>
+                <option> III  </option>
+                <option> IV   </option>
+               
+              </select>
+              </div>
+            </div>
+          </div>
+          <div class = "form-group">
+            <div class = "row">
+              <div class="col-lg-4">
+                <label class="control-label col-sm-2" for="type">Type:</label>
+              </div>
+              <div class="col-lg-8">
+              <select class="dropdown-primary form-control" name="type" required ngModel>
+                <option value="" selected disabled>Select Type</option>
+                <option> Regular  </option>
+                <option> Contract   </option>
+                <option> NPIU </option>
+                <option> Visiting   </option>
+                <option> Other   </option>
+              
+              </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-4">
+                <label class="control-label col-sm-2" for="date_j">Joining_date:</label>
+              </div>
+              <div class="col-lg-8">
+                <input type="date" class="form-control" id="date_j" required placeholder="Enter Joining date:" name="date_j" ngModel>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-4">
+                <label class="control-label col-sm-2" for="email">Email:</label>
+              </div>
+              <div class="col-lg-8">
+                <input type="email" class="form-control" required id="email" placeholder="abc..@gmail.com" name="email" ngModel>
+              </div>
+            </div> 
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-4">
+                <label class="control-label col-sm-2"  for="dob">Date_of_Birth:</label>
+              </div>
+              <div class="col-lg-8">
+                <input type="date" class="form-control"  id="dob" placeholder="Enter Date of Birth:" name="dob" ngModel>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-4">
+                <label class="control-label col-sm-2" for="number">Mobile_Number:</label>
+              </div>
+              <div class="col-lg-8">
+                <input type="number" class="form-control" id="number" placeholder="Enter Mobile_Number:" name="number" ngModel>
+              </div>
+            </div>
+          </div>
+          
+          </div>
+        </form>
+        <button type="button" class="btn btn-primary" (click)="onSubmit()" [disabled]="!f.valid">Submit</button>
+      </div>
+    </div> 
+    <div class="tab-pane fade " id="sectionE" role="tabpane1" aria-labelledby="sectionE-tab">
+      <ul class="nav nav-pills nav-fill" id="myTab">
+       
+        <li class="nav-item">
+          <a class="nav-link active nav-fill show active" id="sectionY-tab" data-toggle="pill" href="#sectionY" role="tab" aria-controls="sectionY"
+            aria-selected="true"> Panel of Theory</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-fill" id="sectionZ-tab" data-toggle="pill" href="#sectionZ" role="tab" aria-controls="sectionZ"
+            aria-selected="true">Panel of Practical</a>
+        </li>
+        
+      </ul>
+
+      <div class="tab-content" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="sectionY" role="tabpane1" aria-labelledby="sectionY-tab">
+            <div class="col-lg-12 kyc-colm user-management kyc-section rewards-section reports-sectn">
+              <div class="kyc-section rewards-section reports-sectn">
+                <div>
+                  <h3 class="heading"><a (click)="createTheoryPanel()" style="cursor: pointer;">Create Panel</a><span class="nav-item dropdown float-right" style="text-decoration: none;">
+                          <button class="leaveButton" (click)="showTheoryPanel()" data-toggle="tooltip" title="View Panel"><i class="fa fa-clock-o " aria-hidden="true" ></i></button>
+                          
+                    </span></h3>
+                  <hr/>
+                  <div class="row">
+                 
+        
+        
+        
+                  <div id = "view panel" style="display: none;">
+                      <div style="margin-bottom: 10px">
+                        <!-- <h5 class="modal-title" id="exampleModalLabel">Panel</h5> -->
+                      </div>
+                      <div>
+                        <h3 *ngIf="theorypanel.length!=0 ">Panel of Theory</h3>
+                        <div>
+                          <table class="table table-bordered "  id="myTable">
+                            <thead>
+                              <br>
+                              <tr style="background-color:rgb(166, 168, 177); font-weight : bold; ">
+                              <td>Course</td>
+                                        <td>Subject Code</td>
+                                        <td>Subject Name</td>
+                                        <td>Faculty</td>
+                                        <td>Update</td>
+                                        <td>Delete</td>
+                              </tr>
+                            </thead>
+              
+                                    <tbody  *ngFor="let req of theorypanel;let i=index;">
+                                      <tr class="table-success">
+                                        <td>{{req.course}}</td>
+                                        <td>{{req.subjectCode}}</td>
+                                        <td>{{req.subjectName}}</td>
+                                        <td>{{req.faculties}}</td>
+                                       
+                                        <td><button type="button" class="btn btn-success" data-toggle="modal"
+                                          data-target="#Rejoin"
+                                          title="Update Panel"
+                                          aria-hidden="true" >Update</button>
+                                          <div
+                                            class="modal fade"
+                                            id="Rejoin"
+                                            tabindex="-1"
+                                            role="dialog"
+                                            aria-labelledby="RejoinLabel"
+                                            aria-hidden="true"
+                                          >
+                              <form  (ngSubmit)="UpdateTheory(req)" #updateT="ngForm">
+                                <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+                                  <div class="modal-content">
+                                    <div class=""  *ngIf="showconfirmationRejoinT">
+                                                  
+                                      <p class="alert alert-success">
+                                          <strong>The Field has been Successfully Updated..!</strong> 
+              
+                                      </p>
+                                    
+                                    </div>
+                                    <div class="modal-header">
+                                      <h5 class="modal-title text-center" id="addInfraLabel">
+                                        Update Faculty
+                                      </h5>
+                                      <button
+                                        type="button"
+                                        class="close"
+                                        data-dismiss="modal"
+                                        aria-label="Close"
+                                      >
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <div >
+              
+                                        <div >
+                                          <div>
+                                            <div>
+                                              <label for="course">Course:</label>
+                                              <select id="course" ngModel="Select" name="course" class="form-control" >
+                                          
+                                                <option>Under Graduate</option>
+                                                <option>Post graduate</option>
+                                              </select>
+                                            </div> 
+                                            
+                                            <br>
+                                            <div>
+                                              <label  class="control-label" for="subject">Subject Code</label>
+                                              <input type="text" ngModel class="form-control" id="subjectcode" placeholder="Enter Subject Code" name="subjectcode" required>
+                                            </div>
+                            
+                                            <br>
+                                            <div>
+                                              <label  class="control-label" for="subject">Subject Name</label>
+                                              <input type="text" ngModel class="form-control" id="subjectname" placeholder="Enter Subject Name" name="subjectname" required>
+                                            </div>
+                                            <br>
+                                            <mat-form-field appearance="fill">
+                                              <mat-label>Select Faculty</mat-label>
+                      
+                                              <mat-select ngModel="Select" multiple class="form-control" id="select_faculty" name="faculty">
+                                                
+                                                <mat-option *ngFor="let staff of staffs" [value]="staff.name">
+                                                  {{staff.name}}
+                                                </mat-option>
+                      
+                                              </mat-select>
+                                            </mat-form-field>
+                                           
+                                            
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                        Close
+                                      </button>
+                                      <button type="submit" class="btn btn-primary " >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  
+                                  </div>
+                                </div>
+                              </form>
+                              </div>
+                                        </td>
+                                        <td><button type="button" class="btn btn-danger"  data-toggle="modal"
+                                          data-target="#addInfra"
+                                          title="Delete Panel"
+                                          aria-hidden="true" >delete</button>
+                                          <div
+                                          class="modal fade"
+                                          id="addInfra"
+                                          tabindex="-1"
+                                          role="dialog"
+                                          aria-labelledby="cancelleave"
+                                          aria-hidden="true"
+                                        >
+                                        
+                                        <form  (ngSubmit)="CancelTheory(req)" #f="ngForm">
+                                          <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+                                            <div class="modal-content">
+                                              <div class=""  *ngIf="showconfirmationCancelT">
+                                                        
+                                                <p class="alert alert-success">
+                                                    <strong>Request Cancelled</strong> 
+                    
+                                                </p>
+                                              
+                                              </div>
+                                              <div class="modal-header">
+                                                <h5 class="modal-title text-center" id="cancelleave">
+                                                  Cancel Panel Request
+                                                </h5>
+                                                <button
+                                                  type="button"
+                                                  class="close"
+                                                  data-dismiss="modal"
+                                                  aria-label="Close"
+                                                >
+                                                  <span aria-hidden="true">&times;</span>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                <h6>Do you want to cancel this request</h6>
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                  No
+                                                </button>
+                                                <button type="submit" class="btn btn-primary " >
+                                                  Yes
+                                                </button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </form>
+                                        </div>
+              
+                    
+                                        </td>
+              
+                
+                              
+                                      </tr>
+                                      
+                         
+                              </tbody>
+                                  </table>
+                        </div>
+                     
+                      </div>
+        
+        
+        
+                  </div>
+
+                  <div id="main" class="col-lg-12">
+                    <div class=""  *ngIf="showPanelMsg">
+                                                
+                      <p class="alert alert-success">
+                          <strong>Panel Successfully added</strong> 
+      
+                      </p>
+                    
+                    </div>
+                    <form (ngSubmit)="onTheoryPanelSubmit()" #tpanel="ngForm">
+                  
+                      <div>
+                        <label for="course">Course:</label>
+                        <select id="course" ngModel="Select" name="course" class="form-control" >
+                    
+                          <option>Under Graduate</option>
+                          <option>Post graduate</option>
+                        </select>
+                      </div> 
+                      
+                      <br>
+                      <div>
+                        <label  class="control-label" for="subject">Subject Code</label>
+                        <input type="text" ngModel class="form-control" id="subjectcode" placeholder="Enter Subject Code" name="subjectcode" required>
+                      </div>
+      
+                      <br>
+                      <div>
+                        <label  class="control-label" for="subject">Subject Name</label>
+                        <input type="text" ngModel class="form-control" id="subjectname" placeholder="Enter Subject Name" name="subjectname" required>
+                      </div>
+                      <br>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Select Faculty</mat-label>
+
+                        <mat-select ngModel="Select"  multiple ngModel="Select" class="form-control" id="select_faculty" name="faculty">
+                          
+                          <mat-option *ngFor="let staff of staffs" [value]="staff.name">
+                            {{staff.name}}
+                          </mat-option>
+
+                        </mat-select>
+                      </mat-form-field>
+                     
+                    
+                      
+                      <br>
+                      <div class="form-actions row text-center ">
+                        <div class="col-lg-6 col-md-4">
+                          <button type="button" (click)="onReset()" class="btn btn-primary button-width float-right">Reset</button>
+                        </div>
+                        <div class="col-lg-6 col-md-4">
+                          <button type="submit"  class="btn btn-success button-width float-left">Proceed</button>
+                        </div>
+                      </div>
+                      
+                    </form>
+      
+                  </div>
+        
+        
+                    
+        
+                  </div>
+        
+                </div>
+        
+        
+              </div>
+        
+            </div>
+            
+            <br>
+         
+            
+
+           
+           
+            
+
+          </div>
+
+          
+          <div class="tab-pane fade " id="sectionZ" role="tabpane1" aria-labelledby="sectionZ-tab">
+            <div class="col-lg-12 kyc-colm user-management kyc-section rewards-section reports-sectn">
+              <div class="kyc-section rewards-section reports-sectn">
+                <div>
+                  <h3 class="heading"><a (click)="createPracticalPanel()" style="cursor: pointer;">Create Panel</a><span class="nav-item dropdown float-right" style="text-decoration: none;">
+                          <button class="leaveButton" (click)="showPracticalPanel()" data-toggle="tooltip" title="View Practical Panel"><i class="fa fa-clock-o " aria-hidden="true" ></i></button>
+                          
+                    </span></h3>
+                  <hr/>
+                  <div class="row">
+                 
+                  <div id = "view practical panel" style="display: none;">
+                      <div style="margin-bottom: 10px">
+                        <!-- <h5 class="modal-title" id="exampleModalLabel">Panel</h5> -->
+                      </div>
+                      <div>
+                        <h3 *ngIf="practicalpanel.length!=0 ">Panel of Practical</h3>
+                        <div>
+                          <table class="table table-bordered "  id="myTable">
+                            <thead>
+                              <br>
+                              <tr style="background-color:rgb(166, 168, 177); font-weight : bold; ">
+                                        <td>Subject Code</td>
+                                        <td>Subject Name</td>
+                                        <td>Faculty 1</td>
+                                        <td>Faculty 2</td>
+                                        <td>External</td>
+                                        <td>labassistant</td>
+                                        <td>labtechnician</td>
+                                        <td>Update</td>
+                                        <td>Delete</td>
+                                      </tr>
+                            </thead>
+              
+                                    <tbody  *ngFor="let preq of practicalpanel">
+                                      <tr class="table-success">
+                                        <td>{{preq.subjectCode}}</td>
+                                        <td>{{preq.subjectName}}</td>
+                                        <td>{{preq.internalFaculty1}}</td>
+                                        <td>{{preq.internalFaculty2}}</td>
+                                        <td>{{preq.externalFaculty}}</td>
+                                        <td>{{preq.labAssistant}}</td>
+                                        <td>{{preq.labTechnician}}</td>
+                                        <td><button type="button" class="btn btn-success" data-toggle="modal"
+                                          data-target="#Rejoin"
+                                          title="Update Panel"
+                                          aria-hidden="true"  (click)="getId(preq.id)">Update</button>
+                              <div
+                              class="modal fade"
+                              id="Rejoin"
+                              tabindex="-1"
+                              role="dialog"
+                              aria-labelledby="RejoinLabel"
+                              aria-hidden="true"
+                            >
+                              <form  (ngSubmit)="UpdatePractical()" #updateP="ngForm">
+                                <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title text-center" id="addInfraLabel">
+                                        Update Faculty
+                                      </h5> 
+                                      <button
+                                        type="button"
+                                        class="close"
+                                        data-dismiss="modal"
+                                        aria-label="Close"
+                                      >
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <div >
+                                        <div>
+                                          <div>
+                                            <label  class="control-label" for="subject">Subject Code</label>
+                                            <input type="text" ngModel  [(ngModel)]="preq.subjectCode" class="form-control" id="subjectcode" placeholder="Enter Subject Code" name="subjectcode" required>
+                                          </div>
+                            
+                                          <br>
+                                          <div>
+                                            <label  class="control-label" for="subject">Subject Name</label>
+                                            <input type="text" ngModel [(ngModel)]="preq.subjectName" class="form-control" id="subjectname" placeholder="Enter Subject Name" name="subjectname" required>
+                                          </div>
+                                          
+                                          <mat-form-field appearance="fill">
+                                            <mat-label>Select Internal Faculty 1</mat-label>
+                    
+                                            <mat-select ngModel="Select"   [(ngModel)]="preq.internalFaculty1" class="form-control" id="select_faculty" name="faculty1">
+                                              
+                                              <mat-option *ngFor="let staff of staffs" [value]="staff.name">
+                                                {{staff.name}}
+                                              </mat-option>
+                    
+                                            </mat-select>
+                                          </mat-form-field>
+                                          <mat-form-field appearance="fill">
+                                            <mat-label>Select Internal Faculty 2</mat-label>
+                    
+                                            <mat-select ngModel="Select"   [(ngModel)]="preq.internalFaculty2" class="form-control" id="select_faculty" name="faculty2">
+                                              
+                                              <mat-option *ngFor="let staff of staffs" [value]="staff.name">
+                                                {{staff.name}}
+                                              </mat-option>
+                    
+                                            </mat-select>
+                                          </mat-form-field>
+                                          <br>
+                                          <mat-form-field appearance="fill">
+                                            <mat-label>Select External Faculty </mat-label>
+                    
+                                            <mat-select ngModel="Select"   [(ngModel)]="preq.externalFaculty" class="form-control" id="select_faculty" name="external">
+                                              
+                                              <mat-option *ngFor="let staff of eData" [value]="staff.name">
+                                                {{staff.name}}
+                                              </mat-option>
+                    
+                                            </mat-select>
+                                          </mat-form-field>
+                                          <br>
+                                          <!-- <div>
+                                            <label  class="control-label" for="subject">Lab Technician</label>
+                                            <input type="text" ngModel class="form-control" id="labtechnician" placeholder="Enter Technician Name" name="labtechnician" required>
+                                          </div> -->
+                                          <mat-form-field appearance="fill">
+                                            <mat-label>Lab Technician</mat-label>
+                    
+                                            <mat-select ngModel="Select"  [(ngModel)]="preq.labTechnician" class="form-control" id="select_faculty" name="labtechnician">
+                                              
+                                              <mat-option *ngFor="let staff of sData" [value]="staff.name">
+                                                {{staff.name}}
+                                              </mat-option>
+                    
+                                            </mat-select>
+                                          </mat-form-field>
+                                          <br>
+                                          <!-- <div>
+                                            <label  class="control-label" for="subject">Lab Assistant</label>
+                                            <input type="text" ngModel class="form-control" id="labAssistant" placeholder="Enter Assistant Name" name="labassistant" required>
+                                          </div> -->
+                                          <mat-form-field appearance="fill">
+                                            <mat-label>Lab Assistant</mat-label>
+                    
+                                            <mat-select ngModel="Select" [(ngModel)]="preq.labAssistant" class="form-control" id="select_faculty" name="labassistant">
+                                              
+                                              <mat-option *ngFor="let staff of sData" [value]="staff.name">
+                                                {{staff.name}}
+                                              </mat-option>
+                    
+                                            </mat-select>
+                                          </mat-form-field>
+                                          <br>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                        Close
+                                      </button>
+                                      <button type="submit" class="btn btn-primary " >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  
+                                  </div>
+                                </div>
+                              </form>
+                              </div> 
+                                       </td>
+                                        <td><button type="button" class="btn btn-danger"  data-toggle="modal"
+                                          data-target="#delete"
+                                          title="Delete Panel"
+                                          aria-hidden="true" (click)="getId(preq.id)" >delete</button>
+                                          <div
+                                          class="modal fade"
+                                          id="delete"
+                                          tabindex="-1"
+                                          role="dialog"
+                                          aria-labelledby="cancelleave"
+                                          aria-hidden="true"
+                                        >
+                                        
+                                        <form  (ngSubmit)="CancelPractical()" #f="ngForm">
+                                          <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h5 class="modal-title text-center" id="cancelleave">
+                                                  Cancel Panel Request
+                                                </h5>
+                                                <button
+                                                  type="button"
+                                                  class="close"
+                                                  data-dismiss="modal"
+                                                  aria-label="Close"
+                                                  (click)="ngOnInit()"
+                                                >
+                                                  <span aria-hidden="true">&times;</span>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                <h6>Do you want to remove this request</h6>
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="ngOnInit()">
+                                                  No
+                                                </button>
+                                                <button type="submit" class="btn btn-primary " >
+                                                  Yes
+                                                </button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </form>
+                                        </div>
+                                        </td>
+                                      </tr>
+                                      
+                         
+                              </tbody>
+                                  </table>
+                        </div>
+                     
+                      </div>
+        
+        
+        
+                  </div>
+
+                  <div id="practical main" class="col-lg-12 ">
+                          <button type="button" class="btn btn-success" data-toggle="modal"
+                                          data-target="#exampleModal1"
+                                          title=""
+                                          aria-hidden="true" >Add External</button>
+                          <button  type="button" class="btn btn-success" data-toggle="modal"
+                                          data-target="#exampleModal2"
+                                          title=""
+                                          aria-hidden="true" >Update External</button>
+                    <div class=""  *ngIf="showPanelMsg">              
+                      <p class="alert alert-success">
+                          <strong>Panel Successfully added</strong> 
+      
+                      </p>
+                    
+                    </div>
+                    <form (ngSubmit)="onPracticalPanelSubmit()" #ppanel="ngForm">
+            
+                      <div>
+                        <label for="course">Course:</label>
+                        <select id="course" ngModel="Select" name="course" class="form-control" >
+                    
+                          <option>Under Graduate</option>
+                          <option>Post graduate</option>
+                        </select>
+                      </div> 
+                      
+                      <br>
+                      <div>
+                        <label  class="control-label" for="subject">Subject Code</label>
+                        <input type="text" ngModel class="form-control" id="subjectcode" placeholder="Enter Subject Code" name="subjectcode" required>
+                      </div>
+        
+                      <br>
+                      <div>
+                        <label  class="control-label" for="subject">Subject Name</label>
+                        <input type="text" ngModel class="form-control" id="subjectname" placeholder="Enter Subject Name" name="subjectname" required>
+                      </div>
+                      <br>
+                      
+                      <mat-form-field appearance="fill">
+                        <mat-label  class="control-label" for="subject">Select Internal Faculty 1</mat-label>
+
+                        <mat-select ngModel="Select"  ngModel="Select" class="form-control" id="select_faculty" name="faculty1">
+                          
+                          <mat-option *ngFor="let staff of staffs" [value]="staff.name">
+                            {{staff.name}}
+                          </mat-option>
+
+                        </mat-select>
+                      </mat-form-field>
+                      <br>
+                      <mat-form-field appearance="fill">
+                        <mat-label class="control-label" for="subject">Select Internal Faculty 2</mat-label>
+
+                        <mat-select ngModel="Select" ngModel="Select" class="form-control" id="select_faculty" name="faculty2">
+                          
+                          <mat-option *ngFor="let staff of staffs" [value]="staff.name">
+                            {{staff.name}}
+                          </mat-option>
+
+                        </mat-select>
+                      </mat-form-field>
+                      <br>
+                      <mat-form-field appearance="fill">
+                        <mat-label class="control-label" for="subject">Select External Faculty</mat-label>
+
+                        <mat-select ngModel="Select" ngModel="Select" class="form-control" id="select_faculty" name="external">
+                          
+                          <mat-option *ngFor="let staff of eData" [value]="staff.name">
+                            {{staff.name}}
+                          </mat-option>
+
+                        </mat-select>
+                      </mat-form-field>
+                      <br>
+                      <!-- <div>
+                        <label  class="control-label" for="subject">Lab Technician</label>
+                        <input type="text" ngModel class="form-control" id="labtechnician" placeholder="Enter Technician Name" name="labtechnician" required>
+                      </div> -->
+                      <mat-form-field appearance="fill">
+                        <mat-label class="control-label" for="subject">Lab Technician</mat-label>
+
+                        <mat-select ngModel="Select"  ngModel="Select" class="form-control" id="select_faculty" name="labtechnician">
+                          
+                          <mat-option *ngFor="let staff of sData" [value]="staff.name">
+                            {{staff.name}}
+                          </mat-option>
+
+                        </mat-select>
+                      </mat-form-field>
+                      <br>
+                      <!-- <div>
+                        <label  class="control-label" for="subject">Lab Assistant</label>
+                        <input type="text" ngModel class="form-control" id="labAssistant" placeholder="Enter Assistant Name" name="labassistant" required>
+                      </div>
+                       -->
+                       <mat-form-field appearance="fill">
+                        <mat-label class="control-label" for="subject">Lab Assistant</mat-label>
+
+                        <mat-select ngModel="Select"  ngModel="Select" class="form-control" id="select_faculty" name="labassistant">
+                          
+                          <mat-option *ngFor="let staff of sData" [value]="staff.name">
+                            {{staff.name}}
+                          </mat-option>
+
+                        </mat-select>
+                      </mat-form-field>
+                    
+                      
+                      <br>
+                      <div class="form-actions row text-center ">
+                        <div class="col-lg-6 col-md-4">
+                          <button type="button" (click)="onReset()" class="btn btn-primary button-width float-right">Reset</button>
+                        </div>
+                        
+                        <div class="col-lg-6 col-md-4">
+                          <button type="submit"  class="btn btn-success button-width float-left">Proceed</button>
+                        </div>
+                      </div>
+                      
+                    </form>
+                  </div>
+        
+        
+                    
+        
+                  </div>
+        
+                </div>
+        
+        
+              </div>
+        
+            </div>
+            
+            <br>
+         
+            
+
+           
+           
+            
+
+          </div>
+
+          
+
+      </div>
+
+     
+      
+    </div>
+
+  </div> 
+
+  <!--END grid script-->
+
+<div class="row center">
+    <div class="col-lg-12">
+            <div
+              class="modal fade"
+              id="exampleModal1"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalLabel1"
+              aria-hidden="true"
+            >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel1">
+                    Add External
+                  </h5>
+                    <span aria-hidden="true">&times;</span>
+                </div>
+
+                <div class="modal-body">
+                  <div class="alert alert-warning" *ngIf="f1.dirty && f1.invalid">Enter all required values</div>
+                    <form #f1="ngForm">
+                          <div class="form-group">
+                            <label for="expertName">Name</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="expertName"
+                              name="name"
+                              required
+                              ngModel
+                            >
+                          </div>
+                          <div class="form-group">
+                            <label for="designation">Designation</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="designation"
+                              name="designation"
+                              required
+                              ngModel
+                            >
+                          </div>
+                          <div class="form-group">
+                            <label for ="email">Email</label>
+                              <input type="text" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="email" name="emailId" ngModel required #emailref1="ngModel">
+                              <div *ngIf="emailref1.errors &&(emailref1.touched || emailref1.dirty)" class ="alert alert-danger">
+                              <div [hidden]="!emailref1.errors?.pattern">
+                              Invalid Email
+                              </div> 
+                              </div> 
+                          </div>
+                          <div class="form-group">
+                            <label for="mobileNumber">Mobile Number</label>
+                            <input type="text" class="form-control" name="mobileNo" id="mobileNumber" pattern="^((\\+91-?)|0)?[0-9]{10}$" ngModel #mobNumber1="ngModel" required>  
+                              <div *ngIf="mobNumber1.errors &&(mobNumber1.touched || mobNumber1.dirty) " class ="alert alert-danger">  
+                                <div *ngIf="mobNumber1.errors.pattern">  
+                              Invalid Mobile Number  
+                                </div>   
+                              </div>  
+                            
+                          </div>
+                          <br />
+                          <h3>Bank Details</h3>
+            
+                          <div class="form-group">
+                            <label for="bankName">Bank Name</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="bankName"
+                              name="bankName"
+                              ngModel
+                            />
+                          </div>
+                          <div class="form-group">
+                            <label for="ifsc">IFSC</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              pattern="^[A-Za-z]{4}[a-zA-Z0-9]{7}$"
+                              id="ifsc"
+                              name="ifscCode"
+                              #ifsc1="ngModel"
+                              ngModel
+                            >
+                            <div *ngIf="ifsc1.errors &&(ifsc1.touched || ifsc1.dirty) " class ="alert alert-danger">  
+                              <div *ngIf="ifsc1.errors.pattern">  
+                                Invalid IFSC Code
+                              </div>   
+                              </div>
+                          </div>
+            
+                          <div class="form-group">
+                            <label for="accountNumber"
+                              >Account Number</label
+                            >
+                            <input
+                              type="number"
+                              class="form-control"
+                              pattern="^\d{9,18}$"
+                              id="accountNumber"
+                              name="AccountNumber"
+                              #accountNumber1="ngModel"
+                              ngModel
+                            >
+                            <div *ngIf="accountNumber1.errors &&(accountNumber1.touched || accountNumber1.dirty) " class ="alert alert-danger">  
+                              <div *ngIf="accountNumber1.errors.pattern">  
+                                Invalid Bank Account Number
+                              </div>   
+                              </div>
+                          </div>
+            
+                          <div class="form-group">
+                            <label for="branchAddress">Bank Branch <Address></Address></label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="Type"
+                              name="branchAddress"
+                              ngModel
+                            >
+                          </div>
+                        </form>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-dismiss="modal"
+                    type="submit"
+                    [disabled]="f1.invalid" 
+                    (click)="addExternal()"
+                  >
+                    Add External
+                  </button>
+                </div>
+              </div>
+            </div> 
+        </div>
+    </div>
+</div>
+
+<div class="row center">
+  <div class="col-lg-12">
+          <div
+            class="modal fade"
+            id="exampleModal2"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel1"
+            aria-hidden="true"
+          >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel1">
+                  Update External
+                </h5>
+                  <span aria-hidden="true">&times;</span>
+              </div>
+
+              <div class="modal-body">
+                <div class="col-lg-6">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Select External</mat-label>
+                    <br>
+    
+                    <mat-select ngModel="Select"ngModel="Select" class="form-control" id="external" name="external" (ngModelChange)="getExternalById($event)">
+                      
+                      <mat-option *ngFor="let staff of eData" [value]="staff.id">
+                        {{staff.name}}
+                      </mat-option>
+    
+                    </mat-select>
+                  </mat-form-field>
+
+                </div>
+                <div class="alert alert-warning" *ngIf="f2.dirty && f2.invalid">Enter all required values</div>
+                  <form #f2="ngForm">
+                        <div class="form-group">
+                          <label for="expertName">Name</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="expertName"
+                            [(ngModel)]="erequest.name"
+                            name="name"
+                            required
+                            ngModel
+                          >
+                        </div>
+                        <div class="form-group">
+                          <label for="designation">Designation</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="designation"
+                            [(ngModel)]="erequest.designation"
+                            name="designation"
+                            required
+                            ngModel
+                          >
+                        </div>
+                        <div class="form-group">
+                          <label for ="email">Email</label>
+                            <input type="text" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="email" name="emailId"  [(ngModel)]="erequest.emailId" required #emailref1="ngModel">
+                            <div *ngIf="emailref1.errors &&(emailref1.touched || emailref1.dirty)" class ="alert alert-danger">
+                            <div [hidden]="!emailref1.errors?.pattern">
+                            Invalid Email
+                            </div> 
+                            </div> 
+                        </div>
+                        <div class="form-group">
+                          <label for="mobileNumber">Mobile Number</label>
+                          <input type="text" class="form-control" name="mobileNo" id="mobileNumber" pattern="^((\\+91-?)|0)?[0-9]{10}$"  [(ngModel)]="erequest.mobileNo" #mobNumber1="ngModel" required>  
+                            <div *ngIf="mobNumber1.errors &&(mobNumber1.touched || mobNumber1.dirty) " class ="alert alert-danger">  
+                              <div *ngIf="mobNumber1.errors.pattern">  
+                            Invalid Mobile Number  
+                              </div>   
+                            </div>  
+                          
+                        </div>
+                        <!-- <br />
+                          <h3>Bank Details</h3>
+            
+                          <div class="form-group">
+                            <label for="bankName">Bank Name</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="bankName"
+                              name="bankName"
+                              [(ngModel)]="erequest.bankName"
+                              ngModel
+                            />
+                          </div>
+                          <div class="form-group">
+                            <label for="ifsc">IFSC</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              pattern="^[A-Za-z]{4}[a-zA-Z0-9]{7}$"
+                              id="ifsc"
+                              [(ngModel)]="erequest.ifscCode"
+                              name="ifscCode"
+                              #ifsc1="ngModel"
+                              ngModel
+                            >
+                            <div *ngIf="ifsc1.errors &&(ifsc1.touched || ifsc1.dirty) " class ="alert alert-danger">  
+                              <div *ngIf="ifsc1.errors.pattern">  
+                                Invalid IFSC Code
+                              </div>   
+                              </div>
+                          </div>
+            
+                          <div class="form-group">
+                            <label for="accountNumber"
+                              >Account Number</label
+                            >
+                            <input
+                              type="number"
+                              class="form-control"
+                              pattern="^\d{9,18}$"
+                              id="accountNumber"
+                              name="AccountNumber"
+                              [(ngModel)]="erequest.AccountNumber"
+                              #accountNumber1="ngModel"
+                              ngModel
+                            >
+                            <div *ngIf="accountNumber1.errors &&(accountNumber1.touched || accountNumber1.dirty) " class ="alert alert-danger">  
+                              <div *ngIf="accountNumber1.errors.pattern">  
+                                Invalid Bank Account Number
+                              </div>   
+                              </div>
+                          </div>
+            
+                          <div class="form-group">
+                            <label for="branchAddress">Bnak Branch <Address></Address></label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="Type"
+                              name="branchAddress"
+                              [(ngModel)]="erequest.branchAddress"
+                              ngModel
+                            >
+                          </div> -->
+                        
+                      </form>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-dismiss="modal"
+                  type="submit"
+                  [disabled]="f2.invalid"
+                  (click)="updateExternal()"
+                >
+                  Update External
+                </button>
+              </div>
+            </div>
+          </div> 
+      </div>
+  </div>
+</div>

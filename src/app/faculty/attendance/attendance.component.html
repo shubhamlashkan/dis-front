@@ -1,0 +1,390 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 kyc-colm user-management">
+      <div class="kyc-section rewards-section reports-sectn">
+        <!--Start Left Panel-->
+        <div class="row">
+          <div class="col-lg-6" style="border-right:1px solid #ADAAAA;">
+            <div class="">
+              <div class="row">
+                <div class="col page-headng" style="width:150%;">
+                  <h3>Calendar</h3>
+                  <div id='calendar'>
+                    <app-calendar></app-calendar>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-lg-5">
+                  <!-- <select class="form-control">
+                    <option>Select Month</option>
+                    <option>January</option>
+                    <option>February</option>
+                    <option>March</option>
+                    <option>April</option>
+                    <option>May</option>
+                    <option>June</option>
+                    <option>July</option>
+                    <option>August</option>
+                    <option>September</option>
+                    <option>October</option>
+                    <option>November</option>
+                    <option>December</option>
+                  </select> -->
+                  <div class="leave-box row">
+                    <div class="col-7">
+                      <p>Total Leave</p>
+                      <p>CL left</p>
+                      <p>Total PL</p>
+                      <p>PL left</p>
+                    </div>
+                    <div class="col-3">
+                      <p>:</p>
+                      <p>:</p>
+                      <p>:</p>
+                      <p>:</p>
+                    </div>
+                    <div class="col-2">
+                      <p>9</p>
+                      <p>3</p>
+                      <p>8</p>
+                      <p>6</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-7 pieChart">
+                  <h5 style="color:#1488CC">Attendance</h5>
+                  <div class="row">
+
+                    <div class="col-lg-12">
+                        <canvas id="pieChart" width="300" height="300"></canvas>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+          <!--End Left Panel-->
+
+          <!--Start Right Panel-->
+          <div class="col-lg-6">
+            <div class="container">
+
+              <ul class="nav nav-pills nav-fill">
+               
+                <li class="nav-item">
+                  <a class="nav-link active nav-fill  show active" id="sectionA-tab" data-toggle="pill" href="#sectionA" role="tab" aria-controls="sectionA"
+                    aria-selected="true">Apply for Leaves</a>
+                </li>
+                
+                <li class="nav-item">
+                  <a class="nav-link pl-2" id="sectionB-tab " data-toggle="pill" href="#sectionB" role="tab" aria-controls="sectionB"
+                    aria-selected="true">My Requests</a>
+                </li>
+            
+              </ul>
+              <hr />
+            </div>
+            <div class="tab-content" id="pills-tabContent">
+              <div class="tab-pane fade show active" id="sectionA" role="tabpane1" aria-labelledby="sectionA-tab">
+                <div class="col-lg-12 kyc-colm user-management kyc-section rewards-section reports-sectn">
+                   <!-- start -->
+                <div class=""  *ngIf="showNullError">
+                  
+                  <p class="alert alert-danger">
+                      <strong>This field cannot be blank</strong> 
+        
+                  </p>
+                
+              </div>
+              <div class=""  *ngIf="showPastDateError">
+                  
+                <p class="alert alert-danger">
+                    <strong>Cannot apply leave for a date that has already passed.</strong> 
+      
+                </p>
+              
+            </div>
+                <div class=""  *ngIf="showMsg">
+                  
+                    <p class="alert alert-success">
+                        <strong>Request sent</strong> 
+          
+                    </p>
+                  
+                </div>
+                <div class=""  *ngIf="showDateError">
+                  
+                  <p class="alert alert-danger">
+                      <strong>From date cannot be more than to date</strong> 
+        
+                  </p>
+                
+              </div>
+              <div class=""  *ngIf="showCreditError">
+                  
+                <p class="alert alert-danger">
+                    <strong>Leaves have not been creditecd for new session</strong> 
+      
+                </p>
+              
+            </div>
+                <form (ngSubmit)="onSubmit()" #f="ngForm">
+                 
+                  <label class="control-label" for="Type of leave">Leave Type : </label>
+                  <div>
+                     <select id="leavetype" ngModel="Select" name="leaveType" class="form-control" required>
+                      <option *ngFor="let leave of leave_type" value="{{leave.leaveName}}">{{leave.leaveName}}</option>
+                
+                    </select> 
+                  </div> 
+                  
+                  
+                  <br>
+  
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <label for="From">From : </label>
+                      <input type="date" name="from" id="from" ngModel style="margin-left:2%;">
+                    </div>
+                    <div class="col-lg-6">
+                      <label for="To">To : </label>
+                      <input type="date" name="to" id="to" ngModel style="margin-left:2%;" >
+                    </div>
+                  </div>
+                  <br>
+                  
+                  <label class="control-label" for="fromDuration">From Duration:</label>
+                  <div class="row" style="margin-left:1%;">
+                    <!-- Material inline 1 -->
+                    <div class="form-check col-lg-4">
+                      <input type="radio" ngModel   class="form-check-input" id="materialInline1" name="fromDuration" value="First Half">
+                      <label class="form-check-label" for="materialInline1">First Half</label>
+                    </div>
+  
+                    <!-- Material inline 2 -->
+                    <div class="form-check col-lg-4">
+                      <input type="radio" value="Second Half" class="form-check-input" ngModel id="materialInline2" name="fromDuration">
+                      <label class="form-check-label" for="materialInline2">Second Half</label>
+                    </div>
+  
+                    <!-- Material inline 3 -->
+                    <div class="form-check col-lg-4">
+                      <input type="radio" value="Full" class="form-check-input" ngModel  id="materialInline3" name="fromDuration">
+                      <label class="form-check-label" for="materialInline3">Full Day</label>
+                    </div>
+                  </div>
+                  <br>
+                  <label class="control-label" for="toDuration">To Duration:</label>
+                  <div class="row" style="margin-left:1%;">
+                    <!-- Material inline 1 -->
+                    <div class="form-check col-lg-4">
+                      <input type="radio" ngModel   class="form-check-input" id="materialInline1" name="toDuration" value="First Half">
+                      <label class="form-check-label" for="materialInline1">First Half</label>
+                    </div>
+  
+                    <!-- Material inline 2 -->
+                    <div class="form-check col-lg-4">
+                      <input type="radio" value="Second Half" class="form-check-input" ngModel id="materialInline2" name="toDuration">
+                      <label class="form-check-label" for="materialInline2">Second Half</label>
+                    </div>
+  
+                    <!-- Material inline 3 -->
+                    <div class="form-check col-lg-4">
+                      <input type="radio" value="Full" class="form-check-input" ngModel  id="materialInline3" name="toDuration">
+                      <label class="form-check-label" for="materialInline3">Full Day</label>
+                    </div>
+                  </div>
+                  <br>
+                  <label class="control-label" for="considerHolidays">Consider public holidays as Leaves</label>
+                  <div class="row" style="margin-left:1%;">
+                    <!-- Material inline 1 -->
+                    <div class="form-check col-lg-4">
+                      <input type="radio" ngModel   class="form-check-input" id="materialInline1" name="considerHolidays" value="true">
+                      <label class="form-check-label" for="materialInline1">Yes</label>
+                    </div>
+  
+                    <!-- Material inline 2 -->
+                    <div class="form-check col-lg-4">
+                      <input type="radio" value="false" class="form-check-input" ngModel id="materialInline2" name="considerHolidays">
+                      <label class="form-check-label" for="materialInline2">No</label>
+                    </div>
+  
+                    <!-- Material inline 3 -->
+                    
+                  </div>
+                  
+                  <br>
+                  <div>
+                    <label for="reason">Reason : </label>
+                    <textarea ngModel name="reason" class="form-control" placeholder="Due to some family problem i am not able to come."
+                      rows="10" id="reason"></textarea>
+                  </div>
+                  <br>
+                  <div class="form-actions row text-center ">
+                    <div class="col-lg-6 col-md-4">
+                      <button type="button" (click)="onReset()" class="btn btn-primary button-width float-right">Reset</button>
+                    </div>
+                    <div class="col-lg-6 col-md-4">
+                      <button type="submit"  class="btn btn-success button-width float-left">Proceed</button>
+                    </div>
+                  </div>
+                  
+                </form>
+
+                </div>
+              
+               
+              </div>
+              <div class="tab-pane fade " id="sectionB" role="tabpane1" aria-labelledby="sectionB-tab">
+                <div class="">
+                  <div class="alert alert-success row">
+                    <h3 *ngIf="leaveRequests.length!=0">Requests</h3>
+                    <div *ngFor="let req of leaveRequests">
+            
+                      <div class="alert alert-success row al">
+                          <p class="col-7">Reason: {{req.reason}}</p>
+                          <p class="col-7"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> Date From: {{req.from}} To: {{req.to}}</p>
+                          <p class="col-5">Status: {{req.status}}</p>
+                          <br>
+                          <p class="col-2"><button type="button" class="btn btn-success"  data-toggle="modal"
+                            data-target="#addInfra"
+                            title="Add an Infrastructure"
+                            aria-hidden="true" >Cancel</button></p>
+
+                          <div
+                            class="modal fade"
+                            id="addInfra"
+                            tabindex="-1"
+                            role="dialog"
+                            aria-labelledby="cancelleave"
+                            aria-hidden="true"
+                          >
+                          
+                          <form  (ngSubmit)="Cancel(req)" #f="ngForm">
+                            <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+                              <div class="modal-content">
+                                <div class=""  *ngIf="showconfirmationCancel">
+                                          
+                                  <p class="alert alert-success">
+                                      <strong>Leaves Canclled</strong> 
+      
+                                  </p>
+                                
+                                </div>
+                                <div class="modal-header">
+                                  <h5 class="modal-title text-center" id="cancelleave">
+                                    Cancel Leave Request
+                                  </h5>
+                                  <button
+                                    type="button"
+                                    class="close"
+                                    data-dismiss="modal"
+                                    aria-label="Close"
+                                  >
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <h6>Do you want to cancel this leave request</h6>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                    No
+                                  </button>
+                                  <button type="submit" class="btn btn-primary " >
+                                    Yes
+                                  </button>
+
+                                  
+                                </div>
+                                
+                              </div>
+                            </div>
+                          </form>
+                          </div>
+                          <div  class =""  *ngIf="req.status === 'approved'">
+                            <p class="col-2"><button type="button" class="btn btn-danger" data-toggle="modal"
+                              data-target="#Rejoin"
+                              title="Rejoin"
+                              aria-hidden="true" >Rejoin</button></p>
+                          </div>
+                          
+                      
+                      </div>
+                      <!-- hdjs -->
+                      <div
+                      class="modal fade"
+                      id="Rejoin"
+                      tabindex="-1"
+                      role="dialog"
+                      aria-labelledby="RejoinLabel"
+                      aria-hidden="true"
+                    >
+                      <form  (ngSubmit)="Rejoin(req)" #rejoin="ngForm">
+                        <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+                          <div class="modal-content">
+                            <div class=""  *ngIf="showconfirmationRejoin">
+                                          
+                              <p class="alert alert-success">
+                                  <strong>The Field has been Successfully Updated..!</strong> 
+
+                              </p>
+                            
+                            </div>
+                            <div class="modal-header">
+                              <h5 class="modal-title text-center" id="addInfraLabel">
+                                Add the New Rejoining Date
+                              </h5>
+                              <button
+                                type="button"
+                                class="close"
+                                data-dismiss="modal"
+                                aria-label="Close"
+                              >
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="input-group mb-1">
+
+                                <div class="input-group-prepend">
+                                  <div class="col-lg-6">
+                                    <label for="To">Rejoining : </label>
+                                    <input type="date" name="to" ngModel style="margin-left:2%;">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                Close
+                              </button>
+                              <button type="submit" class="btn btn-primary " >
+                                Submit
+                              </button>
+                            </div>
+                           
+                          </div>
+                        </div>
+                      </form>
+                      </div>
+
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+            
+            
+        </div>
+      </div>
+    </div>
+    <!--End Right Panel-->
+  </div>
+</div>

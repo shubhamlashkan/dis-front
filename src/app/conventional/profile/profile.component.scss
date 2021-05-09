@@ -1,0 +1,43 @@
+.modal-header{
+    background-color:rgb(4, 58, 87);
+    color:white;
+    margin:0%;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.certificate{
+    color:blue;
+}
+.btn{
+    border-radius: 12px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.btnWidth{
+    width:100px;
+}
+.btn-success{
+    background-color: #1ba94c;
+    color: white;
+}
+.confirmationMessage{
+    padding : 1% 2% 1% 2%;
+    background-color: rgb(209, 206, 206);
+    border-radius: 6px;
+    transition : 0.3s;
+    font-size:14px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  }
+  .facultyName:hover{
+  color: #f46404;
+  }
+  .loading-indicator {
+    position: fixed;
+    z-index: 999;
+    height: 2em;
+    width: 2em;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+  

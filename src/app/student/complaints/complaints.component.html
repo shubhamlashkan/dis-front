@@ -1,0 +1,178 @@
+  <!--Middle Section Start-->
+  <div class="container">
+      <div class="row">
+
+    <!--Start Left Panel-->
+        <div class="col-lg-3 profile-info">
+          <app-sidenavigation></app-sidenavigation>
+        </div>
+      <!--End Left Panel-->
+
+
+        <!--Start Main Panel-->
+      <div class="col-lg-9 kyc-colm user-management">
+          <div class="kyc-section rewards-section reports-sectn">
+
+      <div class="accordian" id="accordion">
+
+      <!--Notification Panel starts-->
+      <div class="card">
+      <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+      <h5>Add a Complaint
+      <div class="nav-item profile dropdown float-right">
+        <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true" style="text-decoration:none;">
+              <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i>
+            </a>
+            <div class="dropdown-menu rounded-0 " aria-labelledby="navbarDropdownMenuLink2">
+              <a class="dropdown-item collapsed" href="#" role="button" data-toggle="collapse" data-target="#cleanliness" aria-expanded="false" aria-controls="cleanliness" style="text-decoration:none;"><i class="fa fa-paint-brush" aria-hidden="true">Cleanliness</i></a>
+              <a class="dropdown-item collapsed" href="#" role="button" data-toggle="collapse" data-target="#equipments" aria-expanded="false" aria-controls="equipments" style="text-decoration:none;"><i class="fa fa-desktop" aria-hidden="true"> Lab Equipments</i></a>
+            </div>
+          </div></h5>
+          </h5>
+      </div>
+
+      <div id="cleanliness" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+
+      <div>
+        <div class="alert alert-info clean">
+          <form action="">
+          <div class="row">
+            <div class="form-group col-6">
+            <label for="location">Location</label>
+            <select id="leavetype" class="form-control">
+                <option>PG Lab</option>
+                <option>HES Lab</option>
+                <option>CNDC Lab</option>
+                <option>GCL Lab</option>
+                <option>SE Lab</option>
+                <option>AVLC</option>
+                <option>LT 201</option>
+                <option>LT 301</option>
+              </select>
+            </div>
+            <div class="form-group col-6">
+            <label for="level">Level of Dustiness</label>
+            <select id="leavetype" class="form-control">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+            </div>
+            <div class="form-group form-check col-12">
+            <label for="details">Details</label>
+              <textarea class="form-control" rows="5" id="details"></textarea>
+            </div>
+            <div class="row">
+            <div class="col-9"></div>
+            <div class="col-3">
+              <button type="submit" class="btn btn-primary ">Submit</button>
+              <button type="submit" class="btn btn-danger">Cancel</button>
+            </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      </div>
+      </div>
+
+      <div id="equipments" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+
+      <div>
+        <div class="alert alert-info clean">
+          <form action="">
+          <div class="row">
+            <div class="form-group col-6">
+            <label for="location">Location</label>
+            <select id="leavetype" class="form-control">
+                <option>PG Lab</option>
+                <option>HES Lab</option>
+                <option>CNDC Lab</option>
+                <option>GCL Lab</option>
+                <option>SE Lab</option>
+                <option>AVLC</option>
+                <option>LT 201</option>
+                <option>LT 301</option>
+              </select>
+            </div>
+            <div class="form-group col-6">
+            <label for="level">Regarding</label>
+            <select id="leavetype" class="form-control">
+                <option>Furniture</option>
+                <option>Monitor</option>
+                <option>Keyboard</option>
+                <option>Mouse</option>
+                <option>Computer</option>
+                <option>Air Conditioner</option>
+                <option>Internet</option>
+                <option>Others</option>
+              </select>
+            </div>
+            </div>
+            <div class="form-group form-check col-12">
+            <label for="details">Details</label>
+              <textarea class="form-control" rows="5" id="details"></textarea>
+            </div>
+            <div class="row">
+            <div class="col-9"></div>
+            <div class="col-3">
+              <button type="submit" class="btn btn-primary ">Submit</button>
+              <button type="submit" class="btn btn-danger">Cancel</button>
+            </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      </div>
+      </div>
+    </div>
+
+    <div>
+    <div class="card-header" id="status">
+      <h5 class="mb-0">
+      Complaint Status</h5>
+    </div>
+    </div>
+    <div class="card-body" id="statusbody">
+      <div>
+        <div class="alert alert-success row">
+          <h4 class="col-12">Compalaint #124</h4>
+          <p class="col-12">Re : Cleanliness</p>
+          <p class="col-6"> Date: 24/08/2017<br/>location : HES Lab<br/>Description : Too much dust and pegion feathers</p>
+          <p class="col-6 " style="text-align: right;"> Assigned to : Mr XYZ <br/>Work in progress<br/>	<i class="fa fa-cogs fa-lg col-6" style="color:rgb(37, 37, 2);" aria-hidden="true"></i></p>
+        </div>
+        <div class="alert alert-success row">
+          <h4 class="col-12">Compalaint #125</h4>
+          <p class="col-12">Re : Equipment</p>
+          <p class="col-6"> Date: 14/08/2017<br/>location : GCL Lab<br/>Description : LAN connectivity problem</p>
+          <p class="col-6 " style="text-align: right;"> Assigned to : Mr XYZ <br/>Resolved<br/>	<i class="fa fa-check-circle fa-lg col-6" style="color:green;" aria-hidden="true"></i></p>
+        </div>
+        <div class="alert alert-success row">
+          <h4 class="col-12">Compalaint #126</h4>
+          <p class="col-12">Re : Equipment</p>
+          <p class="col-6"> Date: 04/08/2017<br/>location : SE Lab<br/>Description : AC is not working</p>
+          <p class="col-6 " style="text-align: right;"> Assigned to : Mr XYZ <br/>Work in progress<br/>	<i class="fa fa-cogs fa-lg col-6" style="color:rgb(37, 37, 2);" aria-hidden="true"></i></p>
+        </div>
+        <div class="alert alert-success row">
+          <h4 class="col-12">Compalaint #127</h4>
+          <p class="col-12">Re : Cleanliness</p>
+          <p class="col-6"> Date: 28/07/2017<br/>location : AVLC<br/>Description : Dust is there on the benches every morning</p>
+          <p class="col-6 " style="text-align: right;"> Assigned to : Mr XYZ <br/>Resolved<br/>	<i class="fa fa-check-circle fa-lg col-6" style="color:green;" aria-hidden="true"></i></p>
+        </div>
+      </div>
+      <!--Notification Panel Ends-->
+    </div>
+    </div>
+
+      <!--End Right Panel-->
+
+      </div>
+    </div>
+    <!--Middle Section finish-->
+  </div>
+  </div>

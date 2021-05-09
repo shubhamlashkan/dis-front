@@ -1,0 +1,20 @@
+.sidenav {
+    height: 78%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: absolute; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 1%;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 15px; /* Place content 30px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    background-color:rgb(252, 249, 249);
+  }
+  .selector.noshadow {
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+  box-shadow: none;
+  border-right:1px solid rgb(133, 128, 128);
+
+  border-radius: 2%;
+}  
