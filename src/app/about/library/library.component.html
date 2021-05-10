@@ -1,0 +1,85 @@
+<br>
+<div class="row">
+  <div class="col-lg-12 kyc-colm user-management">
+          <div class="row">
+              <div >
+                  <h6 style="color:#f46404;font-size: 20px;">Department Library</h6>
+              </div>
+              
+          </div>
+
+
+
+          <hr>
+          <div class="row">
+              <div class="col-lg-2" style="border-right:2px solid black;">
+                  <ul class="list-unstyled" style="text-align: center;">
+                      <li style="margin-top: 30px;"><i class="fa fa-book fa-fw"
+                              aria-hidden="true" style="font-size: 60px;" (click)="getBooks()"></i>
+                          
+                         <p> Books</p>
+                      </li>
+
+                      <li style="margin-top: 30px;"><a><img src="assets/images/thesis.png"
+                                  style="width: 60px; height: 60px; " (click)="getThesis()"></a>
+                         
+                         <p> Thesis</p>
+                      </li>
+
+                  </ul>
+              </div>
+              <div *ngIf="!showBook" class="col-lg-10 table-responsive" id="thesis" style="display: block;">
+
+                  <table class="table table-striped">
+                      <thead>
+                          <tr>
+                              <th scope="col">Thesis Id</th>
+                              <th scope="col">Title of Thesis</th>
+                              <th scope="col">Year</th>
+                              <th scope="col">Submitted By</th>
+                              <th scope="col">Guided By</th>
+                              <th scope="col">CD(Y/N)</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let thesis of thesis">
+                              <th scope="row">{{thesis.thesisId}}</th>
+                              <td>{{thesis.title}}</td>
+                              <td>{{thesis.year}}</td>
+                              <td>{{thesis.SubmittedBy}}</td>
+                              <td>{{thesis.guidedBy}}</td>
+                              <td>{{thesis.cdStatus}}</td>
+                          </tr>
+
+                      </tbody>
+                  </table>
+              </div>
+
+              <div *ngIf="showBook" class="col-lg-10 table-responsive" id="books" style="display: block;">
+                  <table class="table table-striped">
+                      <thead>
+                          <tr>
+                              <th scope="col">Book Id</th>
+                              <th scope="col">Book Name</th>
+                              <th scope="col">Author</th>
+                              <th scope="col">Publisher</th>
+                              <th scope="col">Status</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let book of books">
+                              <th scope="row">{{book.bookId}}</th>
+                              <td>{{book.title}}</td>
+                              <td>{{book.authorName}}</td>
+                              <td>{{book.publisherAndPlace}}</td>
+                              <td>{{book.status}}</td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+
+          </div>
+
+          </div>
+</div>
+

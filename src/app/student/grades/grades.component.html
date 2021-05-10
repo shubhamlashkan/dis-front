@@ -1,0 +1,84 @@
+
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-lg-3 profile-info">
+      <app-sidenavigation></app-sidenavigation>
+    </div>
+     <div class="col-lg-9">
+       
+      <ul class="nav nav-tabs nav-fill">
+        
+        <li class="nav-item ">
+          <a href="#overview" data-toggle="tab" class="nav-link active">Overview Report</a>
+        </li>
+        <li class="nav-item">
+          <a href="#user" data-toggle="tab" class="nav-link">User Report</a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div id="overview" class="tab-pane active">
+          <br>
+          <table class="table table-striped bg-light table-bordered" id="overviewReport">
+            <thead>
+              <tr>
+                <th scope="col">Course name</th>
+                <th scope="col">Grade</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let report of overviewReport">
+                <td scope="row">{{report.courseName}}</td>
+                <td>{{report.grade}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <button (click)="getCSV('overviewReport')" class="btn btn-success">Export as csv</button>
+        </div>
+        <div id="user" class="tab-pane fade ">
+          <span class="mx-2 my-5 h6">Grade category</span><select class="form-select form-select-lg mx-2 my-5" aria-label=".form-select-lg example"  [(ngModel)]="courseId">
+            <!-- <option value="{{this.subjects[0].courseId}}"  selected>{{this.subjects[0].courseName}}</option> -->
+            <option value="{{sub.courseId}}" *ngFor="let sub of subjects" >{{sub.courseName}}</option>
+          </select>
+          <button class="btn btn-primary btn-sm px-2 mx-3 my-5" (click)="getUserReport()">submit</button>
+          <table class="table table-striped table-bordered table-hover " id="userReport">
+            <thead class="">
+              <tr class="bg-light">
+                <th scope="col">Course</th>
+                <th scope="col">Grade Item</th>
+                <th scope="col">Grade</th>
+                <th scope="col">Total Marks</th>
+                <th scope="col">Percentage</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let report of subjectReport">
+                
+                <td>{{report.courseName}}</td>
+                <td>{{report.gradeItemName}}</td>
+                <td>{{report.gradeObtained}}</td>
+                <td>{{report.gradeTotal}}</td>
+                <td>{{(report.gradeObtained/report.gradeTotal)*100 | number}}</td>
+              </tr>
+              
+             
+            </tbody>
+          </table>
+          <button (click)="getCSV('userReport')" class="btn btn-success">Export as csv</button>
+          
+        </div>
+      </div>
+      <br>
+      
+     </div>
+    
+<!--Middle Section finish-->
+  </div>
+</div>
+
+
+
+<!-- ++++++++++++++++++old code++++++++++++++ -->
+  <!-- Start Main Panel-->

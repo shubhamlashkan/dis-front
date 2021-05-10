@@ -1,0 +1,992 @@
+<br />
+<div class="row center">
+	<div class="col-lg-12">
+		<div
+			class="modal fade"
+			id="exampleModal1"
+			tabindex="-1"
+			role="dialog"
+			aria-labelledby="exampleModalLabel1"
+			aria-hidden="true"
+		>
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel1">
+							Add Industry Visit
+						</h5>
+						<button
+							type="button"
+							class="close"
+							data-dismiss="modal"
+							aria-label="Close"
+						>
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div
+							class="alert alert-warning"
+							*ngIf="f1.dirty && f1.invalid"
+						>
+							Enter all required values
+						</div>
+						<form #f1="ngForm">
+							<div class="form-group">
+								<label for="participants">Participants</label>
+								<!-- <br>
+								<small>Format: Course-Year-StartingRollNumber-EndingRollNumber</small>
+								<br>
+								<small>Example Input: BE-IV-30-60,ME-II-05-30</small> -->
+								<input
+									type="text"
+									class="form-control"
+									id="participants"
+									name="participants"
+									required
+									ngModel
+								/>
+							</div>
+							<!-- <small></small> -->
+							<div class="form-group">
+								<label for="coordinator1">Coordinator-1</label>
+								<input
+									type="text"
+									class="form-control"
+									id="coordinator1"
+									name="coordinator1"
+									required
+									ngModel
+								/>
+							</div>
+							<div class="form-group">
+								<label for="coordinator2">Coordinator-2</label>
+								<input
+									type="text"
+									class="form-control"
+									id="coordinator2"
+									name="coordinator2"
+									required
+									ngModel
+								/>
+							</div>
+							<div class="form-group">
+								<label for="date">Date of Visit</label>
+								<input
+									type="date"
+									class="form-control"
+									id="date"
+									name="date"
+									required
+									ngModel
+								/>
+							</div>
+							<div class="form-group">
+								<label for="time">Time</label>
+								<input
+									type="time"
+									class="form-control"
+									id="time"
+									name="time"
+									required
+									ngModel
+								/>
+							</div>
+							<div class="form-group">
+								<label for="companyName">Company Name</label>
+								<input
+									type="text"
+									class="form-control"
+									id="companyName"
+									name="companyName"
+									required
+									ngModel
+								/>
+							</div>
+							<div class="form-group">
+								<label for="address">Address</label>
+								<input
+									type="text"
+									class="form-control"
+									id="address"
+									name="address"
+									required
+									ngModel
+								/>
+							</div>
+							<div class="form-group">
+								<label for="city">City</label>
+								<input
+									type="text"
+									class="form-control"
+									id="city"
+									name="city"
+									required
+									ngModel
+								/>
+							</div>
+							<div class="form-group">
+								<label for="state">State</label>
+								<input
+									type="text"
+									class="form-control"
+									id="state"
+									name="state"
+									required
+									ngModel
+								/>
+							</div>
+							<div class="form-group">
+								<label for="pinCode">PIN code</label>
+								<input
+									type="number"
+									class="form-control"
+									id="pinCode"
+									name="pin"
+									required
+									ngModel
+									#pinCode1="ngModel"
+									pattern="^[1-9][0-9]{5}$"
+								/>
+								<div
+									*ngIf="
+										pinCode1.errors &&
+										(pinCode1.touched || pinCode1.dirty)
+									"
+									class="alert alert-danger"
+								>
+									<div *ngIf="pinCode1.errors.pattern">
+										Invalid Pin Code
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button
+									type="button"
+									class="btn btn-secondary"
+									data-dismiss="modal"
+								>
+									Close
+								</button>
+								<button
+									type="button"
+									class="btn btn-primary"
+									data-dismiss="modal"
+									(click)="addIndustryVisit()"
+									[disabled]="f1.invalid"
+								>
+									Add Industry Visit
+								</button>
+							</div>
+						</form>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+
+		<div
+			class="modal fade"
+			id="exampleModal2"
+			tabindex="-1"
+			role="dialog"
+			aria-labelledby="exampleModalLabel2"
+			aria-hidden="true"
+		>
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel2">
+							Industry Visit Details
+						</h5>
+						<button
+							type="button"
+							class="close"
+							data-dismiss="modal"
+							aria-label="Close"
+						>
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form #f2="ngForm" *ngIf="industryDetails">
+							<div class="form-group">
+								<label for="participants">Participants</label>
+								<input
+									type="text"
+									class="form-control"
+									id="participants"
+									name="participants"
+									[(ngModel)]="industryDetails.participants"
+									disabled
+									required
+									ngModel
+								/>
+							</div>
+							<div class="form-group">
+								<label>Attendance</label>
+								<br />
+								<button
+									type="button"
+									class="btn btn-secondary btn-sm"
+									(click)="downloadAttendance()"
+								>
+								<i class="fa fa-download" aria-hidden="true"></i> Download Attendance
+								</button>
+							</div>
+							<div class="form-group">
+								<label>Notesheet</label>
+								<br />
+								<button
+									type="button"
+									class="btn btn-secondary btn-sm"
+									(click)="downloadNotesheet()"
+								>
+								<i class="fa fa-download" aria-hidden="true"></i> Download Notesheet
+								</button>
+							</div>
+							<!-- <small></small> -->
+							<div class="form-group">
+								<label for="coordinator1">Coordinator-1</label>
+								<input
+									type="text"
+									class="form-control"
+									id="coordinator1"
+									name="coordinator1"
+									[(ngModel)]="industryDetails.coordinator1"
+									disabled
+									required
+									ngModel
+								/>
+							</div>
+							<div class="form-group">
+								<label for="coordinator2">Coordinator-2</label>
+								<input
+									type="text"
+									class="form-control"
+									id="coordinator2"
+									name="coordinator2"
+									[(ngModel)]="industryDetails.coordinator2"
+									disabled
+									required
+									ngModel
+								/>
+							</div>
+							<div class="form-group">
+								<label for="date">Date of Visit</label>
+								<input
+									type="date"
+									class="form-control"
+									id="date"
+									name="date"
+									[(ngModel)]="industryDetails.date"
+									disabled
+									required
+									ngModel
+								/>
+							</div>
+							<div class="form-group">
+								<label for="time">Time</label>
+								<input
+									type="time"
+									class="form-control"
+									id="time"
+									name="time"
+									[(ngModel)]="industryDetails.time"
+									disabled
+									required
+									ngModel
+								/>
+							</div>
+							<div class="form-group">
+								<label for="companyName">Company Name</label>
+								<input
+									type="text"
+									class="form-control"
+									id="companyName"
+									name="companyName"
+									[(ngModel)]="industryDetails.companyName"
+									disabled
+									required
+									ngModel
+								/>
+							</div>
+							<div class="form-group">
+								<label for="address">Address</label>
+								<input
+									type="text"
+									class="form-control"
+									id="address"
+									name="address"
+									[(ngModel)]="industryDetails.address"
+									disabled
+									required
+									ngModel
+								/>
+							</div>
+							<div class="form-group">
+								<label for="city">City</label>
+								<input
+									type="text"
+									class="form-control"
+									id="city"
+									name="city"
+									[(ngModel)]="industryDetails.city"
+									disabled
+									required
+									ngModel
+								/>
+							</div>
+							<div class="form-group">
+								<label for="state">State</label>
+								<input
+									type="text"
+									class="form-control"
+									id="state"
+									name="state"
+									[(ngModel)]="industryDetails.state"
+									disabled
+									required
+									ngModel
+								/>
+							</div>
+							<div class="form-group">
+								<label for="pinCode">PIN code</label>
+								<input
+									type="number"
+									class="form-control"
+									id="pinCode"
+									name="pin"
+									required
+									ngModel
+									[(ngModel)]="industryDetails.pin"
+									disabled
+								/>
+							</div>
+							<div class="form-group">
+								<label >Photographs</label>
+								<ul>
+									<li *ngFor = "let image of imagesList" class="fake-link" >
+									   <a (click)="downloadPhoto(image.url)"><i class="fa fa-file-image-o" aria-hidden="true"></i> {{ image.name }}</a></li>
+								
+								 </ul>
+							  </div>
+							<div class="form-group">
+								<label for="remarks">Remarks</label>
+								<input
+									type="text"
+									class="form-control"
+									id="remarks"
+									name="remarks"
+									[(ngModel)]="industryDetails.remarks"
+									ngModel
+								/>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button
+							type="button"
+							class="btn btn-secondary"
+							data-dismiss="modal"
+						>
+							Close
+						</button>
+						<button
+							type="button"
+							class="btn btn-primary"
+							data-dismiss="modal"
+							(click)="updateRemarks()"
+						>
+							Save Changes
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div
+			class="modal fade"
+			id="exampleModal3"
+			tabindex="-1"
+			role="dialog"
+			aria-labelledby="exampleModalLabel3"
+			aria-hidden="true"
+		>
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel3">
+							Upload Notesheet
+						</h5>
+						<button
+							type="button"
+							class="close"
+							data-dismiss="modal"
+							aria-label="Close"
+						>
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form #f3="ngForm">
+							<div class="form-group">
+								<label for="notesheet"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Select Notesheet</label>
+								<input
+									type="file"
+									class="form-control-file"
+									id="notesheet"
+									name="notesheet"
+									(change)="
+										selectFileInput($event.target.files)
+									"
+									required
+									ngModel
+								/>
+							</div>
+							<div class="modal-footer">
+								<button
+									type="button"
+									class="btn btn-secondary"
+									data-dismiss="modal"
+								>
+									Close
+								</button>
+								<button
+									type="button"
+									class="btn btn-primary"
+									data-dismiss="modal"
+									(click)="changeStatus()"
+									[disabled]="f3.invalid"
+								>
+									Change status to Upcoming
+								</button>
+							</div>
+						</form>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<div
+			class="modal fade"
+			id="exampleModal4"
+			tabindex="-1"
+			role="dialog"
+			aria-labelledby="exampleModalLabel4"
+			aria-hidden="true"
+		>
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel4">
+							Upload details of visit
+						</h5>
+						<button
+							type="button"
+							class="close"
+							data-dismiss="modal"
+							aria-label="Close"
+						>
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form #f4="ngForm">
+							<div class="form-group">
+								<label for="attendance"
+									>Select Attendance</label
+								>
+								<input
+									type="file"
+									class="form-control-file"
+									id="attendance"
+									name="attendance"
+									(change)="
+										selectFileInput($event.target.files)
+									"
+									required
+									ngModel
+								/>
+							</div>
+							<div class="form-group">
+								<label for="photograph"><i class="fa fa-file-image-o" aria-hidden="true"></i> Select Photograph</label>
+								<input
+									type="file"
+									accept="image/*"
+									class="form-control-file"
+									id="photograph"
+									name="photo"
+									(change)="selectPhotoInput($event.target.files)"
+									required
+									multiple
+									ngModel
+								/>
+						</div>
+						<div class="modal-footer">
+							<button
+								type="button"
+								class="btn btn-secondary"
+								data-dismiss="modal"
+							>
+								Close
+							</button>
+							<button
+								type="button"
+								class="btn btn-primary"
+								data-dismiss="modal"
+								(click)="changeStatus2()"
+								[disabled]="f4.invalid"
+							>
+								Change status to Completed
+							</button>
+						</div>
+						</form>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<div
+			class="modal fade"
+			id="exampleModal5"
+			tabindex="-1"
+			role="dialog"
+			aria-labelledby="exampleModalLabel5"
+			aria-hidden="true"
+		>
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel5">
+							Update Industry Visit
+						</h5>
+						<button
+							type="button"
+							class="close"
+							data-dismiss="modal"
+							aria-label="Close"
+						>
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div
+							class="alert alert-warning"
+							*ngIf="f1.dirty && f1.invalid"
+						>
+							Enter all required values
+						</div>
+						<form #f5="ngForm" *ngIf="editingVisit">
+							<div class="form-group">
+								<label for="participants">Participants</label>
+								<input
+									type="text"
+									class="form-control"
+									id="participants"
+									name="participants"
+									[(ngModel)]="editingVisit.participants"
+									required
+									ngModel
+								/>
+							</div>
+							<!-- <small></small> -->
+							<div class="form-group">
+								<label for="coordinator1">Coordinator-1</label>
+								<input
+									type="text"
+									class="form-control"
+									id="coordinator1"
+									name="coordinator1"
+									[(ngModel)]="editingVisit.coordinator1"
+									required
+									ngModel
+								/>
+							</div>
+							<div class="form-group">
+								<label for="coordinator2">Coordinator-2</label>
+								<input
+									type="text"
+									class="form-control"
+									id="coordinator2"
+									name="coordinator2"
+									[(ngModel)]="editingVisit.coordinator2"
+									required
+									ngModel
+								/>
+							</div>
+							<div class="form-group">
+								<label for="date">Date of Visit</label>
+								<input
+									type="date"
+									class="form-control"
+									id="date"
+									name="date"
+									[(ngModel)]="editingVisit.date"
+									required
+									ngModel
+								/>
+							</div>
+							<div class="form-group">
+								<label for="time">Time</label>
+								<input
+									type="time"
+									class="form-control"
+									id="time"
+									name="time"
+									[(ngModel)]="editingVisit.time"
+									required
+									ngModel
+								/>
+							</div>
+							<div class="modal-footer">
+								<button
+									type="button"
+									class="btn btn-secondary"
+									data-dismiss="modal"
+								>
+									Close
+								</button>
+								<button
+									type="button"
+									class="btn btn-primary"
+									data-dismiss="modal"
+									(click)="updateIndustryVisit()"
+									[disabled]="f5.invalid"
+								>
+									Update Industry Visit
+								</button>
+							</div>
+						</form>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<input
+			type="text"
+			class="form-control"
+			placeholder="Search by Company Name"
+			class="col-md-4"
+			[(ngModel)]="searchCompanyName"
+			(keyup.enter)="searchIndustryVisit()"
+		/>
+		<button
+			type="button"
+			class="btn btn-info lessSpace btn-sm"
+			(click)="searchIndustryVisit()"
+		>
+			<i class="fa fa-search" aria-hidden="true"></i> Search
+		</button>
+		<button
+			type="button"
+			class="btn btn-success space"
+			data-toggle="modal"
+			data-target="#exampleModal1"
+			aria-hidden="true"
+		>
+			<i class="fa fa-plus" aria-hidden="true"></i>
+			Add Industry Visit
+		</button>
+	</div>
+</div>
+<br />
+<div class="row center">
+	<div class="col-lg-8">
+		<ul class="nav nav-pills mb-3 nav-fill red" id="pane" role="tablist">
+			<li class="nav-item">
+				<a
+					class="nav-link active"
+					data-toggle="pill"
+					href="#Pending"
+					(click)="refreshPendingVisits(); changeTab1()"
+					>Pending</a
+				>
+			</li>
+			<li class="nav-item">
+				<a
+					class="nav-link"
+					data-toggle="pill"
+					href="#Upcomming"
+					(click)="refreshUpcommingVisits(); changeTab2()"
+					>Upcoming</a
+				>
+			</li>
+			<li class="nav-item">
+				<a
+					class="nav-link"
+					data-toggle="pill"
+					href="#Completed"
+					(click)="refreshCompletedVisits(); changeTab3()"
+					>Completed</a
+				>
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="tab-content" id="pane">
+	<div id="Pending" class="tab-pane active">
+		<div class="row">
+			<div class="col-lg-12">
+				<!-- <div class="table-responsive">
+					<table class="table table-striped">
+					</table>
+				</div> -->
+				<div
+					style="overflow: auto; height: 600px"
+					class="table-responsive"
+				>
+					<table class="table table-striped">
+						<thead>
+							<th></th>
+							<th>Date</th>
+							<th>Time</th>
+							<th>Company Name</th>
+							<th>Coordinator-1</th>
+							<th>Coordinator-2</th>
+							<th>Participants</th>
+							<th>Status</th>
+						</thead>
+						<tr
+							*ngFor="let visit of pendingVisits"
+						>
+								<button
+									type="button"
+									class="beautify1 btn btn-danger button"
+									(click)="
+										deleteIndustry(
+											visit.companyName,
+											visit.industryVisitId
+										)
+									"
+								>
+								<i class="fa fa-trash" aria-hidden="true"></i>
+									</button
+							>
+							<br>
+							<button
+							type="button"
+							class="beautify1 btn btn-warning button"
+							data-toggle="modal"
+							data-target="#exampleModal5"
+							(click)="editIndustryVisit(visit)">
+							<i
+								class="fa fa-pencil"
+								aria-hidden="true"
+							></i></button>
+
+							<td>
+								<strong>{{ visit.date | date }}</strong>
+							</td>
+							<td>{{ visit.time }}</td>
+							<td>{{ visit.companyName }}</td>
+							<td>{{ visit.coordinator1 }}</td>
+							<td>{{ visit.coordinator2 }}</td>
+							<td>{{ visit.participants }}</td>
+							<td>
+								<button
+									type="button"
+									class="btn btn-secondary btn-sm"
+									data-toggle="modal"
+									data-target="#exampleModal3"
+									(click)="
+										changeVisitStatus(
+											visit.companyName,
+											visit.industryVisitId
+										)
+									"
+								><i class="fa fa-bell" aria-hidden="true"></i>
+									Change Status
+								</button>
+								<!-- <div class="row">
+									<div class="col-xs-3">
+										<select
+											class="form-control"
+											name="status"
+											(change)="changeVisitStatus(visit.companyName,visit.industryVisitId)"
+										>
+											<option value="pending">
+												Pending
+											</option>
+											<option
+												value="upcoming"
+												data-toggle="modal"
+												data-target="#exampleModal3" 
+												aria-hidden="true"
+											>
+												Upcoming
+											</option>
+										</select>
+									</div>
+								</div> -->
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="Upcomming" class="tab-pane">
+		<div class="row">
+			<div class="col-lg-12">
+				<!-- <div class="table-responsive">
+					<table class="table table-striped">
+					</table>
+				</div> -->
+				<div
+					style="overflow: auto; height: 600px"
+					class="table-responsive"
+				>
+					<table class="table table-striped">
+						<thead>
+							<th></th>
+							<th>Date</th>
+							<th>Time</th>
+							<th>Company Name</th>
+							<th>Coordinator-1</th>
+							<th>Coordinator-2</th>
+							<th>Participants</th>
+							<th>Status</th>
+							<!-- <th>Invite to Students</th> -->
+						</thead>
+						<tr
+							*ngFor="let visit of upcomingVisits"
+						>
+								<button
+									type="button"
+									class="beautify1 btn btn-danger button"
+									(click)="
+										deleteIndustry(
+											visit.companyName,
+											visit.industryVisitId
+										)
+									"
+								>
+								<i class="fa fa-trash" aria-hidden="true"></i>
+									
+									</button
+							><br>
+							<button
+							type="button"
+							class="beautify1 btn btn-warning button"
+							data-toggle="modal"
+							data-target="#exampleModal5"
+							(click)="editIndustryVisit(visit)"
+						>
+							<i
+								class="fa fa-pencil"
+								aria-hidden="true"
+							></i></button>
+							<td>
+								<strong>{{ visit.date | date }}</strong>
+							</td>
+							<td>{{ visit.time }}</td>
+							<td>{{ visit.companyName }}</td>
+							<td>{{ visit.coordinator1 }}</td>
+							<td>{{ visit.coordinator2 }}</td>
+							<td>{{ visit.participants }}</td>
+							<td>
+								<button
+									type="button"
+									class="btn btn-secondary btn-sm"
+									data-toggle="modal"
+									data-target="#exampleModal4"
+									(click)="
+										changeVisitStatus(
+											visit.companyName,
+											visit.industryVisitId
+										)
+									"
+								><i class="fa fa-bell" aria-hidden="true"></i>
+									Change Status
+								</button>
+								<!-- <div class="row">
+									<div class="col-xs-3" id="year">
+										<select
+											class="form-control"
+											name="status"
+											(change)="
+												changeStatus(
+													visit.industryVisitId,
+													visit.companyName
+												)
+											"
+										>
+											<option value="upcoming">
+												Upcoming
+											</option>
+											<option value="completed">
+												Completed
+											</option>
+										</select>
+									</div>
+								</div> -->
+							</td>
+							<!-- <td>
+								<button
+									type="button"
+									class="btn btn-info btn-sm"
+									(click)="sendInvite()"
+								>
+									Notify
+								</button>
+							</td> -->
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="Completed" class="tab-pane">
+		<div class="row">
+			<div class="col-lg-12">
+				<!-- <div class="table-responsive">
+					<table class="table table-striped">
+						
+					</table>
+				</div> -->
+				<div
+					style="overflow: auto; height: 600px"
+					class="table-responsive"
+				>
+					<table class="table table-striped">
+						<thead>
+							<th>Date</th>
+							<th>Company Name</th>
+							<th>Participants</th>
+							<th>Coordinator-1</th>
+							<th>Coordinator-2</th>
+							<th>Details</th>
+						</thead>
+						<tr *ngFor="let visit of completedVisits">
+							<td>{{ visit.date | date }}</td>
+							<td>{{ visit.companyName }}</td>
+							<td>{{ visit.participants }}</td>
+							<td>{{ visit.coordinator1 }}</td>
+							<td>{{ visit.coordinator2 }}</td>
+
+							<td>
+								<button
+									type="button"
+									class="btn btn-primary btn-sm"
+									(click)="
+										getVisitDetails(visit.industryVisitId);viewPhotos(visit.industryVisitId);
+									"
+									data-toggle="modal"
+									data-target="#exampleModal2"
+									aria-hidden="true"
+								>
+								<i class="fa fa-book" aria-hidden="true"></i>
+									View Details
+								</button>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<!-- <button type="button" class="btn btn-success btn-sm wrapper">
+			View Summary
+		</button> -->
+	</div>
+	<div class="last"></div>
+</div>

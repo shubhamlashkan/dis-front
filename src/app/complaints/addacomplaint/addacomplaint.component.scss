@@ -1,0 +1,181 @@
+.top-buffer {
+    margin-top: 10px;
+  }
+
+  .icon {
+    font-size: 25px;
+    color: #1488CC;
+  }
+
+  .icon:hover {
+    color: #f46404;
+  }
+
+  .request-resources {
+    text-decoration: none;
+
+    color: #bfbfbf;
+  }
+
+  .request-resources:hover {
+    text-decoration: none;
+  }
+
+  .inline {
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  .ul-float-rigth {
+    text-align: right;
+  }
+
+  .add-complaint {
+    font-size: 18px;
+    text-decoration: none;
+    color: #0085cc;
+  }
+
+  .add-complaint:hover {
+    text-decoration: none;
+    color: #f46404;
+  }
+
+  .float {
+    float: right;
+  }
+
+  .complaint-meter {
+    text-decoration-line: none;
+    color: #1488CC;
+  }
+
+  .complaint-meter:hover {
+    text-decoration: none;
+    color: #f46404;
+  }
+
+  .model-head {
+    color: white;
+    background: #1488CC;
+  }
+
+  .button-Reset {
+    margin-bottom: 20px;
+  }
+
+  .pink-border {
+    border: 1px solid pink;
+  }
+
+  .form-actions {
+
+    background-color: transparent;
+    text-align: center;
+
+  }
+  .dropdown-pull-right {
+float: right !important;
+right: 0;
+left: auto;
+}
+
+.dropdown-pull-right>.dropdown-menu {
+right: 0;
+left: auto;
+}
+
+
+  .button-width {
+    width: 78px;
+  }
+
+  .btnClear {
+    display: inline-block;
+    vertical-align: top;
+
+  }
+
+  .link {
+    text-decoration: none;
+  }
+
+  .link:hover {
+    color: #f46404;
+  }
+
+  .inline-ul:li {
+    display: inline;
+  }
+
+  ul {
+    display: flex;
+    list-style: none;
+
+  }
+
+  .complaint-rem {
+    font-size: 17px;
+    color: #808080;
+  }
+
+  .complaint-rem:hover {
+    color: #58c365;
+  }
+ 
+.dropdown-menu {
+  background-color: #fff;
+  top: 95%;
+  -webkit-box-shadow: 0px 6px 16px 2px rgba(0,0,0,0.23);
+  -moz-box-shadow: 0px 6px 16px 2px rgba(0,0,0,0.23);
+  box-shadow: 0px 6px 16px 2px rgba(0,0,0,0.23);
+  border-top: 3px solid #ffbc00;
+  border-bottom:0px;
+  border-left:0px;
+  border-right:0px;
+  padding-left:5%;
+ 
+}
+.dropdown-menu a:hover {
+    color: #f46404;
+    background: none;
+}
+.dropdown-menu:before {
+  content: '';
+  color: #ffbc00;
+  font-family: 'fontAwesome';
+  right: 70%;
+  position: absolute;
+  top: -23px;
+  font-size: 24px;
+}
+.dropdown-toggle:after {
+    display: none;
+}
+
+.required-text{
+  color: #ed0221;
+  font-size: 12px;
+}
+.btnDesign{
+  border-radius: 5%;
+  outline: none;
+  width:100px;
+}
+.confirmationMessage{
+  padding : 1% 2% 1% 2%;
+  background-color: white;
+  border-radius: 6px;
+  transition : 0.3s;
+  font-size:14px;
+  
+}
+a.disabled {
+  color: gray;
+  cursor: not-allowed;
+  text-decoration: underline;
+}
+.btn{
+  border-radius: 12px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}

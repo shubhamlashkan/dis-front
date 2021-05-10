@@ -1,0 +1,76 @@
+<div class="bg"></div>
+<div class="login-pg">
+  <div class="signup-wrap">
+
+    <form class="login-html" (ngSubmit)="onSubmit()">
+      <div class="company-logo">
+        <img src="assets/images/logo.png" alt="" />
+        <div style="color:#1d98c5; padding-top:15px;">
+          <h4>Department of Computer Engineering</h4>
+        </div>
+      </div>
+
+      <div class="panel-headng">
+        <h4>Sign Up</h4>
+      </div>
+      <div class="login-form">
+
+        <div class="sign-up-htm">
+          <div class="group">
+            <label for="user" class="label">Enrollment Id
+              <span class="mandatory">*</span>
+            </label>
+            <input id="user" type="text" class="input" required [(ngModel)]="studentSignUp.enrollment_id" name="enrollment_id">
+          </div>
+          <div class="group">
+            <label for="pass" class="label">Password
+              <span class="mandatory">*</span>
+            </label>
+            <input id="pass" type="password" class="input" data-type="password" required [(ngModel)]="studentSignUp.password" name="password">
+          </div>
+          <div class="group">
+            <label for="cpass" class="label">Re-enter Password
+              <span class="mandatory">*</span>
+            </label>
+            <input id="cpass" type="password" class="input" data-type="password" required [(ngModel)]="studentSignUp.cnf_password" name="cnf_password">
+          </div>
+          <!--<div class="group">
+            <label for="date" class="label">Date of Birth</label>
+            <input type="date" id="exampleInput" name="input" ng-model="example.value" placeholder="MM/DD/YYYY" min="1980-01-01" max="2005-12-31"
+              required />
+          </div>-->
+          <div class="group">
+            <label for="mobile" class="label">Mobile No.
+              <span class="mandatory">*</span>
+            </label>
+            <input id="mobile" type="text" class="input" required [(ngModel)]="studentSignUp.mobile_no" name="mobile_no">
+          </div>
+          <!--<div class="group">
+            or
+          </div>-->
+          <div class="group">
+            <label for="email" class="label">Email Address
+              <span class="mandatory">*</span>
+            </label>
+            <input id="email" type="email" class="input" required [(ngModel)]="studentSignUp.email_add" name="email_add">
+            <!--<div ng-messages="form.email.$error">
+              <p ng-message="minlength">Password should have at least 6 characters.</p>
+              <p ng-message="maxlength">Password should have at most 12 characters.</p>
+              <p ng-message="required">Providing a password is mandatory.</p>
+            </div>-->
+          </div>
+          <div class="group">
+            <input type="submit" class="button login-button" value="Sign Up">
+          </div>
+          <div class="foot-lnk">
+            <a href=".">Already Member? Sign In</a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!--<div [hidden]="!submitted">
+  <h4>You submitted successfully!</h4>
+  <button class="btn btn-success" (click)="newStudentSignUp()">Add</button>
+</div>-->

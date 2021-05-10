@@ -1,0 +1,64 @@
+
+<div class="container">
+  <div class="row">
+ 
+    <div class="col-lg-3 profile-info">
+      <app-sidenavigation></app-sidenavigation>
+    </div>
+    
+     <div class="col-lg-9">
+      <nav class="navbar navbar-light bg-primary">
+        <span class="navbar-brand mb-0 h1 text-white" innerHTML=" {{quizDetails[0].quizName}}">
+          
+        </span>
+      </nav>
+      <div *ngFor="let q of quizDetails" class="quizs" id="{{q.slot}}">
+        <div class="quizs " >
+          <div class="row">
+           <div class="col-md-2">
+           <div class="quizs">
+            <p><b>Question {{q.slot}}</b></p>
+            <p> Marks <b> {{q.obtainedMarks}}</b> </p>
+            <p>Out Of  <b>{{q.maxMarks}}</b></p>
+           </div>
+           </div>
+           <div class="col-md">
+            
+             <p >  <b innerHTML="{{q.questionText}}"></b></p>
+              <ul class="list-group" >
+                
+                <li class="list-group-item "  *ngFor="let option of q.options"  >
+                  <div innerHTML="{{option}}"></div>
+                </li>
+                
+               
+               
+              </ul>
+              <br>
+              <ul class="list-group">
+                <li class="list-group-item "> <span> <b>Correct Answer </b></span>  : {{q.correctAnswer}}</li>
+                <li class="list-group-item "> <span> <b>Your Response </b></span>  : {{q.userResponse}}</li>
+                </ul>
+           </div>
+          </div>
+        </div>
+       
+      <br>
+      
+
+
+      </div>
+      <nav aria-label="Page navigation  example " class="sticky s">
+        <ul class="pagination justify-content-center">
+          <li *ngFor="let q of quizDetails" class="page-item  "><a class="page-link bg-primary text-white" href="{{currentRoute}}#{{q.slot}}">{{q.slot}}</a></li>
+        </ul>
+      </nav>
+<!--Middle Section finish-->
+    </div>
+</div>
+</div>
+
+
+
+<!-- ++++++++++++++++++old code++++++++++++++ -->
+  <!-- Start Main Panel-->

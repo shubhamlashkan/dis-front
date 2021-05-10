@@ -1,0 +1,86 @@
+<div class="container">
+    <div class="row">
+
+	<!--Start Left Panel-->
+      <div class="col-lg-3 profile-info">
+        <app-sidenavigation></app-sidenavigation>
+      </div>
+	  <!--End Left Panel-->
+
+
+      <!--Start Main Panel-->
+    <div class="col-lg-9 kyc-colm user-management">
+        <div class="kyc-section rewards-section reports-sectn">
+
+        <ul class="nav nav-tabs nav-fill">
+         
+		  <li class="nav-item" *ngFor="let course of courses;let i=index" (click)="getAssignments(i)">
+			  <a  class="nav-link active">{{course.courseName}}</a>
+		  </li>
+		  
+        </ul>
+		<!--End Right Panel-->
+		<div id="accordion" >
+
+		<!--Notification Panel starts-->
+		<div class="notifiactiion heading">
+		<br/>
+		<br/>
+			<h2>{{this.showCourse.code}}: {{this.showCourse.name}} </h2>
+			<hr/>
+		</div>
+		<div class="card">
+		<div class="card-header" id="headingOne">
+		<h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="text-decoration:none">
+          <h5>Pending Activities</h5>
+        </button>
+		</h5>
+		</div>
+
+		<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+		<div class="card-body">
+
+		<div *ngFor="let assign of assignments">
+			<div  class="alert alert-success row" *ngIf="!assign.submitted" >
+				<h4 class="col-8">{{assign.assignmentName}}</h4>		<h6 class="col-4">By:Prof {{assign.courseTeacherFirstName}} {{assign.courseTeacherLastName}}</h6>
+				<p class="col-8"> Date of Submission  : {{assign.dueDate}}</p>
+				<div class="col-4">
+					<p>grades: {{assign.gradeObtained}}/{{assign.gradeMaximum}}</p>
+				</div>
+			</div>
+		</div>
+		</div>
+		</div>
+		<div class="card">
+    <div class="card-header" id="headingThree">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="text-decoration:none">
+          <h5>Completed Activities</h5>
+        </button>
+      </h5>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+      <div class="card-body " *ngFor="let assign of assignments">
+		<div class="alert alert-success row m-0 " *ngIf="assign.submitted">
+			<h4 class="col-8">{{assign.assignmentName}}</h4>		<h6 class="col-4">By: Prof {{assign.courseTeacherFirstName}} {{assign.courseTeacherLastName}}</h6>
+			<p class="col-8"> Date of Submission  : {{assign.dateOfSubmission}}</p>
+			<div class="col-4">
+			<p>grades: {{assign.gradeObtained}}/{{assign.gradeMaximum}}</p>
+			</div>
+		</div>
+		</div>
+		<!--Notification Panel Ends-->
+        </div>
+        </div>
+      </div>
+
+	  <!--End Right Panel-->
+
+    </div>
+  </div>
+  <br>
+  <button (click)="getCSV()" class="btn btn-success">Export as csv</button>
+  <!--Middle Section finish-->
+</div>
+</div>

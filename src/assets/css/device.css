@@ -1,0 +1,301 @@
+@charset "utf-8";
+
+@media (min-width: 992px) {
+	
+	.navbar-expand-lg .navbar-nav .nav-link {
+	    padding-right: 10px;
+	    padding-left: 10px;
+		width: 90px;
+    text-align: center;
+	}
+}
+
+@media (max-width: 1600px) {
+	.index-pg .dashboard-panel .icon {	    
+	    text-align: center;
+	}
+	.index-pg .dashboard-panel .icon i {
+		float: none;
+	}
+	.index-pg .dashboard-panel .icon p {
+	    float: none;
+	    display: block;
+	    text-align: center;
+	    margin-bottom: 10px;
+	}
+	.index-pg .dashboard-panel .first .icon {	    
+	    padding: 10px 15px;	    
+	}
+	.index-pg .dashboard-panel .second .icon {	    
+	    padding: 15px 15px 5px;	    
+	}
+	.index-pg .dashboard-panel .third .icon {	    
+	    padding: 15px 15px 5px;	    
+	}
+	.index-pg .dashboard-panel .link {	    
+	    min-height: 61px;
+	}
+
+}
+
+
+@media (max-width: 1440px) {
+	.navbar-expand-lg .navbar-nav .nav-link {
+	    padding-right: 10px;
+	    padding-left: 10px;
+	}
+	.custom-col {
+		-webkit-box-flex: 0;
+	    -ms-flex: 0 0 33.333333%;
+	    flex: 0 0 33.333333%;
+	    max-width: 33.333333%;
+	}
+}
+
+@media (max-width: 1380px) {
+	.kyc-section .search-colm,
+	.kyc-section .radio-btns,
+	.kyc-section .other-options,
+	.kyc-section .search-btn {
+		max-width: 100%;
+	    flex: 100%;
+	    text-align: center;
+	}
+	.kyc-section .search-btn .action-btns {
+		margin: 10px;
+	}
+	.kyc-section .other-options .list-inline {
+	    text-align: center;
+	}
+	.index-pg .radio-btns {
+	    padding: 15px 15px 10px;
+	}	
+	.rih .search-colm {
+		text-align: left;
+	}
+}
+
+@media (max-width: 1320px) {
+	.navbar .nav-item.search-bar {
+	    margin-right: 0px;
+	}
+}
+
+@media (max-width: 1250px) {
+	.kyc-section .store-info .modal-lg .info-three img {
+	    max-width: 100px;
+	}
+	.orders-sectn .form-inline .input-daterange {
+		width: 100%;
+		margin-bottom: 10px;
+		margin-right: 0px;
+	}
+	.orders-sectn .form-inline .input-daterange .custom-label {
+	    margin-right: 10px;
+	    padding-top: 5px;
+	    width: 180px;
+	    display: block;
+	}
+	.orders-sectn .form-inline .input-daterange.col-lg-5 .custom-label {	    
+	    width: auto;	    
+	}
+	.orders-sectn .form-inline .btn,
+	.orders-sectn .form-inline .submit-btn {
+	    width: 100%;
+	}
+	.reward-points-section .date-select .input-daterange {
+	    width: 100%;
+	    margin-bottom: 15px;
+	    margin-right: 0px;
+	}
+	.reward-points-section .date-select .input-daterange .custom-label {
+	    width: 80px;
+	    justify-content: left;
+	}
+	.reward-points-section .date-select .submit-btn {
+	    margin: auto;
+	}
+	.rih .mt-3 {
+	    margin-bottom: 65px;
+	}
+	.brdcrumb.rewards-section .page-headng {
+		text-align: center;
+	}
+	.brdcrumb.rewards-section .page-headng h3,
+	.brdcrumb.rewards-section .page-headng ol {
+		float: none;
+		justify-content: center;
+		padding-top: 0px;
+	}
+}
+
+
+@media (max-width: 1024px) {
+
+
+}
+
+/*Tablets*/
+
+@media (max-width: 992px) {
+	.index-pg .updates {
+		margin-top: 30px;
+		margin-bottom: 30px;
+	}
+	.navbar-light .navbar-nav .nav-item {	    
+	    text-align: center;	    
+	}
+	.navbar-light .navbar-nav .nav-link {    
+	    
+	    display: inline-block;
+	}
+	.navbar-nav .nav-item.last {
+	    border-left: none;
+	}
+	.navbar .dropdown-menu:before {
+		display: none;
+	}
+	.navbar .dropdown-menu .dropdown-item {	    
+	    text-align: center;
+	}
+	.dropdown:hover>.dropdown-menu {
+	  display: inherit;
+	}
+	.index-pg .kyc-colm {
+		margin-top: 40px;
+	}
+	.custom-col {
+		-webkit-box-flex: 0;
+	    -ms-flex: 0 0 50%;
+	    flex: 0 0 50%;
+	    max-width: 50%;
+	}
+	.user-management .date-select .input-daterange {
+	    width: 96%;
+   	}
+   	.orders-sectn .radio-btn-sectn .custom-radio {
+		display: block;
+	}
+	.login-pg {
+	    margin: 5% 5px;	   
+	}
+}
+
+/*Medium Devices Smalller then tablet*/    
+@media (max-width: 768px) {
+	.index-pg .action-btns {
+	    margin-left: 0px;
+	    display: block;
+	    margin-top: 15px;
+	}
+	.kyc-section .store-info .modal-lg .info-three .doc-title {
+	    min-height: auto;
+	}
+	.user-management .table-responsive td a{
+		display: block;
+	    text-align: center;
+	    margin: 7px 0px;
+	    min-width: 110px;
+	}
+	.reward-points-section .points-section .points {
+	    max-width: 100%;
+	    width: 100%;
+	    display: inline-block;
+	    margin-right: 20px;
+	    margin-bottom: 15px;
+	}
+	.rih .page-headng {
+	    padding-bottom: 10px;
+	    text-align: center;
+	}	
+	.rih .page-headng h3 {
+	    float: none;
+	    margin-bottom: 0px;
+	}
+	.rih .page-headng a {
+	    float: none;
+	    padding-top: 0px;    
+	}
+}
+
+/**Smaller Devices**/
+@media (max-width: 575px) {
+	.index-pg .updates .feeds-content .retailer-details dt {
+	    float: none;	   
+	}
+	.kyc-section .store-info .modal-lg .info-three .doc-title {
+	    font-size: 15px;
+	    font-weight: 500;
+	    color: #848484;
+	    margin-bottom: 0px;
+	    margin-top: 20px;
+	}
+	.kyc-section .store-info .modal-lg .info-three .doc-headng {
+	    margin-bottom: 0px;
+	}
+	.kyc-section .store-info .modal-lg .info-three .row {
+	    margin-bottom: 30px;
+	}
+	.modal-dialog {
+	    margin: 1.75rem auto;
+	}
+	.custom-col {
+		-webkit-box-flex: 0;
+	    -ms-flex: 0 0 100%;
+	    flex: 0 0 100%;
+	    max-width: 100%;
+	}
+	.kyc-section .store-info .modal-lg .actn-btns .btn {
+	    margin: 5px;
+	}
+	.kyc-section.brdcrumb .page-headng h3 {
+	    float: none;
+	    text-align: center;
+	}
+	.kyc-section.brdcrumb .page-headng ol {
+	    float: none;
+	    justify-content: center;
+	}
+	.orders-sectn .form-inline .input-daterange .custom-label {	    
+	    width: 100%;	   
+	    margin-bottom: 5px;
+	}
+	.orders-sectn .date-select .input-group-addon {	    
+	    top: 40px;	    
+	}
+	.orders-sectn .form-inline .input-daterange.col-lg-5 .custom-label {
+	    width: 100%;
+	}
+}
+
+/**Mobile**/
+@media (max-width: 479px) {
+	
+.container {    
+    padding: 25px;
+}
+.login-html {
+    padding: 35px 30px 35px 30px;
+}
+.company-logo img {
+	max-width: 230px;
+}
+.login-wrap {
+    min-height: 725px;
+}
+.modules-pg .page-headng .clearfix {
+    text-align: center;
+    padding-bottom: 20px;
+}
+.modules-pg .page-headng .module-btn {
+    float: none;
+}
+.modules-pg .page-headng h3 {
+    float: none;
+}
+}
+
+@media (max-width: 375px) {
+	
+}
+
