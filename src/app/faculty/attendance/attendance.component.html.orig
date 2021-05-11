@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 <!-- Tooltip -->
 <link href="../../../assets/css/tooltip.css" rel="stylesheet" type="text/css" />
 <script src="js/tooltip.js" type="text/javascript"></script>
@@ -12,6 +14,7 @@
 <!--grid script-->
 <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
 <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+>>>>>>> Sonal
 <div class="container">
   <div class="row">
     <div class="col-lg-12 kyc-colm user-management">
@@ -26,6 +29,63 @@
                   <div id='calendar'>
                     <app-calendar></app-calendar>
                   </div>
+<<<<<<< HEAD
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-lg-5">
+                  <!-- <select class="form-control">
+                    <option>Select Month</option>
+                    <option>January</option>
+                    <option>February</option>
+                    <option>March</option>
+                    <option>April</option>
+                    <option>May</option>
+                    <option>June</option>
+                    <option>July</option>
+                    <option>August</option>
+                    <option>September</option>
+                    <option>October</option>
+                    <option>November</option>
+                    <option>December</option>
+                  </select> -->
+                  <div class="leave-box row">
+                    <div class="col-7">
+                      <p>Total Leave</p>
+                      <p>CL left</p>
+                      <p>Total PL</p>
+                      <p>PL left</p>
+                    </div>
+                    <div class="col-3">
+                      <p>:</p>
+                      <p>:</p>
+                      <p>:</p>
+                      <p>:</p>
+                    </div>
+                    <div class="col-2">
+                      <p>9</p>
+                      <p>3</p>
+                      <p>8</p>
+                      <p>6</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-7 pieChart">
+                  <h5 style="color:#1488CC">Attendance</h5>
+                  <div class="row">
+
+                    <div class="col-lg-12">
+                        <canvas id="pieChart" width="300" height="300"></canvas>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+
+=======
                   <br>
                   <div class="col page-headng" style="width:150%;">
                     <h3>My Leave Account</h3>
@@ -57,6 +117,7 @@
                   </div>
                 </div>
               </div>
+>>>>>>> Sonal
             </div>
           </div>
           <!--End Left Panel-->
@@ -133,7 +194,11 @@
                 
                     </select> 
                   </div> 
+<<<<<<< HEAD
+                  
+=======
       
+>>>>>>> Sonal
                   
                   <br>
   
@@ -165,7 +230,11 @@
   
                     <!-- Material inline 3 -->
                     <div class="form-check col-lg-4">
+<<<<<<< HEAD
+                      <input type="radio" value="Full" class="form-check-input" ngModel  id="materialInline3" name="fromDuration">
+=======
                       <input type="radio" value="full" class="form-check-input" ngModel  id="materialInline3" name="fromDuration">
+>>>>>>> Sonal
                       <label class="form-check-label" for="materialInline3">Full Day</label>
                     </div>
                   </div>
@@ -174,25 +243,52 @@
                   <div class="row" style="margin-left:1%;">
                     <!-- Material inline 1 -->
                     <div class="form-check col-lg-4">
+<<<<<<< HEAD
+                      <input type="radio" ngModel   class="form-check-input" id="materialInline1" name="toDuration" value="First Half">
+=======
                       <input type="radio" ngModel   class="form-check-input" id="toDurationFirstHalf" name="toDuration" value="First Half">
+>>>>>>> Sonal
                       <label class="form-check-label" for="materialInline1">First Half</label>
                     </div>
   
                     <!-- Material inline 2 -->
                     <div class="form-check col-lg-4">
+<<<<<<< HEAD
+                      <input type="radio" value="Second Half" class="form-check-input" ngModel id="materialInline2" name="toDuration">
+=======
                       <input type="radio" value="Second Half" class="form-check-input" ngModel id="toDurationSecondHalf" name="toDuration">
+>>>>>>> Sonal
                       <label class="form-check-label" for="materialInline2">Second Half</label>
                     </div>
   
                     <!-- Material inline 3 -->
                     <div class="form-check col-lg-4">
+<<<<<<< HEAD
+                      <input type="radio" value="Full" class="form-check-input" ngModel  id="materialInline3" name="toDuration">
+=======
                       <input type="radio" value="full" class="form-check-input" ngModel  id="toDurationFull" name="toDuration">
+>>>>>>> Sonal
                       <label class="form-check-label" for="materialInline3">Full Day</label>
                     </div>
                   </div>
                   <br>
                   <label class="control-label" for="considerHolidays">Consider public holidays as Leaves</label>
                   <div class="row" style="margin-left:1%;">
+<<<<<<< HEAD
+                    <!-- Material inline 1 -->
+                    <div class="form-check col-lg-4">
+                      <input type="radio" ngModel   class="form-check-input" id="materialInline1" name="considerHolidays" value="true">
+                      <label class="form-check-label" for="materialInline1">Yes</label>
+                    </div>
+  
+                    <!-- Material inline 2 -->
+                    <div class="form-check col-lg-4">
+                      <input type="radio" value="false" class="form-check-input" ngModel id="materialInline2" name="considerHolidays">
+                      <label class="form-check-label" for="materialInline2">No</label>
+                    </div>
+  
+                    <!-- Material inline 3 -->
+=======
                     
                     <div class="form-check col-lg-4">
                       <input type="radio" ngModel   class="form-check-input" id="considerHolidays0" name="considerHolidays" value="true">
@@ -206,6 +302,7 @@
                     </div>
   
                     
+>>>>>>> Sonal
                     
                   </div>
                   
@@ -233,6 +330,21 @@
               </div>
               <div class="tab-pane fade " id="sectionB" role="tabpane1" aria-labelledby="sectionB-tab">
                 <div class="">
+<<<<<<< HEAD
+                  <div class="alert alert-success row">
+                    <h3 *ngIf="leaveRequests.length!=0">Requests</h3>
+                    <div *ngFor="let req of leaveRequests">
+            
+                      <div class="alert alert-success row al">
+                          <p class="col-7">Reason: {{req.reason}}</p>
+                          <p class="col-7"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> Date From: {{req.from}} To: {{req.to}}</p>
+                          <p class="col-5">Status: {{req.status}}</p>
+                          <br>
+                          <p class="col-2"><button type="button" class="btn btn-success"  data-toggle="modal"
+                            data-target="#addInfra"
+                            title="Add an Infrastructure"
+                            aria-hidden="true" >Cancel</button></p>
+=======
                   
                   <div>
                     <h3 *ngIf="myLeaveRequests.length!=0">Requests</h3>
@@ -272,6 +384,7 @@
                         
                             </div>
                           
+>>>>>>> Sonal
 
                           <div
                             class="modal fade"
@@ -282,14 +395,23 @@
                             aria-hidden="true"
                           >
                           
+<<<<<<< HEAD
+                          <form  (ngSubmit)="Cancel(req)" #f="ngForm">
+=======
                           <form  (ngSubmit)="cancel()" #f="ngForm">
+>>>>>>> Sonal
                             <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
                               <div class="modal-content">
                                 <div class=""  *ngIf="showconfirmationCancel">
                                           
                                   <p class="alert alert-success">
+<<<<<<< HEAD
+                                      <strong>Leaves Canclled</strong> 
+      
+=======
                                       <strong>Leaves Caneclled</strong> 
   
+>>>>>>> Sonal
                                   </p>
                                 
                                 </div>
@@ -302,7 +424,10 @@
                                     class="close"
                                     data-dismiss="modal"
                                     aria-label="Close"
+<<<<<<< HEAD
+=======
                                     (click)="ngOnInit()"
+>>>>>>> Sonal
                                   >
                                     <span aria-hidden="true">&times;</span>
                                   </button>
@@ -311,7 +436,11 @@
                                   <h6>Do you want to cancel this leave request</h6>
                                 </div>
                                 <div class="modal-footer">
+<<<<<<< HEAD
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">
+=======
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="ngOnInit()">
+>>>>>>> Sonal
                                     No
                                   </button>
                                   <button type="submit" class="btn btn-primary " >
@@ -325,6 +454,13 @@
                             </div>
                           </form>
                           </div>
+<<<<<<< HEAD
+                          <div  class =""  *ngIf="req.status === 'approved'">
+                            <p class="col-2"><button type="button" class="btn btn-danger" data-toggle="modal"
+                              data-target="#Rejoin"
+                              title="Rejoin"
+                              aria-hidden="true" >Rejoin</button></p>
+=======
                           <!-- <div  *ngIf="req.status === 'approved'">
                             <p class="col-2"><button type="button" class="btn btn-danger"  data-toggle="modal"
                               data-target="#cancelAfterapprove"
@@ -385,6 +521,7 @@
                               title="Rejoin"
                               aria-hidden="true"
                               (click)="getLeaveRequest(req.leaveId)">Rejoin</button></p>
+>>>>>>> Sonal
                           </div>
                           
                       
@@ -418,12 +555,32 @@
                                 class="close"
                                 data-dismiss="modal"
                                 aria-label="Close"
+<<<<<<< HEAD
+=======
                                 (click)="ngOnInit()"
+>>>>>>> Sonal
                               >
                                 <span aria-hidden="true">&times;</span>
                               </button>
                             </div>
                             <div class="modal-body">
+<<<<<<< HEAD
+                              <div class="input-group mb-1">
+
+                                <div class="input-group-prepend">
+                                  <div class="col-lg-6">
+                                    <label for="To">Rejoining : </label>
+                                    <input type="date" name="to" ngModel style="margin-left:2%;">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                Close
+                              </button>
+                              <button type="submit" class="btn btn-primary " >
+=======
                               <label for="To">Rejoining : </label>
                                     <input type="date" name="rejoinTo" ngModel style="margin-left:2%;">
                               <br>
@@ -450,6 +607,7 @@
                                 Close
                               </button>
                               <button type="submit" class="btn btn-primary">
+>>>>>>> Sonal
                                 Submit
                               </button>
                             </div>
@@ -460,8 +618,11 @@
                       </div>
 
                   </div>
+<<<<<<< HEAD
+=======
                   </div>
                    
+>>>>>>> Sonal
                 </div>
               </div>
               </div>
@@ -474,4 +635,7 @@
     <!--End Right Panel-->
   </div>
 </div>
+<<<<<<< HEAD
+=======
 </div>
+>>>>>>> Sonal

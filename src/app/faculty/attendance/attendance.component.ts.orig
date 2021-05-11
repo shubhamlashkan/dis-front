@@ -1,9 +1,16 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
+<<<<<<< HEAD
+import { PiechartComponent } from 'src/app/miscellaneous/piechart/piechart.component';
+=======
+>>>>>>> Sonal
 import {NgForm, Validators,FormControl,FormGroup} from "@angular/forms";
 import {LeaveRequest} from "src/app/Model/leaveRequest.model";
 import {LeaveService} from 'src/app/API_Service/leave.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+<<<<<<< HEAD
+=======
 import { ToastrManager } from 'ng6-toastr-notifications';
+>>>>>>> Sonal
 
 
 
@@ -19,6 +26,24 @@ export class AttendanceComponent implements OnInit {
   @ViewChild("f") addLeave:NgForm;
   @ViewChild("rejoin") ReJoin:NgForm;
   @ViewChild("f") cancelLeave:NgForm;
+<<<<<<< HEAD
+
+  userName:String
+  leave_type:any[]=[];
+  request:LeaveRequest;
+  approved=false;
+  bar=[];
+  leaveRequests:any[]=[];
+  showconfirmationCancel:boolean=false;
+  showconfirmationRejoin: boolean=false;
+  showMsg: boolean = false;
+  showDateError=false;
+  showNullError=false;
+  showPastDateError=false;
+  showCreditError=false;
+
+  constructor(public chart: PiechartComponent,private leaveService:LeaveService) { }
+=======
   // @ViewChild("cancelAfterApprove") cancelAfterApproved:NgForm;
 
   userName:string
@@ -36,10 +61,16 @@ export class AttendanceComponent implements OnInit {
 
 
   constructor(private leaveService:LeaveService,public toastr: ToastrManager) { }
+>>>>>>> Sonal
 
   ngOnInit() {
 
       this.userName = sessionStorage.getItem('authenticaterUser');
+<<<<<<< HEAD
+      console.log(this.userName)
+
+      this.bar = this.chart.getPieChart('pieChart');
+=======
       this.leaveId=0;
       
       this.leaveService.getMyLeaveRequests(this.userName).subscribe(data=>{
@@ -48,6 +79,7 @@ export class AttendanceComponent implements OnInit {
         
       });
       
+>>>>>>> Sonal
       this.leaveService.getLeave().subscribe(data=>{
         console.log(data);
         this.leave_type=data;
@@ -55,6 +87,19 @@ export class AttendanceComponent implements OnInit {
       });
       console.log(this.leave_type);
 
+<<<<<<< HEAD
+      this.leaveService.getRequests().subscribe(data=>{
+        console.log(data);
+        this.leaveRequests=data;
+        
+      });
+      console.log(this.leaveRequests);
+    }
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+    }
+=======
       this.leaveService.getMyLeaveAccount().subscribe(data=>{
         // console.log(data.annual);
         this.myLeaveAccount=data;
@@ -78,6 +123,7 @@ export class AttendanceComponent implements OnInit {
   delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
   }
+>>>>>>> Sonal
 
   onSubmit(){
     var curDate=new Date().toLocaleDateString();
@@ -86,6 +132,16 @@ export class AttendanceComponent implements OnInit {
     let toDate: Date = new Date(this.addLeave.value.to); 
     var tDate= toDate.toLocaleDateString();
     
+<<<<<<< HEAD
+  
+    console.log(fDate);
+    console.log(this.addLeave.value.to)
+    console.log(this.addLeave.value.from)
+    console.log(this.addLeave.value.leaveType)
+    console.log(this.addLeave.value.reason)
+    
+=======
+>>>>>>> Sonal
     if(this.addLeave.value.leaveType==null){
       this.showNullError=true;
       this.delay(3000).then(any=>{
@@ -126,6 +182,10 @@ export class AttendanceComponent implements OnInit {
    this.addLeave.reset();
 
     }
+<<<<<<< HEAD
+
+=======
+>>>>>>> Sonal
     else{
     this.request=new LeaveRequest();
    
@@ -139,6 +199,35 @@ export class AttendanceComponent implements OnInit {
     this.request.suffix=this.addLeave.value.to;
     this.request.details=this.addLeave.value.reason;
     this.request.status="pending";
+<<<<<<< HEAD
+    this.leaveService.addRequest(this.request);
+    
+    this.showMsg= true;
+    this.addLeave.reset();
+    this.delay(3000).then(any=>{
+      this.showMsg= false;})
+    console.log(this.request)
+    }
+    
+   }
+   getRequests(){
+     return this.leaveRequests;
+   }
+   onReset(){
+    this.addLeave.reset();
+   }
+   
+   Rejoin(req: LeaveRequest){
+     req.toDate=this.ReJoin.value.to 
+     this.showconfirmationRejoin= true;
+   }
+   
+   Cancel(req:LeaveRequest){
+  
+    this.request.status="canceled";
+     this.leaveService.deleteRequest(req);
+     this.showconfirmationCancel= true;
+=======
     console.log(this.request)
     this.leaveService.addRequest(this.request);
     
@@ -169,5 +258,6 @@ export class AttendanceComponent implements OnInit {
     var data={leaveId:this.leaveId,status:"cancelled"}
     this.leaveService.UpdateStatus(data)
     this.toastr.successToastr('Leaves Cancelled', 'Success!');
+>>>>>>> Sonal
   }
 }

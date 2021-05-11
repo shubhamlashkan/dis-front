@@ -29,7 +29,10 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import {MatSelectModule} from '@angular/material/select';
 import {ReactiveFormsModule} from '@angular/forms';
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> Sonal
 @NgModule({
   imports: [
     CommonModule,

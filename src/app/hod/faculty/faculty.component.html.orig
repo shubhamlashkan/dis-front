@@ -90,6 +90,9 @@
     </div>
   </div>
 </div>
+<<<<<<< HEAD
+<div class="container">
+=======
 
 <!-- <div class="modal fade my-modal2" id="myModal2" role="dialog">
   <div class="modal-dialog">
@@ -150,6 +153,7 @@
 </div> --> 
 <div class="container">
 
+>>>>>>> Sonal
   <ul class="nav nav-pills nav-fill">
     <input type="text" placeholder="Search.." name="search" style="width:700px;" (keyup)= "getStaffDataByName($event.target.value)">
     <li class="nav-item">
@@ -161,7 +165,11 @@
         aria-selected="true">Staff</a>
     </li>
     <li class="nav-item">
+<<<<<<< HEAD
       <a class="nav-link pl-2" id="sectionC-tab" data-toggle="pill" href="#sectionC" role="tab" aria-controls="sectionC-tab"
+=======
+      <a class="nav-link pl-2" id="sectionB-tab" data-toggle="pill" href="#sectionC" role="tab" aria-controls="sectionB"
+>>>>>>> Sonal
         aria-selected="true">Add Member</a>
     </li>
     <li class="nav-item">
@@ -170,7 +178,10 @@
     </li>
 
   </ul>
+<<<<<<< HEAD
+=======
   <hr />
+>>>>>>> Sonal
 
   <div class="tab-content ">
     <div class="tab-pane fade show active" id="sectionA" role="tabpane1" aria-labelledby="sectionA-tab">
@@ -307,7 +318,11 @@
     </div>
 
 
+<<<<<<< HEAD
+    <div class="tab-pane fade " id="sectionB" role="tabpane1" aria-labelledby="sectionB-tab">
+=======
        <div class="tab-pane fade " id="sectionB" role="tabpane1" aria-labelledby="sectionB-tab">
+>>>>>>> Sonal
       <div class="row" *ngIf = "!searchedRecord" >
         <div class="col-lg-3 col-sm-6" *ngFor='let f of sData' >
 
@@ -394,7 +409,8 @@
       </div>
     </div>   
 
-     <div class="tab-pane fade" id="sectionC" role="tabpane1" aria-labelledby="sectionB-tab">
+<<<<<<< HEAD
+     <div class="tab-pane fade" id="sectionC" role="tabpane1" aria-labelledby="sectionC-tab">
       <div class="col-lg-12 kyc-colm user-management kyc-section rewards-section reports-sectn">
         <!-- START -->
         <div class="col-lg-6" >
@@ -435,6 +451,10 @@
           </div>
         <br>
         <!-- END -->
+=======
+     <div class="tab-pane fade" id="sectionC" role="tabpane1" aria-labelledby="sectionB-tab">
+      <div class="col-lg-12 kyc-colm user-management kyc-section rewards-section reports-sectn">
+>>>>>>> Sonal
         <form #f = "ngForm">
           <div id="add-member" ngModelGroup="addMemberData">
             <div class="form-group">
@@ -575,8 +595,11 @@
       </ul>
 
       <div class="tab-content" id="pills-tabContent">
+<<<<<<< HEAD
+=======
        
 
+>>>>>>> Sonal
           <div class="tab-pane fade show active" id="sectionY" role="tabpane1" aria-labelledby="sectionY-tab">
             <div class="col-lg-12 kyc-colm user-management kyc-section rewards-section reports-sectn">
               <div class="kyc-section rewards-section reports-sectn">
@@ -606,24 +629,49 @@
                                         <td>Subject Code</td>
                                         <td>Subject Name</td>
                                         <td>Faculty</td>
+<<<<<<< HEAD
+                                        <td>Update</td>
+                                        <td>Delete</td>
+                              </tr>
+=======
                                         <td>Year</td>
                                         <td>Update</td>
                                         <td>Delete</td>   
                                         
                                       </tr>
+>>>>>>> Sonal
                             </thead>
               
                                     <tbody  *ngFor="let req of theorypanel;let i=index;">
                                       <tr class="table-success">
+<<<<<<< HEAD
+                                        <td>{{req.course}}</td>
+                                        <td>{{req.subjectCode}}</td>
+                                        <td>{{req.subjectName}}</td>
+                                        <td>{{req.faculties}}</td>
+=======
                               <td>{{req.course}}</td>
                                         <td>{{req.subjectCode}}</td>
                                         <td>{{req.subjectName}}</td>
                                         <td>{{req.faculties}}</td>
                                         <td>{{req.year}}</td>
+>>>>>>> Sonal
                                        
                                         <td><button type="button" class="btn btn-success" data-toggle="modal"
                                           data-target="#Rejoin"
                                           title="Update Panel"
+<<<<<<< HEAD
+                                          aria-hidden="true" >Update</button>
+                                          <div
+                                            class="modal fade"
+                                            id="Rejoin"
+                                            tabindex="-1"
+                                            role="dialog"
+                                            aria-labelledby="RejoinLabel"
+                                            aria-hidden="true"
+                                          >
+                              <form  (ngSubmit)="UpdateTheory(req)" #updateT="ngForm">
+=======
                                           aria-hidden="true" (click)="getPanelOfTheory(req.subjectCode,req.year,req.faculties,req.subjectName,req.course)" >Update</button>
                                           <div
                               class="modal fade"
@@ -634,6 +682,7 @@
                               aria-hidden="true"
                             >
                               <form  (ngSubmit)="UpdateTheory()" #updateT="ngForm">
+>>>>>>> Sonal
                                 <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
                                   <div class="modal-content">
                                     <div class=""  *ngIf="showconfirmationRejoinT">
@@ -653,7 +702,10 @@
                                         class="close"
                                         data-dismiss="modal"
                                         aria-label="Close"
+<<<<<<< HEAD
+=======
                                         (click)="ngOnInit()"
+>>>>>>> Sonal
                                       >
                                         <span aria-hidden="true">&times;</span>
                                       </button>
@@ -665,7 +717,11 @@
                                           <div>
                                             <div>
                                               <label for="course">Course:</label>
+<<<<<<< HEAD
+                                              <select id="course" ngModel="Select" name="course" class="form-control" >
+=======
                                               <select id="course" ngModel="{{course}}" name="course" class="form-control" placehold >
+>>>>>>> Sonal
                                           
                                                 <option>Under Graduate</option>
                                                 <option>Post graduate</option>
@@ -674,20 +730,34 @@
                                             
                                             <br>
                                             <div>
+<<<<<<< HEAD
+                                              <label  class="control-label" for="subject">Subject Code</label>
+                                              <input type="text" ngModel class="form-control" id="subjectcode" placeholder="Enter Subject Code" name="subjectcode" required>
+=======
                                               <label  class="control-label" for="subjectCode">Subject Code</label>
                                               <input type="text" ngModel="{{subjectCode}}" class="form-control" id="subjectcode"  name="subjectcode" required>
+>>>>>>> Sonal
                                             </div>
                             
                                             <br>
                                             <div>
+<<<<<<< HEAD
+                                              <label  class="control-label" for="subject">Subject Name</label>
+                                              <input type="text" ngModel class="form-control" id="subjectname" placeholder="Enter Subject Name" name="subjectname" required>
+=======
                                               <label  class="control-label" for="subjectName">Subject Name</label>
                                               <input type="text" ngModel="{{subjectName}}" class="form-control" id="subjectname"  name="subjectname" required>
+>>>>>>> Sonal
                                             </div>
                                             <br>
                                             <mat-form-field appearance="fill">
                                               <mat-label>Select Faculty</mat-label>
                       
+<<<<<<< HEAD
+                                              <mat-select ngModel="Select" multiple class="form-control" id="select_faculty" name="faculty">
+=======
                                               <mat-select ngModel multiple class="form-control" id="select_faculty" name="faculties">
+>>>>>>> Sonal
                                                 
                                                 <mat-option *ngFor="let staff of staffs" [value]="staff.name">
                                                   {{staff.name}}
@@ -702,10 +772,17 @@
                                       </div>
                                     </div>
                                     <div class="modal-footer">
+<<<<<<< HEAD
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                        Close
+                                      </button>
+                                      <button type="submit" class="btn btn-primary " >
+=======
                                       <button type="button" class="btn btn-secondary" (click)="ngOnInit()" data-dismiss="modal">
                                         Close
                                       </button>
                                       <button type="submit" class="btn btn-primary " (click)="UpdateTheory()"  data-dismiss="modal">
+>>>>>>> Sonal
                                         Submit
                                       </button>
                                     </div>
@@ -718,8 +795,12 @@
                                         <td><button type="button" class="btn btn-danger"  data-toggle="modal"
                                           data-target="#addInfra"
                                           title="Delete Panel"
+<<<<<<< HEAD
+                                          aria-hidden="true" >delete</button>
+=======
                                           aria-hidden="true" 
                                           (click)="getPanelOfTheory(req.subjectCode,req.year,req.faculties,req.subjectName,req.course)">delete</button>
+>>>>>>> Sonal
                                           <div
                                           class="modal fade"
                                           id="addInfra"
@@ -729,6 +810,22 @@
                                           aria-hidden="true"
                                         >
                                         
+<<<<<<< HEAD
+                                        <form  (ngSubmit)="CancelTheory(req)" #f="ngForm">
+                                          <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+                                            <div class="modal-content">
+                                              <div class=""  *ngIf="showconfirmationCancelT">
+                                                        
+                                                <p class="alert alert-success">
+                                                    <strong>Request Cancelled</strong> 
+                    
+                                                </p>
+                                              
+                                              </div>
+                                              <div class="modal-header">
+                                                <h5 class="modal-title text-center" id="cancelleave">
+                                                  Cancel Panel Request
+=======
                                         <form  (ngSubmit)="deletePanelofTheory()" #f="ngForm">
                                           <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
                                             <div class="modal-content">
@@ -736,18 +833,31 @@
                                               <div class="modal-header">
                                                 <h5 class="modal-title text-center" id="cancelleave">
                                                   Delete Panel
+>>>>>>> Sonal
                                                 </h5>
                                                 <button
                                                   type="button"
                                                   class="close"
                                                   data-dismiss="modal"
                                                   aria-label="Close"
+<<<<<<< HEAD
+=======
                                                   (click)="ngOnInit()"
+>>>>>>> Sonal
                                                 >
                                                   <span aria-hidden="true">&times;</span>
                                                 </button>
                                               </div>
                                               <div class="modal-body">
+<<<<<<< HEAD
+                                                <h6>Do you want to cancel this request</h6>
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                  No
+                                                </button>
+                                                <button type="submit" class="btn btn-primary " >
+=======
                                                 <h6>Do you want to delete this panel</h6>
                                               </div>
                                               <div class="modal-footer">
@@ -755,6 +865,7 @@
                                                   No
                                                 </button>
                                                 <button type="submit" class="btn btn-primary " (click)="deletePanelofTheory()" data-dismiss="modal" >
+>>>>>>> Sonal
                                                   Yes
                                                 </button>
                                               </div>
@@ -782,6 +893,20 @@
                   </div>
 
                   <div id="main" class="col-lg-12">
+<<<<<<< HEAD
+                    <div class=""  *ngIf="showPanelMsg">
+                                                
+                      <p class="alert alert-success">
+                          <strong>Panel Successfully added</strong> 
+      
+                      </p>
+                    
+                    </div>
+                    <form (ngSubmit)="onTheoryPanelSubmit()" #tpanel="ngForm">
+                  
+                      <div>
+                        <label for="course">Course:</label>
+=======
                   
                     <form (ngSubmit)="onTheoryPanelSubmit()" #tpanel="ngForm">
                       <div class=""  *ngIf="showNullError">
@@ -794,6 +919,7 @@
                     </div>
                       <div>
                         <label for="course"><span class="mandatory">*</span>Course:</label>
+>>>>>>> Sonal
                         <select id="course" ngModel="Select" name="course" class="form-control" >
                     
                           <option>Under Graduate</option>
@@ -803,12 +929,26 @@
                       
                       <br>
                       <div>
+<<<<<<< HEAD
+                        <label  class="control-label" for="subject">Subject Code</label>
+=======
                         <label  class="control-label" for="subject"><span class="mandatory">*</span>Subject Code</label>
+>>>>>>> Sonal
                         <input type="text" ngModel class="form-control" id="subjectcode" placeholder="Enter Subject Code" name="subjectcode" required>
                       </div>
       
                       <br>
                       <div>
+<<<<<<< HEAD
+                        <label  class="control-label" for="subject">Subject Name</label>
+                        <input type="text" ngModel class="form-control" id="subjectname" placeholder="Enter Subject Name" name="subjectname" required>
+                      </div>
+                      <br>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Select Faculty</mat-label>
+
+                        <mat-select ngModel="Select"  multiple ngModel="Select" class="form-control" id="select_faculty" name="faculty">
+=======
                         <label  class="control-label" for="subject"><span class="mandatory">*</span>Subject Name</label>
                         <input type="text" ngModel class="form-control" id="subjectname" placeholder="Enter Subject Name" name="subjectname" required>
                       </div>
@@ -819,6 +959,7 @@
                         <mat-label><span class="mandatory">*</span>Select Faculty</mat-label>
 
                         <mat-select ngModel="Select"  multiple  class="form-control" id="select_faculty" name="faculty">
+>>>>>>> Sonal
                           
                           <mat-option *ngFor="let staff of staffs" [value]="staff.name">
                             {{staff.name}}
@@ -827,11 +968,21 @@
                         </mat-select>
                       </mat-form-field>
                      
+<<<<<<< HEAD
+                    
+                      
+                      <br>
+                      <div class="form-actions row text-center ">
+                        <div class="col-lg-6 col-md-4">
+                          <button type="button" (click)="onReset()" class="btn btn-primary button-width float-right">Reset</button>
+                        </div>
+=======
                      
                       
                       <br>
                       <div class="form-actions row text-center ">
                         
+>>>>>>> Sonal
                         <div class="col-lg-6 col-md-4">
                           <button type="submit"  class="btn btn-success button-width float-left">Proceed</button>
                         </div>
@@ -854,10 +1005,24 @@
             </div>
             
             <br>
-            </div>
+<<<<<<< HEAD
+         
+            
+
+           
+           
+            
+
+          </div>
 
           
           <div class="tab-pane fade " id="sectionZ" role="tabpane1" aria-labelledby="sectionZ-tab">
+=======
+            </div>
+
+          
+          <!-- <div class="tab-pane fade " id="sectionZ" role="tabpane1" aria-labelledby="sectionZ-tab">
+>>>>>>> Sonal
             <div class="col-lg-12 kyc-colm user-management kyc-section rewards-section reports-sectn">
               <div class="kyc-section rewards-section reports-sectn">
                 <div>
@@ -868,12 +1033,18 @@
                   <hr/>
                   <div class="row">
                  
+<<<<<<< HEAD
+                  <div id = "view practical panel" style="display: none;">
+                      <div style="margin-bottom: 10px">
+                        <!-- <h5 class="modal-title" id="exampleModalLabel">Panel</h5> -->
+=======
         
         
         
                   <div id = "view practical panel" style="display: none;">
                       <div style="margin-bottom: 10px">
-                        <!-- <h5 class="modal-title" id="exampleModalLabel">Panel</h5> -->
+                       
+>>>>>>> Sonal
                       </div>
                       <div>
                         <h3 *ngIf="practicalpanel.length!=0 ">Panel of Practical</h3>
@@ -882,11 +1053,17 @@
                             <thead>
                               <br>
                               <tr style="background-color:rgb(166, 168, 177); font-weight : bold; ">
-                              <td>Course</td>
+<<<<<<< HEAD
                                         <td>Subject Code</td>
                                         <td>Subject Name</td>
                                         <td>Faculty 1</td>
                                         <td>Faculty 2</td>
+=======
+                              <td>Course</td>
+                                        <td>Subject Code</td>
+                                        <td>Subject Name</td>
+                                        <td>Faculty</td>
+>>>>>>> Sonal
                                         <td>External</td>
                                         <td>labassistant</td>
                                         <td>labtechnician</td>
@@ -897,6 +1074,7 @@
               
                                     <tbody  *ngFor="let preq of practicalpanel">
                                       <tr class="table-success">
+<<<<<<< HEAD
                                         <td>{{preq.subjectCode}}</td>
                                         <td>{{preq.subjectName}}</td>
                                         <td>{{preq.internalFaculty1}}</td>
@@ -909,6 +1087,23 @@
                                           title="Update Panel"
                                           aria-hidden="true"  (click)="getId(preq.id)">Update</button>
                               <div
+=======
+                              <td>{{preq.course}}</td>
+                                        <td>{{preq.subjectcode}}</td>
+                                        <td>{{preq.subjectname}}</td>
+                                        <td>{{preq.faculty}}</td>
+                                        <td>{{preq.external}}</td>
+                                        <td>{{preq.labassistant}}</td>
+                                        <td>{{preq.labtechnician}}</td>
+                                        
+
+                                       
+                                        <td><button type="button" class="btn btn-success" data-toggle="modal"
+                                          data-target="#Rejoin"
+                                          title="Update Panel"
+                                          aria-hidden="true" >Update</button>
+                                          <div
+>>>>>>> Sonal
                               class="modal fade"
                               id="Rejoin"
                               tabindex="-1"
@@ -916,6 +1111,7 @@
                               aria-labelledby="RejoinLabel"
                               aria-hidden="true"
                             >
+<<<<<<< HEAD
                               <form  (ngSubmit)="UpdatePractical()" #updateP="ngForm">
                                 <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
                                   <div class="modal-content">
@@ -923,6 +1119,23 @@
                                       <h5 class="modal-title text-center" id="addInfraLabel">
                                         Update Faculty
                                       </h5> 
+=======
+                              <form  (ngSubmit)="UpdatePractical(preq)" #updateP="ngForm">
+                                <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+                                  <div class="modal-content">
+                                    <div class=""  *ngIf="showconfirmationRejoinP">
+                                                  
+                                      <p class="alert alert-success">
+                                          <strong>The Field has been Successfully Updated..!</strong> 
+              
+                                      </p>
+                                    
+                                    </div>
+                                    <div class="modal-header">
+                                      <h5 class="modal-title text-center" id="addInfraLabel">
+                                        Update Faculty
+                                      </h5>
+>>>>>>> Sonal
                                       <button
                                         type="button"
                                         class="close"
@@ -935,6 +1148,7 @@
                                     <div class="modal-body">
                                       <div >
                                         <div>
+<<<<<<< HEAD
                                           <div>
                                             <label  class="control-label" for="subject">Subject Code</label>
                                             <input type="text" ngModel  [(ngModel)]="preq.subjectCode" class="form-control" id="subjectcode" placeholder="Enter Subject Code" name="subjectcode" required>
@@ -1012,6 +1226,35 @@
                     
                                             </mat-select>
                                           </mat-form-field>
+=======
+                                          <div >
+                                            <label for="To">Faculty </label>
+                                              <ng-multiselect-dropdown ngModel="Select" class="form-control" id="select_faculty" name="faculty" required
+                                                  [placeholder]="'select faculty'"
+                                                  [data]="dropdownList"
+                                                  [(ngModel)]="selectedItems"
+                                                  [settings]="dropdownSettings"
+                                                  (onSelect)="onItemSelect($event)"
+                                                  (onSelectAll)="onSelectAll($event)"
+                                                >
+                                              </ng-multiselect-dropdown>
+                                          </div>
+                                          <br>
+                                          <div>
+                                            <label  class="control-label" for="subject">External</label>
+                                            <input type="text" ngModel class="form-control" id="external" placeholder="Enter External Name" name="external" required>
+                                          </div>
+                                          <br>
+                                          <div>
+                                            <label  class="control-label" for="subject">Lab Technician</label>
+                                            <input type="text" ngModel class="form-control" id="labtechnician" placeholder="Enter Technician Name" name="labtechnician" required>
+                                          </div>
+                                          <br>
+                                          <div>
+                                            <label  class="control-label" for="subject">Lab Assistant</label>
+                                            <input type="text" ngModel class="form-control" id="labAssistant" placeholder="Enter Assistant Name" name="labassistant" required>
+                                          </div>
+>>>>>>> Sonal
                                           <br>
                                         </div>
                                       </div>
@@ -1028,6 +1271,7 @@
                                   </div>
                                 </div>
                               </form>
+<<<<<<< HEAD
                               </div> 
                                        </td>
                                         <td><button type="button" class="btn btn-danger"  data-toggle="modal"
@@ -1037,15 +1281,40 @@
                                           <div
                                           class="modal fade"
                                           id="delete"
+=======
+                              </div>
+                                        </td>
+                                        <td><button type="button" class="btn btn-danger"  data-toggle="modal"
+                                          data-target="#addInfra"
+                                          title="Delete Panel"
+                                          aria-hidden="true" >delete</button>
+                                          <div
+                                          class="modal fade"
+                                          id="addInfra"
+>>>>>>> Sonal
                                           tabindex="-1"
                                           role="dialog"
                                           aria-labelledby="cancelleave"
                                           aria-hidden="true"
                                         >
                                         
+<<<<<<< HEAD
                                         <form  (ngSubmit)="CancelPractical()" #f="ngForm">
                                           <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
                                             <div class="modal-content">
+=======
+                                        <form  (ngSubmit)="CancelPractical(req)" #f="ngForm">
+                                          <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+                                            <div class="modal-content">
+                                              <div class=""  *ngIf="showconfirmationCancelP">
+                                                        
+                                                <p class="alert alert-success">
+                                                    <strong>Request Cancelled</strong> 
+                    
+                                                </p>
+                                              
+                                              </div>
+>>>>>>> Sonal
                                               <div class="modal-header">
                                                 <h5 class="modal-title text-center" id="cancelleave">
                                                   Cancel Panel Request
@@ -1055,16 +1324,26 @@
                                                   class="close"
                                                   data-dismiss="modal"
                                                   aria-label="Close"
+<<<<<<< HEAD
                                                   (click)="ngOnInit()"
+=======
+>>>>>>> Sonal
                                                 >
                                                   <span aria-hidden="true">&times;</span>
                                                 </button>
                                               </div>
                                               <div class="modal-body">
+<<<<<<< HEAD
                                                 <h6>Do you want to remove this request</h6>
                                               </div>
                                               <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="ngOnInit()">
+=======
+                                                <h6>Do you want to cancel this request</h6>
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+>>>>>>> Sonal
                                                   No
                                                 </button>
                                                 <button type="submit" class="btn btn-primary " >
@@ -1075,7 +1354,16 @@
                                           </div>
                                         </form>
                                         </div>
+<<<<<<< HEAD
                                         </td>
+=======
+              
+                    
+                                        </td>
+              
+                
+                              
+>>>>>>> Sonal
                                       </tr>
                                       
                          
@@ -1090,6 +1378,7 @@
                   </div>
 
                   <div id="practical main" class="col-lg-12 ">
+<<<<<<< HEAD
                           <button type="button" class="btn btn-success" data-toggle="modal"
                                           data-target="#exampleModal1"
                                           title=""
@@ -1099,6 +1388,10 @@
                                           title=""
                                           aria-hidden="true" >Update External</button>
                     <div class=""  *ngIf="showPanelMsg">              
+=======
+                    <div class=""  *ngIf="showPanelMsg">
+                                                
+>>>>>>> Sonal
                       <p class="alert alert-success">
                           <strong>Panel Successfully added</strong> 
       
@@ -1128,6 +1421,7 @@
                         <input type="text" ngModel class="form-control" id="subjectname" placeholder="Enter Subject Name" name="subjectname" required>
                       </div>
                       <br>
+<<<<<<< HEAD
                       
                       <mat-form-field appearance="fill">
                         <mat-label  class="control-label" for="subject">Select Internal Faculty 1</mat-label>
@@ -1197,6 +1491,37 @@
 
                         </mat-select>
                       </mat-form-field>
+=======
+                      <div>
+                        <label for="select faculty">Select Internal Faculty </label>
+                        <ng-multiselect-dropdown ngModel="Select" class="form-control" id="select_faculty" name="faculty" required
+                          [placeholder]="'select faculty'"
+                          [data]="dropdownList"
+                          [(ngModel)]="selectedItems"
+                          [settings]="dropdownSettings"
+                          (onSelect)="onItemSelect($event)"
+                          (onSelectAll)="onSelectAll($event)"
+        
+                        >
+                      </ng-multiselect-dropdown>
+                      </div>
+                      <br>
+                      <div>
+                        <label  class="control-label" for="subject">External</label>
+                        <input type="text" ngModel class="form-control" id="external" placeholder="Enter External Name" name="external" required>
+                      </div>
+                      <br>
+                      <div>
+                        <label  class="control-label" for="subject">Lab Technician</label>
+                        <input type="text" ngModel class="form-control" id="labtechnician" placeholder="Enter Technician Name" name="labtechnician" required>
+                      </div>
+                      <br>
+                      <div>
+                        <label  class="control-label" for="subject">Lab Assistant</label>
+                        <input type="text" ngModel class="form-control" id="labAssistant" placeholder="Enter Assistant Name" name="labassistant" required>
+                      </div>
+                      
+>>>>>>> Sonal
                     
                       
                       <br>
@@ -1233,7 +1558,11 @@
            
             
 
+<<<<<<< HEAD
           </div>
+=======
+          </div> -->
+>>>>>>> Sonal
 
           
 
@@ -1245,6 +1574,7 @@
 
   </div> 
 
+<<<<<<< HEAD
   <!--END grid script-->
 
 <div class="row center">
@@ -1570,3 +1900,6 @@
       </div>
   </div>
 </div>
+=======
+  <!--END grid script-->
+>>>>>>> Sonal

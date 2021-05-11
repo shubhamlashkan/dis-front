@@ -1,0 +1,606 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-xs-12 kyc-colm user-management">
+            <div class="kyc-section rewards-section reports-sectn">
+                <div class="nav flex-column nav-pills" id="tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link active" id="recents-tab" data-toggle="pill" href="#pills-recents" role="tab"
+                        aria-controls="pills-recents" aria-selected="true">Recents</a><br>
+                    <a class="nav-link" id="circular-tab" data-toggle="pill" href="#pills-circular" role="tab"
+                        aria-controls="pills-circular" aria-selected="false">Circular</a><br>
+                    <a class="nav-link" id="schedules-tab" data-toggle="pill" href="#pills-schedules" role="tab"
+                        aria-controls="pills-schedules" aria-selected="false">Schedules</a><br>
+<<<<<<< HEAD
+                    <a class="nav-link" id="scheme-tab" data-toggle="pill" href="#pills-scheme" role="tab" aria-controls="pills-scheme"
+                        aria-selected="false">Scheme and Syllabus</a><br>
+=======
+>>>>>>> Sonal
+                    <a class="nav-link" id="semtt-tab" data-toggle="pill" href="#pills-semtt" role="tab" aria-controls="pills-semtt"
+                        aria-selected="false">Semester Time Table</a><br>
+                    <a class="nav-link" id="accel-tab" data-toggle="pill" href="#pills-accel" role="tab" aria-controls="pills-accel"
+                        aria-selected="false">Academic Calender</a><br>
+                    <a class="nav-link" id="other-tab" data-toggle="pill" href="#pills-other" role="tab" aria-controls="pills-other"
+                        aria-selected="false">Others</a><br>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-6 col-xs-12 kyc-colm user-management">
+            <div class="kyc-section rewards-section reports-sectn">
+                <div class="tab-content" id="tabContent">
+                    <div class="tab-pane fade show active" id="pills-recents" role="tabpanel" aria-labelledby="recents-tab">
+
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <h4 class="text-left page-headng">Recents</h4>
+                                <hr>
+                            </div>
+                            <div class="col-lg-4">
+                                <ul class="searchbox float-right">
+                                    <li class="">
+                                        <input class="form-control mr-sm-2 searchbox-width" type="search" placeholder="Search"
+                                            aria-label="Search">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="alert alert-success row al">
+                            <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                            <p class="col-7">July-Dec Examination Schedule</p>
+                            <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> 12/07/2018</p>
+                            <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                    preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                        </div>
+                        <div class="alert alert-success row al">
+                            <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                            <p class="col-7">Circular<br>Re: Circular was changed.</p>
+                            <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> 13/09/2108</p>
+                            <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                    preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                        </div>
+                        <div class="alert alert-success row al">
+                            <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                            <p class="col-7">Mid term tests 1 Time table</p>
+                            <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> 19/02/2108</p>
+                            <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                    preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                        </div>
+                        <div class="alert alert-success row al">
+                            <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                            <p class="col-7">Quiz 1 Time table</p>
+                            <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> 17/12/2017</p>
+                            <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                    preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                        </div>
+                        <div class="alert alert-success row al">
+                            <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                            <p class="col-7">Academic Calender July-Dec</p>
+                            <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> 16/08/2018</p>
+                            <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                    preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                        </div>
+                        <div class="alert alert-success row al">
+                            <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                            <p class="col-7">July-Dec Examination Schedule</p>
+                            <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> 12/07/2018</p>
+                            <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                    preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                        </div>
+                        <div class="alert alert-success row al">
+                            <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                            <p class="col-7">Circular<br>Re: Circular was changed.</p>
+                            <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> 13/09/2108</p>
+                            <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                    preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                        </div>
+
+                    </div>
+                    <div class="tab-pane fade" id="pills-circular" role="tabpanel" aria-labelledby="circular-tab">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <h4 class="text-left page-headng">Circular</h4>
+                                <hr>
+                            </div>
+                            <div class="col-lg-4">
+                                <ul class="searchbox float-right">
+                                    <li class="">
+                                        <input class="form-control mr-sm-2 searchbox-width" type="search" placeholder="Search"
+                                            aria-label="Search">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="alert alert-success row al">
+                            <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                            <p class="col-7">Circular:1</p>
+                            <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> 12/07/2018</p>
+                            <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                    preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                        </div>
+                        <div class="alert alert-success row al">
+                            <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                            <p class="col-7">Circular:2<br>Re: Circular was changed.</p>
+                            <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> 13/09/2108</p>
+                            <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                    preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                        </div>
+                        <div class="alert alert-success row al">
+                            <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                            <p class="col-7">Circular:3</p>
+                            <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> 19/02/2108</p>
+                            <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                    preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                        </div>
+                        <div class="alert alert-success row al">
+                            <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                            <p class="col-7">Circular:4</p>
+                            <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> 17/12/2017</p>
+                            <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                    preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                        </div>
+                        <div class="alert alert-success row al">
+                            <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                            <p class="col-7">Circular:5</p>
+                            <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> 16/08/2018</p>
+                            <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                    preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-schedules" role="tabpanel" aria-labelledby="schedules-tab">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <h4 class="text-left page-headng">Schedules</h4>
+                                <hr>
+                            </div>
+                            <div class="col-lg-4">
+                                <ul class="searchbox float-right">
+                                    <li class="">
+                                        <input class="form-control mr-sm-2 searchbox-width" type="search" placeholder="Search"
+                                            aria-label="Search">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <h5 style="background-color:grey; height:50px; padding-left:50px; padding-top:8px; color:white">Quiz
+                            Time Table</h5>
+                        <div class="alert alert-success row al">
+                            <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                            <p class="col-7">Quiz 3 Schedule</p>
+                            <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> 12/07/2018</p>
+                            <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                    preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                        </div>
+                        <div class="alert alert-success row al">
+                            <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                            <p class="col-7">Quiz 2 Schedule</p>
+                            <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> 13/09/2108</p>
+                            <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                    preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                        </div>
+                        <div class="alert alert-success row al">
+                            <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                            <p class="col-7">Quiz 1 Schedule</p>
+                            <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> 19/02/2108</p>
+                            <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                    preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                        </div>
+
+                        <h5 style="background-color:grey; height:50px; padding-left:50px; padding-top:8px; color:white">Midterm
+                            Time Table</h5>
+
+                        <div class="alert alert-success row al">
+                            <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                            <p class="col-7">Mid term tests 1 Time table</p>
+                            <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> 19/02/2108</p>
+                            <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                    preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                        </div>
+                    </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> Sonal
+                    <div class="tab-pane fade" id="pills-semtt" role="tabpanel" aria-labelledby="semtt-tab">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <h4 class="text-left page-headng">Semester time table</h4>
+                                <hr>
+                            </div>
+                            <div class="col-lg-4">
+                                <ul class="searchbox float-right">
+                                    <li class="">
+                                        <input class="form-control mr-sm-2 searchbox-width" type="search" placeholder="Search"
+                                            aria-label="Search">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="accordion" id="tt">
+                            <div class="card">
+                                <div class="card-header text-white" style="background-color: gray " id="headingOne">
+                                    <h5 data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                                        aria-controls="collapseOne">
+                                        BE II YEAR
+                                    </h5>
+                                </div>
+
+                                <div id="collapseOne" class="collapse show pt-3" aria-labelledby="headingOne"
+                                    data-parent="tt">
+                                    <div class="card-body alert alert-success row al">
+                                        <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                                        <p class="col-7">BE II Time table</p>
+                                        <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>
+                                            19/02/2108</p>
+                                        <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                                preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header text-white" style="background-color: gray " id="headingTwo">
+                                    <h5 data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+                                        aria-controls="collapseTwo">
+                                        BE III YEAR
+                                    </h5>
+                                </div>
+
+                                <div id="collapseTwo" class="collapse show pt-3" aria-labelledby="headingTwo"
+                                    data-parent="tt">
+                                    <div class="card-body alert alert-success row al">
+                                        <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                                        <p class="col-7">BE III Time table</p>
+                                        <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>
+                                            19/02/2108</p>
+                                        <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                                preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header text-white" style="background-color: gray " id="headingThree">
+                                    <h5 data-toggle="collapse" data-target="#collapseThree" aria-expanded="true"
+                                        aria-controls="collapseThree">
+                                        BE IV YEAR
+                                    </h5>
+                                </div>
+
+                                <div id="collapseThree" class="collapse show pt-3" aria-labelledby="headingThree"
+                                    data-parent="tt">
+                                    <div class="card-body alert alert-success row al">
+                                        <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                                        <p class="col-7">BE IV Time table</p>
+                                        <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>
+                                            19/02/2108</p>
+                                        <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                                preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header text-white" style="background-color: gray " id="heading4">
+                                    <h5 data-toggle="collapse" data-target="#collapse4" aria-expanded="true"
+                                        aria-controls="collapse4">
+                                        PG I YEAR
+                                    </h5>
+                                </div>
+
+                                <div id="collapse4" class="collapse show pt-3" aria-labelledby="heading4" data-parent="tt">
+                                    <div class="card-body alert alert-success row al">
+                                        <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                                        <p class="col-7">PG I Time table</p>
+                                        <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>
+                                            19/02/2108</p>
+                                        <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                                preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header text-white" style="background-color: gray " id="heading5">
+                                    <h5 data-toggle="collapse" data-target="#collapse5" aria-expanded="true"
+                                        aria-controls="collapse5">
+                                        BE II YEAR
+                                    </h5>
+                                </div>
+
+                                <div id="collapse5" class="collapse show pt-3" aria-labelledby="heading5" data-parent="tt">
+                                    <div class="card-body alert alert-success row al">
+                                        <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                                        <p class="col-7">PG II Time table</p>
+                                        <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>
+                                            19/02/2108</p>
+                                        <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                                preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="tab-pane fade" id="pills-accel" role="tabpanel" aria-labelledby="accel-tab">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <h4 class="text-left page-headng">Academic Calender</h4>
+                                <hr>
+                            </div>
+                            <div class="col-lg-4">
+                                <ul class="searchbox float-right">
+                                    <li class="">
+                                        <input class="form-control mr-sm-2 searchbox-width" type="search" placeholder="Search"
+                                            aria-label="Search">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <h5 style="background-color:grey; height:50px; padding-left:50px; padding-top:8px; color:white">Academic
+                            Session 2018-2019</h5>
+                        <div class="alert alert-success row al">
+                            <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                            <p class="col-7">Semester July'18-Dec'18</p>
+                            <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> 12/07/2018</p>
+                            <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                    preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                        </div>
+                        <div class="alert alert-success row al">
+                            <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                            <p class="col-7">Semester Dec'18-May'19</p>
+                            <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> 13/12/2108</p>
+                            <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                    preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                        </div>
+
+                        <h5 style="background-color:grey; height:50px; padding-left:50px; padding-top:8px; color:white">Academic
+                            Session 2017-2018</h5>
+
+                        <div class="alert alert-success row al">
+                            <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                            <p class="col-7">Semester July'17-Dec'17</p>
+                            <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> 20/07/2107</p>
+                            <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                    preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                        </div>
+                        <div class="alert alert-success row al">
+                            <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                            <p class="col-7">Semester Dec'17-May'18</p>
+                            <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> 19/12/2107</p>
+                            <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                    preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                        </div>
+
+                    </div>
+                    <div class="tab-pane fade" id="pills-other" role="tabpanel" aria-labelledby="other-tab">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <h4 class="text-left page-headng">Others</h4>
+                                <hr>
+                            </div>
+                            <div class="col-lg-4">
+                                <ul class="searchbox float-right">
+                                    <li class="">
+                                        <input class="form-control mr-sm-2 searchbox-width" type="search" placeholder="Search"
+                                            aria-label="Search">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="alert alert-success row al">
+                            <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                            <p class="col-7">Scheme and Syllabus</p>
+                            <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> 12/07/2018</p>
+                            <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                    preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                        </div>
+                        <div class="alert alert-success row al">
+                            <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                            <p class="col-7">Circular<br>Re: Circular was changed.</p>
+                            <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> 13/09/2108</p>
+                            <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                    preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                        </div>
+                        <div class="alert alert-success row al">
+                            <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                            <p class="col-7">Mid term tests 1 Time table</p>
+                            <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> 19/02/2108</p>
+                            <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                    preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                        </div>
+                        <div class="alert alert-success row al">
+                            <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                            <p class="col-7">Quiz 1 Time table</p>
+                            <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> 17/12/2017</p>
+                            <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                    preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                        </div>
+                        <div class="alert alert-success row al">
+                            <i class="col-1 fa fa-file icon fa-fw" style="float: left;" aria-hidden="true"></i>
+                            <p class="col-7">Academic Calender July-Dec</p>
+                            <p class="col-2"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> 16/08/2018</p>
+                            <p class="col-2"><a href=""><i class="fa fa-eye fa-fw" aria-hidden="true fa-fw"></i>
+                                    preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
+                        </div>
+
+                    </div>
+<<<<<<< HEAD
+                    <div class="tab-pane fade" id="pills-scheme" role="tabpanel" aria-labelledby="scheme-tab">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <h4 class="text-left page-headng">Scheme/Syllabus</h4>
+                                <hr>
+                            </div>
+                            <div class="col-lg-4">
+                                    <button type="button" class="btn btn-primary  " data-toggle="modal" data-target=".my-modal">Add Scheme/Syllabus</button>
+                            </div>
+                            <div class="modal fade my-modal" id="myModal" role="dialog">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title ">Add</h3>
+                                            <button type="button" class="close" (click)="ngOnInit()" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form (ngSubmit)="onSubmit()" #addSyllabus="ngForm">
+                                            <div>
+                                                <div >
+                                                  <h6 class="heading">Select</h6>  
+                                                  <select id="Title" class="dropdown-primary form-control" name="Title"  required ngModel >
+                                                        <option value="Syllabus">Syllabus</option>
+                                                        <option value="Scheme">Scheme</option>
+                                                  </select> 
+                                                </div>
+                                                <div >
+                                                    <h6 class="heading">Select Course</h6>
+                                                    <select id="Course"  name="course" class="dropdown-primary form-control" required  ngModel>
+                                                        <option value="UnderGraduate">UnderGraduate</option>
+                                                        <option value="PostGraduate">PostGraduate</option>
+                                                    </select>
+                                                </div>
+                                                <div >
+                                                    <h6 class="heading">Select Semester</h6>
+                                                    <select id="Name"  name="semester" class="dropdown-primary form-control" required ngModel>
+                                                        <option value="First">First</option>
+                                                        <option value="Second">Second</option>
+                                                        <option value="Third">Third</option>
+                                                        <option value="Fourth">Fourth</option>
+                                                        <option value="Fourth">Fifth</option>
+                                                        <option value="Fourth">Sixth</option>
+                                                        <option value="Fourth">Seventh</option>
+                                                        <option value="Fourth">Eight</option>
+                                                    </select>
+                                                </div>
+                                                <br>
+                                                
+                                                <div>
+                                                        <label for="file">Choose File</label>
+                                                        <input type="file"
+                                                            id="file"
+                                                            name='file'
+                                                            (change)="handleFileInput($event.target.files)">
+                                                </div>
+                                                <br>
+                                                <div class="form-actions row text-center ">
+                                                        <div class="col-lg-6 col-md-4">
+                                                            <button type="button" (click)="onReset()" class="btn btn-primary button-width float-right">Reset</button>
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-4">
+                                                            <button type="submit"   class="btn btn-success button-width float-left">Proceed</button>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </form>         
+                                    </div>  
+                                      <!-- hhghb -->
+                                </div> 
+                            </div>
+                            </div>
+                    </div>
+                        
+
+                        <!-- SYLLABUS -->
+                        <div class="card">
+                            <div class="card-header text-white row" style="background-color: gray " id="headingOne">
+                                <h5 data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                                    aria-controls="collapseOne">
+                                    SYLLABUS
+                                </h5>
+                            </div>
+                            <div class="alert alert-success row " *ngFor="let req of syllabus_file">
+                                <p class="col-5">File Name: {{req.fileName}}</p>
+                                <p class="col-4">Course: {{req.course}} <br>
+                                Semester: {{req.semester}} </p>
+                                <p class="col-2"><a href="{{baseUrl}}/syllabus/download/{{req.fileName}}"><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i></a><br>Download</p>
+                                <p class="col-1">
+                                    <button class="btn btn-danger" data-toggle="modal" 
+                                    (click)="getTask(req)" data-target="#taskRemoveSyllabus">Remove</button>
+                                </p>   
+                            </div>
+                            <div class="modal fade" id="taskRemoveSyllabus" tabindex="-1" role="dialog" aria-labelledby="taskRemoveSyllabus"aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="taskRemoveSyllabus">Remove Syllabus</h5>
+                                      <button type="button" (click)="ngOnInit()" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-row">
+                                          <div class="col-7">
+                                            <h4>Are you sure you want to remove Syllabus ?</h4>
+                                          </div>
+                                          <div class="col-2">
+                                            <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth" data-dismiss="modal">Cancel</button>
+                                          </div>
+                                          <div class="col-2">
+                                            <button type="submit" (click)="removeSyllabus()" data-dismiss="modal" class="btn btn-primary btnWidth">Remove </button>
+                                          </div>
+                                          
+                                        </div>
+                                      
+                                    </div>
+                              
+                                  </div>
+                                </div>
+                            </div>
+
+                         </div>
+
+                        <!-- SCHEME -->
+                        <div class="card">
+                            <div class="card-header text-white row" style="background-color: gray " id="headingOne">
+                                <h5 data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                                    aria-controls="collapseOne">
+                                    SCHEME
+                                </h5>
+                            </div>
+                            <div class="alert alert-success row" *ngFor="let req of scheme_file">
+                                <p class="col-5">File Name: {{req.fileName}}</p>
+                                <p class="col-4">Course: {{req.course}} <br>
+                                Semester: {{req.semester}} </p>
+                                <p class="col-2"><a href="{{baseUrl}}/scheme/download/{{req.fileName}}"><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i></a><br>Download</p>
+                                <p class="col-1">
+                                    <button class="btn btn-danger" data-toggle="modal" 
+                                    (click)="getTask(req)" data-target="#taskRemoveScheme">Remove</button>
+                                </p>
+                            </div>
+                            <div class="modal fade" id="taskRemoveScheme" tabindex="-1" role="dialog" aria-labelledby="taskRemoveScheme"aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="taskRemoveScheme">Remove Scheme</h5>
+                                      <button type="button" (click)="ngOnInit()" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-row">
+                                          <div class="col-7">
+                                            <h4>Are you sure you want to remove scheme ?</h4>
+                                          </div>
+                                          <div class="col-2">
+                                            <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth" data-dismiss="modal">Cancel</button>
+                                          </div>
+                                          <div class="col-2">
+                                            <button type="submit" (click)="removeScheme()" data-dismiss="modal" class="btn btn-primary btnWidth">Remove </button>
+                                          </div>
+                                          
+                                        </div>
+                                      
+                                    </div>
+                              
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+=======
+>>>>>>> Sonal
+                </div>
+            </div>
+        </div>
+    </div>
+<<<<<<< HEAD
+</div>
+
+
+=======
+</div>
+>>>>>>> Sonal

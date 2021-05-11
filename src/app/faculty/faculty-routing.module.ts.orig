@@ -20,8 +20,13 @@ import { RouteGuardService } from '../route-guard.service';
 import { FacultyModule } from './faculty.module';
 import { HomeComponent } from './home/home.component';
 import { AlertsComponent } from './alerts/alerts.component';
+<<<<<<< HEAD
 import { StudentsComponent } from './students/students.component';
 canActivate:[RouteGuardService]
+=======
+
+//canActivate:[RouteGuardService],
+>>>>>>> Sonal
 const routes: Routes = [
   {
     path : 'faculty',
@@ -40,6 +45,11 @@ const routes: Routes = [
         component: AboutComponent,
         loadChildren: () => AboutModule
       },
+<<<<<<< HEAD
+
+      
+=======
+>>>>>>> Sonal
       {
         path: 'infrastructure',
         component: InfrastructureOutletComponent,
@@ -73,15 +83,31 @@ const routes: Routes = [
         component : TimetableComponent, 
         loadChildren:() => ConventionalModule
       },
+<<<<<<< HEAD
+      // {
+      //   path : 'student',
+      //   component : StudentComponent,
+      //   loadChildren:()  => HodModule
+      // },
       {
         path : 'students',
         component : StudentsComponent,
         
+=======
+      {
+        path : 'students',
+        component : StudentComponent,
+        loadChildren:()  => HodModule
+>>>>>>> Sonal
       },
       {
         path: 'notification',
         component : AlertsComponent, 
+<<<<<<< HEAD
+      },
+=======
       }
+>>>>>>> Sonal
       
      ]
   }
@@ -91,4 +117,8 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
+<<<<<<< HEAD
 export class FacultyRoutingModule { }
+=======
+export class FacultyRoutingModule { }
+>>>>>>> Sonal

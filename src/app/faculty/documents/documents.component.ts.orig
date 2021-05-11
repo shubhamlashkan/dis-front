@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { HttpClient } from '@angular/common/http';
@@ -6,12 +7,17 @@ import {FileUploadService} from 'src/app/API_Service/scheme.service';
 import {SchemeSyllabus} from "src/app/Model/Scheme.model";
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { apiSetting } from 'src/app/urls/apisetting';
+=======
+import { Component, OnInit } from '@angular/core';
+
+>>>>>>> Sonal
 @Component({
   selector: 'app-documents',
   templateUrl: './documents.component.html',
   styleUrls: ['./documents.component.scss']
 })
 export class DocumentsComponent implements OnInit {
+<<<<<<< HEAD
   shortLink: string = "";
   // loading: boolean = false; // Flag variable
   // file: File = null; // Variable to store file
@@ -142,3 +148,12 @@ export class DocumentsComponent implements OnInit {
   }
 
 }
+=======
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+>>>>>>> Sonal

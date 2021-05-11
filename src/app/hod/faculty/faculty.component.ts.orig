@@ -4,6 +4,7 @@ import { FacultyDataService } from './faculty-data.service';
 import { AdministrationService } from 'src/app/API_Service/administration.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import {PanelOfTheoryService} from 'src/app/API_Service/panel.service';
+<<<<<<< HEAD
 import {PanelOfPracticalService} from 'src/app/API_Service/panel.service';
 import {NgForm,Validators,FormControl,FormGroup, FormBuilder} from "@angular/forms";
 import { facultyEnroll } from 'src/app/Model/facultyEnroll.model';
@@ -14,6 +15,15 @@ import {staffList } from 'src/app/hod/administration/administrationModel';
 import {MatSelectModule} from '@angular/material/select';
 import { MatOption } from '@angular/material';
 import { apiSetting } from 'src/app/urls/apisetting';
+=======
+import {NgForm} from "@angular/forms";
+import { facultyEnroll } from 'src/app/Model/facultyEnroll.model';
+import {FacultyService} from 'src/app/API_Service/facultyEnroll.service';
+import { PanelOfTheory } from 'src/app/Model/panelOfTheory.model';
+import {staffList } from 'src/app/hod/administration/administrationModel';
+import {MatSelectModule} from '@angular/material/select';
+import { MatOption } from '@angular/material';
+>>>>>>> Sonal
 
 
 @Component({
@@ -25,22 +35,26 @@ export class FacultyComponent implements OnInit {
 
   //Forms Declared
   @ViewChild('f') addMemberForm : NgForm;
+<<<<<<< HEAD
+=======
   @ViewChild("f") addFaculty:NgForm;
   @ViewChild("tpanel") addTheoryPanel:NgForm;
-  @ViewChild("ppanel") addPracticalPanel:NgForm;
   @ViewChild("updateT") updateTheory:NgForm;
-  @ViewChild("updateP") ReJoinP:NgForm;
-  @ViewChild("addSyllabus") addSyllabus:NgForm;
-  @ViewChild("f1") addEx:NgForm;
-  @ViewChild("f2") updateEx:NgForm;
   
+>>>>>>> Sonal
   //Variable declared to send and receive data from API's
   Member: addMember;
   responseAdd: string;
   errormsg : string;
-  searchedRecord : boolean; 
+  searchedRecord : boolean;
+<<<<<<< HEAD
+
+  faculty_name: string[] = ['Neha Mehra', 'Sonika Shrivastava', 'Reenu Rajput', 'Priyanka Bamne', 'Aditi Seetha'];
+  mobNumberPattern = "^((\\+91-?)|0)?[0-9]{10}$"; 
   isValidFormSubmitted = false;  
- 
+  dropdownList = [];
+  selectedItems = [];
+  dropdownSettings = {};
 
   baseUrl : string = apiSetting.apiUser;
   showMsg: boolean = false;
@@ -53,16 +67,23 @@ export class FacultyComponent implements OnInit {
   practicalpanel:PanelOfPractical[]=[];
   fileToUpload: File = null;
   form:FormGroup;
-  faculties:string[]=[];
-  year:string
-  subjectName:string;
-  subjectCode:string;
-  course:string;
-  panelId:string; 
-  staffs:staffList[]=[];
-  showNullError=false;
+
+  showconfirmationCancelT:boolean=false;
+  showconfirmationRejoinT:boolean =false;
+  showconfirmationCancelP:boolean=false;
+  showconfirmationRejoinP:boolean =false;
+
+  @ViewChild("f") addFaculty:NgForm;
+  @ViewChild("tpanel") addTheoryPanel:NgForm;
+  @ViewChild("ppanel") addPracticalPanel:NgForm;
+  @ViewChild("updateT") updateTheory:NgForm;
+  @ViewChild("updateP") ReJoinP:NgForm;
+  @ViewChild("addSyllabus") addSyllabus:NgForm;
+  @ViewChild("f1") addEx:NgForm;
+  @ViewChild("f2") updateEx:NgForm;
+
   showPanelMsg: boolean = false;
-  
+  staffs:staffList[];
   fData : facultyData[]= new Array(new facultyData());
   sData :  facultyData[] = new Array (new facultyData());
   allData : facultyData[] = new Array(new facultyData());
@@ -75,6 +96,54 @@ export class FacultyComponent implements OnInit {
     this.getStaffData();
     this.form=this.fb.group({
       "file": [null]   })
+=======
+  isValidFormSubmitted = false;  
+  request:facultyEnroll;
+  faculty:facultyEnroll[]=[];
+
+  req:PanelOfTheory;
+  theorypanel:any[]=[];
+  faculties:string[]=[];
+  year:string
+  subjectName:string;
+  subjectCode:string;
+  course:string;
+  panelId:string; 
+  staffs:staffList[]=[];
+  showNullError=false;
+
+
+
+  
+  fData : facultyData[]= new Array(new facultyData());
+  sData :  facultyData[] = new Array (new facultyData());
+  allData : facultyData[] = new Array(new facultyData());
+  
+
+  constructor(private faculty_service: FacultyDataService, private administrationService:AdministrationService,public toastr: ToastrManager,private facultyEnrollService:FacultyService,private paneloftheoryService:PanelOfTheoryService) { 
+    this.getFacultyData();
+    this.getStaffData();
+  
+  }
+  ngOnInit() {
+    
+    this.subjectCode="";
+    this.faculties=[];
+    this.year="";
+    this.subjectName="";
+    this.course="";
+    this.searchedRecord = false;
+    
+    this.administrationService.getStaffList().subscribe((response=>this.staffs=response.body));
+
+    this.paneloftheoryService.gettheorypanel().subscribe(data=>{
+      console.log(data);
+      this.theorypanel=data;
+      console.log(this.theorypanel);
+      
+    });
+  
+>>>>>>> Sonal
   }
 
   //Get Faculty Data
@@ -106,7 +175,11 @@ export class FacultyComponent implements OnInit {
   }
 
   //Add New Faculty or Staff Details
+<<<<<<< HEAD
 onSubmit(){
+=======
+  onSubmit(){
+>>>>>>> Sonal
   this.Member = new addMember(this.addMemberForm.value.addMemberData.class, this.addMemberForm.value.addMemberData.designation,
     this.addMemberForm.value.addMemberData.dob, this.addMemberForm.value.addMemberData.email, this.addMemberForm.value.addMemberData.emp_id,
     this.addMemberForm.value.addMemberData.date_j, this.addMemberForm.value.addMemberData.number, this.addMemberForm.value.addMemberData.name1,
@@ -134,140 +207,62 @@ onSubmit(){
     
 
 
+<<<<<<< HEAD
 }
 
- getPanelOfTheory(subjectCode:string,year:string,faculties:string[],subjectName:string,course:string){
-  this.subjectCode=subjectCode;
-  this.faculties=faculties;
-  this.year=year;
-  this.subjectName=subjectName;
-  this.course=course;
-  }
-
-  showTheoryPanel() {
-document.getElementById('main').style.display = 'none';
-document.getElementById('view panel').style.display = 'block';
-this.closeNav();
-  }
-
-  createTheoryPanel() {
-document.getElementById('main').style.display = 'block';
-document.getElementById('view panel').style.display = 'none';
-this.closeNav();
-  }
-
-  closeNav() {
-
-document.getElementById('main').className = 'col-lg-12';
-document.getElementById('view panel').className = 'col-lg-12';
-  }
 
 delay(ms: number) {
   return new Promise( resolve => setTimeout(resolve, ms) );
 }
+CancelTheory(req:PanelOfTheory){
 
- deletePanelofTheory(){
-  var req={subjectCode:this.subjectCode,year:this.year}
-  this.paneloftheoryService.deleteRequest(req).subscribe((data)=>{
-    console.log("success");
-    this.ngOnInit();
-
-});
-this.toastr.successToastr('Theory Panel deleted', 'Success!');
-
-  }
+this.paneloftheoryService.deleteRequest(req);
+this.showconfirmationCancelT= true;
 
 }
-
- UpdateTheory(){
-
-var req={subjectCode:this.updateTheory.value.subjectcode,faculties:this.updateTheory.value.faculties
-        ,year:new Date().getFullYear().toString(),course:this.updateTheory.value.course,subjectName:this.updateTheory.value.subjectname}
+UpdateTheory(req: PanelOfTheory){
+console.log(req)
+req.faculties=this.updateTheory.value.faculty;
+req.course = this.updateTheory.value.course;
+req.subjectCode = this.updateTheory.value.subjectcode;
+req.subjectName = this.updateTheory.value.subjectname;
 this.paneloftheoryService.updatePanelOfTheory(req);
-this.paneloftheoryService.gettheorypanel().subscribe(data=>{
-  console.log(data);
-  this.theorypanel=data;
-  console.log(this.theorypanel);
-  
-});
+console.log(req)
+this.showconfirmationRejoinT= true;
+}
 
-this.toastr.successToastr('Theory Panel Updated', 'Success!');
+showTheoryPanel() {
+document.getElementById('main').style.display = 'none';
+document.getElementById('view panel').style.display = 'block';
+this.closeNav();
+}
+createTheoryPanel() {
+document.getElementById('main').style.display = 'block';
+document.getElementById('view panel').style.display = 'none';
+this.closeNav();
+}
+closeNav() {
 
-  }
-
-
+document.getElementById('main').className = 'col-lg-12';
+document.getElementById('view panel').className = 'col-lg-12';
+}
 
 showPracticalPanel() {
 document.getElementById('practical main').style.display = 'none';
 document.getElementById('view practical panel').style.display = 'block';
 this.closeNav();
 }
-
 createPracticalPanel() {
 document.getElementById('practical main').style.display = 'block';
 document.getElementById('view practical panel').style.display = 'none';
 this.closeNav();
 }
-
 closePracticalNav() {
 
 document.getElementById('practical main').className = 'col-lg-12';
 document.getElementById('view practical panel').className = 'col-lg-12';
 }
 
-
-
-onTheoryPanelSubmit(){
-  
-  if(this.addTheoryPanel.value.course==null){
-       this.showNullError=true
-       this.delay(3000).then(any=>{
-        this.showNullError= false;   
-   })
-  }
-  else if( this.addTheoryPanel.value.subjectcode==null){
-    this.showNullError=true;
-    this.delay(3000).then(any=>{
-      this.showNullError= false;   
- })
-  }
-  else if(this.addTheoryPanel.value.subjectname==null){
-    this.showNullError=true;
-    this.delay(3000).then(any=>{
-      this.showNullError= false;   
- })
-  }
-  else if( this.addTheoryPanel.value.faculty==null){
-    this.showNullError=true;
-    this.delay(3000).then(any=>{
-      this.showNullError= false;   
- })
-  }
-  else{
-    
-    this.req=new PanelOfTheory();
-    this.req.year=new Date().getFullYear().toString();
-    this.req.course = this.addTheoryPanel.value.course;
-    this.req.subjectCode = this.addTheoryPanel.value.subjectcode;
-    this.req.subjectName = this.addTheoryPanel.value.subjectname;
-    this.req.faculties = this.addTheoryPanel.value.faculty;
-    this.paneloftheoryService.addtheorypanel(this.req);
-    // this.ngOnInit();
-    this.paneloftheoryService.gettheorypanel().subscribe(data=>{
-      console.log(data);
-      this.theorypanel=data;
-      console.log(this.theorypanel);
-      
-    });
-   
-    this.toastr.successToastr('Theory Panel Created', 'Success!');
-    this.addTheoryPanel.reset();
-  }
-  }
-
-
-//Practical
-  
 UpdatePractical(){
 this.preq=new PanelOfPractical();
 this.preq.subjectCode=this.ReJoinP.value.subjectcode;
@@ -281,6 +276,26 @@ this.panelofpracticalservice.updatePractical(this.preq,this.id);
 this.ngOnInit();
 }
 
+onTheoryPanelSubmit(){
+  
+  this.req=new PanelOfTheory();
+  // this.req.year=new Date().getFullYear().toString();
+  this.req.course = this.addTheoryPanel.value.course;
+  this.req.subjectCode = this.addTheoryPanel.value.subjectcode;
+  this.req.subjectName = this.addTheoryPanel.value.subjectname;
+  this.req.faculties = this.addTheoryPanel.value.faculty;
+  this.paneloftheoryService.addtheorypanel(this.req);
+  console.log(this.req)
+  
+  
+  this.showPanelMsg=true;
+  this.delay(3000).then(any=>{
+    this.showPanelMsg= false;
+    this.addTheoryPanel.reset();
+})
+  
+
+}
 onPracticalPanelSubmit(){
   
   this.preq=new PanelOfPractical();
@@ -391,28 +406,17 @@ CancelPractical(){
 
   ngOnInit() {
 
-    this.subjectCode="";
-    this.faculties=[];
-    this.year="";
-    this.subjectName="";
-    this.course="";
-    this.searchedRecord = false;
-    
     this.administrationService.getStaffList().subscribe((response=>this.staffs=response.body));
 
     this.paneloftheoryService.gettheorypanel().subscribe(data=>{
-      console.log(data);
       this.theorypanel=data;
       console.log(this.theorypanel);
       
     });
-	
-	
     this.panelofpracticalservice.getExternalExaminer().subscribe(data=>{
       this.eData=data;
       
     });
-	
     this.panelofpracticalservice.getpracticalpanel().subscribe(data=>{
       this.practicalpanel=data;
       
@@ -436,3 +440,116 @@ CancelPractical(){
 
   }
   }
+=======
+  }
+
+  getPanelOfTheory(subjectCode:string,year:string,faculties:string[],subjectName:string,course:string){
+  this.subjectCode=subjectCode;
+  this.faculties=faculties;
+  this.year=year;
+  this.subjectName=subjectName;
+  this.course=course;
+  }
+
+  showTheoryPanel() {
+document.getElementById('main').style.display = 'none';
+document.getElementById('view panel').style.display = 'block';
+this.closeNav();
+  }
+
+  createTheoryPanel() {
+document.getElementById('main').style.display = 'block';
+document.getElementById('view panel').style.display = 'none';
+this.closeNav();
+  }
+
+  closeNav() {
+
+document.getElementById('main').className = 'col-lg-12';
+document.getElementById('view panel').className = 'col-lg-12';
+  }
+  
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
+
+  onTheoryPanelSubmit(){
+  
+  if(this.addTheoryPanel.value.course==null){
+       this.showNullError=true
+       this.delay(3000).then(any=>{
+        this.showNullError= false;   
+   })
+  }
+  else if( this.addTheoryPanel.value.subjectcode==null){
+    this.showNullError=true;
+    this.delay(3000).then(any=>{
+      this.showNullError= false;   
+ })
+  }
+  else if(this.addTheoryPanel.value.subjectname==null){
+    this.showNullError=true;
+    this.delay(3000).then(any=>{
+      this.showNullError= false;   
+ })
+  }
+  else if( this.addTheoryPanel.value.faculty==null){
+    this.showNullError=true;
+    this.delay(3000).then(any=>{
+      this.showNullError= false;   
+ })
+  }
+  else{
+    
+    this.req=new PanelOfTheory();
+    this.req.year=new Date().getFullYear().toString();
+    this.req.course = this.addTheoryPanel.value.course;
+    this.req.subjectCode = this.addTheoryPanel.value.subjectcode;
+    this.req.subjectName = this.addTheoryPanel.value.subjectname;
+    this.req.faculties = this.addTheoryPanel.value.faculty;
+    this.paneloftheoryService.addtheorypanel(this.req);
+    // this.ngOnInit();
+    this.paneloftheoryService.gettheorypanel().subscribe(data=>{
+      console.log(data);
+      this.theorypanel=data;
+      console.log(this.theorypanel);
+      
+    });
+   
+    this.toastr.successToastr('Theory Panel Created', 'Success!');
+    this.addTheoryPanel.reset();
+    
+  }
+  }
+
+  UpdateTheory(){
+
+var req={subjectCode:this.updateTheory.value.subjectcode,faculties:this.updateTheory.value.faculties
+        ,year:new Date().getFullYear().toString(),course:this.updateTheory.value.course,subjectName:this.updateTheory.value.subjectname}
+this.paneloftheoryService.updatePanelOfTheory(req);
+this.paneloftheoryService.gettheorypanel().subscribe(data=>{
+  console.log(data);
+  this.theorypanel=data;
+  console.log(this.theorypanel);
+  
+});
+
+this.toastr.successToastr('Theory Panel Updated', 'Success!');
+
+  }
+
+  deletePanelofTheory(){
+  var req={subjectCode:this.subjectCode,year:this.year}
+  this.paneloftheoryService.deleteRequest(req).subscribe((data)=>{
+    console.log("success");
+    this.ngOnInit();
+
+});
+this.toastr.successToastr('Theory Panel deleted', 'Success!');
+
+  }
+
+}
+>>>>>>> Sonal
+
+

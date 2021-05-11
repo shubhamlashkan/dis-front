@@ -20,9 +20,14 @@ import { MydutiesModule } from '../myduties/myduties.module';
 import { MatBadgeModule, MatIconModule } from '@angular/material';
 import { AlertsComponent } from './alerts/alerts.component';
 import { HomeComponent } from './home/home.component';
+<<<<<<< HEAD
+import { StudentsComponent } from './students/students.component';
+// import { DatePipe } from '@angular/common';
+=======
 import {MatSelectModule} from '@angular/material/select';
 import {ReactiveFormsModule} from '@angular/forms';
-import { StudentsComponent } from './students/students.component';
+>>>>>>> Sonal
+
 @NgModule({
   imports: [
     CommonModule,
@@ -35,9 +40,13 @@ import { StudentsComponent } from './students/students.component';
     HodModule,
     MatBadgeModule,
     MatIconModule,
+<<<<<<< HEAD
+    FormsModule
+=======
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
+>>>>>>> Sonal
   ],
   declarations: [
     AttendanceComponent, 
@@ -46,8 +55,12 @@ import { StudentsComponent } from './students/students.component';
     SidenavigationComponent, 
     DocumentsComponent,
     AlertsComponent,
+<<<<<<< HEAD
     HomeComponent,
     StudentsComponent,
+=======
+    HomeComponent
+>>>>>>> Sonal
   ],
   providers: [PiechartComponent]
 })

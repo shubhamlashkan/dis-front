@@ -69,34 +69,54 @@
               <a class="nav-link" routerLink='complaints'><i class="fa fa-question-circle" aria-hidden="true"></i>
                 Complaints </a>
             </li>
-           
+<<<<<<< HEAD
+            <!-- <li class="nav-item ">
+              <a class="nav-link" routerLink='documents'><i class="fa fa-file" aria-hidden="true"></i> Documents </a>
+            </li> -->
             <li class="nav-item mr-2">
               <a class="nav-link" routerLink='documents'><i class="fa fa-file" aria-hidden="true"></i>
                Documents </a>
             </li>
             
+=======
+>>>>>>> Sonal
             
            <li class="nav-item mr-2">
               <a class="nav-link" routerLink='infrastructure'><i class="fa fa-institution" aria-hidden="true"></i>
                 Infrastructure </a>
             </li>
+<<<<<<< HEAD
             
+=======
+            <!-- <li class="nav-item">
+              <a class="nav-link" routerLink='documents'><i class="fa fa-file" aria-hidden="true"></i> Documents </a>
+            </li>
+>>>>>>> Sonal
             <li class="nav-item">
               <a class="nav-link" routerLink='students'><i class="fa fa-graduation-cap" aria-hidden="true"></i> Students
               </a>
             </li>
+<<<<<<< HEAD
+            
+=======
             <li class="nav-item">
               <a class="nav-link" routerLink = 'timetable' routerLinkActive="active-link"><i class="fa fa-calendar" aria-hidden="true"></i> Time Table</a>
             </li> -->
+>>>>>>> Sonal
             <li class="nav-item">
               <a class="nav-link" routerLink='attendance'><i class="fa fa-bar-chart-o" aria-hidden="true"></i>
                 Attendance </a>
             </li>
+<<<<<<< HEAD
+
+            
+=======
             
          
             
           
 
+>>>>>>> Sonal
             <li class="nav-item profile dropdown">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" routerLink='notification' id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

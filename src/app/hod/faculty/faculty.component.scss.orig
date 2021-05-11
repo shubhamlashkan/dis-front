@@ -265,6 +265,8 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
 a{
   text-decoration: none;
 }
+<<<<<<< HEAD
+=======
 .modal-header{
   background-color:rgb(4, 58, 87);
   color:white;
@@ -281,3 +283,4 @@ a{
   max-height: 800px;
   overflow-y: scroll;
 }
+>>>>>>> Sonal

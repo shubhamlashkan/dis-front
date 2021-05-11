@@ -13,6 +13,19 @@ export class FacultyComponent implements OnInit {
   ngOnInit() {
 
  
+<<<<<<< HEAD
+    // if(!this.isUserLoggedIn())
+    // {
+    //   this.router.navigate(['login']);
+    // }
+  }
+
+  // isUserLoggedIn()
+  // {
+  //   let user = sessionStorage.getItem('authenticaterUser');
+  //   return !(user===null);
+  // }
+=======
     if(!this.isUserLoggedIn())
     {
       this.router.navigate(['login']);
@@ -24,5 +37,6 @@ export class FacultyComponent implements OnInit {
     let user = sessionStorage.getItem('authenticaterUser');
     return !(user===null);
   }
+>>>>>>> Sonal
 
 }

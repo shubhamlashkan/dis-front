@@ -10,7 +10,11 @@ export class LeaveRequest{
     considerHolidays:boolean;
     suffix:Date;
     prefix:Date;
+<<<<<<< HEAD
+    leaveId:String;
+=======
     leaveId:number;
     rejoinDate:Date;
+>>>>>>> Sonal
     
 }
