@@ -27,6 +27,7 @@ import { FacultyModule } from '../faculty/faculty.module';
 import { AssignmentsComponent } from '../faculty/assignments/assignments.component';
 import { GradesComponent } from '../faculty/grades/grades.component';
 import { CourseworkComponent } from '../faculty/coursework/coursework.component';
+import { LeavesComponent } from './leaves/leaves.component';
 
 const routes: Routes = [
   { path: 'head',
@@ -40,6 +41,10 @@ const routes: Routes = [
       {
         path: 'student',
         component: StudentComponent
+      },
+      {
+        path: 'leaves',
+        component: LeavesComponent
       },
       {
         path: 'hod_about',

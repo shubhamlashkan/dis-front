@@ -37,28 +37,27 @@ export class LoginComponent implements OnInit {
     this.loginInfo = new AuthLoginInfo(
       this.form.username,
       this.form.password);
+      // console.log(this.form.password)
      // console.log('Before '+this.isUserLoggedIn());
     this.authService.attemptAuth(this.loginInfo).subscribe(
       data => {
         this.loading = false;
-        // console.log(data);
+        console.log(data);
         sessionStorage.setItem('authenticaterUser',this.form.username);
         this.tokenStorage.saveUsername(data.username);
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveAuthorities(data.authorities);
-
+        console.log(data);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getAuthorities();
         this.getValidated();
         this.authService.getMyUserId().subscribe(response => {
           this.userID= response.body['message'];
-          // console.log(response.body[s
+          // console.log(response.body['message']);
+          console.log(this.userID);
+          console.log(this.userID);
           sessionStorage.setItem('userId',this.userID);
-        })
-        this.authService.getMoodleUserId(data.username).subscribe(data=>{
-          this.moodleUserId=data;
-          sessionStorage.setItem('moodleUserId',this.moodleUserId);
         })
         
        // sessionStorage.setItem('userId',this.userID);

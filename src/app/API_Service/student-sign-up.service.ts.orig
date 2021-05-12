@@ -1,0 +1,48 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+<<<<<<< HEAD
+=======
+import { StudentSignUp } from '../Model/student-sign-up.model';
+import { FormGroup } from '@angular/forms';
+import { apiSetting } from '../urls/apisetting';
+>>>>>>> Yashi
+
+@Injectable({
+  providedIn: 'root'
+})
+export class StudentSignUpService {
+
+<<<<<<< HEAD
+  private baseUrl = 'http://13.126.18.214:8080/dis';
+=======
+  private baseUrl = 'http://localhost:8090/dis';
+
+>>>>>>> Yashi
+
+  constructor(private http: HttpClient) { }
+
+  public createStudentSignUp(StudentSignUp: Object): Observable<Object> {
+    return this.http.post(`${this.baseUrl}` + `/signup`, StudentSignUp);
+  }
+<<<<<<< HEAD
+
+}
+=======
+  baseUrl1 : string = apiSetting.apiUser;
+  getAllstudent(){
+    return this.http.get<any>(`${this.baseUrl1}/studentBasicProfile`)
+  
+  }
+  addstudent(req:StudentSignUp){
+    console.log(req);
+    return this.http.post(`${this.baseUrl1}/addStudentBasicProfile`,req);
+  }
+  addFile(form: FormGroup): Observable<any>{
+    const formData: FormData = new FormData();
+    formData.append('file', form.get('file').value);
+    return this.http.post(`${this.baseUrl1}/uploadStudentBasicProfile/0`, formData);
+  }
+  
+}
+>>>>>>> Yashi

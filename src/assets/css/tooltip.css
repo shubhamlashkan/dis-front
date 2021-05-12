@@ -76,3 +76,5 @@
 
 /*compatible with bootstrap*/
 #mcTooltip, #mcTooltip div {box-sizing:content-box;}
+
+.cdk-global-overlay-wrapper, .cdk-overlay-container { z-index: 9999!important; } 

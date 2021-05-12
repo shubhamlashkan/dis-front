@@ -1,0 +1,33 @@
+<<<<<<< HEAD
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+=======
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+>>>>>>> Yashi
+
+import { HodComponent } from './hod.component';
+
+describe('HodComponent', () => {
+  let component: HodComponent;
+  let fixture: ComponentFixture<HodComponent>;
+
+<<<<<<< HEAD
+  beforeEach(waitForAsync(() => {
+=======
+  beforeEach(async(() => {
+>>>>>>> Yashi
+    TestBed.configureTestingModule({
+      declarations: [ HodComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(HodComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

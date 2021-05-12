@@ -9,6 +9,8 @@
                         aria-controls="pills-circular" aria-selected="false">Circular</a><br>
                     <a class="nav-link" id="schedules-tab" data-toggle="pill" href="#pills-schedules" role="tab"
                         aria-controls="pills-schedules" aria-selected="false">Schedules</a><br>
+                    <a class="nav-link" id="scheme-tab" data-toggle="pill" href="#pills-scheme" role="tab" aria-controls="pills-scheme"
+                        aria-selected="false">Scheme and Syllabus</a><br>
                     <a class="nav-link" id="semtt-tab" data-toggle="pill" href="#pills-semtt" role="tab" aria-controls="pills-semtt"
                         aria-selected="false">Semester Time Table</a><br>
                     <a class="nav-link" id="accel-tab" data-toggle="pill" href="#pills-accel" role="tab" aria-controls="pills-accel"
@@ -189,7 +191,6 @@
                                     preview</a><br><a href=""><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i>Download</a></p>
                         </div>
                     </div>
-
                     <div class="tab-pane fade" id="pills-semtt" role="tabpanel" aria-labelledby="semtt-tab">
                         <div class="row">
                             <div class="col-lg-8">
@@ -411,8 +412,181 @@
                         </div>
 
                     </div>
+                    <div class="tab-pane fade" id="pills-scheme" role="tabpanel" aria-labelledby="scheme-tab">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <h4 class="text-left page-headng">Scheme/Syllabus</h4>
+                                <hr>
+                            </div>
+                            <div class="col-lg-4">
+                                    <button type="button" class="btn btn-primary  " data-toggle="modal" data-target=".my-modal">Add Scheme/Syllabus</button>
+                            </div>
+                            <div class="modal fade my-modal" id="myModal" role="dialog">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title ">Add</h3>
+                                            <button type="button" class="close" (click)="ngOnInit()" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form (ngSubmit)="onSubmit()" #addSyllabus="ngForm">
+                                            <div>
+                                                <div >
+                                                  <h6 class="heading">Select</h6>  
+                                                  <select id="Title" class="dropdown-primary form-control" name="Title"  required ngModel >
+                                                        <option value="Syllabus">Syllabus</option>
+                                                        <option value="Scheme">Scheme</option>
+                                                  </select> 
+                                                </div>
+                                                <div >
+                                                    <h6 class="heading">Select Course</h6>
+                                                    <select id="Course"  name="course" class="dropdown-primary form-control" required  ngModel>
+                                                        <option value="UnderGraduate">UnderGraduate</option>
+                                                        <option value="PostGraduate">PostGraduate</option>
+                                                    </select>
+                                                </div>
+                                                <div >
+                                                    <h6 class="heading">Select Semester</h6>
+                                                    <select id="Name"  name="semester" class="dropdown-primary form-control" required ngModel>
+                                                        <option value="First">First</option>
+                                                        <option value="Second">Second</option>
+                                                        <option value="Third">Third</option>
+                                                        <option value="Fourth">Fourth</option>
+                                                        <option value="Fourth">Fifth</option>
+                                                        <option value="Fourth">Sixth</option>
+                                                        <option value="Fourth">Seventh</option>
+                                                        <option value="Fourth">Eight</option>
+                                                    </select>
+                                                </div>
+                                                <br>
+                                                
+                                                <div>
+                                                        <label for="file">Choose File</label>
+                                                        <input type="file"
+                                                            id="file"
+                                                            name='file'
+                                                            (change)="handleFileInput($event.target.files)">
+                                                </div>
+                                                <br>
+                                                <div class="form-actions row text-center ">
+                                                        <div class="col-lg-6 col-md-4">
+                                                            <button type="button" (click)="onReset()" class="btn btn-primary button-width float-right">Reset</button>
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-4">
+                                                            <button type="submit"   class="btn btn-success button-width float-left">Proceed</button>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </form>         
+                                    </div>  
+                                      <!-- hhghb -->
+                                </div> 
+                            </div>
+                            </div>
+                    </div>
+                        
+
+                        <!-- SYLLABUS -->
+                        <div class="card">
+                            <div class="card-header text-white row" style="background-color: gray " id="headingOne">
+                                <h5 data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                                    aria-controls="collapseOne">
+                                    SYLLABUS
+                                </h5>
+                            </div>
+                            <div class="alert alert-success row " *ngFor="let req of syllabus_file">
+                                <p class="col-5">File Name: {{req.fileName}}</p>
+                                <p class="col-4">Course: {{req.course}} <br>
+                                Semester: {{req.semester}} </p>
+                                <p class="col-2"><a href="{{baseUrl}}/syllabus/download/{{req.fileName}}"><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i></a><br>Download</p>
+                                <p class="col-1">
+                                    <button class="btn btn-danger" data-toggle="modal" 
+                                    (click)="getTask(req)" data-target="#taskRemoveSyllabus">Remove</button>
+                                </p>   
+                            </div>
+                            <div class="modal fade" id="taskRemoveSyllabus" tabindex="-1" role="dialog" aria-labelledby="taskRemoveSyllabus"aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="taskRemoveSyllabus">Remove Syllabus</h5>
+                                      <button type="button" (click)="ngOnInit()" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-row">
+                                          <div class="col-7">
+                                            <h4>Are you sure you want to remove Syllabus ?</h4>
+                                          </div>
+                                          <div class="col-2">
+                                            <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth" data-dismiss="modal">Cancel</button>
+                                          </div>
+                                          <div class="col-2">
+                                            <button type="submit" (click)="removeSyllabus()" data-dismiss="modal" class="btn btn-primary btnWidth">Remove </button>
+                                          </div>
+                                          
+                                        </div>
+                                      
+                                    </div>
+                              
+                                  </div>
+                                </div>
+                            </div>
+
+                         </div>
+
+                        <!-- SCHEME -->
+                        <div class="card">
+                            <div class="card-header text-white row" style="background-color: gray " id="headingOne">
+                                <h5 data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                                    aria-controls="collapseOne">
+                                    SCHEME
+                                </h5>
+                            </div>
+                            <div class="alert alert-success row" *ngFor="let req of scheme_file">
+                                <p class="col-5">File Name: {{req.fileName}}</p>
+                                <p class="col-4">Course: {{req.course}} <br>
+                                Semester: {{req.semester}} </p>
+                                <p class="col-2"><a href="{{baseUrl}}/scheme/download/{{req.fileName}}"><i class="fa fa-download fa-fw" aria-hidden="true fa-fw"></i></a><br>Download</p>
+                                <p class="col-1">
+                                    <button class="btn btn-danger" data-toggle="modal" 
+                                    (click)="getTask(req)" data-target="#taskRemoveScheme">Remove</button>
+                                </p>
+                            </div>
+                            <div class="modal fade" id="taskRemoveScheme" tabindex="-1" role="dialog" aria-labelledby="taskRemoveScheme"aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="taskRemoveScheme">Remove Scheme</h5>
+                                      <button type="button" (click)="ngOnInit()" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-row">
+                                          <div class="col-7">
+                                            <h4>Are you sure you want to remove scheme ?</h4>
+                                          </div>
+                                          <div class="col-2">
+                                            <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth" data-dismiss="modal">Cancel</button>
+                                          </div>
+                                          <div class="col-2">
+                                            <button type="submit" (click)="removeScheme()" data-dismiss="modal" class="btn btn-primary btnWidth">Remove </button>
+                                          </div>
+                                          
+                                        </div>
+                                      
+                                    </div>
+                              
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+

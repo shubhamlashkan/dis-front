@@ -1,0 +1,33 @@
+<<<<<<< HEAD
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+=======
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+>>>>>>> Yashi
+
+import { AddcomplaintComponent } from './addcomplaint.component';
+
+describe('AddcomplaintComponent', () => {
+  let component: AddcomplaintComponent;
+  let fixture: ComponentFixture<AddcomplaintComponent>;
+
+<<<<<<< HEAD
+  beforeEach(waitForAsync(() => {
+=======
+  beforeEach(async(() => {
+>>>>>>> Yashi
+    TestBed.configureTestingModule({
+      declarations: [ AddcomplaintComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AddcomplaintComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

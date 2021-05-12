@@ -1,8 +1,13 @@
 export class StudentSignUp {
-    id: number;
-    enrollment_id: string;
-    password: string;
-    cnf_password: string;
-    mobile_no: number;
-    email_add: string;
+    enrollmentId: string;
+    fullName: string;
+    admissionYear: string;
+    courseId: String;
+    mobileNo: number;
+    dob: String;
+    category : string;
+    gender: String;
+    bloodGroup: String;
+    schemeSemester : number;
+    schemeYear : number;
 }

@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SemTimeTableComponent } from './sem-time-table.component';
 
@@ -6,7 +6,7 @@ describe('SemTimeTableComponent', () => {
   let component: SemTimeTableComponent;
   let fixture: ComponentFixture<SemTimeTableComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ SemTimeTableComponent ]
     })

@@ -1,0 +1,120 @@
+import { Component, OnInit } from '@angular/core';
+import { Chart } from 'chart.js';
+
+@Component({
+  selector: 'app-barchart',
+  templateUrl: './barchart.component.html',
+  styleUrls: ['./barchart.component.scss']
+})
+export class BarchartComponent implements OnInit {
+<<<<<<< HEAD
+  overallAttendance:any;
+  attend:any;
+  total:any;
+  constructor() { }
+
+  ngOnInit() {
+
+  }
+
+  getBarChart(idname,bars) {
+    this.overallAttendance=0;
+    this.total=0;
+    this.attend=0;
+    var label=[];
+    var percentage=[];
+    var color=[];
+    for( var i=0; i<bars.length;i++){
+      var cc=bars[i].coursecode;
+      var per=bars[i].percentage;
+      this.total+=bars[i].slot
+      this.attend+=bars[i].attendance
+      var slot=`${cc},\n ${bars[i].attendance}/${bars[i].slot} `;
+      if(per<60){
+        color.push("red");
+      }else if(per<75){
+        color.push("#ffcc00");
+      }else{
+        color.push("green");
+      }
+     label.push(slot);
+     percentage.push(per);
+    //  console.log(label,percentage,color);
+     if(i==bars.length-1){
+       return this.getChart(idname,label,percentage,color);
+     }
+    }
+
+    
+  }
+  getChart(idname,label,percentage,color){
+
+    console.log(this.attend,this.total)
+    this.overallAttendance=(this.attend/this.total)*100;
+    this.overallAttendance=this.overallAttendance.toFixed(2);
+    return new Chart(idname, {
+      type: 'bar',
+      data: {
+        labels: label,
+        datasets: [{
+          label: ` % present`,
+          data:percentage,
+          backgroundColor: color,
+          borderWidth: 1
+=======
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+  getBarChart(idname) {
+    return new Chart(idname, {
+      type: 'bar',
+      data: {
+        labels: ['CO34002', 'CO34005-T', 'CO34005-P', 'CO34007-T', 'CO34007-P', 'CO34008-T', 'CO34008-P', 'EC34013-T', 'EC34013-P'],
+        datasets: [{
+          label: '% present',
+          data: [42, 62, 54, 33, 76, 66, 93, 71, 52],
+          backgroundColor: [
+            'red', '#ffcc00', 'red', 'red', 'green', '#ffcc00', 'green', '#ffcc00', 'red'
+        ],
+        borderColor: ['red', '#ffcc00', 'red', 'red', 'green', '#ffcc00', 'green', '#ffcc00', 'red'],
+        borderWidth: 1
+>>>>>>> Yashi
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+<<<<<<< HEAD
+        tooltips:{
+          enabled:true
+        },
+        title: {
+          text: `Overall Attendance till current date ${this.overallAttendance}`,
+=======
+
+        title: {
+          text: 'Attendance till current date',
+>>>>>>> Yashi
+          display: true
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              stepSize: 10,
+              max: 100,
+              font: 'bold'
+            }
+          }]
+        }
+      }
+    });
+  }
+<<<<<<< HEAD
+=======
+
+>>>>>>> Yashi
+}

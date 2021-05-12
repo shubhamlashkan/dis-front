@@ -26,7 +26,7 @@ export class ActivateAccountComponent implements OnInit {
     });
   }
 
-  get formCtl() {
+  get formCtl(){
     return this.activationForm.controls;
   }
 

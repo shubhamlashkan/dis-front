@@ -42,8 +42,10 @@ selectedTaskId:string;
     this.taskStatus = null;
     /*Get Category of tasks */
  this.service.getCategoryList().subscribe((response=>this.categories=response.body));
+ 
    /* Get Staff List */
  this.service.getStaffList().subscribe((response=>this.staffs=response.body));
+ console.log(this.staffs)
       /* Get Assigned Task Information */
  this.service.assignTaskInfo().subscribe((response=>this.assignedTask=response.body));
   }

@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddGroupDialogComponent } from './add-group-dialog.component';
 
@@ -6,7 +6,7 @@ describe('AddGroupDialogComponent', () => {
   let component: AddGroupDialogComponent;
   let fixture: ComponentFixture<AddGroupDialogComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ AddGroupDialogComponent ]
     })

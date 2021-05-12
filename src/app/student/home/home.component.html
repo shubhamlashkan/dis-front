@@ -30,14 +30,14 @@
         <div class="scheme downloadables">
           <div>
             <i class="fa fa-file-text" style="font-size: 48px; color: #0085cc;" aria-hidden="true"></i>
-            <h5><a href="#">Download Scheme</a></h5>
-            <h6>2016-2020</h6>
+            <h5><a class="nav-link" id="scheme-tab" data-toggle="pill" href="#pills-scheme" role="tab" aria-controls="pills-scheme"
+              aria-selected="false">Download Scheme</a></h5>
           </div>
           <hr/>
           <div>
             <i class="fa fa-file-text" style="font-size: 48px; color: #0085cc;" aria-hidden="true"></i>
-            <h5><a href="#">Download Syllabus</a></h5>
-            <h6>2016-2020</h6>
+            <h5><a class="nav-link" id="syllabus-tab" data-toggle="pill" href="#pills-syllabus" role="tab" aria-controls="pills-syllabus"
+              aria-selected="false">Download Syllabus</a></h5>
           </div>
         </div>
     </div>
@@ -46,29 +46,79 @@
 
 
     <!--Start Right Panel-->
-    <div class="col-lg-9 kyc-colm user-management">
-      <div class="kyc-section rewards-section reports-sectn">
-      <!--Calendar comes in below div-->
-        <div class="row">
-          <div class="col-lg-6">
-            <h3 class="heading">Calendar</h3>
-            <hr/>
-           <app-calendar></app-calendar>
-          </div>
-          <div class="col-lg-6">
-            <h3  class="heading" >Attendance</h3>
-            <hr/>
-            <div class="chart-container">
-              <canvas id="barChart"></canvas>
-            </div>
-          </div>
-          </div>
-    <!--End Right Panel-->
+    <div class="tab-content" id="tabContent">
 
+      <div class="tab-pane fade show active" id="pills-recents" role="tabpanel" aria-labelledby="recents-tab">
+        <div class="col-lg-9 kyc-colm user-management">
+          <div class="kyc-section rewards-section reports-sectn">
+          <!--Calendar comes in below div-->
+            <div class="row">
+              <div class="col-lg-6">
+                <h3 class="heading">Calendar</h3>
+                <hr/>
+              <app-calendar></app-calendar>
+              </div>
+              <div class="col-lg-6">
+                <h3  class="heading" >Attendance</h3>
+                <hr/>
+                <div class="chart-container">
+                  <canvas id="barChart"></canvas>
+                </div>
+              </div>
+              </div>
+        <!--End Right Panel-->
+
+          </div>
+        </div>
       </div>
 
-    </div>
+      <div class="tab-pane fade " id="pills-scheme" role="tabpanel" aria-labelledby="scheme-tab">
+        <div class="card">
+          <div class="card-header text-white" style="background-color: gray " id="headingOne">
+              <h5 data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                  aria-controls="collapseOne">
+                  SCHEME
+              </h5>
+          </div>
 
+          <div id="collapse5" class="collapse show pt-3" aria-labelledby="heading5" data-parent="tt">
+              <div class="card-body alert alert-success row al">
+                  <div *ngFor="let req of scheme_file">
+                      <div class="alert alert-success row" >
+                          <h4 class="col-6">{{req.file.name}}</h4>
+                          <p class="col-4">Course: {{req.course}} </p>
+                          <p class="col-6 heading"> {{req.semester}}</p>
+                          <p class="col-6 float-left"> Download File: {{req.file}}</p>     
+                      </div>  
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane fade " id="pills-syllabus" role="tabpanel" aria-labelledby="syllabus-tab">
+        <div class="card">
+          <div class="card-header text-white" style="background-color: gray " id="headingOne">
+              <h5 data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                  aria-controls="collapseOne">
+                  SYLLABUS
+              </h5>
+          </div>
+          <div id="collapse5" class="collapse show pt-3" aria-labelledby="heading5" data-parent="tt">
+              <div class="card-body alert alert-success row al">
+                  <div *ngFor="let req of syllabus_file">
+                      <div class="alert alert-success row" >
+                          <h4 class="col-6">{{req.file.name}}</h4>
+                          <p class="col-4">Course: {{req.course}} </p>
+                          <p class="col-6 heading"> Semester: {{req.semester}}</p>
+                          <p class="col-6 float-left"> Download File: {{req.file}}</p>     
+                      </div>  
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
   <!--End Right Panel-->
 
   </div>

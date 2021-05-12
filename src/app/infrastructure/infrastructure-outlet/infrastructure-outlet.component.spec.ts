@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InfrastructureOutletComponent } from './infrastructure-outlet.component';
 
@@ -6,7 +6,7 @@ describe('InfrastructureOutletComponent', () => {
   let component: InfrastructureOutletComponent;
   let fixture: ComponentFixture<InfrastructureOutletComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ InfrastructureOutletComponent ]
     })

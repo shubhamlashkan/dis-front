@@ -24,6 +24,7 @@ import { ClassAttendanceComponent } from './class-attendance/class-attendance.co
 import {GradesComponent} from './grades/grades.component'
 import { AssignmentsComponent } from './assignments/assignments.component';
 import { CourseworkComponent } from './coursework/coursework.component';
+import { StudentsComponent } from './students/students.component';
 canActivate:[RouteGuardService]
 const routes: Routes = [
   {
@@ -78,8 +79,8 @@ const routes: Routes = [
       },
       {
         path : 'students',
-        component : StudentComponent,
-        loadChildren:()  => HodModule
+        component : StudentsComponent,
+        
       },
       {
         path: 'notification',

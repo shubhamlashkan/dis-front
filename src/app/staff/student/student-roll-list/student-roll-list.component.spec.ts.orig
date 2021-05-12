@@ -1,0 +1,33 @@
+<<<<<<< HEAD
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+=======
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+>>>>>>> Yashi
+
+import { StudentRollListComponent } from './student-roll-list.component';
+
+describe('StudentRollListComponent', () => {
+  let component: StudentRollListComponent;
+  let fixture: ComponentFixture<StudentRollListComponent>;
+
+<<<<<<< HEAD
+  beforeEach(waitForAsync(() => {
+=======
+  beforeEach(async(() => {
+>>>>>>> Yashi
+    TestBed.configureTestingModule({
+      declarations: [ StudentRollListComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(StudentRollListComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

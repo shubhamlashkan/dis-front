@@ -27,7 +27,8 @@ export class AuthService {
   }
 
   attemptAuth(credentials: AuthLoginInfo): Observable<JwtResponse> {
-    return this.http.post<JwtResponse>(this.loginUrl , credentials, httpOptions);
+    console.log(credentials)
+    return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions);
   }
 
   signUp(info: SignUpInfo): Observable<HttpResponse<string>> {
@@ -60,8 +61,5 @@ export class AuthService {
 
   getMyUserId():Observable<HttpResponse<string>>{
     return this.http.get<string>(`${this.apiUrl}/getMyUserID`,{observe:'response'});
-  }
-  getMoodleUserId(username:string):Observable<Object>{
-    return this.http.get<string>(`${this.moodleUrl}/grades/getStudentsUserId/${username}`);
   }
 }

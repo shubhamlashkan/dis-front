@@ -10,6 +10,7 @@ import { RequestsComponent } from './requests/requests.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { HodComponent } from './hod/hod.component';
+
 import { SidenavigationComponent } from './sidenavigation/sidenavigation.component';
 import { StudentComponent } from './student/student.component';
 import { DocumentsComponent } from './documents/documents.component';
@@ -18,11 +19,16 @@ import { ToDoComponent } from './to-do/to-do.component';
 import { CalendarComponent } from '../miscellaneous/calendar/calendar.component';
 import { FooterModule } from './footer/footer.module';
 import { MeetingsComponent } from './meetings/meetings.component';
+import { LeavesComponent } from './leaves/leaves.component';
 import { ConventionalModule } from '../conventional/conventional.module';
 import { InfrastructureModule } from '../infrastructure/infrastructure.module';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule, MatBadgeModule } from '@angular/material';
 import { NotificationsComponent } from '../miscellaneous/notifications/notifications.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import {MatSelectModule} from '@angular/material/select';
+import {ReactiveFormsModule} from '@angular/forms';
+
 
 @NgModule({
   imports: [
@@ -34,7 +40,10 @@ import { NotificationsComponent } from '../miscellaneous/notifications/notificat
     ConventionalModule,
     FormsModule,
     MatIconModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatSelectModule,
+    NgMultiSelectDropDownModule.forRoot(),
+    ReactiveFormsModule
     ],
   declarations: [
      HomeComponent,
@@ -48,6 +57,7 @@ import { NotificationsComponent } from '../miscellaneous/notifications/notificat
      SidenavigationComponent,
      StudentComponent,
      DocumentsComponent,
+     LeavesComponent,
      ToDoComponent,
      MeetingsComponent],
      providers: [CalendarComponent , NotificationsComponent],

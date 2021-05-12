@@ -1,0 +1,36 @@
+import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
+import { Router } from '@angular/router';
+=======
+
+>>>>>>> Yashi
+@Component({
+  selector: 'app-student',
+  templateUrl: './student.component.html',
+  styleUrls: ['./student.component.scss']
+})
+export class StudentComponent implements OnInit {
+
+<<<<<<< HEAD
+  constructor(private router:Router) { }
+
+  ngOnInit() {
+    if(!this.isUserLoggedIn())
+    {
+      this.router.navigate(['login']);
+    }
+  }
+   isUserLoggedIn()
+  {
+    let user = sessionStorage.getItem('authenticaterUser');
+    return !(user===null);
+  }
+ 
+=======
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+>>>>>>> Yashi
+}

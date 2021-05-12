@@ -3,6 +3,7 @@ import { AboutModule } from './../about/about.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { FacultyRoutingModule } from './faculty-routing.module';
 import { AttendanceComponent } from './attendance/attendance.component';
 import { NavigationComponent } from './navigation/navigation.component';
@@ -23,6 +24,10 @@ import { ClassAttendanceComponent } from './class-attendance/class-attendance.co
 import { GradesComponent } from './grades/grades.component';
 import { AssignmentsComponent } from './assignments/assignments.component';
 import { CourseworkComponent } from './coursework/coursework.component';
+import {MatSelectModule} from '@angular/material/select';
+import {ReactiveFormsModule} from '@angular/forms';
+import { StudentsComponent } from './students/students.component';
+@NgModule({
 @NgModule({
   imports: [
     FormsModule ,
@@ -35,7 +40,10 @@ import { CourseworkComponent } from './coursework/coursework.component';
     MydutiesModule,
     HodModule,
     MatBadgeModule,
-    MatIconModule
+    MatIconModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSelectModule,
   ],
   declarations: [
     AttendanceComponent, 
@@ -48,7 +56,8 @@ import { CourseworkComponent } from './coursework/coursework.component';
     ClassAttendanceComponent,
     GradesComponent,
     AssignmentsComponent,
-    CourseworkComponent
+    CourseworkComponent,
+	StudentsComponent,
   ],
   providers: [PiechartComponent]
 })

@@ -19,11 +19,15 @@ import { ToastrModule } from 'ng6-toastr-notifications';
 import { ConventionalModule } from './conventional/conventional.module';
 import { InfrastructureModule } from './infrastructure/infrastructure.module';
 import { MatTableModule, MatSortModule } from '@angular/material';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    
     
     ],
   imports: [
@@ -44,7 +48,8 @@ import { MatTableModule, MatSortModule } from '@angular/material';
     InfrastructureModule,
     FormsModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [AuthInterceptor,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],

@@ -1,0 +1,35 @@
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-faculty',
+  templateUrl: './faculty.component.html',
+  styleUrls: ['./faculty.component.scss']
+})
+export class FacultyComponent implements OnInit {
+
+  constructor(private router:Router) { }
+
+  ngOnInit() {
+<<<<<<< HEAD
+=======
+
+ 
+>>>>>>> Yashi
+    if(!this.isUserLoggedIn())
+    {
+      this.router.navigate(['login']);
+    }
+  }
+<<<<<<< HEAD
+ 
+=======
+
+>>>>>>> Yashi
+  isUserLoggedIn()
+  {
+    let user = sessionStorage.getItem('authenticaterUser');
+    return !(user===null);
+  }
+
+}

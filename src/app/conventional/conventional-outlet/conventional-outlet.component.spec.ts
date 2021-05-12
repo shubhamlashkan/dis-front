@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ConventionalOutletComponent } from './conventional-outlet.component';
 
@@ -6,7 +6,7 @@ describe('ConventionalOutletComponent', () => {
   let component: ConventionalOutletComponent;
   let fixture: ComponentFixture<ConventionalOutletComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ConventionalOutletComponent ]
     })
