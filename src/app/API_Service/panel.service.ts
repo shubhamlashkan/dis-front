@@ -107,7 +107,7 @@ getExternalById(Id: any){
   return this.http.get<any>(`${this.baseUrl}/externalExaminer/${Id}`)
 }
 
-updateExternal(req :External, id : any){
+updateExternal(req :any, id : any){
   console.log(req)
   this.http.put(`${this.baseUrl}/externalExaminer/${id}`,req).subscribe( 
     response => {

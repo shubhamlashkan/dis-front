@@ -1,4 +1,4 @@
-mport { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { facultyData, addMember,addMemberResponse } from 'src/app/Model/facultyData';
 import { FacultyDataService } from './faculty-data.service';
 import { AdministrationService } from 'src/app/API_Service/administration.service';
@@ -76,7 +76,39 @@ export class FacultyComponent implements OnInit {
     this.form=this.fb.group({
       "file": [null]   })
   }
+  ngOnInit() {
 
+    this.subjectCode="";
+    this.faculties=[];
+    this.year="";
+    this.subjectName="";
+    this.course="";
+    this.searchedRecord = false;
+    
+    this.administrationService.getStaffList().subscribe((response=>this.staffs=response.body));
+
+    this.paneloftheoryService.gettheorypanel().subscribe(data=>{
+      console.log(data);
+      this.theorypanel=data;
+      console.log(this.theorypanel);
+      
+    });
+	
+	
+    this.panelofpracticalservice.getExternalExaminer().subscribe(data=>{
+      this.eData=data;
+      
+    });
+	
+    this.panelofpracticalservice.getpracticalpanel().subscribe(data=>{
+      this.practicalpanel=data;
+      
+    });
+    this.id=0;
+    this.searchedRecord = false;
+    
+    
+  }
   //Get Faculty Data
   getFacultyData(): void{
     this.faculty_service.getFacultyData()
@@ -177,9 +209,9 @@ this.toastr.successToastr('Theory Panel deleted', 'Success!');
 
   }
 
-}
 
- UpdateTheory(){
+
+UpdateTheory(){
 
 var req={subjectCode:this.updateTheory.value.subjectcode,faculties:this.updateTheory.value.faculties
         ,year:new Date().getFullYear().toString(),course:this.updateTheory.value.course,subjectName:this.updateTheory.value.subjectname}
@@ -388,51 +420,4 @@ CancelPractical(){
     this.id=id;
     
   }
-
-  ngOnInit() {
-
-    this.subjectCode="";
-    this.faculties=[];
-    this.year="";
-    this.subjectName="";
-    this.course="";
-    this.searchedRecord = false;
-    
-    this.administrationService.getStaffList().subscribe((response=>this.staffs=response.body));
-
-    this.paneloftheoryService.gettheorypanel().subscribe(data=>{
-      console.log(data);
-      this.theorypanel=data;
-      console.log(this.theorypanel);
-      
-    });
-	
-	
-    this.panelofpracticalservice.getExternalExaminer().subscribe(data=>{
-      this.eData=data;
-      
-    });
-	
-    this.panelofpracticalservice.getpracticalpanel().subscribe(data=>{
-      this.practicalpanel=data;
-      
-    });
-    this.id=0;
-    this.searchedRecord = false;
-    this.dropdownList = this.fData;
-    this.selectedItems = [
-     
-    ];
-    this.dropdownSettings = {
-      singleSelection: false,
-      limitSelection:2,
-      idField: 'item_id',
-      textField: 'item_text',
-      selectAllText: 'Select All',
-      unSelectAllText: 'Unselect All',
-      itemsShowLimit: 50,
-      allowSeachFilter: true
-   }
-
-  }
-  }
+}

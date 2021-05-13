@@ -28,7 +28,6 @@ import {MatSelectModule} from '@angular/material/select';
 import {ReactiveFormsModule} from '@angular/forms';
 import { StudentsComponent } from './students/students.component';
 @NgModule({
-@NgModule({
   imports: [
     FormsModule ,
     CommonModule,
