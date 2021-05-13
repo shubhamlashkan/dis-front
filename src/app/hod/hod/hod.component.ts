@@ -12,10 +12,10 @@ export class HodComponent implements OnInit {
   constructor(private router:Router) { }
 
   ngOnInit() {
-    if(!this.isUserLoggedIn())
-    {
-      this.router.navigate(['login']);
-    }
+    // if(!this.isUserLoggedIn())
+    // {
+    //   this.router.navigate(['login']);
+    // }
   }
   isUserLoggedIn()
   {

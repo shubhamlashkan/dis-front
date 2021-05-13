@@ -139,6 +139,7 @@ export class LeavesComponent implements OnInit {
         console.log(this.leave_type[req]);
         this.leave_type[req].toDate=this.UpdateLeave.value.to; 
         this.leave_type[req].fromDate=this.UpdateLeave.value.from;
+        this.leave_type[req].noOfLeaves = this.UpdateLeave.value.number_of_leaves;
         this.leaveService.addLeave(this.leave_type[req]);
         this.toastr.successToastr('Leave modified', 'Success!');
         break
