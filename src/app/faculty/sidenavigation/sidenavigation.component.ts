@@ -9,12 +9,12 @@ import { SidenavService } from 'src/app/API_Service/sidenav.service';
   providers : [SidenavService]
 })
 export class SidenavigationComponent implements OnInit {
-  userName: any;
-  usertime: any;
-  userId: any;
-  
-  constructor(private sidenav : SidenavService,private facultyService: FacultyService) { }
+  // userName: any;
+  // usertime: any;
+  // userId: any;
   userData :any;
+  constructor(private sidenav : SidenavService,private facultyService: FacultyService) { }
+  
   ngOnInit() {
     this.facultyService.getSideNavigationDetails().subscribe(data=>{
       this.userData=data;

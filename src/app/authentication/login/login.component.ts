@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
     this.authService.attemptAuth(this.loginInfo).subscribe(
       data => {
         this.loading = false;
-        console.log(data);
+        // console.log(data);
         sessionStorage.setItem('authenticaterUser',this.form.username);
         this.tokenStorage.saveUsername(data.username);
         this.tokenStorage.saveToken(data.accessToken);
@@ -55,8 +55,8 @@ export class LoginComponent implements OnInit {
         this.authService.getMyUserId().subscribe(response => {
           this.userID= response.body['message'];
           // console.log(response.body['message']);
-          console.log(this.userID);
-          console.log(this.userID);
+          // console.log(this.userID);
+          // console.log(this.userID);
           sessionStorage.setItem('userId',this.userID);
         })
         
@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
   isUserLoggedIn()
   {
     let user = sessionStorage.getItem('authenticaterUser');
-    console.log(user);
+    // console.log(user);
     return !(user===null);
   }
   

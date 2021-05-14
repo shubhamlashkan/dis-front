@@ -15,6 +15,7 @@ export class AdministrationService {
   }
    
   apiUrl: string = apiSetting.apiUser +'/task';
+  // apiAdministration:string=apiSetting.apiAdministration;
   
   
   httpOptions = {
