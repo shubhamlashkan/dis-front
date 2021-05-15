@@ -7,13 +7,13 @@ export class Urls{
 //  public static gatewayUrl= 'http://localhost';
 //  public static userUrl= 'http://localhost';
 // public static moodle= 'http://localhost';
- public static gatewayUrl= 'http://dbc0454d7508.ngrok.io';
- public static userUrl= 'http://29d004a700c0.ngrok.io';
- public static academics= 'http://453a38b99548.ngrok.io';
- public static administration="http://9c19cb555a8d.ngrok.io";
- public static infrastructure="http://c8e5fadc5190.ngrok.io";
+ public static gatewayUrl= 'http://37079bf56a78.ngrok.io';
+ public static userUrl= 'http://d770057fe976.ngrok.io';
+ public static academics= 'http://d016c5e868a5.ngrok.io';
+ public static administration="http://5458438e34a2.ngrok.io";
+ public static infrastructure="http://82cb7a53eff5.ngrok.io";
   
-public static moodle= 'http://346ac437db3f.ngrok.io';
+public static moodle= 'http://710a22ddbb37.ngrok.io';
 
 
 

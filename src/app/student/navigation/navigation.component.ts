@@ -15,7 +15,7 @@ export class NavigationComponent implements OnInit {
   subscription: Subscription;
 
   constructor(private notificationsService : NotificationsService,private auth: TokenStorageService,private router : Router,private sidenav : SidenavService) { }
-  unreadNotifications : Number
+  unreadNotifications=0;
  
   ngOnInit() {
     this.refresh()

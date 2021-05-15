@@ -231,13 +231,15 @@ export class ComplaintsService {
   // getPermissions():Observable<any>{
   //   return this.http.get(`${this.baseUrl}/addComplaintPermission`);
   // }
-  getLocation():Observable<any>{
-    return this.http.get('http://localhost:8080/dis/infrastructure/getLocationDropDown');
-  }
+  private baseUrl1=apiSetting.apiInfrastructure;
 
+  getLocation():Observable<any>{
+    return this.http.get(this.baseUrl1+'/getLocationDropDown');
+  }
+  
   //add faculty resource
   addFacultyResource(info : any):Observable<any>{
-    return this.http.post('http://localhost:8080/dis/administration/addFacultyResourceRequest',info,httpOptions);
+    return this.http.post(this.baseUrl+'/addFacultyResourceRequest',info,httpOptions);
   }
 
   editComplaints(info : any):Observable<any>{
@@ -253,17 +255,19 @@ export class ComplaintsService {
   getTelephoneComplaintDownloadReport(complaintType : string, createdDate : string, location : string):Observable<any>{
     return this.http.get(`${this.baseUrl}/getTelephoneComplaintsOnDate?complaintType=${complaintType}&createdDate=${createdDate}&location=${location}`);
   }
+  
+  private baseUrl2=apiSetting.apiGateway;
 
   getStaffFacultyList():Observable<any>{
-    return this.http.get("http://localhost:8080/dis/getStaffFacultyList");
+    return this.http.get(this.baseUrl2+"/getStaffFacultyList");
   }
 
   getInfraInchargeDetails():Observable<any>{
-    return this.http.get("http://localhost:8080/dis/infrastructure/infrastructure/getInfraInchargeDetails");
+    return this.http.get(this.baseUrl1+"/infrastructure/getInfraInchargeDetails");
   }
 
   updateInfraIncharge(data: any) {
-    return this.http.post("http://localhost:8080/dis/infrastructure/infrastructure/updateInfraInchargeDetails", data, httpOptions);
+    return this.http.post(this.baseUrl1+"/infrastructure/updateInfraInchargeDetails", data, httpOptions);
   }
 
 }
