@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { apiSetting } from '../urls/apisetting';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -11,7 +12,7 @@ const httpOptions = {
 export class ProfileService {
 
 
-  private baseUrl = "http://localhost:8080/dis/user";
+  private baseUrl = apiSetting.apiUser;
   constructor(private http: HttpClient) { }
 
   getProfileUserId(): Observable<any> {

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { Urls } from '../urls/urls';
+import { apiSetting } from '../urls/apisetting';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json'})
 };
@@ -15,7 +16,7 @@ export class ComplaintsService {
   urls = new Urls();
   private mainUrl = this.urls.mainurl;
   // private baseUrl = mainurl+'/dis/administrationn'
-  private baseUrl="http://localhost:8080/dis/administration";
+  private baseUrl=apiSetting.apiAdministration;
   //private baseUrl="http://localhost:8083";
   constructor(private http: HttpClient) { }
 
