@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FacultyService } from 'src/app/API_Service/faculty.service';
 import { JsonToCSVService } from 'src/app/API_Service/json-to-csv.service';
-import { TwoDToOneDService } from 'src/app/API_Service/two-dto-one-d.service';
 import * as XLSX from 'xlsx';
 
 @Component({
@@ -22,7 +21,7 @@ export class GradesComponent implements OnInit {
   showAll:boolean;
   graderReportGradeItems:any[];
 
-  constructor(private facultyService:FacultyService,private TwoDToOneD: TwoDToOneDService,private jsonToCSV: JsonToCSVService) { }
+  constructor(private facultyService:FacultyService,private jsonToCSV: JsonToCSVService) { }
  
   ngOnInit() {
     this.selectItem="0"

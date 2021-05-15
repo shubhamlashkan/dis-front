@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { apiSetting } from '../urls/apisetting';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json'})
@@ -11,12 +12,12 @@ const httpOptions = {
 })
 export class NotificationsService {
 
-  private baseUrl = 'http://localhost:8080/dis/user/userNotificationController';
-  private staffDataUrl = 'http://localhost:8080/dis/user/staffProfile';
+  private baseUrl = apiSetting.apiUser+'/userNotificationController';
+  private staffDataUrl = apiSetting.apiUser+'/staffProfile';
   constructor(private http :HttpClient) { }
 
   getMyNotifications(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/getAllNotifications`);
+    return this.http.get<any>(`${this.baseUrl}/getAllNotifications`);
   }
   markAsRead(notificationId : String): Observable<Object> {
     return this.http.get(`${this.baseUrl}/markAsRead/${notificationId}`);

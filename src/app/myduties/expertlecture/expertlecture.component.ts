@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormArray, FormControl, NgForm } from "@angular/forms";
 import { ExpertlectureService } from "src/app/API_Service/expertlecture.service";
 import { ToastrManager } from 'ng6-toastr-notifications';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProjectguideallotmentService } from "src/app/API_Service/projectguideallotment.service";
+
 
 export class Expert {
 	constructor(
@@ -76,7 +77,7 @@ export class ExpertlectureComponent implements OnInit {
 	@ViewChild("f2") addExpertLectureForm: NgForm;
 	@ViewChild("f3") showExpertDetails: NgForm;
 
-	constructor(private expertService: ExpertlectureService, public toastr: ToastrManager) {
+	constructor(private expertService: ExpertlectureService, public toastr: ToastrManager, private projectGuideService: ProjectguideallotmentService) {
 		
 	}
 	paymentStatusList: Array<any> = [
@@ -105,6 +106,8 @@ export class ExpertlectureComponent implements OnInit {
 	notesheet: File;
 	editExpert = "None";
 	imagesList: any;
+	faculty:any[];
+	selectedCoordinator: any;
 
 	// editExpertLecture: any[];
 	// selectedCourse;
@@ -121,6 +124,8 @@ export class ExpertlectureComponent implements OnInit {
 	ngOnInit() {
 		this.refreshLectures();
 		this.selectedAudience = [];
+		this.getFaculty();
+		this.selectedCoordinator=null;
 		// this.editExpertLecture = [];
 	}
 	addExpert() {
@@ -137,6 +142,20 @@ export class ExpertlectureComponent implements OnInit {
 			}
 		);
 	}
+
+	getFaculty() {
+		this.projectGuideService.retrieveAllGuides().subscribe(
+			(response) => {
+				this.faculty = response.sort((a, b) =>
+					a.name > b.name ? 1 : -1
+				);
+			},
+			(error) => {
+				this.toastr.errorToastr(error.message,"Alert!", {toastTimeout: 3000});
+			}
+		);
+	}
+
 	onCheckboxChange(e, value) {
 		// console.log(value);
 		if (this.selectedAudience.includes(value)) {
@@ -444,10 +463,13 @@ export class ExpertlectureComponent implements OnInit {
 		this.addExpertLectureForm.form.value.expertDesignation = nameAndDesignation
 			.split("|")[1]
 			.trim();
-		if(this.selectedAudience.length!=0)
+			this.addExpertLectureForm.form.value.coordinator=this.selectedCoordinator;
+			if(this.selectedAudience.length!=0)
 			this.addExpertLectureForm.form.value.audience=this.selectedAudience.join(",");
 		else
 			this.addExpertLectureForm.form.value.audience="BE-I,BE-II,BE-III,BE-IV,ME-I,ME-II"
+		
+		console.log(this.addExpertLectureForm.form.value)
 		this.expertService
 			.addExpertLecture(this.addExpertLectureForm.form.value)
 			.subscribe(

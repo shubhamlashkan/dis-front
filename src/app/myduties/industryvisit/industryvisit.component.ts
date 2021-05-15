@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { ToastrManager } from "ng6-toastr-notifications";
 import { IndustryvisitService } from "src/app/API_Service/industryvisit.service";
+import { ProjectguideallotmentService } from "src/app/API_Service/projectguideallotment.service";
 
 
 export class IndustryVisits{
@@ -60,7 +61,7 @@ export class IndustryDetails{
 
 
 export class IndustryvisitComponent implements OnInit {
-	constructor(private industryVisitService: IndustryvisitService, public toastr: ToastrManager) {}
+	constructor(private industryVisitService: IndustryvisitService, public toastr: ToastrManager, private projectGuideService: ProjectguideallotmentService) {}
 	pendingVisits:IndustryVisits[];
 	upcomingVisits: IndustryVisits[];
 	completedVisits: IndustryVisits[];
@@ -72,12 +73,18 @@ export class IndustryvisitComponent implements OnInit {
 	editingVisit: UpdateIndustryDetails;
 	editingVisitID: string;
 	imagesList: any
+	selectedCoordinator1: any;
+	selectedCoordinator2: any;
+	faculty: any[];
 
 	@ViewChild("f1") addIndustryVisitForm: NgForm;
 
   activeTab=1;
 	ngOnInit() {
 		this.refreshVisits();
+		this.getFaculty();
+		this.selectedCoordinator1=null;
+		this.selectedCoordinator2=null;
 	}
   changeTab1() {
 		this.activeTab = 1;
@@ -105,6 +112,19 @@ export class IndustryvisitComponent implements OnInit {
 				}
 			);
 		}
+	}
+
+	getFaculty() {
+		this.projectGuideService.retrieveAllGuides().subscribe(
+			(response) => {
+				this.faculty = response.sort((a, b) =>
+					a.name > b.name ? 1 : -1
+				);
+			},
+			(error) => {
+				this.toastr.errorToastr(error.message,"Alert!", {toastTimeout: 3000});
+			}
+		);
 	}
 
 	updateRemarks(){
@@ -302,6 +322,8 @@ export class IndustryvisitComponent implements OnInit {
 		alert('Notification module in progress...')
 	}
 	addIndustryVisit(){
+		this.addIndustryVisitForm.form.value.coordinator1=this.selectedCoordinator1;
+		this.addIndustryVisitForm.form.value.coordinator2=this.selectedCoordinator2;
 		this.industryVisitService.addIndustryVisit(this.addIndustryVisitForm.form.value).subscribe(
 			(response) => {
 				this.refreshPendingVisits();

@@ -12,7 +12,7 @@ import { apiSetting } from '../urls/apisetting';
     providedIn: 'root'
   }) 
 export class LeaveService{
-  private baseUrl=`${apiSetting.apiUser}`;
+  private baseUrl=apiSetting.apiUser;
   // private baseUrl="http://3.17.182.120:8081";
   constructor(private http: HttpClient) { }
 

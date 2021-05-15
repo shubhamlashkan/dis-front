@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { apiSetting } from '../urls/apisetting';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SemesterSubjectsService {
 
-  private baseUrl = 'http://localhost:8082/student';
+  private baseUrl = apiSetting.apiAcademics+'/student';
 
   subjects: Observable<any>;
   subjectsArray: any[];

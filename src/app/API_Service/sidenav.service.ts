@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Urls } from '../urls/urls';
+import { apiSetting } from '../urls/apisetting';
 @Injectable({
   providedIn: 'root'
 })
 export class SidenavService {
   urls = new Urls();
-  private baseUrl = this.urls.mainurl;
+  private baseUrl = apiSetting.apiUser;
   constructor(private http : HttpClient) { }
   getSideNavData():Observable<any>{
-    return this.http.get('http://13.126.254.128:8081/dis/user/getSideNavigation');
+    return this.http.get(`${this.baseUrl}+/dis/user/getSideNavigation`);
   }
 }

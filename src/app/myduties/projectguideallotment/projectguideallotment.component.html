@@ -242,7 +242,7 @@
 													name="choose1"
 													required
 												>
-													<!-- <option value="starter" selected>Choose Guide</option>  -->
+													<option [ngValue]="null" selected>Select Guide</option> 
 													<option
 														*ngFor="let g of guides"
 														[ngValue]="g"
@@ -263,7 +263,7 @@
 													name="choose2"
 													required
 												>
-													<!-- <option value="starter" selected>Choose Mentor</option>  -->
+													<option [ngValue]="null" selected>Select Co-guide</option> 
 													<option
 														*ngFor="let g of guides"
 														[ngValue]="g"

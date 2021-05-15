@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { apiSetting } from '../urls/apisetting';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json'})
@@ -11,8 +12,8 @@ const httpOptions = {
 })
 export class CalendarService {
 
-  private baseUrl = 'http://localhost:8080/dis/user/calendar';
-  private staffDataUrl = 'http://localhost:8080/dis/user/staffProfile';
+  private baseUrl = apiSetting.apiUser+'/calendar';
+  private staffDataUrl = apiSetting.apiUser+'/dis/user/staffProfile';
 
   constructor(private http: HttpClient) { }
 
@@ -57,7 +58,6 @@ export class CalendarService {
   }
 
   deleteGroup(gids: string[]): Observable<any>{
-    console.log(gids);
     return this.http.delete(`${this.baseUrl}/deleteGroup?groupId=` + gids)
   }
 }

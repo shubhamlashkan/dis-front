@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
         this.tokenStorage.saveUsername(data.username);
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveAuthorities(data.authorities);
-        console.log(data);
+        // console.log(data);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getAuthorities();
@@ -78,7 +78,7 @@ export class LoginComponent implements OnInit {
     this.authService.validateUser().subscribe(
       tempData => {
         this.router.navigateByUrl('/' + tempData);
-       console.log(tempData);
+      //  console.log(tempData);
         sessionStorage.setItem('userType',tempData);
       }
     );

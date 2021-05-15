@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { FacultyService } from "src/app/API_Service/faculty.service";
+import { ToastrManager } from 'ng6-toastr-notifications';
 import * as XLSX from "xlsx";
+
 @Component({
   selector: "app-coursework",
   templateUrl: "./coursework.component.html",
@@ -23,13 +25,16 @@ export class CourseworkComponent implements OnInit {
   selectedGradeItem=[];
   selectedTagName=[];
   currentTab="CW";
-  constructor(private facultyService: FacultyService) {}
+  finalTagName=[];
+  automatic=true;
+
+  constructor(private facultyService: FacultyService, public toastr: ToastrManager) {}
 
   ngOnInit() {
     this.selectedGradeItem=[];
     this.selectedTagName=[];
+    this.finalTagName=[];
     this.tags = {};
-    this.per = [];
     this.show = false;
     this.facultyService.getAllCourses().subscribe((data) => {
       this.coursename = data;
@@ -44,10 +49,20 @@ export class CourseworkComponent implements OnInit {
 
   changeTab1(){
     this.currentTab="CW";
+    this.selectedGradeItem=[];
+    this.selectedTagName=[];
+    this.finalTagName=[];
+    this.tags = {};
+    this.show = false;
   }
 
   changeTab2(){
     this.currentTab="SW";
+    this.selectedGradeItem=[];
+    this.selectedTagName=[];
+    this.finalTagName=[];
+    this.tags = {};
+    this.show = false;
   }
 
   checkTab(){
@@ -78,6 +93,13 @@ export class CourseworkComponent implements OnInit {
       for (var i = 0; i < this.graderReport[0].length; i++)
           this.tags[this.graderReport[0][i].tagRawName].push(this.graderReport[0][i].gradeItemName);
     });
+  }
+
+  disableFeature(e){
+    if(this.automatic==true)
+      this.automatic=false
+    else
+      this.automatic=true
   }
 
   onCheckboxChange(e, value, tagName) {
@@ -144,7 +166,6 @@ export class CourseworkComponent implements OnInit {
       }
       
       }
-    console.log(marksByTag);
     return marksByTag;
   }
 
@@ -162,7 +183,7 @@ export class CourseworkComponent implements OnInit {
       for (var j = 0; j < weight.length; j++){
         sum=sum+(weight[j]/100)*marks[i][j]
       }
-      scores.push(totalWeight*sum)
+      scores.push(parseFloat((totalWeight*sum).toFixed(2)))
     }
     return scores;
   }
@@ -180,10 +201,13 @@ export class CourseworkComponent implements OnInit {
   }
 
   calculateMarks(){
+    this.show=false;
     var weightArray=this.weightageForm.form.value;
     var grouped={};
+    this.finalTagName=[];
     for (const [key, value] of Object.entries(weightArray)) {
       if(this.selectedTagName.includes(key)){
+        this.finalTagName.push(key)
         grouped[key]={items:[],weight:value,itemWeightage:[]}
         for (const [key2, value2] of Object.entries(weightArray))
           if(this.tags[key].includes(key2)){
@@ -192,15 +216,43 @@ export class CourseworkComponent implements OnInit {
           } 
       }
     }
+    const arrSum = (arr) => arr.reduce((a, b) => a + b, 0);
+    var s=[];
+    var check=0;
+    for(const key in grouped)
+      s.push(grouped[key].weight);
+    check=arrSum(s);
+    if(check!=100){
+      this.toastr.errorToastr("Percentage of tag names is not adding up to 100%","Alert!", {toastTimeout: 3000});
+      return;
+    }
+    check=0;
+    var flag=0;
+    for(const key in grouped){
+      check=arrSum(grouped[key].itemWeightage)
+      if(check!=100){
+        flag=1;
+        this.toastr.errorToastr("Percentage of grading items under "+key+" is not adding up to 100%","Alert!", {toastTimeout: 5000});
+      }
+    }
+    if(flag==1)
+      return;
     
     var totalScore=[];
     
     for(const key in grouped){
-      grouped[key].itemWeightage.sort(function(a, b){return b - a});
-      var dataByTag=this.bestOf(grouped[key].items);
+      if(this.automatic==true){
+        var dataByTag;
+        grouped[key].itemWeightage.sort(function(a, b){return b - a});
+        dataByTag=this.bestOf(grouped[key].items);
+      }
+      else{
+        dataByTag = this.getDataGroupedByTag(grouped[key].items);
+      }
+
       var scores=this.calculateScore(dataByTag, grouped[key].itemWeightage, grouped[key].weight);
       for (var i = 0; i < this.graderReport.length; i++)
-        this.graderReport[i].key = scores[i];
+        this.graderReport[i][key] = scores[i];
       totalScore.push(scores);
     }
     var answer=this.sumArray(totalScore);
@@ -217,36 +269,7 @@ export class CourseworkComponent implements OnInit {
     this.show = true;
   }
 
-  getCW() {
-    var sum = 0;
-    const arrSum = (arr) => arr.reduce((a, b) => a + b, 0);
-    sum = arrSum(this.per);
-    if (sum < 100) {
-      alert("sum is less than 100");
-      return;
-    } else if (sum > 100) {
-      alert("sum is greater than 100");
-      return;
-    } else {
-      this.show = true;
-      this.facultyService
-        .getGraderReport(this.courseId, 0)
-        .subscribe((data) => {
-          console.log(data);
-          this.graderReport = data;
-          this.graderReportGradeItems = this.graderReport[0];
-
-          for (let i in data) {
-            var temp = 0;
-            for (let j = 0; j < data[i].length - 1; j++) {
-              temp = temp + (this.per[j] * data[i][j + 1].percentage) / 100;
-            }
-            this.graderReport[i].CW = temp;
-            console.log(temp);
-          }
-        });
-    }
-  }
+ 
   getCSV(tableId) {
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     let element = document.getElementById(tableId);

@@ -2,7 +2,7 @@
  
   <div class="profile-icon"><img src="assets/images/profile-pic_02.jpg" alt=""/>
   </div>
-  <div class="txt-info main">
+  <div class="txt-info main" *ngIf="userData">
 
     <h4 style="font-size: 20px;">Welcome {{userData.name}}</h4>
 

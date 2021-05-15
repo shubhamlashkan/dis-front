@@ -4,8 +4,6 @@ import { FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {apiSetting} from '../urls/apisetting';
-import { PanelOfPractical } from '../Model/panelOfPractical.model';
-import { PanelOfTheory } from '../Model/panelOfTheory.model';
 
 @Injectable({
     providedIn: 'root'

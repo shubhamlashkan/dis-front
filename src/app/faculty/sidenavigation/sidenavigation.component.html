@@ -2,12 +2,12 @@
   <div class="profile-icon"><img src="assets/images/img_avatar3.png" alt="" /></div>
   <div class="txt-info main">
 
-    <h4 style="font-size: 20px;">Welcome {{userData.name}}</h4>
+    <h4 style="font-size: 20px;" *ngIf="userData">Welcome {{userData.name}}</h4>
 
     <!-- <h5>Last Login: {{userData.lastloggedIn}}</h5> -->
-    <h5>Designation : {{userData.currentDesignation}}</h5>
-    <div class="profile-links">
-      <a href="#">username: {{userData.username}}</a>
+    <h5 *ngIf="userData">Designation : {{userData.currentDesignation}}</h5>
+    <div class="profile-links" *ngIf="userData">
+      <a href="#" *ngIf="userData">username: {{userData.username}}</a>
     </div>
   </div>
 

@@ -14,9 +14,10 @@ import { switchMap } from 'rxjs/operators';
 export class NavigationComponent implements OnInit {
 
   subscription: Subscription;
+  unreadNotifications =0;
 
   constructor(private notificationsService : NotificationsService,private auth: TokenStorageService,private router : Router,private sidenav : SidenavService) { }
-  unreadNotifications : Number
+  
  
   ngOnInit() {
     this.refresh()

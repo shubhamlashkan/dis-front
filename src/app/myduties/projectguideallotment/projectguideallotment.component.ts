@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { ToastrManager } from "ng6-toastr-notifications";
 import { ProjectguideallotmentService } from "src/app/API_Service/projectguideallotment.service";
 import * as XLSX from "xlsx";
 
@@ -101,7 +102,7 @@ export class ProjectguideallotmentComponent implements OnInit {
 	editingBatch: Alloted;
 	year = new Date().getFullYear() - 2;
   courses: any[];
-	constructor(private projectGuideService: ProjectguideallotmentService) {}
+	constructor(private projectGuideService: ProjectguideallotmentService, public toastr: ToastrManager) {}
 	coursesUG: Array<any> = [
 		{
 			name: "BE-I",
@@ -144,15 +145,12 @@ export class ProjectguideallotmentComponent implements OnInit {
 		this.initilizeUG();
 		this.getGuides();
 	}
-	print() {
-		console.log(this.selectedYear);
-	}
 	changeData() {
 		this.batchStudents = [];
 		this.getRemainingStudents();
 		this.refreshAlloted();
-    this.myGuide1=null;
-    this.myGuide2=null;
+    	this.myGuide1=null;
+    	this.myGuide2=null;
 	}
 
 	getGuides() {
@@ -163,7 +161,7 @@ export class ProjectguideallotmentComponent implements OnInit {
 				);
 			},
 			(error) => {
-				console.log(error);
+				this.toastr.errorToastr(error.message,"Alert!", {toastTimeout: 3000});
 			}
 		);
 	}
@@ -234,11 +232,11 @@ export class ProjectguideallotmentComponent implements OnInit {
 		delete batch.batchId;
 		this.projectGuideService.createBatch(batch).subscribe(
 			(response) => {
-				console.log(response);
+				this.toastr.successToastr(response.message, 'Success!', {toastTimeout: 3000});
 				this.changeData();
 			},
 			(error) => {
-				console.log(error);
+				this.toastr.errorToastr(error.message,"Alert!", {toastTimeout: 3000});
 			}
 		);
 		this.batchStudents = [];
@@ -246,11 +244,11 @@ export class ProjectguideallotmentComponent implements OnInit {
 	updateBatch(batch) {
 		this.projectGuideService.updateBatch(batch).subscribe(
 			(response) => {
-				console.log(response);
+				this.toastr.successToastr(response.message, 'Success!', {toastTimeout: 3000});
 				this.changeData();
 			},
 			(error) => {
-				console.log(error);
+				this.toastr.errorToastr(error.message,"Alert!", {toastTimeout: 3000});
 				this.changeData();
 			}
 		);
@@ -290,7 +288,7 @@ export class ProjectguideallotmentComponent implements OnInit {
 				);
 		}
 
-		const fileName ="GuideAllotment" +"_"+this.selectedCourse +"_"+this.selectedYear +"_"+".xlsx";
+		const fileName ="GuideAllotment" +"_"+this.selectedCourse +"_"+this.selectedYear+".xlsx";
 		const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exportArray);
 		const wb: XLSX.WorkBook = XLSX.utils.book_new();
 		XLSX.utils.book_append_sheet(wb, ws, "test");

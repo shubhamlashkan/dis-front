@@ -10,7 +10,7 @@ import { apiSetting } from '../urls/apisetting';
 })
 export class StudentSignUpService {
 
-  private baseUrl = 'http://localhost:8090/dis';
+  private baseUrl = apiSetting.apiGateway+'/dis';
 
 
   constructor(private http: HttpClient) { }

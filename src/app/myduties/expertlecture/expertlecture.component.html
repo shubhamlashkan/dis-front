@@ -371,14 +371,21 @@
               </div>
               <div class="form-group">
                 <label for="coordinator">Coordinator</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="coordinator"
-                  name="coordinator"
-                  required
-                  ngModel
-                />
+                <select
+													class="form-control"
+													id="coordinator"
+													name="coordinator"
+                          [(ngModel)]="selectedCoordinator"
+													required
+												>
+													<option [ngValue]="null">Select Coordinator</option> 
+													<option
+														*ngFor="let f of faculty"
+														[ngValue]="f.name"
+													>
+														{{ f.name }}, {{ f.currentDesignation}}
+													</option>
+												</select>
               </div>
               <div class="form-group">
                 <label>Audience </label>
@@ -1066,13 +1073,20 @@
             <form #f7="ngForm" *ngIf="editingLecture">
               <div class="form-group">
                 <label for="coordinator">Coordinator</label>
-                <input
-                  class="form-control"
-                  id="coordinator"
-                  [(ngModel)]="editingLecture.coordinator"
-                  name="coo"
-                  required
-                />
+                  <select
+                            class="form-control"
+                            id="coordinator"
+                            name="coordinator"
+                            [(ngModel)]="editingLecture.coordinator"
+                            required
+                          >
+                            <option
+                              *ngFor="let f of faculty"
+                              [ngValue]="f.name"
+                            >
+                              {{ f.name }}, {{ f.currentDesignation}}
+                            </option>
+                          </select>
               </div>
               <div class="form-group">
                 <label for="audience">Audience</label>
