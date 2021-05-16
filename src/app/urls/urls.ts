@@ -3,17 +3,17 @@ export class Urls{
 
    
    public static frontendUrl = 'http://localhost:4200'; 
-//     public static backendUrl = 'http://localhost';
-//  public static gatewayUrl= 'http://localhost';
-//  public static userUrl= 'http://localhost';
-// public static moodle= 'http://localhost';
- public static gatewayUrl= 'http://37079bf56a78.ngrok.io';
- public static userUrl= 'http://d770057fe976.ngrok.io';
- public static academics= 'http://d016c5e868a5.ngrok.io';
- public static administration="http://5458438e34a2.ngrok.io";
- public static infrastructure="http://82cb7a53eff5.ngrok.io";
+    public static backendUrl = 'http://localhost';
+ public static gatewayUrl= 'http://localhost';
+ public static userUrl= 'http://localhost';
+public static moodle= 'http://localhost';
+//  public static gatewayUrl= 'http://bd2f30b4a031.ngrok.io';
+//  public static userUrl= 'http://5dc8d88ae4da.ngrok.io';
+//  public static academics= 'http://d8336b452cae.ngrok.io';
+//  public static administration="http://14ab1e75aee1.ngrok.io";
+//  public static infrastructure="http://662bcc018dbe.ngrok.io";
   
-public static moodle= 'http://710a22ddbb37.ngrok.io';
+// public static moodle= 'http://b4a48880e2eb.ngrok.io';
 
 
 

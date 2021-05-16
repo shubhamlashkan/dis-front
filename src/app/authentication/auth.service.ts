@@ -27,7 +27,7 @@ export class AuthService {
   }
 
   attemptAuth(credentials: AuthLoginInfo): Observable<JwtResponse> {
-    console.log(credentials)
+    // console.log(credentials)
     return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions);
   }
 

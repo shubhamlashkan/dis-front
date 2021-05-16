@@ -259,7 +259,7 @@ export class ComplaintsService {
   private baseUrl2=apiSetting.apiGateway;
 
   getStaffFacultyList():Observable<any>{
-    return this.http.get(this.baseUrl2+"/getStaffFacultyList");
+    return this.http.get(this.baseUrl2+"/dis/getStaffFacultyList");
   }
 
   getInfraInchargeDetails():Observable<any>{

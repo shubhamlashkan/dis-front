@@ -2,63 +2,105 @@
 <link href="../../../assets/css/tooltip.css" rel="stylesheet" type="text/css" />
 <script src="js/tooltip.js" type="text/javascript"></script>
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script
+  type="text/javascript"
+  src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+></script>
 
-<script type="text/javascript" src="../../../assets/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../../assets/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../../../assets/js/bootstrap-datepicker.js"></script>  
+<script
+  type="text/javascript"
+  src="../../../assets/js/bootstrap.bundle.min.js"
+></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+  crossorigin="anonymous"
+></script>
+<script
+  type="text/javascript"
+  src="../../../assets/js/bootstrap.min.js"
+></script>
+<script
+  type="text/javascript"
+  src="../../../assets/js/bootstrap-datepicker.js"
+></script>
 
 <!--grid script-->
-<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
-<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+<link
+  rel="stylesheet"
+  href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"
+/>
+<script
+  type="text/javascript"
+  src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"
+></script>
 
 <script>
-  $(document).ready(function(){
-    $('#myTable').dataTable();
+  $(document).ready(function () {
+    $("#myTable").dataTable();
   });
-</script> 
+</script>
 <!--END grid script-->
-
 
 <div class="container">
   <div class="row">
-
-<!--Start Left Panel-->
+    <!--Start Left Panel-->
     <div class="col-lg-3 profile-info">
       <app-sidenavigation></app-sidenavigation>
-     
     </div>
 
-  <!--End Left Panel-->
-
+    <!--End Left Panel-->
 
     <!--Start Right Panel-->
     <div class="col-lg-9 kyc-colm user-management">
       <div class="kyc-section rewards-section reports-sectn">
-      <!--Calendar comes in below div-->
-      <ul class="nav nav-pills mb-3 nav-fill" id="pills-tab" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Calender</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Time Table</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-schemesyllabus" role="tab" aria-controls="pills-profile" aria-selected="false">Time Table</a>
-        </li>
-
-</ul>
+        <!--Calendar comes in below div-->
+        <ul class="nav nav-pills mb-3 nav-fill" id="pills-tab" role="tablist">
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              id="pills-home-tab"
+              data-toggle="pill"
+              href="#pills-home"
+              role="tab"
+              aria-controls="pills-home"
+              aria-selected="true"
+              >Calender</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              id="pills-profile-tab"
+              data-toggle="pill"
+              href="#pills-profile"
+              role="tab"
+              aria-controls="pills-profile"
+              aria-selected="false"
+              >Time Table</a
+            >
+          </li>
+        </ul>
         <div class="tab-content" id="pills-tabContent">
-        <div class="tab-pane" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-          <br>	
-          <div id='calendar'>
-            <app-calendar></app-calendar>
+          <div
+            class="tab-pane active"
+            id="pills-home"
+            role="tabpanel"
+            aria-labelledby="pills-home-tab"
+          >
+            <br />
+            <div id="calendar">
+              <app-calendar></app-calendar>
+            </div>
           </div>
-        </div>
-        <div class="tab-pane show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-          <br>	
-          <div class="table-responsive">
+          <div
+            class="tab-pane show"
+            id="pills-profile"
+            role="tabpanel"
+            aria-labelledby="pills-profile-tab"
+          >
+            <br />
+            <div class="table-responsive">
               <table class="table table-bordered table-striped">
                 <thead class="">
                   <tr>
@@ -97,7 +139,6 @@
                   </tr>
                   <tr>
                     <th scope="row">1:00-2:00</th>
-
                   </tr>
                   <tr>
                     <th scope="row">2:00-3:00</th>
@@ -134,15 +175,18 @@
                 </tbody>
               </table>
             </div>
-            <div style="color:#1488CC;"><a href="#" style="float:right;"><i class="fa fa-download fa-fw"></i>Week time table</a></div>
+            <div style="color: #1488cc">
+              <a href="#" style="float: right"
+                ><i class="fa fa-download fa-fw"></i>Week time table</a
+              >
+            </div>
+          </div>
         </div>
-        
-        </div>
- 
-    <!--End Right Panel-->
 
-  <!--Notification Panel starts-->
-<!--
+        <!--End Right Panel-->
+
+        <!--Notification Panel starts-->
+        <!--
   <div class="notification heading">
   <br/>
   <br/>
@@ -263,12 +307,10 @@
   </div>
   <a href="#" class="float-right">View All</a>
   -->
-  <!--Notification Panel Ends-->
+        <!--Notification Panel Ends-->
       </div>
-
     </div>
 
-  <!--End Right Panel-->
-
+    <!--End Right Panel-->
   </div>
 </div>

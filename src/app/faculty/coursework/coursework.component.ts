@@ -27,6 +27,7 @@ export class CourseworkComponent implements OnInit {
   currentTab="CW";
   finalTagName=[];
   automatic=true;
+  grouped:any;
 
   constructor(private facultyService: FacultyService, public toastr: ToastrManager) {}
 
@@ -216,6 +217,7 @@ export class CourseworkComponent implements OnInit {
           } 
       }
     }
+    this.grouped=grouped;
     const arrSum = (arr) => arr.reduce((a, b) => a + b, 0);
     var s=[];
     var check=0;

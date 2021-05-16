@@ -238,11 +238,11 @@
                   <th scope="col">Student Name</th>
                   <th scope="col">Course</th>
                   <ng-container *ngFor="let item of finalTagName">
-                    <th>{{item}}</th>
+                    <th>{{item}} ({{grouped[item].weight}}%)</th>
                   </ng-container>
                   <!-- <th scope="col" *ngFor="let item of graderReportGradeItems">{{item.gradeItemName}}  -->
                   <!-- </th> -->
-                  <th>{{currentTab}}</th>
+                  <th>{{currentTab}}(100%)</th>
                 </tr>
               </thead>
               <tbody>
