@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MytaskService } from './mytask.service';
 import { searchTask } from './myTaskModel';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import * as XLSX from "xlsx";
 import * as jsPDF from 'jspdf';
 @Component({
   selector: 'app-mytask',
@@ -61,5 +62,22 @@ export class MytaskComponent implements OnInit {
   //   doc.save('tableToPdf.pdf');
   // }
 
-  
+  getCSV(tableId) {
+		let element = document.getElementById(tableId);
+		const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+		ws['!cols'].push({ width: 20 },{ width: 20 },{ width: 30 },{ width: 30 },{ width: 30 })
+		/* generate workbook and add the worksheet */
+		const wb: XLSX.WorkBook = XLSX.utils.book_new();
+			
+ 
+		/* generate workbook and add the worksheet */
+	
+		XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+	
+		/* save to file */
+	
+		XLSX.writeFile(wb, `${tableId}.xlsx`);
+	  }
+
+
 }

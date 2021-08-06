@@ -1,19 +1,18 @@
 <div class="container" >
   <!-- <div id="pdfTable" #pdfTable> -->
-  <table  class="table table-striped">
+  <table  class="table table-striped"
+  id= "taskToDoReport">
   <!-- <h1>{{name}}</h1> -->
-    <tr>
-
+  <thead>
+    <tr class="bg-light">  
       <th>S. No.</th>
       <th>Assigned Date</th>
-
       <th>Task Name</th>
-
       <th>Description</th>
-
       <th> Deadline</th>
       <th></th>
     </tr>
+  </thead>
     <tr *ngFor="let task of showByStaffId; let i = index">
       <td>
         {{i+1}}
@@ -56,7 +55,11 @@
       </td>
     </tr>
   </table>
-  
+  <br />
+  <button (click)="getCSV('taskToDoReport')" class="btn btn-success mb-5">
+    Export as csv
+  </button>
+  <br />
 <!-- </div> -->
 </div>
 <!-- <div><button class="btn btn-primary" (click)="downloadAsPDF()">Save </button></div> -->

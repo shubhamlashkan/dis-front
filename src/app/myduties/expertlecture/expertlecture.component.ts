@@ -3,7 +3,7 @@ import { FormArray, FormControl, NgForm } from "@angular/forms";
 import { ExpertlectureService } from "src/app/API_Service/expertlecture.service";
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { ProjectguideallotmentService } from "src/app/API_Service/projectguideallotment.service";
-
+import * as XLSX from "xlsx";
 
 export class Expert {
 	constructor(
@@ -65,7 +65,17 @@ export class UpdateLecture {
 		public date
 	) {}
 }
-
+export class Data {
+	constructor(
+		public Topic: string,
+		public Date: string,
+		public ExpertName: string,
+		public Designation: string,
+		public Coordinator: string,
+		public Audience: string,
+		public Status: string
+	) {}
+}
 
 @Component({
 	selector: "app-expertlecture",
@@ -484,4 +494,57 @@ export class ExpertlectureComponent implements OnInit {
 				}
 			);
 	}
+
+	exportToCSV() {
+		let exportArray = [];
+		for (var i = 0; i < this.pendingLectures.length; i++) {
+			let obj = this.pendingLectures[i];
+			
+            exportArray.push(new Data(obj.topic,obj.date,obj.expertName,obj.expertDesignation,obj.coordinator,obj.audience,obj.status));
+           
+          
+		}
+
+		const fileName ="PendingExpertLectureReport.xlsx";
+		const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exportArray);
+		const wb: XLSX.WorkBook = XLSX.utils.book_new();
+		XLSX.utils.book_append_sheet(wb, ws, "sheet1");
+		XLSX.writeFile(wb, fileName);
+	}
+
+
+	exportToExcel() {
+		let exportArray = [];
+		for (var i = 0; i < this.upcommingLectures.length; i++) {
+			let obj = this.upcommingLectures[i];
+			
+            exportArray.push(new Data(obj.topic,obj.date,obj.expertName,obj.expertDesignation,obj.coordinator,obj.audience,obj.status));
+           
+          
+		}
+
+		const fileName ="UpcomingExpertLectureReport.xlsx";
+		const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exportArray);
+		const wb: XLSX.WorkBook = XLSX.utils.book_new();
+		XLSX.utils.book_append_sheet(wb, ws, "sheet1");
+		XLSX.writeFile(wb, fileName);
+	}
+
+
+	getCSV(tableId) {
+		let element = document.getElementById(tableId);
+		const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+		ws['!cols'].push({ width: 20 },{ width: 20 },{ width: 30 },{ width: 30 },{ width: 30 },{ width: 30 },{ width: 30 })
+		/* generate workbook and add the worksheet */
+		const wb: XLSX.WorkBook = XLSX.utils.book_new();
+			
+ 
+		/* generate workbook and add the worksheet */
+	
+		XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+	
+		/* save to file */
+	
+		XLSX.writeFile(wb, `${tableId}.xlsx`);
+	  }
 }

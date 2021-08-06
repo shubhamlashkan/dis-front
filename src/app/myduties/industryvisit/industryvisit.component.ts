@@ -3,7 +3,7 @@ import { NgForm } from "@angular/forms";
 import { ToastrManager } from "ng6-toastr-notifications";
 import { IndustryvisitService } from "src/app/API_Service/industryvisit.service";
 import { ProjectguideallotmentService } from "src/app/API_Service/projectguideallotment.service";
-
+import * as XLSX from "xlsx";
 
 export class IndustryVisits{
 	constructor(
@@ -46,6 +46,17 @@ export class IndustryDetails{
 		public totalExpenditure,
 		public remarks
 
+	) {}
+}
+
+export class Data {
+	constructor(
+		public Date: string,
+		public Time: string,
+		public CompanyName: string,
+		public Coordinator1: string,
+		public Coordinator2: string,
+		public Participants: string
 	) {}
 }
 
@@ -334,5 +345,58 @@ export class IndustryvisitComponent implements OnInit {
 			}
 		);
 	}
+
+	exportToCSV() {
+		let exportArray = [];
+		for (var i = 0; i < this.pendingVisits.length; i++) {
+			let obj = this.pendingVisits[i];
+			
+            exportArray.push(new Data(obj.date,obj.time,obj.companyName,obj.coordinator1,obj.coordinator2,obj.participants));
+           
+          
+		}
+
+		const fileName ="PendingIndustryVisitReport.xlsx";
+		const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exportArray);
+		const wb: XLSX.WorkBook = XLSX.utils.book_new();
+		XLSX.utils.book_append_sheet(wb, ws, "sheet1");
+		XLSX.writeFile(wb, fileName);
+	}
+
+
+	exportToExcel() {
+		let exportArray = [];
+		for (var i = 0; i < this.upcomingVisits.length; i++) {
+			let obj = this.upcomingVisits[i];
+			
+			exportArray.push(new Data(obj.date,obj.time,obj.companyName,obj.coordinator1,obj.coordinator2,obj.participants));
+           
+          
+		}
+
+		const fileName ="UpcomingIndustryVisitReport.xlsx";
+		const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exportArray);
+		const wb: XLSX.WorkBook = XLSX.utils.book_new();
+		XLSX.utils.book_append_sheet(wb, ws, "sheet1");
+		XLSX.writeFile(wb, fileName);
+	}
+
+
+	getCSV(tableId) {
+		let element = document.getElementById(tableId);
+		const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+		ws['!cols'].push({ width: 20 },{ width: 20 },{ width: 30 },{ width: 30 },{ width: 30 },{ width: 30 },{ width: 30 })
+		/* generate workbook and add the worksheet */
+		const wb: XLSX.WorkBook = XLSX.utils.book_new();
+			
+ 
+		/* generate workbook and add the worksheet */
+	
+		XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+	
+		/* save to file */
+	
+		XLSX.writeFile(wb, `${tableId}.xlsx`);
+	  }
 
 }
