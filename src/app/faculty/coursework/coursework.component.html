@@ -120,7 +120,16 @@
 
                   <div class="alert alert-warning" *ngIf="automatic">
                     Automatically, higher weightage will be alloted to the best grading item.
-                  </div>
+                    </div>
+                    <div class="alert alert-warning" *ngIf="automatic">
+                    Note :- Before calculating CW/SW alot grades to every student grade item.
+                   </div>
+                   <div class="alert alert-warning" *ngIf="automatic">       
+                    first input box of every tag signifies overall % marks you want to give to particular tag for ex:- 30% for DM assgn tag
+                    </div>
+                    <div class="alert alert-warning" *ngIf="automatic">
+                      Further divide the overall %  for selected grade items of given tag so that it sum ups to 100. for Ex 70% for Ass 1 and 30% for Ass 2.
+                    </div>
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" (change)="disableFeature($event)">
                     <label class="form-check-label" for="flexCheckDefault">
@@ -145,6 +154,7 @@
                             required
                             ngModel
                           />
+                          
                         </div>
                         <ul *ngFor="let gradeItem of tagName.value">
                           <li *ngIf="selectedGradeItem.includes(gradeItem)">

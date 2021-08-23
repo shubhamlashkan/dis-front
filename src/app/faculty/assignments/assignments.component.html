@@ -25,7 +25,7 @@
               <option value="0">All</option>
               
             </select>
-            <span class="mx-1 my-5 h6">Activity Name</span><select class="form-select form-select-lg mx-2 my-5" aria-label=".form-select-lg example" [(ngModel)]="selectAssign">
+            <span class="mx-1 my-5 h6">Activity</span><select class="form-select form-select-lg mx-2 my-5" aria-label=".form-select-lg example" [(ngModel)]="selectAssign">
               <option *ngFor="let assign of assignments" value="{{assign.assignId}}" >{{assign.assignName}}</option>
               <option value="0">All</option>
             </select>
@@ -39,7 +39,7 @@
                   <th scope="col">Activity </th>
                   <th scope="col">Grades</th>
                   <th scope="col">Date of Creation</th>
-                  <th scope="col">Date of Submission</th>
+                  <th scope="col">Submission Status</th>
                 </tr>
               </thead> 
               <tbody>

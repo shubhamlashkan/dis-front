@@ -42,12 +42,9 @@ export class BarchartComponent implements OnInit {
      if(i==bars.length-1){
        return this.getChart(idname,label,percentage,color);
      }
-    }
-
-    
+    }  
   }
   getChart(idname,label,percentage,color){
-
     console.log(this.attend,this.total)
     this.overallAttendance=(this.attend/this.total)*100;
     this.overallAttendance=this.overallAttendance.toFixed(2);

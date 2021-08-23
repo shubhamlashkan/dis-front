@@ -8,7 +8,34 @@ import { Laboratory } from '../models/Laboratory';
 import { Others } from '../models/Others';
 import { FacultyRoom } from '../models/FacultyRoom';
 import { infraType } from '../models/infra';
+import * as XLSX from "xlsx";
 
+export class StockBillData {
+	constructor(
+		public SNo: number,
+		public BillNo: string,
+		public NameofSupplier: string,
+		public itemName: string,
+		public Dateofpurchase: Date,
+    public TotalPrice : number,
+    public cgst : number,
+    public sgst: number,
+    public warranty_period:number,
+    public specification :string,
+    public addressofsupplier:string,
+    public price : number,
+    public quantity : number
+	) {}
+}
+export class Data {
+	constructor(
+		public SNo: number,
+		public Name: string,
+		public Quantity: number,
+		public BillNo: string,
+		public RoomName: string,
+	) {}
+}
 @Component({
   selector: 'app-central-inventory',
   templateUrl: './central-inventory.component.html',
@@ -392,6 +419,40 @@ resetSearch()
   this.billDate = new Date();
   this.infraservice.getBill().subscribe(response=>{this.stockBill =response.body
   });
+}
+
+exportToCSV() {
+  let exportArray = [];
+  for (var i = 0; i < this.equipByRoom.length; i++) {
+    let obj = this.equipByRoom[i];
+    
+          exportArray.push(new Data(i+1,obj.equipmentName,obj.noOfEquipment,obj.billNo,obj.roomName));
+         
+        
+  }
+
+  const fileName ="ShowInventoryReport.xlsx";
+  const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exportArray);
+  const wb: XLSX.WorkBook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "sheet1");
+  XLSX.writeFile(wb, fileName);
+}
+
+exportToExcel() {
+  let exportArray = [];
+  for (var i = 0; i < this.stockBill.length; i++) {
+    let obj = this.stockBill[i];
+    
+          exportArray.push(new StockBillData(i+1,obj.billNo,obj.nameOfSupplier,obj.itmeName,obj.dateOfPurchase,obj.totalPrice,obj.cgst,obj.sgst,obj.warrantyPeriod,obj.specifications,obj.addressOfSupplier,obj.price,obj.quantity));
+         
+        
+  }
+
+  const fileName ="ShowStockBillReport.xlsx";
+  const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exportArray);
+  const wb: XLSX.WorkBook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "sheet1");
+  XLSX.writeFile(wb, fileName);
 }
 
 }

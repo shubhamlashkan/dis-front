@@ -76,7 +76,7 @@ export class GradesComponent implements OnInit {
     })
   }
   changeStudents(){
-    this.facultyService.getStudentOfCourse(this.courses[0].id).subscribe(data=>{
+    this.facultyService.getStudentOfCourse(this.selectCourse).subscribe(data=>{
       this.students=data;
       this.selectStudent=this.students[0].id;
     })

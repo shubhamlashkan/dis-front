@@ -309,8 +309,9 @@
       <div class="modal-body">
         <div  class="ScrollStyle">
           <table  class="table table-striped">
-        
-            <tr>
+            <thead>
+            <tr class="bg-light">
+            
         
               <th>S. No.</th>
               <th>Name</th>
@@ -323,6 +324,7 @@
               <th></th>
               <th></th>
             </tr>
+            </thead>
             <tr *ngFor="let f of equipByRoom; let i = index">
               <td>{{i+1}}</td>
               <td>{{f.equipmentName}}</td> 
@@ -350,7 +352,11 @@
             </tr>
             
           </table>
-          
+          <br />
+          <button (click)="exportToCSV()" class="btn btn-success mb-5">
+            Export as excel
+          </button>
+          <br />
         </div>
       </div>
       
@@ -552,9 +558,8 @@
             
            <div *ngIf="!showSearchedRecord" class="ScrollStyle">
             <table  class="table table-striped">
-        
-              <tr>
-          
+              <thead>
+                <tr class="bg-light">
                 <th>S. No.</th>
                 <th>Bill No.</th>
                 <th>Supplier Name</th>
@@ -568,6 +573,7 @@
                 <th></th>
                 <th></th>
               </tr>
+              </thead>
               <tr  *ngFor="let f of stockBill; let i = index">
                 <td>{{i+1}}</td>
                 <td>{{f.billNo}}</td> 
@@ -592,13 +598,16 @@
               </tr>
              
             </table>
-
+            <br />
+          <button (click)="exportToExcel()" class="btn btn-success mb-5">
+            Export as excel
+          </button>
+          <br />
            </div>
            <div *ngIf="showSearchedRecord" class="ScrollStyle">
             <table  class="table table-striped">
-        
-              <tr>
-          
+              <thead>
+                <tr class="bg-light">  
                 <th>S. No.</th>
                 <th>Bill No.</th>
                 <th>Supplier Name</th>
@@ -612,6 +621,7 @@
                 <th></th>
                 <th></th>
               </tr>
+              </thead>
               <tr  *ngFor="let f of stockBill; let i = index">
                 <td>{{i+1}}</td>
                 <td>{{f.billNo}}</td> 
@@ -636,7 +646,11 @@
               </tr>
              
             </table>
-
+            <br />
+          <button (click)="exportToExcel()" class="btn btn-success mb-5">
+            Export as excel
+          </button>
+          <br />
            </div>
           
         </div>
