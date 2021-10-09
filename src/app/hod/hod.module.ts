@@ -28,6 +28,7 @@ import { NotificationsComponent } from '../miscellaneous/notifications/notificat
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import {MatSelectModule} from '@angular/material/select';
 import {ReactiveFormsModule} from '@angular/forms';
+import { ClassAttendanceComponent } from './class-attendance/class-attendance.component';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import {ReactiveFormsModule} from '@angular/forms';
      DocumentsComponent,
      LeavesComponent,
      ToDoComponent,
-     MeetingsComponent],
+     MeetingsComponent,
+     ClassAttendanceComponent],
      providers: [CalendarComponent , NotificationsComponent],
      exports:[
       

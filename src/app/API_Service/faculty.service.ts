@@ -18,6 +18,18 @@ export class FacultyService {
   constructor(private http: HttpClient,private sessionStorageService:TokenStorageService) {
     
    }
+
+  getAllCategoryList():Observable<any>{
+    return this.http.get<any[]>(`${this.attendanceUrl}/getCourseCategoryList/`);
+  }
+  getAllCourseCategoryList(categoryId:any):Observable<any>{
+    return this.http.get<any[]>(`${this.attendanceUrl}/getCategoryCourseNameList/${categoryId}`);
+  }
+
+   getOverallAttendanceReport(categoryId:any,percentage:any):Observable<any>{
+    return this.http.get<any[]>(`${this.attendanceUrl}/getOverallStudentAttendancePercentageAndCount/${categoryId}/${percentage}`);
+  }
+ 
   getAllStudentAttendance(coursecode):Observable<any>{
     return this.http.get(`${this.attendanceUrl}/getAllStudentTotalAttendance/?coursecode=${coursecode}`);
   }

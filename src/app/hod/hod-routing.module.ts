@@ -21,13 +21,14 @@ import { ConventionalModule } from '../conventional/conventional.module';
 import { RouteGuardService } from '../route-guard.service';
 
 import { AlertsComponent } from './alerts/alerts.component';
-import { ClassAttendanceComponent } from '../faculty/class-attendance/class-attendance.component';
+
 import { FacultyModule } from '../faculty/faculty.module';
 
 import { AssignmentsComponent } from '../faculty/assignments/assignments.component';
 import { GradesComponent } from '../faculty/grades/grades.component';
 import { CourseworkComponent } from '../faculty/coursework/coursework.component';
 import { LeavesComponent } from './leaves/leaves.component';
+import { ClassAttendanceComponent } from './class-attendance/class-attendance.component';
 
 const routes: Routes = [
   { path: 'head',
