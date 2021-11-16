@@ -12,9 +12,10 @@ import { MescholarshipComponent } from './mescholarship/mescholarship.component'
 import { IndustryvisitComponent } from './industryvisit/industryvisit.component';
 import { ExpertlectureComponent } from './expertlecture/expertlecture.component';
 import { CourseSchemeModuleComponent } from './course-scheme-module/course-scheme-module.component';
-
 import { SchemeListComponent } from './course-scheme-module/scheme-list/scheme-list.component';
 import { ExternalListComponent } from './course-scheme-module/external-list/external-list.component';
+
+import {MatTableModule} from '@angular/material/table'; 
 
 @NgModule({
   imports: [
