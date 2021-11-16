@@ -18,10 +18,15 @@ export class FacultiesComponent implements OnInit {
    //Show All Faculty 
    getFacultyData(): void{
     this.faculty_service.getFacultyData()
-      .subscribe(response => this.fData= response.body);
-      console.log(this.fData);
+      .subscribe(response=> {
+        this.fData = response.body;
+        //console.log(response.body);
+      });
   }
-  
+  // getFacultyData(): void{
+  //   this.faculty_service.getFacultyData()
+  //     .subscribe(response => this.fData= response.body);
+  // }
   ngOnInit() {
    
   }

@@ -50,7 +50,7 @@ const routes: Routes = [
         loadChildren: () => InfrastructureModule
       },
       {
-        path:'myduties',
+        path:'myduties', //administration tab
         component: MydutiesNavigationComponent,
         loadChildren: () => MydutiesModule
       },
@@ -62,7 +62,6 @@ const routes: Routes = [
         path : 'documents',
         component : DocumentsComponent
       },
-      
       {
         path : 'profile',
         component : ProfileComponent,
