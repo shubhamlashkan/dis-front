@@ -12,7 +12,7 @@ import { ProjectguideallotmentComponent } from "./projectguideallotment/projectg
 import { ExpertlectureComponent } from "./expertlecture/expertlecture.component";
 import { IndustryvisitComponent } from "./industryvisit/industryvisit.component";
 import { MescholarshipComponent } from "./mescholarship/mescholarship.component";
-
+import { CourseSchemeModuleComponent } from "./course-scheme-module/course-scheme-module.component";
 
 
 
@@ -57,9 +57,10 @@ const routes: Routes = [
       },
       {
         path: 'mescholarship',component: MescholarshipComponent
+      },
+      {
+        path: 'coursescheme', component: CourseSchemeModuleComponent
       }
-      
-       
   ];
   
 @NgModule(
