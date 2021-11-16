@@ -19,7 +19,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
 import { SystemAdminComponent } from './system-admin/system-admin.component';
 
-import { CourseListComponent, DialogContentExampleDialog } from './course-scheme-module/course-list/course-list.component';
+import { CourseListComponent } from './course-scheme-module/course-list/course-list.component';
 
 
 @NgModule({
@@ -45,7 +45,6 @@ import { CourseListComponent, DialogContentExampleDialog } from './course-scheme
     ExternalListComponent, 
     SystemAdminComponent,
     CourseListComponent,
-    DialogContentExampleDialog
   ],
   
 })
