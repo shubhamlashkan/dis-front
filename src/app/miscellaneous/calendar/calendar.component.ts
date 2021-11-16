@@ -11,7 +11,7 @@ import { CalendarService } from './../../API_Service/calendar.service';
 import { MatDialog, MatDialogConfig} from '@angular/material';
 import { ShowEventDialogComponent } from './show-event-dialog.component';
 import { UserGroupsComponent } from './user-groups/user-groups.component';
-import { AriaDescriber } from '@angular/cdk/a11y';
+
 
 @Component({
   selector: 'app-calendar',
