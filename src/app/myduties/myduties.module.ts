@@ -17,6 +17,7 @@ import { SchemeListComponent } from './course-scheme-module/scheme-list/scheme-l
 import { ExternalListComponent } from './course-scheme-module/external-list/external-list.component';
 
 import {MatTabsModule} from '@angular/material/tabs';
+import { SystemAdminComponent } from './system-admin/system-admin.component';
 
 
 @NgModule({
@@ -28,6 +29,16 @@ import {MatTabsModule} from '@angular/material/tabs';
     FormsModule,
     MatTabsModule
   ],
-  declarations: [MydutiesNavigationComponent, MydutiesComponent, MytaskComponent, ProjectguideallotmentComponent, MescholarshipComponent, IndustryvisitComponent, ExpertlectureComponent, CourseSchemeModuleComponent, SchemeListComponent, ExternalListComponent]
+  declarations: [MydutiesNavigationComponent, 
+    MydutiesComponent, 
+    MytaskComponent, 
+    ProjectguideallotmentComponent, 
+    MescholarshipComponent, 
+    IndustryvisitComponent, 
+    ExpertlectureComponent, 
+    CourseSchemeModuleComponent, 
+    SchemeListComponent, 
+    ExternalListComponent, 
+    SystemAdminComponent]
 })
 export class MydutiesModule { }

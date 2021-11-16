@@ -13,6 +13,7 @@ import { ExpertlectureComponent } from "./expertlecture/expertlecture.component"
 import { IndustryvisitComponent } from "./industryvisit/industryvisit.component";
 import { MescholarshipComponent } from "./mescholarship/mescholarship.component";
 import { CourseSchemeModuleComponent } from "./course-scheme-module/course-scheme-module.component";
+import { SystemAdminComponent } from "./system-admin/system-admin.component";
 
 
 
@@ -60,6 +61,9 @@ const routes: Routes = [
       },
       {
         path: 'coursescheme', component: CourseSchemeModuleComponent
+      },
+      {
+        path: 'systemadmin', component: SystemAdminComponent
       }
   ];
   

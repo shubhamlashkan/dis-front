@@ -1,0 +1,10 @@
+<br />
+<div class="box">
+    <select id='faculty' name='name' [(ngModel)]="facultySelect" class="form-control">
+      <option *ngFor="let item of fName" [value]="item">
+        {{item}}
+      </option>    
+    </select>  
+</div>
+
+

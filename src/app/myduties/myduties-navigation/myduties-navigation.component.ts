@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/authentication';
+// import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'app-myduties-navigation',
