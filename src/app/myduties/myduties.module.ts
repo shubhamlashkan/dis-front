@@ -17,6 +17,7 @@ import { ExternalListComponent } from './course-scheme-module/external-list/exte
 
 import {MatTableModule} from '@angular/material/table'; 
 import {MatTabsModule} from '@angular/material/tabs';
+import { CourseListComponent } from './course-scheme-module/course-list/course-list.component';
 
 
 @NgModule({
@@ -26,8 +27,9 @@ import {MatTabsModule} from '@angular/material/tabs';
     TimetableModule,
     MydutiesRoutingModule,
     FormsModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTableModule
   ],
-  declarations: [MydutiesNavigationComponent, MydutiesComponent, MytaskComponent, ProjectguideallotmentComponent, MescholarshipComponent, IndustryvisitComponent, ExpertlectureComponent, CourseSchemeModuleComponent, SchemeListComponent, ExternalListComponent]
+  declarations: [MydutiesNavigationComponent, MydutiesComponent, MytaskComponent, ProjectguideallotmentComponent, MescholarshipComponent, IndustryvisitComponent, ExpertlectureComponent, CourseSchemeModuleComponent, SchemeListComponent, ExternalListComponent, CourseListComponent]
 })
 export class MydutiesModule { }
