@@ -20,7 +20,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { SystemAdminComponent } from './system-admin/system-admin.component';
 
 import { CourseListComponent } from './course-scheme-module/course-list/course-list.component';
-import {MatFormFieldModule, MatSelectModule, MatOptionModule} from '@angular/material'; 
+
 
 @NgModule({
   imports: [
@@ -31,9 +31,7 @@ import {MatFormFieldModule, MatSelectModule, MatOptionModule} from '@angular/mat
     FormsModule,
     MatTabsModule,
     MatTableModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatOptionModule
+    
   ],
   declarations: [MydutiesNavigationComponent, 
     MydutiesComponent, 
