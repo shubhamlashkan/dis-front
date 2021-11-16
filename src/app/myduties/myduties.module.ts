@@ -11,6 +11,10 @@ import { ProjectguideallotmentComponent } from './projectguideallotment/projectg
 import { MescholarshipComponent } from './mescholarship/mescholarship.component';
 import { IndustryvisitComponent } from './industryvisit/industryvisit.component';
 import { ExpertlectureComponent } from './expertlecture/expertlecture.component';
+import { CourseSchemeModuleComponent } from './course-scheme-module/course-scheme-module.component';
+
+import { SchemeListComponent } from './course-scheme-module/scheme-list/scheme-list.component';
+import { ExternalListComponent } from './course-scheme-module/external-list/external-list.component';
 
 @NgModule({
   imports: [
@@ -20,6 +24,6 @@ import { ExpertlectureComponent } from './expertlecture/expertlecture.component'
     MydutiesRoutingModule,
     FormsModule,
   ],
-  declarations: [MydutiesNavigationComponent, MydutiesComponent, MytaskComponent, ProjectguideallotmentComponent, MescholarshipComponent, IndustryvisitComponent, ExpertlectureComponent]
+  declarations: [MydutiesNavigationComponent, MydutiesComponent, MytaskComponent, ProjectguideallotmentComponent, MescholarshipComponent, IndustryvisitComponent, ExpertlectureComponent, CourseSchemeModuleComponent, SchemeListComponent, ExternalListComponent]
 })
 export class MydutiesModule { }
