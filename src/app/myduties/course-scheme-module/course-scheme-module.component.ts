@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SchemeListComponent} from './scheme-list/scheme-list.component';
+
 
 @Component({
   selector: 'app-course-scheme-module',
