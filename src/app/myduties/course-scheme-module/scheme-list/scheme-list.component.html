@@ -1,9 +1,15 @@
-<br/>
-<br/>
-<h4>Schemes</h4>
+
+<div class="container">
+  <div class="row">
+    <div class="col-9">
+      <h4>Schemes</h4>
+    </div>
+    <div class="col-2">
+      <button type="button" class="btn btn-info">Add New Scheme</button>
+    </div>
+  </div>
+</div>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
-   
-  
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name </th>
@@ -12,7 +18,7 @@
     <!-- Weight Column -->
   <ng-container matColumnDef="view_link">
     <th mat-header-cell *matHeaderCellDef>  </th>
-    <td mat-cell *matCellDef="let element"> <a href={{element.view_link}}>View</a> </td>
+    <td mat-cell *matCellDef="let element"> <a routerLink={{element.view_link}}>View</a> </td>
   </ng-container>
 
     <!-- Download Column -->

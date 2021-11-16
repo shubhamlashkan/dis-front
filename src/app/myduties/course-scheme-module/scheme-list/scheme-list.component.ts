@@ -8,10 +8,10 @@ export interface SchemeElement {
 }
 
 const SCHEME_DATA: SchemeElement[] = [
-  { name: 'Hydrogen', link: "", view_link:"/hi" },
-  { name: 'Helium', link: "", view_link:"/hii" },
-  { name: 'Lithium', link: "", view_link:"" },
-  { name: 'Beryllium', link: "#", view_link:"" },
+  { name: 'BE 2022', link: "", view_link: "BE2022" },
+  { name: 'BE 2021', link: "", view_link: "BE2021" },
+  { name: 'ME 2021', link: "", view_link: "ME2021" },
+  { name: 'ME 2022', link: "#", view_link: "ME2022" },
   
 ];
 
