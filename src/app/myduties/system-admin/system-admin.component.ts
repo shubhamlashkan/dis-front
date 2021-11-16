@@ -42,11 +42,18 @@ export class SystemAdminComponent implements OnInit {
     this.faculty_service.getFacultyData()
       .subscribe(response=> {
         this.fData = response.body;
-        this.fData.forEach(faculty => {
+        this.fData.forEach((faculty) => {
           this.fName.push(faculty.name)
         })
 
-        console.log(this.fName)
+        console.log(this.fName[0])
+        console.log(this.fName[1])
+
+        this.fName.shift();
+        
+        console.log(this.fName[0])
+        console.log(this.fName[1])
+
       });
   }
 

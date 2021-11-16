@@ -1,9 +1,12 @@
 <br />
 <div class="box">
   <div class="row">
-    <select id='faculty' name='name' [(ngModel)]="facultySelect" class="form-control">
-      <option *ngFor="let item of fName" [value]="item">
-        {{item}}
+    <select id='faculty' name='name' [(ngModel)]="facultySelect" class="form-control" [value]='none'>
+      <option [value]="none" disabled selected hidden>
+        Select an Option
+      </option>
+      <option *ngFor="let item of fName; index as i" [value]="item">
+          {{item}}
       </option>    
     </select> 
   </div>
