@@ -1,12 +1,8 @@
 import { Routes, RouterModule } from "@angular/router";
-import { MydutiesNavigationComponent } from "./myduties-navigation/myduties-navigation.component";
 import { NgModule } from "@angular/core";
 import {LibraryRoutingModule} from "./library/library-routing.module";
-import { from } from "rxjs";
-import { LibraryModule } from "./library/library.module";
-import { LibraryComponent } from "./library/library/library.component";
 import { TimetableRoutingModule } from "./timetable/timetable-routing.module";
-import { MydutiesComponent } from "./myduties/myduties.component";
+
 import { MytaskComponent } from "./mytask/mytask.component";
 import { ProjectguideallotmentComponent } from "./projectguideallotment/projectguideallotment.component";
 import { ExpertlectureComponent } from "./expertlecture/expertlecture.component";
@@ -28,19 +24,9 @@ import { SystemAdminComponent } from "./system-admin/system-admin.component";
   
 // ];
 
+import { CourseListComponent } from "./course-scheme-module/course-list/course-list.component";
 const routes: Routes = [
-    // {
-    //   path: '', component: MydutiesComponent, children: [
-        
-    //     { path: 'library', loadChildren : './library/library.module#LibraryModule'},
-    //     {
-    //       path: '', redirectTo: 'library', pathMatch: 'full'
-    //     },
-        
-          
-    //   ]
-      
-    // }
+
      {
         path: 'mytask', component:MytaskComponent
       }, 
@@ -61,6 +47,9 @@ const routes: Routes = [
       },
       {
         path: 'coursescheme', component: CourseSchemeModuleComponent
+      },
+      {
+        path: 'coursescheme/:schemename', component: CourseListComponent
       },
       {
         path: 'systemadmin', component: SystemAdminComponent

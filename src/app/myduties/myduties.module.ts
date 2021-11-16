@@ -12,13 +12,15 @@ import { MescholarshipComponent } from './mescholarship/mescholarship.component'
 import { IndustryvisitComponent } from './industryvisit/industryvisit.component';
 import { ExpertlectureComponent } from './expertlecture/expertlecture.component';
 import { CourseSchemeModuleComponent } from './course-scheme-module/course-scheme-module.component';
-
 import { SchemeListComponent } from './course-scheme-module/scheme-list/scheme-list.component';
 import { ExternalListComponent } from './course-scheme-module/external-list/external-list.component';
 
+import {MatTableModule} from '@angular/material/table'; 
 import {MatTabsModule} from '@angular/material/tabs';
 import { SystemAdminComponent } from './system-admin/system-admin.component';
 
+import { CourseListComponent } from './course-scheme-module/course-list/course-list.component';
+import {MatFormFieldModule, MatSelectModule, MatOptionModule} from '@angular/material'; 
 
 @NgModule({
   imports: [
@@ -27,7 +29,11 @@ import { SystemAdminComponent } from './system-admin/system-admin.component';
     TimetableModule,
     MydutiesRoutingModule,
     FormsModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatOptionModule
   ],
   declarations: [MydutiesNavigationComponent, 
     MydutiesComponent, 
@@ -39,6 +45,8 @@ import { SystemAdminComponent } from './system-admin/system-admin.component';
     CourseSchemeModuleComponent, 
     SchemeListComponent, 
     ExternalListComponent, 
-    SystemAdminComponent]
+    SystemAdminComponent,
+    CourseListComponent
+  ]
 })
 export class MydutiesModule { }
