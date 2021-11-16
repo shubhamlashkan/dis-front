@@ -62,7 +62,7 @@ export class SideNavigationComponent implements OnInit {
    .subscribe(
     data=>{
       this.total=data;
-      console.log(this.total);
+      console.log("TOTAl" + this.total);
     }
    ); 
   

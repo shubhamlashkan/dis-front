@@ -18,8 +18,10 @@ export class StaffComponent implements OnInit {
    //Show all staffs
    getStaffData(): void{
     this.faculty_service.getStaffData()
-      .subscribe(data =>this.sData = data.body);
-      console.log(this.sData);
+      .subscribe(data =>{
+        this.sData = data.body;
+        console.log(data.body)
+      });
   }
 
   ngOnInit() {

@@ -7,7 +7,8 @@ import { Injectable } from '@angular/core';
 })
 export class OverviewService {
 
-  url = 'http://localhost:8080/dis/administration/getOverviewDetails';
+  // url = 'http://localhost:8080/dis/administration/getOverviewDetails';
+  url = 'http://52.168.72.250:8080/getOverviewDetails';
 
   constructor(private http: HttpClient) { }
 

@@ -57,8 +57,7 @@ const routes: Routes = [
       },
       {
         path: 'mescholarship',component: MescholarshipComponent
-      }
-      
+      }   
        
   ];
   
