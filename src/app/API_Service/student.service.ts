@@ -50,20 +50,5 @@ export class StudentService {
   :Observable<any>{
     return this.http.get<any[]>(`${this.assnsUrl}/getNumberOfPendingAssignments/`);
   }
-  // public login(Student: Object): Observable<Object> {
-  //   return this.http.post(`${this.baseUrl}` + `/login`, Student);
-  // }
-
-  // public signup(Student: Object): Observable<Object> {
-  //   return this.http.post(`${this.baseUrl}` + `/signup`, Student);
-  // }
-  // public forgotPassword(Student: Object): Observable<Object> {
-  //    return this.http.post(`${this.baseUrl}` + `/forgot-password`, Student);
-  // }
-
-  // public resetPassword(Student: Object): Observable<Object> {
-  //   return this.http.post(`${this.baseUrl}` + `/reset-password`, Student);
-  // }
- 
- 
+  
 }

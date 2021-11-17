@@ -33,7 +33,6 @@ export class SemesterSubjectsService {
     this.subjects.subscribe(data => {
       this.subjectsArray = data;
       for (let i = 0; i < this.subjectsArray.length; i++) {
-        // tslint:disable-next-line:max-line-length
         syllabus.push({ subCode: this.subjectsArray[i].subjectCode, subName: this.subjectsArray[i].subjectName, subSyllabus: this.subjectsArray[i].syllabusPdf });
       }
     });

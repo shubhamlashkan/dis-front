@@ -13,7 +13,6 @@ import { apiSetting } from '../urls/apisetting';
 export class PanelOfTheoryService{
 
       private baseUrl=`${apiSetting.apiUser}`;
-    // private baseUrl="http://3.17.182.120:8081";
     constructor(private http: HttpClient) { }
 
     gettheorypanel(): Observable<any>{

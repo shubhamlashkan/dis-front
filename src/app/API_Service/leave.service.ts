@@ -13,7 +13,7 @@ import { apiSetting } from '../urls/apisetting';
   }) 
 export class LeaveService{
   private baseUrl=apiSetting.apiUser;
-  // private baseUrl="http://3.17.182.120:8081";
+  
   constructor(private http: HttpClient) { }
 
   leaves:Leave[]=[];
