@@ -86,7 +86,6 @@ showEquipment(equipments:string) : void{
  console.log(equipments);
   this.equipType= equipments;
   this.infraservice.getEquipmentByType(this.equipType).subscribe(response=>{this.equipByRoom=response.body
-    //console.log(this.infraById.noofChairs);
   });
 }
 
@@ -117,10 +116,8 @@ getBillById(Id:string):void{
 
 //for getting equipment of any room 
 showEquipmentbyRoom(room:string) : void{
-  //console.log(room);
   this.equipType= room;
     this.infraservice.getEquipmentByRoom(this.equipType).subscribe(response=>{this.equipByRoom=response.body
-      //console.log(this.infraById.noofChairs);
     });
   
   }
@@ -139,7 +136,6 @@ onAddEquip(){
     response => {
 
     if(response.ok) {
-      //this.router.navigate(['/']);
       this.toastr.successToastr(response.body['message'],'Success!');
       console.log(response.body['message']);
       this.ngOnInit();
@@ -148,12 +144,9 @@ onAddEquip(){
   error => {
     if(error.status === 400) {
       this.toastr.errorToastr(error.error['message'], 'Alert!');
-  
    console.log(error.error['message']);
-  
   }
 }
-
   );
 }
 
@@ -171,7 +164,6 @@ onUpdateEquip()
       response => {
   
       if(response.ok) {
-        //this.router.navigate(['/']);
         this.toastr.successToastr(response.body['message'],'Success!');
         console.log(response.body['message']);
         this.ngOnInit();
@@ -180,7 +172,6 @@ onUpdateEquip()
     error => {
       if(error.status === 400) {
         this.toastr.errorToastr(error.error['message'], 'Alert!');
-    
      console.log(error.error['message']);
     
     }
@@ -221,12 +212,9 @@ onAddBill(){
   error => {
     if(error.status === 400) {
       this.toastr.errorToastr(error.error['message'], 'Alert!');
-  
    console.log(error.error['message']);
-  
   }
 }
-
   );
 }
  
@@ -287,15 +275,9 @@ showBillBy(billBy : string){
 getBill(searchValue: string){
 this.billKey = searchValue;
 console.log(this.billKey)
-// if(this.searchBill == "Bill No")  {
-//   this.infraservice.getBill(this.equipType).subscribe(response=>{this.equipByRoom=response.body
-//     //console.log(this.infraById.noofChairs);
-//   });
-// }
 if(this.searchBill == "Supplier Name"){
   this.showSearchedRecord = true;
   this.infraservice.getBillBySupplierName(this.billKey).subscribe(response=>{this.stockBill =response.body
-    //console.log(this.infraById.noofChairs);
   });
   
 }
@@ -375,13 +357,9 @@ getEquipmentTypeList(): void{
 getBillByDate()
 {
 
-  
-  // console.log(this.billDate);
-  // console.log(typeof this.billDate)
   if(this.searchBill == "Date of Purchase"){
     this.infraservice.getBillByDate(this.billDate).subscribe(response=>{this.stockBill =response.body
-      //console.log(this.infraById.noofChairs);
-    });
+});
     
   }
 }

@@ -228,39 +228,7 @@
       </div>
       <div class="modal-body">
      
-          <!-- <div *ngFor="let t of remTask">
-            <div class="form-row">
-              <div class="col-4">
-                <label for="taskName">Task Name</label>
-                  <input type="text" id="taskName" class="form-control" disabled name="taskName" [(ngModel)]="t.taskName">
-              </div>
-              <div class="col-4">
-                <label for="assignedTo">Assigned To</label>
-                  <input type="text" id="assignedTo" class="form-control" disabled name="assignedTo" [(ngModel)]="t.userName">
-              </div>
-              <div class="col-4">
-                <label for="assignedDate">Start Date</label>
-                  <input type="text" id="assignedDate" class="form-control" disabled name="assignedDate" [(ngModel)]="t.createdDate">
-              </div>
-            </div>
-            <br>
-            <div class="form-row">
-              <div class="col-7">
-                <h4>Are you sure you want to remove task ?</h4>
-              </div>
-              <div class="col-2">
-                <button type="submit" (click)="ngOnInit()" class="btn btn-danger btnWidth"
-                  data-dismiss="modal">Cancel</button>
-              </div>
-              <div class="col-2">
-                <button type="submit"  data-dismiss="modal" class="btn btn-primary btnWidth">Remove </button>
-              </div>
-              <div class="col-1">
-                <input type="hidden" name="Id" id="Id" [(ngModel)]="t.id">
-              </div>
-              
-            </div>
-          </div> -->
+          
           <div class="form-row">
             <div class="col-7">
               <h4>Are you sure you want to remove Infrastructure ?</h4>
@@ -272,10 +240,7 @@
             <div class="col-2">
               <button type="submit"(click)="removeInfra()" data-dismiss="modal" class="btn btn-primary btnWidth">Remove </button>
             </div>
-            <!-- <div class="col-1">
-              <input type="hidden" name="Id" id="Id" [(ngModel)]="t.id">
-            </div> -->
-            
+
           </div>
         
       </div>
@@ -495,8 +460,6 @@
   <div class="tab-content" id="pills-tabContent">
     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
       <div   class="pt-2">
-
-        <!-- <h4 id="lab">{{f.type}}</h4> -->
         <hr>
         <div class="row">
           <div class="col-lg-4 kyc-section rewards-section reports-sectn pb-4"  *ngFor='let f of infrastructure' style="background-color: rgb(208, 225, 245);">
