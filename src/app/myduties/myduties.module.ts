@@ -20,6 +20,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { SystemAdminComponent } from './system-admin/system-admin.component';
 
 import { CourseListComponent } from './course-scheme-module/course-list/course-list.component';
+import { AddEditCourseListComponent } from './course-scheme-module/course-list/add-edit-course-list/add-edit-course-list.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { CourseListComponent } from './course-scheme-module/course-list/course-l
     ExternalListComponent, 
     SystemAdminComponent,
     CourseListComponent,
+    AddEditCourseListComponent,
   ],
   
 })

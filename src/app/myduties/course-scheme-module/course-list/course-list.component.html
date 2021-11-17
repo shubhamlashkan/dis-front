@@ -16,7 +16,7 @@
       </select>
     </div>
     <div class="col-2">
-      <button type="button" class="btn btn-info">Add Course</button>
+      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#AddEditCourse">Add Course</button>
     </div>
   </div>
 </div>
@@ -38,8 +38,84 @@
     <td mat-cell *matCellDef="let element"> {{element.credits}}</td>
   </ng-container>
 
-  
+  <!-- Edit Column -->
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef> Edit </th>
+    <td mat-cell *matCellDef="let element">
+      <a data-toggle="modal" data-target="#AddEditCourse"><i class="fa fa-edit" aria-hidden="true"></i></a>
+    </td>
+  </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
+
+<div class="modal fade bd-example-modal-lg" id="AddEditCourse" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add/Edit Course</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <input type="text" class="form-control" id="name" placeholder="Course Name">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" id="code" placeholder="Course Code">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" id="category" placeholder="Course Category">
+          </div>
+          <div class="row">
+            <h5>Hours per Week</h5>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-4">
+              <input type="text" class="form-control" id="lec_hrs" placeholder="Lecture">
+            </div>
+            <div class="form-group col-sm-4">
+              <input type="text" class="form-control" id="tut_hrs" placeholder="Tutorial">
+            </div>
+            <div class="form-group col-sm-4">
+              <input type="text" class="form-control" id="practical_hrs" placeholder="Practical">
+            </div>
+          </div>
+
+          <div class="row">
+            <h5>Credits</h5>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6">
+              <input type="text" class="form-control" id="practical_credit" placeholder="Practical">
+            </div>
+            <div class="form-group col-sm-6">
+              <input type="text" class="form-control" id="theory_credit" placeholder="Theory">
+            </div>
+          </div>
+
+          
+          <div class="row">
+            <h5>Maximum Marks</h5>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6">
+              <input type="text" class="form-control" id="practical_max_marks" placeholder="Practical">
+            </div>
+            <div class="form-group col-sm-6">
+              <input type="text" class="form-control" id="theory_max_marks" placeholder="Theory">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>

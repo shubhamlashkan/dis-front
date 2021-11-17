@@ -9,3 +9,22 @@ h6{
 table {
     width: 100%;
 }
+
+
+.modal {
+    margin: auto;
+}
+
+.row {
+    margin: 0px 2px;
+}
+
+.form-row {
+    display: flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+a {
+    cursor: pointer;
+}
