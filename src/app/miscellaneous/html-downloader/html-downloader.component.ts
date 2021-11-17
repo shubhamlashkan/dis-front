@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 import html2canvas from 'html2canvas';
 
-
 @Component({
   selector: 'app-html-downloader',
   templateUrl: './html-downloader.component.html',
