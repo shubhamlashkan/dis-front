@@ -22,7 +22,7 @@ export class ResetPasswordComponent implements OnInit {
     password: ['', [Validators.required, Validators.minLength(6), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')]],
     confirm_password: ['', [Validators.required]]
   },{
-    validator: PasswordValidation.MatchPassword // to check if password matches
+    validator: PasswordValidation.MatchPassword 
   });
 }
 
@@ -32,25 +32,24 @@ get formCtl() {
 
   reset() {
     this.authService.resetPassword(this.newPasswd).subscribe(
-      // httpResponse handling
+
       response => {
         if(response.ok) {
           this.router.navigate(['/']);
           this.toastr.successToastr(response.body['message'], 'Success!');
-         // console.log(response);
+         
         }
       },
-      // httpErrorResponse handling
+ 
       error => {
         if(error.status === 400) {
           this.router.navigate(['/forgot-password']);
           this.toastr.errorToastr(error.error['message'], 'Oops!');
-          //console.log(error);
+          
         }
       }
     );
     this.submitted = true;
-    // stop here if form is invalid
     if (this.resetForm.invalid) {
       return;
   }
