@@ -52,14 +52,4 @@ export class ProjectguideallotmentService {
 			`${this.baseUrl}/guideAllotment/getAllGuides`
 		);
 	}
-
-
-
-
-
-
-
-
-
-
 }

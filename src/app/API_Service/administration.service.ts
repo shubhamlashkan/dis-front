@@ -15,9 +15,6 @@ export class AdministrationService {
   }
    
   apiUrl: string = apiSetting.apiUser +'/task';
-  // apiAdministration:string=apiSetting.apiAdministration;
-  
-  
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -59,12 +56,9 @@ export class AdministrationService {
   {
     return this.http.delete(`${this.apiUrl}/deleteTask/${Id}`,{observe:'response'});
   }
-
-  /* Function to handle Error  */
   handleError(error) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
-      // client-side error
       errorMessage = `Error: ${error.error.message}`;
     } else {
       if(error.status==404){
@@ -85,12 +79,9 @@ export class AdministrationService {
       {
         errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
       }
-      // server-side error
-     // errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
 
     console.log(errorMessage);
-    //window.alert(errorMessage);
     return throwError(errorMessage);
   }
 

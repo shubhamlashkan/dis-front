@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-=======
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
->>>>>>> Yashi
 
 import { AddacomplaintComponent } from './addacomplaint.component';
 
@@ -10,11 +6,7 @@ describe('AddacomplaintComponent', () => {
   let component: AddacomplaintComponent;
   let fixture: ComponentFixture<AddacomplaintComponent>;
 
-<<<<<<< HEAD
-  beforeEach(waitForAsync(() => {
-=======
   beforeEach(async(() => {
->>>>>>> Yashi
     TestBed.configureTestingModule({
       declarations: [ AddacomplaintComponent ]
     })

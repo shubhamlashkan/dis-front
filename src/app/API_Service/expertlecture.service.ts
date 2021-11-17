@@ -123,15 +123,11 @@ export class ExpertlectureService {
 	}
 
 	downloadAttendance(lectureID) {
-		// return this.http.get<any>(
-		// 	`${this.baseUrl}/expertLecture/downloadAttendance/${lectureID}`);
 		return `${this.baseUrl}/expertLecture/downloadAttendance/${lectureID}`
 		
 	}
 
 	downloadNotesheet(lectureID) {
-		// return this.http.get<any>(
-		// 	`${this.baseUrl}/expertLecture/downloadNotesheet/${lectureID}`);
 		return `${this.baseUrl}/expertLecture/downloadNotesheet/${lectureID}`
 
 	}

@@ -346,21 +346,6 @@ export class AddacomplaintComponent implements OnInit {
   resetForm(): void {
     this.showConfirmation = false;
   }
-  
-    
-  // onFacultySubmit()
-  // {
-  //   console.log(this.faculty);
-  //   this.facultyComplaint=new AddAFacultyComplaint(
-  //     this.faculty.facultyName,this.faculty.details
-  //   );
-  //   this.complaints.addFacultyComplaint(this.facultyComplaint).subscribe(
-  //     data=>{
-  //       console.log(data);
-  //       console.log("Faculty Complaint is registered");
-  //     }
-  //   )
-  // }
 }
 
 

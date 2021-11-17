@@ -32,10 +32,10 @@ export class SignUpComponent implements OnInit {
       date: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]],
       phoneNo: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10),Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]], 
-      // tslint:disable-next-line:max-line-length
+      
       confirm_password: ['', [Validators.required]]
     }, {
-      validator: PasswordValidation.MatchPassword // to check if password matches
+      validator: PasswordValidation.MatchPassword 
     });
 
   }
@@ -65,8 +65,6 @@ export class SignUpComponent implements OnInit {
           data => {
             this.loading = false;
             if(data.ok) {
-              
-           // console.log(data);
             this.isSignedUp = true;
             this.isSignUpFailed = false;
             this.toastr.successToastr(data.body['message'], 'Success!');
@@ -76,7 +74,7 @@ export class SignUpComponent implements OnInit {
             if(error.status === 400 ) {
               this.loading=false;
             this.toastr.errorToastr(error.error['message'], 'Alert!');
-           // console.log(error);
+           
             this.isSignUpFailed = true;
           }
         }
@@ -85,11 +83,5 @@ export class SignUpComponent implements OnInit {
       this.submitted = true;
     }
 
-   
-
-        // stop here if form is invalid
-        // if (this.registerForm.invalid) {
-        //     return;
-        // }
       }
 }

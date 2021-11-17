@@ -16,8 +16,6 @@ export class ActivateAccountComponent implements OnInit {
   activationForm: FormGroup;
   student: Student = new Student();
   submitted = false;
-
-  // tslint:disable-next-line:max-line-length
   constructor(private router: Router, public toastr: ToastrManager, private studentService: StudentService, private authService: AuthService, private formBuider: FormBuilder) { }
 
   ngOnInit() {

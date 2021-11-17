@@ -27,7 +27,7 @@ export class AuthService {
   }
 
   attemptAuth(credentials: AuthLoginInfo): Observable<JwtResponse> {
-    // console.log(credentials)
+  
     return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions);
   }
 
@@ -40,22 +40,21 @@ export class AuthService {
   }
 
   forgetPassword(email: string): Observable<HttpResponse<string>> {
-    // const indata = {'email': email};
+
     return this.http.post<string>(this.forgetPasswordUrl + '?email=' + email, null,{ observe: 'response' });
   }
 
   activateAccount(email: string): Observable<HttpResponse<string>> {
-    // const indata = {'email': email};
+ 
     return this.http.post<string>(this.activateAccountUrl + '?email=' + email, null ,{ observe: 'response' });
   }
 
-  // returns full http response
+
   resetPassword(newPassword): Observable<HttpResponse<string>> {
     const reset_token = this.route.snapshot.queryParams['resetToken'];
-   // console.log(reset_token);
+ 
     const info = {resetToken: reset_token, password: newPassword};
-    //console.log(info);
-    // setting observe value as response to send full http response
+
     return this.http.post<string>(this.resetUrl, info, { observe: 'response' });
   }
 
