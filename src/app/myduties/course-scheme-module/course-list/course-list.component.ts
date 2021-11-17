@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
+
 
 export interface SchemeElement {
   name: string;
@@ -21,14 +21,7 @@ const SCHEME_DATA: SchemeElement[] = [
 })
 export class CourseListComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
-  openDialog() {
-    const dialogRef = this.dialog.open(DialogContentExampleDialog);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
+  constructor() { }
 
   displayedColumns: string[] = [ 'code','name','credits'];
   dataSource = SCHEME_DATA;
@@ -36,9 +29,3 @@ export class CourseListComponent implements OnInit {
   }
 
 }
-
-@Component({
-  selector: 'dialog-content-example-dialog',
-  templateUrl: 'dialog-content-example-dialog.html',
-})
-export class DialogContentExampleDialog {}
