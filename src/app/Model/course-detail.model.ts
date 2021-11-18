@@ -1,14 +1,14 @@
 export class CourseDetail {
     code : any
-    name : String;
-    category : String;
-    lec_hrs : Number;
-    tut_hrs : Number;
-    practical_hrs : Number;
-    theory_credits : Number;
-    practical_credits : Number;
-    theory_max_marks : Number;
-    practical_max_marks : Number;
+    name : string;
+    category : string;
+    lec_hrs : number;
+    tut_hrs : number;
+    practical_hrs : number;
+    theory_credits : number;
+    practical_credits : number;
+    theory_max_marks : number;
+    practical_max_marks : number;
 
     constructor (code,name,category,lec_hrs,tut_hrs,practical_hrs,theory_credits,practical_credits,theory_max_marks,practical_max_marks){
         code = this.code,
@@ -21,5 +21,9 @@ export class CourseDetail {
         practical_credits = this.practical_credits,
         theory_max_marks = this.theory_max_marks;
         practical_max_marks = this.practical_max_marks
+    }
+
+    public getName(){
+        return this.name;
     }
 }

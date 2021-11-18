@@ -6,14 +6,24 @@ export interface SchemeElement {
   code: string;
   credits: number;
   edit: any;
+  id:number
 }
+var COURSE_DATA : Array<any> = [
+  {id:0,code:'CO',name:'DBMS',category:'ABC',lec_hrs:4,tut_hrs:5,practical_hrs:2,theory_credits:5,practical_credits:4,theory_max_marks:5,practical_max_marks:6},
+  {id:1,code:'CO63527',name:'HUM',category:'ABC',lec_hrs:4,tut_hrs:5,practical_hrs:2,theory_credits:8,practical_credits:4,theory_max_marks:5,practical_max_marks:6},
+]
 
-const SCHEME_DATA: SchemeElement[] = [
-  { name: 'OOPS', code: "CO4552", credits: 5 , edit:null },
-  { name: 'OOPS', code: "CO4552", credits: 5 , edit:null },
-  { name: 'OOPS', code: "CO4552", credits: 5 , edit:null },
-  { name: 'OOPS', code: "CO4552", credits: 5 , edit:null },
-];
+const SCHEME_DATA: SchemeElement[] = [];
+
+COURSE_DATA.forEach(course => {
+  SCHEME_DATA.push({
+    name : course.name,
+    code : course.code,
+    credits : course.theory_credits + course.practical_credits,
+    edit : null,
+    id : course.id
+  })
+})
 
 @Component({
   selector: 'app-course-list',
@@ -21,8 +31,7 @@ const SCHEME_DATA: SchemeElement[] = [
   styleUrls: ['./course-list.component.scss']
 })
 export class CourseListComponent implements OnInit {
-
-  course_scheme : CourseDetail;
+  course: any;
 
   constructor() { }
 
@@ -31,4 +40,10 @@ export class CourseListComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  editCourse(i){
+    this.course = { ...COURSE_DATA[i] }; 
+    console.log(this.course)
+  }
+
 }
