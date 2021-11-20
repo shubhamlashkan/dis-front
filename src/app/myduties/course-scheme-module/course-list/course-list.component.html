@@ -16,7 +16,7 @@
       </select>
     </div>
     <div class="col-2">
-      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#AddEditCourse">Add Course</button>
+      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#AddEditCourse" (click)="addCourse()">Add Course</button>
     </div>
   </div>
 </div>
@@ -46,11 +46,20 @@
     </td>
   </ng-container>
 
+  <!-- View Column -->
+  <ng-container matColumnDef="view">
+    <th mat-header-cell *matHeaderCellDef> View </th>
+    <td mat-cell *matCellDef="let element">
+      <a data-toggle="modal" data-target="#ViewCourse" (click)="viewCourse(element.id)"><i class="fa fa-eye" aria-hidden="true"></i></a>
+    </td>
+  </ng-container>
+
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
 
+<!-- Add-Edit Modal -->
 <div class="modal fade bd-example-modal-lg" id="AddEditCourse" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -63,26 +72,26 @@
       <div class="modal-body">
         <form>
           <div class="form-group">
-            <input type="text" class="form-control" id="name" name="name" placeholder="Course Name">
+            <input type="text" class="form-control" id="name" name="name" placeholder="Course Name" [(ngModel)]="course.name">
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" id="code" placeholder="Course Code">
+            <input type="text" class="form-control" id="code" name="code" placeholder="Course Code" [(ngModel)]="course.code">
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" id="category" placeholder="Course Category">
+            <input type="text" class="form-control" id="category" name="category" placeholder="Course Category" [(ngModel)]="course.category">
           </div>
           <div class="row">
             <h5>Hours per Week</h5>
           </div>
           <div class="row">
             <div class="form-group col-sm-4">
-              <input type="text" class="form-control" id="lec_hrs" placeholder="Lecture">
+              <input type="text" class="form-control" id="lec_hrs" name="lec_hrs" placeholder="Lecture" [(ngModel)]="course.lec_hrs">
             </div>
             <div class="form-group col-sm-4">
-              <input type="text" class="form-control" id="tut_hrs" placeholder="Tutorial">
+              <input type="text" class="form-control" id="tut_hrs" name="tut_hrs" placeholder="Tutorial" [(ngModel)]="course.tut_hrs">
             </div>
             <div class="form-group col-sm-4">
-              <input type="text" class="form-control" id="practical_hrs" placeholder="Practical">
+              <input type="text" class="form-control" id="practical_hrs" name="practical_hrs" placeholder="Practical" [(ngModel)]="course.practical_hrs">
             </div>
           </div>
 
@@ -91,10 +100,10 @@
           </div>
           <div class="row">
             <div class="form-group col-sm-6">
-              <input type="text" class="form-control" id="practical_credit" placeholder="Practical">
+              <input type="text" class="form-control" id="practical_credit" placeholder="Practical" name="practical_credit" [(ngModel)]="course.practical_credits">
             </div>
             <div class="form-group col-sm-6">
-              <input type="text" class="form-control" id="theory_credit" placeholder="Theory">
+              <input type="text" class="form-control" id="theory_credit" placeholder="Theory" name="theory_credit" [(ngModel)]="course.theory_credits">
             </div>
           </div>
 
@@ -104,10 +113,10 @@
           </div>
           <div class="row">
             <div class="form-group col-sm-6">
-              <input type="text" class="form-control" id="practical_max_marks" placeholder="Practical">
+              <input type="text" class="form-control" id="practical_max_marks" placeholder="Practical" name="practical_max_marks" [(ngModel)]="course.practical_max_marks">
             </div>
             <div class="form-group col-sm-6">
-              <input type="text" class="form-control" id="theory_max_marks" placeholder="Theory">
+              <input type="text" class="form-control" id="theory_max_marks" placeholder="Theory" name="theory_max_marks" [(ngModel)]="course.theory_max_marks">
             </div>
           </div>
         </form>
@@ -115,6 +124,52 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- View Modal -->
+<div class="modal fade" id="ViewCourse" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{course.name}} {{course.code}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5>Subject Category : {{course.category}}</h5>
+        <strong><h5>Periods per week</h5></strong>
+        <ul>
+          <li>Lecture : {{course.lec_hrs}}</li>
+          <li>Tutorial : {{course.tut_hrs}}</li>
+          <li>Practical : {{course.practical_hrs}}</li>
+        </ul>
+        <strong><h5>Credits</h5></strong>
+        <ul>
+          <li>Theory : {{course.theory_credits}}</li>
+          <li>Practical : {{course.practical_credits}}</li>
+        </ul>
+        <strong><h5>Maximum Marks</h5></strong>
+        <ul>
+          <li>Theory</li>
+          <ol>
+            <li>Th : 70</li>
+            <li>CW : 30</li>
+          </ol>
+          <li>Practical : </li>
+          <ol>
+            <li>SW : 40</li>
+            <li>Pr : 60</li>
+          </ol>
+          <li>Total : 200</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#AddEditCourse" (click)="editCourse(course.id)">Edit Course</button>
       </div>
     </div>
   </div>
