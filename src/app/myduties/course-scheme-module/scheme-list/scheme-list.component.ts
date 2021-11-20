@@ -1,17 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Scheme } from 'src/app/Model/scheme.model';
 
 
-export interface SchemeElement {
-  name: string;
-  link: string;
-  view_link: string;
-}
-
-const SCHEME_DATA: SchemeElement[] = [
-  { name: 'BE 2022', link: "", view_link: "BE2022" },
-  { name: 'BE 2021', link: "", view_link: "BE2021" },
-  { name: 'ME 2021', link: "", view_link: "ME2021" },
-  { name: 'ME 2022', link: "#", view_link: "ME2022" },
+const SCHEME_DATA: Scheme[] = [
+  { scheme_id: 'BE 2022', file_link: "", courses:[]},
+  { scheme_id: 'BE 2021', file_link: "", courses:[]},
+  { scheme_id: 'ME 2021', file_link: "", courses:[]},
+  { scheme_id: 'ME 2022', file_link: "", courses:[]},
   
 ];
 
