@@ -45,15 +45,7 @@ export class SystemAdminComponent implements OnInit {
         this.fData.forEach((faculty) => {
           this.fName.push(faculty.name)
         })
-
-        console.log(this.fName[0])
-        console.log(this.fName[1])
-
         this.fName.shift();
-        
-        console.log(this.fName[0])
-        console.log(this.fName[1])
-
       });
   }
 
