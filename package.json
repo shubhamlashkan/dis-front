@@ -52,7 +52,7 @@
     "jspdf-autotable": "^3.5.13",
     "material-design-icons-iconfont": "^5.0.1",
     "moment": "^2.29.1",
-    "ng-multiselect-dropdown": "^0.3.4",
+    "ng-multiselect-dropdown": "^0.3.7",
     "ng6-toastr-notifications": "^1.0.4",
     "ngx-filesaver": "^11.0.0",
     "npm": "^6.14.5",

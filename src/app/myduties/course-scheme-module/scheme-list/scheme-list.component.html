@@ -46,14 +46,15 @@
           </div>
           <div class="form-group">
             <h5>Add Course</h5>
-            <div id="dropdown-list">
-              <select class="form-control course-dropdown" [(ngModel)]="course" name="course" (ngModelChange)="onChange($event)">
-                <option *ngFor="let course of courses">{{course}}</option>
-              </select>
-            </div>
-            
-            <a id="right-align" (click)="addNewCourse()">add another course</a>
-
+            <div style="width:30%">
+              <ng-multiselect-dropdown
+                  [settings]="coursesSettings"
+                  [data]="courses"
+                  [placeholder]="'Select Course'"
+                  (onSelect)="onItemSelect($event)"
+                  (onSelectAll)="onSelectAll($event)">
+              </ng-multiselect-dropdown>
+              </div>
           </div>
           
         </form>

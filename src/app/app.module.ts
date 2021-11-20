@@ -5,7 +5,7 @@ import { StudentRoutingModule } from './student/student-routing.module';
 import { StudentModule } from './student/student.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -30,6 +30,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     
     
     ],
+    schemas:[NO_ERRORS_SCHEMA], 
+
   imports: [
     AuthenticationModule,
     BrowserModule,
@@ -51,6 +53,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     MatSortModule,
     NgMultiSelectDropDownModule.forRoot()
   ],
+
   providers: [AuthInterceptor,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]

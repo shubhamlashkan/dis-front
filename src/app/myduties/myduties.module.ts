@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MydutiesRoutingModule} from './myduties-routing.module'
 import { LibraryModule } from './library/library.module';
@@ -20,6 +20,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { SystemAdminComponent } from './system-admin/system-admin.component';
 
 import { CourseListComponent } from './course-scheme-module/course-list/course-list.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 
@@ -32,8 +33,11 @@ import { CourseListComponent } from './course-scheme-module/course-list/course-l
     FormsModule,
     MatTabsModule,
     MatTableModule,
-    
+    NgMultiSelectDropDownModule.forRoot()
+
   ],
+  schemas:[NO_ERRORS_SCHEMA], 
+
   declarations: [MydutiesNavigationComponent, 
     MydutiesComponent, 
     MytaskComponent, 
@@ -45,7 +49,8 @@ import { CourseListComponent } from './course-scheme-module/course-list/course-l
     SchemeListComponent, 
     ExternalListComponent, 
     SystemAdminComponent,
-    CourseListComponent
+    CourseListComponent,
+
   ]
   
 })

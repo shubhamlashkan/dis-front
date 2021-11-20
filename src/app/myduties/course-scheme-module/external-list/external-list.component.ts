@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { CourseArray } from 'src/app/Model/course-detail.model';
 import { ExternalData } from 'src/app/Model/external-data.model';
 export interface SchemeElement {
@@ -29,14 +30,17 @@ EXTERNAL_DATA.forEach(external => {
   templateUrl: './external-list.component.html',
   styleUrls: ['./external-list.component.scss']
 })
+
+
 export class ExternalListComponent implements OnInit {
   external : ExternalData;
-  courses : Array<any> = [];
-  selectedCourses : Array<any> = [];
+  selectedCourses = new Set();
+  courses = []
+  coursesSettings:IDropdownSettings={};
+
 
   constructor() { 
     this.external = new ExternalData(null,null,null,null,null);
-    CourseArray.forEach(c => this.courses.push(c.name));
   }
 
   displayedColumns: string[] = [ 'name','institute','details'];
@@ -44,40 +48,26 @@ export class ExternalListComponent implements OnInit {
 
 
   ngOnInit() {
+    var i = 1;
+    CourseArray.forEach(c => {
+      this.courses.push({
+        id: i, name : c.name
+      })
+      i++;
+    });
+    this.coursesSettings = {
+      idField : 'id',
+      textField : 'name',
+    };
   }
-  
-  onChange(e){
-    this.selectedCourses.push(e);
-    console.log(this.selectedCourses)
+  onItemSelect(item: any) {
+    this.selectedCourses.add(item.name)
+    console.log('onItemSelect', this.selectedCourses);
   }
-
-  addNewCourse(){
-    var list = document.getElementById('dropdown-list')
-    var selectTag = document.getElementsByClassName('course-dropdown')[0].cloneNode(true);
-    while (selectTag.firstChild) {
-      selectTag.removeChild(selectTag.lastChild);
-    }
-    var diff = $(this.courses).not(this.selectedCourses).get();
-    for (const val of diff)
-    {
-        var option = document.createElement("option");
-        option.value = val;
-        option.text = val.charAt(0).toUpperCase() + val.slice(1);
-        selectTag.appendChild(option);
-    }
-    list.appendChild(selectTag)
+  onSelectAll(items: any) {
+    items.forEach(item => {
+      this.selectedCourses.add(item.name)
+    });
+    console.log('onSelectAll', this.selectedCourses);
   }
-
-  viewExternal(i){
-    console.log(i)
-    this.external = { ...EXTERNAL_DATA[i]};
-    console.log(this.external)
-
-  }
-
-  addExternal(){
-    console.log("hfb")
-  }
-
-
 }

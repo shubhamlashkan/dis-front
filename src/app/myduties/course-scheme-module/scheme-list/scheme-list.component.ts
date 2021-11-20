@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Scheme } from 'src/app/Model/scheme.model';
 import { CourseArray } from 'src/app/Model/course-detail.model';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 
 export interface SchemeElement {
@@ -25,44 +26,36 @@ const SCHEME_DATA: Scheme[] = [
 export class SchemeListComponent implements OnInit {
 
   courses : Array<any> = [];
-  selectedCourses : Array<any> = [];
+  coursesSettings:IDropdownSettings={};
+  selectedCourses = new Set();
 
   constructor() {
-    CourseArray.forEach(c => this.courses.push(c.name));
   }
   displayedColumns: string[] = [ 'name','view_link','link'];
   dataSource = SCHEME_DATA;
 
   ngOnInit() {
+    var i = 1;
+    CourseArray.forEach(c => {
+      this.courses.push({
+        id: i, name : c.name
+      })
+      i++;
+    });
+    this.coursesSettings = {
+      idField : 'id',
+      textField : 'name',
+    };
   }
-
-  onChange(e){
-    this.selectedCourses.push(e);
-    console.log("onchange" + this.selectedCourses)
-  }
-  onValue(){
-    console.log(this.selectedCourses);
-  }
-
-  addNewCourse(){
-    var list = document.getElementById('dropdown-list')
-    var selectTag = document.getElementsByClassName('course-dropdown')[0].cloneNode(true);
-    selectTag.addEventListener("click", this.onValue);
-    while (selectTag.firstChild) {
-      selectTag.removeChild(selectTag.lastChild);
-    }
-    var diff = $(this.courses).not(this.selectedCourses).get();
-    for (const val of diff)
-    {
-        var option = document.createElement("option");
-        option.value = val;
-        option.text = val.charAt(0).toUpperCase() + val.slice(1);
-        selectTag.appendChild(option);
-    }
-    list.appendChild(selectTag)
-    console.log("addcourse" + this.selectedCourses)
-  }
-
   
-
+  onItemSelect(item: any) {
+    this.selectedCourses.add(item.name)
+    console.log('onItemSelect', this.selectedCourses);
+  }
+  onSelectAll(items: any) {
+    items.forEach(item => {
+      this.selectedCourses.add(item.name)
+    });
+    console.log('onSelectAll', this.selectedCourses);
+  }
 }
