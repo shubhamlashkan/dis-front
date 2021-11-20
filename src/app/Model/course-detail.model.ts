@@ -1,5 +1,5 @@
 export class CourseDetail {
-    code : any
+    code : string
     name : string;
     category : string;
     lec_hrs : number;

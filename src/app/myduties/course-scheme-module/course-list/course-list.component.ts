@@ -31,9 +31,11 @@ COURSE_DATA.forEach(course => {
   styleUrls: ['./course-list.component.scss']
 })
 export class CourseListComponent implements OnInit {
-  course: any;
+  course: CourseDetail;
 
-  constructor() { }
+  constructor() { 
+    this.course = new CourseDetail(null,null,null,0,0,0,0,0,0,0);
+  }
 
   displayedColumns: string[] = [ 'code','name','credits','edit'];
   dataSource = SCHEME_DATA;
