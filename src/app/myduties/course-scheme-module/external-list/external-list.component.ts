@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CourseArray } from 'src/app/Model/course-detail.model';
 import { ExternalData } from 'src/app/Model/external-data.model';
 export interface SchemeElement {
   name: string;
@@ -22,7 +23,6 @@ EXTERNAL_DATA.forEach(external => {
   })
 })
 
-var courses = ['DBMS','OOPS','OS']
 
 @Component({
   selector: 'app-external-list',
@@ -31,15 +31,41 @@ var courses = ['DBMS','OOPS','OS']
 })
 export class ExternalListComponent implements OnInit {
   external : ExternalData;
+  courses : Array<any> = [];
+  selectedCourses : Array<any> = [];
 
   constructor() { 
     this.external = new ExternalData(null,null,null,null,null);
+    CourseArray.forEach(c => this.courses.push(c.name));
   }
 
   displayedColumns: string[] = [ 'name','institute','details'];
   dataSource = SCHEME_DATA;
 
+
   ngOnInit() {
+  }
+  
+  onChange(e){
+    this.selectedCourses.push(e);
+    console.log(this.selectedCourses)
+  }
+
+  addNewCourse(){
+    var list = document.getElementById('dropdown-list')
+    var selectTag = document.getElementsByClassName('course-dropdown')[0].cloneNode(true);
+    while (selectTag.firstChild) {
+      selectTag.removeChild(selectTag.lastChild);
+    }
+    var diff = $(this.courses).not(this.selectedCourses).get();
+    for (const val of diff)
+    {
+        var option = document.createElement("option");
+        option.value = val;
+        option.text = val.charAt(0).toUpperCase() + val.slice(1);
+        selectTag.appendChild(option);
+    }
+    list.appendChild(selectTag)
   }
 
   viewExternal(i){
@@ -52,5 +78,6 @@ export class ExternalListComponent implements OnInit {
   addExternal(){
     console.log("hfb")
   }
+
 
 }

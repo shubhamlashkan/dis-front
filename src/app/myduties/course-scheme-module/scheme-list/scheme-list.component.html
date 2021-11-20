@@ -5,7 +5,7 @@
       <h4>Schemes</h4>
     </div>
     <div class="col-2">
-      <button type="button" class="btn btn-info">Add New Scheme</button>
+      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#AddScheme">Add New Scheme</button>
     </div>
   </div>
 </div>
@@ -13,28 +13,28 @@
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.scheme_id}} </td>
     </ng-container>
     <!-- Weight Column -->
   <ng-container matColumnDef="view_link">
     <th mat-header-cell *matHeaderCellDef>  </th>
-    <td mat-cell *matCellDef="let element"> <a routerLink={{element.name}}>View</a> </td>
+    <td mat-cell *matCellDef="let element"> <a routerLink={{element.scheme_id}}>View</a> </td>
   </ng-container>
     <!-- Download Column -->
     <ng-container matColumnDef="link">
       <th mat-header-cell *matHeaderCellDef>  </th>
-      <td mat-cell *matCellDef="let element"> <a href={{element.link}}>Download</a> </td>
+      <td mat-cell *matCellDef="let element"> <a href={{element.file_link}}>Download</a> </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
   
 
-<div class="modal fade bd-example-modal-lg" id="AddEditCourse" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
+<div class="modal fade bd-example-modal-lg" id="AddScheme" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add/Edit Course</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Add New Scheme</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -42,16 +42,20 @@
       <div class="modal-body">
         <form>
           <div class="form-group">
-            <input type="text" class="form-control" id="name" name="name" placeholder="Course Name" >
+            <input type="text" class="form-control" id="scheme_id" name="scheme_id" placeholder="Scheme Name/Id" >
           </div>
-          <div class="row">
-            <h5>Maximum Marks</h5>
-          </div>
-          <div class="row">
-            <div class="form-group col-sm-12">
-              <input type="text" class="form-control" id="practical_max_marks" placeholder="Practical" name="practical_max_marks" >
+          <div class="form-group">
+            <h5>Add Course</h5>
+            <div id="dropdown-list">
+              <select class="form-control course-dropdown" [(ngModel)]="course" name="course" (ngModelChange)="onChange($event)">
+                <option *ngFor="let course of courses">{{course}}</option>
+              </select>
             </div>
+            
+            <a id="right-align" (click)="addNewCourse()">add another course</a>
+
           </div>
+          
         </form>
       </div>
       <div class="modal-footer">

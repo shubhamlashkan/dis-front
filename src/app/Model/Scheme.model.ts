@@ -4,3 +4,10 @@ export class Scheme{
     courses: (CourseDetail)[];
     file_link: string;
 }
+
+
+export class SchemeSyllabus{
+    course: String;
+    semester: String;
+    file: File;
+}

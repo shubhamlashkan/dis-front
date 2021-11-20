@@ -27,3 +27,9 @@ export class CourseDetail {
         return this.name;
     }
 }
+
+export var CourseArray = [
+    {id:0,code:'CO',name:'DBMS',category:'ABC',lec_hrs:9,tut_hrs:5,practical_hrs:2,theory_credits:5,practical_credits:4,theory_max_marks:5,practical_max_marks:6},
+    {id:1,code:'CO63527',name:'HUM',category:'ABC',lec_hrs:4,tut_hrs:5,practical_hrs:2,theory_credits:8,practical_credits:4,theory_max_marks:5,practical_max_marks:6},
+    {id:2,code:'CO64657',name:'OS',category:'ABC',lec_hrs:4,tut_hrs:5,practical_hrs:2,theory_credits:8,practical_credits:4,theory_max_marks:5,practical_max_marks:6},
+]

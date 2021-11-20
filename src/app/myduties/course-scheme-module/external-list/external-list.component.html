@@ -65,14 +65,13 @@
 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Edit</button>
       </div>
     </div>
   </div>
 </div>
 
 <!-- Add Modal -->
-<div class="modal fade bd-example-modal-lg" id="addExternal" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal fade" id="addExternal" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -95,9 +94,17 @@
           <div class="form-group">
             <input type="tel" class="form-control" id="contact" name="contact" placeholder="Contact Number">
           </div>
-          <div class="row">
+          <div class="form-group">
             <h5>Add Course</h5>
+            <div id="dropdown-list">
+              <select class="form-control course-dropdown" [(ngModel)]="course" name="course" (ngModelChange)="onChange($event)">
+                <option *ngFor="let course of courses">{{course}}</option>
+              </select>
+            </div>
+            
+            <a id="right-align" (click)="addNewCourse()">add another course</a>
           </div>
+
 
         </form>
       </div>
