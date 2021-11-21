@@ -58,4 +58,12 @@ export class SchemeListComponent implements OnInit {
     });
     console.log('onSelectAll', this.selectedCourses);
   }
+
+  onItemDeSelect(item : any){
+    this.selectedCourses.delete(item)
+  }
+
+  onDeSelectAll(item : any){
+    this.selectedCourses = new Set();
+  }
 }

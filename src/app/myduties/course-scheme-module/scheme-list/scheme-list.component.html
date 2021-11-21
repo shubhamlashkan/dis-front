@@ -52,7 +52,10 @@
                   [data]="courses"
                   [placeholder]="'Select Course'"
                   (onSelect)="onItemSelect($event)"
-                  (onSelectAll)="onSelectAll($event)">
+                  (onSelectAll)="onSelectAll($event)"
+                  (onDeSelect)="onItemDeSelect($event)"
+                  (onDeSelectAll)="onDeSelectAll($event)"
+                  >
               </ng-multiselect-dropdown>
               </div>
           </div>
