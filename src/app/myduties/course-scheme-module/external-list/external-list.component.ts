@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { JsonToCSVService } from 'src/app/API_Service/json-to-csv.service';
 import { CourseArray } from 'src/app/Model/course-detail.model';
 import { ExternalData } from 'src/app/Model/external-data.model';
 export interface SchemeElement {
@@ -8,8 +9,10 @@ export interface SchemeElement {
   id : number;
 }
 
+var header : Array<string> = ['name','institute','email','contact','course']
+
 var EXTERNAL_DATA : Array<any> = [
-  { id: 0,name: 'Prof. John Doe', institute: "IIT Indore", email: 'john@test.com', contact: '9999999999', course:['DBMS','OOPS'] },
+  { id: 0,name: 'Prof. John Doe', institute: "IIT Indore", email: 'john@test.com', contact: '9458962359', course:['DBMS','OOPS'] },
   { id: 1,name: 'Prof. John Doe', institute: "IIT Indore", email: 'john@test.com', contact: '9999999999', course:['DBMS'] },
 
 ]
@@ -39,11 +42,11 @@ export class ExternalListComponent implements OnInit {
   coursesSettings:IDropdownSettings={};
 
 
-  constructor() { 
+  constructor( private csvService : JsonToCSVService ) { 
     this.external = new ExternalData(null,null,null,null,null);
   }
 
-  displayedColumns: string[] = [ 'name','institute','details'];
+  displayedColumns: string[] = [ 'name','institute','details','edit'];
   dataSource = SCHEME_DATA;
 
 
@@ -77,5 +80,20 @@ export class ExternalListComponent implements OnInit {
 
   onDeSelectAll(item : any){
     this.selectedCourses = new Set();
+  }
+  viewExternal(i){
+    this.external = { ...EXTERNAL_DATA[i] };
+  }
+  editExternal(i){
+    this.selectedCourses = {...EXTERNAL_DATA[i]} 
+    console.log(this.selectedCourses)
+  }
+  
+  addExternal(){
+    this.external = new ExternalData(null,null,null,null,null);
+  }
+
+  getCSV(){
+    this.csvService.downloadFile(EXTERNAL_DATA,"external data",header)
   }
 }

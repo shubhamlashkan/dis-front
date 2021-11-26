@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { JsonToCSVService } from 'src/app/API_Service/json-to-csv.service';
 import { CourseDetail } from 'src/app/Model/course-detail.model';
 
 export interface SchemeElement {
@@ -9,6 +10,7 @@ export interface SchemeElement {
   view : any;
   id:number
 }
+var header : Array<any> = ['code','name','category','lec_hrs','tut_hrs','practical_hrs','theory_credits','practical_credits','theory_max_marks','practical_max_marks']
 var COURSE_DATA : Array<any> = [
   {id:0,code:'CO',name:'DBMS',category:'ABC',lec_hrs:9,tut_hrs:5,practical_hrs:2,theory_credits:5,practical_credits:4,theory_max_marks:5,practical_max_marks:6},
   {id:1,code:'CO63527',name:'HUM',category:'ABC',lec_hrs:4,tut_hrs:5,practical_hrs:2,theory_credits:8,practical_credits:4,theory_max_marks:5,practical_max_marks:6},
@@ -35,7 +37,7 @@ COURSE_DATA.forEach(course => {
 export class CourseListComponent implements OnInit {
   course: CourseDetail;
 
-  constructor() { 
+  constructor(private csvService : JsonToCSVService) { 
     this.course = new CourseDetail(null,null,null,0,0,0,0,0,0,0);
   }
 
@@ -57,5 +59,11 @@ export class CourseListComponent implements OnInit {
   viewCourse(i){
     this.course = { ...COURSE_DATA[i] };
   }
+
+  getCSV(){
+    this.csvService.downloadFile(COURSE_DATA,"courses",header)
+  }
+
+  
 
 }
