@@ -75,7 +75,8 @@ export class ExternalListComponent implements OnInit {
   }
   
   onItemDeSelect(item : any){
-    this.selectedCourses.delete(item)
+    this.selectedCourses.delete(item.name)
+    console.log(this.selectedCourses)
   }
 
   onDeSelectAll(item : any){
@@ -85,8 +86,8 @@ export class ExternalListComponent implements OnInit {
     this.external = { ...EXTERNAL_DATA[i] };
   }
   editExternal(i){
-    this.selectedCourses = {...EXTERNAL_DATA[i]} 
-    console.log(this.selectedCourses)
+    this.external = {...EXTERNAL_DATA[i]} 
+    console.log(this.external)
   }
   
   addExternal(){

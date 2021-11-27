@@ -60,7 +60,7 @@ export class SchemeListComponent implements OnInit {
   }
 
   onItemDeSelect(item : any){
-    this.selectedCourses.delete(item)
+    this.selectedCourses.delete(item.name)
   }
 
   onDeSelectAll(item : any){

@@ -5,6 +5,9 @@
   <div class="row">
     <div class="col-6">
       <select class="form-control">
+        <option [value]="none" disabled selected hidden>
+          Filter by Semester
+        </option>
         <option value="1">First Semester</option>
         <option value="2">Second Semester</option>
         <option value="3">Third Semester</option>
@@ -76,15 +79,15 @@
         <form>
           <div class="form-group">
             <label for="name">Course</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Course Name" [(ngModel)]="course.name">
+            <input type="text" class="form-control" id="name" name="name" placeholder="eg.: Database Management" [(ngModel)]="course.name">
           </div>
           <div class="form-group">
             <label for="code">Code</label>
-            <input type="text" class="form-control" id="code" name="code" placeholder="Course Code" [(ngModel)]="course.code">
+            <input type="text" class="form-control" id="code" name="code" placeholder="eg.: DBMS" [(ngModel)]="course.code">
           </div>
           <div class="form-group">
             <label for="category">Category</label>
-            <input type="text" class="form-control" id="category" name="category" placeholder="Course Category" [(ngModel)]="course.category">
+            <input type="text" class="form-control" id="category" name="category" placeholder="eg.: XYZ" [(ngModel)]="course.category">
           </div>
           <div class="row">
             <h5>Hours per Week</h5>
@@ -92,15 +95,15 @@
           <div class="row">
             <div class="form-group col-sm-4">
               <label for="lec_hrs">Lecture</label>
-              <input type="text" class="form-control" id="lec_hrs" name="lec_hrs" placeholder="Lecture" [(ngModel)]="course.lec_hrs">
+              <input type="text" class="form-control" id="lec_hrs" name="lec_hrs" placeholder="eg.: 4" [(ngModel)]="course.lec_hrs">
             </div>
             <div class="form-group col-sm-4">
               <label for="tut_hrs">Tutorial</label>
-              <input type="text" class="form-control" id="tut_hrs" name="tut_hrs" placeholder="Tutorial" [(ngModel)]="course.tut_hrs">
+              <input type="text" class="form-control" id="tut_hrs" name="tut_hrs" placeholder="eg.: 3" [(ngModel)]="course.tut_hrs">
             </div>
             <div class="form-group col-sm-4">
               <label for="practical_hrs">Practical</label>
-              <input type="text" class="form-control" id="practical_hrs" name="practical_hrs" placeholder="Practical" [(ngModel)]="course.practical_hrs">
+              <input type="text" class="form-control" id="practical_hrs" name="practical_hrs" placeholder="eg.: 2" [(ngModel)]="course.practical_hrs">
             </div>
           </div>
 
@@ -110,11 +113,11 @@
           <div class="row">
             <div class="form-group col-sm-6">
               <label for="practical_credit">Practical</label>
-              <input type="text" class="form-control" id="practical_credit" placeholder="Practical" name="practical_credit" [(ngModel)]="course.practical_credits">
+              <input type="text" class="form-control" id="practical_credit" placeholder="eg.: 5" name="practical_credit" [(ngModel)]="course.practical_credits">
             </div>
             <div class="form-group col-sm-6">
               <label for="theory_credit">Theory</label>
-              <input type="text" class="form-control" id="theory_credit" placeholder="Theory" name="theory_credit" [(ngModel)]="course.theory_credits">
+              <input type="text" class="form-control" id="theory_credit" placeholder="eg.: 6" name="theory_credit" [(ngModel)]="course.theory_credits">
             </div>
           </div>
 
@@ -125,11 +128,11 @@
           <div class="row">
             <div class="form-group col-sm-6">
               <label for="category">Category</label>
-              <input type="text" class="form-control" id="practical_max_marks" placeholder="Practical" name="practical_max_marks" [(ngModel)]="course.practical_max_marks">
+              <input type="text" class="form-control" id="practical_max_marks" placeholder="eg.: 30" name="practical_max_marks" [(ngModel)]="course.practical_max_marks">
             </div>
             <div class="form-group col-sm-6">
               <label for="category">Category</label>
-              <input type="text" class="form-control" id="theory_max_marks" placeholder="Theory" name="theory_max_marks" [(ngModel)]="course.theory_max_marks">
+              <input type="text" class="form-control" id="theory_max_marks" placeholder="eg.: 70" name="theory_max_marks" [(ngModel)]="course.theory_max_marks">
             </div>
           </div>
         </form>
